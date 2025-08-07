@@ -1,12 +1,12 @@
 import {Component, signal} from '@angular/core';
-import {RestApiService} from '../../lib/core/rest-api.service';
-import {WeatherForecast} from '../../lib/models/WeatherForecast';
+import {RestApiService} from './core/rest-api.service';
+import {WeatherForecast} from './core/models/WeatherForecast';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.html',
+  styleUrl: './app.css',
   standalone: false,
-  styleUrl: './app.css'
 })
 export class App {
   protected readonly title = signal('parsmedeq.client');

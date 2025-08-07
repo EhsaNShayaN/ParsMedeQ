@@ -2,8 +2,8 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
-import {WeatherForecast} from '../models/WeatherForecast';
 import {endpoint} from './services/cookie-utils';
+import {WeatherForecast} from './models/WeatherForecast';
 
 @Injectable({
   providedIn: 'root'
