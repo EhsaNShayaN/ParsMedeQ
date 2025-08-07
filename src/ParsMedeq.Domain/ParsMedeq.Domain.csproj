@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Aggregates\UserAggregate\Entities\**" />
+    <EmbeddedResource Remove="Aggregates\UserAggregate\Entities\**" />
+    <None Remove="Aggregates\UserAggregate\Entities\**" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\SRH.Libraries\SRH.HashIdHexSerializer\SRH.HashIdHexSerializer.csproj" />
+		<ProjectReference Include="..\..\SRH.Libraries\SRH.ValueObjects\SRH.ValueObjects.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Ulid" />
+	</ItemGroup>
+
+</Project>

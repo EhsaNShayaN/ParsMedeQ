@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <SpaRoot>..\parsmedeq.client</SpaRoot>
+    <SpaProxyLaunchCommand>npm start</SpaProxyLaunchCommand>
+    <SpaProxyServerUrl>https://localhost:51035</SpaProxyServerUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\SRH.Libraries\SRH.ServiceRegistry\SRH.ServiceRegistry.csproj" />
+    <ProjectReference Include="..\..\SRH.Libraries\SRH.Sql.ConfigProvider\SRH.Sql.ConfigProvider.csproj" />
+    <ProjectReference Include="..\parsmedeq.client\parsmedeq.client.esproj">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\ParsMedeq.Contracts\ParsMedeq.Contracts.csproj" />
+    <ProjectReference Include="..\ParsMedeq.Infrastructure\ParsMedeq.Infrastructure.csproj" />
+    <ProjectReference Include="..\ParsMedeq.Presentation\ParsMedeq.Presentation.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.SpaProxy"></PackageReference>
+  </ItemGroup>
+
+</Project>

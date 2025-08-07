@@ -1,0 +1,6 @@
+@ParsMedeq.Server_HostAddress = http://localhost:5124
+
+GET {{ParsMedeq.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

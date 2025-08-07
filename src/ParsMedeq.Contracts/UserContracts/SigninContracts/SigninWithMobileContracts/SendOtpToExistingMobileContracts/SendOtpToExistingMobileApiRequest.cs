@@ -1,0 +1,4 @@
+﻿namespace EShop.Contracts.UserContracts.SigninContracts.SigninWithMobileContracts.SendOtpToExistingMobileContracts;
+
+public readonly record struct SendOtpToExistingMobileApiRequest(string Mobile);
+

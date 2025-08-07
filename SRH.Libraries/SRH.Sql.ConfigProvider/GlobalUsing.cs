@@ -1,0 +1,11 @@
+﻿global using SRH.Sql.ConfigProvider.Persistance.ValueObjects;
+global using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+global using Dapper;
+global using System.Data;
+global using SRH.Persistance;
+global using SRH.Persistance.Repositories.Read;
+global using SRH.Sql.ConfigProvider.Persistance.Entities;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore.ChangeTracking;
+global using Microsoft.EntityFrameworkCore.Metadata.Builders;
+global using System.Reflection;

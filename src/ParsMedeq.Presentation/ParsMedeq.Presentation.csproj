@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Mapster" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\SRH.Libraries\SRH.DateProvider\SRH.DateProvider.csproj" />
+		<ProjectReference Include="..\..\SRH.Libraries\SRH.PresentationApi\SRH.PresentationApi.csproj" />
+		<ProjectReference Include="..\..\SRH.Libraries\SRH.ServiceInstaller\SRH.ServiceInstaller.csproj" />
+		<ProjectReference Include="..\ParsMedeq.Application\ParsMedeq.Application.csproj" />
+		<ProjectReference Include="..\ParsMedeq.Contracts\ParsMedeq.Contracts.csproj" />
+		<ProjectReference Include="..\ParsMedeq.Domain\ParsMedeq.Domain.csproj" />
+	</ItemGroup>
+
+</Project>

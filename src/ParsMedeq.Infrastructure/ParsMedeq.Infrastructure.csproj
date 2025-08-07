@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="FluentEmail.Core" />
+		<PackageReference Include="FluentEmail.Smtp" />
+		<PackageReference Include="Microsoft.Extensions.Http.Resilience" />
+		<PackageReference Include="AspNetCore.HealthChecks.SqlServer" />
+		<PackageReference Include="OpenTelemetry.Exporter.Console" />
+		<PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" />
+		<PackageReference Include="OpenTelemetry.Exporter.Prometheus.AspNetCore" />
+		<PackageReference Include="OpenTelemetry.Extensions.Hosting" />
+		<PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" />
+		<PackageReference Include="OpenTelemetry.Instrumentation.EntityFrameworkCore" />
+		<PackageReference Include="OpenTelemetry.Instrumentation.GrpcCore" />
+		<PackageReference Include="OpenTelemetry.Instrumentation.GrpcNetClient" />
+		<PackageReference Include="OpenTelemetry.Instrumentation.Http" />
+		<PackageReference Include="OpenTelemetry.Instrumentation.Runtime" />
+
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\SRH.Libraries\SRH.DateProvider\SRH.DateProvider.csproj" />
+		<ProjectReference Include="..\..\SRH.Libraries\SRH.Persistance\SRH.Persistance.csproj" />
+		<ProjectReference Include="..\..\SRH.Libraries\SRH.ServiceInstaller\SRH.ServiceInstaller.csproj" />
+		<ProjectReference Include="..\ParsMedeq.Application\ParsMedeq.Application.csproj" />
+		<ProjectReference Include="..\ParsMedeq.Domain\ParsMedeq.Domain.csproj" />
+	</ItemGroup>
+
+</Project>

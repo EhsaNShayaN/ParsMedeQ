@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Persistance\ESopSchema\UserRepositories\QueryModels\**" />
+	  <EmbeddedResource Remove="Persistance\ESopSchema\UserRepositories\QueryModels\**" />
+	  <None Remove="Persistance\ESopSchema\UserRepositories\QueryModels\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore" />
+		<PackageReference Include="Microsoft.FeatureManagement" />
+		<PackageReference Include="Scrutor" />
+		<PackageReference Include="Polly.Contrib.DuplicateRequestCollapser" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\SRH.Libraries\SRH.CacheProvider\SRH.CacheProvider.csproj" />
+		<ProjectReference Include="..\..\SRH.Libraries\SRH.DateProvider\SRH.DateProvider.csproj" />
+		<ProjectReference Include="..\..\SRH.Libraries\SRH.HashIdHexSerializer\SRH.HashIdHexSerializer.csproj" />
+		<ProjectReference Include="..\..\SRH.Libraries\SRH.MediatRMessaging.FluentValidation\SRH.MediatRMessaging.FluentValidation.csproj" />
+		<ProjectReference Include="..\..\SRH.Libraries\SRH.MediatRMessaging\SRH.MediatRMessaging.csproj" />
+		<ProjectReference Include="..\..\SRH.Libraries\SRH.ServiceInstaller\SRH.ServiceInstaller.csproj" />
+		<ProjectReference Include="..\ParsMedeq.Domain\ParsMedeq.Domain.csproj" />
+	</ItemGroup>
+
+</Project>

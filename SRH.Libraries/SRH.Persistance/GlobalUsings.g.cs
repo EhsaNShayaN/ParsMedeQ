@@ -1,0 +1,10 @@
+﻿global using Dapper;
+global using SRH.Persistance.Repositories.Read;
+global using SRH.PrimitiveTypes.Optional;
+global using SRH.PrimitiveTypes.Result;
+global using Microsoft.EntityFrameworkCore;
+global using System.Data;
+global using System.Data.Common;
+global using SRH.Persistance.Models;
+global using System.Linq.Expressions;
+global using Z.EntityFramework.Plus;
