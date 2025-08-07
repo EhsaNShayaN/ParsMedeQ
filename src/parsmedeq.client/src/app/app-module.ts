@@ -27,10 +27,10 @@ import {Faq} from './pages/faq/faq';
 import {Login} from './pages/login/login';
 import {SignUp} from './pages/sign-up/sign-up';
 import {ForgotPassword} from './pages/forgot-password/forgot-password';
-import { ProductDetail } from './pages/products/product-detail/product-detail';
-import { NewsDetail } from './pages/news/news-detail/news-detail';
-import { ArticleDetail } from './pages/articles/article-detail/article-detail';
-import { CommentForm } from './pages/comment-form/comment-form';
+import {ProductDetail} from './pages/products/product-detail/product-detail';
+import {NewsDetail} from './pages/news/news-detail/news-detail';
+import {ArticleDetail} from './pages/articles/article-detail/article-detail';
+import {CommentForm} from './pages/comment-form/comment-form';
 
 
 @NgModule({
