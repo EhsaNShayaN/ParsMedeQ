@@ -1,1 +1,15 @@
-<p>warranty works!</p>
+<h3>باقی‌مانده گارانتی محصولات</h3>
+<table mat-table [dataSource]="products" class="mat-elevation-z8">
+  <ng-container matColumnDef="product">
+    <th mat-header-cell *matHeaderCellDef>محصول</th>
+    <td mat-cell *matCellDef="let p">{{ p.name }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="daysLeft">
+    <th mat-header-cell *matHeaderCellDef>روز باقی‌مانده</th>
+    <td mat-cell *matCellDef="let p">{{ p.daysLeft }}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="['product', 'daysLeft']"></tr>
+  <tr mat-row *matRowDef="let row; columns: ['product', 'daysLeft']"></tr>
+</table>

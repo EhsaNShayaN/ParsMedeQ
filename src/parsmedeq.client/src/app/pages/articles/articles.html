@@ -1,1 +1,22 @@
-<p>articles works!</p>
+<div class="articles-container">
+  <mat-card *ngFor="let article of articles" class="article-card">
+    <mat-card-title>{{ article.title }}</mat-card-title>
+    <mat-card-content>
+      <p>{{ article.summary }}</p>
+
+      <div class="comments-section">
+        <h4>نظرات</h4>
+        <ul>
+          <li *ngFor="let comment of article.comments">{{ comment }}</li>
+        </ul>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>نظر خود را بنویسید</mat-label>
+          <textarea matInput [(ngModel)]="newComment"></textarea>
+        </mat-form-field>
+
+        <button mat-button (click)="addComment(article.id)" color="primary">ثبت نظر</button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

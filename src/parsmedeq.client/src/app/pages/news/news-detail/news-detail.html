@@ -1,0 +1,4 @@
+<h2>{{ news?.title }}</h2>
+<p>{{ news?.content }}</p>
+
+<app-comment-form [entityId]="news?.id" entityType="news"></app-comment-form>

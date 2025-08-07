@@ -1,1 +1,14 @@
-<p>repair-request works!</p>
+<h3>درخواست تعمیر</h3>
+<form (ngSubmit)="submitRequest()">
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>شماره سریال دستگاه</mat-label>
+    <input matInput [(ngModel)]="model.serial" name="serial" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>شرح خرابی</mat-label>
+    <textarea matInput [(ngModel)]="model.problem" name="problem" required></textarea>
+  </mat-form-field>
+
+  <button mat-raised-button color="warn">ارسال درخواست</button>
+</form>

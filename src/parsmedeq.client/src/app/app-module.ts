@@ -4,7 +4,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthInterceptor} from './core/services/auth.interceptor';
 import {MatIconRegistry} from '@angular/material/icon';
 import {DomSanitizer} from '@angular/platform-browser';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
@@ -27,6 +27,10 @@ import {Faq} from './pages/faq/faq';
 import {Login} from './pages/login/login';
 import {SignUp} from './pages/sign-up/sign-up';
 import {ForgotPassword} from './pages/forgot-password/forgot-password';
+import { ProductDetail } from './pages/products/product-detail/product-detail';
+import { NewsDetail } from './pages/news/news-detail/news-detail';
+import { ArticleDetail } from './pages/articles/article-detail/article-detail';
+import { CommentForm } from './pages/comment-form/comment-form';
 
 
 @NgModule({
@@ -44,6 +48,10 @@ import {ForgotPassword} from './pages/forgot-password/forgot-password';
     Login,
     SignUp,
     ForgotPassword,
+    ProductDetail,
+    NewsDetail,
+    ArticleDetail,
+    CommentForm,
   ],
   imports: [
     BrowserModule,
@@ -58,6 +66,7 @@ import {ForgotPassword} from './pages/forgot-password/forgot-password';
     MatInputModule,
     MatFormFieldModule,
     AppRoutingModule,
+    FormsModule,
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
