@@ -1,40 +1,45 @@
+// src/app/services/auth.service.ts
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {BehaviorSubject, tap} from 'rxjs';
+import {Router} from '@angular/router';
+import {Observable} from 'rxjs';
+import {tap} from 'rxjs/operators';
 
-@Injectable({providedIn: 'root'})
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
-  private baseUrl = 'https://api.example.com/auth'; // آدرس API خودتان
-  private tokenKey = 'access_token';
+  private apiUrl = 'https://localhost:5001/api/auth'; // آدرس بک‌اند
 
-  isLoggedIn = new BehaviorSubject<boolean>(this.hasToken());
-
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
   }
 
-  login(credentials: { username: string; password: string }) {
-    return this.http.post<{ token: string }>(`${this.baseUrl}/login`, credentials).pipe(
-      tap(response => {
-        localStorage.setItem(this.tokenKey, response.token);
-        this.isLoggedIn.next(true);
-      })
-    );
+  // ورود کاربر و ذخیره JWT
+  login(credentials: { email: string; password: string }): Observable<any> {
+    return this.http.post<{ token: string }>(`${this.apiUrl}/login`, credentials)
+      .pipe(
+        tap((res) => {
+          if (res.token) {
+            localStorage.setItem('token', res.token);
+          }
+        })
+      );
   }
 
-  signup(data: any) {
-    return this.http.post(`${this.baseUrl}/signup`, data);
-  }
-
-  logout() {
-    localStorage.removeItem(this.tokenKey);
-    this.isLoggedIn.next(false);
-  }
-
+  // دریافت توکن
   getToken(): string | null {
-    return localStorage.getItem(this.tokenKey);
+    return localStorage.getItem('token');
   }
 
-  hasToken(): boolean {
-    return !!this.getToken();
+  // بررسی ورود کاربر
+  isLoggedIn(): boolean {
+    const token = this.getToken();
+    return !!token; // فقط چک می‌کنه که توکن باشه
+  }
+
+  // خروج کاربر
+  logout(): void {
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
   }
 }
