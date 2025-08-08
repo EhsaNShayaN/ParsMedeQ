@@ -10,11 +10,11 @@ import {WeatherForecast} from './core/models/WeatherForecast';
 })
 export class App {
   protected readonly title = signal('parsmedeq.client');
-  forecasts: WeatherForecast[] = [];
+  /*forecasts: WeatherForecast[] = [];
 
   constructor(private restApiService: RestApiService) {
     restApiService.getWeatherForecast().subscribe((r: WeatherForecast[]) => {
       this.forecasts = r;
     });
-  }
+  }*/
 }
