@@ -4,7 +4,7 @@ import {MatToolbar, MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule, MatIconButton} from '@angular/material/button';
 import {MatIcon, MatIconModule} from '@angular/material/icon';
 import {MatSidenav, MatSidenavContainer, MatSidenavContent, MatSidenavModule} from '@angular/material/sidenav';
-import {MatDivider, MatListItem, MatListModule, MatNavList} from '@angular/material/list';
+import {MatDivider, MatList, MatListItem, MatListModule, MatNavList} from '@angular/material/list';
 import {MatCardActions, MatCardModule} from '@angular/material/card';
 import {MatFormField, MatInput, MatInputModule, MatLabel} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -22,6 +22,7 @@ import {MatProgressSpinner} from '@angular/material/progress-spinner';
 import {MatChipListbox, MatChipOption} from '@angular/material/chips';
 import {MobileFormatterPipe} from '../core/pipes/mobile-formatter.pipe';
 import {CommentsComponent} from './comments/comments.component';
+import {DefaultClassDirective, DefaultFlexDirective, DefaultLayoutAlignDirective, DefaultLayoutDirective} from 'ngx-flexible-layout';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,12 @@ import {CommentsComponent} from './comments/comments.component';
     MatProgressSpinner,
     MatChipListbox,
     MatChipOption,
+    MatList,
+    //////////////////////
+    DefaultFlexDirective,
+    DefaultClassDirective,
+    DefaultLayoutDirective,
+    DefaultLayoutAlignDirective,
     //////////////////////
     TreeViewComponent,
   ],
@@ -105,6 +112,12 @@ import {CommentsComponent} from './comments/comments.component';
     MatProgressSpinner,
     MatChipListbox,
     MatChipOption,
+    MatList,
+    //////////////////////
+    DefaultFlexDirective,
+    DefaultClassDirective,
+    DefaultLayoutDirective,
+    DefaultLayoutAlignDirective,
     //////////////////////
     TreeViewComponent,
     CommentForm,

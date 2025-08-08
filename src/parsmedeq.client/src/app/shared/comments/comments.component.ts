@@ -18,7 +18,7 @@ import {AuthService} from '../../core/services/auth.service';
 export class CommentsComponent extends PureComponent implements OnInit, DoCheck {
   @Input() relatedId: string | undefined;
   @Input() tableId: number = 0;
-  public commentForm: UntypedFormGroup | undefined;
+  public commentForm!: UntypedFormGroup;
   public ratings = [
     {title: 'Very Dissatisfied', icon: 'sentiment_very_dissatisfied', percentage: 20, selected: false},
     {title: 'Dissatisfied', icon: 'sentiment_dissatisfied', percentage: 40, selected: false},
@@ -35,7 +35,7 @@ export class CommentsComponent extends PureComponent implements OnInit, DoCheck 
               private toaster: ToastrService,
               public appSettings: AppSettings,
               public fb: UntypedFormBuilder,
-              private authService: AuthService) {
+              public authService: AuthService) {
     super(injector);
     this.settings = appSettings.settings;
   }

@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {Comments} from './comments/comments';
 import {Dashboard} from './dashboard/dashboard';
 import {Orders} from './orders/orders';
 import {PreInvoice} from './pre-invoice/pre-invoice';
@@ -15,7 +14,6 @@ const routes: Routes = [
   {path: 'service-request', component: ServiceRequest},
   {path: 'repair-request', component: RepairRequest},
   {path: 'pre-invoice', component: PreInvoice},
-  {path: 'comments', component: Comments},
 ];
 
 @NgModule({
