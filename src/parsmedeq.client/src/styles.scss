@@ -11,16 +11,16 @@ html, body {
 }
 
 .main-container {
-  min-height: calc(100vh - 354px); /*با فرض اینکه هدر و فوتر مجموعاً حدود 354px ارتفاع دارند*/
+  min-height: calc(100vh - 354px - 32px); /*با فرض اینکه هدر و فوتر مجموعاً حدود 354px ارتفاع دارند*/
   padding: 16px;
 }
 
 .admin-container {
-  min-height: calc(100vh - 354px); /*با فرض اینکه هدر و فوتر مجموعاً حدود 354px ارتفاع دارند*/
+  min-height: calc(100vh - 354px - 32px); /*با فرض اینکه هدر و فوتر مجموعاً حدود 354px ارتفاع دارند*/
   padding: 16px;
 }
 
 .user-container {
-  min-height: calc(100vh - 354px); /*با فرض اینکه هدر و فوتر مجموعاً حدود 354px ارتفاع دارند*/
+  min-height: calc(100vh - 354px - 32px); /*با فرض اینکه هدر و فوتر مجموعاً حدود 354px ارتفاع دارند*/
   padding: 16px;
 }
