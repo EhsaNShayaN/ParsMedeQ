@@ -7,7 +7,6 @@ import {Register} from './register/register';
 import {ForgotPassword} from './forgot-password/forgot-password';
 import {SharedModule} from '../../shared/shared-module';
 
-
 @NgModule({
   declarations: [
     Auth,

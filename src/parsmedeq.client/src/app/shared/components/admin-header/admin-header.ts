@@ -4,7 +4,8 @@ import {Router} from '@angular/router';
 @Component({
   selector: 'app-admin-header',
   templateUrl: './admin-header.html',
-  styleUrls: ['./admin-header.scss']
+  styleUrl: './admin-header.scss',
+  standalone: false
 })
 export class AdminHeader {
   constructor(private router: Router) {

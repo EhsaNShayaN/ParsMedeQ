@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {MainLayout} from './layouts/main-layout/main-layout';
-import {UserLayout} from './layouts/user-layout/user-layout';
-import {AdminLayout} from './layouts/admin-layout/admin-layout';
+import {MainLayout} from './shared/layouts/main-layout/main-layout';
+import {UserLayout} from './shared/layouts/user-layout/user-layout';
+import {AdminLayout} from './shared/layouts/admin-layout/admin-layout';
 
 const routes: Routes = [
   // صفحات عمومی

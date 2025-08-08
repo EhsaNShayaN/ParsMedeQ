@@ -4,7 +4,6 @@ import {ContactRoutingModule} from './contact-routing-module';
 import {Contact} from './contact';
 import {SharedModule} from '../../shared/shared-module';
 
-
 @NgModule({
   declarations: [
     Contact

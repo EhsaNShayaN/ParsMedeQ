@@ -30,7 +30,6 @@ import {UserHeader} from './shared/components/user-header/user-header';
     AdminLayout,
     AdminSidebar,
     UserSidebar,
-    CommentForm,
     AdminHeader,
     UserHeader,
   ],
