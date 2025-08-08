@@ -1,10 +1,10 @@
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatButtonModule} from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatListModule} from '@angular/material/list';
+import {MatToolbar, MatToolbarModule} from '@angular/material/toolbar';
+import {MatButtonModule, MatIconButton} from '@angular/material/button';
+import {MatIcon, MatIconModule} from '@angular/material/icon';
+import {MatSidenav, MatSidenavContainer, MatSidenavContent, MatSidenavModule} from '@angular/material/sidenav';
+import {MatListItem, MatListModule, MatNavList} from '@angular/material/list';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormField, MatInput, MatInputModule, MatLabel} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -36,6 +36,14 @@ import {CommentForm} from './components/comment-form/comment-form';
     MatFormField,
     MatLabel,
     MatInput,
+    MatSidenavContainer,
+    MatNavList,
+    MatSidenav,
+    MatToolbar,
+    MatIcon,
+    MatIconButton,
+    MatListItem,
+    MatSidenavContent,
     //////////////////////
   ],
   providers: [],
@@ -50,6 +58,14 @@ import {CommentForm} from './components/comment-form/comment-form';
     MatFormField,
     MatLabel,
     MatInput,
+    MatSidenavContainer,
+    MatNavList,
+    MatSidenav,
+    MatToolbar,
+    MatIcon,
+    MatIconButton,
+    MatListItem,
+    MatSidenavContent,
     //////////////////////
     CommentForm,
   ],
