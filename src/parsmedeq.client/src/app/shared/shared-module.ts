@@ -4,21 +4,41 @@ import {MatToolbar, MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule, MatIconButton} from '@angular/material/button';
 import {MatIcon, MatIconModule} from '@angular/material/icon';
 import {MatSidenav, MatSidenavContainer, MatSidenavContent, MatSidenavModule} from '@angular/material/sidenav';
-import {MatListItem, MatListModule, MatNavList} from '@angular/material/list';
-import {MatCardModule} from '@angular/material/card';
+import {MatDivider, MatListItem, MatListModule, MatNavList} from '@angular/material/list';
+import {MatCardActions, MatCardModule} from '@angular/material/card';
 import {MatFormField, MatInput, MatInputModule, MatLabel} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCard, MatCardContent, MatCardTitle} from '@angular/material/card';
 import {MatButton} from '@angular/material/button';
 import {CommentForm} from './components/comment-form/comment-form';
+import {TreeViewComponent} from './tree-view/tree-view.component';
+import {MatTooltip} from '@angular/material/tooltip';
+import {CurrencyFormatterPipe} from '../core/pipes/currency-formatter.pipe';
+import {SafeHtmlPipe} from '../core/pipes/safe-html.pipe';
+import {ReplaceUrlSpacesPipe} from '../core/pipes/replace-url-spaces.pipe';
+import {DirectivesModule} from '../core/directives/directives.module';
+import {LoadMoreComponent} from './load-more/load-more.component';
+import {MatProgressSpinner} from '@angular/material/progress-spinner';
+import {MatChipListbox, MatChipOption} from '@angular/material/chips';
+import {MobileFormatterPipe} from '../core/pipes/mobile-formatter.pipe';
+import {CommentsComponent} from './comments/comments.component';
 
 @NgModule({
   declarations: [
     CommentForm,
+    /////////////////
+    CurrencyFormatterPipe,
+    SafeHtmlPipe,
+    ReplaceUrlSpacesPipe,
+    MobileFormatterPipe,
+    LoadMoreComponent,
+    CommentsComponent,
   ],
   imports: [
     FormsModule,
     ReactiveFormsModule,
+    DirectivesModule,
+    /////////////////
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
@@ -44,12 +64,25 @@ import {CommentForm} from './components/comment-form/comment-form';
     MatIconButton,
     MatListItem,
     MatSidenavContent,
+    MatDivider,
+    MatTooltip,
+    MatCardActions,
+    MatProgressSpinner,
+    MatChipListbox,
+    MatChipOption,
     //////////////////////
+    TreeViewComponent,
   ],
-  providers: [],
   exports: [
     FormsModule,
     ReactiveFormsModule,
+    DirectivesModule,
+    CurrencyFormatterPipe,
+    SafeHtmlPipe,
+    ReplaceUrlSpacesPipe,
+    MobileFormatterPipe,
+    LoadMoreComponent,
+    CommentsComponent,
     //////////////////////
     MatCard,
     MatCardTitle,
@@ -66,8 +99,18 @@ import {CommentForm} from './components/comment-form/comment-form';
     MatIconButton,
     MatListItem,
     MatSidenavContent,
+    MatDivider,
+    MatTooltip,
+    MatCardActions,
+    MatProgressSpinner,
+    MatChipListbox,
+    MatChipOption,
     //////////////////////
+    TreeViewComponent,
     CommentForm,
+  ],
+  providers: [
+    CurrencyFormatterPipe,
   ],
 })
 export class SharedModule {

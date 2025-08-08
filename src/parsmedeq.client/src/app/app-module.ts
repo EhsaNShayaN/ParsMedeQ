@@ -14,9 +14,11 @@ import {UserLayout} from './shared/layouts/user-layout/user-layout';
 import {AdminLayout} from './shared/layouts/admin-layout/admin-layout';
 import {AdminSidebar} from './shared/components/admin-sidebar/admin-sidebar';
 import {UserSidebar} from './shared/components/user-sidebar/user-sidebar';
-import {CommentForm} from './shared/components/comment-form/comment-form';
 import {AdminHeader} from './shared/components/admin-header/admin-header';
 import {UserHeader} from './shared/components/user-header/user-header';
+import {AppSettings} from './app.settings';
+import {UrlSerializer} from '@angular/router';
+import {LowerCaseUrlSerializer} from './core/pipes/lower-case-url-serializer.pipe';
 
 
 @NgModule({
@@ -41,7 +43,9 @@ import {UserHeader} from './shared/components/user-header/user-header';
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    AppSettings,
+    {provide: UrlSerializer, useClass: LowerCaseUrlSerializer},
   ],
   exports: [],
   bootstrap: [App]
