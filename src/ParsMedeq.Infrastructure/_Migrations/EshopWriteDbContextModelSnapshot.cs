@@ -18,7 +18,7 @@ namespace EShop.Infrastructure._Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.1")
+                .HasAnnotation("ProductVersion", "9.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -54,7 +54,7 @@ namespace EShop.Infrastructure._Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("OutboxMessages");
+                    b.ToTable("OutboxMessages", (string)null);
                 });
 
             modelBuilder.Entity("EShop.Domain.Aggregates.ProductAggregate.Entities.ProductCategoryLink", b =>

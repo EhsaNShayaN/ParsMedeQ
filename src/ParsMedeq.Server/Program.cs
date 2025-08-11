@@ -82,13 +82,13 @@ builder.Services
 
 
 
-builder.Configuration.AddSRHDbConfig(
+/*builder.Configuration.AddSRHDbConfig(
     builder.Configuration.GetSection("Database:DpiConfig").Get<SqlConnectionStringBuilder>()!.ConnectionString,
     processEnv,
     new SettingApplicationName("Dpi_Tsp"),
     SettingVersion.Version1,
     TimeSpan.FromSeconds(5),
-    true);
+    true);*/
 
 ServiceInstallerHelper.InstallServicesRecursively(builder.Services,
            builder.Configuration,
