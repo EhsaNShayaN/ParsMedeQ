@@ -34,55 +34,9 @@ builder.Services.AddSwaggerGen(setup =>
 {
     var authSettings = builder.Services.BuildServiceProvider().GetRequiredService<IOptions<AuthenticationOptions>>().Value;
 
-    setup.AddSecurityDefinition("userId", new OpenApiSecurityScheme()
-    {
-        Name = "userid",
-        In = ParameterLocation.Query,
-        Type = SecuritySchemeType.ApiKey,
-        Scheme = string.Empty,
-    });
-    setup.AddSecurityRequirement(new OpenApiSecurityRequirement()
-    {
-        {
-            new OpenApiSecurityScheme
-            {
-                Reference = new OpenApiReference
-                {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "userId"
-                },
-                Scheme = "",
-                Name = "userid",
-                In = ParameterLocation.Query,
-
-            },
-            []
-        }
-    });
-
-    setup.AddSecurityDefinition("profileId", new OpenApiSecurityScheme() { Name = "profileid", In = ParameterLocation.Query, Type = SecuritySchemeType.ApiKey });
-    setup.AddSecurityRequirement(new OpenApiSecurityRequirement()
-    {
-        {
-            new OpenApiSecurityScheme
-            {
-                Reference = new OpenApiReference
-                {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "profileId"
-                },
-                Scheme = "",
-                Name = "profileId",
-                In = ParameterLocation.Query,
-
-            },
-            []
-        }
-    });
-
     setup.AddSecurityDefinition(authSettings.CSRFTokenHeaderName, new OpenApiSecurityScheme()
     {
-        Name = "X-CSRF-TOKEN",
+        Name = "Authorization",
         In = ParameterLocation.Header,
         Type = SecuritySchemeType.ApiKey,
         Scheme = string.Empty,
@@ -95,10 +49,10 @@ builder.Services.AddSwaggerGen(setup =>
                 Reference = new OpenApiReference
                 {
                     Type = ReferenceType.SecurityScheme,
-                    Id = "X-CSRF-TOKEN"
+                    Id = "Authorization"
                 },
                 Scheme = "",
-                Name = "X-CSRF-TOKEN",
+                Name = "Authorization",
                 In = ParameterLocation.Header,
 
             },
@@ -166,7 +120,7 @@ var summaries = new[]
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 };
 
-app.MapGet("/weatherforecast", () =>
+app.MapGet("/api/weatherforecast", () =>
 {
     var forecast = Enumerable.Range(1, 5).Select(index =>
         new WeatherForecast
@@ -186,10 +140,9 @@ app.UseSwaggerUI(options =>
     options.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.None);
 });
 app.UseAuthorization();
-app.UseExceptionHandler();
+//app.UseExceptionHandler();
 
 app.MapControllers();
-app.MapHealthChecks("/health");
 app.MapFallbackToFile("/index.html");
 app.Run();
 

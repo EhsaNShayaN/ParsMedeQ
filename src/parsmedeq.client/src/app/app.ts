@@ -1,4 +1,4 @@
-import {Component, signal} from '@angular/core';
+import {Component, OnInit, signal} from '@angular/core';
 import {RestApiService} from './core/rest-api.service';
 import {WeatherForecast} from './core/models/WeatherForecast';
 
@@ -8,13 +8,16 @@ import {WeatherForecast} from './core/models/WeatherForecast';
   styleUrl: './app.css',
   standalone: false,
 })
-export class App {
+export class App implements OnInit {
   protected readonly title = signal('parsmedeq.client');
-  /*forecasts: WeatherForecast[] = [];
+  forecasts: WeatherForecast[] = [];
 
   constructor(private restApiService: RestApiService) {
-    restApiService.getWeatherForecast().subscribe((r: WeatherForecast[]) => {
+  }
+
+  ngOnInit() {
+    this.restApiService.getWeatherForecast().subscribe((r: WeatherForecast[]) => {
       this.forecasts = r;
     });
-  }*/
+  }
 }

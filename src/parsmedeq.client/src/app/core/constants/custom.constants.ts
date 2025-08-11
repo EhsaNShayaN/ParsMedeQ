@@ -1,4 +1,4 @@
 export class CustomConstants {
   //static endpoint = '/api/';
-  static endpoint = 'https://localhost:7020/';
+  static endpoint = 'https://localhost:7232/api/';
 }
