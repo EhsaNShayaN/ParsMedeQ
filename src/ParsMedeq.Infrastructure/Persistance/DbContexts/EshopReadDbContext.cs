@@ -7,7 +7,6 @@ public sealed class EshopReadDbContext : DbContextBase<EshopReadDbContext>
     public DbSet<ProductModel> ProductModel { get; set; }
     public DbSet<Product> Product { get; set; }
     public DbSet<ProductCategory> ProductCategory { get; set; }
-    public DbSet<ProductVariation> ProductVariation { get; set; }
 
     public EshopReadDbContext(DbContextOptions<EshopReadDbContext> opts) : base(opts) { }
 }

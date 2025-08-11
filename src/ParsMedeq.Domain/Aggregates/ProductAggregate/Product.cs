@@ -9,7 +9,6 @@ public sealed class Product : AggregateRoot<int>
 {
     #region " Fields "
     private List<ProductCategoryLink> _categoryLinks = [];
-    private List<ProductVariation> _variations = [];
     #endregion
 
     #region " Properties "
@@ -25,7 +24,6 @@ public sealed class Product : AggregateRoot<int>
     public ProductType ProductType { get; private set; } = null!;
     public ProductModel Model { get; private set; } = null!;
     public IReadOnlyCollection<ProductCategoryLink> CategoryLinks => this._categoryLinks.AsReadOnly();
-    public IReadOnlyCollection<ProductVariation> Variations => this._variations.AsReadOnly();
     public IReadOnlyCollection<ProductCategory> Categories => this._categoryLinks.Select(link => link.ProductCategory).ToList().AsReadOnly();
 
     #endregion
@@ -57,15 +55,6 @@ public sealed class Product : AggregateRoot<int>
     #endregion
 
     #region " Methods "
-    public PrimitiveResult AddVariation(ProductVariation variation)
-    {
-        if (this._variations.Any(v => v.VariationType == variation.VariationType && v.Value == variation.Value))
-            return PrimitiveResult.Failure("Domain.Error", "Variation must be unique for the product.");
-
-        this._variations.Add(variation);
-
-        return PrimitiveResult.Success();
-    }
     public PrimitiveResult AddCategoryLink(ProductCategoryLink link)
     {
         if (this._categoryLinks.Any(cl => cl.ProductCategoryId == link.ProductCategoryId))

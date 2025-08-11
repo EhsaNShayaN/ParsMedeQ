@@ -22,11 +22,6 @@ sealed class ProductEntityConfiguration : IEntityTypeConfiguration<Product>
             .WithMany(a => a.Products)
             .HasForeignKey(a => a.ModelId);
 
-        builder
-           .HasMany(a => a.Variations)
-           .WithOne(a => a.Product)
-           .HasForeignKey(a => a.ProductId);
-
         builder.HasIndex(a => a.Slug);
     }
 }

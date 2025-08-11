@@ -9,7 +9,6 @@ public sealed class EshopWriteDbContext : DbContextBase<EshopWriteDbContext>
     public DbSet<ProductModel> ProductModel { get; set; }
     public DbSet<Product> Product { get; set; }
     public DbSet<ProductCategory> ProductCategory { get; set; }
-    public DbSet<ProductVariation> ProductVariation { get; set; }
 
     public EshopWriteDbContext(DbContextOptions<EshopWriteDbContext> opts) : base(opts) { }
 }
