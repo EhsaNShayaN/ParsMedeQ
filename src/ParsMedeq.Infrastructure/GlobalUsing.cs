@@ -3,8 +3,6 @@ global using EShop.Domain.Aggregates.OutboxMessageEntity;
 global using EShop.Domain.Aggregates.ProductAggregate;
 global using EShop.Domain.Aggregates.ProductAggregate.Entities;
 global using EShop.Domain.Aggregates.ProductCategoryAggregate;
-global using EShop.Domain.Aggregates.ProductTypeAggregate;
-global using EShop.Domain.Aggregates.ProductTypeAggregate.Entities;
 global using EShop.Domain.Aggregates.UserAggregate.UserEntity;
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.EntityFrameworkCore.ChangeTracking;

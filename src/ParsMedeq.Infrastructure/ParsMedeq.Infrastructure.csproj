@@ -29,5 +29,9 @@
 		<ProjectReference Include="..\ParsMedeq.Application\ParsMedeq.Application.csproj" />
 		<ProjectReference Include="..\ParsMedeq.Domain\ParsMedeq.Domain.csproj" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Persistance\DbContexts\Seeds\" />
+	  <Folder Include="_Migrations\" />
+	</ItemGroup>
 
 </Project>

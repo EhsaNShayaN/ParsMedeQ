@@ -11,19 +11,6 @@ sealed class ProductEntityConfiguration : IEntityTypeConfiguration<Product>
         builder.Property(x => x.Slug).IsSlugColumn();
         builder.Property(x => x.Title).IsTitleColumn();
 
-        builder
-            .HasOne(a => a.ProductType)
-            .WithMany()
-            .HasForeignKey(a => a.ProductTypeId)
-            .OnDelete(DeleteBehavior.NoAction);
-
-        builder
-            .HasOne(a => a.Model)
-            .WithMany(a => a.Products)
-            .HasForeignKey(a => a.ModelId);
-
         builder.HasIndex(a => a.Slug);
     }
 }
-
-

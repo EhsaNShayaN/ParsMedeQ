@@ -1,7 +1,6 @@
 ﻿using EShop.Domain.Abstractions;
 using EShop.Domain.Aggregates.ProductAggregate.Entities;
 using EShop.Domain.Aggregates.ProductCategoryAggregate;
-using EShop.Domain.Aggregates.ProductTypeAggregate.Entities;
 
 namespace EShop.Domain.Aggregates.ProductAggregate;
 
@@ -21,8 +20,6 @@ public sealed class Product : AggregateRoot<int>
     #endregion
 
     #region " Navigation Properties "
-    public ProductType ProductType { get; private set; } = null!;
-    public ProductModel Model { get; private set; } = null!;
     public IReadOnlyCollection<ProductCategoryLink> CategoryLinks => this._categoryLinks.AsReadOnly();
     public IReadOnlyCollection<ProductCategory> Categories => this._categoryLinks.Select(link => link.ProductCategory).ToList().AsReadOnly();
 

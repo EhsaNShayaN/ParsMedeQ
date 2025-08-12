@@ -16,12 +16,6 @@ sealed class ProductCategoryEntityConfiguration : IEntityTypeConfiguration<Produ
             .WithMany(pc => pc.Children)
             .HasForeignKey(pc => pc.ParentId)
             .OnDelete(DeleteBehavior.Restrict);
-
-        builder
-            .HasOne(a => a.ProductType)
-            .WithMany()
-            .HasForeignKey(a => a.ProductTypeId)
-            .OnDelete(DeleteBehavior.NoAction);
     }
 }
 
