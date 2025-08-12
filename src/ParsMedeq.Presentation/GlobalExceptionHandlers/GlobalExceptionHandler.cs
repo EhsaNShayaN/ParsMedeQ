@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System.Net;
 
-namespace EShop.Presentation.GlobalExceptionHandlers;
+namespace ParsMedeQ.Presentation.GlobalExceptionHandlers;
 public sealed class GlobalExceptionHandler : IExceptionHandler
 {
     private readonly ILogger<GlobalExceptionHandler> _logger;

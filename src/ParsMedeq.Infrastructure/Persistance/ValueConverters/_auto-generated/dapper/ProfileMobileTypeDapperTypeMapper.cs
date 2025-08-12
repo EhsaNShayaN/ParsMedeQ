@@ -1,6 +1,6 @@
-﻿global using EShop.Domain.Types.ProfileTypes;
+﻿global using ParsMedeq.Domain.Types.ProfileTypes;
 
-namespace EShop.Infrastructure.Persistance.DapperValueConverters;
+namespace ParsMedeq.Infrastructure.Persistance.DapperValueConverters;
 sealed class ProfileMobileTypeDapperTypeMapper : SqlMapper.TypeHandler<ProfileMobileType>
 {
 	public override ProfileMobileType Parse(object value) => ProfileMobileType.FromDb(Convert.ToString(value));

@@ -1,5 +1,5 @@
-﻿using EShop.Domain;
-using EShop.Domain.Types;
+﻿using ParsMedeq.Domain;
+using ParsMedeq.Domain.Types;
 using System.Reflection;
 using System.Text;
 
@@ -102,7 +102,7 @@ internal static class Generator
 
         result.AppendLine($"global using {src.Namespace};");
         result.AppendLine();
-        result.AppendLine("namespace EShop.Infrastructure.Persistance.ValueConverters;");
+        result.AppendLine("namespace ParsMedeq.Infrastructure.Persistance.ValueConverters;");
         result.AppendLine($"sealed class {className} : ValueConverter<{src.ValueObjectType.Name}, {tName}>");
         result.AppendLine("{");
         result.AppendLine($"\tpublic {className}(): base(");
@@ -162,7 +162,7 @@ internal static class Generator
 
         result.AppendLine($"global using {src.Namespace};");
         result.AppendLine();
-        result.AppendLine("namespace EShop.Infrastructure.Persistance.DapperValueConverters;");
+        result.AppendLine("namespace ParsMedeq.Infrastructure.Persistance.DapperValueConverters;");
         result.AppendLine($"sealed class {className} : SqlMapper.TypeHandler<{src.ValueObjectType.Name}>");
         result.AppendLine("{");
         result.AppendLine($"\tpublic override {src.ValueObjectType.Name} Parse(object value) => {src.ValueObjectType.Name}.{fromDbMethodName}({GenerateParser(tName)});");

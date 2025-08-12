@@ -1,8 +1,8 @@
-﻿using EShop.Domain.Abstractions;
-using EShop.Domain.Helpers;
-using EShop.Domain.Types;
+﻿using ParsMedeq.Domain.Abstractions;
+using ParsMedeq.Domain.Helpers;
+using ParsMedeq.Domain.Types;
 
-namespace EShop.Domain.Events;
+namespace ParsMedeq.Domain.Events;
 
 public abstract record ReferencedEntityEvent<TEntity, TId, TIdValue, TEvent>(TEntity SourceObject) :
     IntegrationEventBase(DateHelpers.Now),

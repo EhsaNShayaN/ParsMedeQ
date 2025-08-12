@@ -1,6 +1,6 @@
-﻿using EShop.Domain.Helpers;
+﻿using ParsMedeq.Domain.Helpers;
 
-namespace EShop.Domain.Types.VariantTypes;
+namespace ParsMedeq.Domain.Types.VariantTypes;
 /// <summary>
 /// نام رنگ یا سایز
 /// </summary>

@@ -1,6 +1,6 @@
-﻿global using EShop.Domain.Types.SpecificationTypes;
+﻿global using ParsMedeq.Domain.Types.SpecificationTypes;
 
-namespace EShop.Infrastructure.Persistance.ValueConverters;
+namespace ParsMedeq.Infrastructure.Persistance.ValueConverters;
 sealed class SpecificationNameTypeValueConverter : ValueConverter<SpecificationNameType, string>
 {
 	public SpecificationNameTypeValueConverter(): base(

@@ -1,4 +1,4 @@
-﻿namespace EShop.Domain.Events;
+﻿namespace ParsMedeq.Domain.Events;
 
 public interface IEventProvider
 {

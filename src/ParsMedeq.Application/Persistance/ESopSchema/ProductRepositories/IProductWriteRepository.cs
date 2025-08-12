@@ -1,7 +1,7 @@
-﻿using EShop.Domain.Aggregates.ProductAggregate;
-using EShop.Domain.Persistance;
+﻿using ParsMedeq.Domain.Aggregates.ProductAggregate;
+using ParsMedeq.Domain.Persistance;
 
-namespace EShop.Application.Persistance.ESopSchema.ProductRepositories;
+namespace ParsMedeq.Application.Persistance.ESopSchema.ProductRepositories;
 public interface IProductWriteRepository : IDomainRepository
 {
     ValueTask<PrimitiveResult<Product>> AddNewProduct(Product product);

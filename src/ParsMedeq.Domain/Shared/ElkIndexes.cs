@@ -1,5 +1,5 @@
-﻿namespace EShop.Domain.Shared;
+﻿namespace ParsMedeq.Domain.Shared;
 public static class ElkIndexes
 {
-    public const string ServiceStuffIndexName = "SRH_eshop_service_stuff";
+    public const string ServiceStuffIndexName = "srh_parsmedeq_service_stuff";
 }

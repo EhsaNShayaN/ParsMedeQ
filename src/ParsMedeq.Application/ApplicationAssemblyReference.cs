@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace EShop.Application;
+namespace ParsMedeq.Application;
 
 public static class ApplicationAssemblyReference
 {

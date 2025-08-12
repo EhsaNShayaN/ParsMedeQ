@@ -1,6 +1,6 @@
-﻿global using EShop.Domain.Types.SpecificationTypes;
+﻿global using ParsMedeq.Domain.Types.SpecificationTypes;
 
-namespace EShop.Infrastructure.Persistance.DapperValueConverters;
+namespace ParsMedeq.Infrastructure.Persistance.DapperValueConverters;
 sealed class SpecificationNameTypeDapperTypeMapper : SqlMapper.TypeHandler<SpecificationNameType>
 {
 	public override SpecificationNameType Parse(object value) => SpecificationNameType.FromDb(Convert.ToString(value));

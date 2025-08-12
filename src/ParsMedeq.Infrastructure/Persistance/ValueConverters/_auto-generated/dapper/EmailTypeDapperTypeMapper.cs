@@ -1,6 +1,6 @@
-﻿global using EShop.Domain.Types.Email;
+﻿global using ParsMedeq.Domain.Types.Email;
 
-namespace EShop.Infrastructure.Persistance.DapperValueConverters;
+namespace ParsMedeq.Infrastructure.Persistance.DapperValueConverters;
 sealed class EmailTypeDapperTypeMapper : SqlMapper.TypeHandler<EmailType>
 {
 	public override EmailType Parse(object value) => EmailType.FromDb(Convert.ToString(value));

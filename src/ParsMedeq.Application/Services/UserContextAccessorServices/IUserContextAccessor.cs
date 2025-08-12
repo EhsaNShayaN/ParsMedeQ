@@ -1,4 +1,4 @@
-﻿namespace EShop.Application.Services.UserContextAccessorServices;
+﻿namespace ParsMedeq.Application.Services.UserContextAccessorServices;
 public interface IUserContextAccessor
 {
     UserContext? Current { get; set; }

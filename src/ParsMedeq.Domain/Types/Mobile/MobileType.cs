@@ -1,6 +1,6 @@
-﻿using EShop.Domain.Helpers;
+﻿using ParsMedeq.Domain.Helpers;
 
-namespace EShop.Domain.Types.Mobile;
+namespace ParsMedeq.Domain.Types.Mobile;
 /// <summary>
 /// شماره موبایل
 /// </summary>

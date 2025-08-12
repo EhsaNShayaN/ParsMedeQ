@@ -1,7 +1,7 @@
-﻿using EShop.Domain.Helpers;
-using EShop.Domain.Types.UserId;
+﻿using ParsMedeq.Domain.Helpers;
+using ParsMedeq.Domain.Types.UserId;
 
-namespace EShop.Application.Services.UserContextAccessorServices;
+namespace ParsMedeq.Application.Services.UserContextAccessorServices;
 
 public readonly record struct UserContextProfileId(UserIdType UserId)
 {

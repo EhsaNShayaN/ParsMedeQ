@@ -1,3 +1,0 @@
-﻿namespace EShop.Application.Features.EShopFeatures.UserFeatures.SigninFeature.SigninWithMobileFeature.SendOtpToExistingMobileFeature;
-
-public readonly record struct SendOtpToExistingMobileCommandResponse(string Otp);

@@ -1,4 +1,4 @@
-﻿namespace EShop.Domain.Helpers;
+﻿namespace ParsMedeq.Domain.Helpers;
 public static class DecimalValueHelper
 {
     internal const int MAX_VALE_3 = 1_000;

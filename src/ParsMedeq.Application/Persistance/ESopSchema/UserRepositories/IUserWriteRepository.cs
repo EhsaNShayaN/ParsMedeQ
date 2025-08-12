@@ -1,8 +1,8 @@
-﻿using EShop.Domain.Aggregates.UserAggregate.UserEntity;
-using EShop.Domain.Persistance;
-using EShop.Domain.Types.UserId;
+﻿using ParsMedeq.Domain.Aggregates.UserAggregate.UserEntity;
+using ParsMedeq.Domain.Persistance;
+using ParsMedeq.Domain.Types.UserId;
 
-namespace EShop.Application.Persistance.ESopSchema.UserRepositories;
+namespace ParsMedeq.Application.Persistance.ESopSchema.UserRepositories;
 public interface IUserWriteRepository : IDomainRepository
 {
     ValueTask<PrimitiveResult<User>> FindById(UserIdType id, CancellationToken cancellationToken);

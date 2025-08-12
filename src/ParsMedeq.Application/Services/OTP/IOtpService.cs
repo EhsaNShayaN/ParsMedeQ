@@ -1,8 +1,8 @@
-﻿using EShop.Domain.Types.Email;
-using EShop.Domain.Types.Mobile;
+﻿using ParsMedeq.Domain.Types.Email;
+using ParsMedeq.Domain.Types.Mobile;
 using SRH.CacheProvider;
 
-namespace EShop.Application.Services.OTP;
+namespace ParsMedeq.Application.Services.OTP;
 public interface IOtpService
 {
     PrimitiveResult SendOtp(string phoneNumber);

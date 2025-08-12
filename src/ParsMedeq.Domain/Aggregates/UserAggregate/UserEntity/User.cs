@@ -1,15 +1,15 @@
-﻿using EShop.Domain.Abstractions;
-using EShop.Domain.Aggregates.UserAggregate.Events;
-using EShop.Domain.Aggregates.UserAggregate.Validators;
-using EShop.Domain.Types.Email;
-using EShop.Domain.Types.FirstName;
-using EShop.Domain.Types.FullName;
-using EShop.Domain.Types.LastName;
-using EShop.Domain.Types.Mobile;
-using EShop.Domain.Types.Password;
-using EShop.Domain.Types.UserId;
+﻿using ParsMedeq.Domain.Abstractions;
+using ParsMedeq.Domain.Aggregates.UserAggregate.Events;
+using ParsMedeq.Domain.Aggregates.UserAggregate.Validators;
+using ParsMedeq.Domain.Types.Email;
+using ParsMedeq.Domain.Types.FirstName;
+using ParsMedeq.Domain.Types.FullName;
+using ParsMedeq.Domain.Types.LastName;
+using ParsMedeq.Domain.Types.Mobile;
+using ParsMedeq.Domain.Types.Password;
+using ParsMedeq.Domain.Types.UserId;
 
-namespace EShop.Domain.Aggregates.UserAggregate.UserEntity;
+namespace ParsMedeq.Domain.Aggregates.UserAggregate.UserEntity;
 public sealed class User : AggregateRoot<UserIdType>
 {
     #region " Fields "

@@ -1,14 +1,14 @@
-﻿using EShop.Application.Persistance.ESopSchema.UserRepositories;
-using EShop.Infrastructure.Persistance.DbContexts;
-using EShop.Infrastructure.Schemas;
+﻿using ParsMedeq.Application.Persistance.ESopSchema.UserRepositories;
+using ParsMedeq.Infrastructure.Persistance.DbContexts;
+using ParsMedeq.Infrastructure.Schemas;
 using SRH.Persistance.Extensions;
 
-namespace EShop.Infrastructure.Persistance.Repositories.UserRepositories;
+namespace ParsMedeq.Infrastructure.Persistance.Repositories.UserRepositories;
 
 
 internal sealed class UserReadRepository : GenericDomainEntityReadRepositoryBase<User>, IUserReadRepository
 {
-    public UserReadRepository(EshopReadDbContext dbContext) : base(dbContext) { }
+    public UserReadRepository(ReadDbContext dbContext) : base(dbContext) { }
     public ValueTask<PrimitiveResult> EnsureEmailIsUnique(UserIdType id, EmailType email, CancellationToken cancellationToken)
     {
         return this.DbContext.
@@ -71,13 +71,13 @@ internal sealed class UserReadRepository : GenericDomainEntityReadRepositoryBase
 }
 internal static class UserReadRepositoryCompiledQueries
 {
-    public static Func<EshopReadDbContext, MobileType, CancellationToken, Task<User?>> FindTsepUserByMobileCompiledQuery =>
-        EF.CompileAsyncQuery((EshopReadDbContext dbcontext, MobileType mobile, CancellationToken cancellationToken) =>
+    public static Func<ReadDbContext, MobileType, CancellationToken, Task<User?>> FindTsepUserByMobileCompiledQuery =>
+        EF.CompileAsyncQuery((ReadDbContext dbcontext, MobileType mobile, CancellationToken cancellationToken) =>
             dbcontext.Users
                 .Where(user => user.Mobile.Equals(mobile) && user.IsMobileConfirmed)
                 .FirstOrDefault());
-    public static Func<EshopReadDbContext, EmailType, CancellationToken, Task<User?>> FindTsepUserByEmailCompiledQuery =>
-        EF.CompileAsyncQuery((EshopReadDbContext dbcontext, EmailType email, CancellationToken cancellationToken) =>
+    public static Func<ReadDbContext, EmailType, CancellationToken, Task<User?>> FindTsepUserByEmailCompiledQuery =>
+        EF.CompileAsyncQuery((ReadDbContext dbcontext, EmailType email, CancellationToken cancellationToken) =>
             dbcontext.Users
                 .Where(user => user.Email.Equals(email) && user.IsEmailConfirmed)
                 .FirstOrDefault());

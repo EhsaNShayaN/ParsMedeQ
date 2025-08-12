@@ -1,4 +1,4 @@
-﻿namespace EShop.Domain.Types.VariantTypes;
+﻿namespace ParsMedeq.Domain.Types.VariantTypes;
 /// <summary>
 /// شناسه رنگ یا سایز
 /// </summary>

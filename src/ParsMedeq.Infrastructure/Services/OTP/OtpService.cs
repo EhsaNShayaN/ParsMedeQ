@@ -1,13 +1,13 @@
-﻿using EShop.Application.Errors;
-using EShop.Application.Services.EmailSenderService;
-using EShop.Application.Services.OTP;
-using EShop.Application.Services.SmsSenderService;
-using EShop.Domain.Helpers;
+﻿using ParsMedeq.Application.Errors;
+using ParsMedeq.Application.Services.EmailSenderService;
+using ParsMedeq.Application.Services.OTP;
+using ParsMedeq.Application.Services.SmsSenderService;
+using ParsMedeq.Domain.Helpers;
 using Medallion.Threading;
 using Microsoft.Extensions.Caching.Memory;
 using SRH.CacheProvider;
 
-namespace EShop.Infrastructure.Services.OTP;
+namespace ParsMedeq.Infrastructure.Services.OTP;
 public sealed class OtpService : IOtpService
 {
     private readonly IMemoryCache _memoryCache;

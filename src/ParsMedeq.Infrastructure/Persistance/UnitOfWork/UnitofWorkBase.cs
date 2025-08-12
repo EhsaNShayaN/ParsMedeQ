@@ -1,4 +1,4 @@
-﻿namespace EShop.Infrastructure.Persistance.UnitOfWork;
+﻿namespace ParsMedeq.Infrastructure.Persistance.UnitOfWork;
 
 public abstract class UnitofWorkBase<TDbContext>
     where TDbContext : DbContext

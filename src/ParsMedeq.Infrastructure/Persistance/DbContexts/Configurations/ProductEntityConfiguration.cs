@@ -1,6 +1,6 @@
-﻿using EShop.Infrastructure.Persistance.DbContexts.Extensions;
+﻿using ParsMedeq.Infrastructure.Persistance.DbContexts.Extensions;
 
-namespace EShop.Infrastructure.Persistance.DbContexts.Configurations;
+namespace ParsMedeq.Infrastructure.Persistance.DbContexts.Configurations;
 
 sealed class ProductEntityConfiguration : IEntityTypeConfiguration<Product>
 {
@@ -8,9 +8,7 @@ sealed class ProductEntityConfiguration : IEntityTypeConfiguration<Product>
     {
         builder.ToTable(TableNames.Product);
 
-        builder.Property(x => x.Slug).IsSlugColumn();
         builder.Property(x => x.Title).IsTitleColumn();
 
-        builder.HasIndex(a => a.Slug);
     }
 }

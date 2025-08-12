@@ -1,6 +1,6 @@
-﻿global using EShop.Domain.Types.ProfileTypes;
+﻿global using ParsMedeq.Domain.Types.ProfileTypes;
 
-namespace EShop.Infrastructure.Persistance.ValueConverters;
+namespace ParsMedeq.Infrastructure.Persistance.ValueConverters;
 sealed class ProfileIdTypeValueConverter : ValueConverter<ProfileIdType, int>
 {
 	public ProfileIdTypeValueConverter(): base(

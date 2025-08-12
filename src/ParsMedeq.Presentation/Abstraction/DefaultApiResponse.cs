@@ -1,4 +1,4 @@
-﻿namespace EShop.Presentation.Abstraction;
+﻿namespace ParsMedeQ.Presentation.Abstraction;
 
 public record DefaultApiResponse(
     string RequestId,

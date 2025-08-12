@@ -1,4 +1,4 @@
-﻿namespace EShop.Domain.Types.ProfileTypes;
+﻿namespace ParsMedeq.Domain.Types.ProfileTypes;
 
 /// <summary>
 /// تاریخ انقضاء تخفیف محصمول

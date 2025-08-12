@@ -1,6 +1,6 @@
-﻿global using EShop.Domain.Types.VariantTypes;
+﻿global using ParsMedeq.Domain.Types.VariantTypes;
 
-namespace EShop.Infrastructure.Persistance.ValueConverters;
+namespace ParsMedeq.Infrastructure.Persistance.ValueConverters;
 sealed class VariantIdTypeValueConverter : ValueConverter<VariantIdType, int>
 {
 	public VariantIdTypeValueConverter(): base(

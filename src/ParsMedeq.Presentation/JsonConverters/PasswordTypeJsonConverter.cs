@@ -1,8 +1,8 @@
-﻿using EShop.Domain.Types.Password;
+﻿using ParsMedeq.Domain.Types.Password;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace EShop.Presentation.JsonConverters;
+namespace ParsMedeQ.Presentation.JsonConverters;
 
 internal sealed class PasswordTypeJsonConverter : JsonConverter<PasswordType>
 {

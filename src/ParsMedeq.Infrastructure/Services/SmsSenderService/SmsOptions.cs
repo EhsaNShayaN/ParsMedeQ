@@ -1,4 +1,4 @@
-﻿namespace EShop.Infrastructure.Services.SmsSenderService;
+﻿namespace ParsMedeq.Infrastructure.Services.SmsSenderService;
 
 public sealed class SmsOptions
 {

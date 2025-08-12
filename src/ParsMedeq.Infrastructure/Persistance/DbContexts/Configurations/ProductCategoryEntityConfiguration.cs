@@ -1,6 +1,6 @@
-﻿using EShop.Infrastructure.Persistance.DbContexts.Extensions;
+﻿using ParsMedeq.Infrastructure.Persistance.DbContexts.Extensions;
 
-namespace EShop.Infrastructure.Persistance.DbContexts.Configurations;
+namespace ParsMedeq.Infrastructure.Persistance.DbContexts.Configurations;
 
 sealed class ProductCategoryEntityConfiguration : IEntityTypeConfiguration<ProductCategory>
 {
@@ -8,7 +8,6 @@ sealed class ProductCategoryEntityConfiguration : IEntityTypeConfiguration<Produ
     {
         builder.ToTable(TableNames.ProductCategory);
 
-        builder.Property(x => x.Slug).IsSlugColumn();
         builder.Property(x => x.Title).IsTitleColumn();
 
         builder

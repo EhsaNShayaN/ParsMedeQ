@@ -1,9 +1,9 @@
-﻿using EShop.Application.Persistance.ESopSchema.ProductRepositories;
-using EShop.Infrastructure.Persistance.DbContexts;
+﻿using ParsMedeq.Application.Persistance.ESopSchema.ProductRepositories;
+using ParsMedeq.Infrastructure.Persistance.DbContexts;
 
-namespace EShop.Infrastructure.Persistance.Repositories.ProductRepositories;
-internal sealed class ProductReadRepository : GenericPrimitiveReadRepositoryBase<EshopReadDbContext>, IProductReadRepository
+namespace ParsMedeq.Infrastructure.Persistance.Repositories.ProductRepositories;
+internal sealed class ProductReadRepository : GenericPrimitiveReadRepositoryBase<ReadDbContext>, IProductReadRepository
 {
-    public ProductReadRepository(EshopReadDbContext dbContext) : base(dbContext) { }
+    public ProductReadRepository(ReadDbContext dbContext) : base(dbContext) { }
 }
 

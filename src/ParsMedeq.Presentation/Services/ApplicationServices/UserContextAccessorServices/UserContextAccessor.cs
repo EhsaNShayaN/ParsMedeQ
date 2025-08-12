@@ -1,6 +1,6 @@
-﻿using EShop.Application.Services.UserContextAccessorServices;
+﻿using ParsMedeq.Application.Services.UserContextAccessorServices;
 
-namespace EShop.Presentation.Services.ApplicationServices.UserContextAccessorServices;
+namespace ParsMedeQ.Presentation.Services.ApplicationServices.UserContextAccessorServices;
 sealed class UserContextAccessor : IUserContextAccessor
 {
     private static readonly AsyncLocal<UserContext?> _current = new();

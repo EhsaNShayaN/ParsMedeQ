@@ -1,4 +1,4 @@
-﻿namespace EShop.Domain.Abstractions;
+﻿namespace ParsMedeq.Domain.Abstractions;
 
 public abstract class AggregateRoot<TId> :
     EntityBase<TId>,

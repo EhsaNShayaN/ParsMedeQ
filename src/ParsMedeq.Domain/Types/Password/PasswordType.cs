@@ -1,4 +1,4 @@
-﻿namespace EShop.Domain.Types.Password;
+﻿namespace ParsMedeq.Domain.Types.Password;
 /// <summary>
 /// کلمه عبور
 /// </summary>

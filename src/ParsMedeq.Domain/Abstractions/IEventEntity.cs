@@ -1,6 +1,6 @@
-﻿using EShop.Domain.Events;
+﻿using ParsMedeq.Domain.Events;
 
-namespace EShop.Domain.Abstractions;
+namespace ParsMedeq.Domain.Abstractions;
 
 public interface IEventEntity
 {

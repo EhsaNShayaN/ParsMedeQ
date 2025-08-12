@@ -1,40 +1,70 @@
-﻿using EShop.Domain.Abstractions;
-using EShop.Domain.Aggregates.ProductAggregate.Entities;
+﻿using ParsMedeq.Domain.Abstractions;
+using ParsMedeq.Domain.Aggregates.ProductAggregate;
 
-namespace EShop.Domain.Aggregates.ProductCategoryAggregate;
+namespace ParsMedeq.Domain.Aggregates.ProductCategoryAggregate;
 
-public sealed class ProductCategory : AggregateRoot<int>
+public sealed class ProductCategory : EntityBase<int>
 {
     #region " Fields "
-    List<ProductCategory> _children = [];
-    List<ProductCategoryLink> _productLinks = [];
+    private List<Product> _products = [];
+    private List<ProductCategory> _productCategories = [];
     #endregion
 
     #region " Properties "
-    public int? ParentId { get; private set; }
-    public int ProductTypeId { get; private set; }
-    public string Slug { get; private set; } = string.Empty;
     public string Title { get; private set; } = string.Empty;
+    public int? ParentId { get; private set; }
+    public int Sequential { get; private set; }
+    public string Abstract { get; private set; } = string.Empty;
+    public string Anchors { get; private set; } = string.Empty;
+    public string Description { get; private set; } = string.Empty;
+    public string Cover { get; private set; } = string.Empty;
+    public string Image { get; private set; } = string.Empty;
+    public bool Deleted { get; private set; }
+    public bool Disabled { get; private set; }
+    public DateTime CreationDate { get; private set; }
     #endregion
 
     #region " Navigation Properties "
     public ProductCategory? Parent { get; private set; }
-    public IReadOnlyCollection<ProductCategory> Children => this._children.AsReadOnly();
-    public IReadOnlyCollection<ProductCategoryLink> ProductLinks => this._productLinks.AsReadOnly();
-    //public IReadOnlyCollection<Product> Products => this._productLinks.Select(link => link.Product).ToList().AsReadOnly();
+    public IReadOnlyCollection<Product> Products => this._products.AsReadOnly();
+    public IReadOnlyCollection<ProductCategory> Children => this._productCategories.AsReadOnly();
     #endregion
 
     #region " Constructors "
+    private ProductCategory() : base(0) { }
     public ProductCategory(int id) : base(id) { }
     #endregion
 
-    public PrimitiveResult AddChildCategory(ProductCategory child)
+    #region " Factory "
+    public static PrimitiveResult<ProductCategory> Create(
+        string title,
+        int parentId,
+        int sequential,
+        string @abstract,
+        string anchors,
+        string description,
+        string cover,
+        string image,
+        string translation,
+        bool deleted,
+        bool disabled,
+        DateTime creationDate)
     {
-        if (this._children.Any(c => c.Title == child.Title))
-            return PrimitiveResult.Failure("Domain.Error", "Category name must be unique under the same parent.");
-
-        this._children.Add(child);
-
-        return PrimitiveResult.Success();
+        return PrimitiveResult.Success(
+            new ProductCategory()
+            {
+                Title = title,
+                ParentId = parentId,
+                Sequential = sequential,
+                Abstract = @abstract,
+                Anchors = anchors,
+                Description = description,
+                Cover = cover,
+                Image = image,
+                Deleted = deleted,
+                Disabled = disabled,
+                CreationDate = creationDate
+            });
     }
+    #endregion
 }

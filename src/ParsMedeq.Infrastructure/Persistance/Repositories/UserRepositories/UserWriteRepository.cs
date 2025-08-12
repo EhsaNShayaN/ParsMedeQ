@@ -1,12 +1,12 @@
-﻿using EShop.Application.Persistance.ESopSchema.UserRepositories;
-using EShop.Infrastructure.Persistance.DbContexts;
+﻿using ParsMedeq.Application.Persistance.ESopSchema.UserRepositories;
+using ParsMedeq.Infrastructure.Persistance.DbContexts;
 using SRH.Persistance.Repositories.Write;
 
-namespace EShop.Infrastructure.Persistance.Repositories.UserRepositories;
+namespace ParsMedeq.Infrastructure.Persistance.Repositories.UserRepositories;
 
-internal sealed class UserWriteRepository : GenericPrimitiveWriteRepositoryBase<EshopWriteDbContext>, IUserWriteRepository
+internal sealed class UserWriteRepository : GenericPrimitiveWriteRepositoryBase<WriteDbContext>, IUserWriteRepository
 {
-    public UserWriteRepository(EshopWriteDbContext dbContext) : base(dbContext) { }
+    public UserWriteRepository(WriteDbContext dbContext) : base(dbContext) { }
 
     public ValueTask<PrimitiveResult<User>> AddUser(User src, CancellationToken cancellationToken) => this.Add(src);
     public ValueTask<PrimitiveResult<User>> FindById(UserIdType id, CancellationToken cancellationToken) =>

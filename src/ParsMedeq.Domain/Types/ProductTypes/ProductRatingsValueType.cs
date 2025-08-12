@@ -1,4 +1,4 @@
-﻿namespace EShop.Domain.Types.ProductTypes;
+﻿namespace ParsMedeq.Domain.Types.ProductTypes;
 
 /// <summary>
 /// ارزش رای محصول

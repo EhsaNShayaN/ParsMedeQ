@@ -1,4 +1,4 @@
-﻿namespace EShop.Domain.Helpers;
+﻿namespace ParsMedeq.Domain.Helpers;
 internal static class NationalIdHelper
 {
     internal const int PersonalCode_Length = 10;

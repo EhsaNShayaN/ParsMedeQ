@@ -1,7 +1,7 @@
-﻿using EShop.Domain;
+﻿using ParsMedeq.Domain;
 using System.Reflection;
 
-namespace EShop.Infrastructure.Persistance.DbContexts;
+namespace ParsMedeq.Infrastructure.Persistance.DbContexts;
 public abstract class DbContextBase<T> : DbContext
     where T : DbContext
 {

@@ -1,6 +1,6 @@
-﻿using EShop.Domain.Helpers;
+﻿using ParsMedeq.Domain.Helpers;
 
-namespace EShop.Domain.Types.ProductTypes;
+namespace ParsMedeq.Domain.Types.ProductTypes;
 /// <summary>
 /// تصویر محصول
 /// </summary>

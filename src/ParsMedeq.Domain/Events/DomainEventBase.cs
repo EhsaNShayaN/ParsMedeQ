@@ -1,4 +1,4 @@
-﻿namespace EShop.Domain.Events;
+﻿namespace ParsMedeq.Domain.Events;
 public abstract record DomainEventBase(DateTimeOffset OccuredOn) : IDomainEvent
 {
     public bool IsIntegrationEvent => false;

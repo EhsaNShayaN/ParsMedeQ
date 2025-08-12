@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EShop.Domain.Helpers;
+namespace ParsMedeq.Domain.Helpers;
 public static class PasswordGeneratorHelper
 {
 

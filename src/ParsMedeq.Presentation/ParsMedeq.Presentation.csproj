@@ -19,8 +19,4 @@
 		<ProjectReference Include="..\ParsMedeq.Domain\ParsMedeq.Domain.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Features\EShopFeatures\ProductFeature\" />
-	</ItemGroup>
-
 </Project>

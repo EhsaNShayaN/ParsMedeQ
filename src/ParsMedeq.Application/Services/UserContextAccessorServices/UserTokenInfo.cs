@@ -1,4 +1,4 @@
-﻿namespace EShop.Application.Services.UserContextAccessorServices;
+﻿namespace ParsMedeq.Application.Services.UserContextAccessorServices;
 
 public readonly record struct UserTokenInfo(
     string Token,

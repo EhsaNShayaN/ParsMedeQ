@@ -1,6 +1,6 @@
-﻿global using EShop.Domain.Types.CategoryTypes;
+﻿global using ParsMedeq.Domain.Types.CategoryTypes;
 
-namespace EShop.Infrastructure.Persistance.DapperValueConverters;
+namespace ParsMedeq.Infrastructure.Persistance.DapperValueConverters;
 sealed class CategoryIdTypeDapperTypeMapper : SqlMapper.TypeHandler<CategoryIdType>
 {
 	public override CategoryIdType Parse(object value) => CategoryIdType.FromDb(Convert.ToInt32(value));

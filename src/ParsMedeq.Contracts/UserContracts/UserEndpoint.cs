@@ -1,12 +1,12 @@
 ﻿using SRH.PresentationApi.ApiEndpoint;
 
-namespace EShop.Contracts.UserContracts;
+namespace ParsMedeq.Contracts.UserContracts;
 
 public sealed class UserEndpoint : ApiEndpointBase
 {
     const string _tag = "User";
 
-    protected override ApiEndpointItem MyEndpoint => EShopEndpointMetadata.User;
+    protected override ApiEndpointItem MyEndpoint => EndpointMetadata.User;
 
     private ApiEndpointItem UserSigninWithMobile => new("Signin/mobile", this.MyEndpoint);
 

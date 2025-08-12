@@ -1,4 +1,4 @@
-﻿namespace EShop.Domain.Types.CategoryTypes;
+﻿namespace ParsMedeq.Domain.Types.CategoryTypes;
 /// <summary>
 /// شناسه برند
 /// </summary>

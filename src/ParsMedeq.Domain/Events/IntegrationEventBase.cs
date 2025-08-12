@@ -1,6 +1,6 @@
-﻿using EShop.Domain.Helpers;
+﻿using ParsMedeq.Domain.Helpers;
 
-namespace EShop.Domain.Events;
+namespace ParsMedeq.Domain.Events;
 
 public abstract record IntegrationEventBase(DateTimeOffset OccuredOn) : IDomainEvent
 {

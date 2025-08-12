@@ -1,4 +1,4 @@
-﻿namespace EShop.Domain.Types.SpecificationTypes;
+﻿namespace ParsMedeq.Domain.Types.SpecificationTypes;
 /// <summary>
 /// شناسه مشخصه
 /// </summary>

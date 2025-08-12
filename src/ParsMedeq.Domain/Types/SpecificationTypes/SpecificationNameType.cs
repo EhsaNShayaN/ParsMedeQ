@@ -1,6 +1,6 @@
-﻿using EShop.Domain.Helpers;
+﻿using ParsMedeq.Domain.Helpers;
 
-namespace EShop.Domain.Types.SpecificationTypes;
+namespace ParsMedeq.Domain.Types.SpecificationTypes;
 /// <summary>
 /// نام مشخصه
 /// </summary>

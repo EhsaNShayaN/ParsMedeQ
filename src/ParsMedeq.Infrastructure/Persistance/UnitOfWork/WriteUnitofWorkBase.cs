@@ -1,9 +1,9 @@
-﻿using EShop.Domain.Helpers;
+﻿using ParsMedeq.Domain.Helpers;
 using Microsoft.EntityFrameworkCore.Storage;
 using Newtonsoft.Json;
 using SRH.PrimitiveTypes.Optional;
 
-namespace EShop.Infrastructure.Persistance.UnitOfWork;
+namespace ParsMedeq.Infrastructure.Persistance.UnitOfWork;
 
 public abstract class WriteUnitofWorkBase<TDbContext> : UnitofWorkBase<TDbContext>
     where TDbContext : DbContext

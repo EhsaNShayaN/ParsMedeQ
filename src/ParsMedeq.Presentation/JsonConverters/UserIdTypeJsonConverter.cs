@@ -1,9 +1,9 @@
-﻿using EShop.Domain.Helpers;
-using EShop.Domain.Types.UserId;
+﻿using ParsMedeq.Domain.Helpers;
+using ParsMedeq.Domain.Types.UserId;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace EShop.Presentation.JsonConverters;
+namespace ParsMedeQ.Presentation.JsonConverters;
 
 internal sealed class UserIdTypeJsonConverter : JsonConverter<UserIdType>
 {

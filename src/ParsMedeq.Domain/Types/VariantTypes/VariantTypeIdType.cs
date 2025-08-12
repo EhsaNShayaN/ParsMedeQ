@@ -1,6 +1,6 @@
-﻿using EShop.Domain.Types;
+﻿using ParsMedeq.Domain.Types;
 
-namespace EShop.Domain.Types.VariantTypes;
+namespace ParsMedeq.Domain.Types.VariantTypes;
 /// <summary>
 /// نوع متنوع کننده محصول
 /// </summary>

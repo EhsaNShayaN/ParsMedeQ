@@ -1,4 +1,4 @@
-﻿namespace EShop.Application.Errors;
+﻿namespace ParsMedeq.Application.Errors;
 public static class ApplicationErrors
 {
     public readonly static PrimitiveError TooManyRequestsError = PrimitiveError.Create("Application.Error", "Too many requests ....");

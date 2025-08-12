@@ -1,6 +1,6 @@
-﻿global using EShop.Domain.Types.FirstName;
+﻿global using ParsMedeq.Domain.Types.FirstName;
 
-namespace EShop.Infrastructure.Persistance.ValueConverters;
+namespace ParsMedeq.Infrastructure.Persistance.ValueConverters;
 sealed class FirstNameTypeValueConverter : ValueConverter<FirstNameType, string>
 {
 	public FirstNameTypeValueConverter(): base(

@@ -1,4 +1,4 @@
-﻿namespace EShop.Infrastructure.Helpers;
+﻿namespace ParsMedeq.Infrastructure.Helpers;
 
 internal static class HttpProxyHelper
 {

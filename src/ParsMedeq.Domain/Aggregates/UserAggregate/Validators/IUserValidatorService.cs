@@ -1,9 +1,9 @@
-﻿using EShop.Domain.Abstractions;
-using EShop.Domain.Types.Email;
-using EShop.Domain.Types.Mobile;
-using EShop.Domain.Types.UserId;
+﻿using ParsMedeq.Domain.Abstractions;
+using ParsMedeq.Domain.Types.Email;
+using ParsMedeq.Domain.Types.Mobile;
+using ParsMedeq.Domain.Types.UserId;
 
-namespace EShop.Domain.Aggregates.UserAggregate.Validators;
+namespace ParsMedeq.Domain.Aggregates.UserAggregate.Validators;
 
 public interface IUserValidatorService : IDomainValidator
 {

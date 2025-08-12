@@ -1,10 +1,10 @@
-﻿using EShop.Application;
-using EShop.Application.Services.SmsSenderService;
+﻿using ParsMedeq.Application;
+using ParsMedeq.Application.Services.SmsSenderService;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.FeatureManagement;
 
-namespace EShop.Infrastructure.Services.SmsSenderService;
+namespace ParsMedeq.Infrastructure.Services.SmsSenderService;
 public sealed class MoqSmsSenderService : ISmsSenderService
 {
     private readonly ISmsSenderService _mainService;

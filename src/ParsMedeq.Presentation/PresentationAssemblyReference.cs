@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace EShop.Presentation;
+namespace ParsMedeQ.Presentation;
 
 public static class PresentationAssemblyReference
 {

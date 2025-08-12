@@ -1,6 +1,6 @@
-﻿global using EShop.Domain.Types.BrandTypes;
+﻿global using ParsMedeq.Domain.Types.BrandTypes;
 
-namespace EShop.Infrastructure.Persistance.DapperValueConverters;
+namespace ParsMedeq.Infrastructure.Persistance.DapperValueConverters;
 sealed class BrandTitleTypeDapperTypeMapper : SqlMapper.TypeHandler<BrandTitleType>
 {
 	public override BrandTitleType Parse(object value) => BrandTitleType.FromDb(Convert.ToString(value));

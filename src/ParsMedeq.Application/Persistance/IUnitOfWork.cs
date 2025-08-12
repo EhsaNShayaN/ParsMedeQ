@@ -1,2 +1,2 @@
-﻿namespace EShop.Application.Persistance;
+﻿namespace ParsMedeq.Application.Persistance;
 public interface IUnitOfWork { }

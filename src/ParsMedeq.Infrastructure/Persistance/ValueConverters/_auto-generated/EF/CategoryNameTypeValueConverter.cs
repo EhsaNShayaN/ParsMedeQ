@@ -1,6 +1,6 @@
-﻿global using EShop.Domain.Types.CategoryTypes;
+﻿global using ParsMedeq.Domain.Types.CategoryTypes;
 
-namespace EShop.Infrastructure.Persistance.ValueConverters;
+namespace ParsMedeq.Infrastructure.Persistance.ValueConverters;
 sealed class CategoryNameTypeValueConverter : ValueConverter<CategoryNameType, string>
 {
 	public CategoryNameTypeValueConverter(): base(

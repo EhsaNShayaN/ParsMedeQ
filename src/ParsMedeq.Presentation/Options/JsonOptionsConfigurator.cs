@@ -4,7 +4,7 @@ using Microsoft.Extensions.Options;
 using System.Reflection;
 using System.Text.Json.Serialization;
 
-namespace EShop.Presentation.Options;
+namespace ParsMedeQ.Presentation.Options;
 
 internal sealed class JsonOptionsConfigurator : IConfigureOptions<JsonOptions>
 {

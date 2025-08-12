@@ -1,6 +1,6 @@
-﻿global using EShop.Domain.Types.VariantTypes;
+﻿global using ParsMedeq.Domain.Types.VariantTypes;
 
-namespace EShop.Infrastructure.Persistance.DapperValueConverters;
+namespace ParsMedeq.Infrastructure.Persistance.DapperValueConverters;
 sealed class VariantTypeIdTypeDapperTypeMapper : SqlMapper.TypeHandler<VariantTypeIdType>
 {
 	public override VariantTypeIdType Parse(object value) => VariantTypeIdType.FromId(Convert.ToByte(value));

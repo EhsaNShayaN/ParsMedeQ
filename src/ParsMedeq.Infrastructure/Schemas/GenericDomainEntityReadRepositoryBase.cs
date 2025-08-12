@@ -1,14 +1,14 @@
-﻿using EShop.Application.Persistance;
-using EShop.Infrastructure.Persistance.DbContexts;
+﻿using ParsMedeq.Application.Persistance;
+using ParsMedeq.Infrastructure.Persistance.DbContexts;
 
-namespace EShop.Infrastructure.Schemas;
+namespace ParsMedeq.Infrastructure.Schemas;
 
 internal abstract class GenericDomainEntityReadRepositoryBase<TEntity> :
-    GenericPrimitiveReadRepositoryBase<EshopReadDbContext>,
+    GenericPrimitiveReadRepositoryBase<ReadDbContext>,
     IGenericDomainEntityReadRepository<TEntity>
     where TEntity : class
 {
-    protected GenericDomainEntityReadRepositoryBase(EshopReadDbContext dbContext) : base(dbContext) { }
+    protected GenericDomainEntityReadRepositoryBase(ReadDbContext dbContext) : base(dbContext) { }
 
     public ValueTask<PrimitiveResult<TResult[]>> Filter<TResult>(
         Expression<Func<TEntity, bool>> predicate,

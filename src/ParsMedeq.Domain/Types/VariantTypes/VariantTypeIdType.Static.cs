@@ -1,6 +1,6 @@
 ﻿using SRH.Utilities.Helpers;
 
-namespace EShop.Domain.Types.VariantTypes;
+namespace ParsMedeq.Domain.Types.VariantTypes;
 public readonly partial record struct VariantTypeIdType
 {
     public readonly static VariantTypeIdType Unknown = new(0, "نامشخص");

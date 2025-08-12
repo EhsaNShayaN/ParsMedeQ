@@ -1,6 +1,6 @@
 ﻿using SRH.ValueObjects.Currency;
 
-namespace EShop.Infrastructure.Persistance.ValueConverters;
+namespace ParsMedeq.Infrastructure.Persistance.ValueConverters;
 
 sealed class CurrencyInfoValueConverter : ValueConverter<CurrencyInfo, string>
 {

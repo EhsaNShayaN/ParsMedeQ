@@ -1,7 +1,7 @@
-﻿using EShop.Domain.Types.EconomicActivistDocument;
+﻿using ParsMedeq.Domain.Types.EconomicActivistDocument;
 using SRH.Utilities.Helpers;
 
-namespace EShop.Domain.Types.EconomicActivistType;
+namespace ParsMedeq.Domain.Types.EconomicActivistType;
 
 public readonly partial record struct EconomicActivistTypeInfo
 {

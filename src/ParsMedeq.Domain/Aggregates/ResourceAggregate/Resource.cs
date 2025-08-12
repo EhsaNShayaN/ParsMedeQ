@@ -1,7 +1,8 @@
-﻿using EShop.Domain.Abstractions;
-using ParsMedeq.Domain.Aggregates.ResourceAggregate.Entities;
+﻿using ParsMedeq.Domain.Abstractions;
+using ParsMedeq.Domain.Aggregates.ResourceCategoryAggregate;
+using ParsMedeq.Domain.Aggregates.ResourceCategoryAggregate.Entities;
 
-namespace EShop.Domain.Aggregates.ProductAggregate;
+namespace ParsMedeq.Domain.Aggregates.ProductAggregate;
 
 public sealed class Resource : EntityBase<int>
 {

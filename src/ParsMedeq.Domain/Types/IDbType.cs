@@ -1,4 +1,4 @@
-﻿namespace EShop.Domain.Types;
+﻿namespace ParsMedeq.Domain.Types;
 public interface IDbType
 {
     //string ColumnType { get; }

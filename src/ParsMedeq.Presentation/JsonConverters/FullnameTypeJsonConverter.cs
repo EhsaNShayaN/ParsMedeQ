@@ -1,8 +1,8 @@
-﻿using EShop.Domain.Types.FullName;
+﻿using ParsMedeq.Domain.Types.FullName;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace EShop.Presentation.JsonConverters;
+namespace ParsMedeQ.Presentation.JsonConverters;
 
 internal sealed class FullnameTypeJsonConverter : JsonConverter<FullNameType>
 {

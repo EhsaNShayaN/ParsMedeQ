@@ -1,7 +1,7 @@
-﻿using EShop.Domain.Abstractions;
-using EShop.Domain.Types;
+﻿using ParsMedeq.Domain.Abstractions;
+using ParsMedeq.Domain.Types;
 
-namespace EShop.Domain.Events;
+namespace ParsMedeq.Domain.Events;
 
 public interface IReferencedEntityEvent<TEntity, TId, TIdValue, TEvent>
     where TEntity : EntityBase<TId>

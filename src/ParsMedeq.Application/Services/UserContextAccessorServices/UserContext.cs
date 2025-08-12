@@ -1,6 +1,6 @@
-﻿using EShop.Domain.Types.UserId;
+﻿using ParsMedeq.Domain.Types.UserId;
 
-namespace EShop.Application.Services.UserContextAccessorServices;
+namespace ParsMedeq.Application.Services.UserContextAccessorServices;
 
 public sealed record UserContext(UserIdType Id, UserInfo UserInfo)
 {

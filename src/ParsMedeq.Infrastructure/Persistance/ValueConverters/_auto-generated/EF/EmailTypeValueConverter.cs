@@ -1,6 +1,6 @@
-﻿global using EShop.Domain.Types.Email;
+﻿global using ParsMedeq.Domain.Types.Email;
 
-namespace EShop.Infrastructure.Persistance.ValueConverters;
+namespace ParsMedeq.Infrastructure.Persistance.ValueConverters;
 sealed class EmailTypeValueConverter : ValueConverter<EmailType, string>
 {
 	public EmailTypeValueConverter(): base(

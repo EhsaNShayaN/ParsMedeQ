@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace EShop.Presentation.Abstraction;
+namespace ParsMedeQ.Presentation.Abstraction;
 
 interface IPresentationResponseFactory
 {

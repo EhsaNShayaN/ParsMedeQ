@@ -1,6 +1,6 @@
-﻿using EShop.Domain.Helpers;
+﻿using ParsMedeq.Domain.Helpers;
 
-namespace EShop.Domain.Types.BrandTypes;
+namespace ParsMedeq.Domain.Types.BrandTypes;
 /// <summary>
 /// عنوان برند
 /// </summary>

@@ -1,4 +1,4 @@
-﻿namespace EShop.Application.Helpers;
+﻿namespace ParsMedeq.Application.Helpers;
 public abstract record BasePaginatedQuery
 {
     public int PageIndex { get; set; } = 0;

@@ -1,30 +1,30 @@
-﻿using EShop.Application.Errors;
-using EShop.Domain.Aggregates.UserAggregate.UserEntity;
-using EShop.Domain.Aggregates.UserAggregate.Validators;
-using EShop.Domain.DomainServices.SigninService;
-using EShop.Domain.Types.FullName;
-using EShop.Domain.Types.Password;
-using EShop.Domain.Types.UserId;
+﻿using ParsMedeq.Application.Errors;
+using ParsMedeq.Domain.Aggregates.UserAggregate.UserEntity;
+using ParsMedeq.Domain.Aggregates.UserAggregate.Validators;
+using ParsMedeq.Domain.DomainServices.SigninService;
+using ParsMedeq.Domain.Types.FullName;
+using ParsMedeq.Domain.Types.Password;
+using ParsMedeq.Domain.Types.UserId;
 using Medallion.Threading;
 
-namespace EShop.Application.Services.Signin;
+namespace ParsMedeq.Application.Services.Signin;
 internal sealed class SigninService : ISigninService
 {
-    private readonly IEShopReadUnitOfWork _eshopReadUnitOfWork;
-    private readonly IEShopWriteUnitOfWork _eshopWriteUnitOfWork;
+    private readonly IReadUnitOfWork _readUnitOfWork;
+    private readonly IWriteUnitOfWork _writeUnitOfWork;
     private readonly IUserValidatorService _userValidatorService;
     private readonly IDistributedLockProvider _distributedLockProvider;
 
     public SigninService(
-        IEShopWriteUnitOfWork eshopWriteUnitOfWork,
+        IWriteUnitOfWork writeUnitOfWork,
         IUserValidatorService userValidatorService,
-        IEShopReadUnitOfWork eshopReadUnitOfWork,
+        IReadUnitOfWork readUnitOfWork,
         IDistributedLockProvider distributedLockProvider)
     {
         this._distributedLockProvider = distributedLockProvider;
-        this._eshopReadUnitOfWork = eshopReadUnitOfWork;
+        this._readUnitOfWork = readUnitOfWork;
         this._userValidatorService = userValidatorService;
-        this._eshopWriteUnitOfWork = eshopWriteUnitOfWork;
+        this._writeUnitOfWork = writeUnitOfWork;
     }
 
     public async ValueTask<PrimitiveResult<SigninResult>> SigninOrSignupIfMobileNotExists(MobileType mobile, UserIdType registrantId, CancellationToken cancellationToken)
@@ -34,7 +34,7 @@ internal sealed class SigninService : ISigninService
         using var handle = await this._distributedLockProvider.TryAcquireLockAsync(sessionName, TimeSpan.Zero, cancellationToken);
         if (handle is null) return ApplicationErrors.CreateTooManyRequestsError<SigninResult>();
 
-        var user = await this._eshopReadUnitOfWork
+        var user = await this._readUnitOfWork
             .UserReadRepository
             .FindByMobile(mobile, cancellationToken)
             .ConfigureAwait(false);
@@ -49,8 +49,8 @@ internal sealed class SigninService : ISigninService
                 mobile,
                 this._userValidatorService,
                 cancellationToken)
-            .Map(newUser => this._eshopWriteUnitOfWork.UserWriteRepository.AddUser(newUser, cancellationToken))
-            .Map(newUser => this._eshopWriteUnitOfWork.SaveChangesAsync().Map(_ => newUser))
+            .Map(newUser => this._writeUnitOfWork.UserWriteRepository.AddUser(newUser, cancellationToken))
+            .Map(newUser => this._writeUnitOfWork.SaveChangesAsync().Map(_ => newUser))
             .Map(newUser => new SigninResult(
                 newUser.Id,
                 newUser.FullName,
@@ -64,7 +64,7 @@ internal sealed class SigninService : ISigninService
         using var handle = await this._distributedLockProvider.TryAcquireLockAsync(sessionName, TimeSpan.Zero, cancellationToken);
         if (handle is null) return ApplicationErrors.CreateTooManyRequestsError<SigninResult>();
 
-        var user = await this._eshopReadUnitOfWork
+        var user = await this._readUnitOfWork
             .UserReadRepository
             .FindByMobile(mobile, cancellationToken)
             .ConfigureAwait(false);
@@ -83,7 +83,7 @@ internal sealed class SigninService : ISigninService
         using var handle = await this._distributedLockProvider.TryAcquireLockAsync(sessionName, TimeSpan.Zero, cancellationToken);
         if (handle is null) return ApplicationErrors.CreateTooManyRequestsError<SigninResult>();
 
-        var user = await this._eshopReadUnitOfWork
+        var user = await this._readUnitOfWork
             .UserReadRepository
             .FindByMobile(mobile, cancellationToken)
             .ConfigureAwait(false);
@@ -97,8 +97,8 @@ internal sealed class SigninService : ISigninService
                 PasswordType.Empty,
                 this._userValidatorService,
                 cancellationToken)
-            .Map(newUser => this._eshopWriteUnitOfWork.UserWriteRepository.AddUser(newUser, cancellationToken))
-            .Map(newUser => this._eshopWriteUnitOfWork.SaveChangesAsync().Map(_ => newUser))
+            .Map(newUser => this._writeUnitOfWork.UserWriteRepository.AddUser(newUser, cancellationToken))
+            .Map(newUser => this._writeUnitOfWork.SaveChangesAsync().Map(_ => newUser))
             .Map(newUser => new SigninResult(
                 newUser.Id,
                 newUser.FullName,

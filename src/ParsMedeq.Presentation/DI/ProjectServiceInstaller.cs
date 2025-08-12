@@ -1,11 +1,11 @@
-﻿using EShop.Presentation.GlobalExceptionHandlers;
-using EShop.Presentation.Options;
+﻿using ParsMedeQ.Presentation.GlobalExceptionHandlers;
+using ParsMedeQ.Presentation.Options;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SRH.ServiceInstaller;
 using System.Reflection;
 
-namespace EShop.Presentation.DI;
+namespace ParsMedeQ.Presentation.DI;
 internal sealed class ProjectServiceInstaller : IServiceInstaller
 {
     public Assembly[]? DependantAssemblies => null;

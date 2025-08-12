@@ -1,6 +1,6 @@
 ﻿using SRH.CacheProvider;
 
-namespace EShop.Application.Cache;
+namespace ParsMedeq.Application.Cache;
 public static class ApplicationCacheTokens
 {
     readonly static CacheToken _otpRootToken = new("OTP", TimeSpan.FromMinutes(2));

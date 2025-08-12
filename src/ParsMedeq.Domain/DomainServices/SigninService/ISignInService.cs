@@ -1,8 +1,8 @@
-﻿using EShop.Domain.Types.FullName;
-using EShop.Domain.Types.Mobile;
-using EShop.Domain.Types.UserId;
+﻿using ParsMedeq.Domain.Types.FullName;
+using ParsMedeq.Domain.Types.Mobile;
+using ParsMedeq.Domain.Types.UserId;
 
-namespace EShop.Domain.DomainServices.SigninService;
+namespace ParsMedeq.Domain.DomainServices.SigninService;
 public interface ISigninService
 {
     ValueTask<PrimitiveResult<SigninResult>> SigninOrSignupIfMobileNotExists(MobileType mobile, UserIdType registrantId, CancellationToken cancellationToken);

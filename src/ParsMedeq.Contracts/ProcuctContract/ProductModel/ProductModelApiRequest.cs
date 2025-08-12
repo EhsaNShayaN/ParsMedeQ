@@ -1,4 +1,4 @@
-﻿namespace EShop.Contracts.ProcuctContract.ProductModel;
+﻿namespace ParsMedeq.Contracts.ProcuctContract.ProductModel;
 
 public record ProductModelApiRequest() : BasePaginatedApiRequest;
 public record ProductModelByRequestApiRequest : BasePaginatedApiRequest

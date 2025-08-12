@@ -1,6 +1,6 @@
-﻿global using EShop.Domain.Types.EconomicActivistType;
+﻿global using ParsMedeq.Domain.Types.EconomicActivistType;
 
-namespace EShop.Infrastructure.Persistance.DapperValueConverters;
+namespace ParsMedeq.Infrastructure.Persistance.DapperValueConverters;
 sealed class EconomicActivistTypeInfoDapperTypeMapper : SqlMapper.TypeHandler<EconomicActivistTypeInfo>
 {
 	public override EconomicActivistTypeInfo Parse(object value) => EconomicActivistTypeInfo.FromId(Convert.ToByte(value));

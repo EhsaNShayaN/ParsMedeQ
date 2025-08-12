@@ -1,12 +1,12 @@
-﻿using EShop.Application.Persistance.ESopSchema;
-using EShop.Application.Services.UserContextAccessorServices;
-using EShop.Domain.Helpers;
-using EShop.Domain.Types.UserId;
+﻿using ParsMedeq.Application.Persistance.ESopSchema;
+using ParsMedeq.Application.Services.UserContextAccessorServices;
+using ParsMedeq.Domain.Helpers;
+using ParsMedeq.Domain.Types.UserId;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace EShop.Presentation.Services.ApplicationServices.UserContextAccessorServices;
+namespace ParsMedeQ.Presentation.Services.ApplicationServices.UserContextAccessorServices;
 
 public sealed class UserContextAccessorMiddleware
 {
@@ -28,7 +28,7 @@ public sealed class UserContextAccessorMiddleware
             if (httpContext.Request.Query.TryGetValue("userId", out var userId))
             {
                 using var scope = serviceScopeFactory.CreateScope();
-                var repo = scope.ServiceProvider.GetRequiredService<IEShopReadUnitOfWork>().UserReadRepository;
+                var repo = scope.ServiceProvider.GetRequiredService<IReadUnitOfWork>().UserReadRepository;
 
                 if (HashIdsHelper.Instance.TryDecodeSingle(userId, out int uid))
                 {

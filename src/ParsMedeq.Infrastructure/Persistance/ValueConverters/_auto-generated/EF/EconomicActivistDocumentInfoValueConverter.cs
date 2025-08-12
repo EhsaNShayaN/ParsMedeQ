@@ -1,6 +1,6 @@
-﻿global using EShop.Domain.Types.EconomicActivistDocument;
+﻿global using ParsMedeq.Domain.Types.EconomicActivistDocument;
 
-namespace EShop.Infrastructure.Persistance.ValueConverters;
+namespace ParsMedeq.Infrastructure.Persistance.ValueConverters;
 sealed class EconomicActivistDocumentInfoValueConverter : ValueConverter<EconomicActivistDocumentInfo, byte>
 {
 	public EconomicActivistDocumentInfoValueConverter(): base(

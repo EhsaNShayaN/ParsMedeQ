@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace EShop.Presentation.Abstraction;
+namespace ParsMedeQ.Presentation.Abstraction;
 
 public static class MediatRExtensionMethods
 {

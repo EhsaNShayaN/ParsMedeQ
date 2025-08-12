@@ -1,12 +1,12 @@
 ﻿using SRH.PresentationApi.ApiEndpoint;
 
-namespace EShop.Contracts.UserContracts;
+namespace ParsMedeq.Contracts.UserContracts;
 
 public sealed class ProductEndpoint : ApiEndpointBase
 {
     const string _tag = "Product";
 
-    protected override ApiEndpointItem MyEndpoint => EShopEndpointMetadata.Product;
+    protected override ApiEndpointItem MyEndpoint => EndpointMetadata.Product;
 
     public EndpointInfo ProductModels { get; private set; }
 

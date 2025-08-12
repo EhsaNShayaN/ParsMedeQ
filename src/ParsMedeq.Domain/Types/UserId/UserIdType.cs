@@ -1,6 +1,6 @@
-﻿using EShop.Domain.Helpers;
+﻿using ParsMedeq.Domain.Helpers;
 
-namespace EShop.Domain.Types.UserId;
+namespace ParsMedeq.Domain.Types.UserId;
 /// <summary>
 /// شناسه کاربر
 /// </summary>

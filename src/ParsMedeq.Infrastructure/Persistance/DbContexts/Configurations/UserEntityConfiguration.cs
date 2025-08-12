@@ -1,6 +1,6 @@
-﻿using EShop.Infrastructure.Persistance.ValueConverters;
+﻿using ParsMedeq.Infrastructure.Persistance.ValueConverters;
 
-namespace EShop.Infrastructure.Persistance.DbContexts.Configurations;
+namespace ParsMedeq.Infrastructure.Persistance.DbContexts.Configurations;
 
 sealed class UserEntityConfiguration : IEntityTypeConfiguration<User>
 {

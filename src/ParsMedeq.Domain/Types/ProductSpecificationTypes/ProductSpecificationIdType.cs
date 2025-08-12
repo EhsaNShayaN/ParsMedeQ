@@ -1,4 +1,4 @@
-﻿namespace EShop.Domain.Types.ProductSpecificationTypes;
+﻿namespace ParsMedeq.Domain.Types.ProductSpecificationTypes;
 /// <summary>
 /// شناسه مشخصه ی محصول
 /// </summary>

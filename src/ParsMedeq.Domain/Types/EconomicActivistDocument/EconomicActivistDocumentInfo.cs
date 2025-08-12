@@ -1,6 +1,6 @@
-﻿using EShop.Domain.Types.EconomicActivistDocumentType;
+﻿using ParsMedeq.Domain.Types.EconomicActivistDocumentType;
 
-namespace EShop.Domain.Types.EconomicActivistDocument;
+namespace ParsMedeq.Domain.Types.EconomicActivistDocument;
 public readonly partial record struct EconomicActivistDocumentInfo : IDbType<byte>
 {
     public readonly byte Id { get; }

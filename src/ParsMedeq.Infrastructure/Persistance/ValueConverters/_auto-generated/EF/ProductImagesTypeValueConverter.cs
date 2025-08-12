@@ -1,6 +1,6 @@
-﻿global using EShop.Domain.Types.ProductTypes;
+﻿global using ParsMedeq.Domain.Types.ProductTypes;
 
-namespace EShop.Infrastructure.Persistance.ValueConverters;
+namespace ParsMedeq.Infrastructure.Persistance.ValueConverters;
 sealed class ProductImagesTypeValueConverter : ValueConverter<ProductImagesType, string>
 {
 	public ProductImagesTypeValueConverter(): base(

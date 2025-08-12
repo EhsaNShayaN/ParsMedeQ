@@ -1,6 +1,6 @@
-﻿global using EShop.Domain.Types.BrandTypes;
+﻿global using ParsMedeq.Domain.Types.BrandTypes;
 
-namespace EShop.Infrastructure.Persistance.ValueConverters;
+namespace ParsMedeq.Infrastructure.Persistance.ValueConverters;
 sealed class BrandTitleTypeValueConverter : ValueConverter<BrandTitleType, string>
 {
 	public BrandTitleTypeValueConverter(): base(

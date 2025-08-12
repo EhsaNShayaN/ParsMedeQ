@@ -5,4 +5,4 @@ global using SRH.PresentationApi;
 global using SRH.PresentationApi.ApiEndpoint;
 global using SRH.PrimitiveTypes.Result;
 global using System.Data;
-global using EShop.Presentation.Abstraction;
+global using ParsMedeQ.Presentation.Abstraction;

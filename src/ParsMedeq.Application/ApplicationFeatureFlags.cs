@@ -1,4 +1,4 @@
-﻿namespace EShop.Application;
+﻿namespace ParsMedeq.Application;
 public static class ApplicationFeatureFlags
 {
     public const string DummyOTP = "DummyOTP";

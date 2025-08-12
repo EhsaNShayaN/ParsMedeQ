@@ -1,14 +1,14 @@
 ﻿using Dapper;
-using EShop.Application;
-using EShop.Application.Persistance;
-using EShop.Application.Services.EmailSenderService;
-using EShop.Application.Services.OTP;
-using EShop.Application.Services.SmsSenderService;
-using EShop.Domain.Persistance;
-using EShop.Infrastructure.Persistance.DbContexts;
-using EShop.Infrastructure.Services.EmailSenderService;
-using EShop.Infrastructure.Services.OTP;
-using EShop.Infrastructure.Services.SmsSenderService;
+using ParsMedeq.Application;
+using ParsMedeq.Application.Persistance;
+using ParsMedeq.Application.Services.EmailSenderService;
+using ParsMedeq.Application.Services.OTP;
+using ParsMedeq.Application.Services.SmsSenderService;
+using ParsMedeq.Domain.Persistance;
+using ParsMedeq.Infrastructure.Persistance.DbContexts;
+using ParsMedeq.Infrastructure.Services.EmailSenderService;
+using ParsMedeq.Infrastructure.Services.OTP;
+using ParsMedeq.Infrastructure.Services.SmsSenderService;
 using Medallion.Threading;
 using Medallion.Threading.SqlServer;
 using Microsoft.Data.SqlClient;
@@ -25,7 +25,7 @@ using System.Reflection;
 using ZiggyCreatures.Caching.Fusion;
 using ZiggyCreatures.Caching.Fusion.Serialization.NewtonsoftJson;
 
-namespace EShop.Infrastructure.DI;
+namespace ParsMedeq.Infrastructure.DI;
 internal sealed class ProjectInstaller : IServiceInstaller
 {
     public Assembly[]? DependantAssemblies => [ApplicationAssemblyReference.Assembly];
@@ -47,7 +47,7 @@ internal sealed class ProjectInstaller : IServiceInstaller
 static class ServiceCollectionExtension
 {
     const string Default_Db_ConfigName = "Default";
-    const string Db_ConfigName = "Eshop";
+    const string Db_ConfigName = "ParsMedeQ";
 
     internal static IServiceCollection InstallDomainServices(this IServiceCollection services, Assembly[]? dependantAssemblies)
     {
@@ -71,7 +71,7 @@ static class ServiceCollectionExtension
         IConfiguration config,
         Assembly[]? dependantAssemblies)
     {
-        services.AddReadWriteDbContext<EshopReadDbContext, EshopWriteDbContext>(config, Db_ConfigName);
+        services.AddReadWriteDbContext<ReadDbContext, WriteDbContext>(config, Db_ConfigName);
 
         // Register all repositories
         services.Scan(scan =>
@@ -211,7 +211,7 @@ static class ServiceCollectionExtension
             .WithSerializer(new FusionCacheNewtonsoftJsonSerializer())
             .WithDistributedCache(
                 //TODO: Use Config
-                new RedisCache(new RedisCacheOptions() { Configuration = "127.0.0.1:6379", InstanceName = "ER_EShop:" })
+                new RedisCache(new RedisCacheOptions() { Configuration = "127.0.0.1:6379", InstanceName = "ParsMedeQ:" })
             );
 
         return services;
@@ -235,7 +235,7 @@ static class ServiceCollectionExtension
                 return connectionstring?.ConnectionString ?? string.Empty;
             },
             healthQuery: "SELECT GetDate();",
-            name: "Eshop Database");
+            name: "ParsMedeQ Database");
 
         return services;
     }
@@ -246,7 +246,7 @@ static class ServiceCollectionExtension
             .WithTracing(tracingBuilder =>
             {
                 tracingBuilder
-                    .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService((config.GetSection("OTLP:ServiceName").Get<string>() ?? "ER_Eshop(Api)")!))
+                    .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService((config.GetSection("OTLP:ServiceName").Get<string>() ?? "ParsMedeQ(Api)")!))
                     .AddAspNetCoreInstrumentation()
                     .AddHttpClientInstrumentation()
                     .AddGrpcClientInstrumentation()

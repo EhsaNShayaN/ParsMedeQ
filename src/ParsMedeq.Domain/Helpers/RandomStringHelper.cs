@@ -1,4 +1,4 @@
-﻿namespace EShop.Domain.Helpers;
+﻿namespace ParsMedeq.Domain.Helpers;
 public class RandomStringHelper
 {
     private static Random random = new Random();

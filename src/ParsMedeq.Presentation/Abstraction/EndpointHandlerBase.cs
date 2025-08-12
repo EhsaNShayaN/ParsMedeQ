@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 
-namespace EShop.Presentation.Abstraction;
+namespace ParsMedeQ.Presentation.Abstraction;
 internal static class EndpointHandlerBase
 {
     internal static ValueTask<PrimitiveResult<TEndpointResponse>> DefaultHandlerResponseMapper<THandlerResponse, TEndpointResponse>(THandlerResponse handlerResponse, CancellationToken cancellationToken) =>

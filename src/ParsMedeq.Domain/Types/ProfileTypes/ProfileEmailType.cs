@@ -1,6 +1,6 @@
-﻿using EShop.Domain.Helpers;
+﻿using ParsMedeq.Domain.Helpers;
 
-namespace EShop.Domain.Types.ProfileTypes;
+namespace ParsMedeq.Domain.Types.ProfileTypes;
 /// <summary>
 /// ایمیل کاربر
 /// </summary>

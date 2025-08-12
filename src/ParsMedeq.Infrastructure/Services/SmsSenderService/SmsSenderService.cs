@@ -1,8 +1,8 @@
-﻿using EShop.Application.Services.SmsSenderService;
-using EShop.Infrastructure.Helpers;
+﻿using ParsMedeq.Application.Services.SmsSenderService;
+using ParsMedeq.Infrastructure.Helpers;
 using Microsoft.Extensions.Options;
 
-namespace EShop.Infrastructure.Services.SmsSenderService;
+namespace ParsMedeq.Infrastructure.Services.SmsSenderService;
 
 public sealed class SmsSenderService : ISmsSenderService
 {

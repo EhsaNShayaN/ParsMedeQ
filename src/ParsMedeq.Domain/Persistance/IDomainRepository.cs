@@ -1,2 +1,2 @@
-﻿namespace EShop.Domain.Persistance;
+﻿namespace ParsMedeq.Domain.Persistance;
 public interface IDomainRepository { }

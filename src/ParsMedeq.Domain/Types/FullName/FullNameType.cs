@@ -1,7 +1,7 @@
-﻿using EShop.Domain.Types.FirstName;
-using EShop.Domain.Types.LastName;
+﻿using ParsMedeq.Domain.Types.FirstName;
+using ParsMedeq.Domain.Types.LastName;
 
-namespace EShop.Domain.Types.FullName;
+namespace ParsMedeq.Domain.Types.FullName;
 
 /// <summary>
 /// نام کامل

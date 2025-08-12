@@ -1,6 +1,6 @@
-﻿using EShop.Domain.Helpers;
+﻿using ParsMedeq.Domain.Helpers;
 
-namespace EShop.Domain.Types.FirstName;
+namespace ParsMedeq.Domain.Types.FirstName;
 /// <summary>
 /// نام
 /// </summary>

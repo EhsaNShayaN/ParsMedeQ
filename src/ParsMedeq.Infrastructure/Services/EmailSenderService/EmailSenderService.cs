@@ -1,8 +1,8 @@
-﻿using EShop.Application.Services.EmailSenderService;
+﻿using ParsMedeq.Application.Services.EmailSenderService;
 using FluentEmail.Core;
 using SRH.PrimitiveTypes.Result;
 
-namespace EShop.Infrastructure.Services.EmailSenderService;
+namespace ParsMedeq.Infrastructure.Services.EmailSenderService;
 
 public sealed class EmailSenderService : IEmailSenderService
 {
