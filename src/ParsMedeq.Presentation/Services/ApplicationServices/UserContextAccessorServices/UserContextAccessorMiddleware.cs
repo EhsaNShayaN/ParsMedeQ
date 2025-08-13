@@ -1,4 +1,4 @@
-﻿using ParsMedeQ.Application.Persistance.ESopSchema;
+﻿using ParsMedeQ.Application.Persistance.Schema;
 using ParsMedeQ.Application.Services.UserContextAccessorServices;
 using ParsMedeQ.Domain.Helpers;
 using ParsMedeQ.Domain.Types.UserId;

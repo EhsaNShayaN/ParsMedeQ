@@ -3,7 +3,7 @@ using ParsMedeQ.Domain.Persistance;
 using ParsMedeQ.Domain.Types.Email;
 using ParsMedeQ.Domain.Types.UserId;
 
-namespace ParsMedeQ.Application.Persistance.ESopSchema.UserRepositories;
+namespace ParsMedeQ.Application.Persistance.Schema.UserRepositories;
 
 public interface IUserReadRepository :
     IGenericDomainEntityReadRepository<User>,

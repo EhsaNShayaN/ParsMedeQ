@@ -2,33 +2,30 @@
 
 namespace ParsMedeQ.Application.Features.ResourceFeatures.AddResourceFeature;
 
-public sealed record class AddResourceCommand(
-    int Id,
+public sealed record class AddResourceCommand
+(
+    int? Id,
     int TableId,
     string Title,
-    string Abstract,
-    string Anchors,
-    string Description,
-    string Keywords,
-    int ResourceCategoryId,
-    string ResourceCategoryTitle,
     string Image,
     string MimeType,
-    string Doc,
     string Language,
-    string PublishDate,
+    bool IsVip,
+    int Price,
+    int Discount,
+    string Description,
     string PublishInfo,
     string Publisher,
-    int? Price,
-    int? Discount,
-    bool IsVip,
-    int DownloadCount,
-    int? Ordinal,
-    bool Deleted,
-    bool Disabled,
+    int ResourceCategoryId,
+    string ResourceCategoryTitle,
+    string Abstract,
+    string Anchors,
     DateTime? ExpirationDate,
-    DateTime CreationDate
-    ) : IPrimitiveResultCommand<AddResourceCommandResponse>,
+    string ExpirationTime,
+    string Keywords,
+    string PublishDate,
+    int[] Categories,
+    string Doc) : IPrimitiveResultCommand<AddResourceCommandResponse>,
     IValidatableRequest<AddResourceCommand>
 {
     public ValueTask<PrimitiveResult<AddResourceCommand>> Validate() => PrimitiveResult.Success(this)

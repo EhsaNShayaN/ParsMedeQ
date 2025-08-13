@@ -2,7 +2,7 @@
 using ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate;
 using ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate.Entities;
 
-namespace ParsMedeQ.Domain.Aggregates.ProductAggregate;
+namespace ParsMedeQ.Domain.Aggregates.ResourceAggregate;
 
 public sealed class Resource : EntityBase<int>
 {
@@ -11,20 +11,17 @@ public sealed class Resource : EntityBase<int>
     #endregion
 
     #region " Properties "
-    public string Title { get; private set; } = null!;
+    public int TableId { get; private set; }
+    public string Title { get; private set; } = string.Empty;
     public string Abstract { get; private set; } = string.Empty;
     public string Anchors { get; private set; } = string.Empty;
     public string Description { get; private set; } = string.Empty;
     public string Keywords { get; private set; } = string.Empty;
-
-    public int SecondId { get; private set; }
-    public int TableId { get; private set; }
-    public int? CategoryId { get; private set; }
-    public string CategoryTitle { get; private set; } = string.Empty;
+    public int ResourceCategoryId { get; private set; }
+    public string ResourceCategoryTitle { get; private set; } = string.Empty;
     public string Image { get; private set; } = string.Empty;
     public string MimeType { get; private set; } = string.Empty;
     public string Doc { get; private set; } = string.Empty;
-    public int? JournalId { get; private set; }
     public string Language { get; private set; } = string.Empty;
     public string PublishDate { get; private set; } = string.Empty;
     public string PublishInfo { get; private set; } = string.Empty;
@@ -32,11 +29,8 @@ public sealed class Resource : EntityBase<int>
     public int? Price { get; private set; }
     public int? Discount { get; private set; }
     public bool IsVip { get; private set; }
-    public bool Pinned { get; private set; }
     public int DownloadCount { get; private set; }
     public int? Ordinal { get; private set; }
-    public bool ShowInChem { get; private set; }
-    public bool ShowInAcademy { get; private set; }
     public bool Deleted { get; private set; }
     public bool Disabled { get; private set; }
     public DateTime? ExpirationDate { get; private set; }
@@ -44,12 +38,64 @@ public sealed class Resource : EntityBase<int>
     #endregion
 
     #region " Navigation Properties "
-    public ResourceCategory ResourceCategory { get; private set; } = null!;
+    public ResourceCategory? ResourceCategory { get; private set; }
     public IReadOnlyCollection<ResourceCategoryRelations> ResourceCategoryRelations => this._resourceCategoryRelations.AsReadOnly();
     #endregion
 
     #region " Constructors "
     private Resource() : base(0) { }
     public Resource(int id) : base(id) { }
+    #endregion
+
+    #region " Factory "
+    public static PrimitiveResult<Resource> Create(
+        int tableId,
+        string title,
+        string @abstract,
+        string anchors,
+        string description,
+        string keywords,
+        int resourceCategoryId,
+        string resourceCategoryTitle,
+        string image,
+        string mimeType,
+        string doc,
+        string language,
+        string publishDate,
+        string publishInfo,
+        string publisher,
+        int price,
+        int discount,
+        bool isVip,
+        //int ordinal,
+        DateTime? expirationDate)
+    {
+        return PrimitiveResult.Success(
+            new Resource()
+            {
+                TableId = tableId,
+                Title = title,
+                Abstract = @abstract,
+                Anchors = anchors,
+                Description = description,
+                Keywords = keywords,
+                ResourceCategoryId = resourceCategoryId,
+                ResourceCategoryTitle = resourceCategoryTitle,
+                Image = image,
+                MimeType = mimeType,
+                Doc = doc,
+                Language = language,
+                PublishDate = publishDate,
+                PublishInfo = publishInfo,
+                Publisher = publisher,
+                Price = price,
+                Discount = discount,
+                IsVip = isVip,
+                DownloadCount = 0,
+                //Ordinal = ordinal,
+                ExpirationDate = expirationDate,
+                CreationDate = DateTime.Now
+            });
+    }
     #endregion
 }

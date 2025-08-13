@@ -2,7 +2,7 @@
 using ParsMedeQ.Domain.Persistance;
 using ParsMedeQ.Domain.Types.UserId;
 
-namespace ParsMedeQ.Application.Persistance.ESopSchema.UserRepositories;
+namespace ParsMedeQ.Application.Persistance.Schema.UserRepositories;
 public interface IUserWriteRepository : IDomainRepository
 {
     ValueTask<PrimitiveResult<User>> FindById(UserIdType id, CancellationToken cancellationToken);

@@ -1,4 +1,5 @@
-﻿using ParsMedeQ.Infrastructure.Persistance.DbContexts.Extensions;
+﻿using ParsMedeQ.Domain.Aggregates.ResourceAggregate;
+using ParsMedeQ.Infrastructure.Persistance.DbContexts.Extensions;
 
 namespace ParsMedeQ.Infrastructure.Persistance.DbContexts.Configurations;
 

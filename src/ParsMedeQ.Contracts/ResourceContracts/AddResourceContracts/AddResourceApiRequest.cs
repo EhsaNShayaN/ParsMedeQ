@@ -1,32 +1,29 @@
 ﻿namespace ParsMedeQ.Contracts.ResourceContracts.AddResourceContracts;
-public readonly record struct AddResourceApiRequest(
-    int Id,
+public readonly record struct AddResourceApiRequest
+(
+    int? Id,
     int TableId,
     string Title,
-    string Abstract,
-    string Anchors,
-    string Description,
-    string Keywords,
-    int ResourceCategoryId,
-    string ResourceCategoryTitle,
     string Image,
     string MimeType,
-    string Doc,
     string Language,
-    string PublishDate,
+    bool IsVip,
+    int Price,
+    int Discount,
+    string Description,
+    int[] Authors,
     string PublishInfo,
     string Publisher,
-    int? Price,
-    int? Discount,
-    bool IsVip,
-    int DownloadCount,
-    int? Ordinal,
-    bool Deleted,
-    bool Disabled,
-    DateTime? ExpirationDate,
-    DateTime CreationDate
-);
-
+    int ResourceCategoryId,
+    string ResourceCategoryTitle,
+    string Abstract,
+    AnchorInfo[] Anchors,
+    string ExpirationDate,
+    string ExpirationTime,
+    string Keywords,
+    string PublishDate,
+    int[] Categories,
+    string Doc);
 /*public readonly record struct IdTitleRequest(
     int Id,
     string Title

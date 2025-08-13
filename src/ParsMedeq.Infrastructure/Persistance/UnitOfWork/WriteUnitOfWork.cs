@@ -1,6 +1,7 @@
-﻿using ParsMedeQ.Application.Persistance.ESopSchema;
-using ParsMedeQ.Application.Persistance.ESopSchema.ProductRepositories;
-using ParsMedeQ.Application.Persistance.ESopSchema.UserRepositories;
+﻿using ParsMedeQ.Application.Persistance.Schema;
+using ParsMedeQ.Application.Persistance.Schema.ProductRepositories;
+using ParsMedeQ.Application.Persistance.Schema.ResourceRepositories;
+using ParsMedeQ.Application.Persistance.Schema.UserRepositories;
 using ParsMedeQ.Infrastructure.Persistance.DbContexts;
 
 namespace ParsMedeQ.Infrastructure.Persistance.UnitOfWork;
@@ -9,6 +10,7 @@ public sealed class WriteUnitOfWork : WriteUnitofWorkBase<WriteDbContext>, IWrit
 {
     public IUserWriteRepository UserWriteRepository => this.GetService<IUserWriteRepository>();
     public IProductWriteRepository ProductWriteRepository => this.GetService<IProductWriteRepository>();
+    public IResourceWriteRepository ResourceWriteRepository => this.GetService<IResourceWriteRepository>();
 
     #region " Constructors "
     public WriteUnitOfWork(

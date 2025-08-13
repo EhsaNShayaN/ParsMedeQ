@@ -1,4 +1,4 @@
-﻿using ParsMedeQ.Application.Persistance.ESopSchema.UserRepositories;
+﻿using ParsMedeQ.Application.Persistance.Schema.UserRepositories;
 using ParsMedeQ.Infrastructure.Persistance.DbContexts;
 using ParsMedeQ.Infrastructure.Schemas;
 using SRH.Persistance.Extensions;

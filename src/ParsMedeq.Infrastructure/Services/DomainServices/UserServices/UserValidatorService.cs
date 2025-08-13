@@ -1,4 +1,4 @@
-﻿using ParsMedeQ.Application.Persistance.ESopSchema;
+﻿using ParsMedeQ.Application.Persistance.Schema;
 using ParsMedeQ.Domain.Aggregates.UserAggregate.Validators;
 
 namespace ParsMedeQ.Infrastructure.Services.DomainServices.UserServices;

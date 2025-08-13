@@ -1,4 +1,5 @@
-﻿using ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate;
+﻿using ParsMedeQ.Domain.Aggregates.ResourceAggregate;
+using ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate;
 using ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate.Entities;
 
 namespace ParsMedeQ.Infrastructure.Persistance.DbContexts;

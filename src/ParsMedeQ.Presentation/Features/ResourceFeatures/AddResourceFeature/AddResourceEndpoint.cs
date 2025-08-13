@@ -1,11 +1,7 @@
-﻿using org.apache.zookeeper.data;
-using ParsMedeQ.Application.Features.ResourceFeatures.AddResourceFeature;
+﻿using ParsMedeQ.Application.Features.ResourceFeatures.AddResourceFeature;
 using ParsMedeQ.Contracts;
 using ParsMedeQ.Contracts.ResourceContracts.AddResourceContracts;
-using ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate;
 using SRH.Utilities.EhsaN;
-using System.Security.Policy;
-using static Microsoft.Extensions.Logging.EventSource.LoggingEventSource;
 
 namespace ParsMedeQ.Presentation.Features.ResourceFeatures.AddResourceFeature;
 sealed class AddResourceEndpoint : EndpointHandlerBase<
@@ -35,29 +31,23 @@ internal sealed class AddResourceApiRequestMapper : IPresentationMapper<AddResou
                     src.Id,
                     src.TableId,
                     src.Title,
-                    src.Abstract,
-                    src.Anchors,
-                    src.Description,
-                    src.Keywords,
-                    src.ResourceCategoryId,
-                    src.ResourceCategoryTitle,
                     src.Image,
                     src.MimeType,
-                    src.Doc,
                     src.Language,
-                    src.PublishDate,
-                    src.PublishInfo,
-                    src.Publisher,
+                    src.IsVip,
                     src.Price,
                     src.Discount,
-                    src.IsVip,
-                    src.DownloadCount,
-                    src.Ordinal,
-                    src.Deleted,
-                    src.Disabled,
-                    src.ExpirationDate,
-                    src.CreationDate,
-                    )));
+                    src.Description,
+                    src.PublishInfo,
+                    src.Publisher,
+                    src.ResourceCategoryId,
+                    src.ResourceCategoryTitle,
+                    src.Abstract,
+                    src.Anchors.Length > 0 ? Newtonsoft.Json.JsonConvert.SerializeObject(src.Anchors) : string.Empty,
+                    string.IsNullOrEmpty(src.ExpirationDate) ? default(DateTime?) : src.ExpirationDate.ToGeorgianDate(),
+                    src.ExpirationTime,
+                    src.Keywords,
+                    src.PublishDate,
+                    src.Categories,
+                    src.Doc)));
 }
-                    /*src.Anchors.Length > 0 ? Newtonsoft.Json.JsonConvert.SerializeObject(src.Anchors) : string.Empty,
-                    string.IsNullOrEmpty(src.ExpirationDate) ? default(DateTime?) : src.ExpirationDate.ToGeorgianDate(),*/

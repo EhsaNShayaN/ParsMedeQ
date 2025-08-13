@@ -1,4 +1,4 @@
-﻿using ParsMedeQ.Application.Persistance.ESopSchema.ProductRepositories;
+﻿using ParsMedeQ.Application.Persistance.Schema.ProductRepositories;
 using ParsMedeQ.Infrastructure.Persistance.DbContexts;
 using SRH.Persistance.Repositories.Write;
 

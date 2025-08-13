@@ -1,6 +1,6 @@
 ﻿using ParsMedeQ.Domain.Persistance;
 
-namespace ParsMedeQ.Application.Persistance.ESopSchema.ProductRepositories;
+namespace ParsMedeQ.Application.Persistance.Schema.ProductRepositories;
 public interface IProductReadRepository : IDomainRepository
 {
 }

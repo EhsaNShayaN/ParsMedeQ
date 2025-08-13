@@ -7,12 +7,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Persistance\ESopSchema\UserRepositories\QueryModels\**" />
-	  <EmbeddedResource Remove="Persistance\ESopSchema\UserRepositories\QueryModels\**" />
-	  <None Remove="Persistance\ESopSchema\UserRepositories\QueryModels\**" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="Microsoft.EntityFrameworkCore" />
 		<PackageReference Include="Microsoft.FeatureManagement" />
 		<PackageReference Include="Scrutor" />

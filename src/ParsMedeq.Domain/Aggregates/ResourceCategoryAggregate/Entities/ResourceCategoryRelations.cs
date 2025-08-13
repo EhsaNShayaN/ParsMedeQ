@@ -1,5 +1,5 @@
 ﻿using ParsMedeQ.Domain.Abstractions;
-using ParsMedeQ.Domain.Aggregates.ProductAggregate;
+using ParsMedeQ.Domain.Aggregates.ResourceAggregate;
 
 namespace ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate.Entities;
 public sealed class ResourceCategoryRelations : EntityBase<int>
