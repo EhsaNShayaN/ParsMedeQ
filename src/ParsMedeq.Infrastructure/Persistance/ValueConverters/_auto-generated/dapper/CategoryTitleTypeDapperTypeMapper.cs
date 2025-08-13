@@ -1,6 +1,6 @@
-﻿global using ParsMedeq.Domain.Types.CategoryTypes;
+﻿global using ParsMedeQ.Domain.Types.CategoryTypes;
 
-namespace ParsMedeq.Infrastructure.Persistance.DapperValueConverters;
+namespace ParsMedeQ.Infrastructure.Persistance.DapperValueConverters;
 sealed class CategoryTitleTypeDapperTypeMapper : SqlMapper.TypeHandler<CategoryTitleType>
 {
 	public override CategoryTitleType Parse(object value) => CategoryTitleType.FromDb(Convert.ToString(value));

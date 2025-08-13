@@ -1,6 +1,6 @@
-﻿global using ParsMedeq.Domain.Types.ProductTypes;
+﻿global using ParsMedeQ.Domain.Types.ProductTypes;
 
-namespace ParsMedeq.Infrastructure.Persistance.DapperValueConverters;
+namespace ParsMedeQ.Infrastructure.Persistance.DapperValueConverters;
 sealed class ProductNameTypeDapperTypeMapper : SqlMapper.TypeHandler<ProductNameType>
 {
 	public override ProductNameType Parse(object value) => ProductNameType.FromDb(Convert.ToString(value));

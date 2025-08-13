@@ -1,8 +1,8 @@
-﻿using ParsMedeq.Domain.Types.FullName;
-using ParsMedeq.Domain.Types.Mobile;
-using ParsMedeq.Domain.Types.UserId;
+﻿using ParsMedeQ.Domain.Types.FullName;
+using ParsMedeQ.Domain.Types.Mobile;
+using ParsMedeQ.Domain.Types.UserId;
 
-namespace ParsMedeq.Domain.DomainServices.SigninService;
+namespace ParsMedeQ.Domain.DomainServices.SigninService;
 public interface ISigninService
 {
     ValueTask<PrimitiveResult<SigninResult>> SigninOrSignupIfMobileNotExists(MobileType mobile, UserIdType registrantId, CancellationToken cancellationToken);

@@ -1,4 +1,4 @@
-﻿namespace ParsMedeq.Domain.Helpers;
+﻿namespace ParsMedeQ.Domain.Helpers;
 public static class VerhoeffHelper
 {
     private static readonly int[,] MULTIPLICATION_TABLE = new int[,]

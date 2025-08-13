@@ -1,4 +1,4 @@
-﻿namespace ParsMedeq.Domain.Types.ProductVariantTypes;
+﻿namespace ParsMedeQ.Domain.Types.ProductVariantTypes;
 /// <summary>
 /// شناسه نوع محصول
 /// </summary>

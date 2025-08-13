@@ -1,9 +1,9 @@
-﻿using ParsMedeq.Application.Features.UserFeatures.SigninFeature.SigninWithMobileFeature.SigninOrSignupIfMobileNotExistsFeature;
-using ParsMedeq.Application.Services.UserContextAccessorServices;
-using ParsMedeq.Contracts;
-using ParsMedeq.Contracts.UserContracts.SigninContracts.SigninWithMobileContracts.VerifyOtpContracts;
+﻿using ParsMedeQ.Application.Features.UserFeatures.SigninFeature.SigninWithMobileFeature.SigninOrSignupIfMobileNotExistsFeature;
+using ParsMedeQ.Application.Services.UserContextAccessorServices;
+using ParsMedeQ.Contracts;
+using ParsMedeQ.Contracts.UserContracts.SigninContracts.SigninWithMobileContracts.VerifyOtpContracts;
 
-namespace ParsMedeq.Presentation.Features.UserFeatures.SigninFeature.SigninWithMobileFeature.SigninOrSignupIfMobileNotExistsFeature;
+namespace ParsMedeQ.Presentation.Features.UserFeatures.SigninFeature.SigninWithMobileFeature.SigninOrSignupIfMobileNotExistsFeature;
 
 internal sealed class SigninOrSignupIfMobileNotExistsEndpoint : EndpointHandlerBase<
     SigninOrSignupIfMobileNotExistsApiRequest,

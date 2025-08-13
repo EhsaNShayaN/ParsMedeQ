@@ -1,4 +1,4 @@
-﻿namespace ParsMedeq.Application;
+﻿namespace ParsMedeQ.Application;
 public static class ApplicationFeatureFlags
 {
     public const string DummyOTP = "DummyOTP";

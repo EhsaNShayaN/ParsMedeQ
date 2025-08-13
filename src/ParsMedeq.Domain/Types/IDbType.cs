@@ -1,4 +1,4 @@
-﻿namespace ParsMedeq.Domain.Types;
+﻿namespace ParsMedeQ.Domain.Types;
 public interface IDbType
 {
     //string ColumnType { get; }

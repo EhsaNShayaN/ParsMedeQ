@@ -1,8 +1,8 @@
-﻿using ParsMedeq.Domain.Abstractions;
-using ParsMedeq.Domain.Helpers;
-using ParsMedeq.Domain.Types;
+﻿using ParsMedeQ.Domain.Abstractions;
+using ParsMedeQ.Domain.Helpers;
+using ParsMedeQ.Domain.Types;
 
-namespace ParsMedeq.Domain.Events;
+namespace ParsMedeQ.Domain.Events;
 
 public abstract record ReferencedEntityEvent<TEntity, TId, TIdValue, TEvent>(TEntity SourceObject) :
     IntegrationEventBase(DateHelpers.Now),

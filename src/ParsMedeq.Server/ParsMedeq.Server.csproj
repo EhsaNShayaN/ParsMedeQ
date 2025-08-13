@@ -15,9 +15,9 @@
     <ProjectReference Include="..\parsmedeq.client\parsmedeq.client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
-    <ProjectReference Include="..\ParsMedeq.Contracts\ParsMedeq.Contracts.csproj" />
-    <ProjectReference Include="..\ParsMedeq.Infrastructure\ParsMedeq.Infrastructure.csproj" />
-    <ProjectReference Include="..\ParsMedeq.Presentation\ParsMedeq.Presentation.csproj" />
+    <ProjectReference Include="..\ParsMedeQ.Contracts\ParsMedeQ.Contracts.csproj" />
+    <ProjectReference Include="..\ParsMedeQ.Infrastructure\ParsMedeQ.Infrastructure.csproj" />
+    <ProjectReference Include="..\ParsMedeQ.Presentation\ParsMedeQ.Presentation.csproj" />
   </ItemGroup>
 
   <ItemGroup>

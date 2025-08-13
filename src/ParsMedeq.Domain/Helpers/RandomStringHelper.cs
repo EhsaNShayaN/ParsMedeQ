@@ -1,4 +1,4 @@
-﻿namespace ParsMedeq.Domain.Helpers;
+﻿namespace ParsMedeQ.Domain.Helpers;
 public class RandomStringHelper
 {
     private static Random random = new Random();

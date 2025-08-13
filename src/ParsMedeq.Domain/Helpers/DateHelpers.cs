@@ -1,4 +1,4 @@
-﻿namespace ParsMedeq.Domain.Helpers;
+﻿namespace ParsMedeQ.Domain.Helpers;
 public static class DateHelpers
 {
     public static DateTimeOffset Now => DateTimeOffset.UtcNow;

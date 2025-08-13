@@ -1,4 +1,4 @@
-﻿namespace ParsMedeq.Domain.DomainServices.EncryptionService;
+﻿namespace ParsMedeQ.Domain.DomainServices.EncryptionService;
 public interface IEncryptionService
 {
     ValueTask<PrimitiveResult<EncryptionResult>> Encrypt(byte[] src);

@@ -1,4 +1,4 @@
-﻿namespace ParsMedeq.Domain.Types.Address;
+﻿namespace ParsMedeQ.Domain.Types.Address;
 public sealed record AddressType(
     string Province,
     string City,

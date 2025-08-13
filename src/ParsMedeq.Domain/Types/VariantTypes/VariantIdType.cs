@@ -1,4 +1,4 @@
-﻿namespace ParsMedeq.Domain.Types.VariantTypes;
+﻿namespace ParsMedeQ.Domain.Types.VariantTypes;
 /// <summary>
 /// شناسه رنگ یا سایز
 /// </summary>

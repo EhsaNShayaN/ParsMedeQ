@@ -1,8 +1,8 @@
-﻿using ParsMedeq.Application.Features.UserFeatures.SigninFeature.SigninWithMobileFeature.SendOtpFeature;
-using ParsMedeq.Contracts;
-using ParsMedeq.Contracts.UserContracts.SigninContracts.SigninWithMobileContracts.SendOtpContracts;
+﻿using ParsMedeQ.Application.Features.UserFeatures.SigninFeature.SigninWithMobileFeature.SendOtpFeature;
+using ParsMedeQ.Contracts;
+using ParsMedeQ.Contracts.UserContracts.SigninContracts.SigninWithMobileContracts.SendOtpContracts;
 
-namespace ParsMedeq.Presentation.Features.UserFeatures.SigninFeature.SigninWithMobileFeature.SendOtpFeature;
+namespace ParsMedeQ.Presentation.Features.UserFeatures.SigninFeature.SigninWithMobileFeature.SendOtpFeature;
 internal sealed class SendOtpEndpoint : EndpointHandlerBase<
     SigninWithMobileSendOtpApiRequest,
     SigninWithMobileSendOtpCommand,

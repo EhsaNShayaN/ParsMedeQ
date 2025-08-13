@@ -1,6 +1,6 @@
-﻿using ParsMedeq.Domain.Helpers;
+﻿using ParsMedeQ.Domain.Helpers;
 
-namespace ParsMedeq.Domain.Types.UserId;
+namespace ParsMedeQ.Domain.Types.UserId;
 /// <summary>
 /// شناسه کاربر
 /// </summary>

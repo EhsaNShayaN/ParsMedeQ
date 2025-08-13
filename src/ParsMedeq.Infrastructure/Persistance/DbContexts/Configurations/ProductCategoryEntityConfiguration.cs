@@ -1,6 +1,6 @@
-﻿using ParsMedeq.Infrastructure.Persistance.DbContexts.Extensions;
+﻿using ParsMedeQ.Infrastructure.Persistance.DbContexts.Extensions;
 
-namespace ParsMedeq.Infrastructure.Persistance.DbContexts.Configurations;
+namespace ParsMedeQ.Infrastructure.Persistance.DbContexts.Configurations;
 
 sealed class ProductCategoryEntityConfiguration : IEntityTypeConfiguration<ProductCategory>
 {

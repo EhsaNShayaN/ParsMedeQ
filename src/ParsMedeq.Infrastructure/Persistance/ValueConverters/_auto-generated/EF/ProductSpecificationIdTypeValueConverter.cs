@@ -1,4 +1,4 @@
-﻿namespace ParsMedeq.Infrastructure.Persistance.ValueConverters;
+﻿namespace ParsMedeQ.Infrastructure.Persistance.ValueConverters;
 sealed class ProductSpecificationIdTypeValueConverter : ValueConverter<ProductSpecificationIdType, int>
 {
 	public ProductSpecificationIdTypeValueConverter(): base(

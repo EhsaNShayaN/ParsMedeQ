@@ -1,8 +1,8 @@
-﻿using ParsMedeq.Application.Persistance.ESopSchema.UserRepositories;
-using ParsMedeq.Infrastructure.Persistance.DbContexts;
+﻿using ParsMedeQ.Application.Persistance.ESopSchema.UserRepositories;
+using ParsMedeQ.Infrastructure.Persistance.DbContexts;
 using SRH.Persistance.Repositories.Write;
 
-namespace ParsMedeq.Infrastructure.Persistance.Repositories.UserRepositories;
+namespace ParsMedeQ.Infrastructure.Persistance.Repositories.UserRepositories;
 
 internal sealed class UserWriteRepository : GenericPrimitiveWriteRepositoryBase<WriteDbContext>, IUserWriteRepository
 {

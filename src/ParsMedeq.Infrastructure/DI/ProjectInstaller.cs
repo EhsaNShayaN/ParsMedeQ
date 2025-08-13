@@ -1,14 +1,14 @@
 ﻿using Dapper;
-using ParsMedeq.Application;
-using ParsMedeq.Application.Persistance;
-using ParsMedeq.Application.Services.EmailSenderService;
-using ParsMedeq.Application.Services.OTP;
-using ParsMedeq.Application.Services.SmsSenderService;
-using ParsMedeq.Domain.Persistance;
-using ParsMedeq.Infrastructure.Persistance.DbContexts;
-using ParsMedeq.Infrastructure.Services.EmailSenderService;
-using ParsMedeq.Infrastructure.Services.OTP;
-using ParsMedeq.Infrastructure.Services.SmsSenderService;
+using ParsMedeQ.Application;
+using ParsMedeQ.Application.Persistance;
+using ParsMedeQ.Application.Services.EmailSenderService;
+using ParsMedeQ.Application.Services.OTP;
+using ParsMedeQ.Application.Services.SmsSenderService;
+using ParsMedeQ.Domain.Persistance;
+using ParsMedeQ.Infrastructure.Persistance.DbContexts;
+using ParsMedeQ.Infrastructure.Services.EmailSenderService;
+using ParsMedeQ.Infrastructure.Services.OTP;
+using ParsMedeQ.Infrastructure.Services.SmsSenderService;
 using Medallion.Threading;
 using Medallion.Threading.SqlServer;
 using Microsoft.Data.SqlClient;
@@ -25,7 +25,7 @@ using System.Reflection;
 using ZiggyCreatures.Caching.Fusion;
 using ZiggyCreatures.Caching.Fusion.Serialization.NewtonsoftJson;
 
-namespace ParsMedeq.Infrastructure.DI;
+namespace ParsMedeQ.Infrastructure.DI;
 internal sealed class ProjectInstaller : IServiceInstaller
 {
     public Assembly[]? DependantAssemblies => [ApplicationAssemblyReference.Assembly];

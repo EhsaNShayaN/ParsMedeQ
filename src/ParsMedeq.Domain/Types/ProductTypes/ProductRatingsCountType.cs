@@ -1,4 +1,4 @@
-﻿namespace ParsMedeq.Domain.Types.ProductTypes;
+﻿namespace ParsMedeQ.Domain.Types.ProductTypes;
 
 /// <summary>
 /// تعداد رای محصول

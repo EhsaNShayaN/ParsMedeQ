@@ -1,9 +1,9 @@
-﻿using ParsMedeq.Domain.Aggregates.UserAggregate.UserEntity;
-using ParsMedeq.Domain.Persistance;
-using ParsMedeq.Domain.Types.Email;
-using ParsMedeq.Domain.Types.UserId;
+﻿using ParsMedeQ.Domain.Aggregates.UserAggregate.UserEntity;
+using ParsMedeQ.Domain.Persistance;
+using ParsMedeQ.Domain.Types.Email;
+using ParsMedeQ.Domain.Types.UserId;
 
-namespace ParsMedeq.Application.Persistance.ESopSchema.UserRepositories;
+namespace ParsMedeQ.Application.Persistance.ESopSchema.UserRepositories;
 
 public interface IUserReadRepository :
     IGenericDomainEntityReadRepository<User>,

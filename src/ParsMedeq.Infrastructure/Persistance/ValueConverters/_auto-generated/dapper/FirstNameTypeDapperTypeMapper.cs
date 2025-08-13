@@ -1,6 +1,6 @@
-﻿global using ParsMedeq.Domain.Types.FirstName;
+﻿global using ParsMedeQ.Domain.Types.FirstName;
 
-namespace ParsMedeq.Infrastructure.Persistance.DapperValueConverters;
+namespace ParsMedeQ.Infrastructure.Persistance.DapperValueConverters;
 sealed class FirstNameTypeDapperTypeMapper : SqlMapper.TypeHandler<FirstNameType>
 {
 	public override FirstNameType Parse(object value) => FirstNameType.FromDb(Convert.ToString(value));

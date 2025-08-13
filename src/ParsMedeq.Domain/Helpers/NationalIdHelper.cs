@@ -1,4 +1,4 @@
-﻿namespace ParsMedeq.Domain.Helpers;
+﻿namespace ParsMedeQ.Domain.Helpers;
 internal static class NationalIdHelper
 {
     internal const int PersonalCode_Length = 10;

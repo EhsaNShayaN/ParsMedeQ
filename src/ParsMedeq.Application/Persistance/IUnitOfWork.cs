@@ -1,2 +1,2 @@
-﻿namespace ParsMedeq.Application.Persistance;
+﻿namespace ParsMedeQ.Application.Persistance;
 public interface IUnitOfWork { }

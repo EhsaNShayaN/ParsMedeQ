@@ -1,7 +1,7 @@
-﻿using ParsMedeq.Application.Persistance.ESopSchema;
-using ParsMedeq.Application.Services.UserContextAccessorServices;
-using ParsMedeq.Domain.Helpers;
-using ParsMedeq.Domain.Types.UserId;
+﻿using ParsMedeQ.Application.Persistance.ESopSchema;
+using ParsMedeQ.Application.Services.UserContextAccessorServices;
+using ParsMedeQ.Domain.Helpers;
+using ParsMedeQ.Domain.Types.UserId;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;

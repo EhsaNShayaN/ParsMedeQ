@@ -1,7 +1,7 @@
-﻿using ParsMedeq.Domain.Helpers;
-using ParsMedeq.Domain.Types.EconomicActivistType;
+﻿using ParsMedeQ.Domain.Helpers;
+using ParsMedeQ.Domain.Types.EconomicActivistType;
 
-namespace ParsMedeq.Domain.Types.EconomicActivistNationalId;
+namespace ParsMedeQ.Domain.Types.EconomicActivistNationalId;
 /// <summary>
 /// شناسه ملی /شماره ملی /شناسه مشارکت مدنی /کد فراگیر اتباع غیر ایرانی فعال اقتصادی
 /// </summary>

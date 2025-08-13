@@ -1,6 +1,6 @@
-﻿global using ParsMedeq.Domain.Types.ProfileTypes;
+﻿global using ParsMedeQ.Domain.Types.ProfileTypes;
 
-namespace ParsMedeq.Infrastructure.Persistance.DapperValueConverters;
+namespace ParsMedeQ.Infrastructure.Persistance.DapperValueConverters;
 sealed class ProfileIdTypeDapperTypeMapper : SqlMapper.TypeHandler<ProfileIdType>
 {
 	public override ProfileIdType Parse(object value) => ProfileIdType.FromDb(Convert.ToInt32(value));

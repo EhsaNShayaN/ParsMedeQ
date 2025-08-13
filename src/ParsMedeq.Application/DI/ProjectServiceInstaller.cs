@@ -1,6 +1,6 @@
-﻿using ParsMedeq.Application.Services.Signin;
-using ParsMedeq.Domain.Abstractions;
-using ParsMedeq.Domain.DomainServices.SigninService;
+﻿using ParsMedeQ.Application.Services.Signin;
+using ParsMedeQ.Domain.Abstractions;
+using ParsMedeQ.Domain.DomainServices.SigninService;
 using MediatR;
 using MediatR.Pipeline;
 using Microsoft.Extensions.Configuration;
@@ -13,7 +13,7 @@ using SRH.MediatRMessaging.Behaviours;
 using SRH.ServiceInstaller;
 using System.Reflection;
 
-namespace ParsMedeq.Application.DI;
+namespace ParsMedeQ.Application.DI;
 internal sealed class ProjectServiceInstaller : IServiceInstaller
 {
     public Assembly[]? DependantAssemblies => null;

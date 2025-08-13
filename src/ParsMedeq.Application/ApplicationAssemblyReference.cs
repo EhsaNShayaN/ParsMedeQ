@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace ParsMedeq.Application;
+namespace ParsMedeQ.Application;
 
 public static class ApplicationAssemblyReference
 {

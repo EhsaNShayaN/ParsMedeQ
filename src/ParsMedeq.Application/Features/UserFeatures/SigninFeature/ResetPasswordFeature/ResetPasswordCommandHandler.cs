@@ -1,7 +1,7 @@
-﻿using ParsMedeq.Domain.Aggregates.UserAggregate.Validators;
-using ParsMedeq.Domain.Helpers;
+﻿using ParsMedeQ.Domain.Aggregates.UserAggregate.Validators;
+using ParsMedeQ.Domain.Helpers;
 
-namespace ParsMedeq.Application.Features.UserFeatures.SigninFeature.ResetPasswordFeature;
+namespace ParsMedeQ.Application.Features.UserFeatures.SigninFeature.ResetPasswordFeature;
 public sealed class ResetPasswordCommandHandler : IPrimitiveResultCommandHandler<ResetPasswordCommand, ResetPasswordCommandResponse>
 {
     private readonly IOtpService _otpService;

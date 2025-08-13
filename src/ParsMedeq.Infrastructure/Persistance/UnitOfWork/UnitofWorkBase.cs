@@ -1,4 +1,4 @@
-﻿namespace ParsMedeq.Infrastructure.Persistance.UnitOfWork;
+﻿namespace ParsMedeQ.Infrastructure.Persistance.UnitOfWork;
 
 public abstract class UnitofWorkBase<TDbContext>
     where TDbContext : DbContext

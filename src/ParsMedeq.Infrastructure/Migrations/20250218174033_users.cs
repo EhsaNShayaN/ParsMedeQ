@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace ParsMedeq.Infrastructure.Migrations
+namespace ParsMedeQ.Infrastructure.Migrations
 {
     /// <inheritdoc />
     public partial class users : Migration

@@ -1,6 +1,6 @@
-﻿global using ParsMedeq.Domain.Types.LastName;
+﻿global using ParsMedeQ.Domain.Types.LastName;
 
-namespace ParsMedeq.Infrastructure.Persistance.DapperValueConverters;
+namespace ParsMedeQ.Infrastructure.Persistance.DapperValueConverters;
 sealed class LastNameTypeDapperTypeMapper : SqlMapper.TypeHandler<LastNameType>
 {
 	public override LastNameType Parse(object value) => LastNameType.FromDb(Convert.ToString(value));

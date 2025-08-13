@@ -1,6 +1,6 @@
-﻿global using ParsMedeq.Domain.Types.BrandTypes;
+﻿global using ParsMedeQ.Domain.Types.BrandTypes;
 
-namespace ParsMedeq.Infrastructure.Persistance.ValueConverters;
+namespace ParsMedeQ.Infrastructure.Persistance.ValueConverters;
 sealed class BrandIdTypeValueConverter : ValueConverter<BrandIdType, int>
 {
 	public BrandIdTypeValueConverter(): base(

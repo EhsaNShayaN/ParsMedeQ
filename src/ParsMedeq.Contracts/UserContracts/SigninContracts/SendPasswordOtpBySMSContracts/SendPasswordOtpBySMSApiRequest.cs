@@ -1,4 +1,4 @@
-﻿namespace ParsMedeq.Contracts.UserContracts.SigninContracts.SendPasswordOtpBySMSContracts;
+﻿namespace ParsMedeQ.Contracts.UserContracts.SigninContracts.SendPasswordOtpBySMSContracts;
 
 public readonly record struct SendPasswordOtpBySMSApiRequest(string Mobile);
 

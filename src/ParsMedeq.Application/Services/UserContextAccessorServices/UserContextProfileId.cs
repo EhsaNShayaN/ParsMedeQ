@@ -1,7 +1,7 @@
-﻿using ParsMedeq.Domain.Helpers;
-using ParsMedeq.Domain.Types.UserId;
+﻿using ParsMedeQ.Domain.Helpers;
+using ParsMedeQ.Domain.Types.UserId;
 
-namespace ParsMedeq.Application.Services.UserContextAccessorServices;
+namespace ParsMedeQ.Application.Services.UserContextAccessorServices;
 
 public readonly record struct UserContextProfileId(UserIdType UserId)
 {

@@ -1,9 +1,9 @@
-﻿using ParsMedeq.Application;
-using ParsMedeq.Application.Services.EmailSenderService;
+﻿using ParsMedeQ.Application;
+using ParsMedeQ.Application.Services.EmailSenderService;
 using Microsoft.FeatureManagement;
 using SRH.PrimitiveTypes.Result;
 
-namespace ParsMedeq.Infrastructure.Services.EmailSenderService;
+namespace ParsMedeQ.Infrastructure.Services.EmailSenderService;
 public sealed class MoqEmailSenderService : IEmailSenderService
 {
     private readonly IEmailSenderService _mainService;

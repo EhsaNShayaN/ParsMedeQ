@@ -1,6 +1,6 @@
-﻿using ParsMedeq.Domain.Aggregates.ProductAggregate;
+﻿using ParsMedeQ.Domain.Aggregates.ProductAggregate;
 
-namespace ParsMedeq.Application.Features.ProductFeatures;
+namespace ParsMedeQ.Application.Features.ProductFeatures;
 public sealed record CreateProductCommand(int ProductTypeId, int ModelId, string Slug, string Title, string Specifications) : IPrimitiveResultCommand<Product>;
 
 internal sealed class CreateProductCommandHanler : IPrimitiveResultCommandHandler<CreateProductCommand, Product>

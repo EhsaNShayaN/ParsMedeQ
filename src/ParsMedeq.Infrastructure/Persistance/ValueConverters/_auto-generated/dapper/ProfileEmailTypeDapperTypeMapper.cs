@@ -1,6 +1,6 @@
-﻿global using ParsMedeq.Domain.Types.ProfileTypes;
+﻿global using ParsMedeQ.Domain.Types.ProfileTypes;
 
-namespace ParsMedeq.Infrastructure.Persistance.DapperValueConverters;
+namespace ParsMedeQ.Infrastructure.Persistance.DapperValueConverters;
 sealed class ProfileEmailTypeDapperTypeMapper : SqlMapper.TypeHandler<ProfileEmailType>
 {
 	public override ProfileEmailType Parse(object value) => ProfileEmailType.FromDb(Convert.ToString(value));

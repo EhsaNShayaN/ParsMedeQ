@@ -1,7 +1,7 @@
-﻿using ParsMedeq.Domain.Aggregates.ResourceCategoryAggregate;
-using ParsMedeq.Domain.Aggregates.ResourceCategoryAggregate.Entities;
+﻿using ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate;
+using ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate.Entities;
 
-namespace ParsMedeq.Infrastructure.Persistance.DbContexts;
+namespace ParsMedeQ.Infrastructure.Persistance.DbContexts;
 public sealed class ReadDbContext : DbContextBase<ReadDbContext>
 {
     public DbSet<User> Users { get; set; }

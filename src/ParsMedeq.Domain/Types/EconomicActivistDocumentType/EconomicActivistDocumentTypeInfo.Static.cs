@@ -1,6 +1,6 @@
 ﻿using SRH.Utilities.Helpers;
 
-namespace ParsMedeq.Domain.Types.EconomicActivistDocumentType;
+namespace ParsMedeQ.Domain.Types.EconomicActivistDocumentType;
 public readonly partial record struct EconomicActivistDocumentTypeInfo
 {
     public const int EconomicActivistDocumentType_Identity_Id = 1;

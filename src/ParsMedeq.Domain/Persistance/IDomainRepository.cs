@@ -1,2 +1,2 @@
-﻿namespace ParsMedeq.Domain.Persistance;
+﻿namespace ParsMedeQ.Domain.Persistance;
 public interface IDomainRepository { }

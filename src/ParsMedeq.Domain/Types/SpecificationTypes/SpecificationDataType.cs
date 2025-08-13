@@ -1,6 +1,6 @@
-﻿using ParsMedeq.Domain.Helpers;
+﻿using ParsMedeQ.Domain.Helpers;
 
-namespace ParsMedeq.Domain.Types.SpecificationTypes;
+namespace ParsMedeQ.Domain.Types.SpecificationTypes;
 /// <summary>
 /// واحد مشخصه
 /// </summary>

@@ -1,9 +1,9 @@
-﻿using ParsMedeq.Application.Persistance.ESopSchema.UserRepositories;
-using ParsMedeq.Infrastructure.Persistance.DbContexts;
-using ParsMedeq.Infrastructure.Schemas;
+﻿using ParsMedeQ.Application.Persistance.ESopSchema.UserRepositories;
+using ParsMedeQ.Infrastructure.Persistance.DbContexts;
+using ParsMedeQ.Infrastructure.Schemas;
 using SRH.Persistance.Extensions;
 
-namespace ParsMedeq.Infrastructure.Persistance.Repositories.UserRepositories;
+namespace ParsMedeQ.Infrastructure.Persistance.Repositories.UserRepositories;
 
 
 internal sealed class UserReadRepository : GenericDomainEntityReadRepositoryBase<User>, IUserReadRepository

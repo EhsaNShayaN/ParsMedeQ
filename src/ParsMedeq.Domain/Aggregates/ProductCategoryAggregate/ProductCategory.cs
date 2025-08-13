@@ -1,7 +1,7 @@
-﻿using ParsMedeq.Domain.Abstractions;
-using ParsMedeq.Domain.Aggregates.ProductAggregate;
+﻿using ParsMedeQ.Domain.Abstractions;
+using ParsMedeQ.Domain.Aggregates.ProductAggregate;
 
-namespace ParsMedeq.Domain.Aggregates.ProductCategoryAggregate;
+namespace ParsMedeQ.Domain.Aggregates.ProductCategoryAggregate;
 
 public sealed class ProductCategory : EntityBase<int>
 {

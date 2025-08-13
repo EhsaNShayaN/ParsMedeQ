@@ -1,7 +1,7 @@
-﻿using ParsMedeq.Domain.Types.Email;
+﻿using ParsMedeQ.Domain.Types.Email;
 using SRH.MediatRMessaging;
 
-namespace ParsMedeq.Application.Features.UserFeatures.SigninFeature.SendPasswordOtpByEmailFeature;
+namespace ParsMedeQ.Application.Features.UserFeatures.SigninFeature.SendPasswordOtpByEmailFeature;
 public sealed record SendPasswordOtpByEmailCommand(string Email) :
     IPrimitiveResultCommand<SendPasswordOtpByEmailCommandResponse>,
     IValidatableRequest<SendPasswordOtpByEmailCommand>

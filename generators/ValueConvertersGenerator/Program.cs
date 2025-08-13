@@ -9,7 +9,7 @@ if (src is null)
 {
     Console.WriteLine("can not find src folder");
 }
-var path = Path.Combine(src!.FullName, "ParsMedeq.Infrastructure", "Persistance", "ValueConverters", "_auto-generated");
+var path = Path.Combine(src!.FullName, "ParsMedeQ.Infrastructure", "Persistance", "ValueConverters", "_auto-generated");
 Directory.CreateDirectory(path);
 Generator.Generate(path);
 

@@ -1,4 +1,4 @@
-﻿namespace ParsMedeq.Application.Services.SmsSenderService;
+﻿namespace ParsMedeQ.Application.Services.SmsSenderService;
 public interface ISmsSenderService
 {
     ValueTask<PrimitiveResult> Send(string to, string message, CancellationToken cancellationToken);

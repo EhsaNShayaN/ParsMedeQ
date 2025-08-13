@@ -1,7 +1,7 @@
-﻿using ParsMedeq.Application.Persistance.ESopSchema;
-using ParsMedeq.Domain.Aggregates.UserAggregate.Validators;
+﻿using ParsMedeQ.Application.Persistance.ESopSchema;
+using ParsMedeQ.Domain.Aggregates.UserAggregate.Validators;
 
-namespace ParsMedeq.Infrastructure.Services.DomainServices.UserServices;
+namespace ParsMedeQ.Infrastructure.Services.DomainServices.UserServices;
 
 internal sealed class UserValidatorService : IUserValidatorService
 {

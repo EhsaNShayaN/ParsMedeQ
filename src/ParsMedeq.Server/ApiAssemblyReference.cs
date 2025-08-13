@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace ParsMedeq.Server;
+namespace ParsMedeQ.Server;
 
 public static class ApiAssemblyReference
 {

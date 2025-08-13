@@ -1,6 +1,6 @@
-﻿using ParsMedeq.Infrastructure.Persistance.ValueConverters;
+﻿using ParsMedeQ.Infrastructure.Persistance.ValueConverters;
 
-namespace ParsMedeq.Infrastructure.Persistance.DbContexts.Configurations;
+namespace ParsMedeQ.Infrastructure.Persistance.DbContexts.Configurations;
 
 sealed class UserEntityConfiguration : IEntityTypeConfiguration<User>
 {

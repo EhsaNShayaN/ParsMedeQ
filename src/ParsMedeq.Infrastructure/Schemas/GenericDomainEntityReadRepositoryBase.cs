@@ -1,7 +1,7 @@
-﻿using ParsMedeq.Application.Persistance;
-using ParsMedeq.Infrastructure.Persistance.DbContexts;
+﻿using ParsMedeQ.Application.Persistance;
+using ParsMedeQ.Infrastructure.Persistance.DbContexts;
 
-namespace ParsMedeq.Infrastructure.Schemas;
+namespace ParsMedeQ.Infrastructure.Schemas;
 
 internal abstract class GenericDomainEntityReadRepositoryBase<TEntity> :
     GenericPrimitiveReadRepositoryBase<ReadDbContext>,

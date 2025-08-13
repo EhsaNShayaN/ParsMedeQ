@@ -1,4 +1,4 @@
-﻿namespace ParsMedeq.Domain.Types.EconomicActivistDocumentType;
+﻿namespace ParsMedeQ.Domain.Types.EconomicActivistDocumentType;
 public readonly partial record struct EconomicActivistDocumentTypeInfo
 {
     public readonly byte Id { get; }

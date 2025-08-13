@@ -1,7 +1,7 @@
-﻿using ParsMedeq.Contracts.UserContracts;
+﻿using ParsMedeQ.Contracts.UserContracts;
 using SRH.PresentationApi.ApiEndpoint;
 
-namespace ParsMedeq.Contracts;
+namespace ParsMedeQ.Contracts;
 
 public static class Endpoints
 {

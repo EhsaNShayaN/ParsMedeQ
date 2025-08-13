@@ -1,6 +1,6 @@
-﻿global using ParsMedeq.Domain.Types.LastName;
+﻿global using ParsMedeQ.Domain.Types.LastName;
 
-namespace ParsMedeq.Infrastructure.Persistance.ValueConverters;
+namespace ParsMedeQ.Infrastructure.Persistance.ValueConverters;
 sealed class LastNameTypeValueConverter : ValueConverter<LastNameType, string>
 {
 	public LastNameTypeValueConverter(): base(

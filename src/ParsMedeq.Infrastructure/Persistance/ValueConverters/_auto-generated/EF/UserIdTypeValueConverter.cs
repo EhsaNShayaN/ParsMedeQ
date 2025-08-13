@@ -1,6 +1,6 @@
-﻿global using ParsMedeq.Domain.Types.UserId;
+﻿global using ParsMedeQ.Domain.Types.UserId;
 
-namespace ParsMedeq.Infrastructure.Persistance.ValueConverters;
+namespace ParsMedeQ.Infrastructure.Persistance.ValueConverters;
 sealed class UserIdTypeValueConverter : ValueConverter<UserIdType, int>
 {
 	public UserIdTypeValueConverter(): base(

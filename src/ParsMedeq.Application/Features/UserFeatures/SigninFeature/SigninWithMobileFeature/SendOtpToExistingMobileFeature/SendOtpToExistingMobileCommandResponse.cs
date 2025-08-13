@@ -1,3 +1,3 @@
-﻿namespace ParsMedeq.Application.Features.UserFeatures.SigninFeature.SigninWithMobileFeature.SendOtpToExistingMobileFeature;
+﻿namespace ParsMedeQ.Application.Features.UserFeatures.SigninFeature.SigninWithMobileFeature.SendOtpToExistingMobileFeature;
 
 public readonly record struct SendOtpToExistingMobileCommandResponse(string Otp);

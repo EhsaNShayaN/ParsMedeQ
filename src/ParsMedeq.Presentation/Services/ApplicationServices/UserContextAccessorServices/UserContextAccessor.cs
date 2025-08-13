@@ -1,4 +1,4 @@
-﻿using ParsMedeq.Application.Services.UserContextAccessorServices;
+﻿using ParsMedeQ.Application.Services.UserContextAccessorServices;
 
 namespace ParsMedeQ.Presentation.Services.ApplicationServices.UserContextAccessorServices;
 sealed class UserContextAccessor : IUserContextAccessor

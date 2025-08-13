@@ -1,6 +1,6 @@
-﻿using ParsMedeq.Domain.Helpers;
+﻿using ParsMedeQ.Domain.Helpers;
 
-namespace ParsMedeq.Domain.Types.Email;
+namespace ParsMedeQ.Domain.Types.Email;
 /// <summary>
 /// ایمیل
 /// </summary>

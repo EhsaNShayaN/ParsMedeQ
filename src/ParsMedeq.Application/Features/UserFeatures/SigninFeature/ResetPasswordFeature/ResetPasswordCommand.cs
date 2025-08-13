@@ -1,7 +1,7 @@
-﻿using ParsMedeq.Domain.Types.Mobile;
+﻿using ParsMedeQ.Domain.Types.Mobile;
 using SRH.MediatRMessaging;
 
-namespace ParsMedeq.Application.Features.UserFeatures.SigninFeature.ResetPasswordFeature;
+namespace ParsMedeQ.Application.Features.UserFeatures.SigninFeature.ResetPasswordFeature;
 public sealed record class ResetPasswordCommand(
     string Mobile,
     string Otp,

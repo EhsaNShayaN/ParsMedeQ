@@ -1,7 +1,7 @@
-﻿using ParsMedeq.Domain.Types.FirstName;
-using ParsMedeq.Domain.Types.LastName;
+﻿using ParsMedeQ.Domain.Types.FirstName;
+using ParsMedeQ.Domain.Types.LastName;
 
-namespace ParsMedeq.Domain.Types.FullName;
+namespace ParsMedeQ.Domain.Types.FullName;
 
 /// <summary>
 /// نام کامل

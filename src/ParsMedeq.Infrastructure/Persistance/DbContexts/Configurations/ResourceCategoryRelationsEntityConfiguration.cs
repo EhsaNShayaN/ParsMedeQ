@@ -1,6 +1,6 @@
-﻿using ParsMedeq.Domain.Aggregates.ResourceCategoryAggregate.Entities;
+﻿using ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate.Entities;
 
-namespace ParsMedeq.Infrastructure.Persistance.DbContexts.Configurations;
+namespace ParsMedeQ.Infrastructure.Persistance.DbContexts.Configurations;
 
 sealed class ResourceCategoryRelationsEntityConfiguration : IEntityTypeConfiguration<ResourceCategoryRelations>
 {

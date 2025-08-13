@@ -1,7 +1,7 @@
-﻿using ParsMedeq.Domain.Types.Email;
-using ParsMedeq.Domain.Types.FullName;
+﻿using ParsMedeQ.Domain.Types.Email;
+using ParsMedeQ.Domain.Types.FullName;
 
-namespace ParsMedeq.Application.Services.UserContextAccessorServices;
+namespace ParsMedeQ.Application.Services.UserContextAccessorServices;
 
 public readonly record struct UserInfo(
     EmailType UserEmail,

@@ -1,6 +1,6 @@
-﻿global using ParsMedeq.Domain.Types.Mobile;
+﻿global using ParsMedeQ.Domain.Types.Mobile;
 
-namespace ParsMedeq.Infrastructure.Persistance.ValueConverters;
+namespace ParsMedeQ.Infrastructure.Persistance.ValueConverters;
 sealed class MobileTypeValueConverter : ValueConverter<MobileType, string>
 {
 	public MobileTypeValueConverter(): base(

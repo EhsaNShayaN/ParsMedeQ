@@ -1,6 +1,6 @@
-﻿using ParsMedeq.Domain.Types.EconomicActivistDocument;
+﻿using ParsMedeQ.Domain.Types.EconomicActivistDocument;
 
-namespace ParsMedeq.Domain.Types.EconomicActivistType;
+namespace ParsMedeQ.Domain.Types.EconomicActivistType;
 
 /// <summary>
 /// نوع فعال اقتصادی: حقیقی - حقوقی - مشارکت مدنی - اتباع

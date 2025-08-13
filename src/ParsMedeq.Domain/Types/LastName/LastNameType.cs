@@ -1,6 +1,6 @@
-﻿using ParsMedeq.Domain.Helpers;
+﻿using ParsMedeQ.Domain.Helpers;
 
-namespace ParsMedeq.Domain.Types.LastName;
+namespace ParsMedeQ.Domain.Types.LastName;
 /// <summary>
 /// نام خانوادگی
 /// </summary>

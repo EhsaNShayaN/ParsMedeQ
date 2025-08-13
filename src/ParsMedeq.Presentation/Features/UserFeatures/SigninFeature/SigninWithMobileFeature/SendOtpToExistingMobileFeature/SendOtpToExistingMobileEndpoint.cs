@@ -1,8 +1,8 @@
-﻿using ParsMedeq.Application.Features.UserFeatures.SigninFeature.SigninWithMobileFeature.SendOtpToExistingMobileFeature;
-using ParsMedeq.Contracts;
-using ParsMedeq.Contracts.UserContracts.SigninContracts.SigninWithMobileContracts.SendOtpToExistingMobileContracts;
+﻿using ParsMedeQ.Application.Features.UserFeatures.SigninFeature.SigninWithMobileFeature.SendOtpToExistingMobileFeature;
+using ParsMedeQ.Contracts;
+using ParsMedeQ.Contracts.UserContracts.SigninContracts.SigninWithMobileContracts.SendOtpToExistingMobileContracts;
 
-namespace ParsMedeq.Presentation.Features.UserFeatures.SigninFeature.SigninWithMobileFeature.SendOtpToExistingMobileFeature;
+namespace ParsMedeQ.Presentation.Features.UserFeatures.SigninFeature.SigninWithMobileFeature.SendOtpToExistingMobileFeature;
 internal sealed class SendOtpToExistingMobileEndpoint : EndpointHandlerBase<
     SendOtpToExistingMobileApiRequest,
     SendOtpToExistingMobileCommand,

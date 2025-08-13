@@ -1,6 +1,6 @@
-﻿using ParsMedeq.Domain.Events;
+﻿using ParsMedeQ.Domain.Events;
 
-namespace ParsMedeq.Domain.Abstractions;
+namespace ParsMedeQ.Domain.Abstractions;
 public abstract class EntityBase<TId> :
     IEventEntity
     where TId : IEquatable<TId>

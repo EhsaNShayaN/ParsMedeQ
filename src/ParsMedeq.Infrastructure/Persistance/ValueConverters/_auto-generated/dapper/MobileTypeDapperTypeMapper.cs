@@ -1,6 +1,6 @@
-﻿global using ParsMedeq.Domain.Types.Mobile;
+﻿global using ParsMedeQ.Domain.Types.Mobile;
 
-namespace ParsMedeq.Infrastructure.Persistance.DapperValueConverters;
+namespace ParsMedeQ.Infrastructure.Persistance.DapperValueConverters;
 sealed class MobileTypeDapperTypeMapper : SqlMapper.TypeHandler<MobileType>
 {
 	public override MobileType Parse(object value) => MobileType.FromDb(Convert.ToString(value));

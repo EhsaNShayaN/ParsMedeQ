@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace ParsMedeq.Domain;
+namespace ParsMedeQ.Domain;
 
 public static class DomainAssemblyReference
 {

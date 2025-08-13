@@ -1,4 +1,4 @@
-﻿namespace ParsMedeq.Domain.Types.BrandTypes;
+﻿namespace ParsMedeQ.Domain.Types.BrandTypes;
 /// <summary>
 /// شناسه برند
 /// </summary>

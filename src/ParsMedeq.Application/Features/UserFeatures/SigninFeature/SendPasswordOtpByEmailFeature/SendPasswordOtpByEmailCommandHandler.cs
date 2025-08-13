@@ -1,8 +1,8 @@
-﻿using ParsMedeq.Domain.Types.Email;
-using ParsMedeq.Domain.Types.UserId;
+﻿using ParsMedeQ.Domain.Types.Email;
+using ParsMedeQ.Domain.Types.UserId;
 using Microsoft.FeatureManagement;
 
-namespace ParsMedeq.Application.Features.UserFeatures.SigninFeature.SendPasswordOtpByEmailFeature;
+namespace ParsMedeQ.Application.Features.UserFeatures.SigninFeature.SendPasswordOtpByEmailFeature;
 
 public sealed class SendPasswordOtpByEmailCommandHandler : IPrimitiveResultCommandHandler<SendPasswordOtpByEmailCommand, SendPasswordOtpByEmailCommandResponse>
 {

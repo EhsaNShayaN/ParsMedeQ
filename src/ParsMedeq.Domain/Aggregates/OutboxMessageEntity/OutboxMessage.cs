@@ -1,4 +1,4 @@
-﻿namespace ParsMedeq.Domain.Aggregates.OutboxMessageEntity;
+﻿namespace ParsMedeQ.Domain.Aggregates.OutboxMessageEntity;
 public class OutboxMessage
 {
     public long Id { get; set; }

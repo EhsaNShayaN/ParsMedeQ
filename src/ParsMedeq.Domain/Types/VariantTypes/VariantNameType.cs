@@ -1,6 +1,6 @@
-﻿using ParsMedeq.Domain.Helpers;
+﻿using ParsMedeQ.Domain.Helpers;
 
-namespace ParsMedeq.Domain.Types.VariantTypes;
+namespace ParsMedeQ.Domain.Types.VariantTypes;
 /// <summary>
 /// نام رنگ یا سایز
 /// </summary>

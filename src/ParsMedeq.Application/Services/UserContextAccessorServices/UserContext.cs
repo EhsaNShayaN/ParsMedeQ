@@ -1,6 +1,6 @@
-﻿using ParsMedeq.Domain.Types.UserId;
+﻿using ParsMedeQ.Domain.Types.UserId;
 
-namespace ParsMedeq.Application.Services.UserContextAccessorServices;
+namespace ParsMedeQ.Application.Services.UserContextAccessorServices;
 
 public sealed record UserContext(UserIdType Id, UserInfo UserInfo)
 {

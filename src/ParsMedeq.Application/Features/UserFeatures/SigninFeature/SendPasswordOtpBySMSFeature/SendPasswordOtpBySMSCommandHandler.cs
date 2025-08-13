@@ -1,7 +1,7 @@
-﻿using ParsMedeq.Domain.Types.UserId;
+﻿using ParsMedeQ.Domain.Types.UserId;
 using Microsoft.FeatureManagement;
 
-namespace ParsMedeq.Application.Features.UserFeatures.SigninFeature.SendPasswordOtpBySMSFeature;
+namespace ParsMedeQ.Application.Features.UserFeatures.SigninFeature.SendPasswordOtpBySMSFeature;
 
 public sealed class SendPasswordOtpBySMSCommandHandler : IPrimitiveResultCommandHandler<SendPasswordOtpBySMSCommand, SendPasswordOtpBySMSCommandResponse>
 {

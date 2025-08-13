@@ -1,4 +1,4 @@
-﻿using ParsMedeq.Domain.Types.Password;
+﻿using ParsMedeQ.Domain.Types.Password;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 

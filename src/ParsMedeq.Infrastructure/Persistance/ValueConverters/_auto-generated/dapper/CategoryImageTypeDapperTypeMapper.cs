@@ -1,6 +1,6 @@
-﻿global using ParsMedeq.Domain.Types.CategoryTypes;
+﻿global using ParsMedeQ.Domain.Types.CategoryTypes;
 
-namespace ParsMedeq.Infrastructure.Persistance.DapperValueConverters;
+namespace ParsMedeQ.Infrastructure.Persistance.DapperValueConverters;
 sealed class CategoryImageTypeDapperTypeMapper : SqlMapper.TypeHandler<CategoryImageType>
 {
 	public override CategoryImageType Parse(object value) => CategoryImageType.FromDb(Convert.ToString(value));

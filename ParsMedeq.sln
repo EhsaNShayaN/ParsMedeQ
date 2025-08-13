@@ -5,17 +5,17 @@ VisualStudioVersion = 17.14.36401.2
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "parsmedeq.client", "src\parsmedeq.client\parsmedeq.client.esproj", "{406C0890-625F-7608-B876-F8F0E32CE8C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParsMedeq.Server", "src\ParsMedeq.Server\ParsMedeq.Server.csproj", "{0E0AEA37-226E-4703-A9D9-7AAB85A76028}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParsMedeQ.Server", "src\ParsMedeq.Server\ParsMedeQ.Server.csproj", "{0E0AEA37-226E-4703-A9D9-7AAB85A76028}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParsMedeq.Application", "src\ParsMedeq.Application\ParsMedeq.Application.csproj", "{FF1D9FF9-A980-4D1D-B990-21ACD28E401C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParsMedeQ.Application", "src\ParsMedeq.Application\ParsMedeQ.Application.csproj", "{FF1D9FF9-A980-4D1D-B990-21ACD28E401C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParsMedeq.Contracts", "src\ParsMedeq.Contracts\ParsMedeq.Contracts.csproj", "{6DDA5762-4306-4B58-B244-CBFF3B81B65C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParsMedeQ.Contracts", "src\ParsMedeq.Contracts\ParsMedeQ.Contracts.csproj", "{6DDA5762-4306-4B58-B244-CBFF3B81B65C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParsMedeq.Domain", "src\ParsMedeq.Domain\ParsMedeq.Domain.csproj", "{A6936404-B2A1-4000-B405-11E847B771B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParsMedeQ.Domain", "src\ParsMedeq.Domain\ParsMedeQ.Domain.csproj", "{A6936404-B2A1-4000-B405-11E847B771B4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParsMedeq.Infrastructure", "src\ParsMedeq.Infrastructure\ParsMedeq.Infrastructure.csproj", "{9DE384D7-E89F-409F-9DD9-DE1E1A409122}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParsMedeQ.Infrastructure", "src\ParsMedeq.Infrastructure\ParsMedeQ.Infrastructure.csproj", "{9DE384D7-E89F-409F-9DD9-DE1E1A409122}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParsMedeq.Presentation", "src\ParsMedeq.Presentation\ParsMedeq.Presentation.csproj", "{914DE8C0-4365-4FE1-9814-BB4FCC3EEBD5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParsMedeQ.Presentation", "src\ParsMedeq.Presentation\ParsMedeQ.Presentation.csproj", "{914DE8C0-4365-4FE1-9814-BB4FCC3EEBD5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_prerequsites", "_prerequsites", "{7983859F-AB2A-4E1B-959F-24C4051E24CC}"
 EndProject

@@ -26,8 +26,8 @@
 		<ProjectReference Include="..\..\SRH.Libraries\SRH.DateProvider\SRH.DateProvider.csproj" />
 		<ProjectReference Include="..\..\SRH.Libraries\SRH.Persistance\SRH.Persistance.csproj" />
 		<ProjectReference Include="..\..\SRH.Libraries\SRH.ServiceInstaller\SRH.ServiceInstaller.csproj" />
-		<ProjectReference Include="..\ParsMedeq.Application\ParsMedeq.Application.csproj" />
-		<ProjectReference Include="..\ParsMedeq.Domain\ParsMedeq.Domain.csproj" />
+		<ProjectReference Include="..\ParsMedeQ.Application\ParsMedeQ.Application.csproj" />
+		<ProjectReference Include="..\ParsMedeQ.Domain\ParsMedeQ.Domain.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Persistance\DbContexts\Seeds\" />

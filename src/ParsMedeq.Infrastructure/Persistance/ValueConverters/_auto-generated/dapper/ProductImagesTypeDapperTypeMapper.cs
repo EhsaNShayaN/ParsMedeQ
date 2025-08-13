@@ -1,6 +1,6 @@
-﻿global using ParsMedeq.Domain.Types.ProductTypes;
+﻿global using ParsMedeQ.Domain.Types.ProductTypes;
 
-namespace ParsMedeq.Infrastructure.Persistance.DapperValueConverters;
+namespace ParsMedeQ.Infrastructure.Persistance.DapperValueConverters;
 sealed class ProductImagesTypeDapperTypeMapper : SqlMapper.TypeHandler<ProductImagesType>
 {
 	public override ProductImagesType Parse(object value) => ProductImagesType.FromDb(Convert.ToString(value));

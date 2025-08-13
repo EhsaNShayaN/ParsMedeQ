@@ -1,6 +1,6 @@
 ﻿using SRH.PresentationApi.ApiEndpoint;
 
-namespace ParsMedeq.Contracts.UserContracts;
+namespace ParsMedeQ.Contracts.UserContracts;
 
 public sealed class ProductEndpoint : ApiEndpointBase
 {

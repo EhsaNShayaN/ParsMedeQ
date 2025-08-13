@@ -1,6 +1,6 @@
-﻿global using ParsMedeq.Domain.Types.ProductTypes;
+﻿global using ParsMedeQ.Domain.Types.ProductTypes;
 
-namespace ParsMedeq.Infrastructure.Persistance.ValueConverters;
+namespace ParsMedeQ.Infrastructure.Persistance.ValueConverters;
 sealed class ProductVideosTypeValueConverter : ValueConverter<ProductVideosType, string>
 {
 	public ProductVideosTypeValueConverter(): base(

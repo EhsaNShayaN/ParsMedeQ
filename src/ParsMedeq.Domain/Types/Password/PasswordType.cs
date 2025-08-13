@@ -1,4 +1,4 @@
-﻿namespace ParsMedeq.Domain.Types.Password;
+﻿namespace ParsMedeQ.Domain.Types.Password;
 /// <summary>
 /// کلمه عبور
 /// </summary>

@@ -1,9 +1,9 @@
-﻿using ParsMedeq.Application.Persistance.ESopSchema;
-using ParsMedeq.Application.Persistance.ESopSchema.ProductRepositories;
-using ParsMedeq.Application.Persistance.ESopSchema.UserRepositories;
-using ParsMedeq.Infrastructure.Persistance.DbContexts;
+﻿using ParsMedeQ.Application.Persistance.ESopSchema;
+using ParsMedeQ.Application.Persistance.ESopSchema.ProductRepositories;
+using ParsMedeQ.Application.Persistance.ESopSchema.UserRepositories;
+using ParsMedeQ.Infrastructure.Persistance.DbContexts;
 
-namespace ParsMedeq.Infrastructure.Persistance.UnitOfWork;
+namespace ParsMedeQ.Infrastructure.Persistance.UnitOfWork;
 
 public sealed class ReadUnitOfWork : UnitofWorkBase<ReadDbContext>, IReadUnitOfWork
 {

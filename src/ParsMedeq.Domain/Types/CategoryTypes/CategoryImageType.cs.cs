@@ -1,6 +1,6 @@
-﻿using ParsMedeq.Domain.Helpers;
+﻿using ParsMedeQ.Domain.Helpers;
 
-namespace ParsMedeq.Domain.Types.CategoryTypes;
+namespace ParsMedeQ.Domain.Types.CategoryTypes;
 /// <summary>
 /// تصویر برند
 /// </summary>

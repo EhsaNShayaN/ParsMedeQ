@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace ParsMedeq.Application.Options;
+namespace ParsMedeQ.Application.Options;
 
 public sealed class AuthenticationOptions
 {

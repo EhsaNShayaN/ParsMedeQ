@@ -1,4 +1,4 @@
-﻿namespace ParsMedeq.Domain.Types.ProductSpecificationTypes;
+﻿namespace ParsMedeQ.Domain.Types.ProductSpecificationTypes;
 /// <summary>
 /// شناسه مشخصه ی محصول
 /// </summary>

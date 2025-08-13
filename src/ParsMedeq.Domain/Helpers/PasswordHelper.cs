@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace ParsMedeq.Domain.Helpers;
+namespace ParsMedeQ.Domain.Helpers;
 
 public static class PasswordHelper
 {

@@ -1,6 +1,6 @@
-﻿using ParsMedeq.Domain.Types;
+﻿using ParsMedeQ.Domain.Types;
 
-namespace ParsMedeq.Domain.Helpers;
+namespace ParsMedeQ.Domain.Helpers;
 public static class DomainTypesHelper
 {
     public static PrimitiveError CreateTypeError(string message) => PrimitiveError.Create(TypeConstants.TypeErrorCode, message.Trim());

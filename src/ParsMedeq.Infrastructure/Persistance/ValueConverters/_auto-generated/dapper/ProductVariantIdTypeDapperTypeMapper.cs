@@ -1,6 +1,6 @@
-﻿global using ParsMedeq.Domain.Types.ProductVariantTypes;
+﻿global using ParsMedeQ.Domain.Types.ProductVariantTypes;
 
-namespace ParsMedeq.Infrastructure.Persistance.DapperValueConverters;
+namespace ParsMedeQ.Infrastructure.Persistance.DapperValueConverters;
 sealed class ProductVariantIdTypeDapperTypeMapper : SqlMapper.TypeHandler<ProductVariantIdType>
 {
 	public override ProductVariantIdType Parse(object value) => ProductVariantIdType.FromDb(Convert.ToInt32(value));

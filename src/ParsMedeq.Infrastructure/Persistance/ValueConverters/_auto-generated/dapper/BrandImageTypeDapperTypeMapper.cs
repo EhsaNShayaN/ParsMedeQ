@@ -1,6 +1,6 @@
-﻿global using ParsMedeq.Domain.Types.BrandTypes;
+﻿global using ParsMedeQ.Domain.Types.BrandTypes;
 
-namespace ParsMedeq.Infrastructure.Persistance.DapperValueConverters;
+namespace ParsMedeQ.Infrastructure.Persistance.DapperValueConverters;
 sealed class BrandImageTypeDapperTypeMapper : SqlMapper.TypeHandler<BrandImageType>
 {
 	public override BrandImageType Parse(object value) => BrandImageType.FromDb(Convert.ToString(value));

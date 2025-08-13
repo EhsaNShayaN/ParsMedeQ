@@ -1,9 +1,9 @@
-﻿using ParsMedeq.Application.Features.UserFeatures.SigninFeature.SigninWithMobileFeature.SigninWithExistingMobileFeature;
-using ParsMedeq.Application.Services.UserContextAccessorServices;
-using ParsMedeq.Contracts;
-using ParsMedeq.Contracts.UserContracts.SigninContracts.SigninWithMobileContracts.VerifyOtpContracts;
+﻿using ParsMedeQ.Application.Features.UserFeatures.SigninFeature.SigninWithMobileFeature.SigninWithExistingMobileFeature;
+using ParsMedeQ.Application.Services.UserContextAccessorServices;
+using ParsMedeQ.Contracts;
+using ParsMedeQ.Contracts.UserContracts.SigninContracts.SigninWithMobileContracts.VerifyOtpContracts;
 
-namespace ParsMedeq.Presentation.Features.UserFeatures.SigninFeature.SigninWithMobileFeature.SigninWithExistingMobileFeature;
+namespace ParsMedeQ.Presentation.Features.UserFeatures.SigninFeature.SigninWithMobileFeature.SigninWithExistingMobileFeature;
 
 internal sealed class SigninWithExistingMobileEndpoint : EndpointHandlerBase<
     SigninWithExistingMobileApiRequest,

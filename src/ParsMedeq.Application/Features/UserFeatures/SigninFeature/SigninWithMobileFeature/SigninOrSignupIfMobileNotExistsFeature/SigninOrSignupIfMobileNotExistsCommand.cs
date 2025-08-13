@@ -1,7 +1,7 @@
-﻿using ParsMedeq.Application.Services.UserContextAccessorServices;
+﻿using ParsMedeQ.Application.Services.UserContextAccessorServices;
 using SRH.MediatRMessaging;
 
-namespace ParsMedeq.Application.Features.UserFeatures.SigninFeature.SigninWithMobileFeature.SigninOrSignupIfMobileNotExistsFeature;
+namespace ParsMedeQ.Application.Features.UserFeatures.SigninFeature.SigninWithMobileFeature.SigninOrSignupIfMobileNotExistsFeature;
 public sealed record SigninOrSignupIfMobileNotExistsCommand(string Mobile, string Otp) :
     IPrimitiveResultCommand<UserTokenInfo>,
     IValidatableRequest<SigninOrSignupIfMobileNotExistsCommand>

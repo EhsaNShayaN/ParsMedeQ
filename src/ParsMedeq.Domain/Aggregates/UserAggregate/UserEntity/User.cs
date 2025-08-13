@@ -1,15 +1,15 @@
-﻿using ParsMedeq.Domain.Abstractions;
-using ParsMedeq.Domain.Aggregates.UserAggregate.Events;
-using ParsMedeq.Domain.Aggregates.UserAggregate.Validators;
-using ParsMedeq.Domain.Types.Email;
-using ParsMedeq.Domain.Types.FirstName;
-using ParsMedeq.Domain.Types.FullName;
-using ParsMedeq.Domain.Types.LastName;
-using ParsMedeq.Domain.Types.Mobile;
-using ParsMedeq.Domain.Types.Password;
-using ParsMedeq.Domain.Types.UserId;
+﻿using ParsMedeQ.Domain.Abstractions;
+using ParsMedeQ.Domain.Aggregates.UserAggregate.Events;
+using ParsMedeQ.Domain.Aggregates.UserAggregate.Validators;
+using ParsMedeQ.Domain.Types.Email;
+using ParsMedeQ.Domain.Types.FirstName;
+using ParsMedeQ.Domain.Types.FullName;
+using ParsMedeQ.Domain.Types.LastName;
+using ParsMedeQ.Domain.Types.Mobile;
+using ParsMedeQ.Domain.Types.Password;
+using ParsMedeQ.Domain.Types.UserId;
 
-namespace ParsMedeq.Domain.Aggregates.UserAggregate.UserEntity;
+namespace ParsMedeQ.Domain.Aggregates.UserAggregate.UserEntity;
 public sealed class User : AggregateRoot<UserIdType>
 {
     #region " Fields "

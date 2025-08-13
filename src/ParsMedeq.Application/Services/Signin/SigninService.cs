@@ -1,13 +1,13 @@
-﻿using ParsMedeq.Application.Errors;
-using ParsMedeq.Domain.Aggregates.UserAggregate.UserEntity;
-using ParsMedeq.Domain.Aggregates.UserAggregate.Validators;
-using ParsMedeq.Domain.DomainServices.SigninService;
-using ParsMedeq.Domain.Types.FullName;
-using ParsMedeq.Domain.Types.Password;
-using ParsMedeq.Domain.Types.UserId;
+﻿using ParsMedeQ.Application.Errors;
+using ParsMedeQ.Domain.Aggregates.UserAggregate.UserEntity;
+using ParsMedeQ.Domain.Aggregates.UserAggregate.Validators;
+using ParsMedeQ.Domain.DomainServices.SigninService;
+using ParsMedeQ.Domain.Types.FullName;
+using ParsMedeQ.Domain.Types.Password;
+using ParsMedeQ.Domain.Types.UserId;
 using Medallion.Threading;
 
-namespace ParsMedeq.Application.Services.Signin;
+namespace ParsMedeQ.Application.Services.Signin;
 internal sealed class SigninService : ISigninService
 {
     private readonly IReadUnitOfWork _readUnitOfWork;

@@ -1,4 +1,4 @@
-﻿namespace ParsMedeq.Domain.Types;
+﻿namespace ParsMedeQ.Domain.Types;
 internal static class TypeConstants
 {
     internal const string TypeErrorCode = "Type.Error";

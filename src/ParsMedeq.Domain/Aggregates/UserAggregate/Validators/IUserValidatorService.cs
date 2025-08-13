@@ -1,9 +1,9 @@
-﻿using ParsMedeq.Domain.Abstractions;
-using ParsMedeq.Domain.Types.Email;
-using ParsMedeq.Domain.Types.Mobile;
-using ParsMedeq.Domain.Types.UserId;
+﻿using ParsMedeQ.Domain.Abstractions;
+using ParsMedeQ.Domain.Types.Email;
+using ParsMedeQ.Domain.Types.Mobile;
+using ParsMedeQ.Domain.Types.UserId;
 
-namespace ParsMedeq.Domain.Aggregates.UserAggregate.Validators;
+namespace ParsMedeQ.Domain.Aggregates.UserAggregate.Validators;
 
 public interface IUserValidatorService : IDomainValidator
 {

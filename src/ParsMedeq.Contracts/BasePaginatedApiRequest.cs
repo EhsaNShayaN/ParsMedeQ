@@ -1,4 +1,4 @@
-﻿namespace ParsMedeq.Contracts;
+﻿namespace ParsMedeQ.Contracts;
 
 public abstract record BasePaginatedApiRequest
 {

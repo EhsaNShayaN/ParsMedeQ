@@ -1,4 +1,4 @@
-﻿namespace ParsMedeq.Infrastructure.Persistance.DbContexts.Extensions;
+﻿namespace ParsMedeQ.Infrastructure.Persistance.DbContexts.Extensions;
 public static class EFExtensions
 {
     public static PropertyBuilder<string> IsSlugColumn(this PropertyBuilder<string> src) =>

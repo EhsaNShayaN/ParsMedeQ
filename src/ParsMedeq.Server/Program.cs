@@ -1,11 +1,8 @@
-using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
-using ParsMedeq.Application.Options;
-using ParsMedeq.Server;
+using ParsMedeQ.Application.Options;
+using ParsMedeQ.Server;
 using SRH.ServiceInstaller;
-using SRH.Sql.ConfigProvider;
-using SRH.Sql.ConfigProvider.Persistance.ValueObjects;
 using System.Net;
 using System.Net.Mail;
 

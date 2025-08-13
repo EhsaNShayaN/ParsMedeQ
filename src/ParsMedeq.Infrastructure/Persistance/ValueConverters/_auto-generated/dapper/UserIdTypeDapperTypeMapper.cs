@@ -1,6 +1,6 @@
-﻿global using ParsMedeq.Domain.Types.UserId;
+﻿global using ParsMedeQ.Domain.Types.UserId;
 
-namespace ParsMedeq.Infrastructure.Persistance.DapperValueConverters;
+namespace ParsMedeQ.Infrastructure.Persistance.DapperValueConverters;
 sealed class UserIdTypeDapperTypeMapper : SqlMapper.TypeHandler<UserIdType>
 {
 	public override UserIdType Parse(object value) => UserIdType.FromDb(Convert.ToInt32(value));

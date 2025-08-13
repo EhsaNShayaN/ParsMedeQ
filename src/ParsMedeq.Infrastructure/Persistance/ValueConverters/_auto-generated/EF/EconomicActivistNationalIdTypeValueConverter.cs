@@ -1,6 +1,6 @@
-﻿global using ParsMedeq.Domain.Types.EconomicActivistNationalId;
+﻿global using ParsMedeQ.Domain.Types.EconomicActivistNationalId;
 
-namespace ParsMedeq.Infrastructure.Persistance.ValueConverters;
+namespace ParsMedeQ.Infrastructure.Persistance.ValueConverters;
 sealed class EconomicActivistNationalIdTypeValueConverter : ValueConverter<EconomicActivistNationalIdType, string>
 {
 	public EconomicActivistNationalIdTypeValueConverter(): base(

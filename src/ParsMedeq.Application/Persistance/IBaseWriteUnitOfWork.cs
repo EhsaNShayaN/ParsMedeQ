@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
 
-namespace ParsMedeq.Application.Persistance;
+namespace ParsMedeQ.Application.Persistance;
 
 public interface IBaseWriteUnitOfWork : IUnitOfWork
 {

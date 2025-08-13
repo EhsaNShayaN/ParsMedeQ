@@ -1,4 +1,4 @@
-﻿namespace ParsMedeq.Infrastructure.Persistance.DbContexts.Configurations;
+﻿namespace ParsMedeQ.Infrastructure.Persistance.DbContexts.Configurations;
 internal static class TableNames
 {
     internal static string Product = "Product";

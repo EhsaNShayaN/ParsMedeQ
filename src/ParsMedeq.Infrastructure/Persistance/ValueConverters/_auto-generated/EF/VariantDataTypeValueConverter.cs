@@ -1,6 +1,6 @@
-﻿global using ParsMedeq.Domain.Types.VariantTypes;
+﻿global using ParsMedeQ.Domain.Types.VariantTypes;
 
-namespace ParsMedeq.Infrastructure.Persistance.ValueConverters;
+namespace ParsMedeQ.Infrastructure.Persistance.ValueConverters;
 sealed class VariantDataTypeValueConverter : ValueConverter<VariantDataType, string>
 {
 	public VariantDataTypeValueConverter(): base(

@@ -1,6 +1,6 @@
-﻿global using ParsMedeq.Domain.Types.SpecificationTypes;
+﻿global using ParsMedeQ.Domain.Types.SpecificationTypes;
 
-namespace ParsMedeq.Infrastructure.Persistance.ValueConverters;
+namespace ParsMedeQ.Infrastructure.Persistance.ValueConverters;
 sealed class SpecificationUnitTypeValueConverter : ValueConverter<SpecificationUnitType, string>
 {
 	public SpecificationUnitTypeValueConverter(): base(

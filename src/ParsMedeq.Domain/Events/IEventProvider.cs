@@ -1,4 +1,4 @@
-﻿namespace ParsMedeq.Domain.Events;
+﻿namespace ParsMedeQ.Domain.Events;
 
 public interface IEventProvider
 {

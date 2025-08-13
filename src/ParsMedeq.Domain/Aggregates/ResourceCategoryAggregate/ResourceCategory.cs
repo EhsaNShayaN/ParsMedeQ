@@ -1,8 +1,8 @@
-﻿using ParsMedeq.Domain.Abstractions;
-using ParsMedeq.Domain.Aggregates.ProductAggregate;
-using ParsMedeq.Domain.Aggregates.ResourceCategoryAggregate.Entities;
+﻿using ParsMedeQ.Domain.Abstractions;
+using ParsMedeQ.Domain.Aggregates.ProductAggregate;
+using ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate.Entities;
 
-namespace ParsMedeq.Domain.Aggregates.ResourceCategoryAggregate;
+namespace ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate;
 public sealed class ResourceCategory : EntityBase<int>
 {
     #region " Fields "

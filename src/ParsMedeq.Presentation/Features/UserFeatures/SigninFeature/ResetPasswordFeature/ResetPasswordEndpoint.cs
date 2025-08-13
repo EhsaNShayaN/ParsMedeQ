@@ -1,8 +1,8 @@
-﻿using ParsMedeq.Application.Features.UserFeatures.SigninFeature.ResetPasswordFeature;
-using ParsMedeq.Contracts;
-using ParsMedeq.Contracts.UserContracts.SigninContracts.ResetPasswordContracts;
+﻿using ParsMedeQ.Application.Features.UserFeatures.SigninFeature.ResetPasswordFeature;
+using ParsMedeQ.Contracts;
+using ParsMedeQ.Contracts.UserContracts.SigninContracts.ResetPasswordContracts;
 
-namespace ParsMedeq.Presentation.Features.UserFeatures.SigninFeature.ResetPasswordFeature;
+namespace ParsMedeQ.Presentation.Features.UserFeatures.SigninFeature.ResetPasswordFeature;
 sealed class ResetPasswordEndpoint : EndpointHandlerBase<
     ResetPasswordApiRequest,
     ResetPasswordCommand,

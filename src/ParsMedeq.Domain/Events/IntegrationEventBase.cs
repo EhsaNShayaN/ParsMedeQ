@@ -1,6 +1,6 @@
-﻿using ParsMedeq.Domain.Helpers;
+﻿using ParsMedeQ.Domain.Helpers;
 
-namespace ParsMedeq.Domain.Events;
+namespace ParsMedeQ.Domain.Events;
 
 public abstract record IntegrationEventBase(DateTimeOffset OccuredOn) : IDomainEvent
 {

@@ -1,6 +1,6 @@
-﻿global using ParsMedeq.Domain.Types.CategoryTypes;
+﻿global using ParsMedeQ.Domain.Types.CategoryTypes;
 
-namespace ParsMedeq.Infrastructure.Persistance.ValueConverters;
+namespace ParsMedeQ.Infrastructure.Persistance.ValueConverters;
 sealed class CategoryImageTypeValueConverter : ValueConverter<CategoryImageType, string>
 {
 	public CategoryImageTypeValueConverter(): base(

@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace ParsMedeq.Infrastructure;
+namespace ParsMedeQ.Infrastructure;
 
 public static class InfrastructureAssemblyReference
 {

@@ -1,4 +1,4 @@
-﻿namespace ParsMedeq.Contracts.UserContracts.SigninContracts.SigninWithMobileContracts.SendOtpToExistingMobileContracts;
+﻿namespace ParsMedeQ.Contracts.UserContracts.SigninContracts.SigninWithMobileContracts.SendOtpToExistingMobileContracts;
 
 public readonly record struct SendOtpToExistingMobileApiRequest(string Mobile);
 

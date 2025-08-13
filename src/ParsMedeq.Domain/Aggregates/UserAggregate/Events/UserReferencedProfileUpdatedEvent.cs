@@ -1,9 +1,9 @@
-﻿using ParsMedeq.Domain.Aggregates.UserAggregate.UserEntity;
-using ParsMedeq.Domain.Events;
-using ParsMedeq.Domain.Helpers;
-using ParsMedeq.Domain.Types.UserId;
+﻿using ParsMedeQ.Domain.Aggregates.UserAggregate.UserEntity;
+using ParsMedeQ.Domain.Events;
+using ParsMedeQ.Domain.Helpers;
+using ParsMedeQ.Domain.Types.UserId;
 
-namespace ParsMedeq.Domain.Aggregates.UserAggregate.Events;
+namespace ParsMedeQ.Domain.Aggregates.UserAggregate.Events;
 
 public sealed record UserProfileUpdatedEvent(int Id) : IntegrationEventBase(DateHelpers.Now) { }
 

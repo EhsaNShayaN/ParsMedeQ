@@ -1,6 +1,6 @@
-﻿using ParsMedeq.Domain.Helpers;
+﻿using ParsMedeQ.Domain.Helpers;
 
-namespace ParsMedeq.Domain.Types.ProfileTypes;
+namespace ParsMedeQ.Domain.Types.ProfileTypes;
 /// <summary>
 /// نام کاربر
 /// </summary>

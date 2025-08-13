@@ -1,6 +1,6 @@
-﻿global using ParsMedeq.Domain.Types.ProfileTypes;
+﻿global using ParsMedeQ.Domain.Types.ProfileTypes;
 
-namespace ParsMedeq.Infrastructure.Persistance.ValueConverters;
+namespace ParsMedeQ.Infrastructure.Persistance.ValueConverters;
 sealed class ProfileEmailTypeValueConverter : ValueConverter<ProfileEmailType, string>
 {
 	public ProfileEmailTypeValueConverter(): base(

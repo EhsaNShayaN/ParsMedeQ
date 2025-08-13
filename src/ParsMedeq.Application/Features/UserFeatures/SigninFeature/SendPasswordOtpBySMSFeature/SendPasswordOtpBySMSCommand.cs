@@ -1,6 +1,6 @@
 ﻿using SRH.MediatRMessaging;
 
-namespace ParsMedeq.Application.Features.UserFeatures.SigninFeature.SendPasswordOtpBySMSFeature;
+namespace ParsMedeQ.Application.Features.UserFeatures.SigninFeature.SendPasswordOtpBySMSFeature;
 public sealed record SendPasswordOtpBySMSCommand(string Mobile) :
     IPrimitiveResultCommand<SendPasswordOtpBySMSCommandResponse>,
     IValidatableRequest<SendPasswordOtpBySMSCommand>

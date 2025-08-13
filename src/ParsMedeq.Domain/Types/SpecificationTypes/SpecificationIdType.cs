@@ -1,4 +1,4 @@
-﻿namespace ParsMedeq.Domain.Types.SpecificationTypes;
+﻿namespace ParsMedeQ.Domain.Types.SpecificationTypes;
 /// <summary>
 /// شناسه مشخصه
 /// </summary>

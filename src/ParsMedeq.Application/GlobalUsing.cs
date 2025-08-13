@@ -1,7 +1,7 @@
-﻿global using ParsMedeq.Application.Cache;
-global using ParsMedeq.Application.Persistance.ESopSchema;
-global using ParsMedeq.Application.Services.OTP;
-global using ParsMedeq.Domain.Types.Mobile;
+﻿global using ParsMedeQ.Application.Cache;
+global using ParsMedeQ.Application.Persistance.ESopSchema;
+global using ParsMedeQ.Application.Services.OTP;
+global using ParsMedeQ.Domain.Types.Mobile;
 global using SRH.MediatRMessaging.Commands;
 global using SRH.PrimitiveTypes.Result;
 global using System.Linq.Expressions;

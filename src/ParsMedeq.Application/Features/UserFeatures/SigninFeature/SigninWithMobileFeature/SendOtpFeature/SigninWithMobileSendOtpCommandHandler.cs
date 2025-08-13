@@ -1,6 +1,6 @@
 ﻿using Microsoft.FeatureManagement;
 
-namespace ParsMedeq.Application.Features.UserFeatures.SigninFeature.SigninWithMobileFeature.SendOtpFeature;
+namespace ParsMedeQ.Application.Features.UserFeatures.SigninFeature.SigninWithMobileFeature.SendOtpFeature;
 
 public sealed class SigninWithMobileSendOtpCommandHandler : IPrimitiveResultCommandHandler<SigninWithMobileSendOtpCommand, SigninWithMobileSendOtpCommandResponse>
 {

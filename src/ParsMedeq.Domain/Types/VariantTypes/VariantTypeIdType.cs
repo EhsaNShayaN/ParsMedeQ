@@ -1,6 +1,6 @@
-﻿using ParsMedeq.Domain.Types;
+﻿using ParsMedeQ.Domain.Types;
 
-namespace ParsMedeq.Domain.Types.VariantTypes;
+namespace ParsMedeQ.Domain.Types.VariantTypes;
 /// <summary>
 /// نوع متنوع کننده محصول
 /// </summary>

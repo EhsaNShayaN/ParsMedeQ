@@ -1,6 +1,6 @@
 ﻿using SRH.MediatRMessaging;
 
-namespace ParsMedeq.Application.Features.UserFeatures.SigninFeature.SigninWithMobileFeature.SendOtpFeature;
+namespace ParsMedeQ.Application.Features.UserFeatures.SigninFeature.SigninWithMobileFeature.SendOtpFeature;
 public sealed record SigninWithMobileSendOtpCommand(string Mobile) :
     IPrimitiveResultCommand<SigninWithMobileSendOtpCommandResponse>,
     IValidatableRequest<SigninWithMobileSendOtpCommand>

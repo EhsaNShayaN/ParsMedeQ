@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using ParsMedeq.Infrastructure.Persistance.DbContexts;
+using ParsMedeQ.Infrastructure.Persistance.DbContexts;
 
 #nullable disable
 
-namespace ParsMedeq.Infrastructure.Migrations.WriteDb
+namespace ParsMedeQ.Infrastructure.Migrations.WriteDb
 {
     [DbContext(typeof(WriteDbContext))]
     partial class WriteDbContextModelSnapshot : ModelSnapshot
@@ -23,7 +23,7 @@ namespace ParsMedeq.Infrastructure.Migrations.WriteDb
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ParsMedeq.Domain.Aggregates.OutboxMessageEntity.OutboxMessage", b =>
+            modelBuilder.Entity("ParsMedeQ.Domain.Aggregates.OutboxMessageEntity.OutboxMessage", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -57,7 +57,7 @@ namespace ParsMedeq.Infrastructure.Migrations.WriteDb
                     b.ToTable("OutboxMessages");
                 });
 
-            modelBuilder.Entity("ParsMedeq.Domain.Aggregates.ProductAggregate.Product", b =>
+            modelBuilder.Entity("ParsMedeQ.Domain.Aggregates.ProductAggregate.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -139,7 +139,7 @@ namespace ParsMedeq.Infrastructure.Migrations.WriteDb
                     b.ToTable("Product", (string)null);
                 });
 
-            modelBuilder.Entity("ParsMedeq.Domain.Aggregates.ProductAggregate.Resource", b =>
+            modelBuilder.Entity("ParsMedeQ.Domain.Aggregates.ProductAggregate.Resource", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -259,7 +259,7 @@ namespace ParsMedeq.Infrastructure.Migrations.WriteDb
                     b.ToTable("Resource", (string)null);
                 });
 
-            modelBuilder.Entity("ParsMedeq.Domain.Aggregates.ProductCategoryAggregate.ProductCategory", b =>
+            modelBuilder.Entity("ParsMedeQ.Domain.Aggregates.ProductCategoryAggregate.ProductCategory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -315,7 +315,7 @@ namespace ParsMedeq.Infrastructure.Migrations.WriteDb
                     b.ToTable("ProductCategory", (string)null);
                 });
 
-            modelBuilder.Entity("ParsMedeq.Domain.Aggregates.ResourceCategoryAggregate.Entities.ResourceCategoryRelations", b =>
+            modelBuilder.Entity("ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate.Entities.ResourceCategoryRelations", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -344,7 +344,7 @@ namespace ParsMedeq.Infrastructure.Migrations.WriteDb
                     b.ToTable("ResourceCategoryRelations", (string)null);
                 });
 
-            modelBuilder.Entity("ParsMedeq.Domain.Aggregates.ResourceCategoryAggregate.ResourceCategory", b =>
+            modelBuilder.Entity("ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate.ResourceCategory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -381,7 +381,7 @@ namespace ParsMedeq.Infrastructure.Migrations.WriteDb
                     b.ToTable("ResourceCategory", (string)null);
                 });
 
-            modelBuilder.Entity("ParsMedeq.Domain.Aggregates.UserAggregate.UserEntity.User", b =>
+            modelBuilder.Entity("ParsMedeQ.Domain.Aggregates.UserAggregate.UserEntity.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -406,7 +406,7 @@ namespace ParsMedeq.Infrastructure.Migrations.WriteDb
                     b.Property<int>("RegistrantId")
                         .HasColumnType("int");
 
-                    b.ComplexProperty<Dictionary<string, object>>("FullName", "ParsMedeq.Domain.Aggregates.UserAggregate.UserEntity.User.FullName#FullNameType", b1 =>
+                    b.ComplexProperty<Dictionary<string, object>>("FullName", "ParsMedeQ.Domain.Aggregates.UserAggregate.UserEntity.User.FullName#FullNameType", b1 =>
                         {
                             b1.IsRequired();
 
@@ -421,7 +421,7 @@ namespace ParsMedeq.Infrastructure.Migrations.WriteDb
                                 .HasColumnName("LastName");
                         });
 
-                    b.ComplexProperty<Dictionary<string, object>>("Password", "ParsMedeq.Domain.Aggregates.UserAggregate.UserEntity.User.Password#PasswordType", b1 =>
+                    b.ComplexProperty<Dictionary<string, object>>("Password", "ParsMedeQ.Domain.Aggregates.UserAggregate.UserEntity.User.Password#PasswordType", b1 =>
                         {
                             b1.IsRequired();
 
@@ -445,9 +445,9 @@ namespace ParsMedeq.Infrastructure.Migrations.WriteDb
                     b.ToTable("Users", (string)null);
                 });
 
-            modelBuilder.Entity("ParsMedeq.Domain.Aggregates.ProductAggregate.Product", b =>
+            modelBuilder.Entity("ParsMedeQ.Domain.Aggregates.ProductAggregate.Product", b =>
                 {
-                    b.HasOne("ParsMedeq.Domain.Aggregates.ProductCategoryAggregate.ProductCategory", "ProductCategory")
+                    b.HasOne("ParsMedeQ.Domain.Aggregates.ProductCategoryAggregate.ProductCategory", "ProductCategory")
                         .WithMany("Products")
                         .HasForeignKey("ProductCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -456,9 +456,9 @@ namespace ParsMedeq.Infrastructure.Migrations.WriteDb
                     b.Navigation("ProductCategory");
                 });
 
-            modelBuilder.Entity("ParsMedeq.Domain.Aggregates.ProductAggregate.Resource", b =>
+            modelBuilder.Entity("ParsMedeQ.Domain.Aggregates.ProductAggregate.Resource", b =>
                 {
-                    b.HasOne("ParsMedeq.Domain.Aggregates.ResourceCategoryAggregate.ResourceCategory", "ResourceCategory")
+                    b.HasOne("ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate.ResourceCategory", "ResourceCategory")
                         .WithMany("Resources")
                         .HasForeignKey("ResourceCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -467,9 +467,9 @@ namespace ParsMedeq.Infrastructure.Migrations.WriteDb
                     b.Navigation("ResourceCategory");
                 });
 
-            modelBuilder.Entity("ParsMedeq.Domain.Aggregates.ProductCategoryAggregate.ProductCategory", b =>
+            modelBuilder.Entity("ParsMedeQ.Domain.Aggregates.ProductCategoryAggregate.ProductCategory", b =>
                 {
-                    b.HasOne("ParsMedeq.Domain.Aggregates.ProductCategoryAggregate.ProductCategory", "Parent")
+                    b.HasOne("ParsMedeQ.Domain.Aggregates.ProductCategoryAggregate.ProductCategory", "Parent")
                         .WithMany("Children")
                         .HasForeignKey("ParentId")
                         .OnDelete(DeleteBehavior.Restrict);
@@ -477,15 +477,15 @@ namespace ParsMedeq.Infrastructure.Migrations.WriteDb
                     b.Navigation("Parent");
                 });
 
-            modelBuilder.Entity("ParsMedeq.Domain.Aggregates.ResourceCategoryAggregate.Entities.ResourceCategoryRelations", b =>
+            modelBuilder.Entity("ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate.Entities.ResourceCategoryRelations", b =>
                 {
-                    b.HasOne("ParsMedeq.Domain.Aggregates.ResourceCategoryAggregate.ResourceCategory", "ResourceCategory")
+                    b.HasOne("ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate.ResourceCategory", "ResourceCategory")
                         .WithMany("ResourceCategoryRelations")
                         .HasForeignKey("ResourceCategoryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("ParsMedeq.Domain.Aggregates.ProductAggregate.Resource", "Resource")
+                    b.HasOne("ParsMedeQ.Domain.Aggregates.ProductAggregate.Resource", "Resource")
                         .WithMany("ResourceCategoryRelations")
                         .HasForeignKey("ResourceId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -496,9 +496,9 @@ namespace ParsMedeq.Infrastructure.Migrations.WriteDb
                     b.Navigation("ResourceCategory");
                 });
 
-            modelBuilder.Entity("ParsMedeq.Domain.Aggregates.ResourceCategoryAggregate.ResourceCategory", b =>
+            modelBuilder.Entity("ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate.ResourceCategory", b =>
                 {
-                    b.HasOne("ParsMedeq.Domain.Aggregates.ResourceCategoryAggregate.ResourceCategory", "Parent")
+                    b.HasOne("ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate.ResourceCategory", "Parent")
                         .WithMany("Children")
                         .HasForeignKey("ParentId")
                         .OnDelete(DeleteBehavior.Restrict);
@@ -506,19 +506,19 @@ namespace ParsMedeq.Infrastructure.Migrations.WriteDb
                     b.Navigation("Parent");
                 });
 
-            modelBuilder.Entity("ParsMedeq.Domain.Aggregates.ProductAggregate.Resource", b =>
+            modelBuilder.Entity("ParsMedeQ.Domain.Aggregates.ProductAggregate.Resource", b =>
                 {
                     b.Navigation("ResourceCategoryRelations");
                 });
 
-            modelBuilder.Entity("ParsMedeq.Domain.Aggregates.ProductCategoryAggregate.ProductCategory", b =>
+            modelBuilder.Entity("ParsMedeQ.Domain.Aggregates.ProductCategoryAggregate.ProductCategory", b =>
                 {
                     b.Navigation("Children");
 
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("ParsMedeq.Domain.Aggregates.ResourceCategoryAggregate.ResourceCategory", b =>
+            modelBuilder.Entity("ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate.ResourceCategory", b =>
                 {
                     b.Navigation("Children");
 

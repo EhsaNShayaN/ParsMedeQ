@@ -1,5 +1,5 @@
-﻿using ParsMedeq.Domain.Helpers;
-using ParsMedeq.Domain.Types.UserId;
+﻿using ParsMedeQ.Domain.Helpers;
+using ParsMedeQ.Domain.Types.UserId;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 

@@ -1,8 +1,8 @@
-﻿using ParsMedeq.Application.Features.UserFeatures.SigninFeature.SendPasswordOtpBySMSFeature;
-using ParsMedeq.Contracts;
-using ParsMedeq.Contracts.UserContracts.SigninContracts.SendPasswordOtpBySMSContracts;
+﻿using ParsMedeQ.Application.Features.UserFeatures.SigninFeature.SendPasswordOtpBySMSFeature;
+using ParsMedeQ.Contracts;
+using ParsMedeQ.Contracts.UserContracts.SigninContracts.SendPasswordOtpBySMSContracts;
 
-namespace ParsMedeq.Presentation.Features.UserFeatures.SigninFeature.SendPasswordOtpBySMSFeature;
+namespace ParsMedeQ.Presentation.Features.UserFeatures.SigninFeature.SendPasswordOtpBySMSFeature;
 internal sealed class SendPasswordOtpBySMSEndpoint : EndpointHandlerBase<
     SendPasswordOtpBySMSApiRequest,
     SendPasswordOtpBySMSCommand,

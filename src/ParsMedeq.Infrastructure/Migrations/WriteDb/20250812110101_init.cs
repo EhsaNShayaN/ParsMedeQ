@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace ParsMedeq.Infrastructure.Migrations.WriteDb
+namespace ParsMedeQ.Infrastructure.Migrations.WriteDb
 {
     /// <inheritdoc />
     public partial class init : Migration

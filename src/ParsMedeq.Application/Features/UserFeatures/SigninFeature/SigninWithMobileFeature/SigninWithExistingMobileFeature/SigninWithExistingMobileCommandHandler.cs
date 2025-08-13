@@ -1,9 +1,9 @@
-﻿using ParsMedeq.Application.Services.UserContextAccessorServices;
-using ParsMedeq.Domain.DomainServices.SigninService;
-using ParsMedeq.Domain.Helpers;
-using ParsMedeq.Domain.Types.UserId;
+﻿using ParsMedeQ.Application.Services.UserContextAccessorServices;
+using ParsMedeQ.Domain.DomainServices.SigninService;
+using ParsMedeQ.Domain.Helpers;
+using ParsMedeQ.Domain.Types.UserId;
 
-namespace ParsMedeq.Application.Features.UserFeatures.SigninFeature.SigninWithMobileFeature.SigninWithExistingMobileFeature;
+namespace ParsMedeQ.Application.Features.UserFeatures.SigninFeature.SigninWithMobileFeature.SigninWithExistingMobileFeature;
 
 public sealed class SigninWithExistingMobileCommandHandler : IPrimitiveResultCommandHandler<
     SigninWithExistingMobileCommand,

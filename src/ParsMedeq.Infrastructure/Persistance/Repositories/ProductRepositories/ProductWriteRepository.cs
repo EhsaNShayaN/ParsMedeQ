@@ -1,8 +1,8 @@
-﻿using ParsMedeq.Application.Persistance.ESopSchema.ProductRepositories;
-using ParsMedeq.Infrastructure.Persistance.DbContexts;
+﻿using ParsMedeQ.Application.Persistance.ESopSchema.ProductRepositories;
+using ParsMedeQ.Infrastructure.Persistance.DbContexts;
 using SRH.Persistance.Repositories.Write;
 
-namespace ParsMedeq.Infrastructure.Persistance.Repositories.ProductRepositories;
+namespace ParsMedeQ.Infrastructure.Persistance.Repositories.ProductRepositories;
 internal sealed class ProductWriteRepository : GenericPrimitiveWriteRepositoryBase<WriteDbContext>, IProductWriteRepository
 {
     public ProductWriteRepository(WriteDbContext dbContext) : base(dbContext){ }

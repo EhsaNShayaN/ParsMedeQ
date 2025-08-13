@@ -1,4 +1,4 @@
-﻿using ParsMedeq.Domain.Types.FullName;
+﻿using ParsMedeQ.Domain.Types.FullName;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 

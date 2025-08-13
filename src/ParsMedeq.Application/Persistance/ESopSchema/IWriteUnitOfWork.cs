@@ -1,7 +1,7 @@
-﻿using ParsMedeq.Application.Persistance.ESopSchema.ProductRepositories;
-using ParsMedeq.Application.Persistance.ESopSchema.UserRepositories;
+﻿using ParsMedeQ.Application.Persistance.ESopSchema.ProductRepositories;
+using ParsMedeQ.Application.Persistance.ESopSchema.UserRepositories;
 
-namespace ParsMedeq.Application.Persistance.ESopSchema;
+namespace ParsMedeQ.Application.Persistance.ESopSchema;
 public interface IWriteUnitOfWork : IBaseWriteUnitOfWork
 {
     IUserWriteRepository UserWriteRepository { get; }

@@ -1,7 +1,7 @@
-﻿using ParsMedeq.Domain;
+﻿using ParsMedeQ.Domain;
 using System.Reflection;
 
-namespace ParsMedeq.Infrastructure.Persistance.DbContexts;
+namespace ParsMedeQ.Infrastructure.Persistance.DbContexts;
 public abstract class DbContextBase<T> : DbContext
     where T : DbContext
 {
