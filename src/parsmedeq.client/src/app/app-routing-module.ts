@@ -12,7 +12,7 @@ const routes: Routes = [
     children: [
       {path: '', loadChildren: () => import('./features/home/home-module').then(m => m.HomeModule)},
       {path: 'about', loadChildren: () => import('./features/about/about-module').then(m => m.AboutModule)},
-      {path: 'articles', loadChildren: () => import('./features/articles/articles-module').then(m => m.ArticlesModule)},
+      //{path: 'articles', loadChildren: () => import('./features/articles/articles-module').then(m => m.ArticlesModule)},
       {path: 'auth', loadChildren: () => import('./features/auth/auth-module').then(m => m.AuthModule)},
       {path: 'contact', loadChildren: () => import('./features/contact/contact-module').then(m => m.ContactModule)},
       {path: 'faq', loadChildren: () => import('./features/faq/faq-module').then(m => m.FaqModule)},

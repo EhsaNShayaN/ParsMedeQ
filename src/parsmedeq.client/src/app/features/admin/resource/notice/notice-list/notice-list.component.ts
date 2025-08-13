@@ -4,7 +4,7 @@ import {BaseResourcesComponent} from '../../base-resources.component';
 
 @Component({
   selector: 'app-notice-list',
-  styleUrls: ['notice-list.component.scss'],
+  styleUrl: 'notice-list.component.scss',
   templateUrl: 'notice-list.component.html',
   standalone: false
 })

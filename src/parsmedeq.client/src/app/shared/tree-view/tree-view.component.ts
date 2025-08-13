@@ -10,7 +10,7 @@ interface ExampleFlatNode {
   expandable: boolean;
   title: string;
   level: number;
-  id: string;
+  id: number;
 }
 
 /**

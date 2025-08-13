@@ -18,7 +18,7 @@ export interface BaseMenu {
 }
 
 export interface Tree {
-  id: string;
+  id: number;
   title: string;
   children?: Tree[];
 }

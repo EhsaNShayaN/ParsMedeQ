@@ -23,7 +23,7 @@
             <mat-label>تیتر</mat-label>
             <input [placeholder]="'تیتر'" autocomplete="off" formControlName="title" matInput
                    required>
-            <mat-error *ngIf="myForm.controls.title.errors?.required">
+            <mat-error *ngIf="myForm.controls['title'].errors?.['required']">
               تیتر
               الزامی است.
             </mat-error>
@@ -34,7 +34,7 @@
             <mat-label>لید خبر</mat-label>
             <input [placeholder]="'لید خبر'" autocomplete="off" formControlName="abstract" matInput
                    required>
-            <mat-error *ngIf="myForm.controls.abstract.errors?.required">
+            <mat-error *ngIf="myForm.controls['abstract'].errors?.['required']">
               لید خبر
               الزامی است.
             </mat-error>
@@ -48,7 +48,7 @@
                 {{ item.title }}
               </mat-option>
             </mat-select>
-            <mat-error *ngIf="myForm.controls.category.errors?.required">
+            <mat-error *ngIf="myForm.controls['category'].errors?.['required']">
               {{ 'NOTICE_CATEGORY' }}
               الزامی است.
             </mat-error>
@@ -61,11 +61,11 @@
           </div>
         </div>
         <div class="px-2 mb-4" fxFlex="100" fxFlex.gt-xs="100">
-          <mat-label>{{ 'DESCRIPTION' }}</mat-label>
+          <mat-label>توضیحات</mat-label>
           <angular-editor (blur)="leaveAbstract()" [config]="editorConfig" formControlName="description"
                           id="editor0" placeholder="{{'DESCRIPTION'}}" required></angular-editor>
-          <mat-error *ngIf="abstractError && myForm.controls.description.errors?.required">
-            {{ 'DESCRIPTION' }}
+          <mat-error *ngIf="abstractError && myForm.controls['description'].errors?.['required']">
+            توضیحات
             الزامی است.
           </mat-error>
         </div>

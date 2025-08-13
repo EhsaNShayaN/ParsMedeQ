@@ -51,7 +51,7 @@ export class ResourceRequest {
 }
 
 export class ResourcesRequest extends AlborzPagingRequest {
-  id?: string;
+  id?: number;
   tableId?: number;
   categoryId?: number;
 }

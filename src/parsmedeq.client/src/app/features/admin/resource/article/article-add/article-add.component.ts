@@ -1,5 +1,5 @@
 import {Component, Injector, OnInit} from '@angular/core';
-import {UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
+import {FormArray, UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import * as uuid from 'uuid';
 import * as moment from 'jalali-moment';
@@ -13,7 +13,7 @@ import {JalaliMomentDateAdapter} from '../../../../../core/custom-date-adapter';
 @Component({
   selector: 'app-article-add',
   templateUrl: './article-add.component.html',
-  styleUrls: ['./article-add.component.scss'],
+  styleUrl: './article-add.component.scss',
   standalone: false
 })
 export class ArticleAddComponent extends BaseResourceComponent implements OnInit {
@@ -26,6 +26,10 @@ export class ArticleAddComponent extends BaseResourceComponent implements OnInit
               private activatedRoute: ActivatedRoute,
               injector: Injector) {
     super(injector, Tables.Article);
+  }
+
+  get anchorsArray() {
+    return this.myForm.get('anchors') as FormArray;
   }
 
   ngOnInit(): void {
@@ -121,9 +125,9 @@ export class ArticleAddComponent extends BaseResourceComponent implements OnInit
     return x;
   }
 
-  toPersian(s: string): string {
+  /*toPersian(s: string): string {
     return s.replace(/\d/g, (d) => '۰۱۲۳۴۵۶۷۸۹'[Number(d)]);
-  };
+  };*/
 
   dateChanged(dateRangeStart: HTMLInputElement) {
     this.expDate = this.toEnglish(dateRangeStart.value);
@@ -144,6 +148,7 @@ export class ArticleAddComponent extends BaseResourceComponent implements OnInit
     const dayStart = Number(start.substring(8, 10));
     const startDate = new Date(yearStart, monthStart - 1, dayStart);
     console.log(startDate);
+    return startDate;
   }
 
   leaveAbstract() {

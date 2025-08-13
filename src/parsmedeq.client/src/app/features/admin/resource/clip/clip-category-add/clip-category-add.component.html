@@ -20,7 +20,7 @@
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>{{ 'GENRE' }}</mat-label>
             <input [placeholder]="'TITLE'" autocomplete="off" formControlName="title" matInput required>
-            <mat-error *ngIf="myForm.controls.title.errors?.required">
+            <mat-error *ngIf="myForm.controls['title'].errors?.['required']">
               {{ 'GENRE' }}
               الزامی است.
             </mat-error>
@@ -38,11 +38,11 @@
         </div>
         <div class="px-2" fxFlex="100" fxFlex.gt-xs="100">
           <mat-form-field appearance="outline" class="w-100">
-            <mat-label>{{ 'DESCRIPTION' }}</mat-label>
+            <mat-label>توضیحات</mat-label>
             <textarea formControlName="description" matInput placeholder="{{'DESCRIPTION'}}"
                       rows="5"></textarea>
-            <mat-error *ngIf="myForm.controls.description.errors?.required">
-              {{ 'DESCRIPTION' }}
+            <mat-error *ngIf="myForm.controls['description'].errors?.['required']">
+              توضیحات
               الزامی است.
             </mat-error>
           </mat-form-field>

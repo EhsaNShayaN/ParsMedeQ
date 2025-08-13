@@ -23,7 +23,7 @@
             <mat-label>عنوان</mat-label>
             <input [placeholder]="'TITLE'" autocomplete="off" formControlName="title" matInput
                    required>
-            <mat-error *ngIf="myForm.controls.title.errors?.required">
+            <mat-error *ngIf="myForm.controls['title'].errors?.['required']">
               عنوان
               الزامی است.
             </mat-error>
@@ -38,7 +38,7 @@
                 {{ item.title }}
               </mat-option>
             </mat-select>
-            <mat-error *ngIf="myForm.controls.category.errors?.required">
+            <mat-error *ngIf="myForm.controls['category'].errors?.['required']">
               {{ 'ARTICLE_CATEGORY' }}
               الزامی است.
             </mat-error>
@@ -102,7 +102,7 @@
           <mat-label>{{ 'ABSTRACT' }}</mat-label>
           <angular-editor (blur)="leaveAbstract()" [config]="editorConfig" formControlName="abstract"
                           id="editor0" placeholder="{{'ABSTRACT'}}" required></angular-editor>
-          <mat-error *ngIf="abstractError && myForm.controls.abstract.errors?.required">
+          <mat-error *ngIf="abstractError && myForm.controls['abstract'].errors?.['required']">
             {{ 'ABSTRACT' }}
             الزامی است.
           </mat-error>
@@ -117,8 +117,7 @@
           </button>
         </div>
         <div formArrayName="anchors" fxFlex="100" fxLayout="row wrap">
-          <div *ngFor="let item of myForm.controls.anchors['controls']; let i = index;" class="step-section pb-2"
-               fxFlex="100">
+          <div *ngFor="let item of anchorsArray.controls; let i = index;" fxFlex="100" class="step-section pb-2">
             <div class="fw-500 text-center pt-3" fxFlex="4">{{ i + 1 }}.</div>
             <div [formGroupName]="i" fxFlex="90" fxLayout="row wrap">
               <input formControlName="id" type="hidden">
@@ -128,9 +127,7 @@
                        placeholder="{{'TITLE'}}">
               </mat-form-field>
               <div class="px-2" fxFlex="100" fxFlex.gt-xs="80">
-                <angular-editor [config]="editorConfig" formControlName="desc"
-                                id="editor{{i + 1}}"
-                                placeholder="{{'DESCRIPTION'}}"></angular-editor>
+                <angular-editor [config]="editorConfig" formControlName="desc" id="editor{{i + 1}}" placeholder="{{'DESCRIPTION'}}"></angular-editor>
               </div>
             </div>
             <div class="text-center pt-2" fxFlex="6">
@@ -155,7 +152,7 @@
             <mat-label>{{ 'PRICE' }}</mat-label>
             <input class="text-left ltr" formControlName="price" matInput
                    onlyNumber placeholder="{{'PRICE'}}">
-            <mat-error *ngIf="myForm.controls.price.errors?.required">
+            <mat-error *ngIf="myForm.controls['price'].errors?.['required']">
               {{ 'PRICE' }}
               الزامی است.
             </mat-error>
@@ -167,7 +164,7 @@
             <mat-label>{{ 'DISCOUNT_BY_PERCENT' }}</mat-label>
             <input class="text-left ltr" formControlName="discount" matInput
                    onlyNumber placeholder="{{'DISCOUNT_BY_PERCENT'}}">
-            <mat-error *ngIf="myForm.controls.discount.errors?.required">
+            <mat-error *ngIf="myForm.controls['discount'].errors?.['required']">
               {{ 'DISCOUNT' }}
               الزامی است.
             </mat-error>

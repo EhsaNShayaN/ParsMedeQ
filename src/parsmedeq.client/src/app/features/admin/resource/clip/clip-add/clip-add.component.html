@@ -20,7 +20,7 @@
             <mat-label>عنوان</mat-label>
             <input [placeholder]="'TITLE'" autocomplete="off" formControlName="title" matInput
                    required>
-            <mat-error *ngIf="myForm.controls.title.errors?.required">
+            <mat-error *ngIf="myForm.controls['title'].errors?.['required']">
               عنوان
               الزامی است.
             </mat-error>
@@ -34,7 +34,7 @@
                 {{ item.title }}
               </mat-option>
             </mat-select>
-            <mat-error *ngIf="myForm.controls.categoryId.errors?.required">
+            <mat-error *ngIf="myForm.controls['categoryId'].errors?.['required']">
               {{ 'CATEGORY' }}
               الزامی است.
             </mat-error>
@@ -70,7 +70,7 @@
             <mat-label>{{ 'PRICE' }}</mat-label>
             <input class="text-left ltr" formControlName="price" matInput
                    onlyNumber placeholder="{{'PRICE'}}">
-            <mat-error *ngIf="myForm.controls.price.errors?.required">
+            <mat-error *ngIf="myForm.controls['price'].errors?.['required']">
               {{ 'PRICE' }}
               الزامی است.
             </mat-error>
@@ -82,7 +82,7 @@
             <mat-label>{{ 'DISCOUNT_BY_PERCENT' }}</mat-label>
             <input class="text-left ltr" formControlName="discount" matInput
                    onlyNumber placeholder="{{'DISCOUNT_BY_PERCENT'}}">
-            <mat-error *ngIf="myForm.controls.discount.errors?.required">
+            <mat-error *ngIf="myForm.controls['discount'].errors?.['required']">
               {{ 'DISCOUNT' }}
               الزامی است.
             </mat-error>

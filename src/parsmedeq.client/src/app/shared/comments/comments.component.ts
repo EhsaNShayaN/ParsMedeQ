@@ -12,7 +12,7 @@ import {AuthService} from '../../core/services/auth.service';
 @Component({
   selector: 'app-comments',
   templateUrl: './comments.component.html',
-  styleUrls: ['./comments.component.scss'],
+  styleUrl: './comments.component.scss',
   standalone: false
 })
 export class CommentsComponent extends PureComponent implements OnInit, DoCheck {

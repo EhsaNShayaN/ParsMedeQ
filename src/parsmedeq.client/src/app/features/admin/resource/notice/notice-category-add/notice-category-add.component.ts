@@ -6,7 +6,7 @@ import {ActivatedRoute} from '@angular/router';
 @Component({
   selector: 'app-notice-category-add',
   templateUrl: './notice-category-add.component.html',
-  styleUrls: ['./notice-category-add.component.scss'],
+  styleUrl: './notice-category-add.component.scss',
   standalone: false
 })
 export class NoticeCategoryAddComponent extends BaseCategoryComponent {
