@@ -6,16 +6,16 @@ namespace ParsMedeQ.Application.Features.UserFeatures.SigninFeature.SendPassword
 
 public sealed class SendPasswordOtpByEmailCommandHandler : IPrimitiveResultCommandHandler<SendPasswordOtpByEmailCommand, SendPasswordOtpByEmailCommandResponse>
 {
-    private readonly IReadUnitOfWork _taxMemoryReadUnitOfWork;
+    private readonly IReadUnitOfWork _readUnitOfWork;
     private readonly IOtpService _otpService;
     private readonly IFeatureManager _featureManager;
 
     public SendPasswordOtpByEmailCommandHandler(
-        IReadUnitOfWork taxMemoryReadUnitOfWork,
+        IReadUnitOfWork readUnitOfWork,
         IOtpService otpService,
         IFeatureManager featureManager)
     {
-        this._taxMemoryReadUnitOfWork = taxMemoryReadUnitOfWork;
+        this._readUnitOfWork = readUnitOfWork;
         this._otpService = otpService;
         this._featureManager = featureManager;
     }
@@ -23,7 +23,7 @@ public sealed class SendPasswordOtpByEmailCommandHandler : IPrimitiveResultComma
         SendPasswordOtpByEmailCommand request,
         CancellationToken cancellationToken)
     {
-        return await this._taxMemoryReadUnitOfWork
+        return await this._readUnitOfWork
             .UserReadRepository
             .GetOneOrDefault(
                 x => x.Email.Equals(request.Email),

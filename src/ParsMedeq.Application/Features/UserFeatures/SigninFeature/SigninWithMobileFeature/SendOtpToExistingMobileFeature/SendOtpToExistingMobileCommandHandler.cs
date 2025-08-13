@@ -4,25 +4,25 @@ namespace ParsMedeQ.Application.Features.UserFeatures.SigninFeature.SigninWithMo
 
 public sealed class SendOtpToExistingMobileCommandHandler : IPrimitiveResultCommandHandler<SendOtpToExistingMobileCommand, SendOtpToExistingMobileCommandResponse>
 {
-    private readonly IReadUnitOfWork _taxMemoryReadUnitOfWork;
+    private readonly IReadUnitOfWork _readUnitOfWork;
     private readonly IOtpService _otpService;
     private readonly IFeatureManager _featureManager;
 
     public SendOtpToExistingMobileCommandHandler(
-        IReadUnitOfWork taxMemoryReadUnitOfWork,
+        IReadUnitOfWork readUnitOfWork,
         IOtpService otpService,
         IFeatureManager featureManager)
     {
         this._otpService = otpService;
         this._featureManager = featureManager;
-        this._taxMemoryReadUnitOfWork = taxMemoryReadUnitOfWork;
+        this._readUnitOfWork = readUnitOfWork;
     }
     public async Task<PrimitiveResult<SendOtpToExistingMobileCommandResponse>> Handle(
         SendOtpToExistingMobileCommand request,
         CancellationToken cancellationToken)
     {
         return await MobileType.Create(request.Mobile)
-            .Map(mobile => _taxMemoryReadUnitOfWork.UserReadRepository.FindByMobile(mobile, cancellationToken))
+            .Map(mobile => _readUnitOfWork.UserReadRepository.FindByMobile(mobile, cancellationToken))
             .Map(user => this._otpService.SendSMS(
                 user.Mobile,
                 ApplicationCacheTokens.CreateOTPKey(user.Mobile.Value.ToString(), ApplicationCacheTokens.LoginOTP),

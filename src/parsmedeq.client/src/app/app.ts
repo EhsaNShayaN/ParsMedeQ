@@ -19,5 +19,9 @@ export class App implements OnInit {
     this.restApiService.getWeatherForecast().subscribe((r: WeatherForecast[]) => {
       this.forecasts = r;
     });
+    this.restApiService.addResource().subscribe((r: any) => {
+      console.log(r);
+      console.log(r.data);
+    });
   }
 }

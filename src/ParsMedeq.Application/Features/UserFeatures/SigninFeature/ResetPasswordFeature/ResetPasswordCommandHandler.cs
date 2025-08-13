@@ -5,16 +5,16 @@ namespace ParsMedeQ.Application.Features.UserFeatures.SigninFeature.ResetPasswor
 public sealed class ResetPasswordCommandHandler : IPrimitiveResultCommandHandler<ResetPasswordCommand, ResetPasswordCommandResponse>
 {
     private readonly IOtpService _otpService;
-    private readonly IWriteUnitOfWork _taxMemoryWriteUnitOfWork;
+    private readonly IWriteUnitOfWork _writeUnitOfWork;
     private readonly IUserValidatorService _userValidatorService;
 
     public ResetPasswordCommandHandler(
         IOtpService otpService,
-        IWriteUnitOfWork taxMemoryWriteUnitOfWork,
+        IWriteUnitOfWork writeUnitOfWork,
         IUserValidatorService userValidatorService)
     {
         this._otpService = otpService;
-        this._taxMemoryWriteUnitOfWork = taxMemoryWriteUnitOfWork;
+        this._writeUnitOfWork = writeUnitOfWork;
         this._userValidatorService = userValidatorService;
     }
 
@@ -22,7 +22,7 @@ public sealed class ResetPasswordCommandHandler : IPrimitiveResultCommandHandler
     {
         return await
                 MobileType.Create(request.Mobile)
-                .Map(mobile => this._taxMemoryWriteUnitOfWork.UserWriteRepository
+                .Map(mobile => this._writeUnitOfWork.UserWriteRepository
                     .FindByMobile(mobile, cancellationToken)
                     .MapIf(
                         user => user.Mobile.IsDefault(),
@@ -33,10 +33,10 @@ public sealed class ResetPasswordCommandHandler : IPrimitiveResultCommandHandler
                             OtpServiceValidationRemoveKeyStrategy.RemoveIfSuccess,
                             cancellationToken)
                         .Map(() => PasswordHelper.HashAndSaltPassword(request.Password))
-                        .Map(generatedPass => this._taxMemoryWriteUnitOfWork.UserWriteRepository.FindById(user.Id, cancellationToken)
+                        .Map(generatedPass => this._writeUnitOfWork.UserWriteRepository.FindById(user.Id, cancellationToken)
                         .Bind(user => user.UpdatePassword(generatedPass.HashedPassword, generatedPass.Salt, this._userValidatorService)))
-                        .Bind(user => this._taxMemoryWriteUnitOfWork.UserWriteRepository.UpdatePassword(user, cancellationToken))
-                        .Bind(user => this._taxMemoryWriteUnitOfWork.SaveChangesAsync(cancellationToken).Map(_ => user))
+                        .Bind(user => this._writeUnitOfWork.UserWriteRepository.UpdatePassword(user, cancellationToken))
+                        .Bind(user => this._writeUnitOfWork.SaveChangesAsync(cancellationToken).Map(_ => user))
                         .Map(user => new ResetPasswordCommandResponse(true))))
                 .ConfigureAwait(false);
     }

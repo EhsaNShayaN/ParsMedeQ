@@ -6,8 +6,11 @@ namespace ParsMedeQ.Server.DI;
 public sealed class ProjectServiceInstaller : IServiceInstaller
 {
     public Assembly[]? DependantAssemblies => [
-        ParsMedeQ.Application.ApplicationAssemblyReference.Assembly,
-        ParsMedeQ.Infrastructure.InfrastructureAssemblyReference.Assembly];
+        Application.ApplicationAssemblyReference.Assembly,
+        Infrastructure.InfrastructureAssemblyReference.Assembly,
+        Presentation.PresentationAssemblyReference.Assembly,
+    ];
 
-    public IServiceCollection InstallService(IServiceCollection services, IConfiguration config) => services;
+    public IServiceCollection InstallService(IServiceCollection services, IConfiguration config) =>
+        services.AddMinimalEndpoints(this.DependantAssemblies!);
 }

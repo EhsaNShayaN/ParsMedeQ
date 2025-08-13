@@ -18,6 +18,13 @@ export class RestApiService {
     );
   }
 
+  addResource(): Observable<any> {
+    const model = {mobile: '9123440731'};
+    return this.http.post<any>(`${endpoint()}resource/add`, model).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
       console.error('An error occurred:', error.error.message);

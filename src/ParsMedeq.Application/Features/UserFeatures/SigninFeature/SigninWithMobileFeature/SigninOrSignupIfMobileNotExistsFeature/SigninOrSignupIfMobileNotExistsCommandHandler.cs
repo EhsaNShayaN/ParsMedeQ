@@ -9,17 +9,17 @@ public sealed class SigninOrSignupIfMobileNotExistsCommandHandler : IPrimitiveRe
     SigninOrSignupIfMobileNotExistsCommand,
     UserTokenInfo>
 {
-    private readonly IReadUnitOfWork _taxMemoryReadUnitOfWork;
+    private readonly IReadUnitOfWork _readUnitOfWork;
     private readonly ISigninService _signinService;
     private readonly IOtpService _otpService;
 
     public SigninOrSignupIfMobileNotExistsCommandHandler(
-        IReadUnitOfWork taxMemoryReadUnitOfWork,
+        IReadUnitOfWork readUnitOfWork,
         ISigninService signinService,
         IOtpService otpService)
     {
         this._signinService = signinService;
-        this._taxMemoryReadUnitOfWork = taxMemoryReadUnitOfWork;
+        this._readUnitOfWork = readUnitOfWork;
         this._otpService = otpService;
     }
 

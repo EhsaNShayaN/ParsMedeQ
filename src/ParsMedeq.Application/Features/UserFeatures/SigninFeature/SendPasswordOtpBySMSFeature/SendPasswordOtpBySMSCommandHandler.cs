@@ -5,16 +5,16 @@ namespace ParsMedeQ.Application.Features.UserFeatures.SigninFeature.SendPassword
 
 public sealed class SendPasswordOtpBySMSCommandHandler : IPrimitiveResultCommandHandler<SendPasswordOtpBySMSCommand, SendPasswordOtpBySMSCommandResponse>
 {
-    private readonly IReadUnitOfWork _taxMemoryReadUnitOfWork;
+    private readonly IReadUnitOfWork _readUnitOfWork;
     private readonly IOtpService _otpService;
     private readonly IFeatureManager _featureManager;
 
     public SendPasswordOtpBySMSCommandHandler(
-        IReadUnitOfWork taxMemoryReadUnitOfWork,
+        IReadUnitOfWork readUnitOfWork,
         IOtpService otpService,
         IFeatureManager featureManager)
     {
-        this._taxMemoryReadUnitOfWork = taxMemoryReadUnitOfWork;
+        this._readUnitOfWork = readUnitOfWork;
         this._otpService = otpService;
         this._featureManager = featureManager;
     }
@@ -22,7 +22,7 @@ public sealed class SendPasswordOtpBySMSCommandHandler : IPrimitiveResultCommand
         SendPasswordOtpBySMSCommand request,
         CancellationToken cancellationToken)
     {
-        return await this._taxMemoryReadUnitOfWork
+        return await this._readUnitOfWork
             .UserReadRepository
             .GetOneOrDefault(
                 x => x.Mobile.Equals(MobileType.CreateUnsafe(request.Mobile)),
