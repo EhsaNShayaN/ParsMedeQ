@@ -40,9 +40,6 @@ export class BaseCategoryComponent extends BaseComponent implements OnInit, OnDe
                     title: [this.editItem?.title, Validators.required],
                     description: this.editItem?.description,
                 });
-                if (this.tableId !== Tables.Podcast) {
-                    this.myForm.addControl('parentId', new FormControl(this.editItem?.parentId));
-                }
             });
         });
     }

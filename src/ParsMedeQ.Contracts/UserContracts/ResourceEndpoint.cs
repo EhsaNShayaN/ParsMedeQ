@@ -9,6 +9,7 @@ public sealed class ResourceEndpoint : ApiEndpointBase
     protected override ApiEndpointItem MyEndpoint => EndpointMetadata.Resource;
 
     public EndpointInfo AddResource { get; private set; }
+    public EndpointInfo Resources { get; private set; }
 
     public ResourceEndpoint()
     {
@@ -17,6 +18,13 @@ public sealed class ResourceEndpoint : ApiEndpointBase
            this.GetUrl("add"),
            "Add Resource",
            "افزودن خبر، مقاله و ...",
+           _tag);
+
+        Resources = new EndpointInfo(
+           this.GetUrl("list"),
+           this.GetUrl("list"),
+           "List of Resources",
+           "لیست اخبار، مقاله و ...",
            _tag);
     }
 }

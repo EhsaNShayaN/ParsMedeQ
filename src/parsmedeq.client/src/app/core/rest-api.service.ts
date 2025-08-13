@@ -29,13 +29,14 @@ export class RestApiService {
   }
 
   getResource(model: ResourceRequest): Observable<any> {
-    return this.http.post<Resource>(`${endpoint()}general/resource`, model).pipe(
+    return this.http.post<Resource>(`${endpoint()}resource/details`, model).pipe(
       catchError(this.handleError)
     );
   }
 
   getResources(model: ResourcesRequest): Observable<any> {
-    return this.http.post<ResourceResponse>(`${endpoint()}general/resources`, model).pipe(
+    const query = this.modelToQuery(model);
+    return this.http.get<ResourceResponse>(`${endpoint()}resource/list?${query}`).pipe(
       catchError(this.handleError)
     );
   }
@@ -61,6 +62,20 @@ export class RestApiService {
     return this.http.post<BaseResult<boolean>>(endpoint() + 'admin/addResource', formData).pipe(
       catchError(this.handleError)
     );
+  }
+
+  modelToQuery(model: any) {
+    let params = new URLSearchParams(model);
+    let keysForDel: string[] = [];
+    params.forEach((value, key) => {
+      if (!value || value === 'null' || value === 'undefined') {
+        keysForDel.push(key);
+      }
+    });
+    keysForDel.forEach(key => {
+      params.delete(key);
+    });
+    return params.toString();
   }
 
   handleError(error: HttpErrorResponse): any {

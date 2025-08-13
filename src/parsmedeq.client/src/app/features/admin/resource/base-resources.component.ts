@@ -14,7 +14,6 @@ export class BaseResourcesComponent extends BaseReportComponent implements OnIni
     pageIndex = 1;
     pageSize = 5;
     totalCount = 0;
-    adminSort: Sort = {active: 'creationDate', direction: 'desc'};
 
     ///////////
 
@@ -31,10 +30,10 @@ export class BaseResourcesComponent extends BaseReportComponent implements OnIni
 
     getItems() {
         let model: ResourcesRequest = {
-            page: this.pageIndex,
+            pageIndex: this.pageIndex,
             pageSize: this.pageSize,
+            lastId: 0,
             sort: 0,
-            adminSort: this.adminSort,
             tableId: this.tableId
         };
         this.restApiService.getResources(model).subscribe((res: ResourceResponse) => {
@@ -78,7 +77,6 @@ export class BaseResourcesComponent extends BaseReportComponent implements OnIni
 
     sortChanged($event: Sort) {
         console.log($event);
-        this.adminSort = $event;
         this.getItems();
     }
 

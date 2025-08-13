@@ -1,8 +1,8 @@
 export class PagingRequest {
-  page!: number;
+  pageIndex!: number;
   pageSize!: number;
+  lastId!: number;
   sort?: number;
-  adminSort?: SortRequest;
   query?: string;
   fromDate?: string;
   toDate?: string;

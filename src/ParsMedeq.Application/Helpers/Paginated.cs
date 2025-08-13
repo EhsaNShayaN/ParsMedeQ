@@ -14,7 +14,7 @@ public record BasePaginatedApiResponse<T>
     public T[] Items { get; set; }
     public bool HasPrevious { get; set; }
     public bool HasNext { get; set; }
-    public object? LastId { get; set; }
+    public int? LastId { get; set; }
 
     //TODO : We must use factory instead. use immutable approach
     public BasePaginatedApiResponse(T[] items, int count, int currentPage, int pageSize)

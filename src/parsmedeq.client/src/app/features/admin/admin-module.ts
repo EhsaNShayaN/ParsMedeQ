@@ -12,11 +12,11 @@ import {ArticleListComponent} from './resource/article/article-list/article-list
 import { ArticleAddComponent } from './resource/article/article-add/article-add.component';
 import { ArticleCategoryListComponent } from './resource/article/article-category-list/article-category-list.component';
 import {ArticleCategoryAddComponent} from './resource/article/article-category-add/article-category-add.component';
-import {NoticeComponent} from './resource/notice/notice.component';
-import {NoticeListComponent} from './resource/notice/notice-list/notice-list.component';
-import {NoticeAddComponent} from './resource/notice/notice-add/notice-add.component';
-import {NoticeCategoryListComponent} from './resource/notice/notice-category-list/notice-category-list.component';
-import {NoticeCategoryAddComponent} from './resource/notice/notice-category-add/notice-category-add.component';
+import {NewsComponent} from './resource/news/news.component';
+import {NewsListComponent} from './resource/news/news-list/news-list.component';
+import {NewsAddComponent} from './resource/news/news-add/news-add.component';
+import {NewsCategoryListComponent} from './resource/news/news-category-list/news-category-list.component';
+import {NewsCategoryAddComponent} from './resource/news/news-category-add/news-category-add.component';
 import {ClipComponent} from './resource/clip/clip.component';
 import {ClipListComponent} from './resource/clip/clip-list/clip-list.component';
 import {ClipAddComponent} from './resource/clip/clip-add/clip-add.component';
@@ -46,11 +46,11 @@ import {MatSlideToggle} from '@angular/material/slide-toggle';
     ArticleCategoryListComponent,
     ArticleCategoryAddComponent,
 
-    NoticeComponent,
-    NoticeListComponent,
-    NoticeAddComponent,
-    NoticeCategoryListComponent,
-    NoticeCategoryAddComponent,
+    NewsComponent,
+    NewsListComponent,
+    NewsAddComponent,
+    NewsCategoryListComponent,
+    NewsCategoryAddComponent,
 
     ClipComponent,
     ClipListComponent,

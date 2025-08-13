@@ -1,6 +1,6 @@
 ﻿using ParsMedeQ.Application.Features.ResourceFeatures.AddResourceFeature;
 using ParsMedeQ.Contracts;
-using ParsMedeQ.Contracts.ResourceContracts.AddResourceContracts;
+using ParsMedeQ.Contracts.ResourceContracts.AddResourceContract;
 using SRH.Utilities.EhsaN;
 
 namespace ParsMedeQ.Presentation.Features.ResourceFeatures.AddResourceFeature;

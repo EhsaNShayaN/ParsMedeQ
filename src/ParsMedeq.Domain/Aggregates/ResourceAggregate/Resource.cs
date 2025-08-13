@@ -18,7 +18,7 @@ public sealed class Resource : EntityBase<int>
     public string Description { get; private set; } = string.Empty;
     public string Keywords { get; private set; } = string.Empty;
     public int ResourceCategoryId { get; private set; }
-    public string ResourceCategoryTitle { get; private set; } = string.Empty;
+    public string ResourceCategoryTitle { get; set; } = string.Empty;
     public string Image { get; private set; } = string.Empty;
     public string MimeType { get; private set; } = string.Empty;
     public string Doc { get; private set; } = string.Empty;

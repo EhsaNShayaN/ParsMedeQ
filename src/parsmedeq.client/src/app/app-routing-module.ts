@@ -16,7 +16,7 @@ const routes: Routes = [
       {path: 'auth', loadChildren: () => import('./features/auth/auth-module').then(m => m.AuthModule)},
       {path: 'contact', loadChildren: () => import('./features/contact/contact-module').then(m => m.ContactModule)},
       {path: 'faq', loadChildren: () => import('./features/faq/faq-module').then(m => m.FaqModule)},
-      {path: 'news', loadChildren: () => import('./features/news/news-module').then(m => m.NewsModule)},
+      //{path: 'news', loadChildren: () => import('./features/news/news-module').then(m => m.NewsModule)},
       {path: 'products', loadChildren: () => import('./features/products/products-module').then(m => m.ProductsModule)},
     ]
   },
