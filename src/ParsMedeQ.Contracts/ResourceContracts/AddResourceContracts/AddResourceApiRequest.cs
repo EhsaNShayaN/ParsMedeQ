@@ -11,7 +11,6 @@ public readonly record struct AddResourceApiRequest
     int Price,
     int Discount,
     string Description,
-    int[] Authors,
     string PublishInfo,
     string Publisher,
     int ResourceCategoryId,

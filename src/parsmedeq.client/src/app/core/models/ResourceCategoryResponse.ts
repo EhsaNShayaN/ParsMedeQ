@@ -3,10 +3,10 @@ export interface ResourceCategoriesResponse {
 }
 
 export interface ResourceCategory {
-  id: string;
+  id: number;
   title: string;
   description: string;
   count: number;
-  parentId: string;
+  parentId: number;
   creationDate: string;
 }

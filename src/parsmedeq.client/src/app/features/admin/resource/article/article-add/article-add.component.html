@@ -4,14 +4,13 @@
       <div class="text-center">
         <h1 class="uppercase">
           <ng-container *ngIf="editItem; else isAdd">
-            {{ 'EDIT' | translate }}
-            {{ 'ARTICLE' | translate }}
+            ویرایش
+            {{ 'ARTICLE' }}
             "{{ editItem.title }}"
-            {{ ('LANG.' + lang.toUpperCase()) | translate }}
           </ng-container>
           <ng-template #isAdd>
-            {{ 'ADD' | translate }}
-            {{ 'ARTICLE' | translate }}
+            افزودن
+            {{ 'ARTICLE' }}
           </ng-template>
         </h1>
       </div>
@@ -21,135 +20,98 @@
       <form (ngSubmit)="onFormSubmit(myForm.value)" [formGroup]="myForm" fxLayout="row wrap">
         <div class="px-2" fxFlex="100" fxFlex.gt-xs="100">
           <mat-form-field appearance="outline" class="w-100">
-            <mat-label>{{ 'TITLE' | translate }}</mat-label>
-            <input [placeholder]="'TITLE' | translate" autocomplete="off" formControlName="title" matInput
+            <mat-label>عنوان</mat-label>
+            <input [placeholder]="'TITLE'" autocomplete="off" formControlName="title" matInput
                    required>
             <mat-error *ngIf="myForm.controls.title.errors?.required">
-              {{ 'TITLE' | translate }}
-              {{ 'IS_REQUIRED' | translate }}
+              عنوان
+              الزامی است.
             </mat-error>
           </mat-form-field>
         </div>
         <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
           <mat-form-field appearance="outline" class="w-100">
-            <mat-label>{{ 'ARTICLE_CATEGORY' | translate }}</mat-label>
-            <mat-select formControlName="category" placeholder="{{'ARTICLE_CATEGORY' | translate}}"
+            <mat-label>{{ 'ARTICLE_CATEGORY' }}</mat-label>
+            <mat-select formControlName="category" placeholder="{{'ARTICLE_CATEGORY'}}"
                         required>
-              <mat-option *ngFor="let item of articleCategories" [value]="item">
+              <mat-option *ngFor="let item of resourceCategories" [value]="item">
                 {{ item.title }}
               </mat-option>
             </mat-select>
             <mat-error *ngIf="myForm.controls.category.errors?.required">
-              {{ 'ARTICLE_CATEGORY' | translate }}
-              {{ 'IS_REQUIRED' | translate }}
+              {{ 'ARTICLE_CATEGORY' }}
+              الزامی است.
             </mat-error>
-          </mat-form-field>
-        </div>
-        <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>{{ 'AUTHORS' | translate }}</mat-label>
-            <mat-select (openedChange)="onOpenChange(multiUserSearch)" [(ngModel)]="selectedMentors"
-                        [formControl]="providers" formControlName="authors" multiple
-                        name="authors" ngDefaultControl
-                        no-space placeholder="{{'AUTHORS' | translate}}">
-              <!--<mat-select-trigger>
-                {{providers.value }}
-              </mat-select-trigger>-->
-              <input #multiUserSearch (input)="onInputChange($event)" autocomplete="off" class="mat-select-input"
-                     placeholder="جستجو"
-                     type="text"/>
-              <mat-option *ngFor="let item of allProviders" [ngClass]="{'d-none': !isAvailable(item,filteredProviders)}"
-                          [value]="item.id">
-                {{ item.firstName }} {{ item.lastName }}
-              </mat-option>
-              <button (click)="add()" *ngIf="filteredProviders?.length === 0" color="primary" mat-button>
-                {{ 'ADD' | translate }}
-                <mat-icon>add</mat-icon>
-              </button>
-            </mat-select>
-            <mat-error *ngIf="myForm.controls.authors.errors?.required">
-              حداقل یک نویسنده انتخاب نمایید.
-            </mat-error>
-          </mat-form-field>
-        </div>
-        <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>{{ 'JOURNAL' | translate }}</mat-label>
-            <mat-select formControlName="journalId" placeholder="{{'JOURNAL' | translate}}">
-              <mat-option *ngFor="let item of journals" [value]="item.id">
-                {{ item.title }}
-              </mat-option>
-            </mat-select>
           </mat-form-field>
         </div>
         <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
           <div class="border-radius border pad">
-            <mat-label class="ml-2 gray-color">{{ 'IMAGE' | translate }}</mat-label>
+            <mat-label class="ml-2 gray-color">{{ 'IMAGE' }}</mat-label>
             <input (change)="handleImageInput($event.target)" class="py-1" formControlName="image"
-                   placeholder="{{'IMAGE' | translate}}" type="file"/>
+                   placeholder="{{'IMAGE'}}" type="file"/>
           </div>
         </div>
         <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
           <mat-form-field appearance="outline" class="w-100">
-            <mat-label>{{ 'LANGUAGE' | translate }}</mat-label>
+            <mat-label>{{ 'LANGUAGE' }}</mat-label>
             <input autocomplete="off" formControlName="language" matInput
-                   placeholder="{{'LANGUAGE' | translate}}">
+                   placeholder="{{'LANGUAGE'}}">
           </mat-form-field>
         </div>
         <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
           <mat-form-field appearance="outline" class="w-100">
-            <mat-label>{{ 'PUBLISH_DATE' | translate }}</mat-label>
+            <mat-label>{{ 'PUBLISH_DATE' }}</mat-label>
             <input autocomplete="off" formControlName="publishDate" matInput
-                   placeholder="{{'PUBLISH_DATE' | translate}}">
+                   placeholder="{{'PUBLISH_DATE'}}">
           </mat-form-field>
         </div>
         <div class="px-2 mb-4" fxFlex="100" fxFlex.gt-xs="50">
           <div class="border-radius border pad">
-            <mat-label class="ml-2 gray-color">{{ 'FILE' | translate }}</mat-label>
+            <mat-label class="ml-2 gray-color">{{ 'FILE' }}</mat-label>
             <input (change)="handleFileInput($event.target)" class="py-1" formControlName="file"
-                   placeholder="{{'FILE' | translate}}" type="file"/>
+                   placeholder="{{'FILE'}}" type="file"/>
           </div>
         </div>
         <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
           <mat-form-field appearance="outline" class="w-100">
-            <mat-label>{{ 'KEYWORDS' | translate }}({{ 'SEPARATE_WITH_COMMA' | translate }})</mat-label>
+            <mat-label>{{ 'KEYWORDS' }}({{ 'SEPARATE_WITH_COMMA' }})</mat-label>
             <input autocomplete="off" formControlName="keywords" matInput
-                   placeholder="{{'KEYWORDS' | translate}}">
+                   placeholder="{{'KEYWORDS'}}">
           </mat-form-field>
         </div>
         <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
           <mat-form-field appearance="outline" class="w-100">
-            <mat-label>{{ 'EXPIRATION_DATE' | translate }}</mat-label>
+            <mat-label>{{ 'EXPIRATION_DATE' }}</mat-label>
             <input #dateInput (dateChange)="dateChanged(dateInput)" [matDatepicker]="picker"
                    formControlName="expirationDate"
-                   matInput placeholder="{{'EXPIRATION_DATE' | translate}}">
+                   matInput placeholder="{{'EXPIRATION_DATE'}}">
             <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
         </div>
         <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
           <mat-form-field appearance="outline" class="w-100">
-            <mat-label>{{ 'EXPIRATION_TIME' | translate }}</mat-label>
-            <input [(ngModel)]="expTime" [ngxMatTimepicker]="pickerB" formControlName="expirationTime" format="24"
-                   matInput placeholder="{{'EXPIRATION_TIME' | translate}}" readonly/>
+            <mat-label>تاریخ انقضا</mat-label>
+            <input [(ngModel)]="expTime" [ngxMatTimepicker]="pickerB" formControlName="expirationTime" [format]="24"
+                   matInput placeholder="{{'EXPIRATION_TIME'}}" readonly/>
             <mat-icon (click)="pickerB.open()" matSuffix>watch_later</mat-icon>
           </mat-form-field>
           <ngx-mat-timepicker #pickerB color="accent"></ngx-mat-timepicker>
         </div>
         <div class="px-2 mb-4" fxFlex="100" fxFlex.gt-xs="100">
-          <mat-label>{{ 'ABSTRACT' | translate }}</mat-label>
+          <mat-label>{{ 'ABSTRACT' }}</mat-label>
           <angular-editor (blur)="leaveAbstract()" [config]="editorConfig" formControlName="abstract"
-                          id="editor0" placeholder="{{'ABSTRACT' | translate}}" required></angular-editor>
+                          id="editor0" placeholder="{{'ABSTRACT'}}" required></angular-editor>
           <mat-error *ngIf="abstractError && myForm.controls.abstract.errors?.required">
-            {{ 'ABSTRACT' | translate }}
-            {{ 'IS_REQUIRED' | translate }}
+            {{ 'ABSTRACT' }}
+            الزامی است.
           </mat-error>
         </div>
         <!--******************************-->
         <div class="my-3 px-2" fxFlex="100" fxLayoutAlign="start center">
-          <p class="uppercase fw-500 mb-0">{{ 'ANCHORS' | translate }}</p>
+          <p class="uppercase fw-500 mb-0">{{ 'ANCHORS' }}</p>
           <button (click)="addAnchor()" class="mx-3" color="primary" mat-icon-button
-                  matTooltip="{{'ADD' | translate}} {{'ANCHOR' | translate}}" matTooltipPosition="after"
+                  matTooltip="{{'ADD'}} {{'ANCHOR'}}" matTooltipPosition="after"
                   type="button">
             <mat-icon>add_circle</mat-icon>
           </button>
@@ -161,19 +123,19 @@
             <div [formGroupName]="i" fxFlex="90" fxLayout="row wrap">
               <input formControlName="id" type="hidden">
               <mat-form-field appearance="outline" class="h-fix px-2" fxFlex="100" fxFlex.gt-xs="20">
-                <mat-label>{{ 'TITLE' | translate }}</mat-label>
+                <mat-label>عنوان</mat-label>
                 <input autocomplete="off" formControlName="name" matInput
-                       placeholder="{{'TITLE' | translate}}">
+                       placeholder="{{'TITLE'}}">
               </mat-form-field>
               <div class="px-2" fxFlex="100" fxFlex.gt-xs="80">
                 <angular-editor [config]="editorConfig" formControlName="desc"
                                 id="editor{{i + 1}}"
-                                placeholder="{{'DESCRIPTION' | translate}}"></angular-editor>
+                                placeholder="{{'DESCRIPTION'}}"></angular-editor>
               </div>
             </div>
             <div class="text-center pt-2" fxFlex="6">
               <button (click)="deleteAnchor(i)" color="warn" mat-icon-button
-                      matTooltip="{{'DELETE' | translate}} {{'ANCHOR' | translate}}">
+                      matTooltip="{{'DELETE'}} {{'ANCHOR'}}">
                 <mat-icon>cancel</mat-icon>
               </button>
             </div>
@@ -181,33 +143,33 @@
         </div>
         <!--******************************-->
         <div class="px-2" fxFlex="100" fxFlex.gt-xs="20">
-          <mat-label>{{ 'VIP' | translate }}</mat-label>
+          <mat-label>{{ 'VIP' }}</mat-label>
           <div>
             <mat-slide-toggle formControlName="isVip" labelPosition="before"></mat-slide-toggle>
-            <!--<input matInput placeholder="{{'vip' | translate}}" formControlName="keywords" autocomplete="off">-->
+            <!--<input matInput placeholder="{{'vip'}}" formControlName="keywords" autocomplete="off">-->
           </div>
         </div>
         <div class="px-2" fxFlex="100" fxFlex.gt-xs="40">
           <mat-form-field appearance="outline" class="w-100 mt-2">
             <mat-icon class="mr-1 text-muted" matPrefix>money</mat-icon>
-            <mat-label>{{ 'PRICE' | translate }}</mat-label>
+            <mat-label>{{ 'PRICE' }}</mat-label>
             <input class="text-left ltr" formControlName="price" matInput
-                   onlyNumber placeholder="{{'PRICE' | translate}}">
+                   onlyNumber placeholder="{{'PRICE'}}">
             <mat-error *ngIf="myForm.controls.price.errors?.required">
-              {{ 'PRICE' | translate }}
-              {{ 'IS_REQUIRED' | translate }}
+              {{ 'PRICE' }}
+              الزامی است.
             </mat-error>
           </mat-form-field>
         </div>
         <div class="px-2" fxFlex="100" fxFlex.gt-xs="40">
           <mat-form-field appearance="outline" class="w-100 mt-2">
             <mat-icon class="mr-1 text-muted" matPrefix>person_outline</mat-icon>
-            <mat-label>{{ 'DISCOUNT_BY_PERCENT' | translate }}</mat-label>
+            <mat-label>{{ 'DISCOUNT_BY_PERCENT' }}</mat-label>
             <input class="text-left ltr" formControlName="discount" matInput
-                   onlyNumber placeholder="{{'DISCOUNT_BY_PERCENT' | translate}}">
+                   onlyNumber placeholder="{{'DISCOUNT_BY_PERCENT'}}">
             <mat-error *ngIf="myForm.controls.discount.errors?.required">
-              {{ 'DISCOUNT' | translate }}
-              {{ 'IS_REQUIRED' | translate }}
+              {{ 'DISCOUNT' }}
+              الزامی است.
             </mat-error>
           </mat-form-field>
         </div>
@@ -221,8 +183,8 @@
         </div>
         <div class="text-center mt-3" fxFlex="100">
           <button class="uppercase" color="primary" mat-raised-button type="submit">
-            {{ (editItem ? 'EDIT' : 'ADD') | translate }}
-            {{ 'ARTICLE' | translate }}
+            {{ (editItem ? 'EDIT' : 'ADD') }}
+            {{ 'ARTICLE' }}
           </button>
         </div>
       </form>

@@ -1,5 +1,5 @@
 import {Component, Injector} from '@angular/core';
-import {Tables} from '../../../../../../lib/core/constants/server.constants';
+import {Tables} from '../../../../../core/constants/server.constants';
 import {BaseResourcesComponent} from '../../base-resources.component';
 
 @Component({

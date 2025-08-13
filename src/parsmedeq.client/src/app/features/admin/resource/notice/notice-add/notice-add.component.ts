@@ -1,12 +1,12 @@
 import {Component, Injector, OnInit} from '@angular/core';
 import {UntypedFormBuilder, Validators} from '@angular/forms';
-import {getCustomEditorConfigs} from '../../../../../../lib/core/custom-editor-configs';
+import {getCustomEditorConfigs} from '../../../../../core/custom-editor-configs';
 import {ActivatedRoute} from '@angular/router';
-import {JalaliMomentDateAdapter} from '../../../../../../lib/core/custom-date-adapter';
-import {Tables} from '../../../../../../lib/core/constants/server.constants';
-import {ResourceCategoriesResponse} from '../../../../../../lib/models/ResourceCategoryResponse';
+import {JalaliMomentDateAdapter} from '../../../../../core/custom-date-adapter';
+import {Tables} from '../../../../../core/constants/server.constants';
 import {BaseResourceComponent} from '../../base-resource.component';
-import {Resource} from '../../../../../../lib/models/ResourceResponse';
+import {Resource} from '../../../../../core/models/ResourceResponse';
+import {ResourceCategoriesResponse, ResourceCategory} from '../../../../../core/models/ResourceCategoryResponse';
 
 @Component({
   selector: 'app-notice-add',
@@ -15,8 +15,8 @@ import {Resource} from '../../../../../../lib/models/ResourceResponse';
   standalone: false
 })
 export class NoticeAddComponent extends BaseResourceComponent implements OnInit {
-  error: string;
-  noticeCategories = [];
+  error?: string;
+  resourceCategories: ResourceCategory[] = [];
   editorConfig = getCustomEditorConfigs();
   abstractError = false;
 
@@ -29,19 +29,18 @@ export class NoticeAddComponent extends BaseResourceComponent implements OnInit 
 
   ngOnInit(): void {
     this.sub = this.activatedRoute.params.subscribe(params => {
-      this.restClientService.getResourceCategories(Tables.Notice).subscribe((acr: ResourceCategoriesResponse) => {
-        this.noticeCategories = acr.resourceCategories;
-        if (params.id) {
-          this.restClientService.getResource({id: params.id, languageCode: this.lang, tableId: Tables.Notice}).subscribe((a: Resource) => {
+      this.restApiService.getResourceCategories(Tables.Notice).subscribe((acr: ResourceCategoriesResponse) => {
+        this.resourceCategories = acr.resourceCategories;
+        if (params['id']) {
+          this.restApiService.getResource({id: params['id'], tableId: Tables.Notice}).subscribe((a: Resource) => {
             this.editItem = a;
             this.myForm = this.formBuilder.group({
-              category: [this.noticeCategories.find(s => s.id === a.categoryId), Validators.required],
+              category: [this.resourceCategories.find(s => s.id === a.categoryId), Validators.required],
               title: [a.title, Validators.required],
               abstract: [a.abstract, Validators.required],
               description: [a.description, Validators.required],
               image: null,
               keywords: a.keywords,
-              journalId: a.journalId,
               expirationDate: null,
               expirationTime: '',
               anchors: this.formBuilder.array([]),
@@ -49,21 +48,18 @@ export class NoticeAddComponent extends BaseResourceComponent implements OnInit 
               file: null,
               publishDate: null,
               isVip: a.isVip,
-              showInChem: this.editItem?.showInChem,
-              showInAcademy: this.editItem?.showInAcademy,
             });
             if (a.expirationDate) {
               const array = a.expirationDate.split('/').map(s => Number(s));
-              this.myForm.controls.expirationDate.setValue(new JalaliMomentDateAdapter(null).createDate(array[0], array[1] - 1, array[2]));
+              this.myForm.controls['expirationDate'].setValue(new JalaliMomentDateAdapter('').createDate(array[0], array[1] - 1, array[2]));
               this.expDate = a.expirationDate;
               this.expTime = a.expirationTime;
             }
             if (a.publishDate) {
               const array = a.publishDate.split('/').map(s => Number(s));
-              this.myForm.controls.publishDate.setValue(new JalaliMomentDateAdapter(null).createDate(array[0], array[1] - 1, array[2]));
+              this.myForm.controls['publishDate'].setValue(new JalaliMomentDateAdapter('').createDate(array[0], array[1] - 1, array[2]));
               this.pubDate = a.publishDate;
             }
-            this.hideSingleLangControls();
           });
         } else {
           this.myForm = this.formBuilder.group({
@@ -119,13 +115,13 @@ export class NoticeAddComponent extends BaseResourceComponent implements OnInit 
     }
   }
 
-  onFormSubmit(values: any): void {
+  override onFormSubmit(values: any): void {
     this.leaveAbstract();
     super.onFormSubmit(values);
   }
 
   leaveAbstract() {
-    const x = this.myForm.controls.abstract.value;
+    const x = this.myForm.controls['abstract'].value;
     this.abstractError = !x;
   }
 }

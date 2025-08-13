@@ -4,33 +4,32 @@
       <div class="text-center">
         <h1 class="uppercase">
           <ng-container *ngIf="editItem; else isAdd">
-            {{ 'EDIT' | translate }}
-            {{ 'CLIP_CATEGORY' | translate }}
+            ویرایش
+            {{ 'CLIP_CATEGORY' }}
             "{{ editItem.title }}"
-            {{ ('LANG.' + lang.toUpperCase()) | translate }}
           </ng-container>
           <ng-template #isAdd>
-            {{ 'ADD' | translate }}
-            {{ 'CLIP_CATEGORY' | translate }}
+            افزودن
+            {{ 'CLIP_CATEGORY' }}
           </ng-template>
-          {{ '' | translate }}
+          {{ '' }}
         </h1>
       </div>
       <form (ngSubmit)="onFormSubmit(myForm.value)" [formGroup]="myForm" fxLayout="row wrap">
         <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
           <mat-form-field appearance="outline" class="w-100">
-            <mat-label>{{ 'GENRE' | translate }}</mat-label>
-            <input [placeholder]="'TITLE' | translate" autocomplete="off" formControlName="title" matInput required>
+            <mat-label>{{ 'GENRE' }}</mat-label>
+            <input [placeholder]="'TITLE'" autocomplete="off" formControlName="title" matInput required>
             <mat-error *ngIf="myForm.controls.title.errors?.required">
-              {{ 'GENRE' | translate }}
-              {{ 'IS_REQUIRED' | translate }}
+              {{ 'GENRE' }}
+              الزامی است.
             </mat-error>
           </mat-form-field>
         </div>
         <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
           <mat-form-field appearance="outline" class="w-100">
-            <mat-label>{{ 'CLIP_CATEGORY' | translate }}</mat-label>
-            <mat-select formControlName="parentId" placeholder="{{'CLIP_CATEGORY' | translate}}">
+            <mat-label>{{ 'CLIP_CATEGORY' }}</mat-label>
+            <mat-select formControlName="parentId" placeholder="{{'CLIP_CATEGORY'}}">
               <mat-option *ngFor="let item of resourceCategories" [value]="item.id">
                 {{ item.title }}
               </mat-option>
@@ -39,19 +38,19 @@
         </div>
         <div class="px-2" fxFlex="100" fxFlex.gt-xs="100">
           <mat-form-field appearance="outline" class="w-100">
-            <mat-label>{{ 'DESCRIPTION' | translate }}</mat-label>
-            <textarea formControlName="description" matInput placeholder="{{'DESCRIPTION' | translate}}"
+            <mat-label>{{ 'DESCRIPTION' }}</mat-label>
+            <textarea formControlName="description" matInput placeholder="{{'DESCRIPTION'}}"
                       rows="5"></textarea>
             <mat-error *ngIf="myForm.controls.description.errors?.required">
-              {{ 'DESCRIPTION' | translate }}
-              {{ 'IS_REQUIRED' | translate }}
+              {{ 'DESCRIPTION' }}
+              الزامی است.
             </mat-error>
           </mat-form-field>
         </div>
         <div class="text-center mt-2" fxFlex="100">
           <button class="uppercase" color="primary" mat-raised-button type="submit">
-            {{ (editItem ? 'EDIT' : 'ADD') | translate }}
-            {{ 'CLIP_CATEGORY' | translate }}
+            {{ (editItem ? 'EDIT' : 'ADD') }}
+            {{ 'CLIP_CATEGORY' }}
           </button>
         </div>
       </form>

@@ -1,15 +1,13 @@
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatToolbar, MatToolbarModule} from '@angular/material/toolbar';
-import {MatButtonModule, MatIconButton} from '@angular/material/button';
+import {MatButton, MatButtonModule, MatIconButton} from '@angular/material/button';
 import {MatIcon, MatIconModule} from '@angular/material/icon';
 import {MatSidenav, MatSidenavContainer, MatSidenavContent, MatSidenavModule} from '@angular/material/sidenav';
 import {MatDivider, MatList, MatListItem, MatListModule, MatNavList} from '@angular/material/list';
-import {MatCardActions, MatCardModule} from '@angular/material/card';
+import {MatCard, MatCardActions, MatCardContent, MatCardModule, MatCardTitle} from '@angular/material/card';
 import {MatFormField, MatInput, MatInputModule, MatLabel} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatCard, MatCardContent, MatCardTitle} from '@angular/material/card';
-import {MatButton} from '@angular/material/button';
 import {CommentForm} from './components/comment-form/comment-form';
 import {TreeViewComponent} from './tree-view/tree-view.component';
 import {MatTooltip} from '@angular/material/tooltip';

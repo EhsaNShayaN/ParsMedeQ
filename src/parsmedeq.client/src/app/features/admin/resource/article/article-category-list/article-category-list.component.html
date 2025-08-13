@@ -1,17 +1,15 @@
 <table *ngIf="dataSource" [dataSource]="dataSource" class="w-100 mat-elevation-z8" mat-table multiTemplateDataRows>
   <ng-container *ngFor="let column of columnsToDisplay" matColumnDef="{{column}}">
-    <th *matHeaderCellDef mat-header-cell>{{ getColName(column) | translate }}</th>
+    <th *matHeaderCellDef mat-header-cell>{{ getColName(column) }}</th>
     <td *matCellDef="let element; let i = index;" mat-cell>
       <ng-container [ngSwitch]="column">
         <ng-container *ngSwitchCase="'actions'">
-          <a *ngFor="let lang of languages; let i = index"
-             [routerLink]="['/' + lang + '/admin/article/edit-category', element.id]" mat-icon-button
-             matTooltip="{{'EDIT' | translate}} {{('LANG.' + lang.toUpperCase()) | translate}}"
-             target="_blank">
-            <mat-icon [color]="colors[i]">edit</mat-icon>
+          <a [routerLink]="['/admin/article/edit-category', element.id]" mat-icon-button
+             matTooltip="ویرایش" target="_blank">
+            <mat-icon color="warn">edit</mat-icon>
           </a>
           <button (click)="remove(element)" class="remove" color="warn" mat-icon-button
-                  matTooltip="{{'DELETE' | translate}}">
+                  matTooltip="{{'DELETE'}}">
             <mat-icon>delete</mat-icon>
           </button>
         </ng-container>

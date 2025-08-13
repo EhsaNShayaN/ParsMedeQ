@@ -1,5 +1,5 @@
 import {Component, Injector} from '@angular/core';
-import {Tables} from '../../../../../../lib/core/constants/server.constants';
+import {Tables} from '../../../../../core/constants/server.constants';
 import {BaseCategoryComponent} from '../../base-category.component';
 import {ActivatedRoute} from '@angular/router';
 

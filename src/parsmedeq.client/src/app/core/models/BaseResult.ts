@@ -1,6 +1,6 @@
 export class BaseResult<T> {
   code: ResultStatusCode = ResultStatusCode.OK;
-  errors: string[];
+  errors: string[] = [];
   data: T;
 
   constructor(code: ResultStatusCode, data: T) {

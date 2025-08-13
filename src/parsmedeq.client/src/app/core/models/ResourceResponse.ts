@@ -1,4 +1,3 @@
-/*import {Profile} from './UserResponse';*/
 import {AlborzPagingRequest, Paginated} from './Pagination';
 import {ResourceCategory} from './ResourceCategoryResponse';
 
@@ -7,11 +6,10 @@ export interface ResourceResponse extends Paginated {
 }
 
 export class Resource {
-  id!: string;
-  secondId!: number;
+  id!: number;
   tableId!: number;
-  categoryId?: string;
-  categoryTitle!: string;
+  categoryId?: number;
+  categoryTitle?: string;
 
   title!: string;
   abstract!: string;
@@ -22,7 +20,6 @@ export class Resource {
   image!: string;
   mimeType!: string;
   doc!: string;
-  journalId?: string;
 
   language!: string;
   publishDate!: string;
@@ -31,13 +28,8 @@ export class Resource {
   price?: number;
   discount?: number;
   isVip!: boolean;
-  pinned!: boolean;
   downloadCount!: number;
   ordinal?: number;
-  showInChem!: boolean;
-  showInAcademy!: boolean;
-  deleted!: boolean;
-  disabled!: boolean;
   expirationDate!: string;
   expirationTime!: string;
   expired!: boolean;
@@ -45,10 +37,6 @@ export class Resource {
   registered!: boolean;
 
   resourceCategories: ResourceCategory[] = [];
-
-  /*authors: Profile[];
-  advisors: Profile[];
-  chiefEditors: Profile[];*/
 }
 
 export interface ResourceAnchor {
@@ -58,24 +46,19 @@ export interface ResourceAnchor {
 }
 
 export class ResourceRequest {
-  id?: string;
-  secondId?: number;
+  id?: number;
   tableId?: number;
-  languageCode?: string;
 }
 
 export class ResourcesRequest extends AlborzPagingRequest {
   id?: string;
   tableId?: number;
-  pinned?: boolean;
-  categoryId?: string;
+  categoryId?: number;
 }
 
 export interface AddResourceRequest {
-  id?: string;
+  id?: number;
   tableId: number;
-  showInChem: boolean;
-  showInAcademy: boolean;
   title: string;
   image: string;
   mimeType: string;
@@ -84,7 +67,6 @@ export interface AddResourceRequest {
   price?: number;
   discount?: number;
   description: string;
-  authors: string[];
   publishInfo: string;
   publisher: string;
   category: IdTitleRequest;
@@ -93,20 +75,13 @@ export interface AddResourceRequest {
   expirationDate: string;
   expirationTime: string;
   keywords: string;
-  journalId?: string;
   publishDate: string;
   categories: string[];
-  categoryId?: string;
   doc: string;
-  advisors: string[];
-  chiefEditors: string[];
-
-  // Journal specific property
-  journalExpirationDate?: number;
 }
 
 
 export interface IdTitleRequest {
-  id: string;
+  id: number;
   title: string;
 }

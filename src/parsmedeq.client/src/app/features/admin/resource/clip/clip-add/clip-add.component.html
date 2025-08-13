@@ -4,75 +4,47 @@
       <div class="text-center">
         <h1 class="uppercase">
           <ng-container *ngIf="editItem; else isAdd">
-            {{ 'EDIT' | translate }}
-            {{ 'CLIP' | translate }}
+            ویرایش
+            {{ 'CLIP' }}
             "{{ editItem.title }}"
-            {{ ('LANG.' + lang.toUpperCase()) | translate }}
           </ng-container>
           <ng-template #isAdd>
-            {{ 'ADD' | translate }}
-            {{ 'CLIP' | translate }}
+            افزودن
+            {{ 'CLIP' }}
           </ng-template>
         </h1>
       </div>
       <form (ngSubmit)="onFormSubmit(myForm.value)" [formGroup]="myForm" fxLayout="row wrap">
         <div class="px-2" fxFlex="100" fxFlex.gt-xs="33.3">
           <mat-form-field appearance="outline" class="w-100">
-            <mat-label>{{ 'TITLE' | translate }}</mat-label>
-            <input [placeholder]="'TITLE' | translate" autocomplete="off" formControlName="title" matInput
+            <mat-label>عنوان</mat-label>
+            <input [placeholder]="'TITLE'" autocomplete="off" formControlName="title" matInput
                    required>
             <mat-error *ngIf="myForm.controls.title.errors?.required">
-              {{ 'TITLE' | translate }}
-              {{ 'IS_REQUIRED' | translate }}
+              عنوان
+              الزامی است.
             </mat-error>
           </mat-form-field>
         </div>
         <div class="px-2" fxFlex="100" fxFlex.gt-xs="33.3">
           <mat-form-field appearance="outline" class="w-100">
-            <mat-label>{{ 'AUTHORS' | translate }}</mat-label>
-            <mat-select (openedChange)="onOpenChange(multiUserSearch)" [(ngModel)]="selectedAuthors"
-                        [formControl]="providers" formControlName="authors" multiple
-                        name="authors" ngDefaultControl
-                        no-space placeholder="{{'AUTHORS' | translate}}">
-              <!--<mat-select-trigger>
-                {{providers.value }}
-              </mat-select-trigger>-->
-              <input #multiUserSearch (input)="onInputChange($event)" autocomplete="off" class="mat-select-input"
-                     placeholder="جستجو"
-                     type="text"/>
-              <mat-option *ngFor="let item of allProviders" [ngClass]="{'d-none': !isAvailable(item,filteredProviders)}"
-                          [value]="item.id">
-                {{ item.firstName }} {{ item.lastName }}
-              </mat-option>
-              <button (click)="add()" *ngIf="filteredProviders?.length === 0" color="primary" mat-button>
-                {{ 'ADD' | translate }}
-                <mat-icon>add</mat-icon>
-              </button>
-            </mat-select>
-            <mat-error *ngIf="myForm.controls.authors.errors?.required">
-              حداقل یک نویسنده انتخاب نمایید.
-            </mat-error>
-          </mat-form-field>
-        </div>
-        <div class="px-2" fxFlex="100" fxFlex.gt-xs="33.3">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>{{ 'CATEGORY' | translate }}</mat-label>
-            <mat-select formControlName="categoryId" placeholder="{{'CATEGORY' | translate}}">
+            <mat-label>{{ 'CATEGORY' }}</mat-label>
+            <mat-select formControlName="categoryId" placeholder="{{'CATEGORY'}}">
               <mat-option *ngFor="let item of clipCategories" [value]="item.id">
                 {{ item.title }}
               </mat-option>
             </mat-select>
             <mat-error *ngIf="myForm.controls.categoryId.errors?.required">
-              {{ 'CATEGORY' | translate }}
-              {{ 'IS_REQUIRED' | translate }}
+              {{ 'CATEGORY' }}
+              الزامی است.
             </mat-error>
           </mat-form-field>
         </div>
         <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
           <div class="border-radius border pad">
-            <mat-label class="ml-2 gray-color">{{ 'IMAGE' | translate }} {{ 'CLIP' | translate }}</mat-label>
+            <mat-label class="ml-2 gray-color">{{ 'IMAGE' }} {{ 'CLIP' }}</mat-label>
             <input (change)="handleImageInput($event.target)" class="py-1" formControlName="image"
-                   placeholder="{{'IMAGE' | translate}}" type="file"/>
+                   placeholder="{{'IMAGE'}}" type="file"/>
             <a *ngIf="editItem?.image" [routerLink]="editItem?.image" target="_blank">
               <img [src]="editItem?.image" class="img-item w-50"/>
             </a>
@@ -80,13 +52,13 @@
         </div>
         <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
           <div class="border-radius border pad">
-            <mat-label class="ml-2 gray-color">{{ 'FILE' | translate }} {{ 'CLIP' | translate }}</mat-label>
+            <mat-label class="ml-2 gray-color">{{ 'FILE' }} {{ 'CLIP' }}</mat-label>
             <input (change)="handleFileInput($event.target)" class="py-1" formControlName="file"
-                   placeholder="{{'FILE' | translate}}" type="file"/>
+                   placeholder="{{'FILE'}}" type="file"/>
           </div>
         </div>
         <div class="px-2" fxFlex="100" fxFlex.gt-xs="20">
-          <mat-label>{{ 'VIP' | translate }}</mat-label>
+          <mat-label>{{ 'VIP' }}</mat-label>
           <div>
             <mat-slide-toggle color="warn" formControlName="isVip" labelPosition="before">
             </mat-slide-toggle>
@@ -95,31 +67,31 @@
         <div class="px-2" fxFlex="100" fxFlex.gt-xs="40">
           <mat-form-field appearance="outline" class="w-100 mt-2">
             <mat-icon class="mr-1 text-muted" matPrefix>money</mat-icon>
-            <mat-label>{{ 'PRICE' | translate }}</mat-label>
+            <mat-label>{{ 'PRICE' }}</mat-label>
             <input class="text-left ltr" formControlName="price" matInput
-                   onlyNumber placeholder="{{'PRICE' | translate}}">
+                   onlyNumber placeholder="{{'PRICE'}}">
             <mat-error *ngIf="myForm.controls.price.errors?.required">
-              {{ 'PRICE' | translate }}
-              {{ 'IS_REQUIRED' | translate }}
+              {{ 'PRICE' }}
+              الزامی است.
             </mat-error>
           </mat-form-field>
         </div>
         <div class="px-2" fxFlex="100" fxFlex.gt-xs="40">
           <mat-form-field appearance="outline" class="w-100 mt-2">
             <mat-icon class="mr-1 text-muted" matPrefix>person_outline</mat-icon>
-            <mat-label>{{ 'DISCOUNT_BY_PERCENT' | translate }}</mat-label>
+            <mat-label>{{ 'DISCOUNT_BY_PERCENT' }}</mat-label>
             <input class="text-left ltr" formControlName="discount" matInput
-                   onlyNumber placeholder="{{'DISCOUNT_BY_PERCENT' | translate}}">
+                   onlyNumber placeholder="{{'DISCOUNT_BY_PERCENT'}}">
             <mat-error *ngIf="myForm.controls.discount.errors?.required">
-              {{ 'DISCOUNT' | translate }}
-              {{ 'IS_REQUIRED' | translate }}
+              {{ 'DISCOUNT' }}
+              الزامی است.
             </mat-error>
           </mat-form-field>
         </div>
         <div class="px-2 mb-4" fxFlex="100" fxFlex.gt-xs="100">
-          <mat-label>{{ 'ABSTRACT' | translate }}</mat-label>
+          <mat-label>{{ 'ABSTRACT' }}</mat-label>
           <angular-editor [config]="editorConfig" formControlName="description" id="editor0"
-                          placeholder="{{'DESCRIPTION' | translate}}"></angular-editor>
+                          placeholder="{{'DESCRIPTION'}}"></angular-editor>
         </div>
         <div class="px-2" fxFlex="50" fxFlex.gt-xs="50">
           <mat-slide-toggle color="warn" formControlName="showInChem"></mat-slide-toggle>
@@ -131,8 +103,8 @@
         </div>
         <div class="text-center mt-3" fxFlex="100">
           <button class="uppercase" color="primary" mat-raised-button type="submit">
-            {{ (editItem ? 'EDIT' : 'ADD') | translate }}
-            {{ 'CLIP' | translate }}
+            {{ (editItem ? 'EDIT' : 'ADD') }}
+            {{ 'CLIP' }}
           </button>
         </div>
       </form>

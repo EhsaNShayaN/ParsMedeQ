@@ -1,34 +1,34 @@
 import {Directive, Injector} from '@angular/core';
-import {PureComponent} from './pure-component';
-import {Meta, Title} from '@angular/platform-browser';
+import {MatPaginatorIntl} from '@angular/material/paginator';
+import {BaseComponent} from './base-component';
 
 @Directive()
-export class BaseComponent extends PureComponent {
-  titleService: Title;
-  metaService: Meta;
+export class BaseReportComponent extends BaseComponent {
+  paginatorIntl: MatPaginatorIntl;
 
   constructor(injector: Injector) {
     super(injector);
-    this.titleService = injector.get(Title);
-    this.metaService = injector.get(Meta);
+    this.paginatorIntl = injector.get(MatPaginatorIntl);
   }
 
-  setTitle(title: string | null = null) {
-    if (!title) {
-      title = 'AlborzChem | البرز شیمی';
+  setPaginationLang() {
+    this.paginatorIntl.itemsPerPageLabel = 'مورد در هر صفحه';
+    this.paginatorIntl.firstPageLabel = 'صفحه اول';
+    this.paginatorIntl.previousPageLabel = 'صفحه قبل';
+    this.paginatorIntl.nextPageLabel = 'صفحه بعد';
+    this.paginatorIntl.lastPageLabel = 'صفحه آخر';
+    this.paginatorIntl.getRangeLabel = this.getRangeLabel;
+  }
+
+  getRangeLabel = (page: number, pageSize: number, length: number): string => {
+    const of = 'از';
+    if (length === 0 || pageSize === 0) {
+      return '0 ' + of + ' ' + length;
     }
-    this.titleService.setTitle(title);
-  }
+    length = Math.max(length, 0);
+    const startIndex = page * pageSize > length ? (Math.ceil(length / pageSize) - 1) * pageSize : page * pageSize;
 
-  private updateMeta(property: string, content: string) {
-    this.metaService.updateTag({property, content});
-  }
-
-  setMetaDescription(content: string) {
-    this.updateMeta('description', content);
-  }
-
-  setMetaKeywords(content: string) {
-    this.updateMeta('keywords', content);
-  }
+    const endIndex = Math.min(startIndex + pageSize, length);
+    return startIndex + 1 + ' تا ' + endIndex + ' ' + of + ' ' + length + ' مورد';
+  };
 }
