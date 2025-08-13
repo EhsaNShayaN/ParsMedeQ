@@ -35,10 +35,12 @@ public sealed class Resource : EntityBase<int>
     public bool Disabled { get; private set; }
     public DateTime? ExpirationDate { get; private set; }
     public DateTime CreationDate { get; private set; }
+    public bool Registered { get; set; }
     #endregion
 
     #region " Navigation Properties "
     public ResourceCategory? ResourceCategory { get; private set; }
+    public ResourceCategory[]? ResourceCategories { get; set; }
     public IReadOnlyCollection<ResourceCategoryRelations> ResourceCategoryRelations => this._resourceCategoryRelations.AsReadOnly();
     #endregion
 

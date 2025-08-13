@@ -11,6 +11,7 @@ public sealed class ReadDbContext : DbContextBase<ReadDbContext>
     public DbSet<ResourceCategory> ResourceCategory { get; set; }
     public DbSet<ResourceCategoryRelations> ResourceCategoryRelations { get; set; }
     public DbSet<Resource> Resource { get; set; }
+    public DbSet<Purchase> Purchase { get; set; }
 
     public ReadDbContext(DbContextOptions<ReadDbContext> opts) : base(opts) { }
 }

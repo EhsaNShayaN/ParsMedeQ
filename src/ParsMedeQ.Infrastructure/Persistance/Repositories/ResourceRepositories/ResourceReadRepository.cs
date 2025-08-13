@@ -2,6 +2,7 @@
 using ParsMedeQ.Application.Persistance.Schema.ResourceRepositories;
 using ParsMedeQ.Domain.Aggregates.ResourceAggregate;
 using ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate;
+using ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate.Entities;
 using ParsMedeQ.Infrastructure.Persistance.DbContexts;
 using SRH.Persistance.Extensions;
 using SRH.Persistance.Models;
@@ -51,11 +52,42 @@ internal sealed class ResourceReadRepository : GenericPrimitiveReadRepositoryBas
             .Map(data => MapResult(data, paginated));
     }
 
-    public ValueTask<PrimitiveResult<ResourceCategory[]>> FilterResourceCategories(int TableId, CancellationToken cancellationToken)
+    public ValueTask<PrimitiveResult<ResourceCategory[]>> FilterResourceCategories(
+        int TableId,
+        CancellationToken cancellationToken)
     {
         return this.DbContext
             .ResourceCategory
             .Where(s => s.TableId.Equals(TableId))
+            .Run(q => q.ToArrayAsync(cancellationToken), PrimitiveError.Create("", "دسته بندی ای برای نمایش وجود ندارد."))
+            .Map(a => a!);
+    }
+
+    public ValueTask<PrimitiveResult<Resource>> ResourceDetails(int Id, CancellationToken cancellationToken)
+    {
+        return this.DbContext
+            .Resource
+            .Where(s => s.Id.Equals(Id))
+            .Run(q => q.FirstOrDefaultAsync(cancellationToken), PrimitiveError.Create("", "آیتم مورد نظر موجود نمی باشد."))
+            .Map(a => a!);
+    }
+
+    public ValueTask<PrimitiveResult<ResourceCategory>> ResourceDetailsCategory(int Id, CancellationToken cancellationToken)
+    {
+        return this.DbContext
+            .ResourceCategory
+            .Where(s => s.Id.Equals(Id))
+            .Run(q => q.FirstOrDefaultAsync(cancellationToken), PrimitiveError.Create("", "آیتم مورد نظر موجود نمی باشد."))
+            .Map(a => a!);
+    }
+    
+    public ValueTask<PrimitiveResult<ResourceCategoryRelations[]>> FilterResourceCategoryRelations(
+        int ResourceId,
+        CancellationToken cancellationToken)
+    {
+        return this.DbContext
+            .ResourceCategoryRelations
+            .Where(s => s.ResourceId.Equals(ResourceId))
             .Run(q => q.ToArrayAsync(cancellationToken), PrimitiveError.Create("", "دسته بندی ای برای نمایش وجود ندارد."))
             .Map(a => a!);
     }

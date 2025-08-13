@@ -13,6 +13,7 @@ public sealed class WriteDbContext : DbContextBase<WriteDbContext>
     public DbSet<ResourceCategory> ResourceCategory { get; set; }
     public DbSet<ResourceCategoryRelations> ResourceCategoryRelations { get; set; }
     public DbSet<Resource> Resource { get; set; }
+    public DbSet<Purchase> Purchase { get; set; }
 
     public WriteDbContext(DbContextOptions<WriteDbContext> opts) : base(opts) { }
 }
