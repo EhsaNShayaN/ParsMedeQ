@@ -1,0 +1,22 @@
+<div>
+  <a [routerLink]="'/admin/article/add-category'" class="bg-accent mx-3 my-3" mat-raised-button>
+    {{ 'ADD' | translate }}
+    {{ 'ARTICLE_CATEGORY' | translate }}
+    <mat-icon>add</mat-icon>
+  </a>
+  <a [routerLink]="'/admin/article/add'" class="bg-green mx-3 my-3" mat-raised-button>
+    {{ 'ADD' | translate }}
+    {{ 'ARTICLE' | translate }}
+    <mat-icon>add</mat-icon>
+  </a>
+  <a [routerLink]="'/admin/article/category-list'" class="bg-warn mx-3 my-3" mat-raised-button>
+    {{ 'LIST' | translate }}
+    {{ 'ARTICLE_CATEGORIES' | translate }}
+    <mat-icon>grid_on</mat-icon>
+  </a>
+  <a [routerLink]="'/admin/article/list'" class="bg-primary mx-3 my-3" mat-raised-button>
+    {{ 'LIST' | translate }}
+    {{ 'ARTICLES' | translate }}
+    <mat-icon>grid_on</mat-icon>
+  </a>
+</div>

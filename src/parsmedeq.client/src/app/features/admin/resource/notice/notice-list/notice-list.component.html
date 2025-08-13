@@ -1,0 +1,59 @@
+<div class="table-wrapper">
+  <table (matSortChange)="sortChanged($event)" *ngIf="dataSource" [dataSource]="dataSource"
+         class="w-100 mat-elevation-z8" mat-table
+         matSort matSortActive="creationDate" matSortDirection="desc" multiTemplateDataRows>
+    <ng-container *ngFor="let column of displayedColumns" matColumnDef="{{column}}">
+      <ng-container [ngSwitch]="column">
+        <ng-container *ngSwitchCase="'image'">
+          <th *matHeaderCellDef mat-header-cell>
+            {{ getColName(column) | translate }}
+          </th>
+        </ng-container>
+        <ng-container *ngSwitchCase="'actions'">
+          <th *matHeaderCellDef mat-header-cell>
+            {{ getColName(column) | translate }}
+          </th>
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+          <th *matHeaderCellDef mat-header-cell>
+            {{ getColName(column) | translate }}
+          </th>
+        </ng-container>
+      </ng-container>
+      <td *matCellDef="let element; let i = index;" mat-cell>
+        <ng-container [ngSwitch]="column">
+          <ng-container *ngSwitchCase="'image'">
+            <img class="img-square w-100 he-100" src="{{element.image}}"/>
+          </ng-container>
+          <ng-container *ngSwitchCase="'actions'">
+            <a *ngFor="let lang of languages; let i = index"
+               [routerLink]="['/' + lang + '/admin/notice/edit', element.id]" mat-icon-button
+               matTooltip="{{'EDIT' | translate}} {{('LANG.' + lang.toUpperCase()) | translate}}"
+               target="_blank">
+              <mat-icon [color]="colors[i]">edit</mat-icon>
+            </a>
+            <button (click)="remove(element)" class="remove" color="warn" mat-icon-button
+                    matTooltip="{{'DELETE' | translate}}">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </ng-container>
+          <ng-container *ngSwitchDefault>
+            {{ element[column] }}
+          </ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+    <tr *matRowDef="let property; columns: displayedColumns;" mat-row>
+    </tr>
+  </table>
+  <p *ngIf="dataSource?.data?.length === 0" class="py-5 mb-0 text-center">{{ 'NO_DATA_AVAILABLE' | translate }}</p>
+</div>
+<!--<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>-->
+<mat-paginator (page)="onPaginateChange($event)"
+               *ngIf="dataSource?.data?.length > 0"
+               [length]="totalCount"
+               [pageIndex]="pageIndex - 1"
+               [pageSizeOptions]="[5, 10, 25, 100]"
+               [pageSize]="pageSize"
+               showFirstLastButtons></mat-paginator>

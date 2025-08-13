@@ -1,0 +1,10 @@
+.pad {
+  margin-top: 4px;
+  padding: 10px 10px !important
+}
+
+:host ::ng-deep .h-fix {
+  .mat-mdc-text-field-wrapper {
+    max-height: 56px !important;
+  }
+}
