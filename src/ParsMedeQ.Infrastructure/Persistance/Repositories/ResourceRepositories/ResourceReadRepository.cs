@@ -72,7 +72,7 @@ internal sealed class ResourceReadRepository : GenericPrimitiveReadRepositoryBas
             .Map(a => a!);
     }
 
-    public ValueTask<PrimitiveResult<ResourceCategory>> ResourceDetailsCategory(int Id, CancellationToken cancellationToken)
+    public ValueTask<PrimitiveResult<ResourceCategory>> ResourceCategoryDetails(int Id, CancellationToken cancellationToken)
     {
         return this.DbContext
             .ResourceCategory

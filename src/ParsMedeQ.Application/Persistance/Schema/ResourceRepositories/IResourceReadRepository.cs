@@ -19,7 +19,7 @@ public interface IResourceReadRepository : IDomainRepository
     ValueTask<PrimitiveResult<Resource>> ResourceDetails(
         int Id,
         CancellationToken cancellationToken);
-    ValueTask<PrimitiveResult<ResourceCategory>> ResourceDetailsCategory(
+    ValueTask<PrimitiveResult<ResourceCategory>> ResourceCategoryDetails(
         int Id,
         CancellationToken cancellationToken);
     ValueTask<PrimitiveResult<ResourceCategoryRelations[]>> FilterResourceCategoryRelations(
