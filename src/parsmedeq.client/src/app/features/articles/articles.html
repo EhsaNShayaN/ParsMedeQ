@@ -1,0 +1,108 @@
+<!--<app-header-image [backgroundImage]="'assets/images/others/resources_articles_header.jpg'"
+                  [bgImageAnimate]="false"
+                  [contentOffsetToTop]="false"
+                  [hideMask]="true"
+                  [title]="''"
+                  [desc]="">
+</app-header-image>-->
+<div class="theme-container px-3">
+  <div fxLayout="row wrap" class="agents-wrapper">
+    <div fxLayout="row wrap" fxFlex="100" fxFlex.gt-sm="100" class="p-3">
+      <div fxFlex="100" fxFlex.gt-md="20" fxFlex.gt-sm="40" fxFlex.sm="50" class="sidebar">
+        <mat-card appearance="outlined">
+          <div class="widget">
+            <mat-card-title>
+              <h4 class="p-2">دسته بندی</h4>
+            </mat-card-title>
+            <mat-divider></mat-divider>
+            <mat-card-content class="p-0" *ngIf="(data?.length ?? 0) > 0">
+              <app-tree-view [data]="data" (onItemClicked)="itemClicked($event)" [selectedId]="selectedId"
+                             [marginClass]="'mr-2'"></app-tree-view>
+            </mat-card-content>
+          </div>
+        </mat-card>
+      </div>
+      <div fxFlex="100" fxFlex.gt-md="80" fxFlex.gt-sm="60" fxFlex.sm="50" fxLayout="row wrap" class="main">
+        <!--<div fxFlex="100" class="mb-2">
+          <app-properties-toolbar [isHomePage]="false"
+                                  (onChangeCount)="changeCount($event)"
+                                  (onChangeSorting)="changeSorting($event)"
+                                  (onChangeViewType)="changeViewType($event)">
+          </app-properties-toolbar>
+        </div>-->
+        <div fxFlex="100">
+          <mat-card appearance="outlined" class="p-3">
+            <div class="widget">
+              <mat-card-title><h4>
+                مقالات
+                {{ title }}
+              </h4>
+              </mat-card-title>
+              <mat-divider></mat-divider>
+              <mat-card-content>
+                <div fxLayout="row wrap" class="agents-wrapper">
+                  <div *ngFor="let item of items; let i = index" class="p-3"
+                       fxFlex="100" fxFlex.gt-md="33.3">
+                    <mat-card appearance="outlined">
+                      <div fxLayout="row wrap" class="property-status">
+                        <span class="background-color bg-orange">{{ item.categoryTitle }}</span>
+                      </div>
+                      <div fxLayout="row wrap" class="property-status left-0" *ngIf="item.isVip">
+                        <span class="background-color bg-green">vip</span>
+                      </div>
+                      <a
+                        [routerLink]="['/articles', item.secondId, item.title | replaceUrlSpaces ]"
+                        class="agent-img">
+                        <img mat-card-image [src]="item.image" [alt]="item.title" class="w-100 img-square"/>
+                      </a>
+                      <mat-card-content>
+                        <h3 class="two-lines fw-600" [ngClass]="item.language === 'انگلیسی' ? 'ltr' : ''">
+                          {{ item.title }}
+                        </h3>
+                        <p class="mt-2 three-lines" [ngClass]="item.language === 'انگلیسی' ? 'ltr' : ''"
+                           [innerHTML]="item.abstract">
+                        </p>
+                        <p fxLayoutAlign="start center">
+                          <mat-icon color="primary" [matTooltip]="'کلمات کلیدی'" matTooltipPosition="above"
+                                    class="text-right" fxFlex="10" fxFlex.gt-md="10" fxFlex.gt-sm="5">
+                            business
+                          </mat-icon>
+                          <span class="mr-2 single-line" fxFlex="90" fxFlex.gt-md="90" fxFlex.gt-sm="95"
+                                [ngClass]="item.language === 'انگلیسی' ? 'ltr' : ''">
+                              {{ item.keywords }}
+                            </span>
+                        </p>
+                        <p fxLayoutAlign="start center">
+                          <mat-icon color="primary" class="text-right" fxFlex="10" fxFlex.gt-md="10" fxFlex.gt-sm="5">
+                            date_range
+                          </mat-icon>
+                          <span class="text-right mx-2" fxFlex="90" fxFlex.gt-md="90" fxFlex.gt-sm="95">
+                              {{ item.publishDate }}
+                            </span>
+                        </p>
+                      </mat-card-content>
+                      <mat-divider></mat-divider>
+                      <mat-card-actions fxLayoutAlign="space-between center">
+                        <div fxLayout="row" fxLayoutAlign="start center" class="text-muted"></div>
+                        <div>
+                          <a
+                            [routerLink]="['/articles', item.secondId, item.title | replaceUrlSpaces ]"
+                            mat-button color="primary" class="uppercase">
+                            {{ viewText }}
+                          </a>
+                        </div>
+                      </mat-card-actions>
+                    </mat-card>
+                  </div>
+                </div>
+              </mat-card-content>
+            </div>
+          </mat-card>
+        </div>
+        <div *ngIf="items?.length" fxFlex="100" fxLayoutAlign="center center">
+          <app-load-more [step]="1"></app-load-more>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
