@@ -1,5 +1,5 @@
 export interface ResourceCategoriesResponse {
-  resourceCategories: ResourceCategory[];
+  data: ResourceCategory[];
 }
 
 export interface ResourceCategory {

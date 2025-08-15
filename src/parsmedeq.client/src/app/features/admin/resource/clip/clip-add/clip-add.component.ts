@@ -27,7 +27,7 @@ export class ClipAddComponent extends BaseResourceComponent implements OnInit {
   ngOnInit() {
     this.sub = this.activatedRoute.params.subscribe(params => {
       this.restApiService.getResourceCategories(Tables.Clip).subscribe((bc: ResourceCategoriesResponse) => {
-        this.clipCategories = bc.resourceCategories;
+        this.clipCategories = bc.data;
         if (params['id']) {
           this.restApiService.getResource({id: params['id'], tableId: Tables.Clip}).subscribe((j: Resource) => {
             this.editItem = j;

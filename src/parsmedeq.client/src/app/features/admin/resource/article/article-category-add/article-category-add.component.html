@@ -4,13 +4,11 @@
       <div class="text-center">
         <h1 class="uppercase">
           <ng-container *ngIf="editItem; else isAdd">
-            ویرایش
-            {{ 'ARTICLE_CATEGORY' }}
+            ویرایش دسته بندی
             "{{ editItem.title }}"
           </ng-container>
           <ng-template #isAdd>
-            افزودن
-            {{ 'ARTICLE_CATEGORY' }}
+            افزودن دسته بندی
           </ng-template>
         </h1>
       </div>
@@ -18,17 +16,16 @@
         <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>عنوان</mat-label>
-            <input [placeholder]="'TITLE'" autocomplete="off" formControlName="title" matInput required>
+            <input placeholder="عنوان" autocomplete="off" formControlName="title" matInput required>
             <mat-error *ngIf="myForm.controls['title'].errors?.['required']">
-              عنوان
-              الزامی است.
+              عنوان الزامی است.
             </mat-error>
           </mat-form-field>
         </div>
         <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
           <mat-form-field appearance="outline" class="w-100">
-            <mat-label>{{ 'ARTICLE_CATEGORY' }}</mat-label>
-            <mat-select formControlName="parentId" placeholder="ARTICLE_CATEGORY">
+            <mat-label>دسته بندی</mat-label>
+            <mat-select formControlName="parentId" placeholder="دسته بندی">
               <mat-option *ngFor="let item of resourceCategories" [value]="item.id">
                 {{ item.title }}
               </mat-option>
@@ -38,18 +35,16 @@
         <div class="px-2" fxFlex="100" fxFlex.gt-xs="100">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>توضیحات</mat-label>
-            <textarea formControlName="description" matInput placeholder="{{'DESCRIPTION'}}"
-                      rows="5"></textarea>
+            <textarea formControlName="description" matInput placeholder="توضیحات" rows="5"></textarea>
             <mat-error *ngIf="myForm.controls['description'].errors?.['required']">
-              توضیحات
-              الزامی است.
+              توضیحات الزامی است.
             </mat-error>
           </mat-form-field>
         </div>
         <div class="text-center mt-2" fxFlex="100">
           <button class="uppercase" color="primary" mat-raised-button type="submit">
-            {{ (editItem ? 'EDIT' : 'ADD') }}
-            {{ 'ARTICLE_CATEGORY' }}
+            {{ (editItem ? 'ویرایش' : 'افزودن') }}
+            دسته بندی
           </button>
         </div>
       </form>

@@ -21,7 +21,7 @@ public sealed class ResourceCategory : EntityBase<int>
     #endregion
 
     #region " Navigation Properties "
-    public ResourceCategory Parent { get; private set; }
+    public ResourceCategory? Parent { get; private set; }
     public IReadOnlyCollection<Resource> Resources => this._resources.AsReadOnly();
     public IReadOnlyCollection<ResourceCategoryRelations> ResourceCategoryRelations => this._resourceCategoryRelations.AsReadOnly();
     public IReadOnlyCollection<ResourceCategory> Children => this._resourceCategories.AsReadOnly();
@@ -30,5 +30,27 @@ public sealed class ResourceCategory : EntityBase<int>
     #region " Constructors "
     private ResourceCategory() : base(0) { }
     public ResourceCategory(int id) : base(id) { }
+    #endregion
+
+    #region " Factory "
+    public static PrimitiveResult<ResourceCategory> Create(
+        string title,
+        string description,
+        int tableId,
+        int count,
+        int? parentId,
+        DateTime creationDate)
+    {
+        return PrimitiveResult.Success(
+            new ResourceCategory()
+            {
+                Title = title,
+                Description = description,
+                TableId = tableId,
+                Count = count,
+                ParentId = parentId,
+                CreationDate = creationDate
+            });
+    }
     #endregion
 }

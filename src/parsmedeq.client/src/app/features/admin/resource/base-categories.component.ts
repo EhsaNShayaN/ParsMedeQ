@@ -28,9 +28,9 @@ export class BaseCategoriesComponent extends BaseComponent implements OnInit, Af
 
   getServerData() {
     this.restApiService.getResourceCategories(this.tableId).subscribe((resp: ResourceCategoriesResponse) => {
-      if (resp?.resourceCategories) {
-        this.dataSource = resp.resourceCategories;
-        this.totalCount = resp.resourceCategories.length;
+      if (resp?.data) {
+        this.dataSource = resp.data;
+        this.totalCount = resp.data.length;
         if (this.tableId === Tables.Article || this.tableId === Tables.News) {
           this.dataSource.forEach(s => {
             if (s.parentId) {

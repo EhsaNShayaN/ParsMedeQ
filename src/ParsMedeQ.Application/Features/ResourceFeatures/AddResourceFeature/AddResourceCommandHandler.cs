@@ -35,8 +35,9 @@ public sealed class AddResourceCommandHandler : IPrimitiveResultCommandHandler<A
             //request.Ordinal,
             request.ExpirationDate)
                 .Map(resource => this._writeUnitOfWork.ResourceWriteRepository
-                    .AddResource(resource, cancellationToken)
-                    .Map(resource => new AddResourceCommandResponse(resource is not null)))
+                .AddResource(resource, cancellationToken)
+                .Map(resource => new AddResourceCommandResponse(resource is not null)))
+                .Map(resourceCategory => new AddResourceCommandResponse(resourceCategory is not null))
                 .ConfigureAwait(false);
     }
 }

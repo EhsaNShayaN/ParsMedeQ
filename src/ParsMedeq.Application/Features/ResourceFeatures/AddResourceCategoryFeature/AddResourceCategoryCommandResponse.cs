@@ -1,0 +1,2 @@
+﻿namespace ParsMedeQ.Application.Features.ResourceFeatures.AddResourceCategoryFeature;
+public sealed record AddResourceCategoryCommandResponse(bool Changed);

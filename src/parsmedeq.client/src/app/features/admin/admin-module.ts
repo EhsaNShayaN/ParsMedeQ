@@ -25,7 +25,7 @@ import {ClipCategoryAddComponent} from './resource/clip/clip-category-add/clip-c
 import {AngularEditorModule} from '@kolkov/angular-editor';
 import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from '@angular/material/datepicker';
 import {NgxMatTimepickerComponent, NgxMatTimepickerDirective} from 'ngx-mat-timepicker';
-import {MatCell, MatColumnDef, MatHeaderCell, MatHeaderRow, MatRow, MatTable} from '@angular/material/table';
+import {MatCell, MatCellDef, MatColumnDef, MatHeaderCell, MatHeaderCellDef, MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef, MatTable} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatOption, MatSelect} from '@angular/material/select';
@@ -80,6 +80,10 @@ import {MatSlideToggle} from '@angular/material/slide-toggle';
     NgxMatTimepickerDirective,
     NgxMatTimepickerComponent,
     MatSlideToggle,
+    MatHeaderCellDef,
+    MatCellDef,
+    MatHeaderRowDef,
+    MatRowDef,
   ]
 })
 export class AdminModule {

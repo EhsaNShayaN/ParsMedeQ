@@ -42,7 +42,7 @@ export class RestApiService {
   }
 
   addResourceCategory(model: any): Observable<any> {
-    return this.http.post<BaseResult<boolean>>(endpoint() + 'admin/addResourceCategory', model).pipe(
+    return this.http.post<BaseResult<boolean>>(endpoint() + 'resource/category/add', model).pipe(
       catchError(this.handleError)
     );
   }

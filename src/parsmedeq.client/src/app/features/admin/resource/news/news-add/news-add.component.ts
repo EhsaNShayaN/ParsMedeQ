@@ -30,7 +30,7 @@ export class NewsAddComponent extends BaseResourceComponent implements OnInit {
   ngOnInit(): void {
     this.sub = this.activatedRoute.params.subscribe(params => {
       this.restApiService.getResourceCategories(Tables.News).subscribe((acr: ResourceCategoriesResponse) => {
-        this.resourceCategories = acr.resourceCategories;
+        this.resourceCategories = acr.data;
         if (params['id']) {
           this.restApiService.getResource({id: params['id'], tableId: Tables.News}).subscribe((a: Resource) => {
             this.editItem = a;

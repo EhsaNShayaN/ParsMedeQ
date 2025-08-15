@@ -41,8 +41,8 @@ public sealed class ResourceEndpoint : ApiEndpointBase
         AddResourceCategory = new EndpointInfo(
            this.GetUrl("category/add"),
            this.GetUrl("category/add"),
-           "Add Resource",
-           "افزودن خبر، مقاله و ...",
+           "Add Resource Category",
+           "افزودن دسته بندی خبر، مقاله و ...",
            _tag);
 
         ResourceCategories = new EndpointInfo(

@@ -21,6 +21,9 @@ import {MatChipListbox, MatChipOption} from '@angular/material/chips';
 import {MobileFormatterPipe} from '../core/pipes/mobile-formatter.pipe';
 import {CommentsComponent} from './comments/comments.component';
 import {DefaultClassDirective, DefaultFlexDirective, DefaultLayoutAlignDirective, DefaultLayoutDirective} from 'ngx-flexible-layout';
+import {ToastrModule} from 'ngx-toastr';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import {JalaliMomentDateAdapter, PERSIAN_DATE_FORMATS} from '../core/custom-date-adapter';
 
 @NgModule({
   declarations: [
@@ -37,6 +40,7 @@ import {DefaultClassDirective, DefaultFlexDirective, DefaultLayoutAlignDirective
     FormsModule,
     ReactiveFormsModule,
     DirectivesModule,
+    ToastrModule.forRoot(),
     /////////////////
     MatToolbarModule,
     MatButtonModule,
@@ -122,6 +126,9 @@ import {DefaultClassDirective, DefaultFlexDirective, DefaultLayoutAlignDirective
   ],
   providers: [
     CurrencyFormatterPipe,
+    {provide: MAT_DATE_LOCALE, useValue: 'fa-IR'},
+    {provide: DateAdapter, useClass: JalaliMomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: MAT_DATE_FORMATS, useValue: PERSIAN_DATE_FORMATS}
   ],
 })
 export class SharedModule {

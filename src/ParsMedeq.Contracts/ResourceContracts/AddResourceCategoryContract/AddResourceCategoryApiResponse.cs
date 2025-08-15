@@ -1,0 +1,2 @@
+﻿namespace ParsMedeQ.Contracts.ResourceContracts.AddResourceCategoryContract;
+public readonly record struct AddResourceCategoryApiResponse(bool Changed);
