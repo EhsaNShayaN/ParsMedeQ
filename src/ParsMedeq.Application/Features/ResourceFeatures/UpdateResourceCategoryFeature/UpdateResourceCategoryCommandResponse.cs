@@ -1,0 +1,2 @@
+﻿namespace ParsMedeQ.Application.Features.ResourceFeatures.UpdateResourceCategoryFeature;
+public sealed record UpdateResourceCategoryCommandResponse(bool Changed);

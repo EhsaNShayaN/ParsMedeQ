@@ -20,8 +20,7 @@ public sealed class AddResourceCategoryCommandHandler : IPrimitiveResultCommandH
             0,
             request.ParentId,
             DateTime.Now)
-            .Map(resourceCategory => this._writeUnitOfWork.ResourceWriteRepository
-            .AddResourceCategory(resourceCategory, cancellationToken)
+            .Map(resourceCategory => this._writeUnitOfWork.ResourceWriteRepository.AddResourceCategory(resourceCategory, cancellationToken)
             .Map(resourceCategory => this._writeUnitOfWork.SaveChangesAsync(CancellationToken.None).Map(_ => resourceCategory))
             .Map(resourceCategory => new AddResourceCategoryCommandResponse(resourceCategory is not null)))
             .ConfigureAwait(false);

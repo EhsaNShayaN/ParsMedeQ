@@ -47,6 +47,12 @@ export class RestApiService {
     );
   }
 
+  editResourceCategory(model: any): Observable<any> {
+    return this.http.post<BaseResult<boolean>>(endpoint() + 'resource/category/update', model).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   addResource0(): Observable<any> {
     const model = {mobile: '9123440731'};
     return this.http.post<any>(`${endpoint()}resource/add`, model).pipe(

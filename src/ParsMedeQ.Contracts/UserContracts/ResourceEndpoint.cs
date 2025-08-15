@@ -9,9 +9,11 @@ public sealed class ResourceEndpoint : ApiEndpointBase
     protected override ApiEndpointItem MyEndpoint => EndpointMetadata.Resource;
 
     public EndpointInfo AddResource { get; private set; }
+    public EndpointInfo UpdateResource { get; private set; }
     public EndpointInfo Resources { get; private set; }
     public EndpointInfo Resource { get; private set; }
     public EndpointInfo AddResourceCategory { get; private set; }
+    public EndpointInfo UpdateResourceCategory { get; private set; }
     public EndpointInfo ResourceCategories { get; private set; }
     public EndpointInfo ResourceCategory { get; private set; }
 
@@ -22,6 +24,13 @@ public sealed class ResourceEndpoint : ApiEndpointBase
            this.GetUrl("add"),
            "Add Resource",
            "افزودن خبر، مقاله و ...",
+           _tag);
+
+        UpdateResource = new EndpointInfo(
+           this.GetUrl("update"),
+           this.GetUrl("update"),
+           "Update Resource",
+           "ویرایش خبر، مقاله و ...",
            _tag);
 
         Resources = new EndpointInfo(
@@ -43,6 +52,13 @@ public sealed class ResourceEndpoint : ApiEndpointBase
            this.GetUrl("category/add"),
            "Add Resource Category",
            "افزودن دسته بندی خبر، مقاله و ...",
+           _tag);
+
+        UpdateResourceCategory = new EndpointInfo(
+           this.GetUrl("category/update"),
+           this.GetUrl("category/update"),
+           "Update Resource Category",
+           "ویرایش دسته بندی خبر، مقاله و ...",
            _tag);
 
         ResourceCategories = new EndpointInfo(

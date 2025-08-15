@@ -9,8 +9,16 @@ internal sealed class ResourceWriteRepository : GenericPrimitiveWriteRepositoryB
 {
     public ResourceWriteRepository(WriteDbContext dbContext) : base(dbContext) { }
 
-    public ValueTask<PrimitiveResult<Resource>> AddResource(Resource Resource, CancellationToken cancellationToken)
-        => this.Add(Resource);
-    public ValueTask<PrimitiveResult<ResourceCategory>> AddResourceCategory(ResourceCategory ResourceCategory, CancellationToken cancellationToken)
-        => this.Add(ResourceCategory);
+    public ValueTask<PrimitiveResult<Resource>> FindById(int id, CancellationToken cancellationToken) =>
+        this.FindByIdAsync<Resource, int>(id, cancellationToken);
+    public ValueTask<PrimitiveResult<Resource>> AddResource(Resource resource, CancellationToken cancellationToken) =>
+        this.Add(resource);
+    public ValueTask<PrimitiveResult<Resource>> UpdateResource(Resource resource, CancellationToken cancellationToken) =>
+        this.Update(resource);
+    public ValueTask<PrimitiveResult<ResourceCategory>> FindCategoryById(int id, CancellationToken cancellationToken) =>
+        this.FindByIdAsync<ResourceCategory, int>(id, cancellationToken);
+    public ValueTask<PrimitiveResult<ResourceCategory>> AddResourceCategory(ResourceCategory resourceCategory, CancellationToken cancellationToken) =>
+        this.Add(resourceCategory);
+    public ValueTask<PrimitiveResult<ResourceCategory>> UpdateResourceCategory(ResourceCategory resourceCategory, CancellationToken cancellationToken) =>
+        this.Update(resourceCategory);
 }
