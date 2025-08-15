@@ -39,22 +39,22 @@ public sealed class ResourceEndpoint : ApiEndpointBase
            _tag);
 
         AddResourceCategory = new EndpointInfo(
-           this.GetUrl("addCategory"),
-           this.GetUrl("addCategory"),
+           this.GetUrl("category/add"),
+           this.GetUrl("category/add"),
            "Add Resource",
            "افزودن خبر، مقاله و ...",
            _tag);
 
         ResourceCategories = new EndpointInfo(
-           this.GetUrl("listCategories"),
-           this.GetUrl("listCategories"),
+           this.GetUrl("category/list"),
+           this.GetUrl("category/list"),
            "List of ResourceCategories",
            "لیست اخبار، مقاله و ...",
            _tag);
 
         ResourceCategory = new EndpointInfo(
-           this.GetUrl("categoryDetails"),
-           this.GetUrl("categoryDetails"),
+           this.GetUrl("category/details"),
+           this.GetUrl("category/details"),
            "Details of Resourcecategory",
            "جزئیات دسته بندی خبر، مقاله و ...",
            _tag);

@@ -22,14 +22,14 @@ export class RestApiService {
   }
 
   getResourceCategories(tableId: number): Observable<any> {
-    const model = {id: tableId};
-    return this.http.post<ResourceCategoriesResponse>(`${endpoint()}general/resourceCategories`, model).pipe(
+    return this.http.get<ResourceCategoriesResponse>(`${endpoint()}resource/category/list?tableId=${tableId}`,).pipe(
       catchError(this.handleError)
     );
   }
 
   getResource(model: ResourceRequest): Observable<any> {
-    return this.http.post<Resource>(`${endpoint()}resource/details`, model).pipe(
+    const query = this.modelToQuery(model);
+    return this.http.get<Resource>(`${endpoint()}resource/details?${query}`).pipe(
       catchError(this.handleError)
     );
   }

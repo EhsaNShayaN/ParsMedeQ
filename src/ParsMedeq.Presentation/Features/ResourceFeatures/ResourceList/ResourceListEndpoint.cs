@@ -54,13 +54,16 @@ sealed class ResourceListApiRequestMapper : IPresentationMapper<
         ResourceListApiRequest src,
         CancellationToken cancellationToken)
     {
-        return ValueTask.FromResult(
+        var x = ValueTask.FromResult(
             PrimitiveResult.Success(
-                new ResourceListQuery(src.LastId)
+                new ResourceListQuery(src.TableId)
                 {
+                    TableId = src.TableId,
                     PageIndex = src.PageIndex,
-                    PageSize = src.PageSize
+                    PageSize = src.PageSize,
+                    LastId = src.LastId,
                 }));
+        return x;
     }
 }
 sealed class ResourceListApiResponseMapper : IPresentationMapper<

@@ -16,8 +16,8 @@ export class App implements OnInit {
   }
 
   ngOnInit() {
-    this.restApiService.getWeatherForecast().subscribe((r: WeatherForecast[]) => {
+    /*this.restApiService.getWeatherForecast().subscribe((r: WeatherForecast[]) => {
       this.forecasts = r;
-    });
+    });*/
   }
 }

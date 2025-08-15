@@ -35,11 +35,7 @@ sealed class ResourceCategoryListEndpoint : EndpointHandlerBase<
             sender,
             () => ValueTask.FromResult(
                 PrimitiveResult.Success(
-                    new ResourceCategoryListQuery(request.LastId)
-                    {
-                        PageIndex = request.PageIndex,
-                        PageSize = request.PageSize,
-                    })),
+                    new ResourceCategoryListQuery(request.TableId))),
             cancellationToken);
 
 }
@@ -53,11 +49,7 @@ sealed class ResourceCategoryListApiRequestMapper : IPresentationMapper<
     {
         return ValueTask.FromResult(
             PrimitiveResult.Success(
-                new ResourceCategoryListQuery(src.LastId)
-                {
-                    PageIndex = src.PageIndex,
-                    PageSize = src.PageSize
-                }));
+                new ResourceCategoryListQuery(src.TableId)));
     }
 }
 sealed class ResourceCategoryListApiResponseMapper : IPresentationMapper<

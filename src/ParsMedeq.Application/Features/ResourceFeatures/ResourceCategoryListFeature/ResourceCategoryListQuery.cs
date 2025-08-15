@@ -1,12 +1,10 @@
-﻿using ParsMedeQ.Application.Helpers;
-using ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate;
+﻿using ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate;
 using Polly;
 using Polly.Contrib.DuplicateRequestCollapser;
 using SRH.MediatRMessaging.Queries;
 
 namespace ParsMedeQ.Application.Features.ResourceCategoryFeatures.ResourceCategoryListFeature;
-public sealed record ResourceCategoryListQuery(
-    int TableId) : BasePaginatedQuery, IPrimitiveResultQuery<ResourceCategory[]>;
+public sealed record ResourceCategoryListQuery(int TableId) : IPrimitiveResultQuery<ResourceCategory[]>;
 
 sealed class ResourceCategoryListQueryHandler : IPrimitiveResultQueryHandler<ResourceCategoryListQuery, ResourceCategory[]>
 {
@@ -22,7 +20,7 @@ sealed class ResourceCategoryListQueryHandler : IPrimitiveResultQueryHandler<Res
     }
     public async Task<PrimitiveResult<ResourceCategory[]>> Handle(ResourceCategoryListQuery request, CancellationToken cancellationToken)
     {
-        var pollyContext = new Context($"{this.GetType().FullName}|{request.LastId}");
+        var pollyContext = new Context($"{this.GetType().FullName}|{request.TableId}");
         return await this._asyncRequestCollapserPolicy.ExecuteAsync(_ =>
             this.HandleCore(request, cancellationToken), pollyContext)
            .ConfigureAwait(false);
@@ -35,6 +33,6 @@ sealed class ResourceCategoryListQueryHandler : IPrimitiveResultQueryHandler<Res
             .ResourceReadRepository
             .FilterResourceCategories(
             request.TableId,
-            cancellationToken)     
+            cancellationToken)
         .ConfigureAwait(false);
 }

@@ -56,11 +56,13 @@ internal sealed class ResourceReadRepository : GenericPrimitiveReadRepositoryBas
         int TableId,
         CancellationToken cancellationToken)
     {
-        return this.DbContext
+        var x = this.DbContext
             .ResourceCategory
             .Where(s => s.TableId.Equals(TableId))
             .Run(q => q.ToArrayAsync(cancellationToken), PrimitiveError.Create("", "دسته بندی ای برای نمایش وجود ندارد."))
             .Map(a => a!);
+
+        return x;
     }
 
     public ValueTask<PrimitiveResult<Resource>> ResourceDetails(int Id, CancellationToken cancellationToken)
@@ -80,7 +82,7 @@ internal sealed class ResourceReadRepository : GenericPrimitiveReadRepositoryBas
             .Run(q => q.FirstOrDefaultAsync(cancellationToken), PrimitiveError.Create("", "آیتم مورد نظر موجود نمی باشد."))
             .Map(a => a!);
     }
-    
+
     public ValueTask<PrimitiveResult<ResourceCategoryRelations[]>> FilterResourceCategoryRelations(
         int ResourceId,
         CancellationToken cancellationToken)

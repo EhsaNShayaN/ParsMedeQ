@@ -1,3 +1,3 @@
 ﻿namespace ParsMedeQ.Contracts.ResourceCategoryContracts.ResourceCategoryListContract;
 
-public record ResourceCategoryListApiRequest() : BasePaginatedApiRequest;
+public record ResourceCategoryListApiRequest(int TableId);

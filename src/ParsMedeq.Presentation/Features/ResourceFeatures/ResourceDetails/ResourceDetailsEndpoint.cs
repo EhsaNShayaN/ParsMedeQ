@@ -23,7 +23,7 @@ sealed class ResourceDetailsEndpoint : EndpointHandlerBase<
         IPresentationMapper<ResourceDetailsApiRequest, ResourceDetailsQuery> requestMapper,
         IPresentationMapper<Resource, ResourceDetailsApiResponse> responseMapper)
         : base(
-            Endpoints.Resource.Resources,
+            Endpoints.Resource.Resource,
             HttpMethod.Get,
             requestMapper,
             responseMapper,

@@ -1,6 +1,7 @@
 ﻿using ParsMedeQ.Domain.Abstractions;
 using ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate;
 using ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate.Entities;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ParsMedeQ.Domain.Aggregates.ResourceAggregate;
 
@@ -35,11 +36,13 @@ public sealed class Resource : EntityBase<int>
     public bool Disabled { get; private set; }
     public DateTime? ExpirationDate { get; private set; }
     public DateTime CreationDate { get; private set; }
+    [NotMapped]
     public bool Registered { get; set; }
     #endregion
 
     #region " Navigation Properties "
     public ResourceCategory? ResourceCategory { get; private set; }
+    [NotMapped]
     public ResourceCategory[]? ResourceCategories { get; set; }
     public IReadOnlyCollection<ResourceCategoryRelations> ResourceCategoryRelations => this._resourceCategoryRelations.AsReadOnly();
     #endregion
