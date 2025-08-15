@@ -70,7 +70,6 @@ export class ArticleAddComponent extends BaseResourceComponent implements OnInit
             abstract: ['', Validators.required],
             image: '',
             keywords: '',
-            authors: [null, Validators.required],
             journalId: '',
             expirationDate: null,
             expirationTime: '',
@@ -81,8 +80,6 @@ export class ArticleAddComponent extends BaseResourceComponent implements OnInit
             isVip: false,
             price: '',
             discount: '',
-            showInChem: true,
-            showInAcademy: true,
           });
         }
       });

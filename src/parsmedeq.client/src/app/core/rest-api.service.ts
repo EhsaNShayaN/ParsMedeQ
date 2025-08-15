@@ -65,7 +65,7 @@ export class RestApiService {
     formData.append('image', image);
     formData.append('file', file);
     formData.append('model', JSON.stringify(model));
-    return this.http.post<BaseResult<boolean>>(endpoint() + 'admin/addResource', formData).pipe(
+    return this.http.post<BaseResult<boolean>>(`${endpoint()}resource/add`, formData).pipe(
       catchError(this.handleError)
     );
   }

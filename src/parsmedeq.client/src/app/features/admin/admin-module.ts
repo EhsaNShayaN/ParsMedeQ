@@ -5,7 +5,6 @@ import {Admin} from './admin';
 import {Dashboard} from './dashboard/dashboard';
 import {Users} from './users/users';
 import {Products} from './products/products';
-import {Articles} from './articles/articles';
 import {SharedModule} from '../../shared/shared-module';
 import {ArticleComponent} from './resource/article/article.component';
 import {ArticleListComponent} from './resource/article/article-list/article-list.component';
@@ -38,7 +37,6 @@ import {MatSlideToggle} from '@angular/material/slide-toggle';
     Dashboard,
     Users,
     Products,
-    Articles,
 
     ArticleComponent,
     ArticleListComponent,
