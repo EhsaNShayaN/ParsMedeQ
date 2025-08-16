@@ -1,4 +1,5 @@
-﻿using ParsMedeQ.Application.Helpers;
+﻿using ParsMedeQ.Application.Features.ResourceFeatures.ResourceDetailsFeature;
+using ParsMedeQ.Application.Helpers;
 using ParsMedeQ.Domain.Aggregates.ResourceAggregate;
 using ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate;
 using ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate.Entities;
@@ -9,20 +10,26 @@ public interface IResourceReadRepository : IDomainRepository
 {
     ValueTask<PrimitiveResult<BasePaginatedApiResponse<Resource>>> FilterResources(
         BasePaginatedQuery paginated,
-        int TableId,
-        int LastId,
+        int tableId,
+        int lastId,
         CancellationToken cancellationToken);
     ValueTask<PrimitiveResult<ResourceCategory[]>> FilterResourceCategories(
-        int TableId,
+        int tableId,
         CancellationToken cancellationToken);
 
     ValueTask<PrimitiveResult<Resource>> ResourceDetails(
-        int Id,
+        int id,
+        CancellationToken cancellationToken);
+
+    ValueTask<PrimitiveResult<ResourceDetailsDbQueryResponse>> ResourceDetails(
+        int UserId,
+        int ResourceId,
+        int TableId,
         CancellationToken cancellationToken);
     ValueTask<PrimitiveResult<ResourceCategory>> ResourceCategoryDetails(
-        int Id,
+        int id,
         CancellationToken cancellationToken);
     ValueTask<PrimitiveResult<ResourceCategoryRelations[]>> FilterResourceCategoryRelations(
-        int ResourceId,
+        int resourceId,
         CancellationToken cancellationToken);
 }

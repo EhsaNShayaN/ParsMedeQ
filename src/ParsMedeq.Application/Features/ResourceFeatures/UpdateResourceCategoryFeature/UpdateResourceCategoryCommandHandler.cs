@@ -13,7 +13,7 @@ public sealed class UpdateResourceCategoryCommandHandler : IPrimitiveResultComma
     {
         return
             await this._writeUnitOfWork.ResourceWriteRepository.FindCategoryById(request.Id, cancellationToken)
-            .Map(async resourceCategory => await resourceCategory.Update(request.Title, request.Description, request.ParentId))
+            .Map(resourceCategory => resourceCategory.Update(request.Title, request.Description, request.ParentId))
             .Map(resourceCategory => this._writeUnitOfWork.ResourceWriteRepository.UpdateResourceCategory(resourceCategory, cancellationToken)
             .Map(resourceCategory => this._writeUnitOfWork.SaveChangesAsync(CancellationToken.None).Map(_ => resourceCategory))
             .Map(resourceCategory => new UpdateResourceCategoryCommandResponse(resourceCategory is not null)))

@@ -23,4 +23,8 @@
 		<ProjectReference Include="..\ParsMedeQ.Domain\ParsMedeQ.Domain.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Persistance\Schema\ResourceRepositories\NewFolder\" />
+	</ItemGroup>
+
 </Project>

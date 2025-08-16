@@ -14,14 +14,14 @@ namespace ParsMedeQ.Presentation.Features.ResourceFeatures.ResourceDetails;
 sealed class ResourceDetailsEndpoint : EndpointHandlerBase<
     ResourceDetailsApiRequest,
     ResourceDetailsQuery,
-    Resource,
+    ResourceDetailsDbQueryResponse,
     ResourceDetailsApiResponse>
 {
     protected override bool NeedTaxPayerFile => true;
 
     public ResourceDetailsEndpoint(
         IPresentationMapper<ResourceDetailsApiRequest, ResourceDetailsQuery> requestMapper,
-        IPresentationMapper<Resource, ResourceDetailsApiResponse> responseMapper)
+        IPresentationMapper<ResourceDetailsDbQueryResponse, ResourceDetailsApiResponse> responseMapper)
         : base(
             Endpoints.Resource.Resource,
             HttpMethod.Get,
@@ -89,7 +89,7 @@ sealed class ResourceDetailsApiResponseMapper : IPresentationMapper<
                         src.ExpirationDate.HasValue ? $"{src.ExpirationDate.Value.Hour}:{src.ExpirationDate.Value.Minute}" : null,
                         src.ExpirationDate.HasValue && src.ExpirationDate.Value < DateTime.Now,
                         src.CreationDate.ToPersianDate(),
-                        false)
+                        src.Registered)
                     ));
     }
 }

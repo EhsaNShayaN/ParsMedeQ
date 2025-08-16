@@ -1,9 +1,6 @@
 ﻿using ParsMedeQ.Domain.Abstractions;
 using ParsMedeQ.Domain.Aggregates.ResourceAggregate;
 using ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate.Entities;
-using ParsMedeQ.Domain.Types.FullName;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate;
 public sealed class ResourceCategory : EntityBase<int>
@@ -55,19 +52,16 @@ public sealed class ResourceCategory : EntityBase<int>
                 CreationDate = creationDate
             });
     }
-    public async Task<PrimitiveResult<ResourceCategory>> Update(
+    public PrimitiveResult<ResourceCategory> Update(
         string title,
         string description,
         int? parentId)
     {
-        return await PrimitiveResult.Success(this)
-            .OnSuccess(_ =>
-            {
-                this.Title = title;
-                this.Description = description;
-                this.ParentId = parentId;
-            })
-            .Map(_ => this);
+        this.Title = title;
+        this.Description = description;
+        this.ParentId = parentId;
+
+        return this;
     }
     #endregion
 }

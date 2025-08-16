@@ -1,4 +1,5 @@
-﻿using ParsMedeQ.Application.Helpers;
+﻿using ParsMedeQ.Application.Features.ResourceFeatures.ResourceDetailsFeature;
+using ParsMedeQ.Application.Helpers;
 using ParsMedeQ.Application.Persistance.Schema.ResourceRepositories;
 using ParsMedeQ.Domain.Aggregates.ResourceAggregate;
 using ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate;
@@ -53,16 +54,14 @@ internal sealed class ResourceReadRepository : GenericPrimitiveReadRepositoryBas
     }
 
     public ValueTask<PrimitiveResult<ResourceCategory[]>> FilterResourceCategories(
-        int TableId,
+        int tableId,
         CancellationToken cancellationToken)
     {
-        var x = this.DbContext
+        return this.DbContext
             .ResourceCategory
-            .Where(s => s.TableId.Equals(TableId))
-            .Run(q => q.ToArrayAsync(cancellationToken), PrimitiveError.Create("", "دسته بندی ای برای نمایش وجود ندارد."))
+            .Where(s => s.TableId.Equals(tableId))
+            .Run(q => q.ToArrayAsync(cancellationToken), PrimitiveResult.Success(Array.Empty<ResourceCategory>()))
             .Map(a => a!);
-
-        return x;
     }
 
     public ValueTask<PrimitiveResult<Resource>> ResourceDetails(int Id, CancellationToken cancellationToken)
@@ -72,6 +71,54 @@ internal sealed class ResourceReadRepository : GenericPrimitiveReadRepositoryBas
             .Where(s => s.Id.Equals(Id))
             .Run(q => q.FirstOrDefaultAsync(cancellationToken), PrimitiveError.Create("", "آیتم مورد نظر موجود نمی باشد."))
             .Map(a => a!);
+    }
+
+    public ValueTask<PrimitiveResult<ResourceDetailsDbQueryResponse>> ResourceDetails(
+        int UserId,
+        int resourceId,
+        int TableId,
+        CancellationToken cancellationToken)
+    {
+        var query =
+            from res in this.DbContext.Resource
+            where res.Id == resourceId
+            select new ResourceDetailsDbQueryResponse
+            {
+                Id = res.Id,
+                TableId = res.TableId,
+                Title = res.Title,
+                Abstract = res.Abstract,
+                Anchors = res.Anchors,
+                Description = res.Description,
+                Keywords = res.Keywords,
+                ResourceCategoryId = res.ResourceCategoryId,
+                ResourceCategoryTitle = res.ResourceCategoryTitle,
+                Image = res.Image,
+                MimeType = res.MimeType,
+                Doc = res.Doc,
+                Language = res.Language,
+                PublishDate = res.PublishDate,
+                PublishInfo = res.PublishInfo,
+                Publisher = res.Publisher,
+                Price = res.Price,
+                Discount = res.Discount,
+                IsVip = res.IsVip,
+                DownloadCount = res.DownloadCount,
+                Ordinal = res.Ordinal,
+                Deleted = res.Deleted,
+                Disabled = res.Disabled,
+                ExpirationDate = res.ExpirationDate,
+                CreationDate = res.CreationDate,
+                Registered = res.Registered,
+                ResourceCategories = (
+                    from rel in this.DbContext.ResourceCategoryRelations
+                    join cat in this.DbContext.ResourceCategory on rel.ResourceCategoryId equals cat.Id
+                    where rel.Id == res.Id
+                    select new ResourceCategoryDbQueryResponse(cat.Id, cat.Title)
+                ).ToArray()
+            };
+
+        return query.Run(q => q.FirstOrDefaultAsync(), PrimitiveError.CreateInternal("", ""))!;
     }
 
     public ValueTask<PrimitiveResult<ResourceCategory>> ResourceCategoryDetails(int Id, CancellationToken cancellationToken)
