@@ -1,7 +1,7 @@
 ﻿using ParsMedeQ.Domain.Abstractions;
 using ParsMedeQ.Domain.Aggregates.UserAggregate.UserEntity;
 
-namespace ParsMedeQ.Domain.Aggregates.ResourceAggregate;
+namespace ParsMedeQ.Domain.Aggregates.PurchaseAggregate;
 
 public sealed class Purchase : EntityBase<int>
 {

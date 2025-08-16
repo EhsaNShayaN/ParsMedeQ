@@ -1,6 +1,6 @@
 ﻿using Azure.Core;
 using ParsMedeQ.Application.Persistance.Schema.PurchaseRepositories;
-using ParsMedeQ.Domain.Aggregates.ResourceAggregate;
+using ParsMedeQ.Domain.Aggregates.PurchaseAggregate;
 using ParsMedeQ.Infrastructure.Persistance.DbContexts;
 using SRH.Persistance.Extensions;
 

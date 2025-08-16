@@ -1,4 +1,4 @@
-﻿using ParsMedeQ.Domain.Aggregates.ResourceAggregate;
+﻿using ParsMedeQ.Domain.Aggregates.PurchaseAggregate;
 using ParsMedeQ.Domain.Persistance;
 
 namespace ParsMedeQ.Application.Persistance.Schema.PurchaseRepositories;
