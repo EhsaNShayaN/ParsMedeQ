@@ -120,11 +120,11 @@ internal abstract class EndpointHandlerBase<TApiRequest, THandlerRequest, THandl
 
     #region " Constructors "
     protected EndpointHandlerBase(
-    EndpointInfo endpointInfo,
-    HttpMethod httpMethod,
-    Func<TApiRequest, CancellationToken, ValueTask<PrimitiveResult<THandlerRequest>>> requestFactory,
-    Func<THandlerResponse, CancellationToken, ValueTask<PrimitiveResult<TEndpointResponse>>> handlerResponseMapper,
-    Func<PrimitiveResult<TEndpointResponse>, IResult> responseFactory) : base(endpointInfo, httpMethod, handlerResponseMapper, responseFactory)
+        EndpointInfo endpointInfo,
+        HttpMethod httpMethod,
+        Func<TApiRequest, CancellationToken, ValueTask<PrimitiveResult<THandlerRequest>>> requestFactory,
+        Func<THandlerResponse, CancellationToken, ValueTask<PrimitiveResult<TEndpointResponse>>> handlerResponseMapper,
+        Func<PrimitiveResult<TEndpointResponse>, IResult> responseFactory) : base(endpointInfo, httpMethod, handlerResponseMapper, responseFactory)
     {
         this._requestFactory = requestFactory;
     }

@@ -1,15 +1,4 @@
-﻿using Dapper;
-using ParsMedeQ.Application;
-using ParsMedeQ.Application.Persistance;
-using ParsMedeQ.Application.Services.EmailSenderService;
-using ParsMedeQ.Application.Services.OTP;
-using ParsMedeQ.Application.Services.SmsSenderService;
-using ParsMedeQ.Domain.Persistance;
-using ParsMedeQ.Infrastructure.Persistance.DbContexts;
-using ParsMedeQ.Infrastructure.Services.EmailSenderService;
-using ParsMedeQ.Infrastructure.Services.OTP;
-using ParsMedeQ.Infrastructure.Services.SmsSenderService;
-using Medallion.Threading;
+﻿using Medallion.Threading;
 using Medallion.Threading.SqlServer;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Caching.StackExchangeRedis;
@@ -18,6 +7,17 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Http.Resilience;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
+using ParsMedeQ.Application;
+using ParsMedeQ.Application.Persistance;
+using ParsMedeQ.Application.Services.EmailSenderService;
+using ParsMedeQ.Application.Services.OTP;
+using ParsMedeQ.Application.Services.SmsSenderService;
+using ParsMedeQ.Domain.Persistance;
+using ParsMedeQ.Infrastructure.Helpers;
+using ParsMedeQ.Infrastructure.Persistance.DbContexts;
+using ParsMedeQ.Infrastructure.Services.EmailSenderService;
+using ParsMedeQ.Infrastructure.Services.OTP;
+using ParsMedeQ.Infrastructure.Services.SmsSenderService;
 using Polly;
 using System.Net;
 using System.Net.Mail;
@@ -42,7 +42,8 @@ internal sealed class ProjectInstaller : IServiceInstaller
             .InstallFusionCache()
             .InstallOTPService()
             .InstallHealthChecks(config)
-            .InstallOpenTelemtryTracingAndMetrics(config);
+            .InstallOpenTelemtryTracingAndMetrics(config)
+            .InstallFileService();
 }
 static class ServiceCollectionExtension
 {
@@ -288,6 +289,12 @@ static class ServiceCollectionExtension
                 opts.Duration = TimeSpan.FromMinutes(2);
             });
 
+        return services;
+    }
+
+    internal static IServiceCollection InstallFileService(this IServiceCollection services)
+    {
+        services.TryAddSingleton<IFileService, FileService>();
         return services;
     }
 

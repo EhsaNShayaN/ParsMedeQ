@@ -12,8 +12,7 @@ public sealed class ResourceDetailsDbQueryResponse
     public int ResourceCategoryId { get; set; }
     public string ResourceCategoryTitle { get; set; } = string.Empty;
     public string Image { get; set; } = string.Empty;
-    public string MimeType { get; set; } = string.Empty;
-    public string Doc { get; set; } = string.Empty;
+    public int? FileId { get; set; }
     public string Language { get; set; } = string.Empty;
     public string PublishDate { get; set; } = string.Empty;
     public string PublishInfo { get; set; } = string.Empty;

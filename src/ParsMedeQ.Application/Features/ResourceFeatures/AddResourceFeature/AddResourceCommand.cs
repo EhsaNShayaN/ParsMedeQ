@@ -4,10 +4,8 @@ namespace ParsMedeQ.Application.Features.ResourceFeatures.AddResourceFeature;
 
 public sealed record class AddResourceCommand
 (
-    int? Id,
     int TableId,
     string Title,
-    string Image,
     string MimeType,
     string Language,
     bool IsVip,
@@ -25,12 +23,15 @@ public sealed record class AddResourceCommand
     string Keywords,
     string PublishDate,
     int[] Categories,
-    string Doc) : IPrimitiveResultCommand<AddResourceCommandResponse>,
+    byte[] Image,
+    string ImageExtension,
+    byte[] File,
+    string FileExtension) : IPrimitiveResultCommand<AddResourceCommandResponse>,
     IValidatableRequest<AddResourceCommand>
 {
     public ValueTask<PrimitiveResult<AddResourceCommand>> Validate() => PrimitiveResult.Success(this)
             .Ensure([
-                value => MobileType.Create(value.Doc)
+                value => MobileType.Create(value.Title)
                 .Match(
                     _ => PrimitiveResult.Success() ,
                     _ => PrimitiveResult.Failure("Validation.Error", "موبایل ارسالی نامعتبر است"))

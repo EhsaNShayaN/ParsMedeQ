@@ -1,10 +1,13 @@
-﻿namespace ParsMedeQ.Contracts.ResourceContracts.AddResourceContract;
+﻿using Microsoft.AspNetCore.Http;
+using ParsMedeQ.Contracts.Helpers;
+using System.Reflection;
+
+namespace ParsMedeQ.Contracts.ResourceContracts.AddResourceContract;
+
 public readonly record struct AddResourceApiRequest
 (
-    int? Id,
     int TableId,
     string Title,
-    string Image,
     string MimeType,
     string Language,
     bool IsVip,
@@ -22,11 +25,15 @@ public readonly record struct AddResourceApiRequest
     string Keywords,
     string PublishDate,
     int[] Categories,
-    string Doc);
-/*public readonly record struct IdTitleRequest(
-    int Id,
-    string Title
-);*/
+    IFormFile Image,
+    IFormFile File)
+{
+    public static async ValueTask<AddResourceApiRequest?> BindAsync(HttpContext context, ParameterInfo _)
+    {
+        var form = await context.Request.ReadFormAsync(context.RequestAborted).ConfigureAwait(false);
+        return FormBinderHelper.Bind<AddResourceApiRequest>(form);
+    }
+}
 
 public readonly record struct AnchorInfo
 (

@@ -1,12 +1,13 @@
-﻿using ParsMedeQ.Application.Services.Signin;
-using ParsMedeQ.Domain.Abstractions;
-using ParsMedeQ.Domain.DomainServices.SigninService;
-using MediatR;
+﻿using MediatR;
 using MediatR.Pipeline;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.FeatureManagement;
+using ParsMedeQ.Application.Options;
+using ParsMedeQ.Application.Services.Signin;
+using ParsMedeQ.Domain.Abstractions;
+using ParsMedeQ.Domain.DomainServices.SigninService;
 using Polly.Contrib.DuplicateRequestCollapser;
 using SRH.MediatRMessaging;
 using SRH.MediatRMessaging.Behaviours;
@@ -25,7 +26,8 @@ internal sealed class ProjectServiceInstaller : IServiceInstaller
             .InstallMediatRServices()
             .InstallRequestCollapser()
             .InstallFeatureManagment()
-            .InstallSigninService();
+            .InstallSigninService()
+            .InstallRepositoryOptions(config);
     }
 }
 
@@ -75,5 +77,9 @@ static class ServiceCollectionExtension
         services.TryAddScoped<ISigninService, SigninService>();
 
         return services;
+    }
+    public static IServiceCollection InstallRepositoryOptions(this IServiceCollection services, IConfiguration config)
+    {
+        return services.Configure<RepositoryOptions>(config.GetSection("Repository"));
     }
 }

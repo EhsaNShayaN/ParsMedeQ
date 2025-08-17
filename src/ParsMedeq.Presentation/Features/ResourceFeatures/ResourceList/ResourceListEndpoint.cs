@@ -1,10 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
 using ParsMedeQ.Application.Features.ResourceFeatures.ResourceListFeature;
 using ParsMedeQ.Application.Helpers;
 using ParsMedeQ.Contracts;
-using ParsMedeQ.Contracts.ResourceContracts.AddResourceContract;
 using ParsMedeQ.Contracts.ResourceContracts.ResourceListContract;
 using ParsMedeQ.Domain.Aggregates.ResourceAggregate;
 using SRH.Utilities.EhsaN;
@@ -83,29 +81,15 @@ sealed class ResourceListApiResponseMapper : IPresentationMapper<
                         data.ResourceCategoryId,
                         data.ResourceCategoryTitle,
                         data.Title,
-                        data.Abstract,
-                        JsonConvert.DeserializeObject<AnchorInfo[]>(data.Anchors),
-                        data.Description,
-                        data.Keywords,
                         data.Image,
-                        data.MimeType,
-                        data.Doc,
                         data.Language,
-                        data.PublishDate,
-                        data.PublishInfo,
-                        data.Publisher,
                         data.Price,
                         data.Discount,
                         data.IsVip,
                         data.DownloadCount,
                         data.Ordinal,
-                        data.Deleted,
-                        data.Disabled,
-                        data.ExpirationDate.ToPersianDate(),
-                        data.ExpirationDate.HasValue ? $"{data.ExpirationDate.Value.Hour}:{data.ExpirationDate.Value.Minute}" : null,
                         data.ExpirationDate.HasValue && data.ExpirationDate.Value < DateTime.Now,
-                        data.CreationDate.ToPersianDate(),
-                        false))
+                        data.CreationDate.ToPersianDate()))
                     .ToArray(), src.TotalCount, src.PageIndex, src.PageSize)
                     {
                         LastId = src.LastId

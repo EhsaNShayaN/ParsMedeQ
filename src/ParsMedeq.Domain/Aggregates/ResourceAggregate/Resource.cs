@@ -21,8 +21,7 @@ public sealed class Resource : EntityBase<int>
     public int ResourceCategoryId { get; private set; }
     public string ResourceCategoryTitle { get; set; } = string.Empty;
     public string Image { get; private set; } = string.Empty;
-    public string MimeType { get; private set; } = string.Empty;
-    public string Doc { get; private set; } = string.Empty;
+    public int? FileId { get; private set; }
     public string Language { get; private set; } = string.Empty;
     public string PublishDate { get; private set; } = string.Empty;
     public string PublishInfo { get; private set; } = string.Empty;
@@ -63,8 +62,7 @@ public sealed class Resource : EntityBase<int>
         int resourceCategoryId,
         string resourceCategoryTitle,
         string image,
-        string mimeType,
-        string doc,
+        int? fileId,
         string language,
         string publishDate,
         string publishInfo,
@@ -87,8 +85,7 @@ public sealed class Resource : EntityBase<int>
                 ResourceCategoryId = resourceCategoryId,
                 ResourceCategoryTitle = resourceCategoryTitle,
                 Image = image,
-                MimeType = mimeType,
-                Doc = doc,
+                FileId = fileId,
                 Language = language,
                 PublishDate = publishDate,
                 PublishInfo = publishInfo,
@@ -103,4 +100,11 @@ public sealed class Resource : EntityBase<int>
             });
     }
     #endregion
+
+    public PrimitiveResult<Resource> SetFiles(string imagePath, int? fileId)
+    {
+        this.Image = imagePath ?? throw new ArgumentNullException("image not found");
+        this.FileId = fileId;
+        return this;
+    }
 }
