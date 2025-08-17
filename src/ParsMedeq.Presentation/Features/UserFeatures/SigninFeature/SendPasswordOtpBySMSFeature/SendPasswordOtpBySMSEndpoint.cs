@@ -9,7 +9,7 @@ internal sealed class SendPasswordOtpBySMSEndpoint : EndpointHandlerBase<
     SendPasswordOtpBySMSCommandResponse,
     SendPasswordOtpBySMSApiResponse>
 {
-    protected override bool NeedTaxPayerAuthentication => false;
+    protected override bool NeedAuthentication => false;
     protected override bool NeedTaxPayerFile => false;
 
     public SendPasswordOtpBySMSEndpoint() : base(

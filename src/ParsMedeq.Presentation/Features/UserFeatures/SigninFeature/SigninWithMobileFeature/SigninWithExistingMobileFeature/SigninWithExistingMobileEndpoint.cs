@@ -11,7 +11,7 @@ internal sealed class SigninWithExistingMobileEndpoint : EndpointHandlerBase<
     UserTokenInfo,
     SigninWithExistingMobileApiResponse>
 {
-    protected override bool NeedTaxPayerAuthentication => false;
+    protected override bool NeedAuthentication => false;
     protected override bool NeedTaxPayerFile => false;
 
     public SigninWithExistingMobileEndpoint(

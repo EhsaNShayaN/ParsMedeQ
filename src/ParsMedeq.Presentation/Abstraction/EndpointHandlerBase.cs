@@ -15,7 +15,7 @@ internal static class EndpointHandlerBase
 internal abstract class EndpointHandlerBase<THandlerRequest, THandlerResponse, TEndpointResponse> : MinimalApiHandlerBase<THandlerRequest, TEndpointResponse>
     where THandlerRequest : IRequest<PrimitiveResult<THandlerResponse>>
 {
-    protected virtual bool NeedTaxPayerAuthentication { get; } = true;
+    protected virtual bool NeedAuthentication { get; } = true;
     protected virtual bool NeedTaxPayerFile { get; } = true;
     protected virtual bool AdminPrivilages { get; } = false;
 

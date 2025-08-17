@@ -9,7 +9,7 @@ internal sealed class SendPasswordOtpByEmailEndpoint : EndpointHandlerBase<
     SendPasswordOtpByEmailCommandResponse,
     SendPasswordOtpByEmailApiResponse>
 {
-    protected override bool NeedTaxPayerAuthentication => false;
+    protected override bool NeedAuthentication => false;
     protected override bool NeedTaxPayerFile => false;
 
     public SendPasswordOtpByEmailEndpoint() : base(
