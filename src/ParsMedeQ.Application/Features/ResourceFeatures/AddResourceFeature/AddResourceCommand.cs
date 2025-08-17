@@ -6,7 +6,6 @@ public sealed record class AddResourceCommand
 (
     int TableId,
     string Title,
-    string MimeType,
     string Language,
     bool IsVip,
     int Price,
@@ -22,7 +21,6 @@ public sealed record class AddResourceCommand
     string ExpirationTime,
     string Keywords,
     string PublishDate,
-    int[] Categories,
     byte[] Image,
     string ImageExtension,
     byte[] File,

@@ -14,13 +14,9 @@ sealed class AddResourceEndpoint : EndpointHandlerBase<
     protected override bool NeedAuthentication => false;
     protected override bool NeedTaxPayerFile => false;
 
-    public AddResourceEndpoint(
-        IPresentationMapper<AddResourceApiRequest, AddResourceCommand> apiRequestMapper
-        ) : base(
+    public AddResourceEndpoint() : base(
             Endpoints.Resource.AddResource,
-            HttpMethod.Post,
-            apiRequestMapper,
-            DefaultResponseFactory.Instance.CreateOk)
+            HttpMethod.Post)
     { }
     protected override Delegate EndpointDelegate =>
         async (
@@ -34,7 +30,6 @@ sealed class AddResourceEndpoint : EndpointHandlerBase<
         var command = new AddResourceCommand(
              request.TableId,
              request.Title,
-             request.MimeType,
              request.Language,
              request.IsVip,
              request.Price,
@@ -50,7 +45,6 @@ sealed class AddResourceEndpoint : EndpointHandlerBase<
              request.ExpirationTime,
              request.Keywords,
              request.PublishDate,
-             request.Categories,
              imageBytes,
              Path.GetExtension(request.Image.FileName),
              fileBytes,
@@ -85,32 +79,3 @@ sealed class AddResourceEndpoint : EndpointHandlerBase<
         }
     }
 }
-/*internal sealed class AddResourceApiRequestMapper : IPresentationMapper<AddResourceApiRequest, AddResourceCommand>
-{
-    public ValueTask<PrimitiveResult<AddResourceCommand>> Map(AddResourceApiRequest src, CancellationToken cancellationToken) =>
-        ValueTask.FromResult(
-            PrimitiveResult.Success(
-                new AddResourceCommand(
-                    src.Id,
-                    src.TableId,
-                    src.Title,
-                    src.Image,
-                    src.MimeType,
-                    src.Language,
-                    src.IsVip,
-                    src.Price,
-                    src.Discount,
-                    src.Description,
-                    src.PublishInfo,
-                    src.Publisher,
-                    src.ResourceCategoryId,
-                    src.ResourceCategoryTitle,
-                    src.Abstract,
-                    src.Anchors.Length > 0 ? Newtonsoft.Json.JsonConvert.SerializeObject(src.Anchors) : string.Empty,
-                    string.IsNullOrEmpty(src.ExpirationDate) ? default(DateTime?) : src.ExpirationDate.ToGeorgianDate(),
-                    src.ExpirationTime,
-                    src.Keywords,
-                    src.PublishDate,
-                    src.Categories,
-                    src.Doc, null)));
-}*/

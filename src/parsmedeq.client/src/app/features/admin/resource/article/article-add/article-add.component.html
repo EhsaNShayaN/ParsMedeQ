@@ -27,12 +27,12 @@
         <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>دسته بندی</mat-label>
-            <mat-select formControlName="category" placeholder="دسته بندی" required>
-              <mat-option *ngFor="let item of resourceCategories" [value]="item">
+            <mat-select formControlName="resourceCategoryId" placeholder="دسته بندی" required>
+              <mat-option *ngFor="let item of resourceCategories" [value]="item.id">
                 {{ item.title }}
               </mat-option>
             </mat-select>
-            <mat-error *ngIf="myForm.controls['category'].errors?.['required']">
+            <mat-error *ngIf="myForm.controls['resourceCategoryId'].errors?.['required']">
               دسته بندی الزامی است.
             </mat-error>
           </mat-form-field>

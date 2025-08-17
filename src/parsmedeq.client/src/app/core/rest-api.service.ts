@@ -70,6 +70,16 @@ export class RestApiService {
     );
   }
 
+  editResource(model: AddResourceRequest, image: any = null, file: any = null): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('image', image);
+    formData.append('file', file);
+    formData.append('model', JSON.stringify(model));
+    return this.http.post<BaseResult<boolean>>(`${endpoint()}resource/add`, formData).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   modelToQuery(model: any) {
     let params = new URLSearchParams(model);
     let keysForDel: string[] = [];

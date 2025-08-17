@@ -6,7 +6,6 @@ using ParsMedeQ.Contracts;
 using ParsMedeQ.Contracts.ResourceContracts.AddResourceContract;
 using ParsMedeQ.Contracts.ResourceContracts.ResourceDetailsContract;
 using ParsMedeQ.Contracts.ResourceContracts.ResourceListContract;
-using ParsMedeQ.Domain.Aggregates.ResourceAggregate;
 using SRH.Utilities.EhsaN;
 
 namespace ParsMedeQ.Presentation.Features.ResourceFeatures.ResourceDetails;
@@ -52,11 +51,11 @@ sealed class ResourceDetailsApiRequestMapper : IPresentationMapper<
     }
 }
 sealed class ResourceDetailsApiResponseMapper : IPresentationMapper<
-    Resource,
+    ResourceDetailsDbQueryResponse,
     ResourceDetailsApiResponse>
 {
     public ValueTask<PrimitiveResult<ResourceDetailsApiResponse>> Map(
-        Resource src,
+        ResourceDetailsDbQueryResponse src,
         CancellationToken cancellationToken)
     {
         return ValueTask.FromResult(

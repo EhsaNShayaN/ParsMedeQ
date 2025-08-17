@@ -8,8 +8,8 @@ export interface ResourceResponse extends Paginated {
 export class Resource {
   id!: number;
   tableId!: number;
-  categoryId?: number;
-  categoryTitle?: string;
+  resourceCategoryId?: number;
+  resourceCategoryTitle?: string;
 
   title!: string;
   abstract!: string;
@@ -18,8 +18,7 @@ export class Resource {
   keywords!: string;
 
   image!: string;
-  mimeType!: string;
-  doc!: string;
+  fileId?: string;
 
   language!: string;
   publishDate!: string;

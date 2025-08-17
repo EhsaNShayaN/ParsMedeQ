@@ -8,7 +8,6 @@ public readonly record struct AddResourceApiRequest
 (
     int TableId,
     string Title,
-    string MimeType,
     string Language,
     bool IsVip,
     int Price,
@@ -24,7 +23,6 @@ public readonly record struct AddResourceApiRequest
     string ExpirationTime,
     string Keywords,
     string PublishDate,
-    int[] Categories,
     IFormFile Image,
     IFormFile File)
 {

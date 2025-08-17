@@ -4,7 +4,7 @@
     <td *matCellDef="let element; let i = index;" mat-cell>
       <ng-container [ngSwitch]="column">
         <ng-container *ngSwitchCase="'actions'">
-          <a [routerLink]="['/admin/article/edit-category', element.id]" mat-icon-button
+          <a [routerLink]="['/admin/article/category/edit', element.id]" mat-icon-button
              matTooltip="ویرایش" target="_blank">
             <mat-icon color="warn">edit</mat-icon>
           </a>

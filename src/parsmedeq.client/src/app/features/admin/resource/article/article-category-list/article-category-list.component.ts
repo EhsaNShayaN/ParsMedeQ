@@ -17,17 +17,23 @@ export class ArticleCategoryListComponent extends BaseCategoriesComponent {
 
   getColName(column: string) {
     column = column.toLowerCase();
+    if (column === 'title') {
+      column = 'عنوان';
+    }
     if (column === 'parentid') {
-      column = 'article_category';
+      column = 'دسته بندی';
     }
     if (column === 'downloadcount') {
-      column = 'download_count';
+      column = 'تعداد دانلود';
     }
     if (column === 'expirationdate') {
-      column = 'expiration_date';
+      column = 'تاریخ انقضا';
     }
     if (column === 'creationdate') {
-      column = 'published';
+      column = 'تاریخ ایجاد';
+    }
+    if (column === 'actions') {
+      column = 'عملیات';
     }
     return column.toUpperCase();
   }

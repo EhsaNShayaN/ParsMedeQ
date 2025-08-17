@@ -37,7 +37,7 @@ export class ClipAddComponent extends BaseResourceComponent implements OnInit {
               image: null,
               file: null,
               authors: null,
-              categoryId: this.editItem?.categoryId,
+              categoryId: this.editItem?.resourceCategoryId,
               isVip: this.editItem?.isVip,
               price: this.editItem?.price,
               discount: this.editItem?.discount,

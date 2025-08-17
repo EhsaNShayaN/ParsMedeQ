@@ -40,7 +40,7 @@ export class ArticleAddComponent extends BaseResourceComponent implements OnInit
           this.restApiService.getResource({id: params['id'], tableId: Tables.Article}).subscribe((a: Resource) => {
             this.editItem = a;
             this.myForm = this.formBuilder.group({
-              category: [this.resourceCategories.find(s => s.id === a.categoryId), Validators.required],
+              resourceCategoryId: [this.resourceCategories.find(s => s.id === a.resourceCategoryId)?.id, Validators.required],
               title: [a.title, Validators.required],
               abstract: [a.abstract, Validators.required],
               image: null,
@@ -65,12 +65,11 @@ export class ArticleAddComponent extends BaseResourceComponent implements OnInit
           });
         } else {
           this.myForm = this.formBuilder.group({
-            category: ['', Validators.required],
+            resourceCategoryId: ['', Validators.required],
             title: ['', Validators.required],
             abstract: ['', Validators.required],
             image: '',
             keywords: '',
-            journalId: '',
             expirationDate: null,
             expirationTime: '',
             anchors: this.formBuilder.array([]),
@@ -135,6 +134,8 @@ export class ArticleAddComponent extends BaseResourceComponent implements OnInit
 
   override onFormSubmit(values: any): void {
     this.leaveAbstract();
+    const category = this.resourceCategories.find(s => s.id === Number(this.myForm.controls['resourceCategoryId'].value));
+    values.resourceCategoryTitle = category?.title;
     super.onFormSubmit(values);
   }
 

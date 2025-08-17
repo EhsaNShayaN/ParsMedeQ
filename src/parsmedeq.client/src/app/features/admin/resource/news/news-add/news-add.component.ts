@@ -35,7 +35,7 @@ export class NewsAddComponent extends BaseResourceComponent implements OnInit {
           this.restApiService.getResource({id: params['id'], tableId: Tables.News}).subscribe((a: Resource) => {
             this.editItem = a;
             this.myForm = this.formBuilder.group({
-              category: [this.resourceCategories.find(s => s.id === a.categoryId), Validators.required],
+              category: [this.resourceCategories.find(s => s.id === a.resourceCategoryId), Validators.required],
               title: [a.title, Validators.required],
               abstract: [a.abstract, Validators.required],
               description: [a.description, Validators.required],
@@ -69,7 +69,6 @@ export class NewsAddComponent extends BaseResourceComponent implements OnInit {
             description: ['', Validators.required],
             image: '',
             keywords: '',
-            journalId: '',
             expirationDate: null,
             expirationTime: '',
             anchors: this.formBuilder.array([]),
