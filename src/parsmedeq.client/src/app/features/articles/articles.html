@@ -51,7 +51,7 @@
                         <span class="background-color bg-green">vip</span>
                       </div>
                       <a
-                        [routerLink]="['/articles', item.secondId, item.title | replaceUrlSpaces ]"
+                        [routerLink]="['/articles', item.id, item.title | replaceUrlSpaces ]"
                         class="agent-img">
                         <img mat-card-image [src]="item.image" [alt]="item.title" class="w-100 img-square"/>
                       </a>
@@ -85,9 +85,8 @@
                       <mat-card-actions fxLayoutAlign="space-between center">
                         <div fxLayout="row" fxLayoutAlign="start center" class="text-muted"></div>
                         <div>
-                          <a
-                            [routerLink]="['/articles', item.secondId, item.title | replaceUrlSpaces ]"
-                            mat-button color="primary" class="uppercase">
+                          <a [routerLink]="['/articles', item.id, item.title | replaceUrlSpaces ]"
+                             mat-button color="primary" class="uppercase">
                             {{ viewText }}
                           </a>
                         </div>

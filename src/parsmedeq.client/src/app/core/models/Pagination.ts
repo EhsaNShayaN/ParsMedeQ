@@ -1,7 +1,7 @@
 export class PagingRequest {
   pageIndex!: number;
   pageSize!: number;
-  lastId!: number;
+  lastId?: number = 0;   // default value
   sort?: number;
   query?: string;
   fromDate?: string;

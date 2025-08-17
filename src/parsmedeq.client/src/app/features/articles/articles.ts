@@ -59,7 +59,7 @@ export class Articles extends BaseComponent implements OnInit, DoCheck {
 
   public getItems() {
     const model: ResourcesRequest = {
-      page: this.pagination.page,
+      pageIndex: this.pagination.page,
       pageSize: this.pagination.perPage,
       sort: this.sort,
       id: this.selectedId,

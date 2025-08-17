@@ -1,9 +1,9 @@
 import {Component, HostListener, OnDestroy, OnInit, Injector} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {BaseComponent} from '../../../base-component';
-import {Article} from '../../../core/models/ArticleResponse';
 import {AppSettings, Settings} from '../../../app.settings';
 import {Tables} from '../../../core/constants/server.constants';
+import {Resource} from '../../../core/models/ResourceResponse';
 
 @Component({
   selector: 'app-article',
@@ -13,7 +13,7 @@ import {Tables} from '../../../core/constants/server.constants';
 })
 export class ArticleDetail extends BaseComponent implements OnInit, OnDestroy {
   private sub: any;
-  public item: Article | undefined;
+  public item: Resource | undefined;
   public message: string | undefined;
   public settings: Settings;
   ltr = '';

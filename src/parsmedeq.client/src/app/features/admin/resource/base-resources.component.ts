@@ -7,79 +7,78 @@ import {Resource, ResourceResponse, ResourcesRequest} from "../../../core/models
 
 @Directive()
 export class BaseResourcesComponent extends BaseReportComponent implements OnInit, OnDestroy {
-    tableId: number;
-    dataSource!: MatTableDataSource<Resource>;
-    @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator | null = null;
-    @ViewChild(MatSort, {static: true}) sort: MatSort | null = null;
-    pageIndex = 1;
-    pageSize = 5;
-    totalCount = 0;
+  tableId: number;
+  dataSource!: MatTableDataSource<Resource>;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator | null = null;
+  @ViewChild(MatSort, {static: true}) sort: MatSort | null = null;
+  pageIndex = 1;
+  pageSize = 5;
+  totalCount = 0;
 
-    ///////////
+  ///////////
 
-    constructor(injector: Injector,
-                tableId: number) {
-        super(injector);
-        this.tableId = tableId;
-    }
+  constructor(injector: Injector,
+              tableId: number) {
+    super(injector);
+    this.tableId = tableId;
+  }
 
-    ngOnInit() {
-        this.setPaginationLang();
-        this.getItems();
-    }
+  ngOnInit() {
+    this.setPaginationLang();
+    this.getItems();
+  }
 
-    getItems() {
-        let model: ResourcesRequest = {
-            pageIndex: this.pageIndex,
-            pageSize: this.pageSize,
-            lastId: 0,
-            sort: 0,
-            tableId: this.tableId
-        };
-        this.restApiService.getResources(model).subscribe((res: ResourceResponse) => {
-            this.initDataSource(res);
-        });
-    }
+  getItems() {
+    let model: ResourcesRequest = {
+      pageIndex: this.pageIndex,
+      pageSize: this.pageSize,
+      sort: 0,
+      tableId: this.tableId
+    };
+    this.restApiService.getResources(model).subscribe((res: ResourceResponse) => {
+      this.initDataSource(res);
+    });
+  }
 
-    initDataSource(res: ResourceResponse) {
-        this.totalCount = res.totalCount;
-        this.pageSize = res.pageSize;
-        this.dataSource = new MatTableDataSource<Resource>(res.data);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-    }
+  initDataSource(res: ResourceResponse) {
+    this.totalCount = res.totalCount;
+    this.pageSize = res.pageSize;
+    this.dataSource = new MatTableDataSource<Resource>(res.data);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
 
-    remove(property: Resource) {
-        console.log('delete');
-        /*const index: number = this.dataSource.data.indexOf(property);
-        if (index !== -1) {
-          const message = this.appService.getTranslateValue('MESSAGE.SURE_DELETE') ?? '';
-          let dialogRef = this.dialogService.openConfirmDialog('', message);
-          dialogRef.afterClosed().subscribe(dialogResult => {
-            if (dialogResult) {
-              this.dataSource.data.splice(index, 1);
-              this.initDataSource(this.dataSource.data);
-            }
-          });
-        }*/
-    }
-
-    onPaginateChange(event: any) {
-        if (event.previousPageIndex !== event.pageIndex) {
-            this.pageIndex = event.pageIndex + 1;
+  remove(property: Resource) {
+    console.log('delete');
+    /*const index: number = this.dataSource.data.indexOf(property);
+    if (index !== -1) {
+      const message = this.appService.getTranslateValue('MESSAGE.SURE_DELETE') ?? '';
+      let dialogRef = this.dialogService.openConfirmDialog('', message);
+      dialogRef.afterClosed().subscribe(dialogResult => {
+        if (dialogResult) {
+          this.dataSource.data.splice(index, 1);
+          this.initDataSource(this.dataSource.data);
         }
-        if (this.pageSize !== event.pageSize) {
-            this.pageSize = event.pageSize;
-            this.pageIndex = 1;
-        }
-        this.getItems();
-    }
+      });
+    }*/
+  }
 
-    sortChanged($event: Sort) {
-        console.log($event);
-        this.getItems();
+  onPaginateChange(event: any) {
+    if (event.previousPageIndex !== event.pageIndex) {
+      this.pageIndex = event.pageIndex + 1;
     }
+    if (this.pageSize !== event.pageSize) {
+      this.pageSize = event.pageSize;
+      this.pageIndex = 1;
+    }
+    this.getItems();
+  }
 
-    ngOnDestroy() {
-    }
+  sortChanged($event: Sort) {
+    console.log($event);
+    this.getItems();
+  }
+
+  ngOnDestroy() {
+  }
 }

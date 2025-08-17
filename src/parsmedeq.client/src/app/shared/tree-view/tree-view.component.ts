@@ -25,7 +25,7 @@ interface ExampleFlatNode {
   standalone: true
 })
 export class TreeViewComponent implements OnInit {
-  @Input() selectedId: string | undefined;
+  @Input() selectedId: number = 0;
   @Input() data: Tree[] = [];
   @Output() onItemClicked = new EventEmitter<Tree>();
   @Input() marginClass: string = 'mr-5';

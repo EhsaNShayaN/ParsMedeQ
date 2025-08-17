@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, DoCheck, Injector} from '@angular/core';
+import {Component, DoCheck, Injector, Input, OnInit} from '@angular/core';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {mobileValidator} from '../../core/utils/app-validators';
 import {Pagination} from '../../core/models/Pagination';
@@ -16,7 +16,7 @@ import {AuthService} from '../../core/services/auth.service';
   standalone: false
 })
 export class CommentsComponent extends PureComponent implements OnInit, DoCheck {
-  @Input() relatedId: string | undefined;
+  @Input() relatedId: number = 0;
   @Input() tableId: number = 0;
   public commentForm!: UntypedFormGroup;
   public ratings = [
@@ -41,7 +41,7 @@ export class CommentsComponent extends PureComponent implements OnInit, DoCheck 
   }
 
   ngOnInit() {
-    this.getItems(undefined);
+    this.getItems(this.relatedId);
     this.commentForm = this.fb.group({
       description: [null, Validators.required],
       mobile: [null, this.authService.isLoggedIn() ? null : Validators.compose([Validators.required, mobileValidator])],
@@ -52,7 +52,7 @@ export class CommentsComponent extends PureComponent implements OnInit, DoCheck 
     });
   }
 
-  public getItems(id: string | undefined) {
+  public getItems(id: number) {
     const model = {
       page: this.pagination.page,
       pageSize: this.pagination.perPage,
