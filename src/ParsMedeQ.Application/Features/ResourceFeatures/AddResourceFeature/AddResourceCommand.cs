@@ -18,7 +18,6 @@ public sealed record class AddResourceCommand
     string Abstract,
     string Anchors,
     DateTime? ExpirationDate,
-    string ExpirationTime,
     string Keywords,
     string PublishDate,
     byte[] Image,

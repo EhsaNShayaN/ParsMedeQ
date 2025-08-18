@@ -40,8 +40,16 @@ public sealed class AddResourceCommandHandler : IPrimitiveResultCommandHandler<A
                     .Map(imagePath => (resource, imagePath)))
                 .Map(data => UploadFile(this._fileService, request.File, request.FileExtension, "Resources\\Files", cancellationToken)
                     .Map(filePath => (data.resource, data.imagePath, filePath)))
+
+                .MapIf(
+                    data => string.IsNullOrEmpty(data.filePath),
+                    data => Media.Create(request.TableId, data.filePath, string.Empty)
+                        .Map(media => (data.resource, data.imagePath, data.filePath, media)),
+                    data => ValueTask.FromResult(PrimitiveResult.Success((data.resource, data.imagePath, data.filePath, default(Media))))
+                )
                 .Map(data => Media.Create(request.TableId, data.filePath, string.Empty)
                     .Map(media => (data.resource, data.imagePath, data.filePath, media)))
+
                 .Map(data => data.resource.SetFiles(data.imagePath, data.media?.Id))
                 .Map(resource => _writeUnitOfWork.ResourceWriteRepository.AddResource(resource, cancellationToken))
                 .Map(resource => this._writeUnitOfWork.SaveChangesAsync(CancellationToken.None)
@@ -57,6 +65,7 @@ public sealed class AddResourceCommandHandler : IPrimitiveResultCommandHandler<A
         string fodlerName,
         CancellationToken cancellationToken)
     {
+        if ((bytes?.Length ?? 0) == 0) return string.Empty;
         var result = await fileService.UploadFile(bytes, fileExtension, fodlerName, cancellationToken).ConfigureAwait(false);
         if (string.IsNullOrWhiteSpace(result)) return PrimitiveResult.Failure<string>("", "Can not upload file");
 

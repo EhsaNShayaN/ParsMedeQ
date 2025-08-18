@@ -53,29 +53,13 @@ export class RestApiService {
     );
   }
 
-  addResource0(): Observable<any> {
-    const model = {mobile: '9123440731'};
-    return this.http.post<any>(`${endpoint()}resource/add`, model).pipe(
-      catchError(this.handleError)
-    );
-  }
-
   addResource(model: AddResourceRequest, image: any = null, file: any = null): Observable<any> {
-    const formData: FormData = new FormData();
+    const formData: FormData = this.toFormData(model);
+    //const formData: FormData = new FormData();
     formData.append('image', image);
     formData.append('file', file);
-    formData.append('model', JSON.stringify(model));
-    return this.http.post<BaseResult<boolean>>(`${endpoint()}resource/add`, formData).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  editResource(model: AddResourceRequest, image: any = null, file: any = null): Observable<any> {
-    const formData: FormData = new FormData();
-    formData.append('image', image);
-    formData.append('file', file);
-    formData.append('model', JSON.stringify(model));
-    return this.http.post<BaseResult<boolean>>(`${endpoint()}resource/add`, formData).pipe(
+    //formData.append('model', JSON.stringify(model));
+    return this.http.post<BaseResult<boolean>>(`${endpoint()}resource/${model.id ? 'edit' : 'add'}`, formData).pipe(
       catchError(this.handleError)
     );
   }
@@ -93,6 +77,45 @@ export class RestApiService {
     });
     return params.toString();
   }
+
+  toFormData<T extends Record<string, any>>(obj: T): FormData {
+    const formData = new FormData();
+
+    Object.entries(obj).forEach(([key, value]) => {
+
+      console.log(key, typeof(value));
+
+      if (value === undefined || value === null) return;
+
+      // If it's a File or Blob -> append directly (binary)
+      if (value instanceof File || value instanceof Blob) {
+        formData.append(key, value);
+      }
+      // If it's an array
+      else if (Array.isArray(value)) {
+        value.forEach((item, i) => {
+          if (item instanceof File || item instanceof Blob) {
+            formData.append(`${key}[${i}]`, item);
+          } else if (typeof item === "object") {
+            formData.append(`${key}[${i}]`, JSON.stringify(item));
+          } else {
+            formData.append(`${key}[${i}]`, String(item));
+          }
+        });
+      }
+      // If it's an object (non-binary)
+      else if (typeof value === "object") {
+        formData.append(key, JSON.stringify(value));
+      }
+      // primitives
+      else {
+        formData.append(key, String(value));
+      }
+    });
+
+    return formData;
+  }
+
 
   handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {

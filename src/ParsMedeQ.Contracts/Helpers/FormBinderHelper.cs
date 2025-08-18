@@ -10,10 +10,29 @@ internal static class FormBinderHelper
     public static T Bind<T>(IFormCollection form) where T : new()
     {
         var obj = new T();
-        var props = GetOrSetTypeProperties(typeof(T));
+        var props = typeof(T).GetProperties();
 
         foreach (var prop in props)
         {
+            // Handle IFormFile
+            if (prop.PropertyType == typeof(IFormFile))
+            {
+                var file = form.Files.GetFile(prop.Name);
+                if (file != null)
+                    prop.SetValue(obj, file);
+                continue;
+            }
+
+            // Handle IFormFile[]
+            if (prop.PropertyType == typeof(IFormFile[]))
+            {
+                var files = form.Files.GetFiles(prop.Name).ToArray();
+                if (files.Length > 0)
+                    prop.SetValue(obj, files);
+                continue;
+            }
+
+            // Handle simple values
             if (!form.TryGetValue(prop.Name, out var value))
                 continue;
 
@@ -27,7 +46,7 @@ internal static class FormBinderHelper
             }
             catch
             {
-                // ignore if conversion fails
+                // ignore conversion errors
             }
         }
 

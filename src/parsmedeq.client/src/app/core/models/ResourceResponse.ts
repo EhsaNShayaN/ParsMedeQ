@@ -59,7 +59,7 @@ export interface AddResourceRequest {
   id?: number;
   tableId: number;
   title: string;
-  image: string;
+  imagePath?: string;
   mimeType: string;
   language: string;
   isVip: boolean;
@@ -76,7 +76,7 @@ export interface AddResourceRequest {
   keywords: string;
   publishDate: string;
   categories: string[];
-  doc: string;
+  fileId?: number;
 }
 
 
