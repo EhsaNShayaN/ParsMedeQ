@@ -4,7 +4,7 @@ CREATE TABLE [dbo].[ResourceCategoryRelations]
 [TableId] [int] NOT NULL,
 [ResourceCategoryId] [int] NOT NULL,
 [ResourceId] [int] NOT NULL,
-[CreationDate] [datetime2] NOT NULL
+[CreationDate] [datetime] NOT NULL
 ) ON [PRIMARY]
 GO
 ALTER TABLE [dbo].[ResourceCategoryRelations] ADD CONSTRAINT [PK_ResourceCategoryRelations] PRIMARY KEY CLUSTERED ([Id]) ON [PRIMARY]
