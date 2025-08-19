@@ -2,11 +2,6 @@ CREATE TABLE [dbo].[Resource]
 (
 [Id] [int] NOT NULL IDENTITY(1, 1),
 [TableId] [int] NOT NULL,
-[Title] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-[Abstract] [nvarchar] (4000) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-[Anchors] [nvarchar] (max) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-[Description] [nvarchar] (max) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-[Keywords] [nvarchar] (max) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 [ResourceCategoryId] [int] NOT NULL,
 [ResourceCategoryTitle] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 [Image] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
