@@ -238,3 +238,4 @@ packages/
 **/obj/
 /src/Dpi.TSP.Api/.config
 /src/Dpi.TSP.Api/Properties/PublishProfiles
+/src/ParsMedeQ.Server/Repository

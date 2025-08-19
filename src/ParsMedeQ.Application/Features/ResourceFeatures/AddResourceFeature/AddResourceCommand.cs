@@ -28,9 +28,9 @@ public sealed record class AddResourceCommand
 {
     public ValueTask<PrimitiveResult<AddResourceCommand>> Validate() => PrimitiveResult.Success(this)
             .Ensure([
-                value => MobileType.Create(value.Title)
+                value => PrimitiveResult.Success(string.IsNullOrWhiteSpace(value.Title))
                 .Match(
                     _ => PrimitiveResult.Success() ,
-                    _ => PrimitiveResult.Failure("Validation.Error", "موبایل ارسالی نامعتبر است"))
+                    _ => PrimitiveResult.Failure("Validation.Error", "عشق ارسالی نامعتبر است"))
                 ]);
 }

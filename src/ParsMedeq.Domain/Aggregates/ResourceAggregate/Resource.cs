@@ -61,8 +61,8 @@ public sealed class Resource : EntityBase<int>
         string keywords,
         int resourceCategoryId,
         string resourceCategoryTitle,
-        string image,
-        int? fileId,
+        /*string image,
+        int? fileId,*/
         string language,
         string publishDate,
         string publishInfo,
@@ -84,8 +84,8 @@ public sealed class Resource : EntityBase<int>
                 Keywords = keywords,
                 ResourceCategoryId = resourceCategoryId,
                 ResourceCategoryTitle = resourceCategoryTitle,
-                Image = image,
-                FileId = fileId,
+                /*Image = image,
+                FileId = fileId,*/
                 Language = language,
                 PublishDate = publishDate,
                 PublishInfo = publishInfo,

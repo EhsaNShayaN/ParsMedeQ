@@ -168,4 +168,10 @@ export class ArticleAddComponent extends BaseResourceComponent implements OnInit
       anchors.push(this.formBuilder.group(p));
     });
   }
+
+  onFormSubmit2(myForm: UntypedFormGroup) {
+    var ctrl = myForm.controls["fileId"] as any;
+    const f = ctrl.value as File;
+    console.log(f);
+  }
 }

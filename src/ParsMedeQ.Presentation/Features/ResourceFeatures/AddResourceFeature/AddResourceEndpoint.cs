@@ -32,13 +32,15 @@ sealed class AddResourceEndpoint : EndpointHandlerBase<
         if (request.Image is not null)
         {
             imageBytes = await this.ReadStream(request.Image.OpenReadStream()).ConfigureAwait(false);
+            imageExtension = Path.GetExtension(request.Image.FileName);
         }
         if (request.File is not null)
         {
             fileBytes = await this.ReadStream(request.File.OpenReadStream()).ConfigureAwait(false);
+            fileExtension = Path.GetExtension(request.File.FileName);
         }
 
-        var description = HttpUtility.HtmlDecode(request.Description);
+        var description = HttpUtility.HtmlDecode(request.Description ?? string.Empty);
         if (request.Anchors?.Length > 0)
         {
             var counter = 1;
