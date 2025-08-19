@@ -1,4 +1,5 @@
 ﻿using ParsMedeQ.Domain.Abstractions;
+using ParsMedeQ.Domain.Aggregates.ResourceAggregate.Entities;
 using ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate;
 using ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate.Entities;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,15 +10,11 @@ public sealed class Resource : EntityBase<int>
 {
     #region " Fields "
     private List<ResourceCategoryRelations> _resourceCategoryRelations = [];
+    private List<ResourceTranslation> _resourceTranslations = [];
     #endregion
 
     #region " Properties "
     public int TableId { get; private set; }
-    public string Title { get; private set; } = string.Empty;
-    public string Abstract { get; private set; } = string.Empty;
-    public string Anchors { get; private set; } = string.Empty;
-    public string Description { get; private set; } = string.Empty;
-    public string Keywords { get; private set; } = string.Empty;
     public int ResourceCategoryId { get; private set; }
     public string ResourceCategoryTitle { get; set; } = string.Empty;
     public string Image { get; private set; } = string.Empty;
@@ -44,6 +41,7 @@ public sealed class Resource : EntityBase<int>
     [NotMapped]
     public ResourceCategory[]? ResourceCategories { get; set; }
     public IReadOnlyCollection<ResourceCategoryRelations> ResourceCategoryRelations => this._resourceCategoryRelations.AsReadOnly();
+    public IReadOnlyCollection<ResourceTranslation> ResourceTranslations => this._resourceTranslations.AsReadOnly();
     #endregion
 
     #region " Constructors "
@@ -61,8 +59,6 @@ public sealed class Resource : EntityBase<int>
         string keywords,
         int resourceCategoryId,
         string resourceCategoryTitle,
-        /*string image,
-        int? fileId,*/
         string language,
         string publishDate,
         string publishInfo,
@@ -70,11 +66,10 @@ public sealed class Resource : EntityBase<int>
         int price,
         int discount,
         bool isVip,
-        //int ordinal,
         DateTime? expirationDate)
     {
         return PrimitiveResult.Success(
-            new Resource()
+            new Resource
             {
                 TableId = tableId,
                 Title = title,
@@ -84,8 +79,6 @@ public sealed class Resource : EntityBase<int>
                 Keywords = keywords,
                 ResourceCategoryId = resourceCategoryId,
                 ResourceCategoryTitle = resourceCategoryTitle,
-                /*Image = image,
-                FileId = fileId,*/
                 Language = language,
                 PublishDate = publishDate,
                 PublishInfo = publishInfo,
@@ -94,7 +87,6 @@ public sealed class Resource : EntityBase<int>
                 Discount = discount,
                 IsVip = isVip,
                 DownloadCount = 0,
-                //Ordinal = ordinal,
                 ExpirationDate = expirationDate,
                 CreationDate = DateTime.Now
             });
