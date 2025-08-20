@@ -80,7 +80,7 @@ sealed class ResourceListApiResponseMapper : IPresentationMapper<
                         data.TableId,
                         data.ResourceCategoryId,
                         data.ResourceCategoryTitle,
-                        data.Title,
+                        string.Empty, //TODO :ResourceCategory.Title
                         data.Image,
                         data.Language,
                         data.Price,

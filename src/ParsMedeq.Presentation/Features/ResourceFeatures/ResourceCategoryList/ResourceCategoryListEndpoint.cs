@@ -66,8 +66,8 @@ sealed class ResourceCategoryListApiResponseMapper : IPresentationMapper<
                     new ResourceCategoryListApiResponse(
                         data.Id,
                         data.TableId,
-                        data.Title,
-                        data.Description,
+                        string.Empty, //TODO :ResourceCategory.Title
+                        string.Empty, //TODO :ResourceCategory.Title
                         data.Count,
                         data.ParentId,
                         data.CreationDate.ToPersianDate()))

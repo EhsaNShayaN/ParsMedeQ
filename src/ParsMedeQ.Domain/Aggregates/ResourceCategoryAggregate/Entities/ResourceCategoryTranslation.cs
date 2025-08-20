@@ -7,6 +7,7 @@ public sealed class ResourceCategoryTranslation : EntityBase<int>
     public string LanguageCode { get; private set; } = null!;
     public string Title { get; private set; } = null!;
     public string Description { get; private set; } = string.Empty;
+    public int ResourceCategoryId { get; private set; }
     #endregion
 
     #region " Navigation Properties "
@@ -19,13 +20,15 @@ public sealed class ResourceCategoryTranslation : EntityBase<int>
     #endregion
 
     #region " Factory "
-    public static PrimitiveResult<ResourceCategoryTranslation> Create(
+    internal static PrimitiveResult<ResourceCategoryTranslation> Create(
+        string languageCode,
         string title,
         string description)
     {
         return PrimitiveResult.Success(
             new ResourceCategoryTranslation
             {
+                LanguageCode = languageCode,
                 Title = title,
                 Description = description
             });

@@ -72,11 +72,11 @@ public sealed class Resource : EntityBase<int>
             new Resource
             {
                 TableId = tableId,
-                Title = title,
-                Abstract = @abstract,
-                Anchors = anchors,
-                Description = description,
-                Keywords = keywords,
+                //Title = title,
+                //Abstract = @abstract,
+                //Anchors = anchors,
+                //Description = description,
+                //Keywords = keywords,
                 ResourceCategoryId = resourceCategoryId,
                 ResourceCategoryTitle = resourceCategoryTitle,
                 Language = language,
@@ -99,4 +99,5 @@ public sealed class Resource : EntityBase<int>
         this.FileId = fileId;
         return this;
     }
+
 }

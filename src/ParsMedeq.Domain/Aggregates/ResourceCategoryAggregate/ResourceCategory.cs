@@ -33,7 +33,7 @@ public sealed class ResourceCategory : EntityBase<int>
     #endregion
 
     #region " Factory "
-    public static async ValueTask<PrimitiveResult<ResourceCategory>> Create(
+    /*public static async ValueTask<PrimitiveResult<ResourceCategory>> Create(
         string title,
         string description,
         int tableId,
@@ -59,17 +59,45 @@ public sealed class ResourceCategory : EntityBase<int>
                 return data.resourceCategory;
             }).ConfigureAwait(false);
         return result;
+    }*/
+
+    public static async ValueTask<PrimitiveResult<ResourceCategory>> Create(
+        string title,
+        string description,
+        int tableId,
+        int count,
+        int? parentId,
+        DateTime creationDate)
+    {
+        return PrimitiveResult.Success(
+            new ResourceCategory
+            {
+                TableId = tableId,
+                Count = count,
+                ParentId = parentId,
+                CreationDate = creationDate,
+            });
     }
     public PrimitiveResult<ResourceCategory> Update(
         string title,
         string description,
         int? parentId)
     {
-        this.Title = title;
-        this.Description = description;
+        //this.Title = title;
+        //this.Description = description;
         this.ParentId = parentId;
 
         return this;
     }
     #endregion
+
+    public ValueTask<PrimitiveResult> AddTranslation(string langCode, string title, string description)
+    {
+        return ResourceCategoryTranslation.Create(langCode, title, description)
+            .OnSuccess(newTranslation => this._resourceCategoryTranslations.Add(newTranslation.Value))
+            .Match(
+                success => PrimitiveResult.Success(),
+                PrimitiveResult.Failure
+            );
+    }
 }

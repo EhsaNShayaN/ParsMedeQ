@@ -86,11 +86,11 @@ internal sealed class ResourceReadRepository : GenericPrimitiveReadRepositoryBas
             {
                 Id = res.Id,
                 TableId = res.TableId,
-                Title = res.Title,
-                Abstract = res.Abstract,
-                Anchors = res.Anchors,
-                Description = res.Description,
-                Keywords = res.Keywords,
+                Title = string.Empty, //TODO :ResourceCategory.Title
+                Abstract = string.Empty, //TODO :ResourceCategory.Title
+                Anchors = string.Empty, //TODO :ResourceCategory.Title
+                Description = string.Empty, //TODO :ResourceCategory.Title
+                Keywords = string.Empty, //TODO :ResourceCategory.Title
                 ResourceCategoryId = res.ResourceCategoryId,
                 ResourceCategoryTitle = res.ResourceCategoryTitle,
                 Image = res.Image,
@@ -113,7 +113,7 @@ internal sealed class ResourceReadRepository : GenericPrimitiveReadRepositoryBas
                     from rel in this.DbContext.ResourceCategoryRelations
                     join cat in this.DbContext.ResourceCategory on rel.ResourceCategoryId equals cat.Id
                     where rel.Id == res.Id
-                    select new ResourceCategoryDbQueryResponse(cat.Id, cat.Title)
+                    select new ResourceCategoryDbQueryResponse(cat.Id, string.Empty)
                 ).ToArray()
             };
 

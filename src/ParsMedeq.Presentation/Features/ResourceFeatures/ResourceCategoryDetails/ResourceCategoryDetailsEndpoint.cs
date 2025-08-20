@@ -1,7 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
-using org.apache.zookeeper.data;
 using ParsMedeQ.Application.Features.ResourceCategoryFeatures.ResourceCategoryDetailsFeature;
 using ParsMedeQ.Contracts;
 using ParsMedeQ.Contracts.ResourceCategoryContracts.ResourceCategoryDetailsContract;
@@ -64,8 +62,8 @@ sealed class ResourceCategoryDetailsApiResponseMapper : IPresentationMapper<
                     new ResourceCategoryDetailsApiResponse(
                         src.Id,
                         src.TableId,
-                        src.Title,
-                        src.Description,
+                        string.Empty,
+                        string.Empty,
                         src.Count,
                         src.ParentId,
                         src.CreationDate.ToPersianDate())

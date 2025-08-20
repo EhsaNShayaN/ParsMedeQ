@@ -42,7 +42,7 @@ sealed class ResourceListQueryHandler : IPrimitiveResultQueryHandler<ResourceLis
         {
             foreach (var s in resources.Items)
             {
-                s.ResourceCategoryTitle = categories.FirstOrDefault(f => f.Id == s.ResourceCategoryId)?.Title;
+                //s.ResourceCategoryTitle = categories.FirstOrDefault(f => f.Id == s.ResourceCategoryId)?.Title;
             }
             return resources;
         }))

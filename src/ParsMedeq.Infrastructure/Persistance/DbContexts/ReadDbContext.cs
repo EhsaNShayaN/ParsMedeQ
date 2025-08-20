@@ -17,4 +17,10 @@ public sealed class ReadDbContext : DbContextBase<ReadDbContext>
     public DbSet<Media> Media { get; set; }
 
     public ReadDbContext(DbContextOptions<ReadDbContext> opts) : base(opts) { }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.ApplyConfigurationsFromAssembly(InfrastructureAssemblyReference.Assembly);
+        base.OnModelCreating(modelBuilder);
+    }
 }
