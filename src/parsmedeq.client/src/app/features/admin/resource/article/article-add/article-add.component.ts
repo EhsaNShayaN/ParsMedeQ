@@ -9,6 +9,7 @@ import {getCustomEditorConfigs} from '../../../../../core/custom-editor-configs'
 import {ResourceCategoriesResponse, ResourceCategory} from '../../../../../core/models/ResourceCategoryResponse';
 import {Resource} from '../../../../../core/models/ResourceResponse';
 import {JalaliMomentDateAdapter} from '../../../../../core/custom-date-adapter';
+import {BaseResult} from '../../../../../core/models/BaseResult';
 
 @Component({
   selector: 'app-article-add',
@@ -37,29 +38,29 @@ export class ArticleAddComponent extends BaseResourceComponent implements OnInit
       this.restApiService.getResourceCategories(Tables.Article).subscribe((acr: ResourceCategoriesResponse) => {
         this.resourceCategories = acr.data;
         if (params['id']) {
-          this.restApiService.getResource({id: params['id'], tableId: Tables.Article}).subscribe((a: Resource) => {
-            this.editItem = a;
+          this.restApiService.getResource({id: params['id'], tableId: Tables.Article}).subscribe((a: BaseResult<Resource>) => {
+            this.editItem = a.data;
             this.myForm = this.formBuilder.group({
-              resourceCategoryId: [this.resourceCategories.find(s => s.id === a.resourceCategoryId)?.id, Validators.required],
-              title: [a.title, Validators.required],
-              abstract: [a.abstract, Validators.required],
+              resourceCategoryId: [this.editItem.resourceCategoryId, Validators.required],
+              title: [this.editItem.title, Validators.required],
+              abstract: [this.editItem.abstract, Validators.required],
               imagePath: null,
-              keywords: a.keywords,
+              keywords: this.editItem.keywords,
               expirationDate: null,
               expirationTime: '',
               anchors: this.formBuilder.array([]),
-              language: a.language,
+              language: this.editItem.language,
               fileId: null,
-              publishDate: a.publishDate,
-              isVip: a.isVip,
-              price: a.price,
-              discount: a.discount,
+              publishDate: this.editItem.publishDate,
+              isVip: this.editItem.isVip,
+              price: this.editItem.price,
+              discount: this.editItem.discount,
             });
-            if (a.expirationDate) {
-              const array = a.expirationDate.split('/').map(s => Number(s));
+            if (this.editItem.expirationDate) {
+              const array = this.editItem.expirationDate.split('/').map(s => Number(s));
               this.myForm.controls['expirationDate'].setValue(new JalaliMomentDateAdapter('').createDate(array[0], array[1] - 1, array[2]));
-              this.expDate = a.expirationDate;
-              this.expTime = a.expirationTime;
+              this.expDate = this.editItem.expirationDate;
+              this.expTime = this.editItem.expirationTime;
             }
             this.editAnchors();
           });
@@ -170,7 +171,7 @@ export class ArticleAddComponent extends BaseResourceComponent implements OnInit
   }
 
   onFormSubmit2(myForm: UntypedFormGroup) {
-    var ctrl = myForm.controls["fileId"] as any;
+    var ctrl = myForm.controls['fileId'] as any;
     const f = ctrl.value as File;
     console.log(f);
   }

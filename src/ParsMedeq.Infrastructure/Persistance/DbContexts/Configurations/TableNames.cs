@@ -5,6 +5,7 @@ internal static class TableNames
     internal static string ProductCategory = "ProductCategory";
     internal static string User = "Users";
     internal static string Resource = "Resource";
+    internal static string ResourceTranslation = "ResourceTranslation";
     internal static string ResourceCategory = "ResourceCategory";
     internal static string ResourceCategoryTranslation = "ResourceCategoryTranslation";
     internal static string ResourceCategoryRelations = "ResourceCategoryRelations";

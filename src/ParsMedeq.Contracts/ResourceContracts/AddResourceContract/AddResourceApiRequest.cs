@@ -16,7 +16,6 @@ public sealed class AddResourceApiRequest
     public string PublishInfo { get; private set; } = string.Empty;
     public string Publisher { get; private set; } = string.Empty;
     public int ResourceCategoryId { get; private set; }
-    public string ResourceCategoryTitle { get; private set; } = string.Empty;
     public string Abstract { get; private set; } = string.Empty;
     public AnchorInfo[] Anchors { get; private set; } = [];
     public string ExpirationDate { get; private set; } = string.Empty;

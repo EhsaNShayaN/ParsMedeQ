@@ -32,77 +32,44 @@ sealed class ResourceDetailsQueryHandler : IPrimitiveResultQueryHandler<Resource
     public async Task<PrimitiveResult<ResourceDetailsDbQueryResponse>> HandleCore(
         ResourceDetailsQuery request,
         CancellationToken cancellationToken) =>
-        await this._readUnitOfWork
-            .ResourceReadRepository
-            .ResourceDetails(
-                request.ResourceId,
-                cancellationToken)
-        .Map(resource =>
-            this._readUnitOfWork.ResourceReadRepository.FilterResourceCategories(request.TableId, cancellationToken)
-            .Map(categories =>
-            {
-                this._readUnitOfWork.ResourceReadRepository.FilterResourceCategoryRelations(request.ResourceId, cancellationToken)
-                .Map(relations => categories.Join(relations, pv => pv.Id, rp => rp.ResourceCategoryId, (pv, rp) => pv).ToArray())
-                .Map(categories => resource.ResourceCategories = categories)
-                .Map(_ => this._readUnitOfWork.PurchaseReadRepository.GetPurchase(request.TableId, request.ResourceId, request.UserId, cancellationToken))
-                .Map(purchase => resource.Registered = purchase is not null);
-                return resource;
-            }))
-        .Map(x => new ResourceDetailsDbQueryResponse())
+        await this._readUnitOfWork.ResourceReadRepository.ResourceDetails(
+            request.UserId,
+            request.ResourceId,
+            request.TableId,
+            cancellationToken)
+        .Map(res => new ResourceDetailsDbQueryResponse
+        {
+            Id = res.Resource.Id,
+            TableId = res.Resource.TableId,
+            Title = res.ResourceTranslation?.Title ?? string.Empty,
+            Description = res.ResourceTranslation?.Description ?? string.Empty,
+            Abstract = res.ResourceTranslation?.Abstract ?? string.Empty,
+            Anchors = res.ResourceTranslation?.Anchors ?? string.Empty,
+            Keywords = res.ResourceTranslation?.Keywords ?? string.Empty,
+            ResourceCategoryId = res.Resource.ResourceCategory.Id,
+            ResourceCategoryTitle = res.ResourceCategoryTranslation?.Title ?? string.Empty,
+            Image = res.Resource.Image,
+            FileId = res.Resource.FileId,
+            Language = res.Resource.Language,
+            PublishDate = res.Resource.PublishDate,
+            PublishInfo = res.Resource.PublishInfo,
+            Publisher = res.Resource.Publisher,
+            Price = res.Resource.Price,
+            Discount = res.Resource.Discount,
+            IsVip = res.Resource.IsVip,
+            DownloadCount = res.Resource.DownloadCount,
+            Ordinal = res.Resource.Ordinal,
+            Deleted = res.Resource.Deleted,
+            Disabled = res.Resource.Disabled,
+            ExpirationDate = res.Resource.ExpirationDate,
+            CreationDate = res.Resource.CreationDate,
+            Registered = res.Resource.Registered,
+            /*ResourceCategories = (
+                from rel in this.DbContext.ResourceCategoryRelations
+                join cat in this.DbContext.ResourceCategory on rel.ResourceCategoryId equals cat.Id
+                where rel.Id == res.Resource.Id
+                select new ResourceCategoryDbQueryResponse(cat.Id, string.Empty)
+            ).ToArray()*/
+        })
         .ConfigureAwait(false);
-
-    /*public async Task<PrimitiveResult<Resource>> HandleCore2(
-        ResourceDetailsQuery request,
-        CancellationToken cancellationToken)
-    {
-        var result = await ContextualResult<ResourceDetailsQueryHandlerContext>.Create(new(cancellationToken))
-            .Execute(ctx => this._readUnitOfWork
-                .ResourceReadRepository
-                .ResourceDetails(request.ResourceId, ctx.CancellationToken)
-                .Map(ctx.SetResource))
-            .Execute(ctx => this._readUnitOfWork.ResourceReadRepository.FilterResourceCategories(request.TableId, cancellationToken).Map(ctx.SetResourceCategory))
-            .Map(c => c.Resource)
-            .ConfigureAwait(false);
-
-        return result;
-    }*/
 }
-
-/*sealed class ResourceDetailsQueryHandlerContext
-{
-    private readonly CancellationToken _cancellationToken;
-
-    public Resource Resource { get; private set; } = null!;
-    public ResourceCategory[] ResourceCategory { get; private set; } = [];
-    public ResourceCategoryRelations[] ResourceCategoryRelations { get; private set; } = [];
-    public Purchase? Purchase { get; private set; }
-    public CancellationToken CancellationToken => this._cancellationToken;
-
-    public ResourceDetailsQueryHandlerContext(CancellationToken cancellationToken)
-    {
-        this._cancellationToken = cancellationToken;
-    }
-
-
-
-    public ResourceDetailsQueryHandlerContext SetResource(Resource val)
-    {
-        this.Resource = val;
-        return this;
-    }
-    public ResourceDetailsQueryHandlerContext SetResourceCategory(ResourceCategory[] val)
-    {
-        this.ResourceCategory = val;
-        return this;
-    }
-    public ResourceDetailsQueryHandlerContext SetResourceCategoryRelations(ResourceCategoryRelations[] val)
-    {
-        this.ResourceCategoryRelations = val;
-        return this;
-    }
-    public ResourceDetailsQueryHandlerContext SetPurchase(Purchase val)
-    {
-        this.Purchase = val;
-        return this;
-    }
-}*/

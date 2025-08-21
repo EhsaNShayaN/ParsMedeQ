@@ -16,7 +16,6 @@ public sealed class Resource : EntityBase<int>
     #region " Properties "
     public int TableId { get; private set; }
     public int ResourceCategoryId { get; private set; }
-    public string ResourceCategoryTitle { get; set; } = string.Empty;
     public string Image { get; private set; } = string.Empty;
     public int? FileId { get; private set; }
     public string Language { get; private set; } = string.Empty;
@@ -53,7 +52,6 @@ public sealed class Resource : EntityBase<int>
     public static PrimitiveResult<Resource> Create(
         int tableId,
         int resourceCategoryId,
-        string resourceCategoryTitle,
         string language,
         string publishDate,
         string publishInfo,
@@ -61,19 +59,11 @@ public sealed class Resource : EntityBase<int>
         int price,
         int discount,
         bool isVip,
-        DateTime? expirationDate)
-    {
-        return PrimitiveResult.Success(
+        DateTime? expirationDate) => PrimitiveResult.Success(
             new Resource
             {
                 TableId = tableId,
-                //Title = title,
-                //Abstract = @abstract,
-                //Anchors = anchors,
-                //Description = description,
-                //Keywords = keywords,
                 ResourceCategoryId = resourceCategoryId,
-                ResourceCategoryTitle = resourceCategoryTitle,
                 Language = language,
                 PublishDate = publishDate,
                 PublishInfo = publishInfo,
@@ -85,7 +75,6 @@ public sealed class Resource : EntityBase<int>
                 ExpirationDate = expirationDate,
                 CreationDate = DateTime.Now
             });
-    }
     #endregion
 
     public PrimitiveResult<Resource> SetFiles(string imagePath, int? fileId)

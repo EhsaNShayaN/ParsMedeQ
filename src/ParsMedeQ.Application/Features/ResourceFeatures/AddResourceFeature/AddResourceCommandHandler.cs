@@ -21,7 +21,6 @@ public sealed class AddResourceCommandHandler : IPrimitiveResultCommandHandler<A
         return await Resource.Create(
             request.TableId,
             request.ResourceCategoryId,
-            request.ResourceCategoryTitle,
             request.Language,
             request.PublishDate,
             request.PublishInfo,

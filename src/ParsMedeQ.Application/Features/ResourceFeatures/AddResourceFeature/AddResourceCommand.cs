@@ -14,7 +14,6 @@ public sealed record class AddResourceCommand
     string PublishInfo,
     string Publisher,
     int ResourceCategoryId,
-    string ResourceCategoryTitle,
     string Abstract,
     string Anchors,
     DateTime? ExpirationDate,

@@ -64,16 +64,37 @@ internal sealed class ResourceReadRepository : GenericPrimitiveReadRepositoryBas
             .Map(a => a!);
     }
 
-    public ValueTask<PrimitiveResult<Resource>> ResourceDetails(int Id, CancellationToken cancellationToken)
+    public ValueTask<PrimitiveResult<ResourceDetailsDbQueryResponse0>> ResourceDetails(
+        int UserId,
+        int resourceId,
+        int TableId,
+        CancellationToken cancellationToken)
     {
-        return this.DbContext
-            .Resource
-            .Where(s => s.Id.Equals(Id))
-            .Run(q => q.FirstOrDefaultAsync(cancellationToken), PrimitiveError.Create("", "آیتم مورد نظر موجود نمی باشد."))
-            .Map(a => a!);
+        var langCode = "fa";
+
+        var query =
+            from res in this.DbContext.Resource.Include(r => r.ResourceCategory)
+            where res.Id == resourceId
+            select new ResourceDetailsDbQueryResponse0
+            {
+                Resource = res,
+
+                // Single translation object
+                ResourceTranslation = res.ResourceTranslations
+                                   .Where(rt => rt.LanguageCode == langCode)
+                                   .FirstOrDefault(),
+
+                // Category translation object
+                ResourceCategoryTranslation = res.ResourceCategory
+                                          .ResourceCategoryTranslations
+                                          .Where(ct => ct.LanguageCode == langCode)
+                                          .FirstOrDefault()
+            };
+        var x = query.ToQueryString();
+        return query.Run(q => q.FirstOrDefaultAsync(), PrimitiveError.CreateInternal("", ""))!;
     }
 
-    public ValueTask<PrimitiveResult<ResourceDetailsDbQueryResponse>> ResourceDetails(
+    public ValueTask<PrimitiveResult<ResourceDetailsDbQueryResponse>> ResourceDetails0(
         int UserId,
         int resourceId,
         int TableId,
@@ -81,18 +102,23 @@ internal sealed class ResourceReadRepository : GenericPrimitiveReadRepositoryBas
     {
         var query =
             from res in this.DbContext.Resource
+            .Include(s => s.ResourceTranslations)
+            .Include(s => s.ResourceCategory)
+                .ThenInclude(s => s.ResourceCategoryTranslations)
+            .Include(s => s.ResourceCategoryRelations)
             where res.Id == resourceId
             select new ResourceDetailsDbQueryResponse
             {
                 Id = res.Id,
                 TableId = res.TableId,
-                Title = string.Empty, //TODO :ResourceCategory.Title
+                Title = res.ResourceTranslations.FirstOrDefault().Title ?? string.Empty,
                 Abstract = string.Empty, //TODO :ResourceCategory.Title
                 Anchors = string.Empty, //TODO :ResourceCategory.Title
                 Description = string.Empty, //TODO :ResourceCategory.Title
                 Keywords = string.Empty, //TODO :ResourceCategory.Title
                 ResourceCategoryId = res.ResourceCategoryId,
-                ResourceCategoryTitle = res.ResourceCategoryTitle,
+                ResourceCategoryTitle = "",
+                //ResourceCategoryTitle = res.ResourceCategory.ResourceCategoryTranslations.FirstOrDefault().Title ?? string.Empty,
                 Image = res.Image,
                 FileId = res.FileId,
                 Language = res.Language,
@@ -109,12 +135,12 @@ internal sealed class ResourceReadRepository : GenericPrimitiveReadRepositoryBas
                 ExpirationDate = res.ExpirationDate,
                 CreationDate = res.CreationDate,
                 Registered = res.Registered,
-                ResourceCategories = (
+                /*ResourceCategories = (
                     from rel in this.DbContext.ResourceCategoryRelations
                     join cat in this.DbContext.ResourceCategory on rel.ResourceCategoryId equals cat.Id
                     where rel.Id == res.Id
                     select new ResourceCategoryDbQueryResponse(cat.Id, string.Empty)
-                ).ToArray()
+                ).ToArray()*/
             };
 
         return query.Run(q => q.FirstOrDefaultAsync(), PrimitiveError.CreateInternal("", ""))!;

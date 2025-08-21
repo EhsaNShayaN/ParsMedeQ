@@ -4,6 +4,7 @@ namespace ParsMedeQ.Domain.Aggregates.ResourceAggregate.Entities;
 public sealed class ResourceTranslation : EntityBase<int>
 {
     #region " Properties "
+    public int ResourceId { get; private set; }
     public string LanguageCode { get; private set; } = null!;
     public string Title { get; private set; } = null!;
     public string Description { get; private set; } = string.Empty;

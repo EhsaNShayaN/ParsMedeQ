@@ -29,7 +29,7 @@ export class RestApiService {
 
   getResource(model: ResourceRequest): Observable<any> {
     const query = this.modelToQuery(model);
-    return this.http.get<Resource>(`${endpoint()}resource/details?${query}`).pipe(
+    return this.http.get<BaseResult<Resource>>(`${endpoint()}resource/details?${query}`).pipe(
       catchError(this.handleError)
     );
   }

@@ -61,7 +61,6 @@ sealed class AddResourceEndpoint : EndpointHandlerBase<
              request.PublishInfo,
              request.Publisher,
              request.ResourceCategoryId,
-             request.ResourceCategoryTitle,
              HttpUtility.HtmlDecode(request.Abstract),
              request.Anchors?.Any() ?? false ? Newtonsoft.Json.JsonConvert.SerializeObject(request.Anchors) : string.Empty,
              string.IsNullOrEmpty(request.ExpirationDate) ? default : CreateExpirationDate(request.ExpirationDate, request.ExpirationTime),

@@ -17,11 +17,13 @@ public interface IResourceReadRepository : IDomainRepository
         int tableId,
         CancellationToken cancellationToken);
 
-    ValueTask<PrimitiveResult<Resource>> ResourceDetails(
-        int id,
+    ValueTask<PrimitiveResult<ResourceDetailsDbQueryResponse0>> ResourceDetails(
+        int UserId,
+        int ResourceId,
+        int TableId,
         CancellationToken cancellationToken);
 
-    ValueTask<PrimitiveResult<ResourceDetailsDbQueryResponse>> ResourceDetails(
+    ValueTask<PrimitiveResult<ResourceDetailsDbQueryResponse>> ResourceDetails0(
         int UserId,
         int ResourceId,
         int TableId,
