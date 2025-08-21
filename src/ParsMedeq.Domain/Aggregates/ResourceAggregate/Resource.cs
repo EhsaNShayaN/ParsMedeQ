@@ -52,11 +52,6 @@ public sealed class Resource : EntityBase<int>
     #region " Factory "
     public static PrimitiveResult<Resource> Create(
         int tableId,
-        string title,
-        string @abstract,
-        string anchors,
-        string description,
-        string keywords,
         int resourceCategoryId,
         string resourceCategoryTitle,
         string language,
@@ -100,4 +95,13 @@ public sealed class Resource : EntityBase<int>
         return this;
     }
 
+    public ValueTask<PrimitiveResult> AddTranslation(string langCode, string title, string description, string @abstract, string anchors, string keywords)
+    {
+        return ResourceTranslation.Create(langCode, title, description, @abstract, anchors,keywords)
+            .OnSuccess(newTranslation => this._resourceTranslations.Add(newTranslation.Value))
+            .Match(
+                success => PrimitiveResult.Success(),
+                PrimitiveResult.Failure
+            );
+    }
 }

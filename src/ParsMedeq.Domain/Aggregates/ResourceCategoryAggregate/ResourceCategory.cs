@@ -33,34 +33,6 @@ public sealed class ResourceCategory : EntityBase<int>
     #endregion
 
     #region " Factory "
-    /*public static async ValueTask<PrimitiveResult<ResourceCategory>> Create(
-        string title,
-        string description,
-        int tableId,
-        int count,
-        int? parentId,
-        DateTime creationDate)
-    {
-        var result = await ResourceCategoryTranslation.Create(title, description)
-            .Map(translation =>
-            {
-                var resourceCategory = new ResourceCategory
-                {
-                    TableId = tableId,
-                    Count = count,
-                    ParentId = parentId,
-                    CreationDate = creationDate,
-                };
-                return (translation, resourceCategory);
-            })
-            .Map(data =>
-            {
-                data.resourceCategory.ResourceCategoryTranslations.Append(data.translation);
-                return data.resourceCategory;
-            }).ConfigureAwait(false);
-        return result;
-    }*/
-
     public static async ValueTask<PrimitiveResult<ResourceCategory>> Create(
         string title,
         string description,

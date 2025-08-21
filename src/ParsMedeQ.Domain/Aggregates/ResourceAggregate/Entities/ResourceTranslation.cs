@@ -9,6 +9,7 @@ public sealed class ResourceTranslation : EntityBase<int>
     public string Description { get; private set; } = string.Empty;
     public string Abstract { get; private set; } = string.Empty;
     public string Anchors { get; private set; } = string.Empty;
+    public string Keywords { get; private set; } = string.Empty;
     #endregion
 
     #region " Navigation Properties "
@@ -21,19 +22,23 @@ public sealed class ResourceTranslation : EntityBase<int>
     #endregion
 
     #region " Factory "
-    public static PrimitiveResult<ResourceTranslation> Create(
+    internal static PrimitiveResult<ResourceTranslation> Create(
+        string languageCode,
         string title,
         string description,
         string @abstract,
-        string anchors)
+        string anchors,
+        string keywords)
     {
         return PrimitiveResult.Success(
-            new ResourceTranslation()
+            new ResourceTranslation
             {
+                LanguageCode = languageCode,
                 Title = title,
                 Description = description,
                 Abstract = @abstract,
                 Anchors = anchors,
+                Keywords = keywords,
             });
     }
     #endregion
