@@ -1,14 +1,4 @@
-﻿using ParsMedeQ.Domain.Aggregates.ResourceAggregate.Entities;
-using ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate.Entities;
-
-namespace ParsMedeQ.Application.Features.ResourceFeatures.ResourceDetailsFeature;
-
-public sealed class ResourceDetailsDbQueryResponse0
-{
-    public Domain.Aggregates.ResourceAggregate.Resource Resource { get; set; } = null!;
-    public ResourceTranslation? ResourceTranslation { get; set; }
-    public ResourceCategoryTranslation? ResourceCategoryTranslation { get; set; }
-}
+﻿namespace ParsMedeQ.Application.Features.ResourceFeatures.ResourceDetailsFeature;
 
 public sealed class ResourceDetailsDbQueryResponse
 {

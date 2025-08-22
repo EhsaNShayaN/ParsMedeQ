@@ -211,7 +211,6 @@ static class ServiceCollectionExtension
             })
             .WithSerializer(new FusionCacheNewtonsoftJsonSerializer())
             .WithDistributedCache(
-                //TODO: Use Config
                 new RedisCache(new RedisCacheOptions() { Configuration = "127.0.0.1:6379", InstanceName = "ParsMedeQ:" })
             );
 

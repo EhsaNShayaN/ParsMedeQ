@@ -1,9 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
-using ParsMedeQ.Application.Features.ResourceCategoryFeatures.ResourceCategoryListFeature;
+using ParsMedeQ.Application.Features.ResourceFeatures.ResourceCategoryListFeature;
 using ParsMedeQ.Contracts;
 using ParsMedeQ.Contracts.ResourceCategoryContracts.ResourceCategoryListContract;
-using ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate;
 using SRH.Utilities.EhsaN;
 
 namespace ParsMedeQ.Presentation.Features.ResourceCategoryFeatures.ResourceCategoryList;
@@ -11,14 +10,14 @@ namespace ParsMedeQ.Presentation.Features.ResourceCategoryFeatures.ResourceCateg
 sealed class ResourceCategoryListEndpoint : EndpointHandlerBase<
     ResourceCategoryListApiRequest,
     ResourceCategoryListQuery,
-    ResourceCategory[],
+    ResourceCategoryListDbQueryResponse[],
     ResourceCategoryListApiResponse[]>
 {
     protected override bool NeedTaxPayerFile => true;
 
     public ResourceCategoryListEndpoint(
         IPresentationMapper<ResourceCategoryListApiRequest, ResourceCategoryListQuery> requestMapper,
-        IPresentationMapper<ResourceCategory[], ResourceCategoryListApiResponse[]> responseMapper)
+        IPresentationMapper<ResourceCategoryListDbQueryResponse[], ResourceCategoryListApiResponse[]> responseMapper)
         : base(
             Endpoints.Resource.ResourceCategories,
             HttpMethod.Get,
@@ -53,11 +52,11 @@ sealed class ResourceCategoryListApiRequestMapper : IPresentationMapper<
     }
 }
 sealed class ResourceCategoryListApiResponseMapper : IPresentationMapper<
-    ResourceCategory[],
+    ResourceCategoryListDbQueryResponse[],
     ResourceCategoryListApiResponse[]>
 {
     public ValueTask<PrimitiveResult<ResourceCategoryListApiResponse[]>> Map(
-        ResourceCategory[] src,
+        ResourceCategoryListDbQueryResponse[] src,
         CancellationToken cancellationToken)
     {
         return ValueTask.FromResult(
@@ -66,8 +65,8 @@ sealed class ResourceCategoryListApiResponseMapper : IPresentationMapper<
                     new ResourceCategoryListApiResponse(
                         data.Id,
                         data.TableId,
-                        string.Empty, //TODO :ResourceCategory.Title
-                        string.Empty, //TODO :ResourceCategory.Title
+                        data.Title,
+                        data.Description,
                         data.Count,
                         data.ParentId,
                         data.CreationDate.ToPersianDate()))

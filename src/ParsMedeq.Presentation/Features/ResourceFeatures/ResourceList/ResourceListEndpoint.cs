@@ -4,7 +4,6 @@ using ParsMedeQ.Application.Features.ResourceFeatures.ResourceListFeature;
 using ParsMedeQ.Application.Helpers;
 using ParsMedeQ.Contracts;
 using ParsMedeQ.Contracts.ResourceContracts.ResourceListContract;
-using ParsMedeQ.Domain.Aggregates.ResourceAggregate;
 using SRH.Utilities.EhsaN;
 
 namespace ParsMedeQ.Presentation.Features.ResourceFeatures.ResourceList;
@@ -12,14 +11,14 @@ namespace ParsMedeQ.Presentation.Features.ResourceFeatures.ResourceList;
 sealed class ResourceListEndpoint : EndpointHandlerBase<
     ResourceListApiRequest,
     ResourceListQuery,
-    BasePaginatedApiResponse<Resource>,
+    BasePaginatedApiResponse<ResourceListDbQueryResponse>,
     BasePaginatedApiResponse<ResourceListApiResponse>>
 {
     protected override bool NeedTaxPayerFile => true;
 
     public ResourceListEndpoint(
         IPresentationMapper<ResourceListApiRequest, ResourceListQuery> requestMapper,
-        IPresentationMapper<BasePaginatedApiResponse<Resource>, BasePaginatedApiResponse<ResourceListApiResponse>> responseMapper)
+        IPresentationMapper<BasePaginatedApiResponse<ResourceListDbQueryResponse>, BasePaginatedApiResponse<ResourceListApiResponse>> responseMapper)
         : base(
             Endpoints.Resource.Resources,
             HttpMethod.Get,
@@ -52,7 +51,7 @@ sealed class ResourceListApiRequestMapper : IPresentationMapper<
         ResourceListApiRequest src,
         CancellationToken cancellationToken)
     {
-        var x = ValueTask.FromResult(
+        return ValueTask.FromResult(
             PrimitiveResult.Success(
                 new ResourceListQuery(src.TableId)
                 {
@@ -61,15 +60,14 @@ sealed class ResourceListApiRequestMapper : IPresentationMapper<
                     PageSize = src.PageSize,
                     LastId = src.LastId,
                 }));
-        return x;
     }
 }
 sealed class ResourceListApiResponseMapper : IPresentationMapper<
-    BasePaginatedApiResponse<Resource>,
+    BasePaginatedApiResponse<ResourceListDbQueryResponse>,
     BasePaginatedApiResponse<ResourceListApiResponse>>
 {
     public ValueTask<PrimitiveResult<BasePaginatedApiResponse<ResourceListApiResponse>>> Map(
-        BasePaginatedApiResponse<Resource> src,
+        BasePaginatedApiResponse<ResourceListDbQueryResponse> src,
         CancellationToken cancellationToken)
     {
         return ValueTask.FromResult(
@@ -79,8 +77,8 @@ sealed class ResourceListApiResponseMapper : IPresentationMapper<
                         data.Id,
                         data.TableId,
                         data.ResourceCategoryId,
-                        "data.ResourceCategoryTitle",
-                        string.Empty, //TODO :ResourceCategory.Title
+                        data.ResourceCategoryTitle,
+                        data.Title,
                         data.Image,
                         data.Language,
                         data.Price,

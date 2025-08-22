@@ -1,9 +1,8 @@
 /*import {Profile} from './UserResponse';*/
 import {Paginated} from './Pagination';
 
-export interface CommentResponse extends Paginated {
-  data: Comment[];
-  totalCount: number;
+export interface CommentResponse {
+  data: Paginated<Comment>;
 }
 
 export interface Comment {

@@ -2,8 +2,9 @@ import {Directive, Injector, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort, Sort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-import {BaseReportComponent} from "../../../base-report-component";
-import {Resource, ResourceResponse, ResourcesRequest} from "../../../core/models/ResourceResponse";
+import {BaseReportComponent} from '../../../base-report-component';
+import {Resource, ResourceResponse, ResourcesRequest} from '../../../core/models/ResourceResponse';
+import {BaseResult} from '../../../core/models/BaseResult';
 
 @Directive()
 export class BaseResourcesComponent extends BaseReportComponent implements OnInit, OnDestroy {
@@ -41,9 +42,9 @@ export class BaseResourcesComponent extends BaseReportComponent implements OnIni
   }
 
   initDataSource(res: ResourceResponse) {
-    this.totalCount = res.totalCount;
-    this.pageSize = res.pageSize;
-    this.dataSource = new MatTableDataSource<Resource>(res.data);
+    this.totalCount = res.data.totalCount;
+    this.pageSize = res.data.pageSize;
+    this.dataSource = new MatTableDataSource<Resource>(res.data.items);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }

@@ -1,8 +1,8 @@
 import {AlborzPagingRequest, Paginated} from './Pagination';
 import {ResourceCategory} from './ResourceCategoryResponse';
 
-export interface ResourceResponse extends Paginated {
-  data: Resource[];
+export interface ResourceResponse {
+  data: Paginated<Resource>;
 }
 
 export class Resource {

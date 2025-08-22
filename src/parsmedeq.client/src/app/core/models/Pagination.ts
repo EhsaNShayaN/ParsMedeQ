@@ -20,7 +20,8 @@ export class SortRequest {
   direction!: string;
 }
 
-export interface Paginated {
+export interface Paginated<T> {
+  items: T[];
   hasNext: boolean;
   hasPrevious: boolean;
   pageNumber: number;
