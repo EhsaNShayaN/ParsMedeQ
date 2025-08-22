@@ -3,7 +3,6 @@ CREATE TABLE [dbo].[Resource]
 [Id] [int] NOT NULL IDENTITY(1, 1),
 [TableId] [int] NOT NULL,
 [ResourceCategoryId] [int] NOT NULL,
-[ResourceCategoryTitle] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 [Image] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 [FileId] [int] NULL,
 [Language] [nvarchar] (10) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
