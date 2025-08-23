@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
+import {JwtHelperService} from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,9 @@ import {tap} from 'rxjs/operators';
 export class AuthService {
   private apiUrl = 'https://localhost:5001/api/auth'; // آدرس بک‌اند
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient,
+              private router: Router,
+              public jwtHelper: JwtHelperService) {
   }
 
   // ورود کاربر و ذخیره JWT
@@ -35,6 +38,21 @@ export class AuthService {
   isLoggedIn(): boolean {
     const token = this.getToken();
     return !!token; // فقط چک می‌کنه که توکن باشه
+  }
+
+  // بررسی ورود کاربر
+  isAdmin(): boolean {
+    if (!this.isLoggedIn()) {
+      return false;
+    }
+    return this.userInRole('superadmin') || this.userInRole('admin');
+  }
+
+  userInRole(role: string): boolean {
+    const token = this.getToken()!;
+    const decodedToken = this.jwtHelper.decodeToken(token);
+    const roles = decodedToken.role?.split(',');
+    return !!roles.find((s: string) => s.toLowerCase() === role);
   }
 
   // خروج کاربر

@@ -1,24 +1,19 @@
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {Observable, throwError} from 'rxjs';
+import {map, Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {endpoint} from './services/cookie-utils';
-import {WeatherForecast} from './models/WeatherForecast';
 import {AddResourceRequest, Resource, ResourceRequest, ResourceResponse, ResourcesRequest} from './models/ResourceResponse';
 import {BaseResult} from './models/BaseResult';
 import {ResourceCategoriesResponse} from './models/ResourceCategoryResponse';
+import {AuthService} from './services/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RestApiService {
-  constructor(private http: HttpClient) {
-  }
-
-  getWeatherForecast(): Observable<any> {
-    return this.http.get<WeatherForecast[]>(`${endpoint()}weatherForecast`).pipe(
-      catchError(this.handleError)
-    );
+  constructor(private http: HttpClient,
+              private authService: AuthService) {
   }
 
   getResourceCategories(tableId: number): Observable<any> {
@@ -83,7 +78,7 @@ export class RestApiService {
 
     Object.entries(obj).forEach(([key, value]) => {
 
-      console.log(key, typeof(value));
+      console.log(key, typeof (value));
 
       if (value === undefined || value === null) return;
 
@@ -96,7 +91,7 @@ export class RestApiService {
         value.forEach((item, i) => {
           if (item instanceof File || item instanceof Blob) {
             formData.append(`${key}[${i}]`, item);
-          } else if (typeof item === "object") {
+          } else if (typeof item === 'object') {
             formData.append(`${key}[${i}]`, JSON.stringify(item));
           } else {
             formData.append(`${key}[${i}]`, String(item));
@@ -104,7 +99,7 @@ export class RestApiService {
         });
       }
       // If it's an object (non-binary)
-      else if (typeof value === "object") {
+      else if (typeof value === 'object') {
         formData.append(key, JSON.stringify(value));
       }
       // primitives
@@ -116,13 +111,22 @@ export class RestApiService {
     return formData;
   }
 
+  logout(): Observable<any> {
+    return this.http.post<BaseResult<boolean>>(`${endpoint()}resource/logout`, null)
+      .pipe(catchError(this.handleError),
+        map((d: BaseResult<boolean>) => {
+          this.authService.logout();
+          return d.data;
+        }));
+  }
 
-  handleError(error: HttpErrorResponse): any {
+  handleError<T>(error: HttpErrorResponse): Observable<any> {
     if (error.error instanceof ErrorEvent) {
       console.error('An error occurred:', error.error.message);
     } else {
       console.error(
-        `Backend returned code ${error.status}, ` + `body was: ${error.error}`);
+        `Backend returned code ${error.status}, ` +
+        `body was: ${error.error}`);
     }
     return throwError('خطای نامشخص، لطفاً لحظاتی دیگر تلاش نمایید.');
   }

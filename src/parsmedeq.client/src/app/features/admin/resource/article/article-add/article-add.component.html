@@ -1,158 +1,160 @@
-<div *ngIf="myForm" class="p-3" style="background-color: gray">
-  <div class="theme-container">
-    <div>
-      <div class="text-center">
-        <h1 class="uppercase">
-          @if (editItem) {
-          ویرایش
-          "{{ editItem.title }}"
-          } @else {
-          افزودن
-          }
-        </h1>
-      </div>
-      <mat-error *ngIf="error" class="bg-warn p-3 my-3 background-color bordered">
-        {{ error }}
-      </mat-error>
-      <form (ngSubmit)="onFormSubmit(myForm.value)" [formGroup]="myForm" fxLayout="row wrap">
-        <div class="px-2" fxFlex="100" fxFlex.gt-xs="100">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>عنوان</mat-label>
-            <input placeholder="عنوان" autocomplete="off" formControlName="title" matInput required>
-            <mat-error *ngIf="myForm.controls['title'].errors?.['required']">
-              عنوان الزامی است.
-            </mat-error>
-          </mat-form-field>
+@if (myForm) {
+  <div class="p-3">
+    <div class="theme-container">
+      <div>
+        <div class="text-center">
+          <h1 class="uppercase">
+            @if (editItem) {
+              ویرایش
+                "{{ editItem.title }}"
+            } @else {
+              افزودن
+            }
+          </h1>
         </div>
-        <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>دسته بندی</mat-label>
-            <mat-select formControlName="resourceCategoryId" placeholder="دسته بندی" required>
-              <mat-option *ngFor="let item of resourceCategories" [value]="item.id">
-                {{ item.title }}
-              </mat-option>
-            </mat-select>
-            <mat-error *ngIf="myForm.controls['resourceCategoryId'].errors?.['required']">
-              دسته بندی الزامی است.
-            </mat-error>
-          </mat-form-field>
-        </div>
-        <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
-          <div class="border-radius border pad">
-            <mat-label class="ml-2 gray-color">تصویر</mat-label>
-            <input (change)="handleImageInput($event.target)" class="py-1" formControlName="imagePath" placeholder="تصویر" type="file" />
+        <mat-error *ngIf="error" class="bg-warn p-3 my-3 background-color bordered">
+          {{ error }}
+        </mat-error>
+        <form (ngSubmit)="onFormSubmit(myForm.value)" [formGroup]="myForm" fxLayout="row wrap">
+          <div class="px-2" fxFlex="100" fxFlex.gt-xs="100">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>عنوان</mat-label>
+              <input placeholder="عنوان" autocomplete="off" formControlName="title" matInput required>
+              <mat-error *ngIf="myForm.controls['title'].errors?.['required']">
+                عنوان الزامی است.
+              </mat-error>
+            </mat-form-field>
           </div>
-        </div>
-        <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>زبان</mat-label>
-            <input autocomplete="off" formControlName="language" matInput placeholder="زبان">
-          </mat-form-field>
-        </div>
-        <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>تاریخ انتشار</mat-label>
-            <input autocomplete="off" formControlName="publishDate" matInput placeholder="تاریخ انتشار">
-          </mat-form-field>
-        </div>
-        <div class="px-2 mb-4" fxFlex="100" fxFlex.gt-xs="50">
-          <div class="border-radius border pad">
-            <mat-label class="ml-2 gray-color">فایل</mat-label>
-            <input (change)="handleFileInput($event.target)" class="py-1" formControlName="fileId" placeholder="فایل" type="file" />
+          <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>دسته بندی</mat-label>
+              <mat-select formControlName="resourceCategoryId" placeholder="دسته بندی" required>
+                <mat-option *ngFor="let item of resourceCategories" [value]="item.id">
+                  {{ item.title }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="myForm.controls['resourceCategoryId'].errors?.['required']">
+                دسته بندی الزامی است.
+              </mat-error>
+            </mat-form-field>
           </div>
-        </div>
-        <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>کلمات کلیدی(با کاما جدا کنید)</mat-label>
-            <input autocomplete="off" formControlName="keywords" matInput placeholder="کلمات کلیدی">
-          </mat-form-field>
-        </div>
-        <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>تاریخ انقضا</mat-label>
-            <input #dateInput (dateChange)="dateChanged(dateInput)" [matDatepicker]="picker" formControlName="expirationDate"
-                   matInput placeholder="تاریخ انقضا">
-            <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-        </div>
-        <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>ساعت انقضا</mat-label>
-            <input [(ngModel)]="expTime" [ngxMatTimepicker]="pickerB" formControlName="expirationTime" [format]="24" matInput placeholder="تاریخ انقضا" readonly />
-            <mat-icon (click)="pickerB.open()" matSuffix>watch_later</mat-icon>
-          </mat-form-field>
-          <ngx-mat-timepicker #pickerB color="accent"></ngx-mat-timepicker>
-        </div>
-        <div class="px-2 mb-4" fxFlex="100" fxFlex.gt-xs="100">
-          <mat-label>چکیده</mat-label>
-          <angular-editor (blur)="leaveAbstract()" [config]="editorConfig" formControlName="abstract"
-                          id="editor0" placeholder="چکیده" required></angular-editor>
-          <mat-error *ngIf="abstractError && myForm.controls['abstract'].errors?.['required']">
-            چکیده الزامی است.
-          </mat-error>
-        </div>
-        <!--******************************-->
-        <div class="my-3 px-2" fxFlex="100" fxLayoutAlign="start center">
-          <p class="uppercase fw-500 mb-0">لنگرها</p>
-          <button (click)="addAnchor()" class="mx-3" color="primary" mat-icon-button matTooltip="افزودن لنگر" matTooltipPosition="after" type="button">
-            <mat-icon>add_circle</mat-icon>
-          </button>
-        </div>
-        <div formArrayName="anchors" fxFlex="100" fxLayout="row wrap">
-          <div *ngFor="let item of anchorsArray.controls; let i = index;" fxFlex="100" class="step-section pb-2">
-            <div class="fw-500 text-center pt-3" fxFlex="4">{{ i + 1 }}.</div>
-            <div [formGroupName]="i" fxFlex="90" fxLayout="row wrap">
-              <input formControlName="id" type="hidden">
-              <mat-form-field appearance="outline" class="h-fix px-2" fxFlex="100" fxFlex.gt-xs="20">
-                <mat-label>عنوان</mat-label>
-                <input autocomplete="off" formControlName="name" matInput placeholder="عنوان" />
-              </mat-form-field>
-              <div class="px-2" fxFlex="100" fxFlex.gt-xs="80">
-                <angular-editor [config]="editorConfig" formControlName="desc" id="editor{{i + 1}}" placeholder="توضیحات"></angular-editor>
+          <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
+            <div class="border-radius border pad">
+              <mat-label class="ml-2 gray-color">تصویر</mat-label>
+              <input (change)="handleImageInput($event.target)" class="py-1" formControlName="imagePath" placeholder="تصویر" type="file"/>
+            </div>
+          </div>
+          <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>زبان</mat-label>
+              <input autocomplete="off" formControlName="language" matInput placeholder="زبان">
+            </mat-form-field>
+          </div>
+          <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>تاریخ انتشار</mat-label>
+              <input autocomplete="off" formControlName="publishDate" matInput placeholder="تاریخ انتشار">
+            </mat-form-field>
+          </div>
+          <div class="px-2 mb-4" fxFlex="100" fxFlex.gt-xs="50">
+            <div class="border-radius border pad">
+              <mat-label class="ml-2 gray-color">فایل</mat-label>
+              <input (change)="handleFileInput($event.target)" class="py-1" formControlName="fileId" placeholder="فایل" type="file"/>
+            </div>
+          </div>
+          <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>کلمات کلیدی(با کاما جدا کنید)</mat-label>
+              <input autocomplete="off" formControlName="keywords" matInput placeholder="کلمات کلیدی">
+            </mat-form-field>
+          </div>
+          <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>تاریخ انقضا</mat-label>
+              <input #dateInput (dateChange)="dateChanged(dateInput)" [matDatepicker]="picker" formControlName="expirationDate"
+                     matInput placeholder="تاریخ انقضا">
+              <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>ساعت انقضا</mat-label>
+              <input [(ngModel)]="expTime" [ngxMatTimepicker]="pickerB" formControlName="expirationTime" [format]="24" matInput placeholder="تاریخ انقضا" readonly/>
+              <mat-icon (click)="pickerB.open()" matSuffix>watch_later</mat-icon>
+            </mat-form-field>
+            <ngx-mat-timepicker #pickerB color="accent"></ngx-mat-timepicker>
+          </div>
+          <div class="px-2 mb-4" fxFlex="100" fxFlex.gt-xs="100">
+            <mat-label>چکیده</mat-label>
+            <angular-editor (blur)="leaveAbstract()" [config]="editorConfig" formControlName="abstract"
+                            id="editor0" placeholder="چکیده" required></angular-editor>
+            <mat-error *ngIf="abstractError && myForm.controls['abstract'].errors?.['required']">
+              چکیده الزامی است.
+            </mat-error>
+          </div>
+          <!--******************************-->
+          <div class="my-3 px-2" fxFlex="100" fxLayoutAlign="start center">
+            <p class="uppercase fw-500 mb-0">لنگرها</p>
+            <button (click)="addAnchor()" class="mx-3" color="primary" mat-icon-button matTooltip="افزودن لنگر" matTooltipPosition="after" type="button">
+              <mat-icon>add_circle</mat-icon>
+            </button>
+          </div>
+          <div formArrayName="anchors" fxFlex="100" fxLayout="row wrap">
+            <div *ngFor="let item of anchorsArray.controls; let i = index;" fxFlex="100" class="step-section pb-2">
+              <div class="fw-500 text-center pt-3" fxFlex="4">{{ i + 1 }}.</div>
+              <div [formGroupName]="i" fxFlex="90" fxLayout="row wrap">
+                <input formControlName="id" type="hidden">
+                <mat-form-field appearance="outline" class="h-fix px-2" fxFlex="100" fxFlex.gt-xs="20">
+                  <mat-label>عنوان</mat-label>
+                  <input autocomplete="off" formControlName="name" matInput placeholder="عنوان"/>
+                </mat-form-field>
+                <div class="px-2" fxFlex="100" fxFlex.gt-xs="80">
+                  <angular-editor [config]="editorConfig" formControlName="desc" id="editor{{i + 1}}" placeholder="توضیحات"></angular-editor>
+                </div>
+              </div>
+              <div class="text-center pt-2" fxFlex="6">
+                <button (click)="deleteAnchor(i)" color="warn" mat-icon-button
+                        matTooltip="حذف انکر">
+                  <mat-icon>cancel</mat-icon>
+                </button>
               </div>
             </div>
-            <div class="text-center pt-2" fxFlex="6">
-              <button (click)="deleteAnchor(i)" color="warn" mat-icon-button
-                      matTooltip="حذف انکر">
-                <mat-icon>cancel</mat-icon>
-              </button>
+          </div>
+          <!--******************************-->
+          <div class="px-2" fxFlex="100" fxFlex.gt-xs="20">
+            <mat-label>ویژه</mat-label>
+            <div>
+              <mat-slide-toggle formControlName="isVip" labelPosition="before"></mat-slide-toggle>
             </div>
           </div>
-        </div>
-        <!--******************************-->
-        <div class="px-2" fxFlex="100" fxFlex.gt-xs="20">
-          <mat-label>ویژه</mat-label>
-          <div>
-            <mat-slide-toggle formControlName="isVip" labelPosition="before"></mat-slide-toggle>
+          <div class="px-2" fxFlex="100" fxFlex.gt-xs="40">
+            <mat-form-field appearance="outline" class="w-100 mt-2">
+              <mat-icon class="mr-1 text-muted" matPrefix>money</mat-icon>
+              <mat-label>قیمت</mat-label>
+              <input class="text-left ltr" formControlName="price" matInput onlyNumber placeholder="قیمت">
+              <mat-error *ngIf="myForm.controls['price'].errors?.['required']">
+                قیمت الزامی است.
+              </mat-error>
+            </mat-form-field>
           </div>
-        </div>
-        <div class="px-2" fxFlex="100" fxFlex.gt-xs="40">
-          <mat-form-field appearance="outline" class="w-100 mt-2">
-            <mat-icon class="mr-1 text-muted" matPrefix>money</mat-icon>
-            <mat-label>قیمت</mat-label>
-            <input class="text-left ltr" formControlName="price" matInput onlyNumber placeholder="قیمت">
-            <mat-error *ngIf="myForm.controls['price'].errors?.['required']">
-              قیمت الزامی است.
-            </mat-error>
-          </mat-form-field>
-        </div>
-        <div class="px-2" fxFlex="100" fxFlex.gt-xs="40">
-          <mat-form-field appearance="outline" class="w-100 mt-2">
-            <mat-icon class="mr-1 text-muted" matPrefix>person_outline</mat-icon>
-            <mat-label>تخفیف بر حسب درصد</mat-label>
-            <input class="text-left ltr" formControlName="discount" matInput onlyNumber placeholder="تخفیف بر حسب درصد">
-            <mat-error *ngIf="myForm.controls['discount'].errors?.['required']">
-              تخفیف الزامی است.
-            </mat-error>
-          </mat-form-field>
-        </div>
-        <div class="text-center mt-3" fxFlex="100">
-          <button class="uppercase" color="primary" mat-raised-button type="submit">
-            {{ (editItem ? 'ویرایش' : 'افزودن') }}
-          </button>
-        </div>
-      </form>
+          <div class="px-2" fxFlex="100" fxFlex.gt-xs="40">
+            <mat-form-field appearance="outline" class="w-100 mt-2">
+              <mat-icon class="mr-1 text-muted" matPrefix>person_outline</mat-icon>
+              <mat-label>تخفیف بر حسب درصد</mat-label>
+              <input class="text-left ltr" formControlName="discount" matInput onlyNumber placeholder="تخفیف بر حسب درصد">
+              <mat-error *ngIf="myForm.controls['discount'].errors?.['required']">
+                تخفیف الزامی است.
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="text-center mt-3" fxFlex="100">
+            <button class="uppercase" color="primary" mat-raised-button type="submit">
+              {{ (editItem ? 'ویرایش' : 'افزودن') }}
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
-</div>
+}

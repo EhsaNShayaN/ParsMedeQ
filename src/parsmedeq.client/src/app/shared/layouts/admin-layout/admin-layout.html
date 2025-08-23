@@ -1,7 +1,53 @@
+<!--
 <app-admin-header></app-admin-header>
 <div class="admin-panel">
   <app-admin-sidebar></app-admin-sidebar>
   <div class="admin-container">
     <router-outlet></router-outlet>
+  </div>
+</div>
+-->
+<div class="p-3">
+  <div class="theme-container">
+    <mat-sidenav-container class="account">
+      <mat-sidenav #sidenav [mode]="sidenavOpen ? 'side' : 'over'" [opened]="sidenavOpen" class="account-sidenav">
+        <mat-card appearance="outlined">
+          <button (click)="sidenav.toggle()" class="close" color="warn" fxHide="false" fxHide.gt-sm mat-mini-fab>
+            <mat-icon>close</mat-icon>
+          </button>
+          <mat-card-header fxLayoutAlign="start center">
+            <img [src]="profile?.image" alt="" mat-card-avatar>
+            <mat-card-title class="text-muted mb-0">
+              {{ profile?.firstName }}
+              {{ profile?.lastName }}
+            </mat-card-title>
+          </mat-card-header>
+          <div class="divider my-3"></div>
+          @for (link of links; track link.name) {
+            <div>
+              <a [routerLinkActiveOptions]="{exact:true}" [routerLink]="link.href" class="p-2"
+                 fxLayout="row" fxLayoutAlign="start center" matLine routerLinkActive="horizontal-active-link">
+                <mat-icon class="text-muted">{{ link.icon }}</mat-icon>
+                <span class="mx-2">{{ link.name }}</span>
+              </a>
+            </div>
+          }
+        </mat-card>
+      </mat-sidenav>
+      <mat-sidenav-content ngClass.gt-sm="distance">
+        @if (!sidenavOpen) {
+          <mat-card appearance="outlined" class="text-muted mb-3" fxLayout="row"
+                    fxLayoutAlign="space-between center">
+            <button (click)="sidenav.toggle()" mat-icon-button>
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <h3 class="text-right flex-grow-1">مدیریت</h3>
+          </mat-card>
+        }
+        <mat-card appearance="outlined" class="account-wrapper">
+          <router-outlet></router-outlet>
+        </mat-card>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
   </div>
 </div>

@@ -20,20 +20,34 @@ import {UserHeader} from './shared/components/user-header/user-header';
 import {AppSettings} from './app.settings';
 import {UrlSerializer} from '@angular/router';
 import {LowerCaseUrlSerializer} from './core/pipes/lower-case-url-serializer.pipe';
-import {provideTranslateService} from '@ngx-translate/core';
+import {provideTranslateService, TranslatePipe} from '@ngx-translate/core';
 import {provideTranslateHttpLoader} from '@ngx-translate/http-loader';
 import {UrlInitService} from './core/services/url-init.service';
 import {Lang} from './theme/components/lang/lang';
-
+import {MatMiniFabButton} from '@angular/material/button';
+import {MatCardAvatar, MatCardHeader} from '@angular/material/card';
+import {MatLine} from '@angular/material/core';
+import {Toolbar} from './theme/components/toolbar/toolbar';
+import {SocialIcons} from './theme/components/social-icons/social-icons';
+import {UserMenu} from './theme/components/user-menu/user-menu';
+import {JwtModule} from '@auth0/angular-jwt';
+import {LangPackPipe} from './core/pipes/lang-pack.pipe';
 
 export function urlInitFactory(urlInitService: UrlInitService) {
   return () => urlInitService.init();
+}
+
+export function tokenGetter() {
+  return localStorage.getItem('jwt');
 }
 
 @NgModule({
   declarations: [
     App,
     Pages,
+    Toolbar,
+    SocialIcons,
+    UserMenu,
     ////////////////////////////
     Lang,
     Header,
@@ -45,12 +59,24 @@ export function urlInitFactory(urlInitService: UrlInitService) {
     UserSidebar,
     AdminHeader,
     UserHeader,
+    LangPackPipe,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     SharedModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter,
+        allowedDomains: [],
+      }
+    }),
+    MatMiniFabButton,
+    MatCardAvatar,
+    MatCardHeader,
+    MatLine,
+    TranslatePipe,
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),

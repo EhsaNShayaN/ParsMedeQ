@@ -58,4 +58,8 @@ export class AppSettings {
     true,
     'fa'
   );
+
+  public getUrlLang() {
+    return this.settings.lang === 'fa' ? '' : '/' + this.settings.lang;
+  }
 }

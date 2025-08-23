@@ -9,6 +9,5 @@ import {Component} from '@angular/core';
 export class MainLayout {
 
   activateComponent(cmp: any) {
-    console.log('MainLayout', cmp);
   }
 }

@@ -10,7 +10,7 @@
   </mat-sidenav>
   <mat-sidenav-content class="page-wrapper" fxLayout="column" fxLayoutAlign="start stretch">
     <header [ngClass]="'toolbar-' + settings.toolbar" [class.main-toolbar-fixed]="settings.mainToolbarFixed">
-      <!--<app-toolbar1 (onMenuIconClick)="sidenav.toggle()"></app-toolbar1>-->
+      <!--<app-toolbar (onMenuIconClick)="sidenav.toggle()"></app-toolbar>-->
     </header>
     <main [class.content-offset-to-top]="settings.contentOffsetToTop">
       <router-outlet (activate)="activateComponent($event)"></router-outlet>

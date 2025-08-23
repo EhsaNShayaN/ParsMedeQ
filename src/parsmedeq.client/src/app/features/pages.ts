@@ -80,6 +80,5 @@ export class Pages extends PureComponent {
   }
 
   activateComponent(cmp: any) {
-    console.log('Pages', cmp);
   }
 }
