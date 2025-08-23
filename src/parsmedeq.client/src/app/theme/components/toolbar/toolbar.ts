@@ -4,6 +4,7 @@ import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {PureComponent} from '../../../pure-component';
 import {MatMenuTrigger} from '@angular/material/menu';
 import {AuthService} from '../../../core/services/auth.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-toolbar',
@@ -22,13 +23,15 @@ export class Toolbar extends PureComponent implements OnDestroy {
 
   constructor(public appSettings: AppSettings,
               public formBuilder: UntypedFormBuilder,
-              public authService: AuthService) {
+              public authService: AuthService,
+              private translate: TranslateService) {
     super();
     this.settings = this.appSettings.settings;
     this.recheckIfInMenu = false;
     this.subscribeForm = this.formBuilder.group({
       query: ['', Validators.required]
     });
+    this.translate.get('SLOGAN').subscribe(res => console.log('Loaded:', res));
   }
 
   sidenavToggle() {
