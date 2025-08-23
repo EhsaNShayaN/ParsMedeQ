@@ -11,8 +11,8 @@ import {BaseCategoriesComponent} from '../../base-categories.component';
 export class ClipCategoryListComponent extends BaseCategoriesComponent {
   columnsToDisplay: string[] = [/*'row', */'title', 'creationDate', 'actions'];
 
-  constructor(injector: Injector) {
-    super(injector, Tables.Clip);
+  constructor() {
+    super(Tables.Clip);
   }
 
   getColName(column: string) {

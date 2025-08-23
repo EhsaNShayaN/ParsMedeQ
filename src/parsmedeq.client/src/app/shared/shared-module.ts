@@ -19,11 +19,12 @@ import {LoadMoreComponent} from './load-more/load-more.component';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
 import {MatChipListbox, MatChipOption} from '@angular/material/chips';
 import {MobileFormatterPipe} from '../core/pipes/mobile-formatter.pipe';
-import {CommentsComponent} from './comments/comments.component';
-import {DefaultClassDirective, DefaultFlexDirective, DefaultLayoutAlignDirective, DefaultLayoutDirective} from 'ngx-flexible-layout';
+import {Comments} from './comments/comments';
+import {DefaultClassDirective, DefaultFlexDirective, DefaultLayoutAlignDirective, DefaultLayoutDirective, DefaultShowHideDirective} from 'ngx-flexible-layout';
 import {ToastrModule} from 'ngx-toastr';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {JalaliMomentDateAdapter, PERSIAN_DATE_FORMATS} from '../core/custom-date-adapter';
+import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import {JalaliMomentDateAdapter, PERSIAN_DATE_FORMATS} from '../core/custom-date
     ReplaceUrlSpacesPipe,
     MobileFormatterPipe,
     LoadMoreComponent,
-    CommentsComponent,
+    Comments,
   ],
   imports: [
     FormsModule,
@@ -52,6 +53,10 @@ import {JalaliMomentDateAdapter, PERSIAN_DATE_FORMATS} from '../core/custom-date
     MatFormFieldModule,
     FormsModule,
     //////////////////////
+    DefaultShowHideDirective,
+    MatMenuTrigger,
+    MatMenu,
+    MatMenuItem,
     MatCard,
     MatCardTitle,
     MatCardContent,
@@ -91,8 +96,12 @@ import {JalaliMomentDateAdapter, PERSIAN_DATE_FORMATS} from '../core/custom-date
     ReplaceUrlSpacesPipe,
     MobileFormatterPipe,
     LoadMoreComponent,
-    CommentsComponent,
+    Comments,
     //////////////////////
+    DefaultShowHideDirective,
+    MatMenuTrigger,
+    MatMenu,
+    MatMenuItem,
     MatCard,
     MatCardTitle,
     MatCardContent,

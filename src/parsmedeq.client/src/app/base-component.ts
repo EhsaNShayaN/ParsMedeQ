@@ -1,21 +1,19 @@
-import {Directive, Injector} from '@angular/core';
+import {Directive, inject} from '@angular/core';
 import {PureComponent} from './pure-component';
 import {Meta, Title} from '@angular/platform-browser';
 
 @Directive()
 export class BaseComponent extends PureComponent {
-  titleService: Title;
-  metaService: Meta;
+  titleService = inject(Title);
+  metaService = inject(Meta);
 
-  constructor(injector: Injector) {
-    super(injector);
-    this.titleService = injector.get(Title);
-    this.metaService = injector.get(Meta);
+  constructor() {
+    super();
   }
 
   setTitle(title: string | null = null) {
     if (!title) {
-      title = 'AlborzChem | البرز شیمی';
+      title = 'ParsMedeQ | پارس مدیکیو';
     }
     this.titleService.setTitle(title);
   }

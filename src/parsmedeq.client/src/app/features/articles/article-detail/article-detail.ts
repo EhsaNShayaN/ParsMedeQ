@@ -21,10 +21,9 @@ export class ArticleDetail extends BaseComponent implements OnInit, OnDestroy {
   isLoading = true;
   protected readonly Tables = Tables;
 
-  constructor(injector: Injector,
-              public appSettings: AppSettings,
+  constructor(public appSettings: AppSettings,
               private activatedRoute: ActivatedRoute) {
-    super(injector);
+    super();
     this.settings = this.appSettings.settings;
   }
 

@@ -11,8 +11,8 @@ import {BaseCategoriesComponent} from '../../base-categories.component';
 export class ArticleCategoryListComponent extends BaseCategoriesComponent {
   columnsToDisplay: string[] = [/*'row', */'title', 'parentId', 'creationDate', 'actions'];
 
-  constructor(injector: Injector) {
-    super(injector, Tables.Article);
+  constructor() {
+    super(Tables.Article);
   }
 
   getColName(column: string) {

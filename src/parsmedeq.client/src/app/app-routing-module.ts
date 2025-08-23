@@ -3,14 +3,16 @@ import {RouterModule, Routes} from '@angular/router';
 import {MainLayout} from './shared/layouts/main-layout/main-layout';
 import {UserLayout} from './shared/layouts/user-layout/user-layout';
 import {AdminLayout} from './shared/layouts/admin-layout/admin-layout';
+import {Pages} from './features/pages';
 
-const routes: Routes = [
-  // صفحات عمومی
+const pagesChildren: Routes = [
+// صفحات عمومی
   {
     path: '',
     component: MainLayout,
     children: [
       {path: '', loadChildren: () => import('./features/home/home-module').then(m => m.HomeModule)},
+      {path: 'home', loadChildren: () => import('./features/home/home-module').then(m => m.HomeModule)},
       {path: 'about', loadChildren: () => import('./features/about/about-module').then(m => m.AboutModule)},
       //{path: 'articles', loadChildren: () => import('./features/articles/articles-module').then(m => m.ArticlesModule)},
       {path: 'auth', loadChildren: () => import('./features/auth/auth-module').then(m => m.AuthModule)},
@@ -37,6 +39,21 @@ const routes: Routes = [
     ]
   },
   // مسیر پیش‌فرض
+];
+const faPagesChildren: Routes = pagesChildren;
+const routes: Routes = [
+  {
+    path: '',
+    component: Pages, children: faPagesChildren
+  },
+  {
+    path: 'fa',
+    component: Pages, children: faPagesChildren
+  },
+  {
+    path: 'en',
+    component: Pages, children: pagesChildren
+  },
   {path: '**', redirectTo: ''}
 ];
 

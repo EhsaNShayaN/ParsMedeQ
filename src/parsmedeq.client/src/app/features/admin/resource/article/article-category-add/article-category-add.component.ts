@@ -10,7 +10,7 @@ import {ActivatedRoute} from '@angular/router';
   standalone: false
 })
 export class ArticleCategoryAddComponent extends BaseCategoryComponent {
-  constructor(private aRoute: ActivatedRoute, injector: Injector) {
-    super(injector, Tables.Article, aRoute);
+  constructor(private aRoute: ActivatedRoute) {
+    super(Tables.Article, aRoute);
   }
 }

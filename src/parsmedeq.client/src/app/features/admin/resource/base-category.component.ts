@@ -1,31 +1,27 @@
-import {Directive, Injector, OnDestroy, OnInit} from '@angular/core';
-import {FormControl, UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
+import {Directive, inject, OnDestroy, OnInit} from '@angular/core';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {ResourceCategoriesResponse, ResourceCategory} from '../../../core/models/ResourceCategoryResponse';
 import {BaseComponent} from '../../../base-component';
-import {Tables} from '../../../core/constants/server.constants';
 import {BaseResult} from '../../../core/models/BaseResult';
 import {CustomConstants} from '../../../core/constants/custom.constants';
 
 @Directive()
 export class BaseCategoryComponent extends BaseComponent implements OnInit, OnDestroy {
   tableId: number;
-  formBuilder: UntypedFormBuilder;
-  toaster: ToastrService;
+  toaster = inject(ToastrService);
+  formBuilder = inject(UntypedFormBuilder);
   public myForm!: UntypedFormGroup;
   resourceCategories: ResourceCategory[] = [];
   editItem?: ResourceCategory;
   /////////////////////
   private sub: any;
 
-  constructor(injector: Injector,
-              tableId: number,
+  constructor(tableId: number,
               protected activatedRoute: ActivatedRoute) {
-    super(injector);
+    super();
     this.tableId = tableId;
-    this.formBuilder = injector.get(UntypedFormBuilder);
-    this.toaster = injector.get(ToastrService);
   }
 
   ngOnInit() {

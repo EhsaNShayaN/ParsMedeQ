@@ -1,12 +1,12 @@
-import {Directive, Injector} from '@angular/core';
+import {Directive, inject} from '@angular/core';
 import {UntypedFormGroup} from '@angular/forms';
 import {RestApiService} from './core/rest-api.service';
 
 @Directive()
 export class PureComponent {
-  restApiService: RestApiService;
-  constructor(injector: Injector) {
-    this.restApiService = injector.get(RestApiService);
+  restApiService = inject(RestApiService);
+
+  constructor() {
   }
 
   findInvalidControls(myForm: UntypedFormGroup) {

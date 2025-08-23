@@ -8,12 +8,8 @@ export class Settings {
               public header: string,
               public rtl: boolean,
               public searchPanelVariant: number,
-              public searchOnBtnClick: boolean,
-              public currency: string,
               public mainToolbarFixed: boolean,
               public contentOffsetToTop: boolean,
-              public headerBgImage: boolean,
-              public headerBgVideo: boolean,
               public loadMore: {
                 start: boolean,
                 step: number,
@@ -28,7 +24,6 @@ export class Settings {
               public phones: string,
               public fax: string,
               public selectLang: boolean,
-              public selectCurrency: boolean,
               public lang: string
   ) {
   }
@@ -37,19 +32,14 @@ export class Settings {
 @Injectable()
 export class AppSettings {
   public settings = new Settings(
-    'AlborzChem',  // theme name
+    'ParsMedeQ',  // theme name
     'red-custom',      // blue, blue-dark, green, red, red-custom, pink, purple, grey, orange-dark
     1,           // 1 or 2 or 3
     true,        // true = sticky, false = not sticky
     'carousel',     // default, image, carousel, map, video
     true,       // true = rtl, false = ltr
     2,           //  1, 2  or 3
-    false,       //  true = search on button click
-    'USD',       // USD, EUR
 
-    // NOTE:  don't change additional options values, they used for theme performance
-    false,
-    false,
     false,
     false,
     {
@@ -60,13 +50,12 @@ export class AppSettings {
       complete: false,
       result: 0
     },
-    'alborzchem.com',
-    'info@alborzchem.com',
-    '021-58128',
-    '021 58128,021 22026611,021 22026622,021 22050250',
-    '02122022840',
+    'parsmedeq.com',
+    'info@parsmedeq.com',
+    '021-xxx',
+    '021 xxx,021 xxxxxxxx,021 yyyyyyyy,021 zzzzzzzz',
+    '021wwwwwwww',
     true,
-    false,
     'fa'
   );
 }

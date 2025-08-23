@@ -1,4 +1,4 @@
-import {Directive, Injector, OnDestroy} from '@angular/core';
+import {Directive, inject, OnDestroy} from '@angular/core';
 import {UntypedFormGroup} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
 import {BaseComponent} from "../../../base-component";
@@ -8,10 +8,10 @@ import {BaseResult} from '../../../core/models/BaseResult';
 
 @Directive()
 export class BaseResourceComponent extends BaseComponent implements OnDestroy {
+  toaster = inject(ToastrService);
   tableId: number;
   sub: any;
   //////////////////////
-  toaster: ToastrService;
   myForm!: UntypedFormGroup;
   expDate: any;
   expTime: any;
@@ -20,11 +20,9 @@ export class BaseResourceComponent extends BaseComponent implements OnDestroy {
   image?: File;
   file?: File;
 
-  constructor(injector: Injector,
-              tableId: number) {
-    super(injector);
+  constructor(tableId: number) {
+    super();
     this.tableId = tableId;
-    this.toaster = injector.get(ToastrService);
   }
 
   isAvailable(item: any, filteredProviders: any[]) {

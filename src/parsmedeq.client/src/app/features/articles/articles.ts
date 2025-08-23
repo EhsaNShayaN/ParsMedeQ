@@ -34,8 +34,8 @@ export class Articles extends BaseComponent implements OnInit, DoCheck {
 
   ///////////////////////////////
 
-  constructor(injector: Injector, public appSettings: AppSettings) {
-    super(injector);
+  constructor(public appSettings: AppSettings) {
+    super();
     this.settings = appSettings.settings;
   }
 

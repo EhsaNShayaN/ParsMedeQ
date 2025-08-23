@@ -11,11 +11,11 @@ import {AuthService} from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-comments',
-  templateUrl: './comments.component.html',
-  styleUrl: './comments.component.scss',
+  templateUrl: './comments.html',
+  styleUrl: './comments.scss',
   standalone: false
 })
-export class CommentsComponent extends PureComponent implements OnInit, DoCheck {
+export class Comments extends PureComponent implements OnInit, DoCheck {
   @Input() relatedId: number = 0;
   @Input() tableId: number = 0;
   public commentForm!: UntypedFormGroup;
@@ -31,12 +31,11 @@ export class CommentsComponent extends PureComponent implements OnInit, DoCheck 
   public count: number = 12;
   public pagination: Pagination = new Pagination(1, this.count, null, 2, 0, 0);
 
-  constructor(injector: Injector,
-              private toaster: ToastrService,
+  constructor(private toaster: ToastrService,
               public appSettings: AppSettings,
               public fb: UntypedFormBuilder,
               public authService: AuthService) {
-    super(injector);
+    super();
     this.settings = appSettings.settings;
   }
 

@@ -1,4 +1,4 @@
-import {Component, Injector, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormArray, UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import * as uuid from 'uuid';
@@ -24,9 +24,8 @@ export class ArticleAddComponent extends BaseResourceComponent implements OnInit
   abstractError = false;
 
   constructor(public formBuilder: UntypedFormBuilder,
-              private activatedRoute: ActivatedRoute,
-              injector: Injector) {
-    super(injector, Tables.Article);
+              private activatedRoute: ActivatedRoute) {
+    super(Tables.Article);
   }
 
   get anchorsArray() {

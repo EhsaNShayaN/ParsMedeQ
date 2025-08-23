@@ -22,9 +22,8 @@ export class NewsAddComponent extends BaseResourceComponent implements OnInit {
 
 
   constructor(public formBuilder: UntypedFormBuilder,
-              private activatedRoute: ActivatedRoute,
-              injector: Injector) {
-    super(injector, Tables.News);
+              private activatedRoute: ActivatedRoute) {
+    super(Tables.News);
   }
 
   ngOnInit(): void {

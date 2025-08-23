@@ -16,9 +16,8 @@ export class BaseCategoriesComponent extends BaseComponent implements OnInit, Af
   @ViewChild(MatSort, {static: true}) sort: MatSort | undefined;
   totalCount = 0;
 
-  constructor(injector: Injector,
-              tableId: number) {
-    super(injector);
+  constructor(tableId: number) {
+    super();
     this.tableId = tableId;
   }
 

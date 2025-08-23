@@ -1,10 +1,9 @@
-import {Directive, Injector, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Directive, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort, Sort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {BaseReportComponent} from '../../../base-report-component';
 import {Resource, ResourceResponse, ResourcesRequest} from '../../../core/models/ResourceResponse';
-import {BaseResult} from '../../../core/models/BaseResult';
 
 @Directive()
 export class BaseResourcesComponent extends BaseReportComponent implements OnInit, OnDestroy {
@@ -18,9 +17,8 @@ export class BaseResourcesComponent extends BaseReportComponent implements OnIni
 
   ///////////
 
-  constructor(injector: Injector,
-              tableId: number) {
-    super(injector);
+  constructor(tableId: number) {
+    super();
     this.tableId = tableId;
   }
 

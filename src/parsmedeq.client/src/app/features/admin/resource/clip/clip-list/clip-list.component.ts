@@ -11,8 +11,8 @@ import {BaseResourcesComponent} from '../../base-resources.component';
 export class ClipListComponent extends BaseResourcesComponent {
   displayedColumns: string[] = [/*'row', */'title', 'publishInfo', 'publisher', 'image', 'creationDate', 'actions'];
 
-  constructor(injector: Injector) {
-    super(injector, Tables.Clip);
+  constructor() {
+    super(Tables.Clip);
   }
 
   getColName(column: string) {

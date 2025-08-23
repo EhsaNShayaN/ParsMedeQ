@@ -10,7 +10,7 @@ import {ActivatedRoute} from '@angular/router';
   standalone: false
 })
 export class ClipCategoryAddComponent extends BaseCategoryComponent {
-  constructor(private aRoute: ActivatedRoute, injector: Injector) {
-    super(injector, Tables.Clip, aRoute);
+  constructor(private aRoute: ActivatedRoute) {
+    super(Tables.Clip, aRoute);
   }
 }

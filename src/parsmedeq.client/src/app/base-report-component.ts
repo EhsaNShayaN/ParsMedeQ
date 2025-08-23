@@ -1,14 +1,13 @@
-import {Directive, Injector} from '@angular/core';
+import {Directive, inject, Injector} from '@angular/core';
 import {MatPaginatorIntl} from '@angular/material/paginator';
 import {BaseComponent} from './base-component';
 
 @Directive()
 export class BaseReportComponent extends BaseComponent {
-  paginatorIntl: MatPaginatorIntl;
+  paginatorIntl = inject(MatPaginatorIntl);
 
-  constructor(injector: Injector) {
-    super(injector);
-    this.paginatorIntl = injector.get(MatPaginatorIntl);
+  constructor() {
+    super();
   }
 
   setPaginationLang() {

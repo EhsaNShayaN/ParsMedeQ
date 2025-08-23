@@ -11,8 +11,8 @@ import {BaseResourcesComponent} from '../../base-resources.component';
 export class ArticleListComponent extends BaseResourcesComponent {
   displayedColumns: string[] = [/*'row', */'title', 'categoryTitle', 'downloadCount', 'image', 'creationDate', 'actions'];
 
-  constructor(injector: Injector) {
-    super(injector, Tables.Article);
+  constructor() {
+    super(Tables.Article);
   }
 
   getColName(column: string) {

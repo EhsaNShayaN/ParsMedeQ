@@ -1,5 +1,5 @@
 <app-header></app-header>
 <main class="main-container">
-  <router-outlet></router-outlet>
+  <router-outlet (activate)="activateComponent($event)"></router-outlet>
 </main>
 <app-footer></app-footer>

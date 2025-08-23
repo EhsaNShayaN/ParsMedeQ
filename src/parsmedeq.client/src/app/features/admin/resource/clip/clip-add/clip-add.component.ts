@@ -1,4 +1,4 @@
-import {Component, Injector, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UntypedFormBuilder, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {Tables} from '../../../../../core/constants/server.constants';
@@ -18,9 +18,8 @@ export class ClipAddComponent extends BaseResourceComponent implements OnInit {
   editorConfig = getCustomEditorConfigs();
 
   constructor(public formBuilder: UntypedFormBuilder,
-              private activatedRoute: ActivatedRoute,
-              injector: Injector) {
-    super(injector, Tables.Clip);
+              private activatedRoute: ActivatedRoute) {
+    super(Tables.Clip);
   }
 
 
