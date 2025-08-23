@@ -75,15 +75,6 @@ input {
 
   .cart-menu-panel {
     max-width: 350px !important;
-
-    .baskets {
-      min-height: 72px;
-
-      .items {
-        overflow-y: scroll;
-        max-height: 400px;
-      }
-    }
   }
 
   .mat-mdc-menu-content:empty {

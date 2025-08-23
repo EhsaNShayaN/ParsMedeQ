@@ -10,7 +10,6 @@ import {Pages} from './features/pages';
 import {SharedModule} from './shared/shared-module';
 import {Header} from './shared/layouts/header/header';
 import {Footer} from './shared/layouts/footer/footer';
-import {MainLayout} from './shared/layouts/main-layout/main-layout';
 import {UserLayout} from './shared/layouts/user-layout/user-layout';
 import {AdminLayout} from './shared/layouts/admin-layout/admin-layout';
 import {AdminSidebar} from './shared/components/admin-sidebar/admin-sidebar';
@@ -52,7 +51,6 @@ export function tokenGetter() {
     Lang,
     Header,
     Footer,
-    MainLayout,
     UserLayout,
     AdminLayout,
     AdminSidebar,

@@ -1,4 +1,4 @@
-<mat-toolbar id="top-toolbar" class="top-toolbar">
+<mat-toolbar id="top-toolbar" class="top-toolbar d-none">
   <div class="theme-container " fxLayout="row" fxLayoutAlign="space-between center">
     <div class="mr-2">
       <span class="font-large fw-600" ngClass.xs="font-sm fw-600">{{ 'SLOGAN' | translate }}</span>
@@ -43,35 +43,8 @@
     </div>
   </div>
 </mat-toolbar>
-<mat-toolbar id="main-toolbar" class="mat-elevation-z2">
-  <div class="theme-container">
-    <div fxLayout="row" fxLayoutAlign="space-between center">
-      <div fxLayout="row" fxLayoutAlign="space-between center">
-        <a class="logo" [routerLink]="['/' | langPack]">
-          <img src="../../../../assets/logo.png" alt="ParsMedeQ"/>
-        </a>
-        <div fxShow="false" fxShow.gt-sm class="horizontal-menu">
-          <!--<app-mega-menu [menuParentId]="0"></app-mega-menu>-->
-        </div>
-      </div>
-      <div fxLayout="column">
-        <div fxLayout="row">
-          <a [routerLink]="['/products' | langPack]" mat-raised-button class="bg-primary w-100 btn-rounded" ngClass.xs="small">
-            {{ 'ONLINE_SHOP' | translate }}
-          </a>
-        </div>
-        <div fxLayout="row" fxLayoutAlign="space-between center" fxShow.gt-xs="false" class="social text-center mt-2">
-          <div fxShow.gt-xs="false" class="text-center">
-            <app-social-icons fxLayout="row" fxLayoutAlign="start center"></app-social-icons>
-          </div>
-          <div fxLayout="row" fxShow.gt-xs="false" class="text-center font-1">
-            <div class="px-1">
-              <a href="mailto:{{settings.email}}" class="not-link" ngClass.xs="font-sm2">{{ settings.email }}</a>
-            </div>
-            <mat-icon color="primary" fxShow.lt-sm="false">mail</mat-icon>
-          </div>
-        </div>
-      </div>
-    </div>
+<mat-toolbar id="main-toolbar" class="mat-elevation-z2" color="accent">
+  <div class="theme-container0 w-100">
+    <app-header></app-header>
   </div>
 </mat-toolbar>
