@@ -1,1 +1,12 @@
-<p>home works!</p>
+<div class="translation-test">
+  <h2>{{ 'COMMON.WELCOME' | translate }}</h2>
+  <p>{{ 'COMMON.TEST_MESSAGE' | translate }}</p>
+  <h3>{{ 'SLOGAN' | translate }}</h3>
+  
+  <div class="language-info">
+    <p>Current Language: {{ currentLang }}</p>
+    <button (click)="changeLanguage('fa')">فارسی</button>
+    <button (click)="changeLanguage('en')">English</button>
+    <button (click)="resetToPersian()" style="background-color: #dc3545;">Reset to Persian</button>
+  </div>
+</div>

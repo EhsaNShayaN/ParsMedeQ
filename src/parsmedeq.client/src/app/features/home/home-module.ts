@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {Home} from './home';
 import {SharedModule} from '../../shared/shared-module';
 import {HomeRoutingModule} from './home-routing-module';
-
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -13,6 +13,7 @@ import {HomeRoutingModule} from './home-routing-module';
     CommonModule,
     SharedModule,
     HomeRoutingModule,
+    TranslateModule,
   ]
 })
 export class HomeModule {

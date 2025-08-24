@@ -1,0 +1,38 @@
+.translation-test {
+  padding: 20px;
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.translation-test h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.translation-test p {
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+.language-info {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+}
+
+.language-info button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.language-info button:hover {
+  background-color: #0056b3;
+}

@@ -30,7 +30,14 @@ import {UserMenu} from './theme/components/user-menu/user-menu';
 import {JwtModule} from '@auth0/angular-jwt';
 import {LangPackPipe} from './core/pipes/lang-pack.pipe';
 import {TransitPipe} from './core/pipes/transit.pipe';
+import {TranslateModule, TranslateLoader, TranslateService} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {HttpClient} from '@angular/common/http';
 
+// AoT requires an exported function for factories
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 export function urlInitFactory(urlInitService: UrlInitService) {
   return () => urlInitService.init();
@@ -38,6 +45,15 @@ export function urlInitFactory(urlInitService: UrlInitService) {
 
 export function tokenGetter() {
   return localStorage.getItem('jwt');
+}
+
+export function translateFactory(translateService: TranslateService) {
+  return () => {
+    translateService.setDefaultLang('fa');
+    translateService.addLangs(['fa', 'en']);
+    const savedLang = localStorage.getItem('language') || 'fa';
+    return translateService.use(savedLang).toPromise();
+  };
 }
 
 @NgModule({
@@ -75,6 +91,14 @@ export function tokenGetter() {
     MatCardAvatar,
     MatCardHeader,
     MatLine,
+    TranslateModule.forRoot({
+      defaultLanguage: 'fa',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
@@ -86,6 +110,12 @@ export function tokenGetter() {
       provide: APP_INITIALIZER,
       useFactory: urlInitFactory,
       deps: [UrlInitService],
+      multi: true,
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: translateFactory,
+      deps: [TranslateService],
       multi: true,
     }
   ],
