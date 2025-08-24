@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {TranslateService} from '@ngx-translate/core';
 import {AppSettings} from '../../app.settings';
 
 @Injectable({
@@ -7,7 +6,9 @@ import {AppSettings} from '../../app.settings';
 })
 
 export class LanguageService {
-  constructor(private translateService: TranslateService,
+  translateService: any;
+
+  constructor(/*private translateService: TranslateService,*/
               private appSettings: AppSettings) {
   }
 

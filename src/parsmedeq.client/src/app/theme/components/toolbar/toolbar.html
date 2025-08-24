@@ -1,7 +1,7 @@
 <mat-toolbar id="top-toolbar" class="top-toolbar d-none0">
   <div class="theme-container " fxLayout="row" fxLayoutAlign="space-between center">
     <div class="mr-2">
-      <span class="font-large fw-600" ngClass.xs="font-sm fw-600">{{ 'SLOGAN' | translate }}</span>
+      <span class="font-large fw-600" ngClass.xs="font-sm fw-600">{{ 'SLOGAN' | transit }}</span>
     </div>
     <div fxLayout="row" fxLayoutAlign="start center">
       <app-social-icons fxLayout="row" fxLayoutAlign="start center" fxShow="false" fxShow.gt-md></app-social-icons>
@@ -20,7 +20,7 @@
     </div>
     <div></div>
     <div fxLayout="row" fxLayoutAlign="end center" class="right-section" ngClass.xs="w-100">
-      <a [routerLink]="['/search' | langPack]" mat-icon-button matTooltip="{{'SEARCH' | translate}}"
+      <a [routerLink]="['/search' | langPack]" mat-icon-button matTooltip="{{'SEARCH' | transit}}"
          class="shop ml-1">
         <mat-icon>
           search
@@ -29,7 +29,7 @@
       <!--*************-->
       @if (!authService.isLoggedIn()) {
         <a [routerLink]="['/login' | langPack]" class="background-color not-link">
-          {{ 'LOGIN' | translate }}
+          {{ 'LOGIN' | transit }}
         </a>
       } @else {
         <app-user-menu></app-user-menu>

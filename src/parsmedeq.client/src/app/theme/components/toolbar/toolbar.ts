@@ -4,7 +4,6 @@ import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {PureComponent} from '../../../pure-component';
 import {MatMenuTrigger} from '@angular/material/menu';
 import {AuthService} from '../../../core/services/auth.service';
-import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-toolbar',

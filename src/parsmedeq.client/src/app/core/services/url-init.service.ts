@@ -4,7 +4,6 @@ import {getPathLang} from '../shared/util';
 import {NavigationEnd, Router} from '@angular/router';
 import {filter} from 'rxjs';
 import {DOCUMENT} from '@angular/common';
-import {Language} from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root',
@@ -39,7 +38,7 @@ export class UrlInitService {
   }
 
   setCanonical() {
-    const languages: readonly Language[] = this.languageService.getLanguages();
+    const languages: readonly any[] = this.languageService.getLanguages();
     const currentUrlLang = getPathLang(languages);
     let path = window.location.pathname.replace(/^\/+/, '');
     this.remove('canonical');

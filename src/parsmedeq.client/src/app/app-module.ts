@@ -1,6 +1,6 @@
 import {APP_INITIALIZER, NgModule, provideBrowserGlobalErrorListeners} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule, provideHttpClient} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient} from '@angular/common/http';
 import {AuthInterceptor} from './core/services/auth.interceptor';
 import {MatIconRegistry} from '@angular/material/icon';
 import {DomSanitizer} from '@angular/platform-browser';
@@ -19,8 +19,6 @@ import {UserHeader} from './shared/components/user-header/user-header';
 import {AppSettings} from './app.settings';
 import {UrlSerializer} from '@angular/router';
 import {LowerCaseUrlSerializer} from './core/pipes/lower-case-url-serializer.pipe';
-import {provideTranslateService, TranslateLoader, TranslateModule, TranslatePipe} from '@ngx-translate/core';
-import {provideTranslateHttpLoader, TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {UrlInitService} from './core/services/url-init.service';
 import {Lang} from './theme/components/lang/lang';
 import {MatMiniFabButton} from '@angular/material/button';
@@ -31,10 +29,8 @@ import {SocialIcons} from './theme/components/social-icons/social-icons';
 import {UserMenu} from './theme/components/user-menu/user-menu';
 import {JwtModule} from '@auth0/angular-jwt';
 import {LangPackPipe} from './core/pipes/lang-pack.pipe';
+import {TransitPipe} from './core/pipes/transit.pipe';
 
-export function HttpLoaderFactory() {
-  return new TranslateHttpLoader();
-}
 
 export function urlInitFactory(urlInitService: UrlInitService) {
   return () => urlInitService.init();
@@ -62,16 +58,11 @@ export function tokenGetter() {
     AdminHeader,
     UserHeader,
     LangPackPipe,
+    TransitPipe,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory
-      }
-    }),
     AppRoutingModule,
     SharedModule,
     JwtModule.forRoot({
@@ -84,19 +75,10 @@ export function tokenGetter() {
     MatCardAvatar,
     MatCardHeader,
     MatLine,
-    TranslatePipe,
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideHttpClient(),
-    provideTranslateService({
-      loader: provideTranslateHttpLoader({
-        prefix: '/assets/i18n/',
-        suffix: '.json'
-      }),
-      fallbackLang: 'fa',
-      lang: 'fa'
-    }),
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     AppSettings,
     {provide: UrlSerializer, useClass: LowerCaseUrlSerializer},
