@@ -23,15 +23,13 @@ export class Toolbar extends PureComponent implements OnDestroy {
 
   constructor(public appSettings: AppSettings,
               public formBuilder: UntypedFormBuilder,
-              public authService: AuthService,
-              private translate: TranslateService) {
+              public authService: AuthService) {
     super();
     this.settings = this.appSettings.settings;
     this.recheckIfInMenu = false;
     this.subscribeForm = this.formBuilder.group({
       query: ['', Validators.required]
     });
-    this.translate.get('SLOGAN').subscribe(res => console.log('Loaded:', res));
   }
 
   sidenavToggle() {
