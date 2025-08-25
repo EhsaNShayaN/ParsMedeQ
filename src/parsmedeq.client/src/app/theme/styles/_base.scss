@@ -73,11 +73,11 @@ a {
   text-transform: capitalize;
 }
 
-.transition {
-  -webkit-transition: 0.3s;
-  -moz-transition: 0.3s;
-  -ms-transition: 0.3s;
-  transition: 0.3s;
+.translateion {
+  -webkit-translateion: 0.3s;
+  -moz-translateion: 0.3s;
+  -ms-translateion: 0.3s;
+  translateion: 0.3s;
 }
 
 .text-truncate {
@@ -255,7 +255,7 @@ a {
   position: relative;
   height: $main-toolbar-height;
   /*height: auto;*/
-  transition: 0.2s;
+  translateion: 0.2s;
   z-index: 9;
   box-shadow: none;
 }
@@ -1082,8 +1082,8 @@ button.swipe-arrow {
 .ps__rail-x {
   display: none;
   opacity: 0;
-  transition: background-color .2s linear, opacity .2s linear;
-  -webkit-transition: background-color .2s linear, opacity .2s linear;
+  translateion: background-color .2s linear, opacity .2s linear;
+  -webkit-translateion: background-color .2s linear, opacity .2s linear;
   height: 9px;
   bottom: 0;
   position: absolute;
@@ -1092,8 +1092,8 @@ button.swipe-arrow {
 .ps__rail-y {
   display: none;
   opacity: 0;
-  transition: background-color .2s linear, opacity .2s linear;
-  -webkit-transition: background-color .2s linear, opacity .2s linear;
+  translateion: background-color .2s linear, opacity .2s linear;
+  -webkit-translateion: background-color .2s linear, opacity .2s linear;
   width: 9px;
   right: 0;
   left: auto !important;
@@ -1127,8 +1127,8 @@ button.swipe-arrow {
 .ps__thumb-x {
   background-color: #aaa;
   border-radius: 6px;
-  transition: background-color .2s linear, height .2s ease-in-out;
-  -webkit-transition: background-color .2s linear, height .2s ease-in-out;
+  translateion: background-color .2s linear, height .2s ease-in-out;
+  -webkit-translateion: background-color .2s linear, height .2s ease-in-out;
   height: 4px;
   bottom: 1px;
   position: absolute;
@@ -1137,8 +1137,8 @@ button.swipe-arrow {
 .ps__thumb-y {
   background-color: #aaa;
   border-radius: 6px;
-  transition: background-color .2s linear, width .2s ease-in-out;
-  -webkit-transition: background-color .2s linear, width .2s ease-in-out;
+  translateion: background-color .2s linear, width .2s ease-in-out;
+  -webkit-translateion: background-color .2s linear, width .2s ease-in-out;
   width: 4px;
   right: 1px;
   position: absolute;

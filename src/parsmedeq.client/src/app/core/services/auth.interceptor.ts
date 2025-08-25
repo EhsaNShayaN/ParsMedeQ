@@ -2,7 +2,6 @@ import {Injectable, Injector} from '@angular/core';
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {AuthService} from './auth.service';
-import {LanguageService} from './language.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -18,11 +17,11 @@ export class AuthInterceptor implements HttpInterceptor {
       });
       return next.handle(cloned);
     }
-    const languageService = this.injector.get(LanguageService); // Lazy resolve
+    /*const languageService = this.injector.get(LanguageService); // Lazy resolve
     const lang = languageService.getLang();
     req = req.clone({
       headers: req.headers.set('Accept-Language', lang),
-    });
+    });*/
     return next.handle(req);
   }
 }

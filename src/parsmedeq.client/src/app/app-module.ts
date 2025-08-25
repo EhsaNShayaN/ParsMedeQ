@@ -1,9 +1,8 @@
 import {APP_INITIALIZER, NgModule, provideBrowserGlobalErrorListeners} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
-import {HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient} from '@angular/common/http';
+import {BrowserModule, DomSanitizer} from '@angular/platform-browser';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule, provideHttpClient} from '@angular/common/http';
 import {AuthInterceptor} from './core/services/auth.interceptor';
 import {MatIconRegistry} from '@angular/material/icon';
-import {DomSanitizer} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing-module';
 import {App} from './app';
 import {Pages} from './features/pages';
@@ -29,13 +28,17 @@ import {SocialIcons} from './theme/components/social-icons/social-icons';
 import {UserMenu} from './theme/components/user-menu/user-menu';
 import {JwtModule} from '@auth0/angular-jwt';
 import {LangPackPipe} from './core/pipes/lang-pack.pipe';
-import {TransitPipe} from './core/pipes/transit.pipe';
-import {TranslateModule, TranslateLoader, TranslateService} from '@ngx-translate/core';
+import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {HttpClient} from '@angular/common/http';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
+  console.log(`EhsaN: ./assets/i18n/en.json`);
+  http.get('./assets/i18n/en.json').subscribe(s => {
+    console.log(s);
+  }, error => {
+    console.log('error', error);
+  });
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
@@ -74,7 +77,6 @@ export function translateFactory(translateService: TranslateService) {
     AdminHeader,
     UserHeader,
     LangPackPipe,
-    TransitPipe,
   ],
   imports: [
     BrowserModule,
