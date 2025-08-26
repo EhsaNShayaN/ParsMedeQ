@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {PureComponent} from '../../../pure-component';
-import {LanguageService} from '../../../core/services/language.service';
 import {getPathLang} from '../../../core/shared/util';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-lang',
@@ -13,17 +13,17 @@ export class Lang extends PureComponent implements OnInit {
   public languages: readonly string[] = [];
   public langName = '';
 
-  constructor(private languageService: LanguageService) {
+  constructor(private translateService: TranslateService) {
     super();
-    this.languages = languageService.getLanguages();
+    this.languages = translateService.getLangs();
   }
 
   ngOnInit() {
-    this.langName = this.getLangName(this.languageService.getLang());
+    this.langName = this.getLangName(this.translateService.getDefaultLang());
   }
 
   public changeLang(lang: string) {
-    this.languageService.setLang(lang);
+    this.translateService.setDefaultLang(lang);
     this.langName = this.getLangName(lang);
 
     const currentUrlLang = getPathLang(this.languages);

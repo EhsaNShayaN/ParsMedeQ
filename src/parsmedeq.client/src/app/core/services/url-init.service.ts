@@ -1,9 +1,9 @@
 import {Inject, Injectable} from '@angular/core';
-import {LanguageService} from './language.service';
 import {getPathLang} from '../shared/util';
 import {NavigationEnd, Router} from '@angular/router';
 import {filter} from 'rxjs';
 import {DOCUMENT} from '@angular/common';
+import {TranslateService} from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root',
@@ -11,11 +11,11 @@ import {DOCUMENT} from '@angular/common';
 export class UrlInitService {
   constructor(@Inject(DOCUMENT) private document: Document,
               private router: Router,
-              private languageService: LanguageService) {
+              private translateService: TranslateService) {
   }
 
   init(): Promise<void> {
-    this.languageService.addLanguages();
+    this.translateService.addLangs(['fa', 'en']);
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
@@ -23,9 +23,9 @@ export class UrlInitService {
       });
     return new Promise((resolve) => {
       if (typeof window !== 'undefined') {
-        const languages = this.languageService.getLanguages();
+        const languages = this.translateService.getLangs();
         const lang = getPathLang(languages) ?? 'fa';
-        this.languageService.setLang(lang);
+        this.translateService.setDefaultLang(lang);
       }
       resolve();
     });
@@ -38,7 +38,7 @@ export class UrlInitService {
   }
 
   setCanonical() {
-    const languages: readonly any[] = this.languageService.getLanguages();
+    const languages: readonly any[] = this.translateService.getLangs();
     const currentUrlLang = getPathLang(languages);
     let path = window.location.pathname.replace(/^\/+/, '');
     this.remove('canonical');

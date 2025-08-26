@@ -43,15 +43,6 @@ export function tokenGetter() {
   return localStorage.getItem('jwt');
 }
 
-export function translateFactory(translateService: TranslateService) {
-  return () => {
-    translateService.setDefaultLang('fa');
-    translateService.addLangs(['fa', 'en']);
-    const savedLang = localStorage.getItem('language') || 'fa';
-    return translateService.use(savedLang).toPromise();
-  };
-}
-
 @NgModule({
   declarations: [
     App,
@@ -99,10 +90,9 @@ export function translateFactory(translateService: TranslateService) {
     provideBrowserGlobalErrorListeners(),
     provideHttpClient(),
     AppSettings,
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     {provide: APP_INITIALIZER, useFactory: urlInitFactory, deps: [UrlInitService], multi: true},
     {provide: UrlSerializer, useClass: LowerCaseUrlSerializer},
-    {provide: APP_INITIALIZER, useFactory: translateFactory, deps: [TranslateService], multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
   ],
   exports: [],
   bootstrap: [App]
