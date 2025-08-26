@@ -1,10 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using ParsMedeQ.Application.Features.ResourceCategoryFeatures.ResourceCategoryDetailsFeature;
+using ParsMedeQ.Application.Features.ResourceFeatures.ResourceCategoryListFeature;
 using ParsMedeQ.Contracts;
 using ParsMedeQ.Contracts.ResourceCategoryContracts.ResourceCategoryDetailsContract;
 using ParsMedeQ.Contracts.ResourceCategoryContracts.ResourceCategoryListContract;
-using ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate;
 using SRH.Utilities.EhsaN;
 
 namespace ParsMedeQ.Presentation.Features.ResourceCategoryFeatures.ResourceCategoryDetails;
@@ -12,14 +12,14 @@ namespace ParsMedeQ.Presentation.Features.ResourceCategoryFeatures.ResourceCateg
 sealed class ResourceCategoryDetailsEndpoint : EndpointHandlerBase<
     ResourceCategoryDetailsApiRequest,
     ResourceCategoryDetailsQuery,
-    ResourceCategory,
+    ResourceCategoryListDbQueryResponse,
     ResourceCategoryDetailsApiResponse>
 {
     protected override bool NeedTaxPayerFile => true;
 
     public ResourceCategoryDetailsEndpoint(
         IPresentationMapper<ResourceCategoryDetailsApiRequest, ResourceCategoryDetailsQuery> requestMapper,
-        IPresentationMapper<ResourceCategory, ResourceCategoryDetailsApiResponse> responseMapper)
+        IPresentationMapper<ResourceCategoryListDbQueryResponse, ResourceCategoryDetailsApiResponse> responseMapper)
         : base(
             Endpoints.Resource.ResourceCategory,
             HttpMethod.Get,
@@ -50,11 +50,11 @@ sealed class ResourceCategoryDetailsApiRequestMapper : IPresentationMapper<
     }
 }
 sealed class ResourceCategoryDetailsApiResponseMapper : IPresentationMapper<
-    ResourceCategory,
+    ResourceCategoryListDbQueryResponse,
     ResourceCategoryDetailsApiResponse>
 {
     public ValueTask<PrimitiveResult<ResourceCategoryDetailsApiResponse>> Map(
-        ResourceCategory src,
+        ResourceCategoryListDbQueryResponse src,
         CancellationToken cancellationToken)
     {
         return ValueTask.FromResult(
@@ -62,8 +62,8 @@ sealed class ResourceCategoryDetailsApiResponseMapper : IPresentationMapper<
                     new ResourceCategoryDetailsApiResponse(
                         src.Id,
                         src.TableId,
-                        string.Empty,
-                        string.Empty,
+                        src.Title,
+                        src.Description,
                         src.Count,
                         src.ParentId,
                         src.CreationDate.ToPersianDate())

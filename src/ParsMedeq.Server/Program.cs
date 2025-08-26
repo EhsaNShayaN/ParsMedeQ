@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using ParsMedeQ.Application.Options;
+using ParsMedeQ.Presentation.Services.ApplicationServices.UserLangServices;
 using ParsMedeQ.Server;
 using SRH.ServiceInstaller;
 using System.Net;
@@ -92,6 +93,7 @@ ServiceInstallerHelper.InstallServicesRecursively(builder.Services,
            ApiAssemblyReference.Assembly);
 ////////////////////////////////
 var app = builder.Build();
+app.UseMiddleware<UserLangContextAccessorMiddleware>();
 app.UseHsts();
 app.UseDefaultFiles();
 app.MapStaticAssets();

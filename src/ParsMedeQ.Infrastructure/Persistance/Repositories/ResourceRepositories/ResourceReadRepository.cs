@@ -1,10 +1,8 @@
-﻿using org.apache.zookeeper.data;
-using ParsMedeQ.Application.Features.ResourceFeatures.ResourceCategoryListFeature;
+﻿using ParsMedeQ.Application.Features.ResourceFeatures.ResourceCategoryListFeature;
 using ParsMedeQ.Application.Features.ResourceFeatures.ResourceDetailsFeature;
 using ParsMedeQ.Application.Features.ResourceFeatures.ResourceListFeature;
 using ParsMedeQ.Application.Helpers;
 using ParsMedeQ.Application.Persistance.Schema.ResourceRepositories;
-using ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate;
 using ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate.Entities;
 using ParsMedeQ.Infrastructure.Persistance.DbContexts;
 using SRH.Persistance.Extensions;
@@ -170,13 +168,42 @@ internal sealed class ResourceReadRepository : GenericPrimitiveReadRepositoryBas
             });
     }
 
-    public ValueTask<PrimitiveResult<ResourceCategory>> ResourceCategoryDetails(int Id, CancellationToken cancellationToken)
+    public ValueTask<PrimitiveResult<ResourceCategoryListDbQueryResponse>> ResourceCategoryDetails(int Id, string langCode, CancellationToken cancellationToken)
     {
-        return this.DbContext
-            .ResourceCategory
-            .Where(s => s.Id.Equals(Id))
-            .Run(q => q.FirstOrDefaultAsync(cancellationToken), PrimitiveError.Create("", "آیتم مورد نظر موجود نمی باشد."))
-            .Map(a => a!);
+
+        var q = from rc in this.DbContext.ResourceCategory
+                join rct in this.DbContext.ResourceCategoryTranslation
+                on new { id = rc.Id, langCode } equals new { id = rct.ResourceCategoryId, langCode = rct.LanguageCode } into x
+                from a in x.DefaultIfEmpty()
+                where rc.Id.Equals(Id) //&& a.LanguageCode.Equals(langCode)
+                select new ResourceCategoryListDbQueryResponse
+                {
+                    Id = rc.Id,
+                    TableId = rc.TableId,
+                    Count = rc.Count,
+                    ParentId = rc.ParentId,
+                    CreationDate = rc.CreationDate,
+                    Title = a.Title ?? "[NO-TITLE]",
+                    Description = a.Description ?? "[NO-DESCRIPTION]"
+                };
+        return q.Run(q => q.FirstOrDefaultAsync(cancellationToken), PrimitiveError.Create("", "آیتمی با شناسه مورد نظر پیدا نشد"));
+
+        //return this.DbContext
+        //    .ResourceCategory
+        //    .Where(x => x.Id == Id)
+        //    .Include(a => a.ResourceCategoryTranslations.Where(x => x.LanguageCode.Equals(langCode)))
+        //    .Run(q => q.FirstOrDefaultAsync(cancellationToken), PrimitiveError.Create("", "آیتمی با شناسه مورد نظر پیدا نشد"))
+        //    .Map(rc => new ResourceCategoryListDbQueryResponse
+        //    {
+        //        Id = rc.Id,
+        //        TableId = rc.TableId,
+        //        Count = rc.Count,
+        //        ParentId = rc.ParentId,
+        //        CreationDate = rc.CreationDate,
+        //        Title = rc.ResourceCategoryTranslations?.FirstOrDefault()?.Title ?? string.Empty,
+        //        Description = rc.ResourceCategoryTranslations?.FirstOrDefault()?.Description ?? string.Empty
+        //    });
+
     }
 
     public ValueTask<PrimitiveResult<ResourceCategoryRelations[]>> FilterResourceCategoryRelations(

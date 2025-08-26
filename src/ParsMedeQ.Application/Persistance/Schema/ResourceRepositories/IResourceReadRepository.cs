@@ -2,7 +2,6 @@
 using ParsMedeQ.Application.Features.ResourceFeatures.ResourceDetailsFeature;
 using ParsMedeQ.Application.Features.ResourceFeatures.ResourceListFeature;
 using ParsMedeQ.Application.Helpers;
-using ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate;
 using ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate.Entities;
 using ParsMedeQ.Domain.Persistance;
 
@@ -24,9 +23,7 @@ public interface IResourceReadRepository : IDomainRepository
         int TableId,
         CancellationToken cancellationToken);
 
-    ValueTask<PrimitiveResult<ResourceCategory>> ResourceCategoryDetails(
-        int id,
-        CancellationToken cancellationToken);
+    ValueTask<PrimitiveResult<ResourceCategoryListDbQueryResponse>> ResourceCategoryDetails(int Id, string langCode, CancellationToken cancellationToken);
     ValueTask<PrimitiveResult<ResourceCategoryRelations[]>> FilterResourceCategoryRelations(
         int resourceId,
         CancellationToken cancellationToken);
