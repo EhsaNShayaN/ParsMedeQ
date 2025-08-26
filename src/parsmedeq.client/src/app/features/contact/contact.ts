@@ -20,7 +20,6 @@ export class Contact {
 
   onSubmit(): void {
     if (this.form.valid) {
-      console.log(this.form.value); // اینجا می‌تونه بره به API
       alert('پیام شما با موفقیت ارسال شد.');
       this.form.reset();
     }

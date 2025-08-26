@@ -16,7 +16,6 @@ export class CommentForm {
   };
 
   submitComment() {
-    console.log(`ثبت نظر برای ${this.entityType} با آیدی ${this.entityId}`, this.comment);
     // اینجا درخواست به API ارسال شود
   }
 }

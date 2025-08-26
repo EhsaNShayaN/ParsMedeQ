@@ -20,7 +20,6 @@ export class Register {
 
   onSubmit() {
     if (this.signupForm.valid) {
-      console.log('ثبت‌نام:', this.signupForm.value);
       // ارسال به سرویس API
     }
   }

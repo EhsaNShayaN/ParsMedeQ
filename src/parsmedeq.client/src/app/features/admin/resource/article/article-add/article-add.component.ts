@@ -127,9 +127,7 @@ export class ArticleAddComponent extends BaseResourceComponent implements OnInit
 
   dateChanged(dateRangeStart: HTMLInputElement) {
     this.expDate = this.toEnglish(dateRangeStart.value);
-    console.log(this.expDate);
     const startDate = this.toGeorgianDate();
-    console.log(startDate);
   }
 
   override onFormSubmit(values: any): void {
@@ -145,7 +143,6 @@ export class ArticleAddComponent extends BaseResourceComponent implements OnInit
     const monthStart = Number(start.substring(5, 7));
     const dayStart = Number(start.substring(8, 10));
     const startDate = new Date(yearStart, monthStart - 1, dayStart);
-    console.log(startDate);
     return startDate;
   }
 
@@ -167,11 +164,5 @@ export class ArticleAddComponent extends BaseResourceComponent implements OnInit
       };
       anchors.push(this.formBuilder.group(p));
     });
-  }
-
-  onFormSubmit2(myForm: UntypedFormGroup) {
-    var ctrl = myForm.controls['fileId'] as any;
-    const f = ctrl.value as File;
-    console.log(f);
   }
 }

@@ -48,7 +48,6 @@ export class BaseResourcesComponent extends BaseReportComponent implements OnIni
   }
 
   remove(property: Resource) {
-    console.log('delete');
     /*const index: number = this.dataSource.data.indexOf(property);
     if (index !== -1) {
       const message = this.appService.getTranslateValue('MESSAGE.SURE_DELETE') ?? '';
@@ -74,7 +73,6 @@ export class BaseResourcesComponent extends BaseReportComponent implements OnIni
   }
 
   sortChanged($event: Sort) {
-    console.log($event);
     this.getItems();
   }
 

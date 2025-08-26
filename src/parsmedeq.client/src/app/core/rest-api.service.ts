@@ -78,8 +78,6 @@ export class RestApiService {
 
     Object.entries(obj).forEach(([key, value]) => {
 
-      console.log(key, typeof (value));
-
       if (value === undefined || value === null) return;
 
       // If it's a File or Blob -> append directly (binary)

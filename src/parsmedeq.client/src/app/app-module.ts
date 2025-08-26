@@ -31,14 +31,7 @@ import {LangPackPipe} from './core/pipes/lang-pack.pipe';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
-// AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
-  console.log(`EhsaN: ./assets/i18n/en.json`);
-  http.get('./assets/i18n/en.json').subscribe(s => {
-    console.log(s);
-  }, error => {
-    console.log('error', error);
-  });
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
@@ -105,21 +98,11 @@ export function translateFactory(translateService: TranslateService) {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideHttpClient(),
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     AppSettings,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    {provide: APP_INITIALIZER, useFactory: urlInitFactory, deps: [UrlInitService], multi: true},
     {provide: UrlSerializer, useClass: LowerCaseUrlSerializer},
-    {
-      provide: APP_INITIALIZER,
-      useFactory: urlInitFactory,
-      deps: [UrlInitService],
-      multi: true,
-    },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: translateFactory,
-      deps: [TranslateService],
-      multi: true,
-    }
+    {provide: APP_INITIALIZER, useFactory: translateFactory, deps: [TranslateService], multi: true}
   ],
   exports: [],
   bootstrap: [App]

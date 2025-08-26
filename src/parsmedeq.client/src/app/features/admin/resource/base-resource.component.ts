@@ -38,7 +38,6 @@ export class BaseResourceComponent extends BaseComponent implements OnDestroy {
         values.publishDate = this.pubDate;
       }
       values.tableId = this.tableId;
-      console.log(values);
       if (this.editItem) {
         values.id = this.editItem.id;
         if (!this.image) {
@@ -50,7 +49,6 @@ export class BaseResourceComponent extends BaseComponent implements OnDestroy {
       }
       delete values.imagePath;
       delete values.fileId;
-      console.log(values);
       this.restApiService.addResource(values, this.image, this.file).subscribe((d: BaseResult<boolean>) => {
         this.toaster.success(CustomConstants.THE_OPERATION_WAS_SUCCESSFUL, '', {});
       });

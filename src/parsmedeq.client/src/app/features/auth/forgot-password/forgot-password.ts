@@ -18,7 +18,6 @@ export class ForgotPassword {
 
   onSubmit() {
     if (this.forgotForm.valid) {
-      console.log('درخواست بازیابی رمز:', this.forgotForm.value);
       // ارسال به API برای ارسال لینک بازیابی
     }
   }

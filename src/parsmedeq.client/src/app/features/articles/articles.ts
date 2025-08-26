@@ -131,7 +131,6 @@ export class Articles extends BaseComponent implements OnInit, DoCheck {
   ngDoCheck() {
     if (this.settings.loadMore.load) {
       this.settings.loadMore.load = false;
-      console.log(this.pagination);
       this.getItems();
     }
   }

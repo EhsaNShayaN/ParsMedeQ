@@ -50,7 +50,6 @@ export class BaseCategoriesComponent extends BaseComponent implements OnInit, Af
   }
 
   remove(property: Resource) {
-    console.log('delete');
     /*const index: number = this.dataSource.data.indexOf(property);
     if (index !== -1) {
       const message = this.appService.getTranslateValue('MESSAGE.SURE_DELETE') ?? '';

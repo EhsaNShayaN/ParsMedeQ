@@ -101,7 +101,6 @@ export class Comments extends PureComponent implements OnInit, DoCheck {
   public onCommentFormSubmit(values: any) {
     let enumKey = Tables[this.tableId];
     values.tableName = enumKey = enumKey.substring(0, 1).toUpperCase() + enumKey.substring(1, enumKey.length);
-    console.log(values);
     if (this.commentForm?.valid) {
       /*this.restClientService.addComment(values).subscribe((c: Comment) => {
         this.items.splice(0, 0, c);

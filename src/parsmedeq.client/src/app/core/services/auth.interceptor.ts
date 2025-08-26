@@ -2,10 +2,14 @@ import {Injectable, Injector} from '@angular/core';
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {AuthService} from './auth.service';
+import {LanguageService} from './language.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthInterceptor implements HttpInterceptor {
   constructor(private injector: Injector,
+              private LanguageService: LanguageService,
               private auth: AuthService) {
   }
 

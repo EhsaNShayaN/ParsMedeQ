@@ -44,7 +44,6 @@ export class BaseCategoryComponent extends BaseComponent implements OnInit, OnDe
   }
 
   onFormSubmit(values: any): void {
-    console.log(values);
     if (this.myForm.valid) {
       if (this.editItem) {
         values.id = this.editItem.id;

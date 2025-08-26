@@ -25,12 +25,10 @@ export class JalaliMomentDateAdapter extends DateAdapter<jMoment.Moment> {
 
   invalid() {
     return 'hi' as any;
-
   }
 
   toIso8601(date: any) {
     return 'hi';
-
   }
 
   /**
@@ -89,18 +87,6 @@ export class JalaliMomentDateAdapter extends DateAdapter<jMoment.Moment> {
       });
     }
     return r;
-    // switch (style) {
-    //     case 'long':
-    //         const mlong = (minmin().localeData() as any)._jMonths.slice(0);
-    //         console.log(mlong);
-    //         return mlong;
-    //     case 'short':
-    //         const mshort = (minmin().localeData() as any)._jMonthsShort.slice(0);
-    //         console.log('mshort: ', mshort);
-    //         return mshort;
-    //     case 'narrow':
-    //         return (minmin().localeData() as any)._jMonthsShort.slice(0);
-    // }
   }
 
   /**

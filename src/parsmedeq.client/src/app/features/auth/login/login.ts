@@ -20,7 +20,6 @@ export class Login {
   onSubmit() {
     if (this.loginForm.valid) {
       const {username, password} = this.loginForm.value;
-      console.log('ارسال اطلاعات ورود:', {username, password});
       // ارسال به سرویس ورود...
     }
   }
