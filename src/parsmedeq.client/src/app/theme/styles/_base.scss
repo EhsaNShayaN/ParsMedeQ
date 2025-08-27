@@ -655,7 +655,7 @@ main.content-offset-to-top {
 /******* Account *******/
 .account {
   .mat-drawer {
-    width: 280px;
+    width: $sidenav-width;
     border: 0 !important;
     box-shadow: none !important;
     background-color: transparent !important;

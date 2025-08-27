@@ -23,6 +23,11 @@ export class Lang extends PureComponent implements OnInit {
   }
 
   public changeLang(lang: string) {
+    const currentLang = this.translateService.getDefaultLang();
+    if (lang === currentLang) {
+      return;
+    }
+    localStorage.setItem('lang', lang);
     this.translateService.setDefaultLang(lang);
     this.langName = this.getLangName(lang);
 

@@ -13,7 +13,6 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-
   line-height: 1.5em;
   height: 1.5em;
 
@@ -31,7 +30,6 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-
   line-height: 1.5em;
   height: 3em;
 
@@ -49,7 +47,6 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-
   line-height: 1.5em;
   height: 4.5em;
 
@@ -67,7 +64,6 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-
   line-height: 1.5em;
   height: 6em;
 
@@ -98,7 +94,6 @@
   ::-webkit-input-placeholder {
     text-align: right;
   }
-
   /* mozilla solution */
   input:-moz-placeholder {
     text-align: right;
@@ -330,7 +325,6 @@
   .subtitle {
     font-size: 1rem;
   }
-
 }
 
 .guide {
@@ -384,26 +378,32 @@
     padding-left: 0;
     padding-right: 0;
   }
+
   .main {
     padding-top: 16px;
     padding-right: 0;
     padding-left: 0;
   }
+
   .image-article {
     object-fit: contain;
     width: 100% !important;
     flex-wrap: wrap;
   }
+
   .our-title {
     font-size: 16px;
   }
+
   .our-desc {
     display: none;
   }
+
   .desc-footer {
     font-size: 14px;
     margin-top: 10px;
   }
+
   .multi-line-span {
     table {
       margin: unset !important;
@@ -414,31 +414,4 @@
       }
     }
   }
-}
-
-/* You can add global styles to this file, and also import other style files */
-@import 'assets/fonts/alborzchem/alborzchem.css';
-
-html, body {
-  direction: rtl;
-  text-align: right;
-  margin: 0;
-  padding: 0;
-  font-family: 'Alborzchem', sans-serif;
-  background-color: #f9f9f9;
-}
-
-.main-container {
-  min-height: calc(100vh - 354px - 32px); /*با فرض اینکه هدر و فوتر مجموعاً حدود 354px ارتفاع دارند*/
-  padding: 16px;
-}
-
-.admin-container {
-  min-height: calc(100vh - 354px - 32px); /*با فرض اینکه هدر و فوتر مجموعاً حدود 354px ارتفاع دارند*/
-  padding: 16px;
-}
-
-.user-container {
-  min-height: calc(100vh - 354px - 32px); /*با فرض اینکه هدر و فوتر مجموعاً حدود 354px ارتفاع دارند*/
-  padding: 16px;
 }

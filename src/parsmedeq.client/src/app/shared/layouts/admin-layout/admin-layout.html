@@ -1,16 +1,7 @@
-<!--
-<app-admin-header></app-admin-header>
-<div class="admin-panel">
-  <app-admin-sidebar></app-admin-sidebar>
-  <div class="admin-container">
-    <router-outlet></router-outlet>
-  </div>
-</div>
--->
 <div class="p-3">
   <div class="theme-container">
     <mat-sidenav-container class="account">
-      <mat-sidenav #sidenav [mode]="sidenavOpen ? 'side' : 'over'" [opened]="sidenavOpen" class="account-sidenav">
+      <mat-sidenav #sidenav [mode]="sidenavOpen ? 'side' : 'over'" [opened]="sidenavOpen">
         <mat-card appearance="outlined">
           <button (click)="sidenav.toggle()" class="close" color="warn" fxHide="false" fxHide.gt-sm mat-mini-fab>
             <mat-icon>close</mat-icon>
