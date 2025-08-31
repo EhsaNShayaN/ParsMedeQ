@@ -51,15 +51,19 @@ public sealed class ResourceCategory : EntityBase<int>
             });
     }
     public PrimitiveResult<ResourceCategory> Update(
-        string title,
-        string description,
         int? parentId)
     {
-        //this.Title = title;
-        //this.Description = description;
         this.ParentId = parentId;
-
         return this;
+    }
+    public ValueTask<PrimitiveResult<ResourceCategory>> Update(
+        int? parentId,
+        string langCode,
+        string title,
+        string description)
+    {
+        return this.Update(parentId)
+             .Map(_ => this.UpdateTranslation(langCode, title, description).Map(() => this));
     }
     #endregion
 
@@ -69,6 +73,20 @@ public sealed class ResourceCategory : EntityBase<int>
             .OnSuccess(newTranslation => this._resourceCategoryTranslations.Add(newTranslation.Value))
             .Match(
                 success => PrimitiveResult.Success(),
+                PrimitiveResult.Failure
+            );
+    }
+
+    public ValueTask<PrimitiveResult> UpdateTranslation(string langCode, string title, string description)
+    {
+        var currentTranslation = _resourceCategoryTranslations.FirstOrDefault(s => s.LanguageCode.Equals(langCode, StringComparison.OrdinalIgnoreCase));
+        if (currentTranslation is null)
+        {
+            return this.AddTranslation(langCode, title, description);
+        }
+        return currentTranslation.Update(title, description)
+            .Match(
+                _ => PrimitiveResult.Success(),
                 PrimitiveResult.Failure
             );
     }

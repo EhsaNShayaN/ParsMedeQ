@@ -1,4 +1,4 @@
-import {AfterViewInit, Directive, Injector, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Directive, OnInit, ViewChild} from '@angular/core';
 import {BaseComponent} from '../../../base-component';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
@@ -33,11 +33,12 @@ export class BaseCategoriesComponent extends BaseComponent implements OnInit, Af
         if (this.tableId === Tables.Article || this.tableId === Tables.News) {
           this.dataSource.forEach(s => {
             if (s.parentId) {
-              s.title = this.dataSource.find(d => d.id === s.parentId)?.title ?? '';
+              s.parentTitle = this.dataSource.find(d => d.id === s.parentId)?.title ?? '';
             }
           });
         }
       }
+      console.log('dataSource', this.dataSource);
     });
   }
 

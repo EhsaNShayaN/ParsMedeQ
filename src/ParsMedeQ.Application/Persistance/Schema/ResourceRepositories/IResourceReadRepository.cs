@@ -14,6 +14,7 @@ public interface IResourceReadRepository : IDomainRepository
         int lastId,
         CancellationToken cancellationToken);
     ValueTask<PrimitiveResult<ResourceCategoryListDbQueryResponse[]>> FilterResourceCategories(
+        string langCode,
         int tableId,
         CancellationToken cancellationToken);
 
@@ -23,7 +24,10 @@ public interface IResourceReadRepository : IDomainRepository
         int TableId,
         CancellationToken cancellationToken);
 
-    ValueTask<PrimitiveResult<ResourceCategoryListDbQueryResponse>> ResourceCategoryDetails(int Id, string langCode, CancellationToken cancellationToken);
+    ValueTask<PrimitiveResult<ResourceCategoryListDbQueryResponse>> ResourceCategoryDetails(
+        string langCode,
+        int id,
+        CancellationToken cancellationToken);
     ValueTask<PrimitiveResult<ResourceCategoryRelations[]>> FilterResourceCategoryRelations(
         int resourceId,
         CancellationToken cancellationToken);

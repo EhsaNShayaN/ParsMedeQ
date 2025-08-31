@@ -34,11 +34,9 @@ sealed class ResourceCategoryDetailsQueryHandler : IPrimitiveResultQueryHandler<
     public async Task<PrimitiveResult<ResourceCategoryListDbQueryResponse>> HandleCore(
         ResourceCategoryDetailsQuery request,
         CancellationToken cancellationToken) =>
-        await this._readUnitOfWork
-            .ResourceReadRepository
-            .ResourceCategoryDetails(
-            request.Id,
+        await this._readUnitOfWork.ResourceReadRepository.ResourceCategoryDetails(
             _userLangContextAccessor.GetCurrentLang(),
+            request.Id,
             cancellationToken)
         .ConfigureAwait(false);
 }

@@ -33,5 +33,13 @@ public sealed class ResourceCategoryTranslation : EntityBase<int>
                 Description = description
             });
     }
+    internal PrimitiveResult<ResourceCategoryTranslation> Update(
+        string title,
+        string description)
+    {
+        this.Title = title;
+        this.Description = description;
+        return this;
+    }
     #endregion
 }

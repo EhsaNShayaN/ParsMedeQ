@@ -82,27 +82,26 @@ internal sealed class ResourceReadRepository : GenericPrimitiveReadRepositoryBas
     }
 
     public ValueTask<PrimitiveResult<ResourceCategoryListDbQueryResponse[]>> FilterResourceCategories(
+        string langCode,
         int tableId,
         CancellationToken cancellationToken)
     {
-        var langCode = "fa";
-
-        var query =
-            from res in this.DbContext.ResourceCategory.Include(r => r.ResourceCategoryTranslations.Where(l => l.LanguageCode == langCode))
-            where res.TableId == tableId
-            select new ResourceCategoryListDbQueryResponse
-            {
-                Count = res.Count,
-                CreationDate = res.CreationDate,
-                Title = res.ResourceCategoryTranslations.SingleOrDefault(s => s.LanguageCode == langCode).Title ?? string.Empty,
-                Description = res.ResourceCategoryTranslations.SingleOrDefault(s => s.LanguageCode == langCode).Description ?? string.Empty,
-                Id = res.Id,
-                ParentId = res.ParentId,
-                TableId = res.TableId
-            };
-
-        return query.Run(q => q.ToArrayAsync(cancellationToken), PrimitiveError.CreateInternal("", ""))
-            .Map(a => a!);
+        var q = from rc in this.DbContext.ResourceCategory
+                join rct in this.DbContext.ResourceCategoryTranslation
+                on new { id = rc.Id, langCode } equals new { id = rct.ResourceCategoryId, langCode = rct.LanguageCode } into x
+                from a in x.DefaultIfEmpty()
+                where rc.TableId.Equals(tableId)
+                select new ResourceCategoryListDbQueryResponse
+                {
+                    Id = rc.Id,
+                    TableId = rc.TableId,
+                    Count = rc.Count,
+                    ParentId = rc.ParentId,
+                    CreationDate = rc.CreationDate,
+                    Title = a.Title ?? "[NO-TITLE]",
+                    Description = a.Description ?? "[NO-DESCRIPTION]"
+                };
+        return q.Run(q => q.ToArrayAsync(cancellationToken), PrimitiveError.Create("", "آیتمی با شناسه مورد نظر پیدا نشد"));
     }
 
     public ValueTask<PrimitiveResult<ResourceDetailsDbQueryResponse>> ResourceDetails(
@@ -168,14 +167,16 @@ internal sealed class ResourceReadRepository : GenericPrimitiveReadRepositoryBas
             });
     }
 
-    public ValueTask<PrimitiveResult<ResourceCategoryListDbQueryResponse>> ResourceCategoryDetails(int Id, string langCode, CancellationToken cancellationToken)
+    public ValueTask<PrimitiveResult<ResourceCategoryListDbQueryResponse>> ResourceCategoryDetails(
+        string langCode,
+        int id,
+        CancellationToken cancellationToken)
     {
-
         var q = from rc in this.DbContext.ResourceCategory
                 join rct in this.DbContext.ResourceCategoryTranslation
                 on new { id = rc.Id, langCode } equals new { id = rct.ResourceCategoryId, langCode = rct.LanguageCode } into x
                 from a in x.DefaultIfEmpty()
-                where rc.Id.Equals(Id) //&& a.LanguageCode.Equals(langCode)
+                where rc.Id.Equals(id)
                 select new ResourceCategoryListDbQueryResponse
                 {
                     Id = rc.Id,
@@ -187,23 +188,6 @@ internal sealed class ResourceReadRepository : GenericPrimitiveReadRepositoryBas
                     Description = a.Description ?? "[NO-DESCRIPTION]"
                 };
         return q.Run(q => q.FirstOrDefaultAsync(cancellationToken), PrimitiveError.Create("", "آیتمی با شناسه مورد نظر پیدا نشد"));
-
-        //return this.DbContext
-        //    .ResourceCategory
-        //    .Where(x => x.Id == Id)
-        //    .Include(a => a.ResourceCategoryTranslations.Where(x => x.LanguageCode.Equals(langCode)))
-        //    .Run(q => q.FirstOrDefaultAsync(cancellationToken), PrimitiveError.Create("", "آیتمی با شناسه مورد نظر پیدا نشد"))
-        //    .Map(rc => new ResourceCategoryListDbQueryResponse
-        //    {
-        //        Id = rc.Id,
-        //        TableId = rc.TableId,
-        //        Count = rc.Count,
-        //        ParentId = rc.ParentId,
-        //        CreationDate = rc.CreationDate,
-        //        Title = rc.ResourceCategoryTranslations?.FirstOrDefault()?.Title ?? string.Empty,
-        //        Description = rc.ResourceCategoryTranslations?.FirstOrDefault()?.Description ?? string.Empty
-        //    });
-
     }
 
     public ValueTask<PrimitiveResult<ResourceCategoryRelations[]>> FilterResourceCategoryRelations(

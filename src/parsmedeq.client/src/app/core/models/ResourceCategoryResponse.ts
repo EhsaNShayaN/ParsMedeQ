@@ -8,5 +8,10 @@ export interface ResourceCategory {
   description: string;
   count: number;
   parentId: number;
+  parentTitle: string;
   creationDate: string;
+}
+
+export interface AddResourceCategory {
+  changed: boolean;
 }

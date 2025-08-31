@@ -3,6 +3,9 @@
     <th *matHeaderCellDef mat-header-cell>{{ getColName(column) }}</th>
     <td *matCellDef="let element; let i = index;" mat-cell>
       <ng-container [ngSwitch]="column">
+        <ng-container *ngSwitchCase="'parentId'">
+          {{ element.parentTitle }}
+        </ng-container>
         <ng-container *ngSwitchCase="'actions'">
           <a [routerLink]="['/admin/article/category/edit', element.id]" mat-icon-button
              matTooltip="ویرایش" target="_blank">
