@@ -18,13 +18,9 @@ export class Settings {
                 complete: boolean,
                 result: number
               },
-              public domain: string,
               public email: string,
               public mobile: string,
-              public phones: string,
-              public fax: string,
-              public selectLang: boolean,
-              public lang: string
+              public selectLang: boolean
   ) {
   }
 }
@@ -39,7 +35,6 @@ export class AppSettings {
     'carousel',     // default, image, carousel, map, video
     true,       // true = rtl, false = ltr
     2,           //  1, 2  or 3
-
     false,
     false,
     {
@@ -50,16 +45,8 @@ export class AppSettings {
       complete: false,
       result: 0
     },
-    'parsmedeq.com',
     'info@parsmedeq.com',
     '021-xxx',
-    '021 xxx,021 xxxxxxxx,021 yyyyyyyy,021 zzzzzzzz',
-    '021wwwwwwww',
-    true,
-    'fa'
+    true
   );
-
-  public getUrlLang() {
-    return this.settings.lang === 'fa' ? '' : '/' + this.settings.lang;
-  }
 }

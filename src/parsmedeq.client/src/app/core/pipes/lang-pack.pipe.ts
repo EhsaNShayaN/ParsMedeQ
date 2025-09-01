@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {AppSettings} from '../../app.settings';
+import {TranslateService} from '@ngx-translate/core';
 
 @Pipe({
   name: 'langPack',
@@ -7,10 +7,12 @@ import {AppSettings} from '../../app.settings';
 })
 export class LangPackPipe implements PipeTransform {
 
-  constructor(private appSettings: AppSettings) {
+  constructor(private translateService: TranslateService) {
   }
 
   transform(value: string): string {
-    return this.appSettings.getUrlLang() + value;
+    const currentLang = this.translateService.getDefaultLang();
+    if (currentLang === 'fa') return value;
+    return '/' + currentLang + value;
   }
 }

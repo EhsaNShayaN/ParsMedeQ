@@ -26,11 +26,13 @@ import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/
 import {JalaliMomentDateAdapter, PERSIAN_DATE_FORMATS} from '../core/custom-date-adapter';
 import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
 import {TranslateModule} from '@ngx-translate/core';
+import {LangPackPipe} from '../core/pipes/lang-pack.pipe';
 
 @NgModule({
   declarations: [
     CommentForm,
     /////////////////
+    LangPackPipe,
     CurrencyFormatterPipe,
     SafeHtmlPipe,
     ReplaceUrlSpacesPipe,
@@ -93,6 +95,7 @@ import {TranslateModule} from '@ngx-translate/core';
     FormsModule,
     ReactiveFormsModule,
     DirectivesModule,
+    LangPackPipe,
     CurrencyFormatterPipe,
     SafeHtmlPipe,
     ReplaceUrlSpacesPipe,
