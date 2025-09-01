@@ -28,7 +28,7 @@ import {SocialIcons} from './theme/components/social-icons/social-icons';
 import {UserMenu} from './theme/components/user-menu/user-menu';
 import {JwtModule} from '@auth0/angular-jwt';
 import {LangPackPipe} from './core/pipes/lang-pack.pipe';
-import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {BidiModule} from '@angular/cdk/bidi';
 

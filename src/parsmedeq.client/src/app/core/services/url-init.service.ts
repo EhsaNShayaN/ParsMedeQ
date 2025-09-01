@@ -4,6 +4,7 @@ import {NavigationEnd, Router} from '@angular/router';
 import {filter} from 'rxjs';
 import {DOCUMENT} from '@angular/common';
 import {TranslateService} from '@ngx-translate/core';
+import {AppSettings} from '../../app.settings';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,9 @@ import {TranslateService} from '@ngx-translate/core';
 export class UrlInitService {
   constructor(@Inject(DOCUMENT) private document: Document,
               private router: Router,
-              private translateService: TranslateService) {
+              private translateService: TranslateService,
+              private appSettings: AppSettings) {
+    console.log('UrlInitService');
   }
 
   init(): Promise<void> {
@@ -25,7 +28,10 @@ export class UrlInitService {
       if (typeof window !== 'undefined') {
         const languages = this.translateService.getLangs();
         const lang = getPathLang(languages) ?? 'fa';
+        localStorage.setItem('lang', lang);
         this.translateService.setDefaultLang(lang);
+        this.appSettings.settings.rtl = lang === 'fa';
+        console.log('current lang', lang);
       }
       resolve();
     });

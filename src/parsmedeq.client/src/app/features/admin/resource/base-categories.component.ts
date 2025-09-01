@@ -1,4 +1,4 @@
-import {AfterViewInit, Directive, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Directive, inject, OnInit, ViewChild} from '@angular/core';
 import {BaseComponent} from '../../../base-component';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
@@ -6,9 +6,12 @@ import {tap} from 'rxjs';
 import {ResourceCategoriesResponse, ResourceCategory} from '../../../core/models/ResourceCategoryResponse';
 import {Tables} from '../../../core/constants/server.constants';
 import {Resource} from '../../../core/models/ResourceResponse';
+import {TranslateService} from '@ngx-translate/core';
 
 @Directive()
 export class BaseCategoriesComponent extends BaseComponent implements OnInit, AfterViewInit {
+  languages: string[] = [];
+  colors: string[] = ['warn', 'primary', 'success', 'secondary', 'info', 'danger'];
   tableId: number;
   ///////////
   dataSource: ResourceCategory[] = [];
@@ -18,6 +21,8 @@ export class BaseCategoriesComponent extends BaseComponent implements OnInit, Af
 
   constructor(tableId: number) {
     super();
+    const translateService = inject(TranslateService);
+    this.languages = translateService.getLangs();
     this.tableId = tableId;
   }
 

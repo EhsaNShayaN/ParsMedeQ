@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {PureComponent} from '../../../pure-component';
 import {getPathLang} from '../../../core/shared/util';
 import {TranslateService} from '@ngx-translate/core';
+import {AppSettings} from '../../../app.settings';
 
 @Component({
   selector: 'app-lang',
@@ -13,7 +14,8 @@ export class Lang extends PureComponent implements OnInit {
   public languages: readonly string[] = [];
   public langName = '';
 
-  constructor(private translateService: TranslateService) {
+  constructor(private translateService: TranslateService,
+              private appSettings: AppSettings) {
     super();
     this.languages = translateService.getLangs();
   }
@@ -30,6 +32,7 @@ export class Lang extends PureComponent implements OnInit {
     localStorage.setItem('lang', lang);
     this.translateService.setDefaultLang(lang);
     this.langName = this.getLangName(lang);
+    this.appSettings.settings.rtl = lang === 'fa';
 
     const currentUrlLang = getPathLang(this.languages);
     let path = window.location.pathname.replace(/^\/+/, '');

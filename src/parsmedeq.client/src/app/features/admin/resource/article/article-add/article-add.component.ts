@@ -62,6 +62,7 @@ export class ArticleAddComponent extends BaseResourceComponent implements OnInit
               this.expTime = this.editItem.expirationTime;
             }
             this.editAnchors();
+            this.hideSingleLangControls();
           });
         } else {
           this.myForm = this.formBuilder.group({

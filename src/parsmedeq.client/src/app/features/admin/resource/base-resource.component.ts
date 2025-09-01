@@ -1,13 +1,15 @@
 import {Directive, inject, OnDestroy} from '@angular/core';
 import {UntypedFormGroup} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
-import {BaseComponent} from "../../../base-component";
-import {Resource} from "../../../core/models/ResourceResponse";
+import {BaseComponent} from '../../../base-component';
+import {Resource} from '../../../core/models/ResourceResponse';
 import {CustomConstants} from '../../../core/constants/custom.constants';
 import {BaseResult} from '../../../core/models/BaseResult';
+import {TranslateService} from '@ngx-translate/core';
 
 @Directive()
 export class BaseResourceComponent extends BaseComponent implements OnDestroy {
+  lang: string;
   toaster = inject(ToastrService);
   tableId: number;
   sub: any;
@@ -22,7 +24,18 @@ export class BaseResourceComponent extends BaseComponent implements OnDestroy {
 
   constructor(tableId: number) {
     super();
+    const translateService = inject(TranslateService);
+    this.lang = translateService.getDefaultLang();
     this.tableId = tableId;
+  }
+
+  hideSingleLangControls() {
+    if (this.lang !== 'fa') {
+      const validFields = ['title', 'abstract', 'keywords', 'anchors', 'description'];
+      Object.keys(this.myForm.controls).filter(s => !validFields.includes(s)).forEach(key => {
+        this.myForm.get(key)?.disable();
+      });
+    }
   }
 
   isAvailable(item: any, filteredProviders: any[]) {
@@ -49,6 +62,7 @@ export class BaseResourceComponent extends BaseComponent implements OnDestroy {
       }
       delete values.imagePath;
       delete values.fileId;
+      values.languageCode = this.lang;
       this.restApiService.addResource(values, this.image, this.file).subscribe((d: BaseResult<boolean>) => {
         this.toaster.success(CustomConstants.THE_OPERATION_WAS_SUCCESSFUL, '', {});
       });

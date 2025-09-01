@@ -6,9 +6,11 @@ import {AddResourceCategory, ResourceCategoriesResponse, ResourceCategory} from 
 import {BaseComponent} from '../../../base-component';
 import {BaseResult} from '../../../core/models/BaseResult';
 import {CustomConstants} from '../../../core/constants/custom.constants';
+import {TranslateService} from '@ngx-translate/core';
 
 @Directive()
 export class BaseCategoryComponent extends BaseComponent implements OnInit, OnDestroy {
+  lang: string;
   tableId: number;
   toaster = inject(ToastrService);
   formBuilder = inject(UntypedFormBuilder);
@@ -21,6 +23,8 @@ export class BaseCategoryComponent extends BaseComponent implements OnInit, OnDe
   constructor(tableId: number,
               protected activatedRoute: ActivatedRoute) {
     super();
+    const translateService = inject(TranslateService);
+    this.lang = translateService.getDefaultLang();
     this.tableId = tableId;
   }
 
@@ -39,8 +43,20 @@ export class BaseCategoryComponent extends BaseComponent implements OnInit, OnDe
           description: this.editItem?.description,
           parentId: this.editItem?.parentId,
         });
+        if (this.editItem) {
+          this.hideSingleLangControls();
+        }
       });
     });
+  }
+
+  hideSingleLangControls() {
+    if (this.lang !== 'fa') {
+      const validFields = ['title', 'description'];
+      Object.keys(this.myForm.controls).filter(s => !validFields.includes(s)).forEach(key => {
+        this.myForm.get(key)?.disable();
+      });
+    }
   }
 
   onFormSubmit(values: any): void {
@@ -48,6 +64,7 @@ export class BaseCategoryComponent extends BaseComponent implements OnInit, OnDe
       if (this.editItem) {
         values.id = this.editItem.id;
       }
+      values.languageCode = this.lang;
       if (this.editItem) {
         this.restApiService.editResourceCategory(values).subscribe((d: BaseResult<AddResourceCategory>) => {
           this.toaster.success(CustomConstants.THE_OPERATION_WAS_SUCCESSFUL, '', {});

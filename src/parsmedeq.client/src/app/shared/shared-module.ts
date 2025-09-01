@@ -25,6 +25,7 @@ import {ToastrModule} from 'ngx-toastr';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {JalaliMomentDateAdapter, PERSIAN_DATE_FORMATS} from '../core/custom-date-adapter';
 import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
     ReactiveFormsModule,
     DirectivesModule,
     ToastrModule.forRoot(),
+    TranslateModule,
     /////////////////
     MatToolbarModule,
     MatButtonModule,
@@ -97,6 +99,7 @@ import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
     MobileFormatterPipe,
     LoadMoreComponent,
     Comments,
+    TranslateModule,
     //////////////////////
     DefaultShowHideDirective,
     MatMenuTrigger,

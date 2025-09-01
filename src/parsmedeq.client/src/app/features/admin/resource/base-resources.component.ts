@@ -1,12 +1,15 @@
-import {Directive, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Directive, inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort, Sort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {BaseReportComponent} from '../../../base-report-component';
 import {Resource, ResourceResponse, ResourcesRequest} from '../../../core/models/ResourceResponse';
+import {TranslateService} from '@ngx-translate/core';
 
 @Directive()
 export class BaseResourcesComponent extends BaseReportComponent implements OnInit, OnDestroy {
+  languages: string[] = [];
+  colors: string[] = ['warn', 'primary', 'success', 'secondary', 'info', 'danger'];
   tableId: number;
   dataSource!: MatTableDataSource<Resource>;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator | null = null;
@@ -19,6 +22,8 @@ export class BaseResourcesComponent extends BaseReportComponent implements OnIni
 
   constructor(tableId: number) {
     super();
+    const translateService = inject(TranslateService);
+    this.languages = translateService.getLangs();
     this.tableId = tableId;
   }
 

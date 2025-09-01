@@ -1,4 +1,7 @@
 <table *ngIf="dataSource" [dataSource]="dataSource" class="w-100 mat-elevation-z8" mat-table multiTemplateDataRows>
+  <!--@for (column of columnsToDisplay; track column) {
+
+  }-->
   <ng-container *ngFor="let column of columnsToDisplay" matColumnDef="{{column}}">
     <th *matHeaderCellDef mat-header-cell>{{ getColName(column) }}</th>
     <td *matCellDef="let element; let i = index;" mat-cell>
@@ -7,12 +10,12 @@
           {{ element.parentTitle }}
         </ng-container>
         <ng-container *ngSwitchCase="'actions'">
-          <a [routerLink]="['/admin/article/category/edit', element.id]" mat-icon-button
-             matTooltip="ویرایش" target="_blank">
-            <mat-icon color="warn">edit</mat-icon>
+          <a [routerLink]="['/' + lang + '/admin/article/category/edit', element.id]" target="_blank" mat-icon-button
+             matTooltip="ویرایش {{('LANG.' + lang.toUpperCase()) | translate}}"
+             *ngFor="let lang of languages; let i = index">
+            <mat-icon [color]="colors[i]">edit</mat-icon>
           </a>
-          <button (click)="remove(element)" class="remove" color="warn" mat-icon-button
-                  matTooltip="حذف">
+          <button (click)="remove(element)" class="remove" color="warn" mat-icon-button matTooltip="حذف">
             <mat-icon>delete</mat-icon>
           </button>
         </ng-container>

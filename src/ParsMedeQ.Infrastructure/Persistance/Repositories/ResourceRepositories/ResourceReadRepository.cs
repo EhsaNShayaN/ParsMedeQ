@@ -98,8 +98,8 @@ internal sealed class ResourceReadRepository : GenericPrimitiveReadRepositoryBas
                     Count = rc.Count,
                     ParentId = rc.ParentId,
                     CreationDate = rc.CreationDate,
-                    Title = a.Title ?? "[NO-TITLE]",
-                    Description = a.Description ?? "[NO-DESCRIPTION]"
+                    Title = a.Title,
+                    Description = a.Description
                 };
         return q.Run(q => q.ToArrayAsync(cancellationToken), PrimitiveError.Create("", "آیتمی با شناسه مورد نظر پیدا نشد"));
     }
@@ -184,8 +184,8 @@ internal sealed class ResourceReadRepository : GenericPrimitiveReadRepositoryBas
                     Count = rc.Count,
                     ParentId = rc.ParentId,
                     CreationDate = rc.CreationDate,
-                    Title = a.Title ?? "[NO-TITLE]",
-                    Description = a.Description ?? "[NO-DESCRIPTION]"
+                    Title = a.Title,
+                    Description = a.Description
                 };
         return q.Run(q => q.FirstOrDefaultAsync(cancellationToken), PrimitiveError.Create("", "آیتمی با شناسه مورد نظر پیدا نشد"));
     }

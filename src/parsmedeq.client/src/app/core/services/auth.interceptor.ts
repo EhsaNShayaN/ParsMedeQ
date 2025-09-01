@@ -1,7 +1,8 @@
-import {Injectable} from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {AuthService} from './auth.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,7 @@ export class AuthInterceptor implements HttpInterceptor {
       return next.handle(cloned);
     }
     const lang = localStorage.getItem('lang') ?? 'fa';
+    console.log('accept lang', lang);
     req = req.clone({
       headers: req.headers.set('Accept-Language', lang),
     });

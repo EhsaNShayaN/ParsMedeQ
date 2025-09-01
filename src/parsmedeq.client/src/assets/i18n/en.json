@@ -3,5 +3,11 @@
   "COMMON": {
     "WELCOME": "Welcome",
     "TEST_MESSAGE": "Test message for translation"
-  }
+  },
+  "LANG": {
+    "FA": "Persian",
+    "EN": "English"
+  },
+  "LOGIN": "Login",
+  "LOGOUT": "Logout"
 }
