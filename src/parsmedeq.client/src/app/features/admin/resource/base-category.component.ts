@@ -64,7 +64,6 @@ export class BaseCategoryComponent extends BaseComponent implements OnInit, OnDe
       if (this.editItem) {
         values.id = this.editItem.id;
       }
-      values.languageCode = this.lang;
       if (this.editItem) {
         this.restApiService.editResourceCategory(values).subscribe((d: BaseResult<AddResourceCategory>) => {
           this.toaster.success(CustomConstants.THE_OPERATION_WAS_SUCCESSFUL, '', {});

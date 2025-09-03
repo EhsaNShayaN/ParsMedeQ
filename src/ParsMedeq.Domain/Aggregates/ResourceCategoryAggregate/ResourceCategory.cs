@@ -50,11 +50,11 @@ public sealed class ResourceCategory : EntityBase<int>
                 CreationDate = creationDate,
             });
     }
-    public PrimitiveResult<ResourceCategory> Update(
+    public ValueTask<PrimitiveResult<ResourceCategory>> Update(
         int? parentId)
     {
         this.ParentId = parentId;
-        return this;
+        return ValueTask.FromResult(PrimitiveResult.Success(this));
     }
     public ValueTask<PrimitiveResult<ResourceCategory>> Update(
         int? parentId,

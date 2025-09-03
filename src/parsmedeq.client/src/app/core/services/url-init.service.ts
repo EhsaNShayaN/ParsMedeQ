@@ -14,7 +14,6 @@ export class UrlInitService {
               private router: Router,
               private translateService: TranslateService,
               private appSettings: AppSettings) {
-    console.log('UrlInitService');
   }
 
   init(): Promise<void> {
@@ -31,7 +30,6 @@ export class UrlInitService {
         localStorage.setItem('lang', lang);
         this.translateService.setDefaultLang(lang);
         this.appSettings.settings.rtl = lang === 'fa';
-        console.log('current lang', lang);
       }
       resolve();
     });

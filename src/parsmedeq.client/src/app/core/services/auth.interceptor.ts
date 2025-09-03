@@ -20,7 +20,6 @@ export class AuthInterceptor implements HttpInterceptor {
       return next.handle(cloned);
     }
     const lang = localStorage.getItem('lang') ?? 'fa';
-    console.log('accept lang', lang);
     req = req.clone({
       headers: req.headers.set('Accept-Language', lang),
     });

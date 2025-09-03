@@ -62,7 +62,6 @@ export class BaseResourceComponent extends BaseComponent implements OnDestroy {
       }
       delete values.imagePath;
       delete values.fileId;
-      values.languageCode = this.lang;
       this.restApiService.addResource(values, this.image, this.file).subscribe((d: BaseResult<boolean>) => {
         this.toaster.success(CustomConstants.THE_OPERATION_WAS_SUCCESSFUL, '', {});
       });
