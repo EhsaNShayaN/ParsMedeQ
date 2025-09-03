@@ -29,9 +29,7 @@ public sealed class ResourceTranslation : EntityBase<int>
         string description,
         string @abstract,
         string anchors,
-        string keywords)
-    {
-        return PrimitiveResult.Success(
+        string keywords) => PrimitiveResult.Success(
             new ResourceTranslation
             {
                 LanguageCode = languageCode,
@@ -41,6 +39,19 @@ public sealed class ResourceTranslation : EntityBase<int>
                 Anchors = anchors,
                 Keywords = keywords,
             });
+    internal PrimitiveResult<ResourceTranslation> Update(
+        string title,
+        string description,
+        string @abstract,
+        string anchors,
+        string keywords)
+    {
+        this.Title = title;
+        this.Description = description;
+        this.Abstract = @abstract;
+        this.Anchors = anchors;
+        this.Keywords = keywords;
+        return this;
     }
     #endregion
 }

@@ -29,6 +29,9 @@ export class ArticleListComponent extends BaseResourcesComponent {
     if (column === 'expirationdate') {
       column = 'تاریخ انقضا';
     }
+    if (column === 'image') {
+      column = 'تصوبر';
+    }
     if (column === 'creationdate') {
       column = 'تاریخ ایجاد';
     }

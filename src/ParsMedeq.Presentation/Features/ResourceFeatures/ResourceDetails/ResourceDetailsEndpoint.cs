@@ -3,9 +3,10 @@ using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using ParsMedeQ.Application.Features.ResourceFeatures.ResourceDetailsFeature;
 using ParsMedeQ.Contracts;
-using ParsMedeQ.Contracts.ResourceContracts.AddResourceContract;
+using ParsMedeQ.Contracts.ResourceContracts;
 using ParsMedeQ.Contracts.ResourceContracts.ResourceDetailsContract;
 using ParsMedeQ.Contracts.ResourceContracts.ResourceListContract;
+using ParsMedeQ.Contracts.ResourceContracts.UpdateResourceContract;
 using SRH.Utilities.EhsaN;
 
 namespace ParsMedeQ.Presentation.Features.ResourceFeatures.ResourceDetails;

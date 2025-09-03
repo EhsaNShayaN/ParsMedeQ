@@ -14,6 +14,7 @@ internal sealed class ResourceReadRepository : GenericPrimitiveReadRepositoryBas
     public ResourceReadRepository(ReadDbContext dbContext) : base(dbContext) { }
     public ValueTask<PrimitiveResult<BasePaginatedApiResponse<ResourceListDbQueryResponse>>> FilterResources(
         BasePaginatedQuery paginated,
+        string langCode,
         int tableId,
         int lastId,
         CancellationToken cancellationToken)
@@ -32,12 +33,6 @@ internal sealed class ResourceReadRepository : GenericPrimitiveReadRepositoryBas
                 LastId = data.Length > 0 ? data.Last().Id : 0
             };
         }
-
-        /*var baseQuery = this.DbContext
-            .Resource
-            .Where(a => !a.Deleted.Equals(false));*/
-
-        var langCode = "fa";
 
         var query =
             from res in this.DbContext.Resource
@@ -105,13 +100,12 @@ internal sealed class ResourceReadRepository : GenericPrimitiveReadRepositoryBas
     }
 
     public ValueTask<PrimitiveResult<ResourceDetailsDbQueryResponse>> ResourceDetails(
+        string langCode,
         int UserId,
         int resourceId,
         int TableId,
         CancellationToken cancellationToken)
     {
-        var langCode = "fa";
-
         var query =
             from res in this.DbContext.Resource.Include(r => r.ResourceCategory)
             where res.Id == resourceId

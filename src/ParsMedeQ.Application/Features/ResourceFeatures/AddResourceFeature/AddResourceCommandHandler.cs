@@ -1,4 +1,5 @@
-﻿using ParsMedeQ.Domain.Aggregates.MediaAggregate;
+﻿using ParsMedeQ.Domain;
+using ParsMedeQ.Domain.Aggregates.MediaAggregate;
 using ParsMedeQ.Domain.Aggregates.ResourceAggregate;
 
 namespace ParsMedeQ.Application.Features.ResourceFeatures.AddResourceFeature;
@@ -29,7 +30,7 @@ public sealed class AddResourceCommandHandler : IPrimitiveResultCommandHandler<A
             request.Discount,
             request.IsVip,
             request.ExpirationDate)
-            .Map(resource => resource.AddTranslation("fa", request.Title, request.Description, request.Abstract, request.Anchors, request.Keywords)
+            .Map(resource => resource.AddTranslation(Constants.LangCode_Farsi.ToLower(), request.Title, request.Description, request.Abstract, request.Anchors, request.Keywords)
                 .Map(() => resource))
             .Map(resource => UploadFile(this._fileService, request.Image, request.ImageExtension, "Images", cancellationToken)
                 .Map(imagePath => (resource, imagePath)))

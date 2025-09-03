@@ -1,4 +1,5 @@
 ﻿using ParsMedeQ.Application.Helpers;
+using ParsMedeQ.Application.Services.UserLangServices;
 using Polly;
 using Polly.Contrib.DuplicateRequestCollapser;
 using SRH.MediatRMessaging.Queries;
@@ -8,13 +9,16 @@ public sealed record ResourceListQuery(int TableId) : BasePaginatedQuery, IPrimi
 
 sealed class ResourceListQueryHandler : IPrimitiveResultQueryHandler<ResourceListQuery, BasePaginatedApiResponse<ResourceListDbQueryResponse>>
 {
+    private readonly IUserLangContextAccessor _userLangContextAccessor;
     private readonly IAsyncRequestCollapserPolicy _asyncRequestCollapserPolicy;
     private readonly IReadUnitOfWork _readUnitOfWork;
 
     public ResourceListQueryHandler(
+        IUserLangContextAccessor userLangContextAccessor,
         IAsyncRequestCollapserPolicy asyncRequestCollapserPolicy,
         IReadUnitOfWork taxMemoryReadUnitOfWork)
     {
+        this._userLangContextAccessor = userLangContextAccessor;
         this._asyncRequestCollapserPolicy = asyncRequestCollapserPolicy;
         this._readUnitOfWork = taxMemoryReadUnitOfWork;
     }
@@ -31,6 +35,7 @@ sealed class ResourceListQueryHandler : IPrimitiveResultQueryHandler<ResourceLis
         CancellationToken cancellationToken) =>
         await this._readUnitOfWork.ResourceReadRepository.FilterResources(
             request,
+            this._userLangContextAccessor.GetCurrentLang(),
             request.LastId,
             request.TableId,
             cancellationToken)

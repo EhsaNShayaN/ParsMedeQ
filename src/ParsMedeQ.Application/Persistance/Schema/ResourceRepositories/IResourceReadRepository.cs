@@ -10,6 +10,7 @@ public interface IResourceReadRepository : IDomainRepository
 {
     ValueTask<PrimitiveResult<BasePaginatedApiResponse<ResourceListDbQueryResponse>>> FilterResources(
         BasePaginatedQuery paginated,
+        string langCode,
         int tableId,
         int lastId,
         CancellationToken cancellationToken);
@@ -19,6 +20,7 @@ public interface IResourceReadRepository : IDomainRepository
         CancellationToken cancellationToken);
 
     ValueTask<PrimitiveResult<ResourceDetailsDbQueryResponse>> ResourceDetails(
+        string langCode,
         int UserId,
         int ResourceId,
         int TableId,

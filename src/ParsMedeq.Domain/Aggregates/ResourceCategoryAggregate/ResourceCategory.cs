@@ -33,15 +33,13 @@ public sealed class ResourceCategory : EntityBase<int>
     #endregion
 
     #region " Factory "
-    public static async ValueTask<PrimitiveResult<ResourceCategory>> Create(
+    public static PrimitiveResult<ResourceCategory> Create(
         string title,
         string description,
         int tableId,
         int count,
         int? parentId,
-        DateTime creationDate)
-    {
-        return PrimitiveResult.Success(
+        DateTime creationDate) => PrimitiveResult.Success(
             new ResourceCategory
             {
                 TableId = tableId,
@@ -49,13 +47,14 @@ public sealed class ResourceCategory : EntityBase<int>
                 ParentId = parentId,
                 CreationDate = creationDate,
             });
-    }
+
     public ValueTask<PrimitiveResult<ResourceCategory>> Update(
         int? parentId)
     {
         this.ParentId = parentId;
         return ValueTask.FromResult(PrimitiveResult.Success(this));
     }
+
     public ValueTask<PrimitiveResult<ResourceCategory>> Update(
         int? parentId,
         string langCode,
@@ -67,7 +66,10 @@ public sealed class ResourceCategory : EntityBase<int>
     }
     #endregion
 
-    public ValueTask<PrimitiveResult> AddTranslation(string langCode, string title, string description)
+    public ValueTask<PrimitiveResult> AddTranslation(
+        string langCode,
+        string title,
+        string description)
     {
         return ResourceCategoryTranslation.Create(langCode, title, description)
             .OnSuccess(newTranslation => this._resourceCategoryTranslations.Add(newTranslation.Value))
@@ -77,7 +79,10 @@ public sealed class ResourceCategory : EntityBase<int>
             );
     }
 
-    public ValueTask<PrimitiveResult> UpdateTranslation(string langCode, string title, string description)
+    public ValueTask<PrimitiveResult> UpdateTranslation(
+        string langCode,
+        string title,
+        string description)
     {
         var currentTranslation = _resourceCategoryTranslations.FirstOrDefault(s => s.LanguageCode.Equals(langCode, StringComparison.OrdinalIgnoreCase));
         if (currentTranslation is null)

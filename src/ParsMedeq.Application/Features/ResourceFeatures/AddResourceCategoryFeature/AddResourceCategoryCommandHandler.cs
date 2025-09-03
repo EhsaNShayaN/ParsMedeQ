@@ -1,4 +1,5 @@
-﻿using ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate;
+﻿using ParsMedeQ.Domain;
+using ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate;
 
 namespace ParsMedeQ.Application.Features.ResourceFeatures.AddResourceCategoryFeature;
 public sealed class AddResourceCategoryCommandHandler : IPrimitiveResultCommandHandler<AddResourceCategoryCommand, AddResourceCategoryCommandResponse>
@@ -20,7 +21,7 @@ public sealed class AddResourceCategoryCommandHandler : IPrimitiveResultCommandH
             0,
             request.ParentId,
             DateTime.Now)
-            .Map(resourceCategory => resourceCategory.AddTranslation("fa", request.Title, request.Description).Map(() => resourceCategory))
+            .Map(resourceCategory => resourceCategory.AddTranslation(Constants.LangCode_Farsi.ToLower(), request.Title, request.Description).Map(() => resourceCategory))
             .Map(resourceCategory => this._writeUnitOfWork.ResourceWriteRepository.AddResourceCategory(resourceCategory, cancellationToken)
             .Map(resourceCategory => this._writeUnitOfWork.SaveChangesAsync(CancellationToken.None).Map(_ => resourceCategory))
             .Map(resourceCategory => new AddResourceCategoryCommandResponse(resourceCategory is not null)))

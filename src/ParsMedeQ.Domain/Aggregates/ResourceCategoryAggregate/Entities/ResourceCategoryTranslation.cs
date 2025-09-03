@@ -23,16 +23,13 @@ public sealed class ResourceCategoryTranslation : EntityBase<int>
     internal static PrimitiveResult<ResourceCategoryTranslation> Create(
         string languageCode,
         string title,
-        string description)
-    {
-        return PrimitiveResult.Success(
+        string description) => PrimitiveResult.Success(
             new ResourceCategoryTranslation
             {
                 LanguageCode = languageCode,
                 Title = title,
                 Description = description
             });
-    }
     internal PrimitiveResult<ResourceCategoryTranslation> Update(
         string title,
         string description)

@@ -1,6 +1,4 @@
-﻿using ParsMedeQ.Contracts.ResourceContracts.AddResourceContract;
-
-namespace ParsMedeQ.Contracts.ResourceContracts.ResourceListContract;
+﻿namespace ParsMedeQ.Contracts.ResourceContracts.ResourceListContract;
 public readonly record struct ResourceDetailsApiResponse(
     int Id,
     int TableId,

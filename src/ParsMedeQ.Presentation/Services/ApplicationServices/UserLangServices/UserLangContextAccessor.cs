@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
 using ParsMedeQ.Application.Services.UserLangServices;
+using ParsMedeQ.Domain;
 
 namespace ParsMedeQ.Presentation.Services.ApplicationServices.UserLangServices;
 public sealed class UserLangContextAccessor : IUserLangContextAccessor
@@ -30,7 +31,7 @@ public sealed class UserLangContextAccessorMiddleware
     {
         try
         {
-            StringValues lang = "fa";
+            StringValues lang = Constants.LangCode_Farsi.ToLower();
             if (httpContext.Request.Headers.TryGetValue("accept-language", out var r) && !string.IsNullOrWhiteSpace(r))
             {
                 lang = r;
@@ -44,7 +45,7 @@ public sealed class UserLangContextAccessorMiddleware
         }
         catch
         {
-            userLangContextAccessor.Current = new UserLangContext("fa");
+            userLangContextAccessor.Current = new UserLangContext(Constants.LangCode_Farsi.ToLower());
             await this._next(httpContext);
         }
         finally

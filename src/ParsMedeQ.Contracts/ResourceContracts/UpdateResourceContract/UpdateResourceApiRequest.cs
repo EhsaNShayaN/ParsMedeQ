@@ -2,11 +2,11 @@
 using ParsMedeQ.Contracts.Helpers;
 using System.Reflection;
 
-namespace ParsMedeQ.Contracts.ResourceContracts.AddResourceContract;
+namespace ParsMedeQ.Contracts.ResourceContracts.UpdateResourceContract;
 
-public sealed class AddResourceApiRequest
+public sealed class UpdateResourceApiRequest
 {
-    public int TableId { get; private set; }
+    public int Id { get; private set; }
     public string Title { get; private set; } = null!;
     public string Language { get; private set; } = string.Empty;
     public bool IsVip { get; private set; }
@@ -25,9 +25,9 @@ public sealed class AddResourceApiRequest
     public IFormFile? Image { get; private set; }
     public IFormFile? File { get; private set; }
 
-    public static async ValueTask<AddResourceApiRequest?> BindAsync(HttpContext context, ParameterInfo _)
+    public static async ValueTask<UpdateResourceApiRequest?> BindAsync(HttpContext context, ParameterInfo _)
     {
         var form = await context.Request.ReadFormAsync(context.RequestAborted).ConfigureAwait(false);
-        return FormBinderHelper.Bind<AddResourceApiRequest>(form);
+        return FormBinderHelper.Bind<UpdateResourceApiRequest>(form);
     }
 }

@@ -75,6 +75,50 @@ public sealed class Resource : EntityBase<int>
                 ExpirationDate = expirationDate,
                 CreationDate = DateTime.Now
             });
+
+    public ValueTask<PrimitiveResult<Resource>> Update(
+        int resourceCategoryId,
+        string language,
+        string publishDate,
+        string publishInfo,
+        string publisher,
+        int price,
+        int discount,
+        bool isVip,
+        DateTime? expirationDate)
+    {
+        this.ResourceCategoryId = resourceCategoryId;
+        this.Language = language;
+        this.PublishDate = publishDate;
+        this.PublishInfo = publishInfo;
+        this.Publisher = publisher;
+        this.Price = price;
+        this.Discount = discount;
+        this.IsVip = isVip;
+        this.ExpirationDate = expirationDate;
+        return ValueTask.FromResult(PrimitiveResult.Success(this));
+    }
+
+    public ValueTask<PrimitiveResult<Resource>> Update(
+        int resourceCategoryId,
+        string language,
+        string publishDate,
+        string publishInfo,
+        string publisher,
+        int price,
+        int discount,
+        bool isVip,
+        DateTime? expirationDate,
+        string langCode,
+        string title,
+        string description,
+        string @abstract,
+        string anchors,
+        string keywords)
+    {
+        return this.Update(resourceCategoryId, language, publishDate, publishInfo, publisher, price, discount, isVip, expirationDate)
+             .Map(_ => this.UpdateTranslation(langCode, title, description, @abstract, anchors, keywords).Map(() => this));
+    }
     #endregion
 
     public PrimitiveResult<Resource> SetFiles(string imagePath, int? fileId)
@@ -86,10 +130,24 @@ public sealed class Resource : EntityBase<int>
 
     public ValueTask<PrimitiveResult> AddTranslation(string langCode, string title, string description, string @abstract, string anchors, string keywords)
     {
-        return ResourceTranslation.Create(langCode, title, description, @abstract, anchors,keywords)
+        return ResourceTranslation.Create(langCode, title, description, @abstract, anchors, keywords)
             .OnSuccess(newTranslation => this._resourceTranslations.Add(newTranslation.Value))
             .Match(
                 success => PrimitiveResult.Success(),
+                PrimitiveResult.Failure
+            );
+    }
+
+    public ValueTask<PrimitiveResult> UpdateTranslation(string langCode, string title, string description, string @abstract, string anchors, string keywords)
+    {
+        var currentTranslation = _resourceTranslations.FirstOrDefault(s => s.LanguageCode.Equals(langCode, StringComparison.OrdinalIgnoreCase));
+        if (currentTranslation is null)
+        {
+            return this.AddTranslation(langCode, title, description, @abstract, anchors, keywords);
+        }
+        return currentTranslation.Update(title, description, @abstract, anchors, keywords)
+            .Match(
+                _ => PrimitiveResult.Success(),
                 PrimitiveResult.Failure
             );
     }
