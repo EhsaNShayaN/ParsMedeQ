@@ -1,8 +1,10 @@
 ﻿using MediatR;
 using ParsMedeQ.Application.Features.ResourceFeatures.AddResourceFeature;
 using ParsMedeQ.Contracts;
+using ParsMedeQ.Contracts.ResourceContracts;
 using ParsMedeQ.Contracts.ResourceContracts.AddResourceContract;
 using SRH.Utilities.EhsaN;
+using System.Text.Json;
 using System.Web;
 
 namespace ParsMedeQ.Presentation.Features.ResourceFeatures.AddResourceFeature;
@@ -41,13 +43,20 @@ sealed class AddResourceEndpoint : EndpointHandlerBase<
         }
 
         var description = HttpUtility.HtmlDecode(request.Description ?? string.Empty);
-        if (request.Anchors?.Length > 0)
+        var anchors = string.Empty;
+        if (!string.IsNullOrEmpty(request.Anchors))
         {
+            var DefaultJsonSerializerOptions = new JsonSerializerOptions()
+            {
+                PropertyNameCaseInsensitive = true
+            };
+            var anchorsArray = JsonSerializer.Deserialize<AnchorInfo[]>(request.Anchors, DefaultJsonSerializerOptions);
             var counter = 1;
-            foreach (var anchor in request.Anchors)
+            foreach (var anchor in anchorsArray)
             {
                 description += $"<div id='{anchor.Id}' #{anchor.Id}><h3>{counter++}. {anchor.Name}</h3><p>{HttpUtility.HtmlDecode(anchor.Desc)}</p></div>";
             }
+            anchors = JsonSerializer.Serialize(anchorsArray);
         }
 
         var command = new AddResourceCommand(
@@ -62,7 +71,7 @@ sealed class AddResourceEndpoint : EndpointHandlerBase<
              request.Publisher,
              request.ResourceCategoryId,
              HttpUtility.HtmlDecode(request.Abstract),
-             request.Anchors?.Any() ?? false ? Newtonsoft.Json.JsonConvert.SerializeObject(request.Anchors) : string.Empty,
+             anchors,
              string.IsNullOrEmpty(request.ExpirationDate) ? default : CreateExpirationDate(request.ExpirationDate, request.ExpirationTime),
              request.Keywords?.Replace("،", ","),
              request.PublishDate,

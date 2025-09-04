@@ -75,37 +75,20 @@ export class RestApiService {
 
   toFormData<T extends Record<string, any>>(obj: T): FormData {
     const formData = new FormData();
-
     Object.entries(obj).forEach(([key, value]) => {
-
       if (value === undefined || value === null) return;
 
-      // If it's a File or Blob -> append directly (binary)
       if (value instanceof File || value instanceof Blob) {
         formData.append(key, value);
-      }
-      // If it's an array
-      else if (Array.isArray(value)) {
-        value.forEach((item, i) => {
-          if (item instanceof File || item instanceof Blob) {
-            formData.append(`${key}[${i}]`, item);
-          } else if (typeof item === 'object') {
-            formData.append(`${key}[${i}]`, JSON.stringify(item));
-          } else {
-            formData.append(`${key}[${i}]`, String(item));
-          }
-        });
-      }
-      // If it's an object (non-binary)
-      else if (typeof value === 'object') {
+      } else if (Array.isArray(value)) {
+        // Append the entire array as a JSON string
         formData.append(key, JSON.stringify(value));
-      }
-      // primitives
-      else {
+      } else if (typeof value === 'object') {
+        formData.append(key, JSON.stringify(value));
+      } else {
         formData.append(key, String(value));
       }
     });
-
     return formData;
   }
 

@@ -2,9 +2,9 @@ import {Directive, inject, OnDestroy, OnInit} from '@angular/core';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
-import {AddResourceCategory, ResourceCategoriesResponse, ResourceCategory} from '../../../core/models/ResourceCategoryResponse';
+import {ResourceCategoriesResponse, ResourceCategory} from '../../../core/models/ResourceCategoryResponse';
 import {BaseComponent} from '../../../base-component';
-import {BaseResult} from '../../../core/models/BaseResult';
+import {AddResult, BaseResult} from '../../../core/models/BaseResult';
 import {CustomConstants} from '../../../core/constants/custom.constants';
 import {TranslateService} from '@ngx-translate/core';
 
@@ -65,12 +65,12 @@ export class BaseCategoryComponent extends BaseComponent implements OnInit, OnDe
         values.id = this.editItem.id;
       }
       if (this.editItem) {
-        this.restApiService.editResourceCategory(values).subscribe((d: BaseResult<AddResourceCategory>) => {
+        this.restApiService.editResourceCategory(values).subscribe((d: BaseResult<AddResult>) => {
           this.toaster.success(CustomConstants.THE_OPERATION_WAS_SUCCESSFUL, '', {});
         });
       } else {
         values.tableId = this.tableId;
-        this.restApiService.addResourceCategory(values).subscribe((d: BaseResult<AddResourceCategory>) => {
+        this.restApiService.addResourceCategory(values).subscribe((d: BaseResult<AddResult>) => {
           this.toaster.success(CustomConstants.THE_OPERATION_WAS_SUCCESSFUL, '', {});
         });
       }

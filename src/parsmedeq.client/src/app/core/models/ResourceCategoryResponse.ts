@@ -11,7 +11,3 @@ export interface ResourceCategory {
   parentTitle: string;
   creationDate: string;
 }
-
-export interface AddResourceCategory {
-  changed: boolean;
-}

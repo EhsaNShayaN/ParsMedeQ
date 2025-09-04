@@ -4,7 +4,7 @@ import {ToastrService} from 'ngx-toastr';
 import {BaseComponent} from '../../../base-component';
 import {Resource} from '../../../core/models/ResourceResponse';
 import {CustomConstants} from '../../../core/constants/custom.constants';
-import {BaseResult} from '../../../core/models/BaseResult';
+import {AddResult, BaseResult} from '../../../core/models/BaseResult';
 import {TranslateService} from '@ngx-translate/core';
 
 @Directive()
@@ -62,7 +62,7 @@ export class BaseResourceComponent extends BaseComponent implements OnDestroy {
       }
       delete values.imagePath;
       delete values.fileId;
-      this.restApiService.addResource(values, this.image, this.file).subscribe((d: BaseResult<boolean>) => {
+      this.restApiService.addResource(values, this.image, this.file).subscribe((d: BaseResult<AddResult>) => {
         this.toaster.success(CustomConstants.THE_OPERATION_WAS_SUCCESSFUL, '', {});
       });
     } else {

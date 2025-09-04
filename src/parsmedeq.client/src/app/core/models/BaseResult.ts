@@ -19,3 +19,7 @@ export enum ResultStatusCode {
   Conflict = (409),
   UnhandledException = (500)
 }
+
+export interface AddResult {
+  changed: boolean;
+}
