@@ -1,3 +1,4 @@
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using ParsMedeQ.Application.Options;
@@ -97,6 +98,12 @@ app.UseMiddleware<UserLangContextAccessorMiddleware>();
 app.UseHsts();
 app.UseDefaultFiles();
 app.MapStaticAssets();
+/*app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath, "Resources")),
+    RequestPath = "/Resources"
+});*/
 app.UseAntiforgery();
 
 app.UseCors(opts =>

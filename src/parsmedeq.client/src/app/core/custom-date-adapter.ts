@@ -1,8 +1,7 @@
 import {Inject, Optional} from '@angular/core';
 import {DateAdapter, MAT_DATE_LOCALE} from '@angular/material/core';
-import * as jMoment from 'moment-jalaali';
+import jMoment from 'moment-jalaali';
 
-const minmin: any = jMoment;
 
 export const PERSIAN_DATE_FORMATS = {
   parse: {
@@ -19,8 +18,8 @@ export const PERSIAN_DATE_FORMATS = {
 export class JalaliMomentDateAdapter extends DateAdapter<jMoment.Moment> {
   constructor(@Optional() @Inject(MAT_DATE_LOCALE) matDateLocale: string | undefined) {
     super();
-    this.setLocale(matDateLocale || minmin.locale('fa'));
-    minmin.loadPersian();
+    this.setLocale(matDateLocale || jMoment.locale('fa'));
+    jMoment.loadPersian();
   }
 
   invalid() {
@@ -64,29 +63,14 @@ export class JalaliMomentDateAdapter extends DateAdapter<jMoment.Moment> {
    * most of the time we use long format. short or narrow format for month names is a little odd.
    */
   getMonthNames(style: 'long' | 'short' | 'narrow'): string[] {
-    const r: string[] = [];
-    minmin.loadPersian({dialect: 'persian-modern', usePersianDigits: false});
-    const l = minmin().localeData();
+    jMoment.loadPersian({dialect: 'persian-modern', usePersianDigits: false});
+    const localeData: any = jMoment().localeData();
+
     if (style === 'long' || style === 'short') {
-      Object.keys(l).forEach(key => {
-        if (key === '_jMonths') {
-          const values = l[key];
-          for (let index = 0; index < values.length; index++) {
-            r.push(values[index]);
-          }
-        }
-      });
+      return localeData.jMonths();
     } else {
-      Object.keys(l).forEach(key => {
-        if (key === '_jMonthsShort') {
-          const values = l[key];
-          for (let index = 0; index < values.length; index++) {
-            r.push(values[index]);
-          }
-        }
-      });
+      return localeData.jMonthsShort();
     }
-    return r;
   }
 
   /**
@@ -102,11 +86,11 @@ export class JalaliMomentDateAdapter extends DateAdapter<jMoment.Moment> {
   getDayOfWeekNames(style: 'long' | 'short' | 'narrow'): string[] {
     switch (style) {
       case 'long':
-        return minmin().localeData().weekdays().slice(0);
+        return jMoment().localeData().weekdays().slice(0);
       case 'short':
-        return minmin().localeData().weekdaysShort().slice(0);
+        return jMoment().localeData().weekdaysShort().slice(0);
       case 'narrow':
-        return minmin().localeData().weekdaysMin().slice(0);
+        return jMoment().localeData().weekdaysMin().slice(0);
     }
   }
 
@@ -130,29 +114,29 @@ export class JalaliMomentDateAdapter extends DateAdapter<jMoment.Moment> {
    */
   getNumDaysInMonth(date: jMoment.Moment, fa?: any): number {
     if ((date as any)['_d']) {
-      return minmin.jDaysInMonth(this.getYear((date as any)['_d']), this.getMonth((date as any)['_d']));
+      return jMoment.jDaysInMonth(this.getYear((date as any)['_d']), this.getMonth((date as any)['_d']));
     }
-    return minmin.jDaysInMonth(this.getYear(date), this.getMonth(date));
+    return jMoment.jDaysInMonth(this.getYear(date), this.getMonth(date));
   }
 
   clone(date: jMoment.Moment): jMoment.Moment {
     // return date.clone().locale(this.locale);
-    return minmin(date);
+    return jMoment(date);
   }
 
   createDate(year: number, month: number, date: number): jMoment.Moment {
-    return minmin().jYear(year).jMonth(month).jDate(date);
+    return jMoment(`${year}/${month + 1}/${date}`, 'jYYYY/jM/jD');
   }
 
   today(): jMoment.Moment {
-    return minmin();
+    return jMoment();
   }
 
   parse(value: any, parseFormat: string | string[]): jMoment.Moment | null {
     if (value && typeof value === 'string') {
-      return minmin(value, parseFormat, this.locale);
+      return jMoment(value, parseFormat, this.locale);
     }
-    return value ? minmin(value).locale(this.locale) : null;
+    return value ? jMoment(value).locale(this.locale) : null;
   }
 
   format(date: jMoment.Moment, displayFormat: any): string {
@@ -164,7 +148,7 @@ export class JalaliMomentDateAdapter extends DateAdapter<jMoment.Moment> {
   }
 
   addCalendarMonths(date: jMoment.Moment, months: number): jMoment.Moment {
-    return this.clone(date).add(months as any, 'jmonth');
+    return this.clone(date).add(months, 'jMonth');
   }
 
   addCalendarDays(date: jMoment.Moment, days: number): jMoment.Moment {
@@ -176,7 +160,7 @@ export class JalaliMomentDateAdapter extends DateAdapter<jMoment.Moment> {
   }
 
   isDateInstance(obj: any): boolean {
-    return minmin.isMoment(obj);
+    return jMoment.isMoment(obj);
   }
 
   isValid(date: jMoment.Moment): boolean {

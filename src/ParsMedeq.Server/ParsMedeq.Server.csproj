@@ -10,6 +10,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Repository\**" />
+    <Content Remove="Repository\**" />
+    <EmbeddedResource Remove="Repository\**" />
+    <None Remove="Repository\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\SRH.Libraries\SRH.ServiceRegistry\SRH.ServiceRegistry.csproj" />
     <ProjectReference Include="..\..\SRH.Libraries\SRH.Sql.ConfigProvider\SRH.Sql.ConfigProvider.csproj" />
     <ProjectReference Include="..\parsmedeq.client\parsmedeq.client.esproj">

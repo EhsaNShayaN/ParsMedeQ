@@ -26,12 +26,12 @@
             <img class="img-square w-100 he-100" src="{{element.image}}"/>
           </ng-container>
           <ng-container *ngSwitchCase="'actions'">
-            <a [routerLink]="['/admin/article/edit', element.id]" mat-icon-button
-               matTooltip="ویرایش" target="_blank">
-              <mat-icon color="warn">edit</mat-icon>
+            <a [routerLink]="['/' + lang + '/admin/article/edit', element.id]" target="_blank" mat-icon-button
+               matTooltip="ویرایش {{('LANG.' + lang.toUpperCase()) | translate}}"
+               *ngFor="let lang of languages; let i = index">
+              <mat-icon [color]="colors[i]">edit</mat-icon>
             </a>
-            <button (click)="remove(element)" class="remove" color="warn" mat-icon-button
-                    matTooltip="حذف">
+            <button mat-icon-button color="warn" (click)="remove(element)" matTooltip="{{'DELETE' | translate}}" class="remove">
               <mat-icon>delete</mat-icon>
             </button>
           </ng-container>

@@ -5,10 +5,11 @@ import * as moment from 'jalali-moment';
 @Component({
   selector: 'app-date-picker',
   templateUrl: './date-picker.component.html',
-  styleUrls: ['./date-picker.component.scss']
+  styleUrl: './date-picker.component.scss',
+  standalone: false
 })
 export class DatePickerComponent extends PureComponent implements OnInit {
-  @Input() title: string;
+  @Input() title: string = '';
   @Output() dateSelect = new EventEmitter<string>();
   date: any;
 

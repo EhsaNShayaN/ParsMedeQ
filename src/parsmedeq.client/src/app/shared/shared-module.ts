@@ -22,15 +22,18 @@ import {MobileFormatterPipe} from '../core/pipes/mobile-formatter.pipe';
 import {Comments} from './comments/comments';
 import {DefaultClassDirective, DefaultFlexDirective, DefaultLayoutAlignDirective, DefaultLayoutDirective, DefaultShowHideDirective} from 'ngx-flexible-layout';
 import {ToastrModule} from 'ngx-toastr';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
-import {JalaliMomentDateAdapter, PERSIAN_DATE_FORMATS} from '../core/custom-date-adapter';
 import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
 import {TranslateModule} from '@ngx-translate/core';
 import {LangPackPipe} from '../core/pipes/lang-pack.pipe';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule, MatRippleModule, provideNativeDateAdapter} from '@angular/material/core';
+import {JalaliMomentDateAdapter, PERSIAN_DATE_FORMATS} from '../core/custom-date-adapter';
+import {DatePickerComponent} from './date-picker/date-picker.component';
 
 @NgModule({
   declarations: [
     CommentForm,
+    DatePickerComponent,
     /////////////////
     LangPackPipe,
     CurrencyFormatterPipe,
@@ -46,6 +49,8 @@ import {LangPackPipe} from '../core/pipes/lang-pack.pipe';
     DirectivesModule,
     ToastrModule.forRoot(),
     TranslateModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     /////////////////
     MatToolbarModule,
     MatButtonModule,
@@ -103,6 +108,9 @@ import {LangPackPipe} from '../core/pipes/lang-pack.pipe';
     LoadMoreComponent,
     Comments,
     TranslateModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    DatePickerComponent,
     //////////////////////
     DefaultShowHideDirective,
     MatMenuTrigger,
@@ -141,6 +149,7 @@ import {LangPackPipe} from '../core/pipes/lang-pack.pipe';
   ],
   providers: [
     CurrencyFormatterPipe,
+    provideNativeDateAdapter(), // 👈 required
     {provide: MAT_DATE_LOCALE, useValue: 'fa-IR'},
     {provide: DateAdapter, useClass: JalaliMomentDateAdapter, deps: [MAT_DATE_LOCALE]},
     {provide: MAT_DATE_FORMATS, useValue: PERSIAN_DATE_FORMATS}

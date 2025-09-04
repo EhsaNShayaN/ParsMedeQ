@@ -9,7 +9,7 @@ import {BaseResourcesComponent} from '../../base-resources.component';
   standalone: false
 })
 export class ArticleListComponent extends BaseResourcesComponent {
-  displayedColumns: string[] = [/*'row', */'title', 'categoryTitle', 'downloadCount', 'image', 'creationDate', 'actions'];
+  displayedColumns: string[] = [/*'row', */'title', 'resourceCategoryTitle', 'downloadCount', 'image', 'creationDate', 'actions'];
 
   constructor() {
     super(Tables.Article);
@@ -20,7 +20,7 @@ export class ArticleListComponent extends BaseResourcesComponent {
     if (column === 'title') {
       column = 'عنوان';
     }
-    if (column === 'categorytitle') {
+    if (column === 'resourcecategorytitle') {
       column = 'دسته بندی';
     }
     if (column === 'downloadcount') {
@@ -30,7 +30,7 @@ export class ArticleListComponent extends BaseResourcesComponent {
       column = 'تاریخ انقضا';
     }
     if (column === 'image') {
-      column = 'تصوبر';
+      column = 'تصویر';
     }
     if (column === 'creationdate') {
       column = 'تاریخ ایجاد';
