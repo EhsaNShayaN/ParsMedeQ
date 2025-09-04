@@ -4,7 +4,7 @@ import {map, Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {endpoint} from './services/cookie-utils';
 import {AddResourceRequest, Resource, ResourceRequest, ResourceResponse, ResourcesRequest} from './models/ResourceResponse';
-import {BaseResult} from './models/BaseResult';
+import {AddResult, BaseResult} from './models/BaseResult';
 import {ResourceCategoriesResponse} from './models/ResourceCategoryResponse';
 import {AuthService} from './services/auth.service';
 
@@ -37,7 +37,7 @@ export class RestApiService {
   }
 
   addResourceCategory(model: any): Observable<any> {
-    return this.http.post<BaseResult<boolean>>(endpoint() + 'resource/category/add', model).pipe(
+    return this.http.post<BaseResult<boolean>>(`${endpoint()}resource/category/${model.id ? 'edit' : 'add'}`, formData).pipe(
       catchError(this.handleError)
     );
   }

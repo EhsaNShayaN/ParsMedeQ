@@ -5,8 +5,8 @@ using ParsMedeQ.Contracts.ResourceContracts.UpdateResourceContract;
 using SRH.Utilities.EhsaN;
 using System.Web;
 
-namespace ParsMedeQ.Presentation.Features.ResourceFeatures.UpdateResourceFeature;
-sealed class UpdateResourceEndpoint : EndpointHandlerBase<
+namespace ParsMedeQ.Presentation.Features.ResourceFeatures.EditResourceFeature;
+sealed class EditResourceEndpoint : EndpointHandlerBase<
     UpdateResourceApiRequest,
     UpdateResourceCommand,
     UpdateResourceCommandResponse,
@@ -15,7 +15,7 @@ sealed class UpdateResourceEndpoint : EndpointHandlerBase<
     protected override bool NeedAuthentication => false;
     protected override bool NeedTaxPayerFile => false;
 
-    public UpdateResourceEndpoint() : base(
+    public EditResourceEndpoint() : base(
             Endpoints.Resource.UpdateResource,
             HttpMethod.Post)
     { }

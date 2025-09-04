@@ -13,7 +13,7 @@ public sealed class ResourceEndpoint : ApiEndpointBase
     public EndpointInfo Resources { get; private set; }
     public EndpointInfo Resource { get; private set; }
     public EndpointInfo AddResourceCategory { get; private set; }
-    public EndpointInfo UpdateResourceCategory { get; private set; }
+    public EndpointInfo EditResourceCategory { get; private set; }
     public EndpointInfo ResourceCategories { get; private set; }
     public EndpointInfo ResourceCategory { get; private set; }
 
@@ -54,10 +54,10 @@ public sealed class ResourceEndpoint : ApiEndpointBase
            "افزودن دسته بندی خبر، مقاله و ...",
            _tag);
 
-        UpdateResourceCategory = new EndpointInfo(
-           this.GetUrl("category/update"),
-           this.GetUrl("category/update"),
-           "Update Resource Category",
+        EditResourceCategory = new EndpointInfo(
+           this.GetUrl("category/edit"),
+           this.GetUrl("category/edit"),
+           "Edit Resource Category",
            "ویرایش دسته بندی خبر، مقاله و ...",
            _tag);
 

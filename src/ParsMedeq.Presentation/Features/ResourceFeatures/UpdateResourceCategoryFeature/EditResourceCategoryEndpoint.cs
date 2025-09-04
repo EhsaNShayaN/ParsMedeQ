@@ -3,7 +3,7 @@ using ParsMedeQ.Contracts;
 using ParsMedeQ.Contracts.ResourceContracts.UpdateResourceCategoryContract;
 
 namespace ParsMedeQ.Presentation.Features.ResourceFeatures.UpdateResourceCategoryFeature;
-sealed class UpdateResourceCategoryEndpoint : EndpointHandlerBase<
+sealed class EditResourceCategoryEndpoint : EndpointHandlerBase<
     UpdateResourceCategoryApiRequest,
     UpdateResourceCategoryCommand,
     UpdateResourceCategoryCommandResponse,
@@ -12,10 +12,10 @@ sealed class UpdateResourceCategoryEndpoint : EndpointHandlerBase<
     protected override bool NeedAuthentication => false;
     protected override bool NeedTaxPayerFile => false;
 
-    public UpdateResourceCategoryEndpoint(
+    public EditResourceCategoryEndpoint(
         IPresentationMapper<UpdateResourceCategoryApiRequest, UpdateResourceCategoryCommand> apiRequestMapper
         ) : base(
-            Endpoints.Resource.UpdateResourceCategory,
+            Endpoints.Resource.EditResourceCategory,
             HttpMethod.Post,
             apiRequestMapper,
             DefaultResponseFactory.Instance.CreateOk)
