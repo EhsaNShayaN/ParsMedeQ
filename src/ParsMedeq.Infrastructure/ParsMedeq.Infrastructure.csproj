@@ -5,6 +5,12 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="_Migrations\**" />
+	  <EmbeddedResource Remove="_Migrations\**" />
+	  <None Remove="_Migrations\**" />
+	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="FluentEmail.Core" />
 		<PackageReference Include="FluentEmail.Smtp" />
@@ -31,7 +37,6 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Persistance\DbContexts\Seeds\" />
-	  <Folder Include="_Migrations\" />
 	</ItemGroup>
 
 </Project>

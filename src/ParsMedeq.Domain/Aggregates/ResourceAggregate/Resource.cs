@@ -16,8 +16,6 @@ public sealed class Resource : EntityBase<int>
     #region " Properties "
     public int TableId { get; private set; }
     public int ResourceCategoryId { get; private set; }
-    public string Image { get; private set; } = string.Empty;
-    public int? FileId { get; private set; }
     public string Language { get; private set; } = string.Empty;
     public string PublishDate { get; private set; } = string.Empty;
     public string PublishInfo { get; private set; } = string.Empty;
@@ -114,23 +112,26 @@ public sealed class Resource : EntityBase<int>
         string description,
         string @abstract,
         string anchors,
-        string keywords)
+        string keywords,
+        string imagePath,
+        int? fileId)
     {
         return this.Update(resourceCategoryId, language, publishDate, publishInfo, publisher, price, discount, isVip, expirationDate)
-             .Map(_ => this.UpdateTranslation(langCode, title, description, @abstract, anchors, keywords).Map(() => this));
+             .Map(_ => this.UpdateTranslation(langCode, title, description, @abstract, anchors, keywords, imagePath, fileId).Map(() => this));
     }
     #endregion
 
-    public PrimitiveResult<Resource> SetFiles(string imagePath, int? fileId)
+    public ValueTask<PrimitiveResult> AddTranslation(
+        string langCode,
+        string title,
+        string description,
+        string @abstract,
+        string anchors,
+        string keywords,
+        string imagePath,
+        int? fileId)
     {
-        this.Image = imagePath ?? throw new ArgumentNullException("image not found");
-        this.FileId = fileId;
-        return this;
-    }
-
-    public ValueTask<PrimitiveResult> AddTranslation(string langCode, string title, string description, string @abstract, string anchors, string keywords)
-    {
-        return ResourceTranslation.Create(langCode, title, description, @abstract, anchors, keywords)
+        return ResourceTranslation.Create(langCode, title, description, @abstract, anchors, keywords, imagePath, fileId)
             .OnSuccess(newTranslation => this._resourceTranslations.Add(newTranslation.Value))
             .Match(
                 success => PrimitiveResult.Success(),
@@ -138,14 +139,22 @@ public sealed class Resource : EntityBase<int>
             );
     }
 
-    public ValueTask<PrimitiveResult> UpdateTranslation(string langCode, string title, string description, string @abstract, string anchors, string keywords)
+    public ValueTask<PrimitiveResult> UpdateTranslation(
+        string langCode,
+        string title,
+        string description,
+        string @abstract,
+        string anchors,
+        string keywords,
+        string imagePath,
+        int? fileId)
     {
         var currentTranslation = _resourceTranslations.FirstOrDefault(s => s.LanguageCode.Equals(langCode, StringComparison.OrdinalIgnoreCase));
         if (currentTranslation is null)
         {
-            return this.AddTranslation(langCode, title, description, @abstract, anchors, keywords);
+            return this.AddTranslation(langCode, title, description, @abstract, anchors, keywords, imagePath, fileId);
         }
-        return currentTranslation.Update(title, description, @abstract, anchors, keywords)
+        return currentTranslation.Update(title, description, @abstract, anchors, keywords, imagePath, fileId)
             .Match(
                 _ => PrimitiveResult.Success(),
                 PrimitiveResult.Failure

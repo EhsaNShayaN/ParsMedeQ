@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.IdentityModel.Tokens;
 using ParsMedeQ.Application.Features.ResourceFeatures.UpdateResourceFeature;
 using ParsMedeQ.Contracts;
 using ParsMedeQ.Contracts.ResourceContracts;
@@ -62,6 +61,7 @@ sealed class EditResourceEndpoint : EndpointHandlerBase<
 
         var command = new UpdateResourceCommand(
              request.Id,
+             request.TableId,
              request.Title,
              description,
              HttpUtility.HtmlDecode(request.Abstract),
@@ -79,7 +79,9 @@ sealed class EditResourceEndpoint : EndpointHandlerBase<
              imageBytes,
              imageExtension,
              fileBytes,
-             fileExtension);
+             fileExtension,
+             request.OldImagePath,
+             request.OldFileId == 0 ? null : request.OldFileId);
 
         return await this.CallMediatRHandler(sender,
                 () => ValueTask.FromResult(PrimitiveResult.Success(command)),

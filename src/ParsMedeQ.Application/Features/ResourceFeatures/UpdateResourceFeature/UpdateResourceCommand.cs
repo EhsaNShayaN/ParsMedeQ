@@ -4,6 +4,7 @@ namespace ParsMedeQ.Application.Features.ResourceFeatures.UpdateResourceFeature;
 
 public sealed record class UpdateResourceCommand(
     int Id,
+    int TableId,
     string Title,
     string Description,
     string Abstract,
@@ -22,7 +23,9 @@ public sealed record class UpdateResourceCommand(
     byte[] Image,
     string ImageExtension,
     byte[] File,
-    string FileExtension) : IPrimitiveResultCommand<UpdateResourceCommandResponse>,
+    string FileExtension,
+    string OldImagePath,
+    int? OldFileId) : IPrimitiveResultCommand<UpdateResourceCommandResponse>,
     IValidatableRequest<UpdateResourceCommand>
 {
     public ValueTask<PrimitiveResult<UpdateResourceCommand>> Validate() => PrimitiveResult.Success(this)

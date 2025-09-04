@@ -11,6 +11,8 @@ public sealed class ResourceTranslation : EntityBase<int>
     public string Abstract { get; private set; } = string.Empty;
     public string Anchors { get; private set; } = string.Empty;
     public string Keywords { get; private set; } = string.Empty;
+    public string Image { get; private set; } = string.Empty;
+    public int? FileId { get; private set; }
     #endregion
 
     #region " Navigation Properties "
@@ -29,7 +31,9 @@ public sealed class ResourceTranslation : EntityBase<int>
         string description,
         string @abstract,
         string anchors,
-        string keywords) => PrimitiveResult.Success(
+        string keywords,
+        string imagePath,
+        int? fileId) => PrimitiveResult.Success(
             new ResourceTranslation
             {
                 LanguageCode = languageCode,
@@ -38,19 +42,25 @@ public sealed class ResourceTranslation : EntityBase<int>
                 Abstract = @abstract,
                 Anchors = anchors,
                 Keywords = keywords,
+                Image = imagePath,
+                FileId = fileId
             });
     internal PrimitiveResult<ResourceTranslation> Update(
         string title,
         string description,
         string @abstract,
         string anchors,
-        string keywords)
+        string keywords,
+        string imagePath,
+        int? fileId)
     {
         this.Title = title;
         this.Description = description;
         this.Abstract = @abstract;
         this.Anchors = anchors;
         this.Keywords = keywords;
+        this.Image = imagePath;
+        this.FileId = fileId;
         return this;
     }
     #endregion

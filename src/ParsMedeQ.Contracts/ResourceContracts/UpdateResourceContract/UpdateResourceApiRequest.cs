@@ -7,6 +7,7 @@ namespace ParsMedeQ.Contracts.ResourceContracts.UpdateResourceContract;
 public sealed class UpdateResourceApiRequest
 {
     public int Id { get; private set; }
+    public int TableId { get; private set; }
     public string Title { get; private set; } = null!;
     public string Language { get; private set; } = string.Empty;
     public bool IsVip { get; private set; }
@@ -24,6 +25,8 @@ public sealed class UpdateResourceApiRequest
     public string PublishDate { get; private set; } = string.Empty;
     public IFormFile? Image { get; private set; }
     public IFormFile? File { get; private set; }
+    public string OldImagePath { get; private set; } = string.Empty;
+    public int OldFileId { get; private set; }
 
     public static async ValueTask<UpdateResourceApiRequest?> BindAsync(HttpContext context, ParameterInfo _)
     {

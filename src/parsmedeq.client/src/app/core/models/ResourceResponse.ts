@@ -18,7 +18,7 @@ export class Resource {
   keywords!: string;
 
   image!: string;
-  fileId?: string;
+  fileId?: number;
 
   language!: string;
   publishDate!: string;

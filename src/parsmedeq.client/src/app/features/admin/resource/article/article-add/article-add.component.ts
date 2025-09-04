@@ -55,6 +55,8 @@ export class ArticleAddComponent extends BaseResourceComponent implements OnInit
               price: this.editItem.price,
               discount: this.editItem.discount,
             });
+            this.oldImagePath = this.editItem.image;
+            this.oldFileId = this.editItem.fileId ?? 0;
             if (this.editItem.expirationDate) {
               const array = this.editItem.expirationDate.split('/').map(s => Number(s));
               this.myForm.controls['expirationDate'].setValue(new JalaliMomentDateAdapter('').createDate(array[0], array[1] - 1, array[2]));
@@ -114,6 +116,14 @@ export class ArticleAddComponent extends BaseResourceComponent implements OnInit
     if (target.files && target.files[0]) {
       this.file = target.files[0];
     }
+  }
+
+  deleteImage() {
+    this.oldImagePath = '';
+  }
+
+  deleteFile() {
+    this.oldFileId = 0;
   }
 
   toEnglish(s: string) {

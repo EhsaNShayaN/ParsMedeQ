@@ -30,8 +30,6 @@ public sealed class AddResourceCommandHandler : IPrimitiveResultCommandHandler<A
             request.Discount,
             request.IsVip,
             request.ExpirationDate)
-            .Map(resource => resource.AddTranslation(Constants.LangCode_Farsi.ToLower(), request.Title, request.Description, request.Abstract, request.Anchors, request.Keywords)
-                .Map(() => resource))
             .Map(resource => UploadFile(this._fileService, request.Image, request.ImageExtension, "Images", cancellationToken)
                 .Map(imagePath => (resource, imagePath)))
             .Map(data => UploadFile(this._fileService, request.File, request.FileExtension, "Files", cancellationToken)
@@ -44,7 +42,10 @@ public sealed class AddResourceCommandHandler : IPrimitiveResultCommandHandler<A
                     .Map(media => this._writeUnitOfWork.SaveChangesAsync(CancellationToken.None)
                         .Map(_ => media))
                     .Map(media => (data.resource, data.imagePath, data.filePath, media)))
-            .Map(data => data.resource.SetFiles(data.imagePath, data.media?.Id))
+            .Map(data => data.resource.AddTranslation(
+                    Constants.LangCode_Farsi.ToLower(), request.Title, request.Description,
+                    request.Abstract, request.Anchors, request.Keywords, data.imagePath, data.media?.Id)
+                .Map(() => data.resource))
             .Map(resource => _writeUnitOfWork.ResourceWriteRepository.AddResource(resource, cancellationToken))
             .Map(resource => this._writeUnitOfWork.SaveChangesAsync(CancellationToken.None)
                 .Map(_ => resource))

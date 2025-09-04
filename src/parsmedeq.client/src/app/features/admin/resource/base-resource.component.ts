@@ -19,8 +19,8 @@ export class BaseResourceComponent extends BaseComponent implements OnDestroy {
   expTime: any;
   pubDate: any;
   editItem?: Resource;
-  imagePath: string = '';
-  fileId: string = '';
+  oldImagePath: string = '';
+  oldFileId: number = 0;
   image?: File;
   file?: File;
 
@@ -58,15 +58,15 @@ export class BaseResourceComponent extends BaseComponent implements OnDestroy {
     values.tableId = this.tableId;
     if (this.editItem) {
       values.id = this.editItem.id;
-      /*if (!this.image) {
-        values.image = this.editItem.image;
+      if (!this.image) {
+        values.oldImagePath = this.oldImagePath;
       }
       if (!this.file) {
-        values.fileId = this.editItem.fileId;
-      }*/
+        values.oldFileId = this.oldFileId;
+      }
     }
-    /*delete values.imagePath;
-    delete values.fileId;*/
+    delete values.imagePath;
+    delete values.fileId;
     this.restApiService.addResource(values, this.image, this.file).subscribe((d: BaseResult<AddResult>) => {
       this.toaster.success(CustomConstants.THE_OPERATION_WAS_SUCCESSFUL, '', {});
     });
