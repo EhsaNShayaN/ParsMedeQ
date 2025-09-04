@@ -7,7 +7,9 @@ CREATE TABLE [dbo].[ResourceTranslation]
 [Description] [nvarchar] (max) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
 [Abstract] [nvarchar] (max) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
 [Anchors] [nvarchar] (max) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-[Keywords] [nvarchar] (4000) COLLATE SQL_Latin1_General_CP1_CI_AS NULL
+[Keywords] [nvarchar] (4000) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[Image] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+[FileId] [int] NULL
 ) ON [PRIMARY]
 GO
 ALTER TABLE [dbo].[ResourceTranslation] ADD CONSTRAINT [PK_ResourceTranslation_1] PRIMARY KEY CLUSTERED ([Id]) ON [PRIMARY]
