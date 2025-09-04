@@ -2,7 +2,7 @@
 using ParsMedeQ.Contracts;
 using ParsMedeQ.Contracts.ResourceContracts.UpdateResourceCategoryContract;
 
-namespace ParsMedeQ.Presentation.Features.ResourceFeatures.UpdateResourceCategoryFeature;
+namespace ParsMedeQ.Presentation.Features.ResourceFeatures.EditResourceCategoryFeature;
 sealed class EditResourceCategoryEndpoint : EndpointHandlerBase<
     UpdateResourceCategoryApiRequest,
     UpdateResourceCategoryCommand,

@@ -60,21 +60,16 @@ export class BaseCategoryComponent extends BaseComponent implements OnInit, OnDe
   }
 
   onFormSubmit(values: any): void {
-    if (this.myForm.valid) {
-      if (this.editItem) {
-        values.id = this.editItem.id;
-      }
-      if (this.editItem) {
-        this.restApiService.editResourceCategory(values).subscribe((d: BaseResult<AddResult>) => {
-          this.toaster.success(CustomConstants.THE_OPERATION_WAS_SUCCESSFUL, '', {});
-        });
-      } else {
-        values.tableId = this.tableId;
-        this.restApiService.addResourceCategory(values).subscribe((d: BaseResult<AddResult>) => {
-          this.toaster.success(CustomConstants.THE_OPERATION_WAS_SUCCESSFUL, '', {});
-        });
-      }
+    if (!this.myForm.valid) {
+      console.log(this.findInvalidControls(this.myForm));
+      return;
     }
+    if (this.editItem) {
+      values.id = this.editItem.id;
+    }
+    this.restApiService.addResourceCategory(values).subscribe((d: BaseResult<AddResult>) => {
+      this.toaster.success(CustomConstants.THE_OPERATION_WAS_SUCCESSFUL, '', {});
+    });
   }
 
   ngOnDestroy() {

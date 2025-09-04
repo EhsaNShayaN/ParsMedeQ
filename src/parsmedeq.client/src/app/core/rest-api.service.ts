@@ -37,13 +37,7 @@ export class RestApiService {
   }
 
   addResourceCategory(model: any): Observable<any> {
-    return this.http.post<BaseResult<boolean>>(`${endpoint()}resource/category/${model.id ? 'edit' : 'add'}`, formData).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  editResourceCategory(model: any): Observable<any> {
-    return this.http.post<BaseResult<boolean>>(endpoint() + 'resource/category/update', model).pipe(
+    return this.http.post<BaseResult<boolean>>(`${endpoint()}resource/category/${model.id ? 'edit' : 'add'}`, model).pipe(
       catchError(this.handleError)
     );
   }

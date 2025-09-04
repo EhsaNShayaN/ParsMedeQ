@@ -19,6 +19,8 @@ export class BaseResourceComponent extends BaseComponent implements OnDestroy {
   expTime: any;
   pubDate: any;
   editItem?: Resource;
+  imagePath: string = '';
+  fileId: string = '';
   image?: File;
   file?: File;
 
@@ -43,31 +45,32 @@ export class BaseResourceComponent extends BaseComponent implements OnDestroy {
   }
 
   onFormSubmit(values: any): void {
-    if (this.myForm.valid) {
-      if (this.expDate) {
-        values.expirationDate = this.expDate;
-      }
-      if (this.pubDate) {
-        values.publishDate = this.pubDate;
-      }
-      values.tableId = this.tableId;
-      if (this.editItem) {
-        values.id = this.editItem.id;
-        if (!this.image) {
-          values.image = this.editItem.image;
-        }
-        if (!this.file) {
-          values.fileId = this.editItem.fileId;
-        }
-      }
-      delete values.imagePath;
-      delete values.fileId;
-      this.restApiService.addResource(values, this.image, this.file).subscribe((d: BaseResult<AddResult>) => {
-        this.toaster.success(CustomConstants.THE_OPERATION_WAS_SUCCESSFUL, '', {});
-      });
-    } else {
+    if (!this.myForm.valid) {
       console.log(this.findInvalidControls(this.myForm));
+      return;
     }
+    if (this.expDate) {
+      values.expirationDate = this.expDate;
+    }
+    if (this.pubDate) {
+      values.publishDate = this.pubDate;
+    }
+    values.tableId = this.tableId;
+    if (this.editItem) {
+      values.id = this.editItem.id;
+      /*if (!this.image) {
+        values.image = this.editItem.image;
+      }
+      if (!this.file) {
+        values.fileId = this.editItem.fileId;
+      }*/
+    }
+    /*delete values.imagePath;
+    delete values.fileId;*/
+    this.restApiService.addResource(values, this.image, this.file).subscribe((d: BaseResult<AddResult>) => {
+      this.toaster.success(CustomConstants.THE_OPERATION_WAS_SUCCESSFUL, '', {});
+    });
+
   }
 
   ngOnDestroy() {
