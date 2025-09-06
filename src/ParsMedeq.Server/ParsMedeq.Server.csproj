@@ -38,4 +38,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Resources\Articles\0e1d0009-e088-4feb-a687-7785f3e90660.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

@@ -1,16 +1,16 @@
-// src/app/services/auth.service.ts
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {JwtHelperService} from '@auth0/angular-jwt';
+import {CustomConstants} from '../constants/custom.constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'https://localhost:5001/api/auth'; // آدرس بک‌اند
+  private apiUrl = `${CustomConstants.endpoint}/auth`; // آدرس بک‌اند
 
   constructor(private http: HttpClient,
               private router: Router,

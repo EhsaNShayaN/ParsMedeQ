@@ -43,7 +43,6 @@ export class BaseCategoriesComponent extends BaseComponent implements OnInit, Af
           });
         }
       }
-      console.log('dataSource', this.dataSource);
     });
   }
 

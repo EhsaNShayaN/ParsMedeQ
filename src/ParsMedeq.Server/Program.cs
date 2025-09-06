@@ -88,7 +88,7 @@ builder.Services
     SettingVersion.Version1,
     TimeSpan.FromSeconds(5),
     true);*/
-
+Console.WriteLine("*****************" + Path.Combine(builder.Environment.ContentRootPath, "Resources"));
 ServiceInstallerHelper.InstallServicesRecursively(builder.Services,
            builder.Configuration,
            ApiAssemblyReference.Assembly);
@@ -98,12 +98,12 @@ app.UseMiddleware<UserLangContextAccessorMiddleware>();
 app.UseHsts();
 app.UseDefaultFiles();
 app.MapStaticAssets();
-/*app.UseStaticFiles();
+app.UseStaticFiles();
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath, "Resources")),
     RequestPath = "/Resources"
-});*/
+});
 app.UseAntiforgery();
 
 app.UseCors(opts =>

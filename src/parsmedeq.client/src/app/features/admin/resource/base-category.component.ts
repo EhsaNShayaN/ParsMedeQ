@@ -42,6 +42,7 @@ export class BaseCategoryComponent extends BaseComponent implements OnInit, OnDe
           title: [this.editItem?.title, Validators.required],
           description: this.editItem?.description,
           parentId: this.editItem?.parentId,
+          tableId: this.tableId,
         });
         if (this.editItem) {
           this.hideSingleLangControls();
