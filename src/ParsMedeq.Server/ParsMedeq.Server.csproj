@@ -10,14 +10,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Repository\**" />
-    <Compile Remove="Resources\**" />
-    <Content Remove="Repository\**" />
-    <Content Remove="Resources\**" />
-    <EmbeddedResource Remove="Repository\**" />
     <EmbeddedResource Remove="Resources\**" />
-    <None Remove="Repository\**" />
-    <None Remove="Resources\**" />
+    <Content Remove="Resources\**" />
   </ItemGroup>
 
   <ItemGroup>
