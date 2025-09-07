@@ -11,9 +11,9 @@ $custom-typography: mat.m2-define-typography-config(
 @include mat.core();
 
 .app {
-  &.red-custom {
-    @import "skins/red-custom";
-    @include mat.all-component-colors($red-custom-theme);
-    @include theme-reset($red-custom-theme);
+  &.green-custom {
+    @import "skins/green-custom";
+    @include mat.all-component-colors($green-custom-theme);
+    @include theme-reset($green-custom-theme);
   }
 }

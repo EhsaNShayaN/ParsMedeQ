@@ -29,7 +29,7 @@ export class Settings {
 export class AppSettings {
   public settings = new Settings(
     'ParsMedeQ',  // theme name
-    'red-custom',      // blue, blue-dark, green, red, red-custom, pink, purple, grey, orange-dark
+    'green-custom',      // blue, blue-dark, green, red, green-custom, pink, purple, grey, orange-dark
     1,           // 1 or 2 or 3
     true,        // true = sticky, false = not sticky
     'carousel',     // default, image, carousel, map, video
