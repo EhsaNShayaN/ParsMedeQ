@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <SpaRoot>..\parsmedeq.client</SpaRoot>
+    <SpaProxyLaunchCommand>npm start</SpaProxyLaunchCommand>
+    <SpaProxyServerUrl>https://localhost:51035</SpaProxyServerUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Repository\**" />
+    <Compile Remove="Resources\**" />
+    <Content Remove="Repository\**" />
+    <Content Remove="Resources\**" />
+    <EmbeddedResource Remove="Repository\**" />
+    <EmbeddedResource Remove="Resources\**" />
+    <None Remove="Repository\**" />
+    <None Remove="Resources\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\SRH.Libraries\SRH.ServiceRegistry\SRH.ServiceRegistry.csproj" />
+    <ProjectReference Include="..\..\SRH.Libraries\SRH.Sql.ConfigProvider\SRH.Sql.ConfigProvider.csproj" />
+    <ProjectReference Include="..\parsmedeq.client\parsmedeq.client.esproj">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\ParsMedeQ.Contracts\ParsMedeQ.Contracts.csproj" />
+    <ProjectReference Include="..\ParsMedeQ.Infrastructure\ParsMedeQ.Infrastructure.csproj" />
+    <ProjectReference Include="..\ParsMedeQ.Presentation\ParsMedeQ.Presentation.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.SpaProxy"></PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" />
+  </ItemGroup>
+
+</Project>
