@@ -35,7 +35,7 @@ sealed class ResourceListEndpoint : EndpointHandlerBase<
             sender,
             () => ValueTask.FromResult(
                 PrimitiveResult.Success(
-                    new ResourceListQuery(request.LastId)
+                    new ResourceListQuery(request.TableId)
                     {
                         PageIndex = request.PageIndex,
                         PageSize = request.PageSize,

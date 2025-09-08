@@ -36,6 +36,7 @@ internal sealed class ResourceReadRepository : GenericPrimitiveReadRepositoryBas
 
         var query =
             from res in this.DbContext.Resource
+            .Where(res => res.TableId.Equals(tableId))
             .Include(r => r.ResourceTranslations.Where(l => l.LanguageCode == langCode))
             .Include(r => r.ResourceCategory)
             .ThenInclude(r => r.ResourceCategoryTranslations.Where(l => l.LanguageCode == langCode))

@@ -16,7 +16,7 @@ export class AdminLayout extends PureComponent implements OnInit, AfterViewInit 
     {name: 'کاربران', href: 'user', icon: 'view_list'},
     {name: 'محصولات', href: 'product', icon: 'view_list'},
     {name: 'مقالات', href: 'article', icon: 'view_list'},
-    {name: 'اخبار', href: 'notice', icon: 'view_list'},
+    {name: 'اخبار', href: 'news', icon: 'view_list'},
     {name: 'کلیپ ها', href: 'clip', icon: 'view_list'},
     {name: 'نظرات', href: 'comment', icon: 'view_list'},
     {name: 'پرداخت ها', href: 'payment', icon: 'money'},
