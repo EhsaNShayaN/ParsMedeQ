@@ -5,6 +5,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {BaseReportComponent} from '../../../base-report-component';
 import {Resource, ResourceResponse, ResourcesRequest} from '../../../core/models/ResourceResponse';
 import {TranslateService} from '@ngx-translate/core';
+import {Helpers} from '../../../core/helpers';
 
 @Directive()
 export class BaseResourcesComponent extends BaseReportComponent implements OnInit, OnDestroy {
@@ -17,8 +18,7 @@ export class BaseResourcesComponent extends BaseReportComponent implements OnIni
   pageIndex = 1;
   pageSize = 5;
   totalCount = 0;
-
-  ///////////
+  helpers = inject(Helpers);
 
   constructor(tableId: number) {
     super();
@@ -28,7 +28,7 @@ export class BaseResourcesComponent extends BaseReportComponent implements OnIni
   }
 
   ngOnInit() {
-    this.setPaginationLang();
+    this.helpers.setPaginationLang();
     this.getItems();
   }
 
