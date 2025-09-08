@@ -1,4 +1,4 @@
-import {Component, Injector} from '@angular/core';
+import {Component} from '@angular/core';
 import {Tables} from '../../../../../core/constants/server.constants';
 import {BaseResourcesComponent} from '../../base-resources.component';
 
@@ -9,7 +9,7 @@ import {BaseResourcesComponent} from '../../base-resources.component';
   standalone: false
 })
 export class NewsListComponent extends BaseResourcesComponent {
-  displayedColumns: string[] = [/*'row', */'title', 'categoryTitle', 'downloadCount', 'image', 'creationDate', 'actions'];
+  displayedColumns: string[] = [/*'row', */'title', 'resourceCategoryTitle', 'downloadCount', 'image', 'creationDate', 'actions'];
 
   constructor() {
     super(Tables.News);
@@ -17,17 +17,26 @@ export class NewsListComponent extends BaseResourcesComponent {
 
   getColName(column: string) {
     column = column.toLowerCase();
-    if (column === 'categorytitle') {
-      column = 'news_category';
+    if (column === 'title') {
+      column = 'عنوان';
+    }
+    if (column === 'resourcecategorytitle') {
+      column = 'دسته بندی';
     }
     if (column === 'downloadcount') {
-      column = 'download_count';
+      column = 'تعداد دانلود';
     }
     if (column === 'expirationdate') {
-      column = 'expiration_date';
+      column = 'تاریخ انقضا';
+    }
+    if (column === 'image') {
+      column = 'تصویر';
     }
     if (column === 'creationdate') {
-      column = 'published';
+      column = 'تاریخ ایجاد';
+    }
+    if (column === 'actions') {
+      column = 'عملیات';
     }
     return column.toUpperCase();
   }

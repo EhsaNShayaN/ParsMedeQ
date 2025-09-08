@@ -1,4 +1,4 @@
-import {Component, Injector} from '@angular/core';
+import {Component} from '@angular/core';
 import {Tables} from '../../../../../core/constants/server.constants';
 import {BaseCategoriesComponent} from '../../base-categories.component';
 
@@ -17,14 +17,17 @@ export class ClipCategoryListComponent extends BaseCategoriesComponent {
 
   getColName(column: string) {
     column = column.toLowerCase();
-    if (column === 'downloadcount') {
-      column = 'download_count';
+    if (column === 'title') {
+      column = 'عنوان';
     }
-    if (column === 'expirationdate') {
-      column = 'expiration_date';
+    if (column === 'parentid') {
+      column = 'دسته بندی';
     }
     if (column === 'creationdate') {
-      column = 'published';
+      column = 'تاریخ ایجاد';
+    }
+    if (column === 'actions') {
+      column = 'عملیات';
     }
     return column.toUpperCase();
   }

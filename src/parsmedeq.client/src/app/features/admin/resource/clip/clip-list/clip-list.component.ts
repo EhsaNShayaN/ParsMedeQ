@@ -1,4 +1,4 @@
-import {Component, Injector} from '@angular/core';
+import {Component} from '@angular/core';
 import {Tables} from '../../../../../core/constants/server.constants';
 import {BaseResourcesComponent} from '../../base-resources.component';
 
@@ -9,7 +9,7 @@ import {BaseResourcesComponent} from '../../base-resources.component';
   standalone: false
 })
 export class ClipListComponent extends BaseResourcesComponent {
-  displayedColumns: string[] = [/*'row', */'title', 'publishInfo', 'publisher', 'image', 'creationDate', 'actions'];
+  displayedColumns: string[] = [/*'row', */'title', 'resourceCategoryTitle', 'publishInfo', 'publisher', 'image', 'creationDate', 'actions'];
 
   constructor() {
     super(Tables.Clip);
@@ -17,20 +17,26 @@ export class ClipListComponent extends BaseResourcesComponent {
 
   getColName(column: string) {
     column = column.toLowerCase();
+    if (column === 'title') {
+      column = 'عنوان';
+    }
+    if (column === 'resourcecategorytitle') {
+      column = 'دسته بندی';
+    }
     if (column === 'publishinfo') {
-      column = 'PUBLISH_INFO';
+      column = 'اطلاعات چاپ';
     }
     if (column === 'publisher') {
-      column = 'PUBLISHER';
+      column = 'ناشر';
     }
-    if (column === 'downloadcount') {
-      column = 'download_count';
-    }
-    if (column === 'expirationdate') {
-      column = 'expiration_date';
+    if (column === 'image') {
+      column = 'تصویر';
     }
     if (column === 'creationdate') {
-      column = 'published';
+      column = 'تاریخ ایجاد';
+    }
+    if (column === 'actions') {
+      column = 'عملیات';
     }
     return column.toUpperCase();
   }

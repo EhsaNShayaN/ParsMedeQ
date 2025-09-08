@@ -17,17 +17,17 @@ export class NewsCategoryListComponent extends BaseCategoriesComponent {
 
   getColName(column: string) {
     column = column.toLowerCase();
+    if (column === 'title') {
+      column = 'عنوان';
+    }
     if (column === 'parentid') {
-      column = 'news_category';
-    }
-    if (column === 'downloadcount') {
-      column = 'download_count';
-    }
-    if (column === 'expirationdate') {
-      column = 'expiration_date';
+      column = 'دسته بندی';
     }
     if (column === 'creationdate') {
-      column = 'published';
+      column = 'تاریخ ایجاد';
+    }
+    if (column === 'actions') {
+      column = 'عملیات';
     }
     return column.toUpperCase();
   }
