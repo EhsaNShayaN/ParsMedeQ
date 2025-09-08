@@ -36,8 +36,8 @@ sealed class ResourceListQueryHandler : IPrimitiveResultQueryHandler<ResourceLis
         await this._readUnitOfWork.ResourceReadRepository.FilterResources(
             request,
             this._userLangContextAccessor.GetCurrentLang(),
-            request.LastId,
             request.TableId,
+            request.LastId,
             cancellationToken)
         .ConfigureAwait(false);
 }
