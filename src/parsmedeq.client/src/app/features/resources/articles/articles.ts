@@ -1,12 +1,12 @@
 import {Component, DoCheck, OnInit, Injector} from '@angular/core';
-import {BaseComponent} from '../../base-component';
-import {Resource} from '../../core/models/ResourceResponse';
-import {AppSettings, Settings} from '../../app.settings';
-import {Pagination} from '../../core/models/Pagination';
-import {Tree} from '../../core/models/MenusResponse';
-import {ResourceCategory} from '../../core/models/ResourceCategoryResponse';
-import {ResourcesRequest} from '../../core/models/ResourceResponse';
-import {Tables} from '../../core/constants/server.constants';
+import {BaseComponent} from '../../../base-component';
+import {Resource} from '../../../core/models/ResourceResponse';
+import {AppSettings, Settings} from '../../../app.settings';
+import {Pagination} from '../../../core/models/Pagination';
+import {Tree} from '../../../core/models/MenusResponse';
+import {ResourceCategory} from '../../../core/models/ResourceCategoryResponse';
+import {ResourcesRequest} from '../../../core/models/ResourceResponse';
+import {Tables} from '../../../core/constants/server.constants';
 
 @Component({
   selector: 'app-articles',

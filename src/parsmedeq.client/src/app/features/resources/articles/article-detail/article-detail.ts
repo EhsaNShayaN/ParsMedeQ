@@ -1,9 +1,9 @@
 import {Component, HostListener, OnDestroy, OnInit, Injector} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {BaseComponent} from '../../../base-component';
-import {AppSettings, Settings} from '../../../app.settings';
-import {Tables} from '../../../core/constants/server.constants';
-import {Resource} from '../../../core/models/ResourceResponse';
+import {BaseComponent} from '../../../../base-component';
+import {AppSettings, Settings} from '../../../../app.settings';
+import {Tables} from '../../../../core/constants/server.constants';
+import {Resource} from '../../../../core/models/ResourceResponse';
 
 @Component({
   selector: 'app-article',

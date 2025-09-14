@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {ArticlesRoutingModule} from './articles-routing-module';
 import {Articles} from './articles';
 import {ArticleDetail} from './article-detail/article-detail';
-import {SharedModule} from '../../shared/shared-module';
+import {SharedModule} from '../../../shared/shared-module';
 
 
 @NgModule({
