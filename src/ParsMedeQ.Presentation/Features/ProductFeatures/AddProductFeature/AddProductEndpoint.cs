@@ -60,7 +60,6 @@ sealed class AddProductEndpoint : EndpointHandlerBase<
         }
 
         var command = new AddProductCommand(
-             request.TableId,
              request.Title,
              request.Language,
              request.IsVip,

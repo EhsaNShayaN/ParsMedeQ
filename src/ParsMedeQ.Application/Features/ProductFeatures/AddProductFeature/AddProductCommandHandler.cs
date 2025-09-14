@@ -20,7 +20,6 @@ public sealed class AddProductCommandHandler : IPrimitiveResultCommandHandler<Ad
     {
         Media? defaultMedia = null;
         return await Product.Create(
-            request.TableId,
             request.ProductCategoryId,
             request.Language,
             request.PublishDate,
@@ -37,7 +36,7 @@ public sealed class AddProductCommandHandler : IPrimitiveResultCommandHandler<Ad
             .MapIf(
                 data => string.IsNullOrEmpty(data.filePath),
                 data => ValueTask.FromResult(PrimitiveResult.Success((data.Product, data.imagePath, data.filePath, media: defaultMedia))),
-                data => Media.Create(request.TableId, data.filePath, string.Empty)
+                data => Media.Create(Tables.Product.GetHashCode(), data.filePath, string.Empty)
                     .Map(media => _writeUnitOfWork.MediaWriteRepository.AddMedia(media, cancellationToken))
                     .Map(media => this._writeUnitOfWork.SaveChangesAsync(CancellationToken.None)
                         .Map(_ => media))

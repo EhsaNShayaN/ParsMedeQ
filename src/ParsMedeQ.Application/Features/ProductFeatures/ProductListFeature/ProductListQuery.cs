@@ -5,7 +5,7 @@ using Polly.Contrib.DuplicateRequestCollapser;
 using SRH.MediatRMessaging.Queries;
 
 namespace ParsMedeQ.Application.Features.ProductFeatures.ProductListFeature;
-public sealed record ProductListQuery(int TableId) : BasePaginatedQuery, IPrimitiveResultQuery<BasePaginatedApiResponse<ProductListDbQueryResponse>>;
+public sealed record ProductListQuery(int ProductCategoryId) : BasePaginatedQuery, IPrimitiveResultQuery<BasePaginatedApiResponse<ProductListDbQueryResponse>>;
 
 sealed class ProductListQueryHandler : IPrimitiveResultQueryHandler<ProductListQuery, BasePaginatedApiResponse<ProductListDbQueryResponse>>
 {
@@ -36,7 +36,7 @@ sealed class ProductListQueryHandler : IPrimitiveResultQueryHandler<ProductListQ
         await this._readUnitOfWork.ProductReadRepository.FilterProducts(
             request,
             this._userLangContextAccessor.GetCurrentLang(),
-            request.TableId,
+            request.ProductCategoryId,
             request.LastId,
             cancellationToken)
         .ConfigureAwait(false);

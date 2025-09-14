@@ -1,11 +1,10 @@
-import {Component, DoCheck, OnInit, Injector} from '@angular/core';
+import {Component, DoCheck, OnInit} from '@angular/core';
 import {BaseComponent} from '../../../base-component';
-import {Resource} from '../../../core/models/ResourceResponse';
+import {Resource, ResourceResponse, ResourcesRequest} from '../../../core/models/ResourceResponse';
 import {AppSettings, Settings} from '../../../app.settings';
 import {Pagination} from '../../../core/models/Pagination';
-import {Tree} from '../../../core/models/MenusResponse';
-import {ResourceCategory} from '../../../core/models/ResourceCategoryResponse';
-import {ResourcesRequest} from '../../../core/models/ResourceResponse';
+import {createTree, Tree} from '../../../core/models/MenusResponse';
+import {ResourceCategoriesResponse, ResourceCategory} from '../../../core/models/ResourceCategoryResponse';
 import {Tables} from '../../../core/constants/server.constants';
 
 @Component({
@@ -15,7 +14,6 @@ import {Tables} from '../../../core/constants/server.constants';
   standalone: false
 })
 export class Articles extends BaseComponent implements OnInit, DoCheck {
-  viewText = 'VIEW';
   resourceCategories: ResourceCategory[] = [];
   data: Tree[] = [];
   title: string | undefined;
@@ -40,11 +38,11 @@ export class Articles extends BaseComponent implements OnInit, DoCheck {
   }
 
   ngOnInit() {
-    /*this.restClientService.getResourceCategories(Tables.Article).subscribe((acr: ResourceCategoriesResponse) => {
-      this.resourceCategories = acr.resourceCategories;
+    this.restApiService.getResourceCategories(Tables.Article).subscribe((acr: ResourceCategoriesResponse) => {
+      this.resourceCategories = acr.data;
       this.data = createTree(this.resourceCategories);
       this.getItems();
-    });*/
+    });
   }
 
   itemClicked($event: Tree) {
@@ -62,16 +60,16 @@ export class Articles extends BaseComponent implements OnInit, DoCheck {
       pageIndex: this.pagination.page,
       pageSize: this.pagination.perPage,
       sort: this.sort,
-      id: this.selectedId,
+      resourceCategoryId: this.selectedId,
       tableId: Tables.Article,
     };
     this.title = this.resourceCategories.find(s => s.id === this.selectedId)?.title;
-    /*this.restClientService.getResources(model).subscribe((result: ArticleResponse) => {
+    this.restApiService.getResources(model).subscribe((result: ResourceResponse) => {
       if (this.items && this.items.length > 0) {
         this.settings.loadMore.page++;
         this.pagination.page = this.settings.loadMore.page;
       }
-      if (result.data.length == 0) {
+      if (result.data.items.length == 0) {
         this.items = [];
         this.items.length = 0;
         this.pagination = new Pagination(1, this.count, null, 2, 0, 0);
@@ -79,17 +77,17 @@ export class Articles extends BaseComponent implements OnInit, DoCheck {
         return false;
       }
       if (this.items && this.items.length > 0) {
-        this.items = this.items.concat(result.data);
+        this.items = this.items.concat(result.data.items);
       } else {
-        this.items = result.data;
+        this.items = result.data.items;
       }
       this.pagination = {
-        page: result.pageNumber + 1,
-        perPage: result.pageSize,
-        prePage: result.pageNumber - 1 ? result.pageNumber - 1 : null,
-        nextPage: (result.totalPages > result.pageNumber) ? result.pageNumber + 1 : null,
-        total: result.totalCount,
-        totalPages: result.totalPages,
+        page: result.data.pageNumber + 1,
+        perPage: result.data.pageSize,
+        prePage: result.data.pageNumber - 1 ? result.data.pageNumber - 1 : null,
+        nextPage: (result.data.totalPages > result.data.pageNumber) ? result.data.pageNumber + 1 : null,
+        total: result.data.totalCount,
+        totalPages: result.data.totalPages,
       };
       this.message = null;
       if (this.items.length == this.pagination.total) {
@@ -99,7 +97,7 @@ export class Articles extends BaseComponent implements OnInit, DoCheck {
         this.settings.loadMore.complete = false;
       }
       return true;
-    });*/
+    });
   }
 
   public resetLoadMore() {

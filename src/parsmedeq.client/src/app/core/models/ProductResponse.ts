@@ -49,9 +49,7 @@ export class ProductRequest {
 }
 
 export class ProductsRequest extends AlborzPagingRequest {
-  id?: number;
-  tableId?: number;
-  categoryId?: number;
+  productCategoryId?: number;
 }
 
 export interface AddProductRequest {

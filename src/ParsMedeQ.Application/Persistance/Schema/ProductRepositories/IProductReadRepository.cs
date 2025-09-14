@@ -10,7 +10,7 @@ public interface IProductReadRepository : IDomainRepository
     ValueTask<PrimitiveResult<BasePaginatedApiResponse<ProductListDbQueryResponse>>> FilterProducts(
         BasePaginatedQuery paginated,
         string langCode,
-        int tableId,
+        int productCategoryId,
         int lastId,
         CancellationToken cancellationToken);
     ValueTask<PrimitiveResult<ProductCategoryListDbQueryResponse[]>> FilterProductCategories(

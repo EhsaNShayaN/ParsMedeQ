@@ -1,7 +1,6 @@
 ﻿namespace ParsMedeQ.Contracts.ProductContracts.ProductListContract;
 public readonly record struct ProductListApiResponse(
     int Id,
-    int TableId,
     int? ProductCategoryId,
     string ProductCategoryTitle,
     string Title,

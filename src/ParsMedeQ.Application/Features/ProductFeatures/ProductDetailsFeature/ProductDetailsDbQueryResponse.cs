@@ -3,7 +3,6 @@
 public sealed class ProductDetailsDbQueryResponse
 {
     public int Id { get; set; }
-    public int TableId { get; set; }
     public string Title { get; set; } = string.Empty;
     public string Abstract { get; set; } = string.Empty;
     public string Anchors { get; set; } = string.Empty;

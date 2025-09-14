@@ -11,7 +11,6 @@ public sealed class Product : EntityBase<int>
     #endregion
 
     #region " Properties "
-    public int TableId { get; private set; }
     public int ProductCategoryId { get; private set; }
     public string Language { get; private set; } = string.Empty;
     public string PublishDate { get; private set; } = string.Empty;
@@ -44,7 +43,6 @@ public sealed class Product : EntityBase<int>
 
     #region " Factory "
     public static PrimitiveResult<Product> Create(
-        int tableId,
         int ProductCategoryId,
         string language,
         string publishDate,
@@ -56,7 +54,6 @@ public sealed class Product : EntityBase<int>
         DateTime? expirationDate) => PrimitiveResult.Success(
             new Product
             {
-                TableId = tableId,
                 ProductCategoryId = ProductCategoryId,
                 Language = language,
                 PublishDate = publishDate,

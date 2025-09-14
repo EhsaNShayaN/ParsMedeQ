@@ -35,7 +35,7 @@ sealed class ResourceListEndpoint : EndpointHandlerBase<
             sender,
             () => ValueTask.FromResult(
                 PrimitiveResult.Success(
-                    new ResourceListQuery(request.TableId)
+                    new ResourceListQuery(request.TableId, request.ResourceCategoryId)
                     {
                         PageIndex = request.PageIndex,
                         PageSize = request.PageSize,
@@ -53,7 +53,7 @@ sealed class ResourceListApiRequestMapper : IPresentationMapper<
     {
         return ValueTask.FromResult(
             PrimitiveResult.Success(
-                new ResourceListQuery(src.TableId)
+                new ResourceListQuery(src.TableId, src.ResourceCategoryId)
                 {
                     TableId = src.TableId,
                     PageIndex = src.PageIndex,

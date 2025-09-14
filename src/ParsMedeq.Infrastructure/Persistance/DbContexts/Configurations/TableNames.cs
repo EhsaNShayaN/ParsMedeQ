@@ -8,4 +8,3 @@ internal static class TableNames
     internal static string ResourceCategoryTranslation = "ResourceCategoryTranslation";
     internal static string ResourceCategoryRelations = "ResourceCategoryRelations";
 }
-

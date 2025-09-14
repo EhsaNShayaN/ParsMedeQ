@@ -6,7 +6,6 @@ namespace ParsMedeQ.Contracts.ProductContracts.AddProductContract;
 
 public sealed class AddProductApiRequest
 {
-    public int TableId { get; private set; }
     public string Title { get; private set; } = null!;
     public string Language { get; private set; } = string.Empty;
     public bool IsVip { get; private set; }

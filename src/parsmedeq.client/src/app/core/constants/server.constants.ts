@@ -5,7 +5,6 @@ export enum Tables {
   Product0 = 4,
   Payment = 5,
   Order = 6,
-  ProductVariant = 7,
-  Ticket = 8,
-  TicketAnswers = 9,
+  Ticket = 7,
+  TicketAnswers = 8,
 }

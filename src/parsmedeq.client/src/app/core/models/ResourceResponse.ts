@@ -50,9 +50,9 @@ export class ResourceRequest {
 }
 
 export class ResourcesRequest extends AlborzPagingRequest {
-  id?: number;
+  //id?: number;
   tableId?: number;
-  categoryId?: number;
+  resourceCategoryId?: number;
 }
 
 export interface AddResourceRequest {

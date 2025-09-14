@@ -62,7 +62,6 @@ sealed class ProductDetailsApiResponseMapper : IPresentationMapper<
             PrimitiveResult.Success(
                     new ProductDetailsApiResponse(
                         src.Id,
-                        src.TableId,
                         src.ProductCategoryId,
                         src.ProductCategoryTitle,
                         src.Title,

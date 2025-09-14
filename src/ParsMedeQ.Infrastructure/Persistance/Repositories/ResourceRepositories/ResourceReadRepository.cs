@@ -16,6 +16,7 @@ internal sealed class ResourceReadRepository : GenericPrimitiveReadRepositoryBas
         BasePaginatedQuery paginated,
         string langCode,
         int tableId,
+        int resourceCategoryId,
         int lastId,
         CancellationToken cancellationToken)
     {
@@ -40,7 +41,7 @@ internal sealed class ResourceReadRepository : GenericPrimitiveReadRepositoryBas
             .Include(r => r.ResourceTranslations.Where(l => l.LanguageCode == langCode))
             .Include(r => r.ResourceCategory)
             .ThenInclude(r => r.ResourceCategoryTranslations.Where(l => l.LanguageCode == langCode))
-            where res.Deleted == false
+            where res.Deleted == false && (resourceCategoryId == 0 || res.ResourceCategoryId.Equals(resourceCategoryId))
             select new ResourceListDbQueryResponse
             {
                 Id = res.Id,

@@ -14,7 +14,7 @@ internal sealed class ProductReadRepository : GenericPrimitiveReadRepositoryBase
     public ValueTask<PrimitiveResult<BasePaginatedApiResponse<ProductListDbQueryResponse>>> FilterProducts(
         BasePaginatedQuery paginated,
         string langCode,
-        int tableId,
+        int productCategoryId,
         int lastId,
         CancellationToken cancellationToken)
     {
@@ -35,7 +35,7 @@ internal sealed class ProductReadRepository : GenericPrimitiveReadRepositoryBase
 
         var query =
             from res in this.DbContext.Product
-            .Where(res => res.TableId.Equals(tableId))
+            .Where(res => res.ProductCategoryId.Equals(productCategoryId))
             .Include(r => r.ProductTranslations.Where(l => l.LanguageCode == langCode))
             .Include(r => r.ProductCategory)
             .ThenInclude(r => r.ProductCategoryTranslations.Where(l => l.LanguageCode == langCode))
@@ -43,7 +43,6 @@ internal sealed class ProductReadRepository : GenericPrimitiveReadRepositoryBase
             select new ProductListDbQueryResponse
             {
                 Id = res.Id,
-                TableId = res.TableId,
                 Title = res.ProductTranslations.SingleOrDefault(s => s.LanguageCode == langCode).Title ?? string.Empty,
                 ProductCategoryId = res.ProductCategoryId,
                 ProductCategoryTitle = res.ProductCategory.ProductCategoryTranslations.SingleOrDefault(s => s.LanguageCode == langCode).Title ?? string.Empty,
@@ -124,7 +123,6 @@ internal sealed class ProductReadRepository : GenericPrimitiveReadRepositoryBase
             .Map(res => new ProductDetailsDbQueryResponse
             {
                 Id = res.Product.Id,
-                TableId = res.Product.TableId,
                 Title = res.ProductTranslation?.Title ?? string.Empty,
                 Description = res.ProductTranslation?.Description ?? string.Empty,
                 Abstract = res.ProductTranslation?.Abstract ?? string.Empty,

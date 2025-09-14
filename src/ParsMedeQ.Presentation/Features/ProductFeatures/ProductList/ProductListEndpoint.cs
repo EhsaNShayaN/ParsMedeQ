@@ -35,7 +35,7 @@ sealed class ProductListEndpoint : EndpointHandlerBase<
             sender,
             () => ValueTask.FromResult(
                 PrimitiveResult.Success(
-                    new ProductListQuery(request.TableId)
+                    new ProductListQuery(request.ProductCategoryId)
                     {
                         PageIndex = request.PageIndex,
                         PageSize = request.PageSize,
@@ -53,9 +53,8 @@ sealed class ProductListApiRequestMapper : IPresentationMapper<
     {
         return ValueTask.FromResult(
             PrimitiveResult.Success(
-                new ProductListQuery(src.TableId)
+                new ProductListQuery(src.ProductCategoryId)
                 {
-                    TableId = src.TableId,
                     PageIndex = src.PageIndex,
                     PageSize = src.PageSize,
                     LastId = src.LastId,
@@ -75,7 +74,6 @@ sealed class ProductListApiResponseMapper : IPresentationMapper<
                     new BasePaginatedApiResponse<ProductListApiResponse>(src.Items.Select(data =>
                     new ProductListApiResponse(
                         data.Id,
-                        data.TableId,
                         data.ProductCategoryId,
                         data.ProductCategoryTitle,
                         data.Title,

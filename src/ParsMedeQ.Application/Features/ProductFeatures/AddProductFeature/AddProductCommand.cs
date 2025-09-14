@@ -4,7 +4,6 @@ namespace ParsMedeQ.Application.Features.ProductFeatures.AddProductFeature;
 
 public sealed record class AddProductCommand
 (
-    int TableId,
     string Title,
     string Language,
     bool IsVip,

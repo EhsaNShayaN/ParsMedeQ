@@ -1,12 +1,10 @@
-import {Component, DoCheck, OnInit, Injector} from '@angular/core';
+import {Component, DoCheck, OnInit} from '@angular/core';
 import {BaseComponent} from '../../base-component';
-import {Product} from '../../core/models/ProductResponse';
+import {Product, ProductResponse, ProductsRequest} from '../../core/models/ProductResponse';
 import {AppSettings, Settings} from '../../app.settings';
 import {Pagination} from '../../core/models/Pagination';
-import {Tree} from '../../core/models/MenusResponse';
-import {ProductCategory} from '../../core/models/ProductCategoryResponse';
-import {ProductsRequest} from '../../core/models/ProductResponse';
-import {Tables} from '../../core/constants/server.constants';
+import {createTree, Tree} from '../../core/models/MenusResponse';
+import {ProductCategoriesResponse, ProductCategory} from '../../core/models/ProductCategoryResponse';
 
 @Component({
   selector: 'app-products',
@@ -15,7 +13,6 @@ import {Tables} from '../../core/constants/server.constants';
   standalone: false
 })
 export class Products extends BaseComponent implements OnInit, DoCheck {
-  viewText = 'VIEW';
   productCategories: ProductCategory[] = [];
   data: Tree[] = [];
   title: string | undefined;
@@ -40,11 +37,11 @@ export class Products extends BaseComponent implements OnInit, DoCheck {
   }
 
   ngOnInit() {
-    /*this.restClientService.getProductCategories(Tables.Product).subscribe((acr: ProductCategoriesResponse) => {
-      this.productCategories = acr.productCategories;
+    this.restApiService.getProductCategories().subscribe((acr: ProductCategoriesResponse) => {
+      this.productCategories = acr.data;
       this.data = createTree(this.productCategories);
       this.getItems();
-    });*/
+    });
   }
 
   itemClicked($event: Tree) {
@@ -62,15 +59,15 @@ export class Products extends BaseComponent implements OnInit, DoCheck {
       pageIndex: this.pagination.page,
       pageSize: this.pagination.perPage,
       sort: this.sort,
-      id: this.selectedId
+      productCategoryId: this.selectedId,
     };
     this.title = this.productCategories.find(s => s.id === this.selectedId)?.title;
-    /*this.restClientService.getProducts(model).subscribe((result: ProductResponse) => {
+    this.restApiService.getProducts(model).subscribe((result: ProductResponse) => {
       if (this.items && this.items.length > 0) {
         this.settings.loadMore.page++;
         this.pagination.page = this.settings.loadMore.page;
       }
-      if (result.data.length == 0) {
+      if (result.data.items.length == 0) {
         this.items = [];
         this.items.length = 0;
         this.pagination = new Pagination(1, this.count, null, 2, 0, 0);
@@ -78,17 +75,17 @@ export class Products extends BaseComponent implements OnInit, DoCheck {
         return false;
       }
       if (this.items && this.items.length > 0) {
-        this.items = this.items.concat(result.data);
+        this.items = this.items.concat(result.data.items);
       } else {
-        this.items = result.data;
+        this.items = result.data.items;
       }
       this.pagination = {
-        page: result.pageNumber + 1,
-        perPage: result.pageSize,
-        prePage: result.pageNumber - 1 ? result.pageNumber - 1 : null,
-        nextPage: (result.totalPages > result.pageNumber) ? result.pageNumber + 1 : null,
-        total: result.totalCount,
-        totalPages: result.totalPages,
+        page: result.data.pageNumber + 1,
+        perPage: result.data.pageSize,
+        prePage: result.data.pageNumber - 1 ? result.data.pageNumber - 1 : null,
+        nextPage: (result.data.totalPages > result.data.pageNumber) ? result.data.pageNumber + 1 : null,
+        total: result.data.totalCount,
+        totalPages: result.data.totalPages,
       };
       this.message = null;
       if (this.items.length == this.pagination.total) {
@@ -98,7 +95,7 @@ export class Products extends BaseComponent implements OnInit, DoCheck {
         this.settings.loadMore.complete = false;
       }
       return true;
-    });*/
+    });
   }
 
   public resetLoadMore() {

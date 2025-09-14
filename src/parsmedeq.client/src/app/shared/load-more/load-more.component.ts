@@ -4,7 +4,7 @@ import {Settings, AppSettings} from '../../app.settings';
 @Component({
   selector: 'app-load-more',
   templateUrl: './load-more.component.html',
-  styleUrls: ['./load-more.component.scss'],
+  styleUrl: './load-more.component.scss',
   standalone: false
 })
 export class LoadMoreComponent implements OnInit {
