@@ -4,12 +4,11 @@ import {AdminRoutingModule} from './admin-routing-module';
 import {Admin} from './admin';
 import {Dashboard} from './dashboard/dashboard';
 import {Users} from './users/users';
-import {Products} from './products/products';
 import {SharedModule} from '../../shared/shared-module';
 import {ArticleComponent} from './resource/article/article.component';
 import {ArticleListComponent} from './resource/article/article-list/article-list.component';
-import { ArticleAddComponent } from './resource/article/article-add/article-add.component';
-import { ArticleCategoryListComponent } from './resource/article/article-category-list/article-category-list.component';
+import {ArticleAddComponent} from './resource/article/article-add/article-add.component';
+import {ArticleCategoryListComponent} from './resource/article/article-category-list/article-category-list.component';
 import {ArticleCategoryAddComponent} from './resource/article/article-category-add/article-category-add.component';
 import {NewsComponent} from './resource/news/news.component';
 import {NewsListComponent} from './resource/news/news-list/news-list.component';
@@ -30,13 +29,17 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatOption, MatSelect} from '@angular/material/select';
 import {MatError} from '@angular/material/form-field';
 import {MatSlideToggle} from '@angular/material/slide-toggle';
+import {ProductComponent} from './product/product.component';
+import {ProductListComponent} from './product/product-list/product-list.component';
+import { ProductAddComponent } from './product/product-add/product-add.component';
+import {ProductCategoryListComponent} from './product/product-category-list/product-category-list.component';
+import {ProductCategoryAddComponent} from './product/product-category-add/product-category-add.component';
 
 @NgModule({
   declarations: [
     Admin,
     Dashboard,
     Users,
-    Products,
 
     ArticleComponent,
     ArticleListComponent,
@@ -55,6 +58,12 @@ import {MatSlideToggle} from '@angular/material/slide-toggle';
     ClipAddComponent,
     ClipCategoryListComponent,
     ClipCategoryAddComponent,
+
+    ProductComponent,
+    ProductListComponent,
+    ProductAddComponent,
+    ProductCategoryListComponent,
+    ProductCategoryAddComponent,
   ],
   imports: [
     CommonModule,

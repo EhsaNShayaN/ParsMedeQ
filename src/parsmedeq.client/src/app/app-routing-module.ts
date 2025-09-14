@@ -12,12 +12,13 @@ const pagesChildren: Routes = [
       {path: '', loadChildren: () => import('./features/home/home-module').then(m => m.HomeModule)},
       {path: 'home', loadChildren: () => import('./features/home/home-module').then(m => m.HomeModule)},
       {path: 'about', loadChildren: () => import('./features/about/about-module').then(m => m.AboutModule)},
-      //{path: 'articles', loadChildren: () => import('./features/articles/articles-module').then(m => m.ArticlesModule)},
+      {path: 'articles', loadChildren: () => import('./features/articles/articles-module').then(m => m.ArticlesModule)},
+      {path: 'news', loadChildren: () => import('./features/news/news-module').then(m => m.NewsModule)},
+      //{path: 'clips', loadChildren: () => import('./features/clips/clips-module').then(m => m.ClipsModule)},
+      //{path: 'products', loadChildren: () => import('./features/products/products-module').then(m => m.ProductsModule)},
       {path: 'auth', loadChildren: () => import('./features/auth/auth-module').then(m => m.AuthModule)},
       {path: 'contact', loadChildren: () => import('./features/contact/contact-module').then(m => m.ContactModule)},
       {path: 'faq', loadChildren: () => import('./features/faq/faq-module').then(m => m.FaqModule)},
-      //{path: 'news', loadChildren: () => import('./features/news/news-module').then(m => m.NewsModule)},
-      {path: 'products', loadChildren: () => import('./features/products/products-module').then(m => m.ProductsModule)},
     ]
   },
   // پنل کاربر

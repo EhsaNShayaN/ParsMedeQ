@@ -1,0 +1,111 @@
+@use '../../../theme/styles/variables' as *;
+
+.mat-mdc-card {
+  .anchor-fix {
+    position: fixed;
+    z-index: 3;
+    width: 100%;
+    left: 0;
+    right: 0;
+
+    &.top {
+      top: 80px;
+      padding: 20px 0;
+    }
+
+    .single-line {
+      line-height: 2.5em;
+      height: 2.5em;
+    }
+  }
+
+  .mr {
+    margin-top: 84px;
+  }
+
+  .agent-wrapper {
+    img {
+      border-radius: 4px;
+    }
+
+    .listed-count {
+      font-weight: 600;
+      min-width: 24px;
+    }
+  }
+
+  .property-status {
+    position: absolute;
+    z-index: 2;
+
+    span {
+      padding: 3px 6px;
+      margin: 0;
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      border-radius: 4px;
+      /*background-color: #ffa000;
+      color: #fff;*/
+    }
+  }
+}
+
+.hover:hover {
+  color: $primary;
+}
+
+.wh-100 {
+  width: 100px;
+  height: 100px;
+}
+
+.left-0 {
+  left: 0;
+}
+
+.red-color {
+  border-left: solid 2px $gray-light;
+  font-size: 18px;
+  /*margin-right: 8px;*/
+
+  &:last-child {
+    border-left: none;
+  }
+}
+
+/**********************/
+
+.tab-wrapper {
+  //margin-top: -40px;
+  background: #f4f4f4;
+}
+
+.tab-item {
+  &.active {
+    border-bottom: solid 2px $primary;
+  }
+}
+
+.fix-tabs {
+  position: fixed;
+  top: $main-toolbar-height-mobile;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  max-width: 1300px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: $silver;
+  box-shadow: rgba(55, 55, 55, 0.06) 0 0 24px 24px;
+}
+
+.content {
+  padding: 15px !important;
+  margin: 0 !important;
+
+  h1 {
+    font-size: 16px;
+  }
+}

@@ -16,6 +16,11 @@ import {ClipListComponent} from './resource/clip/clip-list/clip-list.component';
 import {ClipAddComponent} from './resource/clip/clip-add/clip-add.component';
 import {ClipCategoryListComponent} from './resource/clip/clip-category-list/clip-category-list.component';
 import {ClipCategoryAddComponent} from './resource/clip/clip-category-add/clip-category-add.component';
+import {ProductComponent} from './product/product.component';
+import {ProductListComponent} from './product/product-list/product-list.component';
+import {ProductAddComponent} from './product/product-add/product-add.component';
+import {ProductCategoryListComponent} from './product/product-category-list/product-category-list.component';
+import {ProductCategoryAddComponent} from './product/product-category-add/product-category-add.component';
 
 const routes: Routes = [
   {path: '', component: Admin},
@@ -43,6 +48,14 @@ const routes: Routes = [
   {path: 'clip/category/list', component: ClipCategoryListComponent},
   {path: 'clip/category/add', component: ClipCategoryAddComponent},
   {path: 'clip/category/edit/:id', component: ClipCategoryAddComponent},
+
+  {path: 'product', component: ProductComponent},
+  {path: 'product/list', component: ProductListComponent},
+  {path: 'product/add', component: ProductAddComponent},
+  {path: 'product/edit/:id', component: ProductAddComponent},
+  {path: 'product/category/list', component: ProductCategoryListComponent},
+  {path: 'product/category/add', component: ProductCategoryAddComponent},
+  {path: 'product/category/edit/:id', component: ProductCategoryAddComponent},
 ];
 
 @NgModule({

@@ -4,9 +4,11 @@ import {map, Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {endpoint} from './services/cookie-utils';
 import {AddResourceRequest, Resource, ResourceRequest, ResourceResponse, ResourcesRequest} from './models/ResourceResponse';
-import {AddResult, BaseResult} from './models/BaseResult';
+import {BaseResult} from './models/BaseResult';
 import {ResourceCategoriesResponse} from './models/ResourceCategoryResponse';
 import {AuthService} from './services/auth.service';
+import {ProductCategoriesResponse} from './models/ProductCategoryResponse';
+import {AddProductRequest, Product, ProductRequest, ProductResponse, ProductsRequest} from './models/ProductResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -49,6 +51,45 @@ export class RestApiService {
     formData.append('file', file);
     //formData.append('model', JSON.stringify(model));
     return this.http.post<BaseResult<boolean>>(`${endpoint()}resource/${model.id ? 'edit' : 'add'}`, formData).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  ////////////////////////
+
+  getProductCategories(): Observable<any> {
+    return this.http.get<ProductCategoriesResponse>(`${endpoint()}product/category/list`,).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getProduct(model: ProductRequest): Observable<any> {
+    const query = this.modelToQuery(model);
+    return this.http.get<BaseResult<Product>>(`${endpoint()}product/details?${query}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getProducts(model: ProductsRequest): Observable<any> {
+    const query = this.modelToQuery(model);
+    return this.http.get<ProductResponse>(`${endpoint()}product/list?${query}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  addProductCategory(model: any): Observable<any> {
+    return this.http.post<BaseResult<boolean>>(`${endpoint()}product/category/${model.id ? 'edit' : 'add'}`, model).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  addProduct(model: AddProductRequest, image: any = null, file: any = null): Observable<any> {
+    const formData: FormData = this.toFormData(model);
+    //const formData: FormData = new FormData();
+    formData.append('image', image);
+    formData.append('file', file);
+    //formData.append('model', JSON.stringify(model));
+    return this.http.post<BaseResult<boolean>>(`${endpoint()}product/${model.id ? 'edit' : 'add'}`, formData).pipe(
       catchError(this.handleError)
     );
   }
