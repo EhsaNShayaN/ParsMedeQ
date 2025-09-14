@@ -1,4 +1,5 @@
 ﻿using ParsMedeQ.Application.Persistance.Schema.MediaRepositories;
+using ParsMedeQ.Application.Persistance.Schema.ProductRepositories;
 using ParsMedeQ.Application.Persistance.Schema.PurchaseRepositories;
 using ParsMedeQ.Application.Persistance.Schema.ResourceRepositories;
 using ParsMedeQ.Application.Persistance.Schema.UserRepositories;
@@ -9,6 +10,7 @@ public interface IReadUnitOfWork : IUnitOfWork
 {
     IUserReadRepository UserReadRepository { get; }
     IResourceReadRepository ResourceReadRepository { get; }
+    IProductReadRepository ProductReadRepository { get; }
     IMediaReadRepository MediaReadRepository { get; }
     IPurchaseReadRepository PurchaseReadRepository { get; }
 }

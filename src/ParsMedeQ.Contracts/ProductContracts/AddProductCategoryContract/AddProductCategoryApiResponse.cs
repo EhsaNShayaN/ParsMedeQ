@@ -1,0 +1,2 @@
+﻿namespace ParsMedeQ.Contracts.ProductContracts.AddProductCategoryContract;
+public readonly record struct AddProductCategoryApiResponse(bool Changed);

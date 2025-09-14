@@ -1,0 +1,2 @@
+﻿namespace ParsMedeQ.Application.Features.ProductFeatures.UpdateProductCategoryFeature;
+public sealed record UpdateProductCategoryCommandResponse(bool Changed);

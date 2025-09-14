@@ -1,4 +1,6 @@
 ﻿using ParsMedeQ.Domain.Aggregates.MediaAggregate;
+using ParsMedeQ.Domain.Aggregates.ProductAggregate;
+using ParsMedeQ.Domain.Aggregates.ProductCategoryAggregate;
 using ParsMedeQ.Domain.Aggregates.PurchaseAggregate;
 using ParsMedeQ.Domain.Aggregates.ResourceAggregate;
 using ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate;
@@ -14,6 +16,8 @@ public sealed class WriteDbContext : DbContextBase<WriteDbContext>
     public DbSet<ResourceCategoryTranslation> ResourceCategoryTranslation { get; set; }
     public DbSet<ResourceCategoryRelations> ResourceCategoryRelations { get; set; }
     public DbSet<Resource> Resource { get; set; }
+    public DbSet<Product> Product { get; set; }
+    public DbSet<ProductCategory> ProductCategory { get; set; }
     public DbSet<Purchase> Purchase { get; set; }
     public DbSet<Media> Media { get; set; }
 
