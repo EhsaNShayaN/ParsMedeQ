@@ -1,0 +1,16 @@
+﻿namespace ParsMedeQ.Contracts.ProductContracts.ProductListContract;
+public readonly record struct ProductListApiResponse(
+    int Id,
+    int TableId,
+    int? ProductCategoryId,
+    string ProductCategoryTitle,
+    string Title,
+    string Image,
+    string Language,
+    int? Price,
+    int? Discount,
+    bool IsVip,
+    int DownloadCount,
+    int? Ordinal,
+    bool Expired,
+    string CreationDate);

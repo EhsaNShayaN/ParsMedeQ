@@ -1,13 +1,17 @@
 ﻿using ParsMedeQ.Application.Features.ProductFeatures.ProductCategoryListFeature;
+using ParsMedeQ.Application.Features.ProductFeatures.ProductDetailsFeature;
+using ParsMedeQ.Application.Features.ProductFeatures.ProductListFeature;
+using ParsMedeQ.Application.Helpers;
 using ParsMedeQ.Application.Persistance.Schema.ProductRepositories;
 using ParsMedeQ.Infrastructure.Persistance.DbContexts;
 using SRH.Persistance.Extensions;
+using SRH.Persistance.Models;
 
 namespace ParsMedeQ.Infrastructure.Persistance.Repositories.ProductRepositories;
 internal sealed class ProductReadRepository : GenericPrimitiveReadRepositoryBase<ReadDbContext>, IProductReadRepository
 {
     public ProductReadRepository(ReadDbContext dbContext) : base(dbContext) { }
-    /*public ValueTask<PrimitiveResult<BasePaginatedApiResponse<ProductListDbQueryResponse>>> FilterProducts(
+    public ValueTask<PrimitiveResult<BasePaginatedApiResponse<ProductListDbQueryResponse>>> FilterProducts(
         BasePaginatedQuery paginated,
         string langCode,
         int tableId,
@@ -70,7 +74,7 @@ internal sealed class ProductReadRepository : GenericPrimitiveReadRepositoryBase
             PaginateOrder.DESC,
             cancellationToken)
             .Map(data => MapResult(data, paginated));
-    }*/
+    }
 
     public ValueTask<PrimitiveResult<ProductCategoryListDbQueryResponse[]>> FilterProductCategories(
         string langCode,
@@ -91,7 +95,7 @@ internal sealed class ProductReadRepository : GenericPrimitiveReadRepositoryBase
         return q.Run(q => q.ToArrayAsync(cancellationToken), PrimitiveError.Create("", "آیتمی با شناسه مورد نظر پیدا نشد"));
     }
 
-    /*public ValueTask<PrimitiveResult<ProductDetailsDbQueryResponse>> ProductDetails(
+    public ValueTask<PrimitiveResult<ProductDetailsDbQueryResponse>> ProductDetails(
         string langCode,
         int UserId,
         int ProductId,
@@ -143,15 +147,15 @@ internal sealed class ProductReadRepository : GenericPrimitiveReadRepositoryBase
                 Disabled = res.Product.Disabled,
                 ExpirationDate = res.Product.ExpirationDate,
                 CreationDate = res.Product.CreationDate,
-                Registered = res.Product.Registered,
-                *//*ProductCategories = (
+                Registered = res.Product.Registered/*,
+                ProductCategories = (
                     from rel in this.DbContext.ProductCategoryRelations
                     join cat in this.DbContext.ProductCategory on rel.ProductCategoryId equals cat.Id
                     where rel.Id == res.Product.Id
                     select new ProductCategoryDbQueryResponse(cat.Id, string.Empty)
-                ).ToArray()*//*
+                ).ToArray()*/
             });
-    }*/
+    }
 
     public ValueTask<PrimitiveResult<ProductCategoryListDbQueryResponse>> ProductCategoryDetails(
         string langCode,
