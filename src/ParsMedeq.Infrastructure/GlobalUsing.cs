@@ -5,8 +5,6 @@ global using Microsoft.EntityFrameworkCore.Metadata.Builders;
 global using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 global using Microsoft.Extensions.DependencyInjection;
 global using ParsMedeQ.Domain.Aggregates.OutboxMessageEntity;
-global using ParsMedeQ.Domain.Aggregates.ProductAggregate;
-global using ParsMedeQ.Domain.Aggregates.ProductCategoryAggregate;
 global using ParsMedeQ.Domain.Aggregates.UserAggregate.UserEntity;
 global using SRH.Persistance.Repositories.Read;
 global using SRH.PrimitiveTypes.Result;

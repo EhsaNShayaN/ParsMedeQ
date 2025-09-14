@@ -1,6 +1,0 @@
-<h2>محصولات ما</h2>
-<mat-card *ngFor="let product of products" class="mb-3">
-  <mat-card-title>{{ product.title }}</mat-card-title>
-  <mat-card-content>{{ product.shortDescription }}</mat-card-content>
-  <button mat-button color="primary" [routerLink]="['/products', product.id]">مشاهده جزئیات</button>
-</mat-card>

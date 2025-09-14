@@ -7,7 +7,6 @@ public static class Endpoints
 {
     public readonly static UserEndpoint User = new();
     public readonly static ResourceEndpoint Resource = new();
-    public readonly static ProductEndpoint Product = new();
 }
 public static class EndpointMetadata
 {
@@ -16,6 +15,5 @@ public static class EndpointMetadata
 
     public readonly static ApiEndpointItem User = new("user", V1);
     public readonly static ApiEndpointItem Resource = new("resource", V1);
-    public readonly static ApiEndpointItem Product = new("product", V1);
     public readonly static ApiEndpointItem Admin = new("admin", V1);
 }
