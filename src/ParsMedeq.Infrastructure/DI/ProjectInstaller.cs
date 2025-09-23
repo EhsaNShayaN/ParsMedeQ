@@ -12,12 +12,14 @@ using ParsMedeQ.Application.Persistance;
 using ParsMedeQ.Application.Services.EmailSenderService;
 using ParsMedeQ.Application.Services.OTP;
 using ParsMedeQ.Application.Services.SmsSenderService;
+using ParsMedeQ.Application.Services.UserAuthenticationServices;
 using ParsMedeQ.Domain.Persistance;
 using ParsMedeQ.Infrastructure.Helpers;
 using ParsMedeQ.Infrastructure.Persistance.DbContexts;
 using ParsMedeQ.Infrastructure.Services.EmailSenderService;
 using ParsMedeQ.Infrastructure.Services.OTP;
 using ParsMedeQ.Infrastructure.Services.SmsSenderService;
+using ParsMedeQ.Infrastructure.Services.UserAuthenticationToken;
 using Polly;
 using System.Net;
 using System.Net.Mail;
@@ -43,12 +45,21 @@ internal sealed class ProjectInstaller : IServiceInstaller
             .InstallOTPService()
             .InstallHealthChecks(config)
             .InstallOpenTelemtryTracingAndMetrics(config)
-            .InstallFileService();
+            .InstallFileService()
+            .InstallUserAuthenticationTokenService(config);
 }
 static class ServiceCollectionExtension
 {
     const string Default_Db_ConfigName = "Default";
     const string Db_ConfigName = "ParsMedeQ";
+
+    internal static IServiceCollection InstallUserAuthenticationTokenService(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.Configure<UserAuthenticationTokenServiceOptions>(configuration.GetSection("Jwt"));
+        services.TryAddSingleton<IUserAuthenticationTokenService, UserAuthenticationTokenService>();
+
+        return services;
+    }
 
     internal static IServiceCollection InstallDomainServices(this IServiceCollection services, Assembly[]? dependantAssemblies)
     {

@@ -31,6 +31,7 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {BidiModule} from '@angular/cdk/bidi';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {AuthGuard} from './core/guards/auth.guard';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -92,6 +93,7 @@ export function tokenGetter() {
     provideBrowserGlobalErrorListeners(),
     provideHttpClient(),
     AppSettings,
+    AuthGuard,
     {provide: APP_INITIALIZER, useFactory: urlInitFactory, deps: [UrlInitService], multi: true},
     {provide: UrlSerializer, useClass: LowerCaseUrlSerializer},
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

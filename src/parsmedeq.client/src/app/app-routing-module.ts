@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {UserLayout} from './shared/layouts/user-layout/user-layout';
 import {AdminLayout} from './shared/layouts/admin-layout/admin-layout';
 import {Pages} from './features/pages';
+import {AuthGuard} from './core/guards/auth.guard';
 
 const pagesChildren: Routes = [
 // صفحات عمومی
@@ -27,7 +28,8 @@ const pagesChildren: Routes = [
     component: UserLayout,
     children: [
       {path: '', loadChildren: () => import('./features/user-panel/user-panel-module').then(m => m.UserPanelModule)}
-    ]
+    ],
+    canActivate: [AuthGuard]
   },
   // پنل مدیریت
   {
@@ -35,7 +37,8 @@ const pagesChildren: Routes = [
     component: AdminLayout,
     children: [
       {path: '', loadChildren: () => import('./features/admin/admin-module').then(m => m.AdminModule)}
-    ]
+    ],
+    canActivate: [AuthGuard]
   },
   // مسیر پیش‌فرض
 ];
