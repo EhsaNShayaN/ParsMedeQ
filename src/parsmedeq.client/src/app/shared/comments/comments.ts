@@ -1,4 +1,4 @@
-import {Component, DoCheck, Injector, Input, OnInit} from '@angular/core';
+import {Component, DoCheck, Input, OnInit} from '@angular/core';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {mobileValidator} from '../../core/utils/app-validators';
 import {Pagination} from '../../core/models/Pagination';
@@ -20,11 +20,11 @@ export class Comments extends PureComponent implements OnInit, DoCheck {
   @Input() tableId: number = 0;
   public commentForm!: UntypedFormGroup;
   public ratings = [
-    {title: 'Very Dissatisfied', icon: 'sentiment_very_dissatisfied', percentage: 20, selected: false},
-    {title: 'Dissatisfied', icon: 'sentiment_dissatisfied', percentage: 40, selected: false},
-    {title: 'Neutral', icon: 'sentiment_neutral', percentage: 60, selected: false},
-    {title: 'Satisfied', icon: 'sentiment_satisfied', percentage: 80, selected: false},
-    {title: 'Very Satisfied', icon: 'sentiment_very_satisfied', percentage: 100, selected: false}
+    {id: 1, title: 'Very Dissatisfied', icon: 'sentiment_very_dissatisfied', percentage: 20, selected: false},
+    {id: 2, title: 'Dissatisfied', icon: 'sentiment_dissatisfied', percentage: 40, selected: false},
+    {id: 3, title: 'Neutral', icon: 'sentiment_neutral', percentage: 60, selected: false},
+    {id: 4, title: 'Satisfied', icon: 'sentiment_satisfied', percentage: 80, selected: false},
+    {id: 5, title: 'Very Satisfied', icon: 'sentiment_very_satisfied', percentage: 100, selected: false}
   ];
   public settings: Settings;
   public items: Comment[] = [];

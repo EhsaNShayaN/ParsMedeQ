@@ -9,5 +9,10 @@
     "EN": "انگلیسی"
   },
   "LOGIN": "ورود",
-  "LOGOUT": "خروج"
+  "LOGOUT": "خروج",
+  "MOBILE": "موبایل",
+  "IS_REQUIRED": "الزامی است.",
+  "IS_INVALID": "نامعتبر است.",
+  "COMMENTS": "نظرات",
+  "COMMENT_TEXT": "متن نظر"
 }

@@ -9,5 +9,10 @@
     "EN": "English"
   },
   "LOGIN": "Login",
-  "LOGOUT": "Logout"
+  "LOGOUT": "Logout",
+  "MOBILE": "Mobile",
+  "IS_REQUIRED": "Is Required",
+  "IS_INVALID": "Invalid",
+  "COMMENTS": "Comments",
+  "COMMENT_TEXT": "Text of comment"
 }

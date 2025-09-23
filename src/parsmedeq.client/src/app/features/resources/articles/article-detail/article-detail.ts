@@ -1,4 +1,4 @@
-import {Component, HostListener, OnDestroy, OnInit, Injector} from '@angular/core';
+import {AfterViewInit, Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {BaseComponent} from '../../../../base-component';
 import {AppSettings, Settings} from '../../../../app.settings';
@@ -11,7 +11,7 @@ import {Resource} from '../../../../core/models/ResourceResponse';
   styleUrl: './article-detail.scss',
   standalone: false
 })
-export class ArticleDetail extends BaseComponent implements OnInit, OnDestroy {
+export class ArticleDetail extends BaseComponent implements OnInit, AfterViewInit, OnDestroy {
   private sub: any;
   public item: Resource | undefined;
   public message: string | undefined;
@@ -45,19 +45,17 @@ export class ArticleDetail extends BaseComponent implements OnInit, OnDestroy {
 
   ngAfterViewInit(): void {
     this.sub = this.activatedRoute.params.subscribe(params => {
-      const title = Number(params['id']).toString() === params['id'] ? Number(params['id']) : null;
-      const id = !!title ? null : params['id'];
-      this.getArticleById(id, title);
+      this.getArticleById(params['id']);
     });
   }
 
-  public getArticleById(id: string, secondId: number | null) {
-    /*this.restClientService.getResource({id, secondId, tableId: this.Tables.Thesis}).subscribe((d: Article) => {
+  public getArticleById(id: number) {
+    this.restApiService.getResource({id, tableId: Tables.Article}).subscribe((d: Resource) => {
       this.item = d;
       this.setTitle(this.item.title);
       this.setMetaDescription(this.item.abstract);
       this.ltr = this.item.language === 'انگلیسی' ? 'ltr' : '';
-    });*/
+    });
   }
 
   scrollToItem(str: string) {

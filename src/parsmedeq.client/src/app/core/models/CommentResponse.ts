@@ -6,7 +6,7 @@ export interface CommentResponse {
 }
 
 export interface Comment {
-  id: string;
+  id: number;
   icon: string;
   description: string;
   relatedId: string;
@@ -16,5 +16,5 @@ export interface Comment {
   answers: string[];
   isConfirmed: boolean;
   creationDate: string;
-  //profile: Profile;
+  profile: any;
 }

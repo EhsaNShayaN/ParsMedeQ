@@ -60,10 +60,12 @@
           </div>
         </div>
       </div>
-      <app-comments *ngIf="item" [relatedId]="item.id" [tableId]="Tables.Article"></app-comments>
+      @if (item) {
+        <app-comments [relatedId]="item.id" [tableId]="Tables.Article"></app-comments>
+      }
     </ng-container>
     <div class="text-center" *ngIf="!item">
-      <img src="/src/assets/loading.gif" width="200" alt="loading" *ngIf="isLoading"/>
+      <img src="/assets/loading.gif" width="100" alt="loading" *ngIf="isLoading"/>
       <span class="fw-600 font-large" *ngIf="!isLoading">آیتم مورد نظر وجود ندارد.</span>
     </div>
   </mat-card>
