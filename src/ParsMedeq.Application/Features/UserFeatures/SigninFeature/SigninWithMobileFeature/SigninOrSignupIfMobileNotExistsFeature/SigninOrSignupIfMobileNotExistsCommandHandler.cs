@@ -1,41 +1,50 @@
-﻿using ParsMedeQ.Application.Services.UserAuthenticationServices;
+﻿using Microsoft.AspNetCore.Http;
+using ParsMedeQ.Application.Features.UserFeatures.SigninFeature.SigninWithMobileFeature.SigninOrSignupIfMobileNotExistsFeature;
+using ParsMedeQ.Application.Services.TokenGeneratorService;
 using ParsMedeQ.Application.Services.UserContextAccessorServices;
 using ParsMedeQ.Domain.DomainServices.SigninService;
 using ParsMedeQ.Domain.Types.UserId;
 
-namespace ParsMedeQ.Application.Features.UserFeatures.SigninFeature.SigninWithMobileFeature.SigninOrSignupIfMobileNotExistsFeature;
+namespace Dpi.TSP.Application.Features.TaxMemoryFeatures.TspUserFeatures.SigninFeature.SigninWithMobileFeature.SigninOrSignupIfMobileNotExistsFeature;
 
 public sealed class SigninOrSignupIfMobileNotExistsCommandHandler : IPrimitiveResultCommandHandler<
     SigninOrSignupIfMobileNotExistsCommand,
     UserTokenInfo>
 {
-    private readonly IReadUnitOfWork _readUnitOfWork;
+    #region " Fields "
     private readonly ISigninService _signinService;
     private readonly IOtpService _otpService;
-    private readonly IUserAuthenticationTokenService _userAuthenticationTokenService;
+    private readonly ITokenGeneratorService _tokenGeneratorService;
+    private readonly IHttpContextAccessor _httpContextAccessor;
+    #endregion
 
     public SigninOrSignupIfMobileNotExistsCommandHandler(
-        IReadUnitOfWork readUnitOfWork,
         ISigninService signinService,
         IOtpService otpService,
-        IUserAuthenticationTokenService userAuthenticationTokenService)
+        ITokenGeneratorService tokenGeneratorService,
+        IHttpContextAccessor httpContextAccessor)
     {
         this._signinService = signinService;
-        this._readUnitOfWork = readUnitOfWork;
         this._otpService = otpService;
-        this._userAuthenticationTokenService = userAuthenticationTokenService;
+        this._tokenGeneratorService = tokenGeneratorService;
+        this._httpContextAccessor = httpContextAccessor;
     }
 
     public async Task<PrimitiveResult<UserTokenInfo>> Handle(SigninOrSignupIfMobileNotExistsCommand request, CancellationToken cancellationToken)
     {
         return
             await ContextualResult<LoginContext>.Create(new(request, cancellationToken))
-                .Execute(SetMobile)
-                .Execute(ValidateOtp)
-                .Execute(SigninOrSignupIfMobileNotExists)
-                .Execute(SetToken)
+                .Execute(this.SetMobile)
+                .Execute(this.ValidateOtp)
+                .Execute(this.SigninOrSignupIfMobileNotExists)
+                .Execute(this.GenerateToken)
+                .OnSuccess(_ =>
+                {
+                    this._tokenGeneratorService.PersistToken(
+                        _.Value.Token!,
+                        this._httpContextAccessor.HttpContext!);
+                })
                 .Map(ctx => new UserTokenInfo(
-                    //HashIdsHelper.Instance.EncodeLong(ctx.SigninResult.UserId.Value),
                     ctx.Token,
                     ctx.SigninResult.FullName.GetValue(),
                     ctx.Mobile.Value))
@@ -58,19 +67,31 @@ public sealed class SigninOrSignupIfMobileNotExistsCommandHandler : IPrimitiveRe
             UserIdType.Empty, ctx.CancellationToken)
             .Map(ctx.SetSigninResult);
     }
-    ValueTask<PrimitiveResult<LoginContext>> SetToken(LoginContext ctx)
+    ValueTask<PrimitiveResult<LoginContext>> GenerateToken(LoginContext ctx)
     {
-        return this._userAuthenticationTokenService.GenerateToken(ctx.Mobile.Value)
-            .Map(ctx.SetToken);
+        return this._tokenGeneratorService
+            .GenerateToken(
+                ctx.SigninResult.UserId.Value,
+                AuthenticationHelper.WEB_AUDIENCE,
+                ctx.CancellationToken)
+            .Map(ctx.SetGenerateTokenResult);
     }
 }
-sealed record LoginContext(SigninOrSignupIfMobileNotExistsCommand Request, CancellationToken CancellationToken)
+sealed class LoginContext
 {
+    public SigninOrSignupIfMobileNotExistsCommand Request { get; }
+    public CancellationToken CancellationToken { get; }
     public MobileType Mobile { get; private set; }
     public SigninResult SigninResult { get; private set; }
-    public string Token { get; private set; }
+    public string Token { get; private set; } = null;
 
-    public LoginContext SetMobile(MobileType value) => this with { Mobile = value };
-    public LoginContext SetSigninResult(SigninResult value) => this with { SigninResult = value };
-    public LoginContext SetToken(string value) => this with { Token = value };
+    public LoginContext(SigninOrSignupIfMobileNotExistsCommand request, CancellationToken cancellationToken)
+    {
+        this.Request = request;
+        this.CancellationToken = cancellationToken;
+    }
+
+    public LoginContext SetMobile(MobileType value) { this.Mobile = value; return this; }
+    public LoginContext SetSigninResult(SigninResult value) { this.SigninResult = value; return this; }
+    public LoginContext SetGenerateTokenResult(string value) { this.Token = value; return this; }
 }

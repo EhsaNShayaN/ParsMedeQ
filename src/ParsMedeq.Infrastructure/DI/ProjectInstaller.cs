@@ -12,7 +12,7 @@ using ParsMedeQ.Application.Persistance;
 using ParsMedeQ.Application.Services.EmailSenderService;
 using ParsMedeQ.Application.Services.OTP;
 using ParsMedeQ.Application.Services.SmsSenderService;
-using ParsMedeQ.Application.Services.UserAuthenticationServices;
+using ParsMedeQ.Application.Services.TokenGeneratorService;
 using ParsMedeQ.Domain.Persistance;
 using ParsMedeQ.Infrastructure.Helpers;
 using ParsMedeQ.Infrastructure.Persistance.DbContexts;
@@ -56,7 +56,7 @@ static class ServiceCollectionExtension
     internal static IServiceCollection InstallUserAuthenticationTokenService(this IServiceCollection services, IConfiguration configuration)
     {
         services.Configure<UserAuthenticationTokenServiceOptions>(configuration.GetSection("Jwt"));
-        services.TryAddSingleton<IUserAuthenticationTokenService, UserAuthenticationTokenService>();
+        services.TryAddSingleton<ITokenGeneratorService, TokenGeneratorService>();
 
         return services;
     }
