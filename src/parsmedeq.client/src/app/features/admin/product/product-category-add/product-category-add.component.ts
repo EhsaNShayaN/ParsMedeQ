@@ -4,7 +4,6 @@ import {ToastrService} from 'ngx-toastr';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {ProductCategoriesResponse, ProductCategory} from '../../../../core/models/ProductCategoryResponse';
 import {BaseComponent} from '../../../../base-component';
-import {TranslateService} from '@ngx-translate/core';
 import {AddResult, BaseResult} from '../../../../core/models/BaseResult';
 import {CustomConstants} from '../../../../core/constants/custom.constants';
 
@@ -24,7 +23,6 @@ export class ProductCategoryAddComponent extends BaseComponent implements OnInit
 
   constructor(private toaster: ToastrService,
               protected activatedRoute: ActivatedRoute,
-              protected translateService: TranslateService,
               private formBuilder: UntypedFormBuilder) {
     super();
     this.lang = this.translateService.getDefaultLang();

@@ -1,0 +1,14 @@
+.login {
+  min-width: 500px;
+  min-height: 400px;
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (max-width: 600px) {
+  .login {
+    min-width: unset !important;
+    min-height: unset !important;
+    width: 100%;
+  }
+}

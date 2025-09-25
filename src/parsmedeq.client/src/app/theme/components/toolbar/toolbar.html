@@ -28,7 +28,7 @@
       </a>
       <!--*************-->
       @if (!authService.isLoggedIn()) {
-        <a [routerLink]="['/login' | langPack]" class="background-color not-link">
+        <a [routerLink]="['/auth/login' | langPack]" class="background-color not-link">
           {{ 'LOGIN' | translate }}
         </a>
       } @else {

@@ -27,7 +27,6 @@ import {MatCell, MatCellDef, MatColumnDef, MatHeaderCell, MatHeaderCellDef, MatH
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatOption, MatSelect} from '@angular/material/select';
-import {MatError} from '@angular/material/form-field';
 import {MatSlideToggle} from '@angular/material/slide-toggle';
 import {ProductComponent} from './product/product.component';
 import {ProductListComponent} from './product/product-list/product-list.component';
@@ -79,7 +78,6 @@ import {ProductCategoryAddComponent} from './product/product-category-add/produc
     MatCell,
     MatSelect,
     MatOption,
-    MatError,
     AngularEditorModule,
     MatDatepickerToggle,
     MatDatepicker,

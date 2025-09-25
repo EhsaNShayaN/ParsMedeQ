@@ -1,6 +1,7 @@
 import {Directive, inject} from '@angular/core';
 import {PureComponent} from './pure-component';
 import {Meta, Title} from '@angular/platform-browser';
+import {TranslateService} from '@ngx-translate/core';
 
 @Directive()
 export class BaseComponent extends PureComponent {

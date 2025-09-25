@@ -73,7 +73,7 @@
           </h3>
           <p class="text-muted"><small>{{ review.creationDate }}</small></p>
           <p class="text">{{ review.description }}</p>
-          @if ((review.answers?.length ?? 0) > 0) {
+          @if ((review.answers.length ?? 0) > 0) {
             <div>
               @for (answer of review.answers; track answer) {
                 <div class="mr-5">
@@ -88,7 +88,7 @@
         </mat-list-item>
       }
     </mat-list>
-    @if (items?.length) {
+    @if (items.length) {
       <div fxFlex="100" fxLayoutAlign="center center">
         <app-load-more [step]="1"></app-load-more>
       </div>

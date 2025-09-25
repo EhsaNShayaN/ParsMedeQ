@@ -8,11 +8,23 @@
     "FA": "فارسی",
     "EN": "انگلیسی"
   },
+  "SIGNIN": "ورود",
   "LOGIN": "ورود",
   "LOGOUT": "خروج",
   "MOBILE": "موبایل",
   "IS_REQUIRED": "الزامی است.",
   "IS_INVALID": "نامعتبر است.",
   "COMMENTS": "نظرات",
-  "COMMENT_TEXT": "متن نظر"
+  "COMMENT_TEXT": "متن نظر",
+  "HOME": "خانه",
+  "MANAGEMENT": "مدیریت",
+  "CONTACT_US": "تماس با ما",
+  "FAQ": "سوالات متداول",
+  "NEWS": "اخبار",
+  "ARTICLES": "مقالات",
+  "ARTICLE": "مقاله",
+  "PRODUCTS": "محصولات",
+  "PRODUCT": "محصول",
+  "ABOUT_US": "درباره ما",
+  "CONTINUE": "ادامه"
 }

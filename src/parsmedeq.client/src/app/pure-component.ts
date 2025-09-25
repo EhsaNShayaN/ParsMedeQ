@@ -1,10 +1,12 @@
 import {Directive, inject} from '@angular/core';
 import {UntypedFormGroup} from '@angular/forms';
 import {RestApiService} from './core/rest-api.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Directive()
 export class PureComponent {
   restApiService = inject(RestApiService);
+  translateService = inject(TranslateService);
 
   constructor() {
   }
@@ -18,5 +20,21 @@ export class PureComponent {
       }
     }
     return invalid;
+  }
+
+  navigateToLink(url: string, lang: string) {
+    if (lang !== 'fa') {
+      url = lang + '/' + url;
+    }
+    /*this.router.navigate([url]).then(() => {
+    });*/
+  }
+
+  public getTranslateValue(key: string, param: string | null = null) {
+    let value = null;
+    this.translateService.get(key, {param}).subscribe((res: string) => {
+      value = res;
+    });
+    return value;
   }
 }

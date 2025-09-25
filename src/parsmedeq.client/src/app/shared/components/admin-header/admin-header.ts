@@ -14,6 +14,6 @@ export class AdminHeader {
   logout() {
     // TODO: حذف توکن از localStorage یا سرویس Auth
     localStorage.removeItem('token');
-    this.router.navigate(['/auth/login']);
+    this.router.navigate(['/login']);
   }
 }

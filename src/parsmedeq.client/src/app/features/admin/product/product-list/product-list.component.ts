@@ -5,7 +5,6 @@ import {Product, ProductResponse, ProductsRequest} from '../../../../core/models
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort, Sort} from '@angular/material/sort';
 import {Helpers} from '../../../../core/helpers';
-import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-product-list',
@@ -24,8 +23,7 @@ export class ProductListComponent extends BaseComponent implements OnInit, OnDes
   pageSize = 5;
   totalCount = 0;
 
-  constructor(private helpers: Helpers,
-              private translateService: TranslateService) {
+  constructor(private helpers: Helpers) {
     super();
     this.languages = this.translateService.getLangs();
   }

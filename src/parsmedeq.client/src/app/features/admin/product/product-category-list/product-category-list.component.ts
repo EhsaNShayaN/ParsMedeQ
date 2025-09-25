@@ -3,7 +3,6 @@ import {BaseComponent} from '../../../../base-component';
 import {ProductCategoriesResponse, ProductCategory} from '../../../../core/models/ProductCategoryResponse';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
-import {TranslateService} from '@ngx-translate/core';
 import {tap} from 'rxjs';
 import {Product} from '../../../../core/models/ProductResponse';
 
@@ -23,7 +22,7 @@ export class ProductCategoryListComponent extends BaseComponent implements OnIni
   @ViewChild(MatSort, {static: true}) sort: MatSort | undefined;
   totalCount = 0;
 
-  constructor(private translateService: TranslateService) {
+  constructor() {
     super();
     this.languages = this.translateService.getLangs();
   }

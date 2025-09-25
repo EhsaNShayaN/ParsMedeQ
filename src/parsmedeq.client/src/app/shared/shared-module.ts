@@ -7,7 +7,7 @@ import {MatSidenav, MatSidenavContainer, MatSidenavContent, MatSidenavModule} fr
 import {MatDivider, MatList, MatListItem, MatListModule, MatNavList} from '@angular/material/list';
 import {MatCard, MatCardActions, MatCardContent, MatCardModule, MatCardTitle} from '@angular/material/card';
 import {MatFormField, MatInput, MatInputModule, MatLabel} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatError, MatFormFieldModule} from '@angular/material/form-field';
 import {CommentForm} from './components/comment-form/comment-form';
 import {TreeViewComponent} from './tree-view/tree-view.component';
 import {MatTooltip} from '@angular/material/tooltip';
@@ -26,7 +26,7 @@ import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
 import {TranslateModule} from '@ngx-translate/core';
 import {LangPackPipe} from '../core/pipes/lang-pack.pipe';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule, MatRippleModule, provideNativeDateAdapter} from '@angular/material/core';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule, provideNativeDateAdapter} from '@angular/material/core';
 import {JalaliMomentDateAdapter, PERSIAN_DATE_FORMATS} from '../core/custom-date-adapter';
 import {DatePickerComponent} from './date-picker/date-picker.component';
 
@@ -88,6 +88,7 @@ import {DatePickerComponent} from './date-picker/date-picker.component';
     MatChipListbox,
     MatChipOption,
     MatList,
+    MatError,
     //////////////////////
     DefaultFlexDirective,
     DefaultClassDirective,
@@ -138,6 +139,7 @@ import {DatePickerComponent} from './date-picker/date-picker.component';
     MatChipListbox,
     MatChipOption,
     MatList,
+    MatError,
     //////////////////////
     DefaultFlexDirective,
     DefaultClassDirective,

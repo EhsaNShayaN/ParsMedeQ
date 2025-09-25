@@ -3,14 +3,12 @@ import {FormArray, UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Valid
 import {ActivatedRoute} from '@angular/router';
 import * as uuid from 'uuid';
 import * as moment from 'jalali-moment';
-import {Tables} from '../../../../core/constants/server.constants';
 import {getCustomEditorConfigs} from '../../../../core/custom-editor-configs';
 import {ProductCategoriesResponse, ProductCategory} from '../../../../core/models/ProductCategoryResponse';
 import {Product} from '../../../../core/models/ProductResponse';
 import {JalaliMomentDateAdapter} from '../../../../core/custom-date-adapter';
 import {AddResult, BaseResult} from '../../../../core/models/BaseResult';
 import {BaseComponent} from '../../../../base-component';
-import {TranslateService} from '@ngx-translate/core';
 import {CustomConstants} from '../../../../core/constants/custom.constants';
 import {ToastrService} from 'ngx-toastr';
 
@@ -39,8 +37,7 @@ export class ProductAddComponent extends BaseComponent implements OnInit, OnDest
 
   constructor(public formBuilder: UntypedFormBuilder,
               private activatedRoute: ActivatedRoute,
-              private toaster: ToastrService,
-              private translateService: TranslateService) {
+              private toaster: ToastrService) {
     super();
     this.lang = this.translateService.getDefaultLang();
   }

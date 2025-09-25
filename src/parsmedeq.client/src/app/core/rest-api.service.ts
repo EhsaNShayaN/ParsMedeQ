@@ -9,6 +9,7 @@ import {ResourceCategoriesResponse} from './models/ResourceCategoryResponse';
 import {AuthService} from './services/auth.service';
 import {ProductCategoriesResponse} from './models/ProductCategoryResponse';
 import {AddProductRequest, Product, ProductRequest, ProductResponse, ProductsRequest} from './models/ProductResponse';
+import {MobileRequest, MobileResponse, SendOtpRequest, SendOtpResponse} from './models/Login';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,18 @@ import {AddProductRequest, Product, ProductRequest, ProductResponse, ProductsReq
 export class RestApiService {
   constructor(private http: HttpClient,
               private authService: AuthService) {
+  }
+
+  sendOtp(model: SendOtpRequest): Observable<any> {
+    return this.http.post<BaseResult<SendOtpResponse>>(`${endpoint()}/tspuser/Signin/mobile/sendotp`, model).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  sendMobile(model: MobileRequest): Observable<any> {
+    return this.http.post<BaseResult<MobileResponse>>(`${endpoint()}/tspuser/Signin/mobile`, model).pipe(
+      catchError(this.handleError)
+    );
   }
 
   getResourceCategories(tableId: number): Observable<any> {

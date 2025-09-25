@@ -1,9 +1,11 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using ParsMedeQ.Application.Services.UserContextAccessorServices;
 using ParsMedeQ.Application.Services.UserLangServices;
 using ParsMedeQ.Presentation.GlobalExceptionHandlers;
 using ParsMedeQ.Presentation.Options;
+using ParsMedeQ.Presentation.Services.ApplicationServices.UserContextAccessorServices;
 using ParsMedeQ.Presentation.Services.ApplicationServices.UserLangServices;
 using SRH.ServiceInstaller;
 using System.Reflection;
@@ -18,6 +20,7 @@ internal sealed class ProjectServiceInstaller : IServiceInstaller
         .ConfigureOptions<JsonOptionsConfigurator>()
         .ScanAndAddPresentationMappers([PresentationAssemblyReference.Assembly])
         .InstallGlobalExceptionHandler()
+        .InstallUserContextAccerssor()
         .InstallUserLangContextAccessor();
 }
 
@@ -35,6 +38,12 @@ static class ServiceCollectionExtension
     public static IServiceCollection InstallUserLangContextAccessor(this IServiceCollection services)
     {
         services.TryAddSingleton<IUserLangContextAccessor, UserLangContextAccessor>();
+        return services;
+    }
+    public static IServiceCollection InstallUserContextAccerssor(this IServiceCollection services)
+    {
+        services.TryAddSingleton<IUserContextAccessor, UserContextAccessor>();
+        //services.TryAddSingleton<IUserContextFactory, UserContextFactory>();
         return services;
     }
     internal static IServiceCollection ScanAndAddPresentationMappers(this IServiceCollection services, params Assembly[] assemblies)

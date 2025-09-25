@@ -8,11 +8,23 @@
     "FA": "Persian",
     "EN": "English"
   },
+  "SIGNIN": "Sign In",
   "LOGIN": "Login",
   "LOGOUT": "Logout",
   "MOBILE": "Mobile",
   "IS_REQUIRED": "Is Required",
   "IS_INVALID": "Invalid",
   "COMMENTS": "Comments",
-  "COMMENT_TEXT": "Text of comment"
+  "COMMENT_TEXT": "Text of comment",
+  "HOME": "Home",
+  "MANAGEMENT": "Management",
+  "CONTACT_US": "Contact Us",
+  "FAQ": "FAQ",
+  "NEWS": "News",
+  "ARTICLES": "ARTICLES",
+  "ARTICLE": "ARTICLE",
+  "PRODUCTS": "Products",
+  "PRODUCT": "Product",
+  "ABOUT_US": "About Us",
+  "CONTINUE": "Continue"
 }
