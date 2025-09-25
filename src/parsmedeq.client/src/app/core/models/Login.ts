@@ -12,5 +12,7 @@ export interface MobileRequest {
 }
 
 export interface MobileResponse {
+  token: string;
+  fullname: string;
   mobile: string;
 }

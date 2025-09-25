@@ -1,10 +1,10 @@
-﻿using ParsMedeQ.Application.Persistance.Schema;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using ParsMedeQ.Application.Persistance.Schema;
 using ParsMedeQ.Application.Services.UserContextAccessorServices;
 using ParsMedeQ.Domain.Helpers;
 using ParsMedeQ.Domain.Types.UserId;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace ParsMedeQ.Presentation.Services.ApplicationServices.UserContextAccessorServices;
 
@@ -20,7 +20,7 @@ public sealed class UserContextAccessorMiddleware
     public async Task Invoke(HttpContext httpContext,
         IUserContextAccessor UserContextAccessor,
         IServiceScopeFactory serviceScopeFactory,
-        ILogger<UserContextAccessorMiddleware> logger, CancellationToken cancellationToken)
+        ILogger<UserContextAccessorMiddleware> logger)
     {
         UserContext taxPayerUserContext = UserContext.Guest;
         try
@@ -34,7 +34,7 @@ public sealed class UserContextAccessorMiddleware
                 {
                     var userInfoResult = await repo.FindUser(
                         UserIdType.FromDb(uid),
-                        cancellationToken);
+                        httpContext.RequestAborted);
 
                     if (userInfoResult.IsSuccess)
                     {

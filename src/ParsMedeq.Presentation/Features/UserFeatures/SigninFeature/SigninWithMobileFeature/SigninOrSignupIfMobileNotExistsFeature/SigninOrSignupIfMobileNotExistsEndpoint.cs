@@ -35,7 +35,9 @@ sealed class SigninOrSignupIfMobileNotExistsApiRequestMApper : IPresentationMapp
 
 sealed class SigninOrSignupIfMobileNotExistsApiResponseMapper : IPresentationMapper<UserTokenInfo, SigninOrSignupIfMobileNotExistsApiResponse>
 {
-    public ValueTask<PrimitiveResult<SigninOrSignupIfMobileNotExistsApiResponse>> Map(UserTokenInfo src, CancellationToken cancellationToken) =>
+    public ValueTask<PrimitiveResult<SigninOrSignupIfMobileNotExistsApiResponse>> Map(
+        UserTokenInfo src,
+        CancellationToken cancellationToken) =>
         ValueTask.FromResult(
             PrimitiveResult.Success(
                 new SigninOrSignupIfMobileNotExistsApiResponse(

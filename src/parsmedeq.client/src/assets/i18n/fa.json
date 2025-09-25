@@ -26,5 +26,9 @@
   "PRODUCTS": "محصولات",
   "PRODUCT": "محصول",
   "ABOUT_US": "درباره ما",
-  "CONTINUE": "ادامه"
+  "CONTINUE": "ادامه",
+  "ENTER_WITH_OTP": "ورود با رمز یکبار مصرف",
+  "CHANGE_MOBILE": "تغییر موبایل",
+  "FORGOT_YOUR_PASSWORD": "فراموشی رمز عبور",
+  "PASSWORD": "رمز عبور"
 }

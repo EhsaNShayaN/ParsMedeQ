@@ -1,7 +1,6 @@
 import {isPlatformBrowser} from '@angular/common';
-import {Component, ViewChild, HostListener, Inject, PLATFORM_ID} from '@angular/core';
-import {Router} from '@angular/router';
-import {Settings, AppSettings} from '../app.settings';
+import {Component, HostListener, Inject, PLATFORM_ID, ViewChild} from '@angular/core';
+import {AppSettings, Settings} from '../app.settings';
 import {PureComponent} from '../pure-component';
 
 @Component({
@@ -20,7 +19,6 @@ export class Pages extends PureComponent {
   public settings: Settings;
 
   constructor(public appSettings: AppSettings,
-              public router: Router,
               @Inject(PLATFORM_ID) private platformId: any) {
     super();
     this.settings = this.appSettings.settings;

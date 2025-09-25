@@ -26,5 +26,9 @@
   "PRODUCTS": "Products",
   "PRODUCT": "Product",
   "ABOUT_US": "About Us",
-  "CONTINUE": "Continue"
+  "CONTINUE": "Continue",
+  "ENTER_WITH_OTP": "Sign in using a one-time password.",
+  "CHANGE_MOBILE": "Change Mobile",
+  "FORGOT_YOUR_PASSWORD": "Forgot Your Password",
+  "PASSWORD": "Password"
 }

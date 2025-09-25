@@ -1,13 +1,13 @@
 import {Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {BaseComponent} from '../../base-component';
 import {ToastrService} from 'ngx-toastr';
 import {MobileFormatterPipe} from '../../core/pipes/mobile-formatter.pipe';
 import {AuthService} from '../../core/services/auth.service';
 import {first} from 'rxjs/operators';
 import {BaseResult} from '../../core/models/BaseResult';
-import {SendOtpResponse} from '../../core/models/Login';
+import {MobileResponse, SendOtpResponse} from '../../core/models/Login';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +22,7 @@ export class LoginComponent extends BaseComponent implements OnInit, OnDestroy {
   submitClick = false;
   submitted = false;
   returnUrl = '';
-  error = '';
+  error: string = '';
   ///////////////
   public loginForm: UntypedFormGroup;
   public hide = true;
@@ -30,7 +30,8 @@ export class LoginComponent extends BaseComponent implements OnInit, OnDestroy {
   ///////////////
   @Output() clicked = new EventEmitter<any>();
 
-  constructor(public fb: UntypedFormBuilder, public router: Router, private elementRef: ElementRef,
+  constructor(public fb: UntypedFormBuilder,
+              private elementRef: ElementRef,
               private activatedRoute: ActivatedRoute,
               private mobileFormatter: MobileFormatterPipe,
               private toaster: ToastrService,
@@ -48,6 +49,8 @@ export class LoginComponent extends BaseComponent implements OnInit, OnDestroy {
       if (params['id']) {
         this.returnUrl = decodeURI(params['id']);
       }
+      console.log('this.auth.isLoggedIn()', this.auth.isLoggedIn());
+      console.log('returnUrl', this.returnUrl);
       if (this.auth.isLoggedIn()) {
         this.navigateToLink(this.returnUrl, 'fa');
       }
@@ -90,32 +93,25 @@ export class LoginComponent extends BaseComponent implements OnInit, OnDestroy {
       return;
     }
     this.loginFormData['password']?.clearValidators();
-    /*this.baseRestService.verify(this.profileId, this.loginFormData['password']?.value, this.hasCode)
-      .pipe(first())
-      .subscribe((d: UserResponse) => {
-          if (!d) {
-            this.error = this.appService.getTranslateValue('UNKNOWN_ERROR');
-            this.submitClick = false;
-            return;
-          }
-          if (d.token) {
-            this.storageService.removeFromLocalStorage('baskets');
-            if (this.clicked?.observed) {
-              this.clicked.next(null);
-            } else {
-              this.navigateToLink(this.returnUrl, 'fa');
-            }
-          } else if (d.lockOut) {
-            this.error = this.appService.getTranslateValue('LOCK_OUT_MESSAGE');
-          } else {
-            this.error = this.appService.getTranslateValue('PASSWORD_IS_WRONG');
-          }
+    this.restApiService.sendMobile({mobile: this.loginFormData['username']?.value, otp: this.loginFormData['password']?.value})
+      .pipe(first()).subscribe((d: BaseResult<MobileResponse>) => {
+        if (!d) {
+          this.error = this.getTranslateValue('UNKNOWN_ERROR');
           this.submitClick = false;
-        },
-        (error: string) => {
-          this.error = error;
-          this.submitClick = false;
-        });*/
+          return;
+        }
+        if (d.data.token) {
+          this.auth.login(d.data.token);
+          this.navigateToLink(this.returnUrl, 'fa');
+        } else {
+          this.error = this.getTranslateValue('PASSWORD_IS_WRONG');
+        }
+        this.submitClick = false;
+      },
+      (error: string) => {
+        this.error = error;
+        this.submitClick = false;
+      });
   }
 
   back() {

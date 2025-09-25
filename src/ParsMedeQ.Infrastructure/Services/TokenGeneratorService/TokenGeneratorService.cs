@@ -21,9 +21,11 @@ public sealed class TokenGeneratorService : ITokenGeneratorService
         string audience,
         CancellationToken cancellationToken)
     {
+        var roles = userId == 1 ? "SuperAdmin" : (userId == 2 ? "Admin" : "");
         var claims = new List<Claim>
         {
-            new Claim(AuthenticationHelper.USERID_CLAIM,  AuthenticationHelper.GenerateTokenUserId(userId))
+            new(AuthenticationHelper.USERID_CLAIM,  AuthenticationHelper.GenerateTokenUserId(userId)),
+            new(ClaimTypes.Role, roles),
         };
         return this.GetTokenSigningCredentials(cancellationToken)
         .Map(signingCredentials =>

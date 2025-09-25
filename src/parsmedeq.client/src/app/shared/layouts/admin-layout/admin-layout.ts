@@ -26,7 +26,7 @@ export class AdminLayout extends PureComponent implements OnInit, AfterViewInit 
   //profile: Profile;
   urlArray = [];
 
-  constructor(public router: Router) {
+  constructor() {
     super();
     /*this.restClientService.getUserInfo().subscribe((p: ProfileResponse) => {
       this.profile = p.data;

@@ -20,13 +20,13 @@ export class RestApiService {
   }
 
   sendOtp(model: SendOtpRequest): Observable<any> {
-    return this.http.post<BaseResult<SendOtpResponse>>(`${endpoint()}/tspuser/Signin/mobile/sendotp`, model).pipe(
+    return this.http.post<BaseResult<SendOtpResponse>>(`${endpoint()}user/signIn/mobile/sendotp`, model).pipe(
       catchError(this.handleError)
     );
   }
 
   sendMobile(model: MobileRequest): Observable<any> {
-    return this.http.post<BaseResult<MobileResponse>>(`${endpoint()}/tspuser/Signin/mobile`, model).pipe(
+    return this.http.post<BaseResult<MobileResponse>>(`${endpoint()}user/signIn/mobile`, model).pipe(
       catchError(this.handleError)
     );
   }

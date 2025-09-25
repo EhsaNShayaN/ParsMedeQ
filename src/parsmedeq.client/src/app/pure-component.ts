@@ -2,11 +2,13 @@ import {Directive, inject} from '@angular/core';
 import {UntypedFormGroup} from '@angular/forms';
 import {RestApiService} from './core/rest-api.service';
 import {TranslateService} from '@ngx-translate/core';
+import {Router} from '@angular/router';
 
 @Directive()
 export class PureComponent {
   restApiService = inject(RestApiService);
   translateService = inject(TranslateService);
+  router = inject(Router);
 
   constructor() {
   }
@@ -26,15 +28,15 @@ export class PureComponent {
     if (lang !== 'fa') {
       url = lang + '/' + url;
     }
-    /*this.router.navigate([url]).then(() => {
-    });*/
+    this.router.navigate([url]).then(() => {
+    });
   }
 
-  public getTranslateValue(key: string, param: string | null = null) {
+  getTranslateValue(key: string, param: string | null = null) {
     let value = null;
     this.translateService.get(key, {param}).subscribe((res: string) => {
       value = res;
     });
-    return value;
+    return value ?? '';
   }
 }

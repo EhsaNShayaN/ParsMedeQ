@@ -22,7 +22,6 @@ export class AuthService {
   }
 
   isAdmin(): boolean {
-    return true;
     return this.userInRole('superadmin') || this.userInRole('admin');
   }
 
