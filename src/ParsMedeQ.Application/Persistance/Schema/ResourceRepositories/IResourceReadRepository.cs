@@ -12,7 +12,7 @@ public interface IResourceReadRepository : IDomainRepository
         BasePaginatedQuery paginated,
         string langCode,
         int tableId,
-        int resourceCategoryId,
+        int? resourceCategoryId,
         int lastId,
         CancellationToken cancellationToken);
     ValueTask<PrimitiveResult<ResourceCategoryListDbQueryResponse[]>> FilterResourceCategories(

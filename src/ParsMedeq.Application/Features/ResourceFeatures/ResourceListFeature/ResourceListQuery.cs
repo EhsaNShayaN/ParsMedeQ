@@ -5,7 +5,7 @@ using Polly.Contrib.DuplicateRequestCollapser;
 using SRH.MediatRMessaging.Queries;
 
 namespace ParsMedeQ.Application.Features.ResourceFeatures.ResourceListFeature;
-public sealed record ResourceListQuery(int TableId, int ResourceCategoryId) : BasePaginatedQuery, IPrimitiveResultQuery<BasePaginatedApiResponse<ResourceListDbQueryResponse>>;
+public sealed record ResourceListQuery(int TableId, int? ResourceCategoryId) : BasePaginatedQuery, IPrimitiveResultQuery<BasePaginatedApiResponse<ResourceListDbQueryResponse>>;
 
 sealed class ResourceListQueryHandler : IPrimitiveResultQueryHandler<ResourceListQuery, BasePaginatedApiResponse<ResourceListDbQueryResponse>>
 {
