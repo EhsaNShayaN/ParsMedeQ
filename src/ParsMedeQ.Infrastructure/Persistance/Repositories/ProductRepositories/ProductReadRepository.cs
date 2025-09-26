@@ -14,7 +14,7 @@ internal sealed class ProductReadRepository : GenericPrimitiveReadRepositoryBase
     public ValueTask<PrimitiveResult<BasePaginatedApiResponse<ProductListDbQueryResponse>>> FilterProducts(
         BasePaginatedQuery paginated,
         string langCode,
-        int productCategoryId,
+        int? productCategoryId,
         int lastId,
         CancellationToken cancellationToken)
     {
@@ -35,7 +35,7 @@ internal sealed class ProductReadRepository : GenericPrimitiveReadRepositoryBase
 
         var query =
             from res in this.DbContext.Product
-            .Where(res => res.ProductCategoryId.Equals(productCategoryId))
+            .Where(res => productCategoryId.HasValue && res.ProductCategoryId.Equals(productCategoryId))
             .Include(r => r.ProductTranslations.Where(l => l.LanguageCode == langCode))
             .Include(r => r.ProductCategory)
             .ThenInclude(r => r.ProductCategoryTranslations.Where(l => l.LanguageCode == langCode))

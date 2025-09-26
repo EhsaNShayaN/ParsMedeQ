@@ -28,7 +28,7 @@ export class ProductAddComponent extends BaseComponent implements OnInit, OnDest
   error?: string;
   productCategories: ProductCategory[] = [];
   editorConfig = getCustomEditorConfigs();
-  //descriptionError = false;
+  descriptionError = false;
 
   constructor(public formBuilder: UntypedFormBuilder,
               private activatedRoute: ActivatedRoute,
@@ -47,7 +47,7 @@ export class ProductAddComponent extends BaseComponent implements OnInit, OnDest
             this.myForm = this.formBuilder.group({
               productCategoryId: [this.editItem.productCategoryId, Validators.required],
               title: [this.editItem.title, Validators.required],
-              //description: [this.editItem.description, Validators.required],
+              description: [this.editItem.description, Validators.required],
               imagePath: null,
               fileId: null,
               price: this.editItem.price,
@@ -101,7 +101,7 @@ export class ProductAddComponent extends BaseComponent implements OnInit, OnDest
   }
 
   onFormSubmit(values: any): void {
-    //this.leaveDescription();
+    this.leaveDescription();
     const category = this.productCategories.find(s => s.id === Number(this.myForm.controls['productCategoryId'].value));
     values.productCategoryTitle = category?.title;
     if (!this.myForm.valid) {
@@ -124,10 +124,10 @@ export class ProductAddComponent extends BaseComponent implements OnInit, OnDest
     });
   }
 
-  /*leaveDescription() {
+  leaveDescription() {
     const x = this.myForm.controls['description'].value;
     this.descriptionError = !x;
-  }*/
+  }
 
   ngOnDestroy() {
     this.sub.unsubscribe();

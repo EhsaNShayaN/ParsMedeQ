@@ -1,3 +1,3 @@
 ﻿namespace ParsMedeQ.Contracts.ProductContracts.ProductListContract;
 
-public record ProductListApiRequest(int ProductCategoryId) : BasePaginatedApiRequest;
+public record ProductListApiRequest(int? ProductCategoryId) : BasePaginatedApiRequest;
