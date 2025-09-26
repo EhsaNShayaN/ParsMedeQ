@@ -1,6 +1,5 @@
-﻿using ParsMedeQ.Application.Services.EmailSenderService;
-using FluentEmail.Core;
-using SRH.PrimitiveTypes.Result;
+﻿using FluentEmail.Core;
+using ParsMedeQ.Application.Services.EmailSenderService;
 
 namespace ParsMedeQ.Infrastructure.Services.EmailSenderService;
 
@@ -17,7 +16,7 @@ public sealed class EmailSenderService : IEmailSenderService
     {
         var sendResponse = this._fluentEmail
             .To(to)
-            //.CC("shayan.e@dpi.ir")
+            //.CC("shayan.e@parsmedeq.ir")
             .Subject(title)
             .Body(body, isHtml)
             .Send();

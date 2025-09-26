@@ -40,7 +40,7 @@ internal sealed class ProjectInstaller : IServiceInstaller
             .InstallEmailSenderService(config)
             .InstallSmsSenderService(config)
             .InstallDistributedLockService(config)
-            .InstallDpiCacheProvider(config)
+            .InstallCacheProvider(config)
             .InstallFusionCache()
             .InstallOTPService()
             .InstallHealthChecks(config)
@@ -281,7 +281,7 @@ static class ServiceCollectionExtension
         return services;
     }
 
-    internal static IServiceCollection InstallDpiCacheProvider(this IServiceCollection services, IConfiguration config)
+    internal static IServiceCollection InstallCacheProvider(this IServiceCollection services, IConfiguration config)
     {
         var redisConnectionstring = config.GetSection("DistributedCache:ConnectionString").Get<string>();
         var cacheAppName = config.GetSection("DistributedCache:ApplicationName").Get<string>();
