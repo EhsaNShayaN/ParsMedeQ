@@ -49,19 +49,21 @@ public sealed class ProductCategory : EntityBase<int>
         int? parentId,
         string langCode,
         string title,
-        string description)
+        string description,
+        string image)
     {
         return this.Update(parentId)
-             .Map(_ => this.UpdateTranslation(langCode, title, description).Map(() => this));
+             .Map(_ => this.UpdateTranslation(langCode, title, description, image).Map(() => this));
     }
     #endregion
 
     public ValueTask<PrimitiveResult> AddTranslation(
         string langCode,
         string title,
-        string description)
+        string description,
+        string image)
     {
-        return ProductCategoryTranslation.Create(langCode, title, description)
+        return ProductCategoryTranslation.Create(langCode, title, description, image)
             .OnSuccess(newTranslation => this._ProductCategoryTranslations.Add(newTranslation.Value))
             .Match(
                 success => PrimitiveResult.Success(),
@@ -72,14 +74,15 @@ public sealed class ProductCategory : EntityBase<int>
     public ValueTask<PrimitiveResult> UpdateTranslation(
         string langCode,
         string title,
-        string description)
+        string description,
+        string image)
     {
         var currentTranslation = _ProductCategoryTranslations.FirstOrDefault(s => s.LanguageCode.Equals(langCode, StringComparison.OrdinalIgnoreCase));
         if (currentTranslation is null)
         {
-            return this.AddTranslation(langCode, title, description);
+            return this.AddTranslation(langCode, title, description, image);
         }
-        return currentTranslation.Update(title, description)
+        return currentTranslation.Update(title, description, image)
             .Match(
                 _ => PrimitiveResult.Success(),
                 PrimitiveResult.Failure

@@ -6,7 +6,9 @@ public sealed record class AddProductCategoryCommand(
     int TableId,
     string Title,
     string Description,
-    int? ParentId) : IPrimitiveResultCommand<AddProductCategoryCommandResponse>,
+    int? ParentId,
+    byte[] Image,
+    string ImageExtension) : IPrimitiveResultCommand<AddProductCategoryCommandResponse>,
     IValidatableRequest<AddProductCategoryCommand>
 {
     public ValueTask<PrimitiveResult<AddProductCategoryCommand>> Validate() => PrimitiveResult.Success(this)

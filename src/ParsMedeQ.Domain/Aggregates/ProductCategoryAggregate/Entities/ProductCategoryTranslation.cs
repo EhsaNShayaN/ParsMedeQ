@@ -8,6 +8,7 @@ public sealed class ProductCategoryTranslation : EntityBase<int>
     public string Title { get; private set; } = string.Empty;
     public string Description { get; private set; } = string.Empty;
     public int ProductCategoryId { get; private set; }
+    public string Image { get; private set; } = string.Empty;
     #endregion
 
     #region " Navigation Properties "
@@ -23,19 +24,23 @@ public sealed class ProductCategoryTranslation : EntityBase<int>
     internal static PrimitiveResult<ProductCategoryTranslation> Create(
         string languageCode,
         string title,
-        string description) => PrimitiveResult.Success(
+        string description,
+        string image) => PrimitiveResult.Success(
             new ProductCategoryTranslation
             {
                 LanguageCode = languageCode,
                 Title = title,
-                Description = description
+                Description = description,
+                Image = image
             });
     internal PrimitiveResult<ProductCategoryTranslation> Update(
         string title,
-        string description)
+        string description,
+        string image)
     {
         this.Title = title;
         this.Description = description;
+        this.Image = image;
         return this;
     }
     #endregion
