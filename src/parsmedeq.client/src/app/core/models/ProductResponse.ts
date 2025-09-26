@@ -12,25 +12,13 @@ export class Product {
   productCategoryTitle?: string;
 
   title!: string;
-  abstract!: string;
-  anchors!: ProductAnchor[];
   description!: string;
-  keywords!: string;
 
   image!: string;
   fileId?: number;
 
-  language!: string;
-  publishDate!: string;
-  publishInfo!: string;
-  publisher!: string;
   price?: number;
   discount?: number;
-  downloadCount!: number;
-  ordinal?: number;
-  expirationDate!: string;
-  expirationTime!: string;
-  expired!: boolean;
   creationDate!: string;
   registered!: boolean;
 

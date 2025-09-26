@@ -20,7 +20,6 @@ public interface IProductReadRepository : IDomainRepository
         string langCode,
         int UserId,
         int ProductId,
-        int TableId,
         CancellationToken cancellationToken);
     ValueTask<PrimitiveResult<ProductCategoryListDbQueryResponse>> ProductCategoryDetails(
         string langCode,

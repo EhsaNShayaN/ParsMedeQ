@@ -1,12 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormArray, UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
-import * as uuid from 'uuid';
-import * as moment from 'jalali-moment';
 import {getCustomEditorConfigs} from '../../../../core/custom-editor-configs';
 import {ProductCategoriesResponse, ProductCategory} from '../../../../core/models/ProductCategoryResponse';
 import {Product} from '../../../../core/models/ProductResponse';
-import {JalaliMomentDateAdapter} from '../../../../core/custom-date-adapter';
 import {AddResult, BaseResult} from '../../../../core/models/BaseResult';
 import {BaseComponent} from '../../../../base-component';
 import {CustomConstants} from '../../../../core/constants/custom.constants';
@@ -22,8 +19,6 @@ export class ProductAddComponent extends BaseComponent implements OnInit, OnDest
   lang: string;
   sub: any;
   myForm!: UntypedFormGroup;
-  expDate: any;
-  expTime: any;
   editItem?: Product;
   oldImagePath: string = '';
   oldFileId: number = 0;
@@ -33,17 +28,13 @@ export class ProductAddComponent extends BaseComponent implements OnInit, OnDest
   error?: string;
   productCategories: ProductCategory[] = [];
   editorConfig = getCustomEditorConfigs();
-  abstractError = false;
+  //descriptionError = false;
 
   constructor(public formBuilder: UntypedFormBuilder,
               private activatedRoute: ActivatedRoute,
               private toaster: ToastrService) {
     super();
     this.lang = this.translateService.getDefaultLang();
-  }
-
-  get anchorsArray() {
-    return this.myForm.get('anchors') as FormArray;
   }
 
   ngOnInit(): void {
@@ -56,44 +47,24 @@ export class ProductAddComponent extends BaseComponent implements OnInit, OnDest
             this.myForm = this.formBuilder.group({
               productCategoryId: [this.editItem.productCategoryId, Validators.required],
               title: [this.editItem.title, Validators.required],
-              abstract: [this.editItem.abstract, Validators.required],
+              //description: [this.editItem.description, Validators.required],
               imagePath: null,
-              keywords: this.editItem.keywords,
-              expirationDate: null,
-              expirationTime: '',
-              anchors: this.formBuilder.array([]),
-              language: this.editItem.language,
               fileId: null,
-              publishDate: this.editItem.publishDate,
               price: this.editItem.price,
               discount: this.editItem.discount,
             });
             this.oldImagePath = this.editItem.image;
             this.oldFileId = this.editItem.fileId ?? 0;
-            if (this.editItem.expirationDate) {
-              const array = this.editItem.expirationDate.split('/').map(s => Number(s));
-              this.myForm.controls['expirationDate'].setValue(new JalaliMomentDateAdapter('').createDate(array[0], array[1] - 1, array[2]));
-              this.expDate = this.editItem.expirationDate;
-              this.expTime = this.editItem.expirationTime;
-            }
-            this.editAnchors();
             this.hideSingleLangControls();
           });
         } else {
           this.myForm = this.formBuilder.group({
             productCategoryId: ['', Validators.required],
-            title: ['flkgjfd', Validators.required],
-            abstract: ['sdfsdfds', Validators.required],
+            title: [null, Validators.required],
             imagePath: null,
-            keywords: 'sdfsdfs',
-            expirationDate: null,
-            expirationTime: '',
-            anchors: this.formBuilder.array([]),
-            language: 'sdfdsfds',
             fileId: null,
-            publishDate: '1401/01/12',
-            price: 12340,
-            discount: 10,
+            price: null,
+            discount: null,
           });
         }
       });
@@ -102,29 +73,11 @@ export class ProductAddComponent extends BaseComponent implements OnInit, OnDest
 
   hideSingleLangControls() {
     if (this.lang !== 'fa') {
-      const validFields = ['title', 'abstract', 'keywords', 'anchors', 'description'];
+      const validFields = ['title', 'imagePath', 'fileId', 'description'];
       Object.keys(this.myForm.controls).filter(s => !validFields.includes(s)).forEach(key => {
         this.myForm.get(key)?.disable();
       });
     }
-  }
-
-  createAnchor(): UntypedFormGroup {
-    return this.formBuilder.group({
-      id: uuid.v4().replace(/-/g, ''),
-      name: null,
-      desc: null,
-    });
-  }
-
-  addAnchor(): void {
-    const anchors = this.myForm.controls['anchors'] as UntypedFormArray;
-    anchors.push(this.createAnchor());
-  }
-
-  deleteAnchor(index: number) {
-    const anchors = this.myForm.controls['anchors'] as UntypedFormArray;
-    anchors.removeAt(index);
   }
 
   handleImageInput(target: any) {
@@ -147,31 +100,13 @@ export class ProductAddComponent extends BaseComponent implements OnInit, OnDest
     this.oldFileId = 0;
   }
 
-  toEnglish(s: string) {
-    let x = s.replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d).toString());
-    x = x.replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d).toString());
-    return x;
-  }
-
-  /*toPersian(s: string): string {
-    return s.replace(/\d/g, (d) => '۰۱۲۳۴۵۶۷۸۹'[Number(d)]);
-  };*/
-
-  dateChanged(dateRangeStart: HTMLInputElement) {
-    this.expDate = this.toEnglish(dateRangeStart.value);
-    const startDate = this.toGeorgianDate();
-  }
-
   onFormSubmit(values: any): void {
-    this.leaveAbstract();
+    //this.leaveDescription();
     const category = this.productCategories.find(s => s.id === Number(this.myForm.controls['productCategoryId'].value));
     values.productCategoryTitle = category?.title;
     if (!this.myForm.valid) {
       console.log(this.findInvalidControls(this.myForm));
       return;
-    }
-    if (this.expDate) {
-      values.expirationDate = this.expDate;
     }
     if (this.editItem) {
       values.id = this.editItem.id;
@@ -189,34 +124,10 @@ export class ProductAddComponent extends BaseComponent implements OnInit, OnDest
     });
   }
 
-  toGeorgianDate() {
-    const start = moment.from(this.expDate, 'fa', 'YYYY/MM/DD').locale('en').format('YYYY/MM/DD');
-    const yearStart = Number(start.substring(0, 4));
-    const monthStart = Number(start.substring(5, 7));
-    const dayStart = Number(start.substring(8, 10));
-    const startDate = new Date(yearStart, monthStart - 1, dayStart);
-    return startDate;
-  }
-
-  leaveAbstract() {
-    const x = this.myForm.controls['abstract'].value;
-    this.abstractError = !x;
-  }
-
-  editAnchors() {
-    const anchors = this.myForm.controls['anchors'] as UntypedFormArray;
-    while (anchors.length) {
-      anchors.removeAt(0);
-    }
-    this.editItem?.anchors?.forEach(plan => {
-      let p = {
-        id: plan.id,
-        name: plan.name,
-        desc: plan.desc,
-      };
-      anchors.push(this.formBuilder.group(p));
-    });
-  }
+  /*leaveDescription() {
+    const x = this.myForm.controls['description'].value;
+    this.descriptionError = !x;
+  }*/
 
   ngOnDestroy() {
     this.sub.unsubscribe();

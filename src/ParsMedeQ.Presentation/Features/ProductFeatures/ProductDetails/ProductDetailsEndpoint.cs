@@ -32,7 +32,7 @@ sealed class ProductDetailsEndpoint : EndpointHandlerBase<
             ISender sender,
             CancellationToken cancellationToken) => this.CallMediatRHandler(
             sender,
-            () => ValueTask.FromResult(PrimitiveResult.Success(new ProductDetailsQuery(0, request.Id, request.TableId))),
+            () => ValueTask.FromResult(PrimitiveResult.Success(new ProductDetailsQuery(0, request.Id))),
             cancellationToken);
 
 }
@@ -44,7 +44,7 @@ sealed class ProductDetailsApiRequestMapper : IPresentationMapper<
         ProductDetailsApiRequest src,
         CancellationToken cancellationToken)
     {
-        return ValueTask.FromResult(PrimitiveResult.Success(new ProductDetailsQuery(0, src.Id, src.TableId)));
+        return ValueTask.FromResult(PrimitiveResult.Success(new ProductDetailsQuery(0, src.Id)));
     }
 }
 sealed class ProductDetailsApiResponseMapper : IPresentationMapper<

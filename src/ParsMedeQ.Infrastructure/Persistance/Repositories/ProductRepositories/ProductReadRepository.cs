@@ -94,7 +94,6 @@ internal sealed class ProductReadRepository : GenericPrimitiveReadRepositoryBase
         string langCode,
         int UserId,
         int ProductId,
-        int TableId,
         CancellationToken cancellationToken)
     {
         var query =
