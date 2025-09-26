@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using ParsMedeQ.Contracts.Helpers;
-using ParsMedeQ.Contracts.ResourceContracts.UpdateResourceContract;
 using System.Reflection;
 
 namespace ParsMedeQ.Contracts.ProductContracts.AddProductCategoryContract;
@@ -11,9 +10,9 @@ public sealed class AddProductCategoryApiRequest
     public string Description { get; private set; } = string.Empty;
     public int? ParentId { get; private set; }
     public IFormFile? Image { get; private set; }
-    public static async ValueTask<UpdateResourceApiRequest?> BindAsync(HttpContext context, ParameterInfo _)
+    public static async ValueTask<AddProductCategoryApiRequest?> BindAsync(HttpContext context, ParameterInfo _)
     {
         var form = await context.Request.ReadFormAsync(context.RequestAborted).ConfigureAwait(false);
-        return FormBinderHelper.Bind<UpdateResourceApiRequest>(form);
+        return FormBinderHelper.Bind<AddProductCategoryApiRequest>(form);
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using ParsMedeQ.Contracts.Helpers;
-using ParsMedeQ.Contracts.ResourceContracts.UpdateResourceContract;
 using System.Reflection;
 
 namespace ParsMedeQ.Contracts.ProductContracts.UpdateProductCategoryContract;
@@ -12,9 +11,9 @@ public sealed class UpdateProductCategoryApiRequest
     public int? ParentId { get; private set; }
     public IFormFile? Image { get; private set; }
     public string OldImagePath { get; private set; } = string.Empty;
-    public static async ValueTask<UpdateResourceApiRequest?> BindAsync(HttpContext context, ParameterInfo _)
+    public static async ValueTask<UpdateProductCategoryApiRequest?> BindAsync(HttpContext context, ParameterInfo _)
     {
         var form = await context.Request.ReadFormAsync(context.RequestAborted).ConfigureAwait(false);
-        return FormBinderHelper.Bind<UpdateResourceApiRequest>(form);
+        return FormBinderHelper.Bind<UpdateProductCategoryApiRequest>(form);
     }
 }
