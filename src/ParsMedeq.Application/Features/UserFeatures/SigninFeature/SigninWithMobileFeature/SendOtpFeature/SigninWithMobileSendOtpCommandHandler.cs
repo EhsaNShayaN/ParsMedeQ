@@ -4,18 +4,15 @@ namespace ParsMedeQ.Application.Features.UserFeatures.SigninFeature.SigninWithMo
 
 public sealed class SigninWithMobileSendOtpCommandHandler : IPrimitiveResultCommandHandler<SigninWithMobileSendOtpCommand, SigninWithMobileSendOtpCommandResponse>
 {
-    private readonly IReadUnitOfWork _readUnitOfWork;
     private readonly IOtpService _otpService;
     private readonly IFeatureManager _featureManager;
 
     public SigninWithMobileSendOtpCommandHandler(
-        IReadUnitOfWork readUnitOfWork,
         IOtpService otpService,
         IFeatureManager featureManager)
     {
         this._otpService = otpService;
         this._featureManager = featureManager;
-        this._readUnitOfWork = readUnitOfWork;
     }
     public async Task<PrimitiveResult<SigninWithMobileSendOtpCommandResponse>> Handle(
         SigninWithMobileSendOtpCommand request,

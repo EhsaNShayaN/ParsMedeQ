@@ -6,4 +6,5 @@ public static class ApplicationFeatureFlags
     public const string DummyShahkarInquiry = "DummyShahkarInquiry";
     public const string DummyCivilRegistryInquiry = "DummyCivilRegistryInquiry";
     public const string DummyAddressInquiry = "DummyAddressInquiry";
+    public const string OTPWithRedis = "OTPWithRedis";
 }

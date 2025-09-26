@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
-using ParsMedeQ.Application.Features.UserFeatures.SigninFeature.SigninWithMobileFeature.SigninOrSignupIfMobileNotExistsFeature;
 using ParsMedeQ.Application.Services.TokenGeneratorService;
 using ParsMedeQ.Application.Services.UserContextAccessorServices;
 using ParsMedeQ.Domain.DomainServices.SigninService;
 using ParsMedeQ.Domain.Types.UserId;
 
-namespace Dpi.TSP.Application.Features.TaxMemoryFeatures.TspUserFeatures.SigninFeature.SigninWithMobileFeature.SigninOrSignupIfMobileNotExistsFeature;
+namespace ParsMedeQ.Application.Features.UserFeatures.SigninFeature.SigninWithMobileFeature.SigninOrSignupIfMobileNotExistsFeature;
 
 public sealed class SigninOrSignupIfMobileNotExistsCommandHandler : IPrimitiveResultCommandHandler<
     SigninOrSignupIfMobileNotExistsCommand,
