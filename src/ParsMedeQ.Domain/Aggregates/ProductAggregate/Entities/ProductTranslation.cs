@@ -8,9 +8,6 @@ public sealed class ProductTranslation : EntityBase<int>
     public string LanguageCode { get; private set; } = null!;
     public string Title { get; private set; } = null!;
     public string Description { get; private set; } = string.Empty;
-    public string Abstract { get; private set; } = string.Empty;
-    public string Anchors { get; private set; } = string.Empty;
-    public string Keywords { get; private set; } = string.Empty;
     public string Image { get; private set; } = string.Empty;
     public int? FileId { get; private set; }
     #endregion
@@ -39,9 +36,6 @@ public sealed class ProductTranslation : EntityBase<int>
                 LanguageCode = languageCode,
                 Title = title,
                 Description = description,
-                Abstract = @abstract,
-                Anchors = anchors,
-                Keywords = keywords,
                 Image = imagePath,
                 FileId = fileId
             });
@@ -56,9 +50,6 @@ public sealed class ProductTranslation : EntityBase<int>
     {
         this.Title = title;
         this.Description = description;
-        this.Abstract = @abstract;
-        this.Anchors = anchors;
-        this.Keywords = keywords;
         this.Image = imagePath;
         this.FileId = fileId;
         return this;

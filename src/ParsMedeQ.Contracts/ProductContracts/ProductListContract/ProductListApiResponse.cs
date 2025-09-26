@@ -5,10 +5,6 @@ public readonly record struct ProductListApiResponse(
     string ProductCategoryTitle,
     string Title,
     string Image,
-    string Language,
     int? Price,
     int? Discount,
-    int DownloadCount,
-    int? Ordinal,
-    bool Expired,
     string CreationDate);

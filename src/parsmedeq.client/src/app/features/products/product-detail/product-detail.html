@@ -6,7 +6,7 @@
           <div fxLayout="row wrap" fxFlex="100" fxFlex.gt-sm="100">
             <div fxFlex="100" fxFlex.gt-sm="25" class="pl-3 position-relative" [ngClass.lt-md]="'image-product'">
               <div fxLayout="row wrap" class="property-status left-0 px-3" *ngIf="(item.price ?? 0) > 0">
-                <span class="background-color bg-green">vip</span>
+                <span class="background-color bg-orange">vip</span>
               </div>
               <div fxLayout="row wrap" class="property-status">
                 <span class="background-color bg-orange px-3 py-2">{{ item.productCategoryTitle }}</span>

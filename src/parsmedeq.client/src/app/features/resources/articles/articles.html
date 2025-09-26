@@ -48,7 +48,7 @@
                         <span class="background-color bg-orange">{{ item.resourceCategoryTitle }}</span>
                       </div>
                       <div fxLayout="row wrap" class="property-status left-0" *ngIf="(item.price ?? 0) > 0">
-                        <span class="background-color bg-green">vip</span>
+                        <span class="background-color bg-orange">vip</span>
                       </div>
                       <a
                         [routerLink]="['/articles', item.id, item.title | replaceUrlSpaces ]"

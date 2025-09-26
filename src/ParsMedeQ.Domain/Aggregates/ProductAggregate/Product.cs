@@ -12,17 +12,10 @@ public sealed class Product : EntityBase<int>
 
     #region " Properties "
     public int ProductCategoryId { get; private set; }
-    public string Language { get; private set; } = string.Empty;
-    public string PublishDate { get; private set; } = string.Empty;
-    public string PublishInfo { get; private set; } = string.Empty;
-    public string Publisher { get; private set; } = string.Empty;
     public int? Price { get; private set; }
     public int? Discount { get; private set; }
-    public int DownloadCount { get; private set; }
-    public int? Ordinal { get; private set; }
     public bool Deleted { get; private set; }
     public bool Disabled { get; private set; }
-    public DateTime? ExpirationDate { get; private set; }
     public DateTime CreationDate { get; private set; }
     [NotMapped]
     public bool Registered { get; set; }
@@ -53,14 +46,8 @@ public sealed class Product : EntityBase<int>
             new Product
             {
                 ProductCategoryId = ProductCategoryId,
-                Language = language,
-                PublishDate = publishDate,
-                PublishInfo = publishInfo,
-                Publisher = publisher,
                 Price = price,
                 Discount = discount,
-                DownloadCount = 0,
-                ExpirationDate = expirationDate,
                 CreationDate = DateTime.Now
             });
 
@@ -75,13 +62,8 @@ public sealed class Product : EntityBase<int>
         DateTime? expirationDate)
     {
         this.ProductCategoryId = ProductCategoryId;
-        this.Language = language;
-        this.PublishDate = publishDate;
-        this.PublishInfo = publishInfo;
-        this.Publisher = publisher;
         this.Price = price;
         this.Discount = discount;
-        this.ExpirationDate = expirationDate;
         return ValueTask.FromResult(PrimitiveResult.Success(this));
     }
 

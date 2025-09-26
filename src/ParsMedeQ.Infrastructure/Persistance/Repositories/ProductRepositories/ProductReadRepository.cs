@@ -47,14 +47,10 @@ internal sealed class ProductReadRepository : GenericPrimitiveReadRepositoryBase
                 ProductCategoryId = res.ProductCategoryId,
                 ProductCategoryTitle = res.ProductCategory.ProductCategoryTranslations.SingleOrDefault(s => s.LanguageCode == langCode).Title ?? string.Empty,
                 Image = res.ProductTranslations.SingleOrDefault(s => s.LanguageCode == langCode).Image ?? string.Empty,
-                Language = res.Language,
                 Price = res.Price,
                 Discount = res.Discount,
-                DownloadCount = res.DownloadCount,
-                Ordinal = res.Ordinal,
                 Deleted = res.Deleted,
                 Disabled = res.Disabled,
-                ExpirationDate = res.ExpirationDate,
                 CreationDate = res.CreationDate,
             };
 
@@ -124,32 +120,16 @@ internal sealed class ProductReadRepository : GenericPrimitiveReadRepositoryBase
                 Id = res.Product.Id,
                 Title = res.ProductTranslation?.Title ?? string.Empty,
                 Description = res.ProductTranslation?.Description ?? string.Empty,
-                Abstract = res.ProductTranslation?.Abstract ?? string.Empty,
-                Anchors = res.ProductTranslation?.Anchors ?? string.Empty,
-                Keywords = res.ProductTranslation?.Keywords ?? string.Empty,
                 ProductCategoryId = res.Product.ProductCategory.Id,
                 ProductCategoryTitle = res.ProductCategoryTranslation?.Title ?? string.Empty,
                 Image = res.ProductTranslation?.Image ?? string.Empty,
                 FileId = res.ProductTranslation?.FileId,
-                Language = res.Product.Language,
-                PublishDate = res.Product.PublishDate,
-                PublishInfo = res.Product.PublishInfo,
-                Publisher = res.Product.Publisher,
                 Price = res.Product.Price,
                 Discount = res.Product.Discount,
-                DownloadCount = res.Product.DownloadCount,
-                Ordinal = res.Product.Ordinal,
                 Deleted = res.Product.Deleted,
                 Disabled = res.Product.Disabled,
-                ExpirationDate = res.Product.ExpirationDate,
                 CreationDate = res.Product.CreationDate,
-                Registered = res.Product.Registered/*,
-                ProductCategories = (
-                    from rel in this.DbContext.ProductCategoryRelations
-                    join cat in this.DbContext.ProductCategory on rel.ProductCategoryId equals cat.Id
-                    where rel.Id == res.Product.Id
-                    select new ProductCategoryDbQueryResponse(cat.Id, string.Empty)
-                ).ToArray()*/
+                Registered = res.Product.Registered
             });
     }
 

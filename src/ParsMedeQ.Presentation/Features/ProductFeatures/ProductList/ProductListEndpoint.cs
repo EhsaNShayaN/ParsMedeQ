@@ -78,12 +78,8 @@ sealed class ProductListApiResponseMapper : IPresentationMapper<
                         data.ProductCategoryTitle,
                         data.Title,
                         data.Image,
-                        data.Language,
                         data.Price,
                         data.Discount,
-                        data.DownloadCount,
-                        data.Ordinal,
-                        data.ExpirationDate.HasValue && data.ExpirationDate.Value < DateTime.Now,
                         data.CreationDate.ToPersianDate()))
                     .ToArray(), src.TotalCount, src.PageIndex, src.PageSize)
                     {

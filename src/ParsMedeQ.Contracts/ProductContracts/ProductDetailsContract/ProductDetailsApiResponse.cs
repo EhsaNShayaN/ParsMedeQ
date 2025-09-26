@@ -1,29 +1,15 @@
-﻿using ParsMedeQ.Contracts.ResourceContracts;
-
-namespace ParsMedeQ.Contracts.ProductContracts.ProductListContract;
+﻿namespace ParsMedeQ.Contracts.ProductContracts.ProductDetailsContract;
 public readonly record struct ProductDetailsApiResponse(
     int Id,
     int? ProductCategoryId,
     string ProductCategoryTitle,
     string Title,
-    string Abstract,
-    AnchorInfo[] Anchors,
     string Description,
-    string Keywords,
     string Image,
     int? FileId,
-    string Language,
-    string PublishDate,
-    string PublishInfo,
-    string Publisher,
     int? Price,
     int? Discount,
-    int DownloadCount,
-    int? Ordinal,
     bool Deleted,
     bool Disabled,
-    string ExpirationDate,
-    string ExpirationTime,
-    bool Expired,
     string CreationDate,
     bool Registered);
