@@ -17,7 +17,7 @@ internal abstract class EndpointHandlerBase<THandlerRequest, THandlerResponse, T
 {
     protected virtual bool NeedAuthentication { get; } = true;
     protected virtual bool NeedTaxPayerFile { get; } = true;
-    protected virtual bool AdminPrivilages { get; } = false;
+    protected virtual bool NeedAdminPrivilage { get; } = false;
 
     protected virtual Delegate EndpointDelegate =>
       (ISender sender, CancellationToken cancellationToken) => this.CallMediatRHandler(
