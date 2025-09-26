@@ -21,7 +21,7 @@
   "CONTACT_US": "Contact Us",
   "FAQ": "FAQ",
   "NEWS": "News",
-  "ARTICLES": "ARTICLES",
+  "ARTICLES": "Articles",
   "ARTICLE": "ARTICLE",
   "PRODUCTS": "Products",
   "PRODUCT": "Product",
@@ -30,5 +30,10 @@
   "ENTER_WITH_OTP": "Sign in using a one-time password.",
   "CHANGE_MOBILE": "Change Mobile",
   "FORGOT_YOUR_PASSWORD": "Forgot Your Password",
-  "PASSWORD": "Password"
+  "PASSWORD": "Password",
+  "ADD": "Add",
+  "EDIT": "Edit",
+  "CATEGORY": "Category",
+  "TITLE": "Title",
+  "DESCRIPTION": "Description"
 }

@@ -8,7 +8,6 @@ CREATE TABLE [dbo].[Product]
 [Publisher] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
 [Price] [int] NULL,
 [Discount] [int] NULL,
-[IsVip] [bit] NOT NULL,
 [DownloadCount] [int] NOT NULL,
 [Ordinal] [int] NULL,
 [Deleted] [bit] NOT NULL,

@@ -25,7 +25,7 @@
                    required>
             <mat-error *ngIf="myForm.controls['title'].errors?.['required']">
               تیتر
-              الزامی است.
+              {{ 'IS_REQUIRED' | translate }}
             </mat-error>
           </mat-form-field>
         </div>
@@ -36,7 +36,7 @@
                    required>
             <mat-error *ngIf="myForm.controls['abstract'].errors?.['required']">
               لید خبر
-              الزامی است.
+              {{ 'IS_REQUIRED' | translate }}
             </mat-error>
           </mat-form-field>
         </div>
@@ -50,7 +50,7 @@
             </mat-select>
             <mat-error *ngIf="myForm.controls['category'].errors?.['required']">
               دسته بندی
-              الزامی است.
+              {{ 'IS_REQUIRED' | translate }}
             </mat-error>
           </mat-form-field>
         </div>
@@ -66,7 +66,7 @@
                           id="editor0" placeholder="{{'DESCRIPTION'}}" required></angular-editor>
           <mat-error *ngIf="abstractError && myForm.controls['description'].errors?.['required']">
             توضیحات
-            الزامی است.
+            {{ 'IS_REQUIRED' | translate }}
           </mat-error>
         </div>
         <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
@@ -130,14 +130,6 @@
             <mat-icon (click)="pickerB.open()" matSuffix>watch_later</mat-icon>
           </mat-form-field>
           <ngx-mat-timepicker #pickerB color="accent"></ngx-mat-timepicker>
-        </div>
-        <div class="px-2" fxFlex="50" fxFlex.gt-xs="50">
-          <mat-slide-toggle color="warn" formControlName="showInChem"></mat-slide-toggle>
-          <mat-label>نمایش در سایت البرز 3شیمی</mat-label>
-        </div>
-        <div class="px-2" fxFlex="50" fxFlex.gt-xs="50">
-          <mat-slide-toggle color="warn" formControlName="showInAcademy"></mat-slide-toggle>
-          <mat-label>نمایش در سایت آکادمی البرز</mat-label>
         </div>
         <div class="text-center mt-3" fxFlex="100">
           <button class="uppercase" color="primary" mat-raised-button type="submit">

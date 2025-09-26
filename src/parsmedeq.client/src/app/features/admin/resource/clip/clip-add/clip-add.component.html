@@ -22,7 +22,7 @@
                    required>
             <mat-error *ngIf="myForm.controls['title'].errors?.['required']">
               عنوان
-              الزامی است.
+              {{ 'IS_REQUIRED' | translate }}
             </mat-error>
           </mat-form-field>
         </div>
@@ -36,7 +36,7 @@
             </mat-select>
             <mat-error *ngIf="myForm.controls['categoryId'].errors?.['required']">
               {{ 'CATEGORY' }}
-              الزامی است.
+              {{ 'IS_REQUIRED' | translate }}
             </mat-error>
           </mat-form-field>
         </div>
@@ -72,7 +72,7 @@
                    onlyNumber placeholder="{{'PRICE'}}">
             <mat-error *ngIf="myForm.controls['price'].errors?.['required']">
               {{ 'PRICE' }}
-              الزامی است.
+              {{ 'IS_REQUIRED' | translate }}
             </mat-error>
           </mat-form-field>
         </div>
@@ -84,7 +84,7 @@
                    onlyNumber placeholder="{{'DISCOUNT_BY_PERCENT'}}">
             <mat-error *ngIf="myForm.controls['discount'].errors?.['required']">
               {{ 'DISCOUNT' }}
-              الزامی است.
+              {{ 'IS_REQUIRED' | translate }}
             </mat-error>
           </mat-form-field>
         </div>
@@ -92,14 +92,6 @@
           <mat-label>{{ 'ABSTRACT' }}</mat-label>
           <angular-editor [config]="editorConfig" formControlName="description" id="editor0"
                           placeholder="{{'DESCRIPTION'}}"></angular-editor>
-        </div>
-        <div class="px-2" fxFlex="50" fxFlex.gt-xs="50">
-          <mat-slide-toggle color="warn" formControlName="showInChem"></mat-slide-toggle>
-          <mat-label>نمایش در سایت البرز 2شیمی</mat-label>
-        </div>
-        <div class="px-2" fxFlex="50" fxFlex.gt-xs="50">
-          <mat-slide-toggle color="warn" formControlName="showInAcademy"></mat-slide-toggle>
-          <mat-label>نمایش در سایت آکادمی البرز</mat-label>
         </div>
         <div class="text-center mt-3" fxFlex="100">
           <button class="uppercase" color="primary" mat-raised-button type="submit">

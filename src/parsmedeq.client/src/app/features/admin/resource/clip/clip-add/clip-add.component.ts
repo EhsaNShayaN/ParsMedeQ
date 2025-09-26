@@ -53,8 +53,6 @@ export class ClipAddComponent extends BaseResourceComponent implements OnInit {
             isVip: false,
             price: '',
             discount: '',
-            showInChem: true,
-            showInAcademy: true,
           });
         }
       });

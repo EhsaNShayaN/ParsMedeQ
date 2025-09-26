@@ -1,5 +1,5 @@
-import {Directive, inject, OnDestroy, OnInit} from '@angular/core';
-import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
+import {Directive, inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {FormGroupDirective, UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {ResourceCategoriesResponse, ResourceCategory} from '../../../core/models/ResourceCategoryResponse';
@@ -15,6 +15,7 @@ export class BaseCategoryComponent extends BaseComponent implements OnInit, OnDe
   toaster = inject(ToastrService);
   formBuilder = inject(UntypedFormBuilder);
   public myForm!: UntypedFormGroup;
+  @ViewChild(FormGroupDirective) formDir!: FormGroupDirective;
   resourceCategories: ResourceCategory[] = [];
   editItem?: ResourceCategory;
   /////////////////////
@@ -70,6 +71,9 @@ export class BaseCategoryComponent extends BaseComponent implements OnInit, OnDe
     }
     this.restApiService.addResourceCategory(values).subscribe((d: BaseResult<AddResult>) => {
       this.toaster.success(CustomConstants.THE_OPERATION_WAS_SUCCESSFUL, '', {});
+      if (!this.editItem) {
+        this.formDir.resetForm();
+      }
     });
   }
 

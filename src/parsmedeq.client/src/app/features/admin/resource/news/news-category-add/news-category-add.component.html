@@ -21,7 +21,7 @@
             <input [placeholder]="'TITLE'" autocomplete="off" formControlName="title" matInput required>
             <mat-error *ngIf="myForm.controls['title'].errors?.['required']">
               عنوان
-              الزامی است.
+              {{ 'IS_REQUIRED' | translate }}
             </mat-error>
           </mat-form-field>
         </div>
@@ -42,7 +42,7 @@
                       rows="5"></textarea>
             <mat-error *ngIf="myForm.controls['description'].errors?.['required']">
               توضیحات
-              الزامی است.
+              {{ 'IS_REQUIRED' | translate }}
             </mat-error>
           </mat-form-field>
         </div>

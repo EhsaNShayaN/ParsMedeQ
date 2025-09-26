@@ -12,7 +12,7 @@
   "LOGIN": "ورود",
   "LOGOUT": "خروج",
   "MOBILE": "موبایل",
-  "IS_REQUIRED": "الزامی است.",
+  "IS_REQUIRED": "{{ 'IS_REQUIRED' | translate }}",
   "IS_INVALID": "نامعتبر است.",
   "COMMENTS": "نظرات",
   "COMMENT_TEXT": "متن نظر",
@@ -30,5 +30,10 @@
   "ENTER_WITH_OTP": "ورود با رمز یکبار مصرف",
   "CHANGE_MOBILE": "تغییر موبایل",
   "FORGOT_YOUR_PASSWORD": "فراموشی رمز عبور",
-  "PASSWORD": "رمز عبور"
+  "PASSWORD": "رمز عبور",
+  "ADD": "افزودن",
+  "EDIT": "ویرایش",
+  "CATEGORY": "دسته بندی",
+  "TITLE": "عنوان",
+  "DESCRIPTION": "توضیحات"
 }

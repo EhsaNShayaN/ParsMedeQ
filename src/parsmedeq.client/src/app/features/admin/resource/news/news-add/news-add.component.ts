@@ -75,8 +75,6 @@ export class NewsAddComponent extends BaseResourceComponent implements OnInit {
             file: '',
             publishDate: null,
             isVip: false,
-            showInChem: true,
-            showInAcademy: true,
           });
         }
       });

@@ -21,7 +21,7 @@
               <mat-label>عنوان</mat-label>
               <input placeholder="عنوان" autocomplete="off" formControlName="title" matInput required>
               <mat-error *ngIf="myForm.controls['title'].errors?.['required']">
-                عنوان الزامی است.
+                عنوان {{ 'IS_REQUIRED' | translate }}
               </mat-error>
             </mat-form-field>
           </div>
@@ -34,7 +34,7 @@
                 </mat-option>
               </mat-select>
               <mat-error *ngIf="myForm.controls['productCategoryId'].errors?.['required']">
-                دسته بندی الزامی است.
+                دسته بندی {{ 'IS_REQUIRED' | translate }}
               </mat-error>
             </mat-form-field>
           </div>
@@ -98,7 +98,7 @@
             <angular-editor (blur)="leaveAbstract()" [config]="editorConfig" formControlName="abstract"
                             id="editor0" placeholder="چکیده" required></angular-editor>
             <mat-error *ngIf="abstractError && myForm.controls['abstract'].errors?.['required']">
-              چکیده الزامی است.
+              چکیده {{ 'IS_REQUIRED' | translate }}
             </mat-error>
           </div>
           <!--******************************-->
@@ -142,7 +142,7 @@
               <mat-label>قیمت</mat-label>
               <input class="text-left ltr" formControlName="price" matInput onlyNumber placeholder="قیمت">
               <mat-error *ngIf="myForm.controls['price'].errors?.['required']">
-                قیمت الزامی است.
+                قیمت {{ 'IS_REQUIRED' | translate }}
               </mat-error>
             </mat-form-field>
           </div>
@@ -152,7 +152,7 @@
               <mat-label>تخفیف بر حسب درصد</mat-label>
               <input class="text-left ltr" formControlName="discount" matInput onlyNumber placeholder="تخفیف بر حسب درصد">
               <mat-error *ngIf="myForm.controls['discount'].errors?.['required']">
-                تخفیف الزامی است.
+                تخفیف {{ 'IS_REQUIRED' | translate }}
               </mat-error>
             </mat-form-field>
           </div>

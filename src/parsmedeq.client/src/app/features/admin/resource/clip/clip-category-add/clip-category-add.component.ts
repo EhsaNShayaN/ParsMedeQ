@@ -12,5 +12,6 @@ import {ActivatedRoute} from '@angular/router';
 export class ClipCategoryAddComponent extends BaseCategoryComponent {
   constructor(private aRoute: ActivatedRoute) {
     super(Tables.Clip, aRoute);
+    console.log('ClipCategoryAddComponent');
   }
 }
