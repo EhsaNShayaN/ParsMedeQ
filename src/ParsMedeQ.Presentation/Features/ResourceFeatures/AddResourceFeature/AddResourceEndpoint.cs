@@ -63,7 +63,6 @@ sealed class AddResourceEndpoint : EndpointHandlerBase<
              request.TableId,
              request.Title,
              request.Language,
-             request.IsVip,
              request.Price,
              request.Discount,
              description,

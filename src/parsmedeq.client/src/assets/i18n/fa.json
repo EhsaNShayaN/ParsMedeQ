@@ -12,7 +12,7 @@
   "LOGIN": "ورود",
   "LOGOUT": "خروج",
   "MOBILE": "موبایل",
-  "IS_REQUIRED": "{{ 'IS_REQUIRED' | translate }}",
+  "IS_REQUIRED": "الزامی است.",
   "IS_INVALID": "نامعتبر است.",
   "COMMENTS": "نظرات",
   "COMMENT_TEXT": "متن نظر",
@@ -35,5 +35,17 @@
   "EDIT": "ویرایش",
   "CATEGORY": "دسته بندی",
   "TITLE": "عنوان",
-  "DESCRIPTION": "توضیحات"
+  "DESCRIPTION": "توضیحات",
+  "CLIP": "کلیپ",
+  "IMAGE": "تصویر",
+  "FILE": "فایل",
+  "DOC": "فایل",
+  "PRICE": "قیمت",
+  "DISCOUNT": "تخفیف",
+  "DISCOUNT_BY_PERCENT": "تخفیف(درصد)",
+  "ABSTRACT": "چکیده",
+  "ACCOUNT": "حساب کاربری",
+  "PROFILE": "پروفایل",
+  "CREATION_DATE": "تاریخ ایجاد",
+  "ACTIONS": "عملیات"
 }

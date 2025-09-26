@@ -46,7 +46,6 @@ export class NewsAddComponent extends BaseResourceComponent implements OnInit {
               language: a.language,
               file: null,
               publishDate: null,
-              isVip: a.isVip,
             });
             if (a.expirationDate) {
               const array = a.expirationDate.split('/').map(s => Number(s));
@@ -74,7 +73,6 @@ export class NewsAddComponent extends BaseResourceComponent implements OnInit {
             language: '',
             file: '',
             publishDate: null,
-            isVip: false,
           });
         }
       });

@@ -6,7 +6,6 @@ public sealed record class AddProductCommand
 (
     string Title,
     string Language,
-    bool IsVip,
     int Price,
     int Discount,
     string Description,

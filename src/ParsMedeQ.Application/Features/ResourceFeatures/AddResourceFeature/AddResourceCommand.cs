@@ -7,7 +7,6 @@ public sealed record class AddResourceCommand
     int TableId,
     string Title,
     string Language,
-    bool IsVip,
     int Price,
     int Discount,
     string Description,

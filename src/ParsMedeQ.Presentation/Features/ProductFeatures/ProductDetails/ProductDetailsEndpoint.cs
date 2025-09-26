@@ -77,7 +77,6 @@ sealed class ProductDetailsApiResponseMapper : IPresentationMapper<
                         src.Publisher,
                         src.Price,
                         src.Discount,
-                        src.IsVip,
                         src.DownloadCount,
                         src.Ordinal,
                         src.Deleted,

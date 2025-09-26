@@ -1,105 +1,92 @@
-<div *ngIf="myForm" class="p-3">
-  <div class="theme-container">
-    <div>
-      <div class="text-center">
-        <h1 class="uppercase">
-          <ng-container *ngIf="editItem; else isAdd">
-            ویرایش
-            {{ 'CLIP' }}
-            "{{ editItem.title }}"
-          </ng-container>
-          <ng-template #isAdd>
-            افزودن
-            {{ 'CLIP' }}
-          </ng-template>
-        </h1>
+@if (myForm) {
+  <div class="p-3">
+    <div class="theme-container">
+      <div>
+        <div class="text-center">
+          <h1 class="uppercase">
+            @if (editItem) {
+              {{ 'EDIT' | translate }} {{ 'CLIP' | translate }}
+              "{{ editItem.title }}"
+            } @else {
+              {{ 'ADD' | translate }} {{ 'CLIP' | translate }}
+            }
+          </h1>
+        </div>
+        <form (ngSubmit)="onFormSubmit(myForm.value)" [formGroup]="myForm" fxLayout="row wrap">
+          <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>{{ 'TITLE' | translate }}</mat-label>
+              <input [placeholder]="'TITLE' | translate" autocomplete="off" formControlName="title" matInput required>
+              <mat-error *ngIf="myForm.controls['title'].errors?.['required']">
+                {{ 'TITLE' | translate }}
+                {{ 'IS_REQUIRED' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>{{ 'CATEGORY' | translate }}</mat-label>
+              <mat-select formControlName="resourceCategoryId" placeholder="{{ 'CATEGORY' | translate}}">
+                <mat-option *ngFor="let item of clipCategories" [value]="item.id">
+                  {{ item.title }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="myForm.controls['resourceCategoryId'].errors?.['required']">
+                {{ 'CATEGORY' | translate }}
+                {{ 'IS_REQUIRED' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
+            <div class="border-radius border pad">
+              <mat-label class="ml-2 gray-color">{{ 'IMAGE' | translate }}</mat-label>
+              <input (change)="handleImageInput($event.target)" class="py-1" formControlName="image" [placeholder]="'IMAGE' | translate" type="file"/>
+              <a *ngIf="editItem?.image" [routerLink]="editItem?.image" target="_blank">
+                <img [src]="editItem?.image" class="img-item w-50"/>
+              </a>
+            </div>
+          </div>
+          <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
+            <div class="border-radius border pad">
+              <mat-label class="ml-2 gray-color">{{ 'FILE' | translate }}</mat-label>
+              <input (change)="handleFileInput($event.target)" class="py-1" formControlName="file"
+                     [placeholder]="'FILE' | translate" type="file"/>
+            </div>
+          </div>
+          <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
+            <mat-form-field appearance="outline" class="w-100 mt-2">
+              <mat-icon class="mr-1 text-muted" matPrefix>money</mat-icon>
+              <mat-label>{{ 'PRICE' | translate }}</mat-label>
+              <input class="text-left ltr" formControlName="price" matInput onlyNumber [placeholder]="'PRICE' | translate">
+              <mat-error *ngIf="myForm.controls['price'].errors?.['required']">
+                {{ 'PRICE' | translate }}
+                {{ 'IS_REQUIRED' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
+            <mat-form-field appearance="outline" class="w-100 mt-2">
+              <mat-icon class="mr-1 text-muted" matPrefix>person_outline</mat-icon>
+              <mat-label>{{ 'DISCOUNT_BY_PERCENT' | translate }}</mat-label>
+              <input class="text-left ltr" formControlName="discount" matInput onlyNumber [placeholder]="'DISCOUNT_BY_PERCENT' | translate">
+              <mat-error *ngIf="myForm.controls['discount'].errors?.['required']">
+                {{ 'DISCOUNT' | translate }}
+                {{ 'IS_REQUIRED' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="px-2 mb-4" fxFlex="100" fxFlex.gt-xs="100">
+            <mat-label>{{ 'DESCRIPTION' | translate }}</mat-label>
+            <angular-editor [config]="editorConfig" formControlName="description" id="editor0" [placeholder]="'DESCRIPTION' | translate"></angular-editor>
+          </div>
+          <div class="text-center mt-3" fxFlex="100">
+            <button class="uppercase" color="primary" mat-raised-button type="submit">
+              {{ (editItem ? 'EDIT' : 'ADD') | translate }}
+              {{ 'CLIP' | translate }}
+            </button>
+          </div>
+        </form>
       </div>
-      <form (ngSubmit)="onFormSubmit(myForm.value)" [formGroup]="myForm" fxLayout="row wrap">
-        <div class="px-2" fxFlex="100" fxFlex.gt-xs="33.3">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>عنوان</mat-label>
-            <input [placeholder]="'TITLE'" autocomplete="off" formControlName="title" matInput
-                   required>
-            <mat-error *ngIf="myForm.controls['title'].errors?.['required']">
-              عنوان
-              {{ 'IS_REQUIRED' | translate }}
-            </mat-error>
-          </mat-form-field>
-        </div>
-        <div class="px-2" fxFlex="100" fxFlex.gt-xs="33.3">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>{{ 'CATEGORY' }}</mat-label>
-            <mat-select formControlName="categoryId" placeholder="{{'CATEGORY'}}">
-              <mat-option *ngFor="let item of clipCategories" [value]="item.id">
-                {{ item.title }}
-              </mat-option>
-            </mat-select>
-            <mat-error *ngIf="myForm.controls['categoryId'].errors?.['required']">
-              {{ 'CATEGORY' }}
-              {{ 'IS_REQUIRED' | translate }}
-            </mat-error>
-          </mat-form-field>
-        </div>
-        <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
-          <div class="border-radius border pad">
-            <mat-label class="ml-2 gray-color">{{ 'IMAGE' }} {{ 'CLIP' }}</mat-label>
-            <input (change)="handleImageInput($event.target)" class="py-1" formControlName="image"
-                   placeholder="{{'IMAGE'}}" type="file"/>
-            <a *ngIf="editItem?.image" [routerLink]="editItem?.image" target="_blank">
-              <img [src]="editItem?.image" class="img-item w-50"/>
-            </a>
-          </div>
-        </div>
-        <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
-          <div class="border-radius border pad">
-            <mat-label class="ml-2 gray-color">{{ 'FILE' }} {{ 'CLIP' }}</mat-label>
-            <input (change)="handleFileInput($event.target)" class="py-1" formControlName="file"
-                   placeholder="{{'FILE'}}" type="file"/>
-          </div>
-        </div>
-        <div class="px-2" fxFlex="100" fxFlex.gt-xs="20">
-          <mat-label>{{ 'VIP' }}</mat-label>
-          <div>
-            <mat-slide-toggle color="warn" formControlName="isVip" labelPosition="before">
-            </mat-slide-toggle>
-          </div>
-        </div>
-        <div class="px-2" fxFlex="100" fxFlex.gt-xs="40">
-          <mat-form-field appearance="outline" class="w-100 mt-2">
-            <mat-icon class="mr-1 text-muted" matPrefix>money</mat-icon>
-            <mat-label>{{ 'PRICE' }}</mat-label>
-            <input class="text-left ltr" formControlName="price" matInput
-                   onlyNumber placeholder="{{'PRICE'}}">
-            <mat-error *ngIf="myForm.controls['price'].errors?.['required']">
-              {{ 'PRICE' }}
-              {{ 'IS_REQUIRED' | translate }}
-            </mat-error>
-          </mat-form-field>
-        </div>
-        <div class="px-2" fxFlex="100" fxFlex.gt-xs="40">
-          <mat-form-field appearance="outline" class="w-100 mt-2">
-            <mat-icon class="mr-1 text-muted" matPrefix>person_outline</mat-icon>
-            <mat-label>{{ 'DISCOUNT_BY_PERCENT' }}</mat-label>
-            <input class="text-left ltr" formControlName="discount" matInput
-                   onlyNumber placeholder="{{'DISCOUNT_BY_PERCENT'}}">
-            <mat-error *ngIf="myForm.controls['discount'].errors?.['required']">
-              {{ 'DISCOUNT' }}
-              {{ 'IS_REQUIRED' | translate }}
-            </mat-error>
-          </mat-form-field>
-        </div>
-        <div class="px-2 mb-4" fxFlex="100" fxFlex.gt-xs="100">
-          <mat-label>{{ 'ABSTRACT' }}</mat-label>
-          <angular-editor [config]="editorConfig" formControlName="description" id="editor0"
-                          placeholder="{{'DESCRIPTION'}}"></angular-editor>
-        </div>
-        <div class="text-center mt-3" fxFlex="100">
-          <button class="uppercase" color="primary" mat-raised-button type="submit">
-            {{ (editItem ? 'EDIT' : 'ADD') }}
-            {{ 'CLIP' }}
-          </button>
-        </div>
-      </form>
     </div>
   </div>
-</div>
+}

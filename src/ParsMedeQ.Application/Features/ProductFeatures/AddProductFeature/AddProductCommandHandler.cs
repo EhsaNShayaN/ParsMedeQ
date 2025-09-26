@@ -27,7 +27,6 @@ public sealed class AddProductCommandHandler : IPrimitiveResultCommandHandler<Ad
             request.Publisher,
             request.Price,
             request.Discount,
-            request.IsVip,
             request.ExpirationDate)
             .Map(Product => UploadFile(this._fileService, request.Image, request.ImageExtension, "Images", cancellationToken)
                 .Map(imagePath => (Product, imagePath)))

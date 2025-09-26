@@ -36,8 +36,7 @@ export class ClipAddComponent extends BaseResourceComponent implements OnInit {
               image: null,
               file: null,
               authors: null,
-              categoryId: this.editItem?.resourceCategoryId,
-              isVip: this.editItem?.isVip,
+              resourceCategoryId: this.editItem?.resourceCategoryId,
               price: this.editItem?.price,
               discount: this.editItem?.discount,
             });
@@ -49,8 +48,7 @@ export class ClipAddComponent extends BaseResourceComponent implements OnInit {
             image: null,
             file: null,
             authors: null,
-            categoryId: null,
-            isVip: false,
+            resourceCategoryId: null,
             price: '',
             discount: '',
           });

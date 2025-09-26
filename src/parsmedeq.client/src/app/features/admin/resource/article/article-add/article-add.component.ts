@@ -51,7 +51,6 @@ export class ArticleAddComponent extends BaseResourceComponent implements OnInit
               language: this.editItem.language,
               fileId: null,
               publishDate: this.editItem.publishDate,
-              isVip: this.editItem.isVip,
               price: this.editItem.price,
               discount: this.editItem.discount,
             });
@@ -79,7 +78,6 @@ export class ArticleAddComponent extends BaseResourceComponent implements OnInit
             language: 'sdfdsfds',
             fileId: null,
             publishDate: '1401/01/12',
-            isVip: false,
             price: 12340,
             discount: 10,
           });

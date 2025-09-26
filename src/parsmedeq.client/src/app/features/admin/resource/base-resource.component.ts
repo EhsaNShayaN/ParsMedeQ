@@ -1,5 +1,5 @@
-import {Directive, inject, OnDestroy} from '@angular/core';
-import {UntypedFormGroup} from '@angular/forms';
+import {Directive, inject, OnDestroy, ViewChild} from '@angular/core';
+import {FormGroupDirective, UntypedFormGroup} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
 import {BaseComponent} from '../../../base-component';
 import {Resource} from '../../../core/models/ResourceResponse';
@@ -15,6 +15,7 @@ export class BaseResourceComponent extends BaseComponent implements OnDestroy {
   sub: any;
   //////////////////////
   myForm!: UntypedFormGroup;
+  @ViewChild(FormGroupDirective) formDir!: FormGroupDirective;
   expDate: any;
   expTime: any;
   pubDate: any;
@@ -69,6 +70,9 @@ export class BaseResourceComponent extends BaseComponent implements OnDestroy {
     delete values.fileId;
     this.restApiService.addResource(values, this.image, this.file).subscribe((d: BaseResult<AddResult>) => {
       this.toaster.success(CustomConstants.THE_OPERATION_WAS_SUCCESSFUL, '', {});
+      if (!this.editItem) {
+        this.formDir.resetForm();
+      }
     });
 
   }

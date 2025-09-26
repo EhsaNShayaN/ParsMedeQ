@@ -74,7 +74,6 @@ sealed class EditProductEndpoint : EndpointHandlerBase<
              request.Publisher,
              request.Price,
              request.Discount,
-             request.IsVip,
              string.IsNullOrEmpty(request.ExpirationDate) ? default : CreateExpirationDate(request.ExpirationDate, request.ExpirationTime),
              imageBytes,
              imageExtension,

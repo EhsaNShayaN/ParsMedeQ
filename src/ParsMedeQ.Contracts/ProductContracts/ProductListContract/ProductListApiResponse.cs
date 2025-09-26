@@ -8,7 +8,6 @@ public readonly record struct ProductListApiResponse(
     string Language,
     int? Price,
     int? Discount,
-    bool IsVip,
     int DownloadCount,
     int? Ordinal,
     bool Expired,

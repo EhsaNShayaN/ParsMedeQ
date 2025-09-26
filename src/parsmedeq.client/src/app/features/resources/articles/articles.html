@@ -47,7 +47,7 @@
                       <div fxLayout="row wrap" class="property-status">
                         <span class="background-color bg-orange">{{ item.resourceCategoryTitle }}</span>
                       </div>
-                      <div fxLayout="row wrap" class="property-status left-0" *ngIf="item.isVip">
+                      <div fxLayout="row wrap" class="property-status left-0" *ngIf="(item.price ?? 0) > 0">
                         <span class="background-color bg-green">vip</span>
                       </div>
                       <a

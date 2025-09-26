@@ -22,7 +22,6 @@ public sealed class Resource : EntityBase<int>
     public string Publisher { get; private set; } = string.Empty;
     public int? Price { get; private set; }
     public int? Discount { get; private set; }
-    public bool IsVip { get; private set; }
     public int DownloadCount { get; private set; }
     public int? Ordinal { get; private set; }
     public bool Deleted { get; private set; }
@@ -56,7 +55,6 @@ public sealed class Resource : EntityBase<int>
         string publisher,
         int price,
         int discount,
-        bool isVip,
         DateTime? expirationDate) => PrimitiveResult.Success(
             new Resource
             {
@@ -68,7 +66,6 @@ public sealed class Resource : EntityBase<int>
                 Publisher = publisher,
                 Price = price,
                 Discount = discount,
-                IsVip = isVip,
                 DownloadCount = 0,
                 ExpirationDate = expirationDate,
                 CreationDate = DateTime.Now
@@ -82,7 +79,6 @@ public sealed class Resource : EntityBase<int>
         string publisher,
         int price,
         int discount,
-        bool isVip,
         DateTime? expirationDate)
     {
         this.ResourceCategoryId = resourceCategoryId;
@@ -92,7 +88,6 @@ public sealed class Resource : EntityBase<int>
         this.Publisher = publisher;
         this.Price = price;
         this.Discount = discount;
-        this.IsVip = isVip;
         this.ExpirationDate = expirationDate;
         return ValueTask.FromResult(PrimitiveResult.Success(this));
     }
@@ -105,7 +100,6 @@ public sealed class Resource : EntityBase<int>
         string publisher,
         int price,
         int discount,
-        bool isVip,
         DateTime? expirationDate,
         string langCode,
         string title,
@@ -116,7 +110,7 @@ public sealed class Resource : EntityBase<int>
         string imagePath,
         int? fileId)
     {
-        return this.Update(resourceCategoryId, language, publishDate, publishInfo, publisher, price, discount, isVip, expirationDate)
+        return this.Update(resourceCategoryId, language, publishDate, publishInfo, publisher, price, discount, expirationDate)
              .Map(_ => this.UpdateTranslation(langCode, title, description, @abstract, anchors, keywords, imagePath, fileId).Map(() => this));
     }
     #endregion

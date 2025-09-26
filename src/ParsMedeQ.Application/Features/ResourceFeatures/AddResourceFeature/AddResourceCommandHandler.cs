@@ -28,7 +28,6 @@ public sealed class AddResourceCommandHandler : IPrimitiveResultCommandHandler<A
             request.Publisher,
             request.Price,
             request.Discount,
-            request.IsVip,
             request.ExpirationDate)
             .Map(resource => UploadFile(this._fileService, request.Image, request.ImageExtension, "Images", cancellationToken)
                 .Map(imagePath => (resource, imagePath)))

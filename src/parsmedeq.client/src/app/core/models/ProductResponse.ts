@@ -26,7 +26,6 @@ export class Product {
   publisher!: string;
   price?: number;
   discount?: number;
-  isVip!: boolean;
   downloadCount!: number;
   ordinal?: number;
   expirationDate!: string;
@@ -59,7 +58,6 @@ export interface AddProductRequest {
   imagePath?: string;
   mimeType: string;
   language: string;
-  isVip: boolean;
   price?: number;
   discount?: number;
   description: string;

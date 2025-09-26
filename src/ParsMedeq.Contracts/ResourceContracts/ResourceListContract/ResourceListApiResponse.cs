@@ -9,7 +9,6 @@ public readonly record struct ResourceListApiResponse(
     string Language,
     int? Price,
     int? Discount,
-    bool IsVip,
     int DownloadCount,
     int? Ordinal,
     bool Expired,

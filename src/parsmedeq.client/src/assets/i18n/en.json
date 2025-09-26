@@ -35,5 +35,17 @@
   "EDIT": "Edit",
   "CATEGORY": "Category",
   "TITLE": "Title",
-  "DESCRIPTION": "Description"
+  "DESCRIPTION": "Description",
+  "CLIP": "Clip",
+  "IMAGE": "Image",
+  "FILE": "File",
+  "DOC": "Doc",
+  "PRICE": "Price",
+  "DISCOUNT": "Discount",
+  "DISCOUNT_BY_PERCENT": "Discount by percent",
+  "ABSTRACT": "Abstract",
+  "ACCOUNT": "Account",
+  "PROFILE": "Profile",
+  "CREATION_DATE": "Creation date",
+  "ACTIONS": "Actions"
 }

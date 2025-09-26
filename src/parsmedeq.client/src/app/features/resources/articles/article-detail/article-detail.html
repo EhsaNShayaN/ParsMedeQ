@@ -5,7 +5,7 @@
         <div fxLayout="row wrap" class="agent-wrapper">
           <div fxLayout="row wrap" fxFlex="100" fxFlex.gt-sm="100">
             <div fxFlex="100" fxFlex.gt-sm="25" class="pl-3 position-relative" [ngClass.lt-md]="'image-article'">
-              <div fxLayout="row wrap" class="property-status left-0 px-3" *ngIf="item.isVip">
+              <div fxLayout="row wrap" class="property-status left-0 px-3" *ngIf="(item.price ?? 0) > 0">
                 <span class="background-color bg-green">vip</span>
               </div>
               <div fxLayout="row wrap" class="property-status">

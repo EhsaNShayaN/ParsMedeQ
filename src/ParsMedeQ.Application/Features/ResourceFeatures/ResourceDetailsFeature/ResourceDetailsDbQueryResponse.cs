@@ -19,7 +19,6 @@ public sealed class ResourceDetailsDbQueryResponse
     public string Publisher { get; set; } = string.Empty;
     public int? Price { get; set; }
     public int? Discount { get; set; }
-    public bool IsVip { get; set; }
     public int DownloadCount { get; set; }
     public int? Ordinal { get; set; }
     public bool Deleted { get; set; }

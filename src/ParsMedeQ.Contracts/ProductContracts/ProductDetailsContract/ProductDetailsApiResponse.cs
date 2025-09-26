@@ -18,7 +18,6 @@ public readonly record struct ProductDetailsApiResponse(
     string Publisher,
     int? Price,
     int? Discount,
-    bool IsVip,
     int DownloadCount,
     int? Ordinal,
     bool Deleted,

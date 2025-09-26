@@ -18,7 +18,6 @@ public sealed record class UpdateProductCommand(
     string Publisher,
     int Price,
     int Discount,
-    bool IsVip,
     DateTime? ExpirationDate,
     byte[] Image,
     string ImageExtension,

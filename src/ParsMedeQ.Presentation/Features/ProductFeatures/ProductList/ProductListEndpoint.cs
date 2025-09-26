@@ -81,7 +81,6 @@ sealed class ProductListApiResponseMapper : IPresentationMapper<
                         data.Language,
                         data.Price,
                         data.Discount,
-                        data.IsVip,
                         data.DownloadCount,
                         data.Ordinal,
                         data.ExpirationDate.HasValue && data.ExpirationDate.Value < DateTime.Now,

@@ -43,7 +43,7 @@ public sealed class UpdateResourceCommandHandler : IPrimitiveResultCommandHandle
                 _ => langCode.Equals(Constants.LangCode_Farsi, StringComparison.OrdinalIgnoreCase),
                 data => data.resource.Update(
                     request.ResourceCategoryId, request.Language, request.PublishDate, request.PublishInfo, request.Publisher,
-                    request.Price, request.Discount, request.IsVip, request.ExpirationDate, langCode, request.Title, request.Description,
+                    request.Price, request.Discount, request.ExpirationDate, langCode, request.Title, request.Description,
                     request.Abstract, request.Anchors, request.Keywords, data.imagePath ?? request.OldImagePath, data.media?.Id ?? request.OldFileId),
                 data => data.resource.UpdateTranslation(langCode, request.Title, request.Description, request.Abstract, request.Anchors, request.Keywords,
                     data.imagePath ?? request.OldImagePath, data.media?.Id ?? request.OldFileId)

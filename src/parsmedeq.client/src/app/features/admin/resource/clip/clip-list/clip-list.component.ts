@@ -9,7 +9,7 @@ import {BaseResourcesComponent} from '../../base-resources.component';
   standalone: false
 })
 export class ClipListComponent extends BaseResourcesComponent {
-  displayedColumns: string[] = [/*'row', */'title', 'resourceCategoryTitle', 'publishInfo', 'publisher', 'image', 'creationDate', 'actions'];
+  displayedColumns: string[] = [/*'row', */'title', 'resourceCategoryTitle', 'price', 'discount', 'image', 'creationDate', 'actions'];
 
   constructor() {
     super(Tables.Clip);
@@ -17,27 +17,12 @@ export class ClipListComponent extends BaseResourcesComponent {
 
   getColName(column: string) {
     column = column.toLowerCase();
-    if (column === 'title') {
-      column = 'عنوان';
-    }
     if (column === 'resourcecategorytitle') {
-      column = 'دسته بندی';
-    }
-    if (column === 'publishinfo') {
-      column = 'اطلاعات چاپ';
-    }
-    if (column === 'publisher') {
-      column = 'ناشر';
-    }
-    if (column === 'image') {
-      column = 'تصویر';
+      column = 'category';
     }
     if (column === 'creationdate') {
-      column = 'تاریخ ایجاد';
+      column = 'creation_date';
     }
-    if (column === 'actions') {
-      column = 'عملیات';
-    }
-    return column.toUpperCase();
+    return this.getTranslateValue(column.toUpperCase());
   }
 }
