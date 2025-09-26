@@ -4,7 +4,7 @@ import {map, Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {endpoint} from './services/cookie-utils';
 import {AddResourceRequest, Resource, ResourceRequest, ResourceResponse, ResourcesRequest} from './models/ResourceResponse';
-import {BaseResult} from './models/BaseResult';
+import {AddResult, BaseResult} from './models/BaseResult';
 import {ResourceCategoriesResponse} from './models/ResourceCategoryResponse';
 import {AuthService} from './services/auth.service';
 import {ProductCategoriesResponse} from './models/ProductCategoryResponse';
@@ -90,11 +90,14 @@ export class RestApiService {
     );
   }
 
-  addProductCategory(model: any): Observable<any> {
-    return this.http.post<BaseResult<boolean>>(`${endpoint()}product/category/${model.id ? 'edit' : 'add'}`, model).pipe(
+  addProductCategory(model: any, image: any = null): Observable<any> {
+    const formData: FormData = this.toFormData(model);
+    formData.append('image', image);
+    return this.http.post<BaseResult<AddResult>>(`${endpoint()}product/category/${model.id ? 'edit' : 'add'}`, formData).pipe(
       catchError(this.handleError)
     );
   }
+
 
   addProduct(model: AddProductRequest, image: any = null, file: any = null): Observable<any> {
     const formData: FormData = this.toFormData(model);

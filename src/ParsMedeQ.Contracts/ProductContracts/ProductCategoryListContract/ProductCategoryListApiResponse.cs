@@ -4,5 +4,5 @@ public readonly record struct ProductCategoryListApiResponse(
     string Title,
     string Description,
     int? ParentId,
-    string CreationDate
-);
+    string CreationDate,
+    string Image);

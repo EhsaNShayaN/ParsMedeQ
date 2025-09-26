@@ -1,7 +1,7 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
-import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
+import {FormGroupDirective, UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {ProductCategoriesResponse, ProductCategory} from '../../../../core/models/ProductCategoryResponse';
 import {BaseComponent} from '../../../../base-component';
 import {AddResult, BaseResult} from '../../../../core/models/BaseResult';
@@ -16,10 +16,13 @@ import {CustomConstants} from '../../../../core/constants/custom.constants';
 export class ProductCategoryAddComponent extends BaseComponent implements OnInit, OnDestroy {
   lang: string;
   public myForm!: UntypedFormGroup;
+  @ViewChild(FormGroupDirective) formDir!: FormGroupDirective;
   productCategories: ProductCategory[] = [];
   editItem?: ProductCategory;
   /////////////////////
   private sub: any;
+  image?: File;
+  oldImagePath: string = '';
 
   constructor(private toaster: ToastrService,
               protected activatedRoute: ActivatedRoute,
@@ -42,6 +45,7 @@ export class ProductCategoryAddComponent extends BaseComponent implements OnInit
           title: [this.editItem?.title, Validators.required],
           description: this.editItem?.description,
           parentId: this.editItem?.parentId,
+          imagePath: null
         });
         if (this.editItem) {
           this.hideSingleLangControls();
@@ -50,9 +54,19 @@ export class ProductCategoryAddComponent extends BaseComponent implements OnInit
     });
   }
 
+  handleImageInput(target: any) {
+    if (target.files && target.files[0]) {
+      this.image = target.files[0];
+    }
+  }
+
+  deleteImage() {
+    this.oldImagePath = '';
+  }
+
   hideSingleLangControls() {
     if (this.lang !== 'fa') {
-      const validFields = ['title', 'description'];
+      const validFields = ['imagePath', 'title', 'description'];
       Object.keys(this.myForm.controls).filter(s => !validFields.includes(s)).forEach(key => {
         this.myForm.get(key)?.disable();
       });
@@ -66,9 +80,18 @@ export class ProductCategoryAddComponent extends BaseComponent implements OnInit
     }
     if (this.editItem) {
       values.id = this.editItem.id;
+      if (!this.image) {
+        values.oldImagePath = this.oldImagePath;
+      }
     }
-    this.restApiService.addProductCategory(values).subscribe((d: BaseResult<AddResult>) => {
-      this.toaster.success(CustomConstants.THE_OPERATION_WAS_SUCCESSFUL, '', {});
+    delete values.imagePath;
+    this.restApiService.addProductCategory(values, this.image).subscribe((d: BaseResult<AddResult>) => {
+      if (d.data.changed) {
+        this.toaster.success(CustomConstants.THE_OPERATION_WAS_SUCCESSFUL, '', {});
+        if (!this.editItem) {
+          this.formDir.resetForm();
+        }
+      }
     });
   }
 

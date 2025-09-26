@@ -1,53 +1,54 @@
-<div *ngIf="myForm" class="p-3">
-  <div class="theme-container">
-    <div>
-      <div class="text-center">
-        <h1 class="uppercase">
-          <ng-container *ngIf="editItem; else isAdd">
-            ویرایش دسته بندی
-            "{{ editItem.title }}"
-          </ng-container>
-          <ng-template #isAdd>
-            افزودن دسته بندی
-          </ng-template>
-        </h1>
+@if (myForm) {
+  <div class="p-3">
+    <div class="theme-container">
+      <div>
+        <div class="text-center">
+          <h1 class="uppercase">
+            @if (editItem) {
+              {{ 'EDIT' | translate }} {{ 'CATEGORY' | translate }}
+              "{{ editItem.title }}"
+            } @else {
+              {{ 'ADD' | translate }} {{ 'CATEGORY' | translate }}
+            }
+          </h1>
+        </div>
+        <form (ngSubmit)="onFormSubmit(myForm.value)" [formGroup]="myForm" fxLayout="row wrap">
+          <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>عنوان</mat-label>
+              <input placeholder="عنوان" autocomplete="off" formControlName="title" matInput required>
+              <mat-error *ngIf="myForm.controls['title'].errors?.['required']">
+                عنوان {{ 'IS_REQUIRED' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>دسته بندی</mat-label>
+              <mat-select formControlName="parentId" placeholder="دسته بندی">
+                <mat-option *ngFor="let item of resourceCategories" [value]="item.id">
+                  {{ item.title }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="px-2" fxFlex="100" fxFlex.gt-xs="100">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>توضیحات</mat-label>
+              <textarea formControlName="description" matInput placeholder="توضیحات" rows="5"></textarea>
+              <mat-error *ngIf="myForm.controls['description'].errors?.['required']">
+                توضیحات {{ 'IS_REQUIRED' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="text-center mt-2" fxFlex="100">
+            <button class="uppercase" color="primary" mat-raised-button type="submit">
+              {{ (editItem ? 'ویرایش' : 'افزودن') }}
+              دسته بندی
+            </button>
+          </div>
+        </form>
       </div>
-      <form (ngSubmit)="onFormSubmit(myForm.value)" [formGroup]="myForm" fxLayout="row wrap">
-        <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>عنوان</mat-label>
-            <input placeholder="عنوان" autocomplete="off" formControlName="title" matInput required>
-            <mat-error *ngIf="myForm.controls['title'].errors?.['required']">
-              عنوان {{ 'IS_REQUIRED' | translate }}
-            </mat-error>
-          </mat-form-field>
-        </div>
-        <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>دسته بندی</mat-label>
-            <mat-select formControlName="parentId" placeholder="دسته بندی">
-              <mat-option *ngFor="let item of resourceCategories" [value]="item.id">
-                {{ item.title }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div class="px-2" fxFlex="100" fxFlex.gt-xs="100">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>توضیحات</mat-label>
-            <textarea formControlName="description" matInput placeholder="توضیحات" rows="5"></textarea>
-            <mat-error *ngIf="myForm.controls['description'].errors?.['required']">
-              توضیحات {{ 'IS_REQUIRED' | translate }}
-            </mat-error>
-          </mat-form-field>
-        </div>
-        <div class="text-center mt-2" fxFlex="100">
-          <button class="uppercase" color="primary" mat-raised-button type="submit">
-            {{ (editItem ? 'ویرایش' : 'افزودن') }}
-            دسته بندی
-          </button>
-        </div>
-      </form>
     </div>
   </div>
-</div>
+}

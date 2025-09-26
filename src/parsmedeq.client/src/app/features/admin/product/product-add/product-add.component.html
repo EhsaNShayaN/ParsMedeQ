@@ -40,7 +40,7 @@
           </div>
           <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
             <div class="border-radius border pad">
-              <mat-label class="ml-2 gray-color">تصویر</mat-label>
+              <mat-label class="ml-2 gray-color">{{ 'IMAGE' | translate }}</mat-label>
               <input (change)="handleImageInput($event.target)" class="py-1" formControlName="imagePath" placeholder="تصویر" type="file"/>
               <button *ngIf="oldImagePath" mat-icon-button (click)="deleteImage()" class="mx-3" color="primary"
                       matTooltip="حذف تصویر" matTooltipPosition="after" type="button">

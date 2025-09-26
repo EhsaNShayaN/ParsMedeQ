@@ -6,6 +6,9 @@
     <th *matHeaderCellDef mat-header-cell>{{ getColName(column) }}</th>
     <td *matCellDef="let element; let i = index;" mat-cell>
       <ng-container [ngSwitch]="column">
+        <ng-container *ngSwitchCase="'image'">
+          <img class="img-square w-100 he-100" src="{{element.image}}"/>
+        </ng-container>
         <ng-container *ngSwitchCase="'parentId'">
           {{ element.parentTitle }}
         </ng-container>

@@ -67,7 +67,8 @@ sealed class ProductCategoryListApiResponseMapper : IPresentationMapper<
                         data.Title,
                         data.Description,
                         data.ParentId,
-                        data.CreationDate.ToPersianDate()))
+                        data.CreationDate.ToPersianDate(),
+                        data.Image))
                     .ToArray()));
     }
 }

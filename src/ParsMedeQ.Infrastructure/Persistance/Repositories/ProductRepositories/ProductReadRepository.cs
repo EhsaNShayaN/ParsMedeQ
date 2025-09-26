@@ -84,7 +84,8 @@ internal sealed class ProductReadRepository : GenericPrimitiveReadRepositoryBase
                     ParentId = rc.ParentId,
                     CreationDate = rc.CreationDate,
                     Title = a.Title,
-                    Description = a.Description
+                    Description = a.Description,
+                    Image = a.Image,
                 };
         return q.Run(q => q.ToArrayAsync(cancellationToken), PrimitiveError.Create("", "آیتمی با شناسه مورد نظر پیدا نشد"));
     }

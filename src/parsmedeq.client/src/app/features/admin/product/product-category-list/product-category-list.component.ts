@@ -5,6 +5,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {tap} from 'rxjs';
 import {Product} from '../../../../core/models/ProductResponse';
+import {Helpers} from '../../../../core/helpers';
 
 @Component({
   selector: 'app-product-category-list',
@@ -13,7 +14,7 @@ import {Product} from '../../../../core/models/ProductResponse';
   standalone: false
 })
 export class ProductCategoryListComponent extends BaseComponent implements OnInit, AfterViewInit {
-  columnsToDisplay: string[] = [/*'row', */'title', 'parentId', 'creationDate', 'actions'];
+  columnsToDisplay: string[] = [/*'row', */'title', 'parentId', 'image', 'creationDate', 'actions'];
   languages: string[] = [];
   colors: string[] = ['warn', 'primary', 'success', 'secondary', 'info', 'danger'];
   ///////////
@@ -22,12 +23,13 @@ export class ProductCategoryListComponent extends BaseComponent implements OnIni
   @ViewChild(MatSort, {static: true}) sort: MatSort | undefined;
   totalCount = 0;
 
-  constructor() {
+  constructor(private helpers: Helpers) {
     super();
     this.languages = this.translateService.getLangs();
   }
 
   ngOnInit(): void {
+    this.helpers.setPaginationLang();
     this.getServerData();
   }
 
@@ -67,7 +69,7 @@ export class ProductCategoryListComponent extends BaseComponent implements OnIni
     }*/
   }
 
-  getColName(column: string) {
+  getColName0(column: string) {
     column = column.toLowerCase();
     if (column === 'title') {
       column = 'عنوان';
@@ -88,5 +90,17 @@ export class ProductCategoryListComponent extends BaseComponent implements OnIni
       column = 'عملیات';
     }
     return column.toUpperCase();
+  }
+
+
+  getColName(column: string) {
+    column = column.toUpperCase();
+    if (column === 'PARENTID') {
+      column = 'CATEGORY';
+    }
+    if (column === 'CREATIONDATE') {
+      column = 'CREATION_DATE';
+    }
+    return this.getTranslateValue(column);
   }
 }
