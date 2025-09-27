@@ -1,5 +1,4 @@
 ﻿using Medallion.Threading;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.FeatureManagement;
 using ParsMedeQ.Application;
 using ParsMedeQ.Application.Errors;
@@ -12,53 +11,23 @@ using SRH.CacheProvider;
 namespace ParsMedeQ.Infrastructure.Services.OTP;
 public sealed class OtpService : IOtpService
 {
-    private readonly IMemoryCache _memoryCache;
     private readonly ICacheProvider _cacheProvider;
     private readonly ISmsSenderService _smsSenderService;
     private readonly IEmailSenderService _emailSenderService;
     private readonly IDistributedLockProvider _distributedLockProvider;
-    private readonly MemoryCacheEntryOptions cacheEntryOptions;
-    private readonly IFeatureManager _featureManager;
 
     public OtpService(
-        IMemoryCache memoryCache,
         ICacheProvider cacheProvider,
         ISmsSenderService smsSenderService,
         IEmailSenderService emailSenderService,
-        IDistributedLockProvider distributedLockProvider,
-        IFeatureManager featureManager)
+        IDistributedLockProvider distributedLockProvider)
     {
-        this._memoryCache = memoryCache;
         this._cacheProvider = cacheProvider;
         this._smsSenderService = smsSenderService;
         this._emailSenderService = emailSenderService;
         this._distributedLockProvider = distributedLockProvider;
-        this.cacheEntryOptions = new MemoryCacheEntryOptions
-        {
-            AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5),
-            SlidingExpiration = TimeSpan.FromMinutes(2)
-        };
-        this._featureManager = featureManager;
     }
 
-    public PrimitiveResult SendOtp(string mobile)
-    {
-        Random rnd = new Random();
-        int code = rnd.Next(100000, 999999);  // creates a number by 6 digit
-        // TODO: send sms
-        this._memoryCache.Set(mobile, code, this.cacheEntryOptions);
-        return PrimitiveResult.Success();
-    }
-    public PrimitiveResult CheckOtp(
-        string mobile,
-        string otp)
-    {
-        // todo: check otp on memory
-        var result = this._memoryCache.Get(mobile)!.ToString();
-        if (!string.IsNullOrEmpty(result) && otp == result)
-            return PrimitiveResult.Success();
-        return PrimitiveResult.Failure("", "Code is Wrong");
-    }
     public async ValueTask<PrimitiveResult<string>> SendSMS(
         MobileType mobile,
         CacheTokenKey token,
@@ -107,19 +76,13 @@ public sealed class OtpService : IOtpService
         OtpServiceValidationRemoveKeyStrategy removeStrategy,
         CancellationToken cancellationToken)
     {
-        if ((await this.HasRedis()).Value)
+        using var handle = await this._distributedLockProvider.TryAcquireLockAsync(token.GetCacheKey(), TimeSpan.Zero, cancellationToken);
+        if (handle is null)
         {
-            using var handle = await this._distributedLockProvider.TryAcquireLockAsync(token.GetCacheKey(), TimeSpan.Zero, cancellationToken);
-            if (handle is null)
-            {
-                return ApplicationErrors.CreateTooManyRequestsError();
-            }
+            return ApplicationErrors.CreateTooManyRequestsError();
         }
 
-        return await this.HasRedis()
-        .Map(hasRedis => hasRedis
-        ? this._cacheProvider.Get(token, string.Empty, cancellationToken)
-        : this.GetFromMemory(token))
+        return await this._cacheProvider.Get(token, string.Empty, cancellationToken)
         .Map(value => !string.IsNullOrWhiteSpace(value) && value.Equals(otp))
         .Map(result =>
         {
@@ -137,20 +100,6 @@ public sealed class OtpService : IOtpService
             _ => PrimitiveResult.Failure("", "خطا در بررسی کد یکبار مصرف")
         )
         .ConfigureAwait(false);
-    }
-    async ValueTask<PrimitiveResult<bool>> HasRedis()
-    {
-        return await this._featureManager.IsEnabledAsync(ApplicationFeatureFlags.OTPWithRedis).ConfigureAwait(false);
-    }
-    ValueTask<PrimitiveResult> SetInMemory(object token, string otp)
-    {
-        this._memoryCache.Set(token, otp, this.cacheEntryOptions);
-        return ValueTask.FromResult(PrimitiveResult.Success());
-    }
-    ValueTask<PrimitiveResult<string>> GetFromMemory(object token)
-    {
-        var result = this._memoryCache.Get(token);
-        return ValueTask.FromResult(PrimitiveResult.Success(result?.ToString() ?? ""));
     }
 }
 public sealed class OtpServiceFactory : IOtpServiceFactory
