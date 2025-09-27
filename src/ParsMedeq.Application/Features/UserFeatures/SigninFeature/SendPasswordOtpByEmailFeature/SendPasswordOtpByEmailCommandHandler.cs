@@ -1,28 +1,29 @@
-﻿using ParsMedeQ.Domain.Types.Email;
+﻿using Microsoft.FeatureManagement;
+using ParsMedeQ.Domain.Types.Email;
 using ParsMedeQ.Domain.Types.UserId;
-using Microsoft.FeatureManagement;
 
 namespace ParsMedeQ.Application.Features.UserFeatures.SigninFeature.SendPasswordOtpByEmailFeature;
 
 public sealed class SendPasswordOtpByEmailCommandHandler : IPrimitiveResultCommandHandler<SendPasswordOtpByEmailCommand, SendPasswordOtpByEmailCommandResponse>
 {
     private readonly IReadUnitOfWork _readUnitOfWork;
-    private readonly IOtpService _otpService;
+    private readonly IOtpServiceFactory _otpServiceFactory;
     private readonly IFeatureManager _featureManager;
 
     public SendPasswordOtpByEmailCommandHandler(
         IReadUnitOfWork readUnitOfWork,
-        IOtpService otpService,
-        IFeatureManager featureManager)
+        IFeatureManager featureManager,
+        IOtpServiceFactory otpServiceFactory)
     {
         this._readUnitOfWork = readUnitOfWork;
-        this._otpService = otpService;
         this._featureManager = featureManager;
+        this._otpServiceFactory = otpServiceFactory;
     }
     public async Task<PrimitiveResult<SendPasswordOtpByEmailCommandResponse>> Handle(
         SendPasswordOtpByEmailCommand request,
         CancellationToken cancellationToken)
     {
+        var otpService = await _otpServiceFactory.Create();
         return await this._readUnitOfWork
             .UserReadRepository
             .GetOneOrDefault(
@@ -33,7 +34,7 @@ public sealed class SendPasswordOtpByEmailCommandHandler : IPrimitiveResultComma
             .MapIf(
                 user => user.Email.IsDefault(),
                 _ => ValueTask.FromResult(PrimitiveResult.Failure<SendPasswordOtpByEmailCommandResponse>("", "ایمیلی برای شما تعریف نشده است")),
-                user => this._otpService
+                user => otpService
                 .SendEmail(
                     user.Email,
                     "ورود به سیستم", $"کد یکبار مصرف : {{otp}}",

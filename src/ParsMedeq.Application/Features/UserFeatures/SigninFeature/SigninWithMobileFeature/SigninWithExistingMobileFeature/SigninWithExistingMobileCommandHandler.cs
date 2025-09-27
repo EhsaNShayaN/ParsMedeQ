@@ -10,14 +10,14 @@ public sealed class SigninWithExistingMobileCommandHandler : IPrimitiveResultCom
     UserTokenInfo>
 {
     private readonly ISigninService _signinService;
-    private readonly IOtpService _otpService;
+    private readonly IOtpServiceFactory _otpServiceFactory;
 
     public SigninWithExistingMobileCommandHandler(
         ISigninService signinService,
-        IOtpService otpService)
+        IOtpServiceFactory otpServiceFactory)
     {
         this._signinService = signinService;
-        this._otpService = otpService;
+        this._otpServiceFactory = otpServiceFactory;
     }
 
     public async Task<PrimitiveResult<UserTokenInfo>> Handle(SigninWithExistingMobileCommand request, CancellationToken cancellationToken)
@@ -35,9 +35,10 @@ public sealed class SigninWithExistingMobileCommandHandler : IPrimitiveResultCom
     }
 
     ValueTask<PrimitiveResult<LoginContext>> SetMobile(LoginContext ctx) => MobileType.Create(ctx.Request.Mobile).Map(ctx.SetMobile);
-    ValueTask<PrimitiveResult<LoginContext>> ValidateOtp(LoginContext ctx)
+    async ValueTask<PrimitiveResult<LoginContext>> ValidateOtp(LoginContext ctx)
     {
-        return this._otpService.Validate(
+        var otpService = await _otpServiceFactory.Create();
+        return await otpService.Validate(
             ctx.Request.Otp,
             ApplicationCacheTokens.CreateOTPKey(ctx.Mobile.Value, ApplicationCacheTokens.LoginOTP),
             OtpServiceValidationRemoveKeyStrategy.RemoveIfSuccess,

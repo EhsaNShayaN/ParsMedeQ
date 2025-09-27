@@ -5,7 +5,7 @@ import {MatButton, MatButtonModule, MatIconButton} from '@angular/material/butto
 import {MatIcon, MatIconModule} from '@angular/material/icon';
 import {MatSidenav, MatSidenavContainer, MatSidenavContent, MatSidenavModule} from '@angular/material/sidenav';
 import {MatDivider, MatList, MatListItem, MatListModule, MatNavList} from '@angular/material/list';
-import {MatCard, MatCardActions, MatCardContent, MatCardModule, MatCardTitle} from '@angular/material/card';
+import {MatCard, MatCardActions, MatCardContent, MatCardImage, MatCardModule, MatCardTitle} from '@angular/material/card';
 import {MatFormField, MatInput, MatInputModule, MatLabel} from '@angular/material/input';
 import {MatError, MatFormFieldModule} from '@angular/material/form-field';
 import {CommentForm} from './components/comment-form/comment-form';
@@ -89,6 +89,7 @@ import {DatePickerComponent} from './date-picker/date-picker.component';
     MatChipOption,
     MatList,
     MatError,
+    MatCardImage,
     //////////////////////
     DefaultFlexDirective,
     DefaultClassDirective,
@@ -140,6 +141,7 @@ import {DatePickerComponent} from './date-picker/date-picker.component';
     MatChipOption,
     MatList,
     MatError,
+    MatCardImage,
     //////////////////////
     DefaultFlexDirective,
     DefaultClassDirective,

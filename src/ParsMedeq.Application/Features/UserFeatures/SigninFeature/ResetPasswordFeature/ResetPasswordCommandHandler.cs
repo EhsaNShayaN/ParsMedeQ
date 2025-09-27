@@ -4,22 +4,23 @@ using ParsMedeQ.Domain.Helpers;
 namespace ParsMedeQ.Application.Features.UserFeatures.SigninFeature.ResetPasswordFeature;
 public sealed class ResetPasswordCommandHandler : IPrimitiveResultCommandHandler<ResetPasswordCommand, ResetPasswordCommandResponse>
 {
-    private readonly IOtpService _otpService;
+    private readonly IOtpServiceFactory _otpServiceFactory;
     private readonly IWriteUnitOfWork _writeUnitOfWork;
     private readonly IUserValidatorService _userValidatorService;
 
     public ResetPasswordCommandHandler(
-        IOtpService otpService,
         IWriteUnitOfWork writeUnitOfWork,
-        IUserValidatorService userValidatorService)
+        IUserValidatorService userValidatorService,
+        IOtpServiceFactory otpServiceFactory)
     {
-        this._otpService = otpService;
         this._writeUnitOfWork = writeUnitOfWork;
         this._userValidatorService = userValidatorService;
+        this._otpServiceFactory = otpServiceFactory;
     }
 
     public async Task<PrimitiveResult<ResetPasswordCommandResponse>> Handle(ResetPasswordCommand request, CancellationToken cancellationToken)
     {
+        var otpService = await _otpServiceFactory.Create();
         return await
                 MobileType.Create(request.Mobile)
                 .Map(mobile => this._writeUnitOfWork.UserWriteRepository
@@ -27,7 +28,7 @@ public sealed class ResetPasswordCommandHandler : IPrimitiveResultCommandHandler
                     .MapIf(
                         user => user.Mobile.IsDefault(),
                         _ => ValueTask.FromResult(PrimitiveResult.Failure<ResetPasswordCommandResponse>("", "موبایلی برای شما تعریف نشده است")),
-                        user => this._otpService.Validate(
+                        user => otpService.Validate(
                             request.Otp,
                             ApplicationCacheTokens.CreateOTPKey(user.Id.Value.ToString(), ApplicationCacheTokens.SetPasswordOTP),
                             OtpServiceValidationRemoveKeyStrategy.RemoveIfSuccess,

@@ -1,27 +1,28 @@
-﻿using ParsMedeQ.Domain.Types.UserId;
-using Microsoft.FeatureManagement;
+﻿using Microsoft.FeatureManagement;
+using ParsMedeQ.Domain.Types.UserId;
 
 namespace ParsMedeQ.Application.Features.UserFeatures.SigninFeature.SendPasswordOtpBySMSFeature;
 
 public sealed class SendPasswordOtpBySMSCommandHandler : IPrimitiveResultCommandHandler<SendPasswordOtpBySMSCommand, SendPasswordOtpBySMSCommandResponse>
 {
     private readonly IReadUnitOfWork _readUnitOfWork;
-    private readonly IOtpService _otpService;
+    private readonly IOtpServiceFactory _otpServiceFactory;
     private readonly IFeatureManager _featureManager;
 
     public SendPasswordOtpBySMSCommandHandler(
         IReadUnitOfWork readUnitOfWork,
-        IOtpService otpService,
-        IFeatureManager featureManager)
+        IFeatureManager featureManager,
+        IOtpServiceFactory otpServiceFactory)
     {
         this._readUnitOfWork = readUnitOfWork;
-        this._otpService = otpService;
         this._featureManager = featureManager;
+        this._otpServiceFactory = otpServiceFactory;
     }
     public async Task<PrimitiveResult<SendPasswordOtpBySMSCommandResponse>> Handle(
         SendPasswordOtpBySMSCommand request,
         CancellationToken cancellationToken)
     {
+        var otpService = await _otpServiceFactory.Create();
         return await this._readUnitOfWork
             .UserReadRepository
             .GetOneOrDefault(
@@ -32,7 +33,7 @@ public sealed class SendPasswordOtpBySMSCommandHandler : IPrimitiveResultCommand
             .MapIf(
                 user => user.Mobile.IsDefault(),
                 _ => ValueTask.FromResult(PrimitiveResult.Failure<SendPasswordOtpBySMSCommandResponse>("", "موبایلی برای شما تعریف نشده است")),
-                user => this._otpService.SendSMS(
+                user => otpService.SendSMS(
                 user.Mobile,
                 ApplicationCacheTokens.CreateOTPKey(user.Id.Value.ToString(), ApplicationCacheTokens.SetPasswordOTP),
                 cancellationToken)

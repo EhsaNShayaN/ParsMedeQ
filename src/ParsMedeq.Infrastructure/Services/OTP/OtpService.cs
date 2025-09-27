@@ -66,18 +66,7 @@ public sealed class OtpService : IOtpService
     {
         var otp = PasswordGeneratorHelper.Generate(6, PasswordGeneratorHelper.PasswordGeneratorOptions.UseDigits);
 
-        return await this.HasRedis()
-            .Map(hasRedis => hasRedis
-        ? this._cacheProvider.Set(
-            token,
-            otp,
-            cancellationToken)
-        : this.SetInMemory(token, otp))
-            .Map(async _ => await Task.Run(() => this._smsSenderService.SendVerificationCode(mobile.Value, otp, cancellationToken).ConfigureAwait(false)))
-            .Map(_ => otp)
-            .ConfigureAwait(false);
-
-        /*return await this._cacheProvider.Set(
+        return await this._cacheProvider.Set(
             token,
             otp,
             cancellationToken)
@@ -88,7 +77,7 @@ public sealed class OtpService : IOtpService
                 return PrimitiveResult.Success();
             })
             .Map(_ => otp)
-            .ConfigureAwait(false);*/
+            .ConfigureAwait(false);
     }
     public async ValueTask<PrimitiveResult<string>> SendEmail(
         EmailType email,
@@ -162,5 +151,38 @@ public sealed class OtpService : IOtpService
     {
         var result = this._memoryCache.Get(token);
         return ValueTask.FromResult(PrimitiveResult.Success(result?.ToString() ?? ""));
+    }
+}
+public sealed class OtpServiceFactory : IOtpServiceFactory
+{
+    private readonly IFeatureManager _featureManager;
+    private readonly IServiceProvider _serviceProvider;
+
+    public OtpServiceFactory(
+        IFeatureManager featureManager,
+        IServiceProvider serviceProvider)
+    {
+        this._featureManager = featureManager;
+        this._serviceProvider = serviceProvider;
+    }
+
+    public async ValueTask<IOtpService> Create()
+    {
+        IOtpService? result;
+        var hasRedis = await HasRedis();
+        if (hasRedis)
+        {
+            result = this._serviceProvider.GetKeyedService<IOtpService>("redis");
+        }
+        else
+        {
+            result = this._serviceProvider.GetKeyedService<IOtpService>("inMemory");
+        }
+        if (result is null) throw new InvalidOperationException("");
+        return result;
+    }
+    async ValueTask<bool> HasRedis()
+    {
+        return await this._featureManager.IsEnabledAsync(ApplicationFeatureFlags.OTPWithRedis);
     }
 }

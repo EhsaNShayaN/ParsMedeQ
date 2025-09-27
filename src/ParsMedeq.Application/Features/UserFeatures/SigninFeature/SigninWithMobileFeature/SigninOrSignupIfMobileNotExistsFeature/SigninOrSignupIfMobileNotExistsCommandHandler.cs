@@ -12,19 +12,19 @@ public sealed class SigninOrSignupIfMobileNotExistsCommandHandler : IPrimitiveRe
 {
     #region " Fields "
     private readonly ISigninService _signinService;
-    private readonly IOtpService _otpService;
+    private readonly IOtpServiceFactory _otpServiceFactory;
     private readonly ITokenGeneratorService _tokenGeneratorService;
     private readonly IHttpContextAccessor _httpContextAccessor;
     #endregion
 
     public SigninOrSignupIfMobileNotExistsCommandHandler(
         ISigninService signinService,
-        IOtpService otpService,
+        IOtpServiceFactory otpServiceFactory,
         ITokenGeneratorService tokenGeneratorService,
         IHttpContextAccessor httpContextAccessor)
     {
         this._signinService = signinService;
-        this._otpService = otpService;
+        this._otpServiceFactory = otpServiceFactory;
         this._tokenGeneratorService = tokenGeneratorService;
         this._httpContextAccessor = httpContextAccessor;
     }
@@ -51,9 +51,10 @@ public sealed class SigninOrSignupIfMobileNotExistsCommandHandler : IPrimitiveRe
     }
 
     ValueTask<PrimitiveResult<LoginContext>> SetMobile(LoginContext ctx) => MobileType.Create(ctx.Request.Mobile).Map(ctx.SetMobile);
-    ValueTask<PrimitiveResult<LoginContext>> ValidateOtp(LoginContext ctx)
+    async ValueTask<PrimitiveResult<LoginContext>> ValidateOtp(LoginContext ctx)
     {
-        return this._otpService.Validate(
+        var otpService = await _otpServiceFactory.Create();
+        return await otpService.Validate(
             ctx.Request.Otp,
             ApplicationCacheTokens.CreateOTPKey(ctx.Mobile.Value, ApplicationCacheTokens.LoginOTP),
             OtpServiceValidationRemoveKeyStrategy.RemoveIfSuccess,

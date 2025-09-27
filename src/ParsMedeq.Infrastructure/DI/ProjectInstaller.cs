@@ -232,7 +232,9 @@ static class ServiceCollectionExtension
     public static IServiceCollection InstallOTPService(this IServiceCollection services)
     {
         services.AddMemoryCache();
-        services.TryAddScoped<IOtpService, OtpService>();
+        services.AddKeyedScoped<IOtpService, OtpService>("redis");
+        services.AddKeyedScoped<IOtpService, InMemoryOtpService>("inMemory");
+        services.TryAddScoped<IOtpServiceFactory, OtpServiceFactory>();
 
         return services;
     }

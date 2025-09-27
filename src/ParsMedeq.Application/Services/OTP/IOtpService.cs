@@ -4,10 +4,6 @@ using SRH.CacheProvider;
 namespace ParsMedeQ.Application.Services.OTP;
 public interface IOtpService
 {
-    PrimitiveResult SendOtp(string mobile);
-    PrimitiveResult CheckOtp(
-        string mobile,
-        string otp);
     ValueTask<PrimitiveResult<string>> SendSMS(
         MobileType mobile,
         CacheTokenKey token,
