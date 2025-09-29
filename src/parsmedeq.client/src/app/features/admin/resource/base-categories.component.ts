@@ -7,9 +7,11 @@ import {ResourceCategoriesResponse, ResourceCategory} from '../../../core/models
 import {Tables} from '../../../core/constants/server.constants';
 import {Resource} from '../../../core/models/ResourceResponse';
 import {TranslateService} from '@ngx-translate/core';
+import {Helpers} from '../../../core/helpers';
 
 @Directive()
 export class BaseCategoriesComponent extends BaseComponent implements OnInit, AfterViewInit {
+  helpers = inject(Helpers);
   languages: string[] = [];
   colors: string[] = ['warn', 'primary', 'success', 'secondary', 'info', 'danger'];
   tableId: number;
@@ -27,6 +29,7 @@ export class BaseCategoriesComponent extends BaseComponent implements OnInit, Af
   }
 
   ngOnInit(): void {
+    this.helpers.setPaginationLang();
     this.getServerData();
   }
 

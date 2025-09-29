@@ -1,8 +1,7 @@
-import {inject, Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {AuthService} from './auth.service';
-import {TranslateService} from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -13,16 +12,16 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = this.auth.getToken();
+    let cloned: HttpRequest<any> = req;
     if (token) {
-      const cloned = req.clone({
+      cloned = cloned.clone({
         setHeaders: {Authorization: `Bearer ${token}`}
       });
-      return next.handle(cloned);
     }
     const lang = localStorage.getItem('lang') ?? 'fa';
-    req = req.clone({
-      headers: req.headers.set('Accept-Language', lang),
+    cloned = cloned.clone({
+      headers: cloned.headers.set('Accept-Language', lang)
     });
-    return next.handle(req);
+    return next.handle(cloned);
   }
 }

@@ -9,7 +9,6 @@ public sealed record ResourceCategoryListQuery(int TableId) : IPrimitiveResultQu
 sealed class ResourceCategoryListQueryHandler : IPrimitiveResultQueryHandler<ResourceCategoryListQuery, ResourceCategoryListDbQueryResponse[]>
 {
     private readonly IUserLangContextAccessor _userLangContextAccessor;
-    private readonly IAsyncRequestCollapserPolicy _asyncRequestCollapserPolicy;
     private readonly IReadUnitOfWork _readUnitOfWork;
 
     public ResourceCategoryListQueryHandler(
@@ -18,23 +17,14 @@ sealed class ResourceCategoryListQueryHandler : IPrimitiveResultQueryHandler<Res
         IReadUnitOfWork taxMemoryReadUnitOfWork)
     {
         this._userLangContextAccessor = userLangContextAccessor;
-        this._asyncRequestCollapserPolicy = asyncRequestCollapserPolicy;
         this._readUnitOfWork = taxMemoryReadUnitOfWork;
     }
     public async Task<PrimitiveResult<ResourceCategoryListDbQueryResponse[]>> Handle(ResourceCategoryListQuery request, CancellationToken cancellationToken)
     {
-        var pollyContext = new Context($"{this.GetType().FullName}|{request.TableId}");
-        return await this._asyncRequestCollapserPolicy.ExecuteAsync(_ =>
-            this.HandleCore(request, cancellationToken), pollyContext)
-           .ConfigureAwait(false);
-    }
-
-    public async Task<PrimitiveResult<ResourceCategoryListDbQueryResponse[]>> HandleCore(
-        ResourceCategoryListQuery request,
-        CancellationToken cancellationToken) =>
-        await this._readUnitOfWork.ResourceReadRepository.FilterResourceCategories(
+        return await this._readUnitOfWork.ResourceReadRepository.FilterResourceCategories(
             _userLangContextAccessor.GetCurrentLang(),
             request.TableId,
             cancellationToken)
-        .ConfigureAwait(false);
+            .ConfigureAwait(false);
+    }
 }
