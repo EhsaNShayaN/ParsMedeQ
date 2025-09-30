@@ -15,17 +15,18 @@
         <form (ngSubmit)="onFormSubmit(myForm.value)" [formGroup]="myForm" fxLayout="row wrap">
           <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
             <mat-form-field appearance="outline" class="w-100">
-              <mat-label>عنوان</mat-label>
-              <input placeholder="عنوان" autocomplete="off" formControlName="title" matInput required>
+              <mat-label>{{ 'TITLE' | translate }}</mat-label>
+              <input [placeholder]="'TITLE' | translate" autocomplete="off" formControlName="title" matInput required>
               <mat-error *ngIf="myForm.controls['title'].errors?.['required']">
-                عنوان {{ 'IS_REQUIRED' | translate }}
+                {{ 'TITLE' | translate }}
+                {{ 'IS_REQUIRED' | translate }}
               </mat-error>
             </mat-form-field>
           </div>
           <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
             <mat-form-field appearance="outline" class="w-100">
-              <mat-label>دسته بندی</mat-label>
-              <mat-select formControlName="parentId" placeholder="دسته بندی">
+              <mat-label>{{ 'CATEGORY' | translate }}</mat-label>
+              <mat-select formControlName="parentId" [placeholder]="'CATEGORY' | translate">
                 <mat-option *ngFor="let item of resourceCategories" [value]="item.id">
                   {{ item.title }}
                 </mat-option>
@@ -34,17 +35,19 @@
           </div>
           <div class="px-2" fxFlex="100" fxFlex.gt-xs="100">
             <mat-form-field appearance="outline" class="w-100">
-              <mat-label>توضیحات</mat-label>
-              <textarea formControlName="description" matInput placeholder="توضیحات" rows="5"></textarea>
+              <mat-label>{{ 'DESCRIPTION' | translate }}</mat-label>
+              <textarea formControlName="description" matInput [placeholder]="'DESCRIPTION' | translate"
+                        rows="5"></textarea>
               <mat-error *ngIf="myForm.controls['description'].errors?.['required']">
-                توضیحات {{ 'IS_REQUIRED' | translate }}
+                {{ 'DESCRIPTION' | translate }}
+                {{ 'IS_REQUIRED' | translate }}
               </mat-error>
             </mat-form-field>
           </div>
           <div class="text-center mt-2" fxFlex="100">
             <button class="uppercase" color="primary" mat-raised-button type="submit">
-              {{ (editItem ? 'ویرایش' : 'افزودن') }}
-              دسته بندی
+              {{ (editItem ? 'EDIT' : 'ADD') | translate }}
+              {{ 'CATEGORY' | translate }}
             </button>
           </div>
         </form>
