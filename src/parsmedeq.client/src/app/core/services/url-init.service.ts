@@ -27,7 +27,7 @@ export class UrlInitService {
       if (typeof window !== 'undefined') {
         const languages = this.translateService.getLangs();
         const lang = getPathLang(languages) ?? 'fa';
-        localStorage.setItem('lang', lang);
+        sessionStorage.setItem('lang', lang);
         this.translateService.setDefaultLang(lang);
         this.appSettings.settings.rtl = lang === 'fa';
       }

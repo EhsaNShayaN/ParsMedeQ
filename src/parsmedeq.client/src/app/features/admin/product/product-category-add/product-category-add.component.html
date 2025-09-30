@@ -36,7 +36,8 @@
           <div class="px-2" fxFlex="100" fxFlex.gt-xs="75">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>{{ 'DESCRIPTION' | translate }}</mat-label>
-              <textarea formControlName="description" matInput [placeholder]="'DESCRIPTION' | translate" rows="5"></textarea>
+              <textarea formControlName="description" matInput [placeholder]="'DESCRIPTION' | translate"
+                        rows="5"></textarea>
               <mat-error *ngIf="myForm.controls['description'].errors?.['required']">
                 {{ 'DESCRIPTION' | translate }}
                 {{ 'IS_REQUIRED' | translate }}
@@ -46,9 +47,12 @@
           <div class="px-2" fxFlex="100" fxFlex.gt-xs="25">
             <div class="border-radius border pad">
               <mat-label class="ml-2 gray-color">{{ 'IMAGE' | translate }}</mat-label>
-              <input (change)="handleImageInput($event.target)" class="py-1" formControlName="imagePath" [placeholder]="'IMAGE' | translate" type="file"/>
-              <button *ngIf="oldImagePath" mat-icon-button (click)="deleteImage()" class="mx-3" color="primary"
-                      [matTooltip]="('DELETE' | translate) + ' ' + ('IMAGE' | translate)" matTooltipPosition="after" type="button">
+              <input (change)="handleImageInput($event.target)" class="py-1" formControlName="imagePath"
+                     [placeholder]="'IMAGE' | translate" type="file"/>
+              <button *ngIf="oldImagePath" mat-button (click)="deleteImage()" class="mx-3 red-color delete-img"
+                      [matTooltip]="('DELETE' | translate) + ' ' + ('IMAGE' | translate)" matTooltipPosition="after"
+                      type="button">
+                {{ ('DELETE' | translate) + ' ' + ('IMAGE' | translate) }}
                 <mat-icon>close</mat-icon>
               </button>
             </div>

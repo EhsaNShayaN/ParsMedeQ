@@ -48,5 +48,6 @@
   "PROFILE": "Profile",
   "CREATION_DATE": "Creation date",
   "ACTIONS": "Actions",
-  "MAIN_IMAGE": "Main Image"
+  "MAIN_IMAGE": "Main Image",
+  "DELETE": "Delete"
 }

@@ -48,6 +48,7 @@ export class ProductCategoryAddComponent extends BaseComponent implements OnInit
           imagePath: null
         });
         if (this.editItem) {
+          this.oldImagePath = this.editItem.image;
           this.hideSingleLangControls();
         }
       });

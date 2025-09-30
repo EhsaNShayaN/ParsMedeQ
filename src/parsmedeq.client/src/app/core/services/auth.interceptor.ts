@@ -18,7 +18,7 @@ export class AuthInterceptor implements HttpInterceptor {
         setHeaders: {Authorization: `Bearer ${token}`}
       });
     }
-    const lang = localStorage.getItem('lang') ?? 'fa';
+    const lang = sessionStorage.getItem('lang') ?? 'fa';
     cloned = cloned.clone({
       headers: cloned.headers.set('Accept-Language', lang)
     });

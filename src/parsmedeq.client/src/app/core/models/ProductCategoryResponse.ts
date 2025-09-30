@@ -4,10 +4,10 @@ export interface ProductCategoriesResponse {
 
 export interface ProductCategory {
   id: number;
-  title: string;
-  description: string;
-  count: number;
   parentId: number;
   parentTitle: string;
+  title: string;
+  description: string;
+  image: string;
   creationDate: string;
 }

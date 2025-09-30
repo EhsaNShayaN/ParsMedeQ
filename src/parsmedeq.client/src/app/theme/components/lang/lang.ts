@@ -27,7 +27,7 @@ export class Lang extends PureComponent implements OnInit {
     if (lang === currentLang) {
       return;
     }
-    localStorage.setItem('lang', lang);
+    sessionStorage.setItem('lang', lang);
     this.translateService.setDefaultLang(lang);
     this.langName = this.getLangName(lang);
     this.appSettings.settings.rtl = lang === 'fa';

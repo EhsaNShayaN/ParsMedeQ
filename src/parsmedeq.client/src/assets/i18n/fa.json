@@ -48,5 +48,6 @@
   "PROFILE": "پروفایل",
   "CREATION_DATE": "تاریخ ایجاد",
   "ACTIONS": "عملیات",
-  "MAIN_IMAGE": "تصویر اصلی"
+  "MAIN_IMAGE": "تصویر اصلی",
+  "DELETE": "حذف"
 }
