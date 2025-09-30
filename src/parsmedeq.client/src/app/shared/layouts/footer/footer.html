@@ -3,8 +3,18 @@
     <div class="company-info">
       <h3>ParsMedeQ</h3>
       <p>تولیدکننده تجهیزات پزشکی با کیفیت بالا</p>
-      <p>آدرس: تهران، خیابان مثال، پلاک ۱۲۳</p>
-      <p>تلفن: ۰۲۱-۱۲۳۴۵۶۷۸</p>
+      <p>
+        آدرس:
+        <span [innerHTML]="settings.address"></span>
+      </p>
+      <p>
+        تلفن:
+        <a href="tel:{{settings.tel}}" class="not-link">{{ settings.tel.replace('021', '') }}</a>
+      </p>
+      <p>
+        کدپستی:
+        {{ settings.postalCode }}
+      </p>
     </div>
 
     <div class="footer-links">
