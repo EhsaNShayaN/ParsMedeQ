@@ -1,5 +1,5 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {FormGroupDirective, UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {getCustomEditorConfigs} from '../../../../core/custom-editor-configs';
 import {ProductCategoriesResponse, ProductCategory} from '../../../../core/models/ProductCategoryResponse';
@@ -19,6 +19,7 @@ export class ProductAddComponent extends BaseComponent implements OnInit, OnDest
   lang: string;
   sub: any;
   myForm!: UntypedFormGroup;
+  @ViewChild(FormGroupDirective) formDir!: FormGroupDirective;
   editItem?: Product;
   oldImagePath: string = '';
   oldFileId: number = 0;
@@ -61,6 +62,7 @@ export class ProductAddComponent extends BaseComponent implements OnInit, OnDest
           this.myForm = this.formBuilder.group({
             productCategoryId: ['', Validators.required],
             title: [null, Validators.required],
+            description: [null, Validators.required],
             imagePath: null,
             fileId: null,
             price: null,
@@ -101,6 +103,7 @@ export class ProductAddComponent extends BaseComponent implements OnInit, OnDest
   }
 
   onFormSubmit(values: any): void {
+    console.log('onFormSubmit', values);
     this.leaveDescription();
     const category = this.productCategories.find(s => s.id === Number(this.myForm.controls['productCategoryId'].value));
     values.productCategoryTitle = category?.title;
@@ -121,6 +124,9 @@ export class ProductAddComponent extends BaseComponent implements OnInit, OnDest
     delete values.fileId;
     this.restApiService.addProduct(values, this.image, this.file).subscribe((d: BaseResult<AddResult>) => {
       this.toaster.success(CustomConstants.THE_OPERATION_WAS_SUCCESSFUL, '', {});
+      if (!this.editItem) {
+        this.formDir.resetForm();
+      }
     });
   }
 

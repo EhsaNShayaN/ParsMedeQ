@@ -35,18 +35,21 @@ internal sealed class ProductReadRepository : GenericPrimitiveReadRepositoryBase
 
         var query =
             from res in this.DbContext.Product
-            .Where(res => productCategoryId.HasValue && res.ProductCategoryId.Equals(productCategoryId))
             .Include(r => r.ProductTranslations.Where(l => l.LanguageCode == langCode))
             .Include(r => r.ProductCategory)
             .ThenInclude(r => r.ProductCategoryTranslations.Where(l => l.LanguageCode == langCode))
-            where res.Deleted == false
+            where res.Deleted == false && ((productCategoryId ?? 0) == 0 || res.ProductCategoryId.Equals(productCategoryId))
             select new ProductListDbQueryResponse
             {
-                Id = res.Id,
                 Title = res.ProductTranslations.SingleOrDefault(s => s.LanguageCode == langCode).Title ?? string.Empty,
-                ProductCategoryId = res.ProductCategoryId,
                 ProductCategoryTitle = res.ProductCategory.ProductCategoryTranslations.SingleOrDefault(s => s.LanguageCode == langCode).Title ?? string.Empty,
                 Image = res.ProductTranslations.SingleOrDefault(s => s.LanguageCode == langCode).Image ?? string.Empty,
+
+                Id = res.Id,
+                Title = res.Title,
+                ProductCategoryId = res.ProductCategoryId,
+                ProductCategoryTitle = res.ProductCategoryTitle,
+                Image = res.Image,
                 Price = res.Price,
                 Discount = res.Discount,
                 Deleted = res.Deleted,

@@ -275,9 +275,6 @@
   .edit-property .step-section {
     background: rgba(mat.m2-get-color-from-palette($background, background), 0.7);
   }
-  .input-file-container .mat-orphan-label {
-    color: mat.m2-get-color-from-palette($foreground, text) !important;
-  }
   .meg-dropdown-content {
     background-color: mat.m2-get-color-from-palette($background, card);
 
