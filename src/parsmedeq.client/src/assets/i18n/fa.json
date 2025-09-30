@@ -49,5 +49,6 @@
   "CREATION_DATE": "تاریخ ایجاد",
   "ACTIONS": "عملیات",
   "MAIN_IMAGE": "تصویر اصلی",
-  "DELETE": "حذف"
+  "DELETE": "حذف",
+  "THE_OPERATION_WAS_SUCCESSFUL": "عملیات مورد نظر با موفقیت انجام شد."
 }

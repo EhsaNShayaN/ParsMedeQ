@@ -49,5 +49,6 @@
   "CREATION_DATE": "Creation date",
   "ACTIONS": "Actions",
   "MAIN_IMAGE": "Main Image",
-  "DELETE": "Delete"
+  "DELETE": "Delete",
+  "THE_OPERATION_WAS_SUCCESSFUL": "The operation was successful"
 }
