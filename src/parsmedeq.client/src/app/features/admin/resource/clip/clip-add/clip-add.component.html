@@ -40,24 +40,32 @@
           <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
             <div class="border-radius border pad">
               <mat-label class="ml-2 gray-color">{{ 'IMAGE' | translate }}</mat-label>
-              <input (change)="handleImageInput($event.target)" class="py-1" formControlName="image" [placeholder]="'IMAGE' | translate" type="file"/>
-              <a *ngIf="editItem?.image" [routerLink]="editItem?.image" target="_blank">
-                <img [src]="editItem?.image" class="img-item w-50"/>
-              </a>
+              <input (change)="handleImageInput($event.target)" class="py-1" formControlName="imagePath"
+                     [placeholder]="'IMAGE' | translate" type="file"/>
+              <button *ngIf="oldImagePath" mat-icon-button (click)="deleteImage()" class="mx-3" color="primary"
+                      [matTooltip]="('DELETE' | translate) + ' ' + ('IMAGE' | translate)" matTooltipPosition="after"
+                      type="button">
+                <mat-icon>close</mat-icon>
+              </button>
             </div>
           </div>
           <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
             <div class="border-radius border pad">
               <mat-label class="ml-2 gray-color">{{ 'FILE' | translate }}</mat-label>
-              <input (change)="handleFileInput($event.target)" class="py-1" formControlName="file"
+              <input (change)="handleFileInput($event.target)" class="py-1" formControlName="fileId"
                      [placeholder]="'FILE' | translate" type="file"/>
+              <button *ngIf="oldFileId" mat-icon-button (click)="deleteFile()" class="mx-3" color="primary"
+                      [matTooltip]="('DELETE' | translate) + ' ' + ('FILE' | translate)" matTooltipPosition="after" type="button">
+                <mat-icon>close</mat-icon>
+              </button>
             </div>
           </div>
           <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
             <mat-form-field appearance="outline" class="w-100 mt-2">
               <mat-icon class="mr-1 text-muted" matPrefix>money</mat-icon>
               <mat-label>{{ 'PRICE' | translate }}</mat-label>
-              <input class="text-left ltr" formControlName="price" matInput onlyNumber [placeholder]="'PRICE' | translate">
+              <input class="text-left ltr" formControlName="price" matInput onlyNumber
+                     [placeholder]="'PRICE' | translate">
               <mat-error *ngIf="myForm.controls['price'].errors?.['required']">
                 {{ 'PRICE' | translate }}
                 {{ 'IS_REQUIRED' | translate }}
@@ -68,7 +76,8 @@
             <mat-form-field appearance="outline" class="w-100 mt-2">
               <mat-icon class="mr-1 text-muted" matPrefix>person_outline</mat-icon>
               <mat-label>{{ 'DISCOUNT_BY_PERCENT' | translate }}</mat-label>
-              <input class="text-left ltr" formControlName="discount" matInput onlyNumber [placeholder]="'DISCOUNT_BY_PERCENT' | translate">
+              <input class="text-left ltr" formControlName="discount" matInput onlyNumber
+                     [placeholder]="'DISCOUNT_BY_PERCENT' | translate">
               <mat-error *ngIf="myForm.controls['discount'].errors?.['required']">
                 {{ 'DISCOUNT' | translate }}
                 {{ 'IS_REQUIRED' | translate }}
@@ -77,7 +86,8 @@
           </div>
           <div class="px-2 mb-4" fxFlex="100" fxFlex.gt-xs="100">
             <mat-label>{{ 'DESCRIPTION' | translate }}</mat-label>
-            <angular-editor [config]="editorConfig" formControlName="description" id="editor0" [placeholder]="'DESCRIPTION' | translate"></angular-editor>
+            <angular-editor [config]="editorConfig" formControlName="description" id="editor0"
+                            [placeholder]="'DESCRIPTION' | translate"></angular-editor>
           </div>
           <div class="text-center mt-3" fxFlex="100">
             <button class="uppercase" color="primary" mat-raised-button type="submit">

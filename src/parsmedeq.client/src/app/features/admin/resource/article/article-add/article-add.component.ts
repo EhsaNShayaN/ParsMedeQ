@@ -1,14 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {FormArray, UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
+import {Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
-import * as uuid from 'uuid';
-import * as moment from 'jalali-moment';
 import {Tables} from '../../../../../core/constants/server.constants';
 import {BaseResourceComponent} from '../../base-resource.component';
 import {getCustomEditorConfigs} from '../../../../../core/custom-editor-configs';
 import {ResourceCategoriesResponse, ResourceCategory} from '../../../../../core/models/ResourceCategoryResponse';
 import {Resource} from '../../../../../core/models/ResourceResponse';
-import {JalaliMomentDateAdapter} from '../../../../../core/custom-date-adapter';
 import {BaseResult} from '../../../../../core/models/BaseResult';
 
 @Component({
@@ -21,17 +18,10 @@ export class ArticleAddComponent extends BaseResourceComponent implements OnInit
   error?: string;
   resourceCategories: ResourceCategory[] = [];
   editorConfig = getCustomEditorConfigs();
-  abstractError = false;
 
-  constructor(public formBuilder: UntypedFormBuilder,
-              private activatedRoute: ActivatedRoute) {
+  constructor(private activatedRoute: ActivatedRoute) {
     super(Tables.Article);
   }
-
-  get anchorsArray() {
-    return this.myForm.get('anchors') as FormArray;
-  }
-
   ngOnInit(): void {
     this.sub = this.activatedRoute.params.subscribe(params => {
       this.restApiService.getResourceCategories(Tables.Article).subscribe((acr: ResourceCategoriesResponse) => {
@@ -44,99 +34,46 @@ export class ArticleAddComponent extends BaseResourceComponent implements OnInit
               title: [this.editItem.title, Validators.required],
               abstract: [this.editItem.abstract, Validators.required],
               imagePath: null,
-              keywords: this.editItem.keywords,
-              expirationDate: null,
-              expirationTime: '',
-              anchors: this.formBuilder.array([]),
-              language: this.editItem.language,
               fileId: null,
-              publishDate: this.editItem.publishDate,
+              keywords: this.editItem.keywords,
+              /*expirationDate: null,
+              expirationTime: '',
+              language: this.editItem.language,
+              publishDate: this.editItem.publishDate,*/
+              anchors: this.formBuilder.array([]),
               price: this.editItem.price,
               discount: this.editItem.discount,
             });
             this.oldImagePath = this.editItem.image;
             this.oldFileId = this.editItem.fileId ?? 0;
-            if (this.editItem.expirationDate) {
+            /*if (this.editItem.expirationDate) {
               const array = this.editItem.expirationDate.split('/').map(s => Number(s));
               this.myForm.controls['expirationDate'].setValue(new JalaliMomentDateAdapter('').createDate(array[0], array[1] - 1, array[2]));
               this.expDate = this.editItem.expirationDate;
               this.expTime = this.editItem.expirationTime;
-            }
+            }*/
             this.editAnchors();
             this.hideSingleLangControls();
           });
         } else {
           this.myForm = this.formBuilder.group({
             resourceCategoryId: ['', Validators.required],
-            title: ['flkgjfd', Validators.required],
-            abstract: ['sdfsdfds', Validators.required],
+            title: ['', Validators.required],
+            abstract: ['', Validators.required],
             imagePath: null,
-            keywords: 'sdfsdfs',
-            expirationDate: null,
+            keywords: '',
+            /*expirationDate: null,
             expirationTime: '',
+            language: '',
+            publishDate: '',*/
             anchors: this.formBuilder.array([]),
-            language: 'sdfdsfds',
             fileId: null,
-            publishDate: '1401/01/12',
-            price: 12340,
-            discount: 10,
+            price: null,
+            discount: null,
           });
         }
       });
     });
-  }
-
-  createAnchor(): UntypedFormGroup {
-    return this.formBuilder.group({
-      id: uuid.v4().replace(/-/g, ''),
-      name: null,
-      desc: null,
-    });
-  }
-
-  addAnchor(): void {
-    const anchors = this.myForm.controls['anchors'] as UntypedFormArray;
-    anchors.push(this.createAnchor());
-  }
-
-  deleteAnchor(index: number) {
-    const anchors = this.myForm.controls['anchors'] as UntypedFormArray;
-    anchors.removeAt(index);
-  }
-
-  handleImageInput(target: any) {
-    if (target.files && target.files[0]) {
-      this.image = target.files[0];
-    }
-  }
-
-  handleFileInput(target: any) {
-    if (target.files && target.files[0]) {
-      this.file = target.files[0];
-    }
-  }
-
-  deleteImage() {
-    this.oldImagePath = '';
-  }
-
-  deleteFile() {
-    this.oldFileId = 0;
-  }
-
-  toEnglish(s: string) {
-    let x = s.replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d).toString());
-    x = x.replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d).toString());
-    return x;
-  }
-
-  /*toPersian(s: string): string {
-    return s.replace(/\d/g, (d) => '۰۱۲۳۴۵۶۷۸۹'[Number(d)]);
-  };*/
-
-  dateChanged(dateRangeStart: HTMLInputElement) {
-    this.expDate = this.toEnglish(dateRangeStart.value);
-    const startDate = this.toGeorgianDate();
   }
 
   override onFormSubmit(values: any): void {
@@ -144,34 +81,5 @@ export class ArticleAddComponent extends BaseResourceComponent implements OnInit
     const category = this.resourceCategories.find(s => s.id === Number(this.myForm.controls['resourceCategoryId'].value));
     values.resourceCategoryTitle = category?.title;
     super.onFormSubmit(values);
-  }
-
-  toGeorgianDate() {
-    const start = moment.from(this.expDate, 'fa', 'YYYY/MM/DD').locale('en').format('YYYY/MM/DD');
-    const yearStart = Number(start.substring(0, 4));
-    const monthStart = Number(start.substring(5, 7));
-    const dayStart = Number(start.substring(8, 10));
-    const startDate = new Date(yearStart, monthStart - 1, dayStart);
-    return startDate;
-  }
-
-  leaveAbstract() {
-    const x = this.myForm.controls['abstract'].value;
-    this.abstractError = !x;
-  }
-
-  private editAnchors() {
-    const anchors = this.myForm.controls['anchors'] as UntypedFormArray;
-    while (anchors.length) {
-      anchors.removeAt(0);
-    }
-    this.editItem?.anchors?.forEach(plan => {
-      let p = {
-        id: plan.id,
-        name: plan.name,
-        desc: plan.desc,
-      };
-      anchors.push(this.formBuilder.group(p));
-    });
   }
 }

@@ -20,6 +20,8 @@
   "MANAGEMENT": "Management",
   "CONTACT_US": "Contact Us",
   "FAQ": "FAQ",
+  "NEWS_1": "News",
+  "NEWS_LEAD": "Lead of news",
   "NEWS": "News",
   "ARTICLES": "Articles",
   "ARTICLE": "ARTICLE",
@@ -50,5 +52,16 @@
   "ACTIONS": "Actions",
   "MAIN_IMAGE": "Main Image",
   "DELETE": "Delete",
-  "THE_OPERATION_WAS_SUCCESSFUL": "The operation was successful"
+  "THE_OPERATION_WAS_SUCCESSFUL": "The operation was successful",
+  "LANGUAGE": "Language",
+  "PUBLISHED": "Published",
+  "PUBLISHER": "Publisher",
+  "PUBLISH_DATE": "Publish date",
+  "PUBLISH_INFO": "Publish info",
+  "SEPARATE_WITH_COMMA": "Separate with comma",
+  "KEYWORDS": "Keywords",
+  "EXPIRATION_DATE": "Expiration date",
+  "EXPIRATION_TIME": "Expiration time",
+  "ANCHOR": "Anchor",
+  "ANCHORS": "Anchors"
 }

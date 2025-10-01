@@ -48,7 +48,8 @@
               <input (change)="handleImageInput($event.target)" class="py-1" formControlName="imagePath"
                      [placeholder]="'MAIN_IMAGE' | translate" type="file"/>
               <button *ngIf="oldImagePath" mat-icon-button (click)="deleteImage()" class="mx-3" color="primary"
-                      [matTooltip]="('DELETE' | translate) + ' ' + ('MAIN_IMAGE' | translate)" matTooltipPosition="after" type="button">
+                      [matTooltip]="('DELETE' | translate) + ' ' + ('MAIN_IMAGE' | translate)"
+                      matTooltipPosition="after" type="button">
                 <mat-icon>close</mat-icon>
               </button>
             </div>
@@ -56,16 +57,19 @@
           <div class="px-2 mb-4" fxFlex="100" fxFlex.gt-xs="50">
             <div class="border-radius border pad">
               <mat-label class="ml-2 gray-color">{{ 'FILE' | translate }}</mat-label>
-              <input (change)="handleFileInput($event.target)" class="py-1" formControlName="fileId" [placeholder]="'FILE' | translate" type="file"/>
+              <input (change)="handleFileInput($event.target)" class="py-1" formControlName="fileId"
+                     [placeholder]="'FILE' | translate" type="file"/>
               <button *ngIf="oldFileId" mat-icon-button (click)="deleteFile()" class="mx-3" color="primary"
-                      [matTooltip]="('DELETE' | translate) + ' ' + ('FILE' | translate)" matTooltipPosition="after" type="button">
+                      [matTooltip]="('DELETE' | translate) + ' ' + ('FILE' | translate)" matTooltipPosition="after"
+                      type="button">
                 <mat-icon>close</mat-icon>
               </button>
             </div>
           </div>
           <div class="px-2 mb-4" fxFlex="100" fxFlex.gt-xs="100">
             <mat-label>{{ 'DESCRIPTION' | translate }}</mat-label>
-            <angular-editor (blur)="leaveDescription()" [config]="editorConfig" formControlName="description" id="editor0"
+            <angular-editor (blur)="leaveDescription()" [config]="editorConfig" formControlName="description"
+                            id="editor0"
                             [placeholder]="'DESCRIPTION' | translate" required></angular-editor>
             <mat-error *ngIf="descriptionError && myForm.controls['description'].errors?.['required']">
               {{ 'DESCRIPTION' | translate }}
@@ -76,7 +80,8 @@
             <mat-form-field appearance="outline" class="w-100 mt-2">
               <mat-icon class="mr-1 text-muted" matPrefix>money</mat-icon>
               <mat-label>{{ 'PRICE' | translate }}</mat-label>
-              <input class="text-left ltr" formControlName="price" matInput onlyNumber [placeholder]="'PRICE' | translate">
+              <input class="text-left ltr" formControlName="price" matInput onlyNumber
+                     [placeholder]="'PRICE' | translate">
               <mat-error *ngIf="myForm.controls['price'].errors?.['required']">
                 {{ 'PRICE' | translate }}
                 {{ 'IS_REQUIRED' | translate }}
@@ -87,7 +92,8 @@
             <mat-form-field appearance="outline" class="w-100 mt-2">
               <mat-icon class="mr-1 text-muted" matPrefix>person_outline</mat-icon>
               <mat-label>{{ 'DISCOUNT_BY_PERCENT' | translate }}</mat-label>
-              <input class="text-left ltr" formControlName="discount" matInput onlyNumber [placeholder]="'DISCOUNT_BY_PERCENT' | translate">
+              <input class="text-left ltr" formControlName="discount" matInput onlyNumber
+                     [placeholder]="'DISCOUNT_BY_PERCENT' | translate">
               <mat-error *ngIf="myForm.controls['discount'].errors?.['required']">
                 {{ 'DISCOUNT' | translate }}
                 {{ 'IS_REQUIRED' | translate }}

@@ -20,6 +20,8 @@
   "MANAGEMENT": "مدیریت",
   "CONTACT_US": "تماس با ما",
   "FAQ": "سوالات متداول",
+  "NEWS_1": "خبر",
+  "NEWS_LEAD": "لید خبر",
   "NEWS": "اخبار",
   "ARTICLES": "مقالات",
   "ARTICLE": "مقاله",
@@ -50,5 +52,16 @@
   "ACTIONS": "عملیات",
   "MAIN_IMAGE": "تصویر اصلی",
   "DELETE": "حذف",
-  "THE_OPERATION_WAS_SUCCESSFUL": "عملیات مورد نظر با موفقیت انجام شد."
+  "THE_OPERATION_WAS_SUCCESSFUL": "عملیات مورد نظر با موفقیت انجام شد.",
+  "LANGUAGE": "زبان",
+  "PUBLISHED": "تاریخ ایجاد",
+  "PUBLISHER": "ناشر",
+  "PUBLISH_DATE": "تاریخ انتشار",
+  "PUBLISH_INFO": "اطلاعات چاپ",
+  "SEPARATE_WITH_COMMA": "با کاما از هم جدا نمایید.",
+  "KEYWORDS": "کلمات کلیدی",
+  "EXPIRATION_DATE": "تاریخ انقضا",
+  "EXPIRATION_TIME": "ساعت انقضا",
+  "ANCHOR": "لنگر",
+  "ANCHORS": "لنگرها"
 }
