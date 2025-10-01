@@ -29,6 +29,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule, provideNativeDateAdapter} from '@angular/material/core';
 import {JalaliMomentDateAdapter, PERSIAN_DATE_FORMATS} from '../core/custom-date-adapter';
 import {DatePickerComponent} from './date-picker/date-picker.component';
+import {MultiFileUploadComponent} from './components/multi-file-upload/multi-file-upload.component';
+import {CdkDrag, CdkDropList} from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import {DatePickerComponent} from './date-picker/date-picker.component';
     MobileFormatterPipe,
     LoadMoreComponent,
     Comments,
+    MultiFileUploadComponent,
   ],
   imports: [
     FormsModule,
@@ -61,6 +64,8 @@ import {DatePickerComponent} from './date-picker/date-picker.component';
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
+    CdkDrag,
+    CdkDropList,
     //////////////////////
     DefaultShowHideDirective,
     MatMenuTrigger,
@@ -100,6 +105,8 @@ import {DatePickerComponent} from './date-picker/date-picker.component';
   ],
   exports: [
     FormsModule,
+    CdkDrag,
+    CdkDropList,
     ReactiveFormsModule,
     DirectivesModule,
     LangPackPipe,
@@ -150,6 +157,7 @@ import {DatePickerComponent} from './date-picker/date-picker.component';
     //////////////////////
     TreeViewComponent,
     CommentForm,
+    MultiFileUploadComponent,
   ],
   providers: [
     CurrencyFormatterPipe,

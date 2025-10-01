@@ -40,6 +40,7 @@
   "DESCRIPTION": "توضیحات",
   "CLIP": "کلیپ",
   "IMAGE": "تصویر",
+  "IMAGES": "تصاویر",
   "FILE": "فایل",
   "DOC": "فایل",
   "PRICE": "قیمت",
@@ -63,5 +64,6 @@
   "EXPIRATION_DATE": "تاریخ انقضا",
   "EXPIRATION_TIME": "ساعت انقضا",
   "ANCHOR": "لنگر",
-  "ANCHORS": "لنگرها"
+  "ANCHORS": "لنگرها",
+  "AT_LEAST_ONE_IMAGE_IS_REQUIRED": "حداقل یک تصویر انتخاب نمایید."
 }

@@ -40,6 +40,7 @@
   "DESCRIPTION": "Description",
   "CLIP": "Clip",
   "IMAGE": "Image",
+  "IMAGEُ": "Images",
   "FILE": "File",
   "DOC": "Doc",
   "PRICE": "Price",
@@ -63,5 +64,6 @@
   "EXPIRATION_DATE": "Expiration date",
   "EXPIRATION_TIME": "Expiration time",
   "ANCHOR": "Anchor",
-  "ANCHORS": "Anchors"
+  "ANCHORS": "Anchors",
+  "AT_LEAST_ONE_IMAGE_IS_REQUIRED": "At least one image is required"
 }

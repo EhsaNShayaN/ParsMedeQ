@@ -1,0 +1,40 @@
+<div
+  class="multi-upload"
+  [class.drag-over]="isDragOver"
+  (drop)="onFileDropped($event)"
+  (dragover)="onDragOver($event)"
+  (dragleave)="onDragLeave($event)"
+>
+  <mat-label>{{label}}</mat-label>
+  <input
+    type="file"
+    [accept]="accept"
+    [multiple]="true"
+    (change)="onFileSelected($event)"
+    [disabled]="disabled"
+  />
+
+  <div class="preview-list" cdkDropList (cdkDropListDropped)="drop($event)">
+    @for (item of items; track item.id; let i = $index) {
+      <div class="preview-item" cdkDrag>
+        <img [src]="item.preview" alt="preview"/>
+        <button type="button" (click)="removeFile(i)" [disabled]="disabled">
+          ✕
+        </button>
+      </div>
+    }
+  </div>
+
+  <!-- Angular Form Required Error -->
+  @if (control?.hasError('required')) {
+    <mat-error>{{ 'AT_LEAST_ONE_IMAGE_IS_REQUIRED' | translate }}</mat-error>
+  }
+  <!-- Custom Validation Errors -->
+  @if (errors.length) {
+    <mat-error>
+      @for (err of errors; track err) {
+        <div>{{ err }}</div>
+      }
+    </mat-error>
+  }
+</div>
