@@ -22,10 +22,22 @@ public sealed class AddProductApiRequest
     public string PublishDate { get; private set; } = string.Empty;
     public IFormFile? Image { get; private set; }
     public IFormFile? File { get; private set; }
+    public IFormFile[] NewFiles { get; private set; }
+    public AddProductGalleryApiRequest? Gallery { get; private set; }
 
     public static async ValueTask<AddProductApiRequest?> BindAsync(HttpContext context, ParameterInfo _)
     {
         var form = await context.Request.ReadFormAsync(context.RequestAborted).ConfigureAwait(false);
         return FormBinderHelper.Bind<AddProductApiRequest>(form);
     }
+}
+public sealed class AddProductGalleryApiRequest
+{
+    public AddProductExistingImageApiRequest? Existing { get; set; }
+    public int[]? Deleted { get; private set; }
+}
+public sealed class AddProductExistingImageApiRequest
+{
+    public int Id { get; set; }
+    public string Url { get; set; } = string.Empty;
 }

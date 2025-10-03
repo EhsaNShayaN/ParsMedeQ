@@ -104,6 +104,9 @@ export class RestApiService {
     //const formData: FormData = new FormData();
     formData.append('image', image);
     formData.append('file', file);
+    for (const newFile of model.gallery.new) {
+      formData.append('newFiles', newFile);
+    }
     //formData.append('model', JSON.stringify(model));
     return this.http.post<BaseResult<boolean>>(`${endpoint()}product/${model.id ? 'edit' : 'add'}`, formData).pipe(
       catchError(this.handleError)

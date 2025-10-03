@@ -1,5 +1,6 @@
 ﻿using ParsMedeQ.Application.Persistance.Schema.ProductRepositories;
 using ParsMedeQ.Domain.Aggregates.ProductAggregate;
+using ParsMedeQ.Domain.Aggregates.ProductAggregate.Entities;
 using ParsMedeQ.Domain.Aggregates.ProductCategoryAggregate;
 using ParsMedeQ.Infrastructure.Persistance.DbContexts;
 using SRH.Persistance.Extensions;
@@ -18,6 +19,10 @@ internal sealed class ProductWriteRepository : GenericPrimitiveWriteRepositoryBa
             .Run(q => q.FirstOrDefaultAsync(cancellationToken), PrimitiveError.Create("", "مقاله ای با شناسه مورد نظر پیدا نشد"));
     public ValueTask<PrimitiveResult<Product>> AddProduct(Product Product, CancellationToken cancellationToken) =>
         this.Add(Product);
+    public ValueTask<PrimitiveResult<ProductMedia>> AddProductMedia(ProductMedia ProductMedia, CancellationToken cancellationToken) =>
+        this.Add(ProductMedia);
+    public ValueTask<PrimitiveResult<ProductMedia>> DeleteProductMedia(ProductMedia ProductMedia, CancellationToken cancellationToken) =>
+        this.Remove(ProductMedia);
     public ValueTask<PrimitiveResult<Product>> UpdateProduct(Product Product, CancellationToken cancellationToken) =>
         this.Update(Product);
     public ValueTask<PrimitiveResult<ProductCategory>> FindCategoryById(int id, CancellationToken cancellationToken) =>

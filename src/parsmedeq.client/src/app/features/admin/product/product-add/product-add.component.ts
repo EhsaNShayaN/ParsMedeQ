@@ -127,7 +127,7 @@ export class ProductAddComponent extends BaseComponent implements OnInit, OnDest
     this.restApiService.addProduct(values, this.image, this.file).subscribe((d: BaseResult<AddResult>) => {
       this.toaster.success(this.getTranslateValue('THE_OPERATION_WAS_SUCCESSFUL'), '', {});
       if (!this.editItem) {
-        this.formDir.resetForm();
+        //this.formDir.resetForm();
       }
     });
   }

@@ -7,8 +7,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Persistance\DbContexts\Seeds\**" />
 	  <Compile Remove="_Migrations\**" />
+	  <EmbeddedResource Remove="Persistance\DbContexts\Seeds\**" />
 	  <EmbeddedResource Remove="_Migrations\**" />
+	  <None Remove="Persistance\DbContexts\Seeds\**" />
 	  <None Remove="_Migrations\**" />
 	</ItemGroup>
 	<ItemGroup>
@@ -34,9 +37,6 @@
 		<ProjectReference Include="..\..\SRH.Libraries\SRH.ServiceInstaller\SRH.ServiceInstaller.csproj" />
 		<ProjectReference Include="..\ParsMedeQ.Application\ParsMedeQ.Application.csproj" />
 		<ProjectReference Include="..\ParsMedeQ.Domain\ParsMedeQ.Domain.csproj" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Persistance\DbContexts\Seeds\" />
 	</ItemGroup>
 
 </Project>
