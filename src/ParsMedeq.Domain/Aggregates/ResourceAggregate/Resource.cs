@@ -23,7 +23,7 @@ public sealed class Resource : EntityBase<int>
     public int? Price { get; private set; }
     public int? Discount { get; private set; }
     public int DownloadCount { get; private set; }
-    public int? Ordinal { get; private set; }
+    public int Stock { get; set; }
     public bool Deleted { get; private set; }
     public bool Disabled { get; private set; }
     public DateTime? ExpirationDate { get; private set; }

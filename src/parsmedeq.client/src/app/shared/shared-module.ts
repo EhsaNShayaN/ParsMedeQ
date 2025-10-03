@@ -31,6 +31,7 @@ import {JalaliMomentDateAdapter, PERSIAN_DATE_FORMATS} from '../core/custom-date
 import {DatePickerComponent} from './date-picker/date-picker.component';
 import {MultiFileUploadComponent} from './components/multi-file-upload/multi-file-upload.component';
 import {CdkDrag, CdkDropList} from '@angular/cdk/drag-drop';
+import {CartItemControlComponent} from '../features/cart/cart-item-control/cart-item-control.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import {CdkDrag, CdkDropList} from '@angular/cdk/drag-drop';
     LoadMoreComponent,
     Comments,
     MultiFileUploadComponent,
+    CartItemControlComponent,
   ],
   imports: [
     FormsModule,
@@ -120,6 +122,7 @@ import {CdkDrag, CdkDropList} from '@angular/cdk/drag-drop';
     MatDatepickerModule,
     MatNativeDateModule,
     DatePickerComponent,
+    CartItemControlComponent,
     //////////////////////
     DefaultShowHideDirective,
     MatMenuTrigger,

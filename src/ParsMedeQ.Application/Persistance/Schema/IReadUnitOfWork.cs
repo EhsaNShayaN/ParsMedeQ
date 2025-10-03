@@ -14,4 +14,5 @@ public interface IReadUnitOfWork : IUnitOfWork
     IProductReadRepository ProductReadRepository { get; }
     IMediaReadRepository MediaReadRepository { get; }
     IPurchaseReadRepository PurchaseReadRepository { get; }
+    ICartReadRepository CartReadRepository { get; }
 }

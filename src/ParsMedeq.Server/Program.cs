@@ -1,7 +1,9 @@
+using Hangfire;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using ParsMedeQ.Application.Options;
+using ParsMedeQ.Infrastructure.Services.CartServices;
 using ParsMedeQ.Presentation.Services.ApplicationServices.UserLangServices;
 using ParsMedeQ.Server;
 using SRH.ServiceInstaller;
@@ -111,6 +113,9 @@ app.MapMinimalEndpoits();
 // Configure the HTTP request pipeline.
 
 app.UseHttpsRedirection();
+app.UseHangfireDashboard("/hangfire");
+// اجرای Job زمان‌بندی‌شده هر 5 دقیقه
+RecurringJob.AddOrUpdate<CartStockValidator>("ValidateCarts", service => service.ValidateCartsAsync(), Cron.MinuteInterval(5));
 
 var summaries = new[]
 {
@@ -140,8 +145,11 @@ app.UseAuthorization();
 //app.UseExceptionHandler();
 //app.UseMiddleware<UserContextAccessorMiddleware>();
 
+app.MapHub<CartHub>("/hubs/cart"); // مسیر SignalR
+
 app.MapControllers();
 app.MapFallbackToFile("/index.html");
+
 app.Run();
 
 internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)

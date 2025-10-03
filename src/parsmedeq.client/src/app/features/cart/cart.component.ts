@@ -3,7 +3,8 @@ import {CartService} from '../../core/services/cart.service';
 
 @Component({
   selector: 'app-cart',
-  templateUrl: './cart.component.html'
+  templateUrl: './cart.component.html',
+  standalone: false
 })
 export class CartComponent {
   cart = this.cartService.cart;

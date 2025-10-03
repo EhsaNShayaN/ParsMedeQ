@@ -6,7 +6,7 @@ using ParsMedeQ.Domain.Persistance;
 namespace ParsMedeQ.Application.Persistance.Schema.ProductRepositories;
 public interface IProductWriteRepository : IDomainRepository
 {
-    ValueTask<PrimitiveResult<Product>> FindById(int id, CancellationToken cancellationToken);
+    ValueTask<PrimitiveResult<Product>> FindById(int id, CancellationToken cancellationToken=default);
     ValueTask<PrimitiveResult<Product>> AddProduct(Product Product, CancellationToken cancellationToken);
     ValueTask<PrimitiveResult<ProductMedia>> AddProductMedia(ProductMedia ProductMedia, CancellationToken cancellationToken);
     ValueTask<PrimitiveResult<ProductMedia>> DeleteProductMedia(ProductMedia ProductMedia, CancellationToken cancellationToken);

@@ -2,6 +2,7 @@
 using ParsMedeQ.Domain.Aggregates.ProductAggregate.Entities;
 using ParsMedeQ.Domain.Aggregates.ProductCategoryAggregate;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.CompilerServices;
 
 namespace ParsMedeQ.Domain.Aggregates.ProductAggregate;
 public sealed class Product : EntityBase<int>
@@ -14,6 +15,7 @@ public sealed class Product : EntityBase<int>
     public int ProductCategoryId { get; private set; }
     public int? Price { get; private set; }
     public int? Discount { get; private set; }
+    public int Stock { get; private set; }
     public bool Deleted { get; private set; }
     public bool Disabled { get; private set; }
     public DateTime CreationDate { get; private set; }
@@ -128,5 +130,11 @@ public sealed class Product : EntityBase<int>
                 _ => PrimitiveResult.Success(),
                 PrimitiveResult.Failure
             );
+    }
+
+    public ValueTask<PrimitiveResult<Product>> UpdateStock(int quantity)
+    {
+        this.Stock += quantity;
+        return ValueTask.FromResult(PrimitiveResult.Success(this));
     }
 }

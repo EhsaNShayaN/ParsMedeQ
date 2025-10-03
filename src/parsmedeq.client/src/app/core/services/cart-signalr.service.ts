@@ -1,44 +1,39 @@
-import {Injectable, signal} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {StorageService} from './storage.service';
-import {Cart, CartItem} from '../models/Cart';
+import {Injectable} from '@angular/core';
+import * as signalR from '@microsoft/signalr';
+import {CartService} from './cart.service';
 
 @Injectable({providedIn: 'root'})
-export class CartService {
-  private apiUrl = '/api/cart';
-  cart = signal<Cart | null>(null);
+export class CartSignalRService {
+  private hubConnection!: signalR.HubConnection;
 
-  constructor(private http: HttpClient, private storage: StorageService) {
+  constructor(private cartService: CartService) {
   }
 
-  /** گرفتن سبد */
-  loadCart(userId?: string): void {
-    const anonymousId = userId ? null : this.storage.getAnonymousId();
-    this.http.get<Cart>(`${this.apiUrl}?userId=${userId ?? ''}&anonymousId=${anonymousId ?? ''}`)
-      .subscribe(c => this.cart.set(c));
+  startConnection(userId: string) {
+    this.hubConnection = new signalR.HubConnectionBuilder()
+      .withUrl('https://localhost:5001/hubs/cart')
+      .withAutomaticReconnect()
+      .build();
+
+    this.hubConnection.start().then(() => {
+      console.log('SignalR connected');
+      this.hubConnection.invoke('JoinCartGroup', userId);
+    }).catch(err => console.error(err));
+
+    this.hubConnection.on('CartUpdatedDetailed', (data) => {
+      // بروزرسانی BehaviorSubject
+      this.cartService.loadCart(userId); // دوباره سبد رو از سرور می‌گیریم
+    });
   }
 
-  /** افزودن به سبد */
-  addToCart(item: CartItem, userId?: string): void {
-    const anonymousId = userId ? null : this.storage.getAnonymousId();
-    this.http.post<Cart>(`${this.apiUrl}/add?userId=${userId ?? ''}&anonymousId=${anonymousId ?? ''}`, item)
-      .subscribe(c => this.cart.set(c));
+  stopConnection(userId: string) {
+    if (this.hubConnection) {
+      this.hubConnection.invoke('LeaveCartGroup', userId);
+      this.hubConnection.stop();
+    }
   }
 
-  /** حذف از سبد */
-  removeFromCart(itemId: string, userId?: string): void {
-    const anonymousId = userId ? null : this.storage.getAnonymousId();
-    this.http.delete<Cart>(`${this.apiUrl}/remove?userId=${userId ?? ''}&anonymousId=${anonymousId ?? ''}&itemId=${itemId}`)
-      .subscribe(c => this.cart.set(c));
-  }
-
-  /** ادغام بعد از لاگین */
-  mergeCart(userId: string): void {
-    const anonymousId = this.storage.getAnonymousId();
-    this.http.post<Cart>(`${this.apiUrl}/merge?anonymousId=${anonymousId}&userId=${userId}`, {})
-      .subscribe(c => {
-        this.cart.set(c);
-        this.storage.clearAnonymousId(); // بعد از ادغام، ناشناس پاک میشه
-      });
+  onCartUpdatedDetailed(callback: (data: any) => void) {
+    this.hubConnection.on('CartUpdatedDetailed', callback);
   }
 }

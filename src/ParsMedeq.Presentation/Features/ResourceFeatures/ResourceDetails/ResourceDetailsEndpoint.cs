@@ -80,7 +80,7 @@ sealed class ResourceDetailsApiResponseMapper : IPresentationMapper<
                         src.Price,
                         src.Discount,
                         src.DownloadCount,
-                        src.Ordinal,
+                        src.Stock,
                         src.Deleted,
                         src.Disabled,
                         src.ExpirationDate.ToPersianDate(),

@@ -20,6 +20,7 @@ export class Product {
 
   price?: number;
   discount?: number;
+  stock!: number;
   creationDate!: string;
   registered!: boolean;
 

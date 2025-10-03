@@ -37,6 +37,29 @@
       @if (appSettings.settings.selectLang) {
         <app-lang></app-lang>
       }
+
+      <div class="cart-dropdown">
+        <button class="cart-btn">
+          🛒 سبد خرید ({{ totalItems }})
+        </button>
+        <div class="cart-menu">
+          <ng-container *ngIf="cartItems.length > 0; else empty">
+            <div class="cart-item" *ngFor="let item of cartItems">
+              <span>{{ item.productName }}</span>
+              <span>تعداد: {{ item.quantity }}</span>
+              <span>{{ item.unitPrice * item.quantity | number }} تومان</span>
+              <button (click)="removeItem(item.id)">❌</button>
+            </div>
+            <div class="checkout">
+              <a routerLink="/checkout">رفتن به پرداخت</a>
+            </div>
+          </ng-container>
+          <ng-template #empty>
+            <div class="empty-cart">سبد خرید شما خالی است</div>
+          </ng-template>
+        </div>
+      </div>
+
       <button mat-button class="menu" fxHide="false" fxHide.gt-sm (click)="sidenavToggle()">
         <mat-icon>menu</mat-icon>
       </button>

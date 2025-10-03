@@ -99,3 +99,47 @@ input {
   line-height: 110%;
   text-align: center;
 }
+
+/****BEGIN CART****/
+.cart-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.cart-btn {
+  cursor: pointer;
+  padding: 6px 12px;
+}
+
+.cart-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  background: white;
+  border: 1px solid #ccc;
+  min-width: 250px;
+  z-index: 1000;
+  padding: 10px;
+}
+
+.cart-dropdown:hover .cart-menu {
+  display: block;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.checkout {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.empty-cart {
+  text-align: center;
+  color: #888;
+}
+
+/****END CART****/

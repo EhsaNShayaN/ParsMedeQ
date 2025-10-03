@@ -1,9 +1,11 @@
-import {Component, Output, EventEmitter, ViewChild, OnDestroy} from '@angular/core';
+import {Component, Output, EventEmitter, ViewChild, OnDestroy, OnInit} from '@angular/core';
 import {AppSettings, Settings} from '../../../app.settings';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {PureComponent} from '../../../pure-component';
 import {MatMenuTrigger} from '@angular/material/menu';
 import {AuthService} from '../../../core/services/auth.service';
+import {CartItem} from '../../../core/models/Cart';
+import {CartService} from '../../../core/services/cart.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -11,7 +13,9 @@ import {AuthService} from '../../../core/services/auth.service';
   styleUrl: './toolbar.scss',
   standalone: false
 })
-export class Toolbar extends PureComponent implements OnDestroy {
+export class Toolbar extends PureComponent implements OnInit, OnDestroy {
+  cartItems: CartItem[] = [];
+  totalItems = 0;
   @Output() onMenuIconClick: EventEmitter<any> = new EventEmitter<any>();
   public subscribeForm: UntypedFormGroup;
   public settings: Settings;
@@ -20,7 +24,8 @@ export class Toolbar extends PureComponent implements OnDestroy {
   recheckIfInMenu: boolean;
   subscribe1: any;
 
-  constructor(public appSettings: AppSettings,
+  constructor(private cartService: CartService,
+              public appSettings: AppSettings,
               public formBuilder: UntypedFormBuilder,
               public authService: AuthService) {
     super();
@@ -29,6 +34,18 @@ export class Toolbar extends PureComponent implements OnDestroy {
     this.subscribeForm = this.formBuilder.group({
       query: ['', Validators.required]
     });
+  }
+
+  ngOnInit(): void {
+    // Subscribe به BehaviorSubject
+    this.cartService.cart$.subscribe(cart => {
+      this.cartItems = cart?.items ?? [];
+      this.totalItems = this.cartItems.reduce((sum, i) => sum + i.quantity, 0);
+    });
+  }
+
+  removeItem(itemId: string) {
+    this.cartService.removeFromCart(itemId);
   }
 
   sidenavToggle() {

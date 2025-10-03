@@ -12,6 +12,13 @@
                 <span class="background-color bg-orange px-3 py-2">{{ item.productCategoryTitle }}</span>
               </div>
               <img [src]="item.image" [alt]="item.title" class="w-100 img-square">
+              <app-cart-item-control
+                [productId]="item.id"
+                [productType]="'Book'"
+                [productName]="item.title"
+                [unitPrice]="item.price ?? 0"
+                [stock]="item.stock">
+              </app-cart-item-control>
               <!--<app-download-management
                 *ngIf="item.doc === 'True' && (item.registered || (item.price ?? 0) === 0)" [id]="item.id" [price]="item.price" [tableId]="Tables.Product">
               </app-download-management>-->

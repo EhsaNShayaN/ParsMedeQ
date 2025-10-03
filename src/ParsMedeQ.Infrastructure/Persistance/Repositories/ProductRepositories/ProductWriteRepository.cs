@@ -11,12 +11,12 @@ internal sealed class ProductWriteRepository : GenericPrimitiveWriteRepositoryBa
 {
     public ProductWriteRepository(WriteDbContext dbContext) : base(dbContext) { }
 
-    public ValueTask<PrimitiveResult<Product>> FindById(int id, CancellationToken cancellationToken) =>
+    public ValueTask<PrimitiveResult<Product>> FindById(int id, CancellationToken cancellationToken = default) =>
         this.DbContext
             .Product
             .Include(s => s.ProductTranslations)
             .Where(s => s.Id.Equals(id))
-            .Run(q => q.FirstOrDefaultAsync(cancellationToken), PrimitiveError.Create("", "مقاله ای با شناسه مورد نظر پیدا نشد"));
+            .Run(q => q.FirstOrDefaultAsync(cancellationToken), PrimitiveError.Create("", "محصولی با شناسه مورد نظر پیدا نشد"));
     public ValueTask<PrimitiveResult<Product>> AddProduct(Product Product, CancellationToken cancellationToken) =>
         this.Add(Product);
     public ValueTask<PrimitiveResult<ProductMedia>> AddProductMedia(ProductMedia ProductMedia, CancellationToken cancellationToken) =>

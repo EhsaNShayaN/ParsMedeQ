@@ -84,7 +84,7 @@ sealed class ResourceListApiResponseMapper : IPresentationMapper<
                         data.Price,
                         data.Discount,
                         data.DownloadCount,
-                        data.Ordinal,
+                        data.Stock,
                         data.ExpirationDate.HasValue && data.ExpirationDate.Value < DateTime.Now,
                         data.CreationDate.ToPersianDate()))
                     .ToArray(), src.TotalCount, src.PageIndex, src.PageSize)

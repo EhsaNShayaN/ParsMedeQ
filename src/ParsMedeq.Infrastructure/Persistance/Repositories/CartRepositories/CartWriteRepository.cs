@@ -1,6 +1,7 @@
 ﻿using ParsMedeQ.Application.Persistance.Schema.CartRepositories;
 using ParsMedeQ.Domain.Aggregates.CartAggregate;
 using ParsMedeQ.Domain.Aggregates.CartAggregate.Entities;
+using ParsMedeQ.Domain.Aggregates.ProductAggregate;
 using ParsMedeQ.Infrastructure.Persistance.DbContexts;
 using SRH.Persistance.Repositories.Write;
 
@@ -9,6 +10,10 @@ internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<
 {
     public CartWriteRepository(WriteDbContext dbContext) : base(dbContext) { }
 
+    public async ValueTask<Cart[]> GetCartsAsync()
+    {
+        return await this.DbContext.Cart.Include(c => c.CartItems).ToArrayAsync();
+    }
     public async ValueTask<Cart> GetCartAsync(string? userId, string? anonymousId)
     {
         var cart = await this.DbContext.Cart
@@ -26,20 +31,56 @@ internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<
     }
     public async ValueTask<Cart> AddToCartAsync(string? userId, string? anonymousId, CartItem item)
     {
+        // گرفتن محصول از دیتابیس
+        var product = await this.DbContext.Set<Product>().FindAsync(item.ProductId);
+        if (product == null)
+            throw new InvalidOperationException("محصول پیدا نشد");
+
+        if (product.Stock <= 0)
+            throw new InvalidOperationException("محصول ناموجود است");
+
         var cart = await GetCartAsync(userId, anonymousId);
 
         var existingItem = cart.CartItems.FirstOrDefault(i => i.ProductId == item.ProductId && i.ProductType == item.ProductType);
+
         if (existingItem != null)
         {
+            // چک موجودی
+            if (existingItem.Quantity + item.Quantity > product.Stock)
+                throw new InvalidOperationException($"حداکثر تعداد سفارش {product.Stock} عدد است");
+
             existingItem.Quantity += item.Quantity;
         }
         else
         {
+            if (item.Quantity > product.Stock)
+                throw new InvalidOperationException($"حداکثر تعداد سفارش {product.Stock} عدد است");
+
             await cart.AddCartItem(item);
         }
 
         await this.DbContext.SaveChangesAsync();
         return cart;
+    }
+    public async ValueTask<bool> CheckoutAsync(string userId)
+    {
+        var cart = await this.DbContext.Cart.Include(c => c.CartItems).FirstOrDefaultAsync(c => c.UserId == userId);
+        if (cart == null || !cart.CartItems.Any()) return false;
+
+        foreach (var item in cart.CartItems)
+        {
+            var product = await this.DbContext.Set<Product>().FindAsync(item.ProductId);
+            if (product == null || product.Stock < item.Quantity)
+                throw new InvalidOperationException($"موجودی محصول {item.ProductName} کافی نیست");
+
+            await product.UpdateStock(item.Quantity);
+        }
+
+        // سبد بعد از خرید خالی میشه
+        this.DbContext.CartItems.RemoveRange(cart.CartItems);
+        await this.DbContext.SaveChangesAsync();
+
+        return true;
     }
     public async ValueTask<Cart> RemoveFromCartAsync(string? userId, string? anonymousId, int itemId)
     {
@@ -47,7 +88,7 @@ internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<
         var item = cart.CartItems.FirstOrDefault(i => i.Id == itemId);
         if (item != null)
         {
-            cart.RemoveCartItem(item);
+            await cart.RemoveCartItem(item);
             this.DbContext.CartItems.Remove(item);
         }
 

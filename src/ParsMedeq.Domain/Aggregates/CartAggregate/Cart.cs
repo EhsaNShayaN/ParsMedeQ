@@ -104,6 +104,9 @@ public sealed class Cart : EntityBase<string>
     }
     public ValueTask<PrimitiveResult> RemoveCartItem(
         CartItem item)
-        => this._CartItems.Remove(item) ? PrimitiveResult.Success() : PrimitiveResult.Failure("","");
+    {
+        return ValueTask.FromResult(PrimitiveResult.Success());
+        //return this._CartItems.Remove(item) ? PrimitiveResult.Success() : PrimitiveResult.Failure("", "");
+    }
     #endregion
 }

@@ -27,7 +27,7 @@ export class Resource {
   price?: number;
   discount?: number;
   downloadCount!: number;
-  ordinal?: number;
+  stock!: number;
   expirationDate!: string;
   expirationTime!: string;
   expired!: boolean;

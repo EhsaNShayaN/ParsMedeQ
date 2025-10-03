@@ -1,4 +1,5 @@
-﻿using Medallion.Threading;
+﻿using Hangfire;
+using Medallion.Threading;
 using Medallion.Threading.SqlServer;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Caching.StackExchangeRedis;
@@ -46,7 +47,8 @@ internal sealed class ProjectInstaller : IServiceInstaller
             .InstallHealthChecks(config)
             .InstallOpenTelemtryTracingAndMetrics(config)
             .InstallFileService()
-            .InstallUserAuthenticationTokenService(config);
+            .InstallUserAuthenticationTokenService(config)
+            .InstallHangfire(config);
 }
 static class ServiceCollectionExtension
 {
@@ -307,6 +309,14 @@ static class ServiceCollectionExtension
     internal static IServiceCollection InstallFileService(this IServiceCollection services)
     {
         services.TryAddSingleton<IFileService, FileService>();
+        return services;
+    }
+
+    internal static IServiceCollection InstallHangfire(this IServiceCollection services, IConfiguration config)
+    {
+        services.AddHangfire(hangfireConfig =>
+        hangfireConfig.UseSqlServerStorage(config.GetConnectionString("DefaultConnection")));
+        services.AddHangfireServer();
         return services;
     }
 

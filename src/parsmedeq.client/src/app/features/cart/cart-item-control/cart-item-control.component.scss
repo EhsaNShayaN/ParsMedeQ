@@ -1,12 +1,27 @@
-<div *ngIf="quantity() === 0; else inCart">
-  <button (click)="add()">➕ افزودن به سبد</button>
-</div>
+.out-of-stock {
+  background: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
 
-<ng-template #inCart>
-  <div class="cart-control">
-    <button (click)="decrease()">➖</button>
-    <span>{{ quantity() }}</span>
-    <button (click)="increase()">➕</button>
-    <button class="remove" (click)="remove()">❌</button>
-  </div>
-</ng-template>
+.cart-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  button {
+    padding: 4px 8px;
+    cursor: pointer;
+  }
+
+  span {
+    font-weight: bold;
+    min-width: 20px;
+    text-align: center;
+  }
+}
+
+.warning {
+  color: red;
+  font-size: 12px;
+}

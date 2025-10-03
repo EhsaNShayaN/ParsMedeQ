@@ -2,11 +2,13 @@
 using ParsMedeQ.Application.Features.ProductFeatures.ProductDetailsFeature;
 using ParsMedeQ.Application.Features.ProductFeatures.ProductListFeature;
 using ParsMedeQ.Application.Helpers;
+using ParsMedeQ.Domain.Aggregates.ProductAggregate;
 using ParsMedeQ.Domain.Persistance;
 
 namespace ParsMedeQ.Application.Persistance.Schema.ProductRepositories;
 public interface IProductReadRepository : IDomainRepository
 {
+    ValueTask<PrimitiveResult<Product>> FindById(int id, CancellationToken cancellationToken);
     ValueTask<PrimitiveResult<BasePaginatedApiResponse<ProductListDbQueryResponse>>> FilterProducts(
         BasePaginatedQuery paginated,
         string langCode,

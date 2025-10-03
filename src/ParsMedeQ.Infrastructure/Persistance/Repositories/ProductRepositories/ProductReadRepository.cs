@@ -3,6 +3,7 @@ using ParsMedeQ.Application.Features.ProductFeatures.ProductDetailsFeature;
 using ParsMedeQ.Application.Features.ProductFeatures.ProductListFeature;
 using ParsMedeQ.Application.Helpers;
 using ParsMedeQ.Application.Persistance.Schema.ProductRepositories;
+using ParsMedeQ.Domain.Aggregates.ProductAggregate;
 using ParsMedeQ.Infrastructure.Persistance.DbContexts;
 using SRH.Persistance.Extensions;
 using SRH.Persistance.Models;
@@ -11,6 +12,13 @@ namespace ParsMedeQ.Infrastructure.Persistance.Repositories.ProductRepositories;
 internal sealed class ProductReadRepository : GenericPrimitiveReadRepositoryBase<ReadDbContext>, IProductReadRepository
 {
     public ProductReadRepository(ReadDbContext dbContext) : base(dbContext) { }
+
+    public ValueTask<PrimitiveResult<Product>> FindById(int id, CancellationToken cancellationToken) =>
+        this.DbContext
+            .Product
+            .Include(s => s.ProductTranslations)
+            .Where(s => s.Id.Equals(id))
+            .Run(q => q.FirstOrDefaultAsync(cancellationToken), PrimitiveError.Create("", "محصولی با شناسه مورد نظر پیدا نشد"));
     public ValueTask<PrimitiveResult<BasePaginatedApiResponse<ProductListDbQueryResponse>>> FilterProducts(
         BasePaginatedQuery paginated,
         string langCode,

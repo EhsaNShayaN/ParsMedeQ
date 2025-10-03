@@ -11,4 +11,5 @@ public interface IWriteUnitOfWork : IBaseWriteUnitOfWork
     IResourceWriteRepository ResourceWriteRepository { get; }
     IProductWriteRepository ProductWriteRepository { get; }
     IMediaWriteRepository MediaWriteRepository { get; }
+    ICartWriteRepository CartWriteRepository { get; }
 }

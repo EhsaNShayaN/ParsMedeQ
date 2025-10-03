@@ -3,5 +3,4 @@
 namespace ParsMedeQ.Application.Persistance.Schema.CartRepositories;
 public interface ICartReadRepository : IDomainRepository
 {
-    
 }
