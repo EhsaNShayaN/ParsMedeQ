@@ -1,0 +1,60 @@
+import {Component, Input, computed, effect} from '@angular/core';
+import {CartService} from '../../../core/services/cart.service';
+import {CartItem} from '../../../core/models/Cart';
+
+@Component({
+  selector: 'app-cart-item-control',
+  templateUrl: './cart-item-control.component.html',
+  styleUrls: ['./cart-item-control.component.css']
+})
+export class CartItemControlComponent {
+  @Input() productId!: string;
+  @Input() productType!: string;
+  @Input() productName!: string;
+  @Input() unitPrice!: number;
+
+  cart = this.cartService.cart;
+
+  // پیدا کردن آیتم در سبد
+  item = computed(() =>
+    this.cart()?.items.find(i => i.productId === this.productId && i.productType === this.productType)
+  );
+
+  quantity = computed(() => this.item()?.quantity ?? 0);
+
+  constructor(private cartService: CartService) {
+  }
+
+  add() {
+    const item: CartItem = {
+      productId: this.productId,
+      productType: this.productType,
+      productName: this.productName,
+      unitPrice: this.unitPrice,
+      quantity: 1
+    };
+    this.cartService.addToCart(item, this.cart()?.userId);
+  }
+
+  remove() {
+    if (this.item()) {
+      this.cartService.removeFromCart(this.item()!.id!, this.cart()?.userId);
+    }
+  }
+
+  increase() {
+    const item = this.item();
+    if (item) {
+      this.cartService.addToCart({...item, quantity: 1}, this.cart()?.userId);
+    }
+  }
+
+  decrease() {
+    const item = this.item();
+    if (item && item.quantity > 1) {
+      this.cartService.addToCart({...item, quantity: -1}, this.cart()?.userId);
+    } else {
+      this.remove();
+    }
+  }
+}

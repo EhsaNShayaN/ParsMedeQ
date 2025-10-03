@@ -1,0 +1,12 @@
+<div *ngIf="quantity() === 0; else inCart">
+  <button (click)="add()">➕ افزودن به سبد</button>
+</div>
+
+<ng-template #inCart>
+  <div class="cart-control">
+    <button (click)="decrease()">➖</button>
+    <span>{{ quantity() }}</span>
+    <button (click)="increase()">➕</button>
+    <button class="remove" (click)="remove()">❌</button>
+  </div>
+</ng-template>
