@@ -4,6 +4,7 @@ CREATE TABLE [dbo].[Product]
 [ProductCategoryId] [int] NOT NULL,
 [Price] [int] NULL,
 [Discount] [int] NULL,
+[Stock] [int] NOT NULL,
 [Deleted] [bit] NOT NULL,
 [Disabled] [bit] NOT NULL,
 [CreationDate] [datetime] NOT NULL

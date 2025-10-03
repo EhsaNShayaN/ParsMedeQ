@@ -10,7 +10,7 @@ CREATE TABLE [dbo].[Resource]
 [Price] [int] NULL,
 [Discount] [int] NULL,
 [DownloadCount] [int] NOT NULL,
-[Ordinal] [int] NULL,
+[Stock] [int] NOT NULL,
 [Deleted] [bit] NOT NULL,
 [Disabled] [bit] NOT NULL,
 [ExpirationDate] [datetime] NULL,
