@@ -7,6 +7,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Features\ProductFeatures\AddProductMediaFeature\AddProductMediaCommand.cs" />
+	  <Compile Remove="Features\ProductFeatures\AddProductMediaFeature\AddProductMediaCommandHandler.cs" />
+	  <Compile Remove="Features\ProductFeatures\AddProductMediaFeature\AddProductMediaCommandResponse.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Microsoft.EntityFrameworkCore" />
 		<PackageReference Include="Microsoft.FeatureManagement" />
 		<PackageReference Include="Scrutor" />
@@ -21,6 +27,10 @@
 		<ProjectReference Include="..\..\SRH.Libraries\SRH.MediatRMessaging\SRH.MediatRMessaging.csproj" />
 		<ProjectReference Include="..\..\SRH.Libraries\SRH.ServiceInstaller\SRH.ServiceInstaller.csproj" />
 		<ProjectReference Include="..\ParsMedeQ.Domain\ParsMedeQ.Domain.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Features\ProductFeatures\AddProductMediaFeature\" />
 	</ItemGroup>
 
 </Project>
