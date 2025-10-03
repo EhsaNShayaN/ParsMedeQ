@@ -1,0 +1,12 @@
+<div *ngIf="cart() as c">
+  <h2>سبد خرید</h2>
+  <ul>
+    <li *ngFor="let item of c.items">
+      {{ item.productName }} - {{ item.quantity }} × {{ item.unitPrice | number }} تومان
+      <button (click)="removeItem(item.id!)">حذف</button>
+    </li>
+  </ul>
+  <p>جمع کل: {{ total() | number }} تومان</p>
+  <button (click)="checkout()">مرحله بعد</button>
+  <button (click)="payment()">پرداخت</button>
+</div>

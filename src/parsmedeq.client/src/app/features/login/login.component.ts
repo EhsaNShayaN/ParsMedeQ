@@ -1,13 +1,14 @@
-import {Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {BaseComponent} from '../../base-component';
-import {ToastrService} from 'ngx-toastr';
 import {MobileFormatterPipe} from '../../core/pipes/mobile-formatter.pipe';
 import {AuthService} from '../../core/services/auth.service';
 import {first} from 'rxjs/operators';
 import {BaseResult} from '../../core/models/BaseResult';
 import {MobileResponse, SendOtpResponse} from '../../core/models/Login';
+import {CartService} from '../../core/services/cart.service';
+import {StorageService} from '../../core/services/storage.service';
 
 @Component({
   selector: 'app-login',
@@ -31,11 +32,11 @@ export class LoginComponent extends BaseComponent implements OnInit, OnDestroy {
   @Output() clicked = new EventEmitter<any>();
 
   constructor(public fb: UntypedFormBuilder,
-              private elementRef: ElementRef,
               private activatedRoute: ActivatedRoute,
               private mobileFormatter: MobileFormatterPipe,
-              private toaster: ToastrService,
-              private auth: AuthService) {
+              private auth: AuthService,
+              private storageService: StorageService,
+              private cartService: CartService) {
     super();
     this.loginForm = this.fb.group({
       username: ['', Validators.compose([Validators.required, Validators.minLength(10)])],
@@ -49,8 +50,6 @@ export class LoginComponent extends BaseComponent implements OnInit, OnDestroy {
       if (params['id']) {
         this.returnUrl = decodeURI(params['id']);
       }
-      console.log('this.auth.isLoggedIn()', this.auth.isLoggedIn());
-      console.log('returnUrl', this.returnUrl);
       if (this.auth.isLoggedIn()) {
         this.navigateToLink(this.returnUrl, 'fa');
       }
@@ -78,7 +77,7 @@ export class LoginComponent extends BaseComponent implements OnInit, OnDestroy {
       .subscribe((d: BaseResult<SendOtpResponse>) => {
           this.submitClick = false;
           this.hasMobile = true;
-          this.loginFormData['password']?.setValue(d.data.otp)
+          this.loginFormData['password']?.setValue(d.data.otp);
         },
         (error: string) => {
           this.error = error;
@@ -103,6 +102,9 @@ export class LoginComponent extends BaseComponent implements OnInit, OnDestroy {
         if (d.data.token) {
           this.auth.login(d.data.token);
           this.navigateToLink(this.returnUrl, 'fa');
+          const anonymousId = this.storageService.getAnonymousId();
+          this.cartService.mergeCart(anonymousId);
+          this.storageService.clearAnonymousId();
         } else {
           this.error = this.getTranslateValue('PASSWORD_IS_WRONG');
         }
@@ -112,35 +114,6 @@ export class LoginComponent extends BaseComponent implements OnInit, OnDestroy {
         this.error = error;
         this.submitClick = false;
       });
-  }
-
-  back() {
-    this.error = '';
-    this.hasMobile = false;
-    this.hasCode = 0;
-    this.submitClick = false;
-    this.loginFormData['password']?.setErrors(null);
-  }
-
-  sendOTP(type: number) {
-    this.submitClick = true;
-    /*this.baseRestService.sendCode(this.profileId, type === 2)
-      .pipe(first())
-      .subscribe((d: BaseResult<boolean>) => {
-        this.submitClick = false;
-        this.hasCode = type;
-        if (d.data) {
-          const msg = 'کد به ' + this.mobile + ' ارسال شد.';
-          this.toaster.success(msg, '', {
-            // timeOut: 30000,
-          });
-        } else {
-          const msg = 'محدودیت تعداد پیامک در روز';
-          this.toaster.error(msg, '', {
-            // timeOut: 30000,
-          });
-        }
-      });*/
   }
 
   ngOnDestroy() {

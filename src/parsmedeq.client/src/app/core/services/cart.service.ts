@@ -1,48 +1,44 @@
-import {Injectable} from '@angular/core';
-import {Router} from '@angular/router';
-import {JwtHelperService} from '@auth0/angular-jwt';
+import {Injectable, signal} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {StorageService} from './storage.service';
+import {Cart, CartItem} from '../models/Cart';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class AuthService {
+@Injectable({providedIn: 'root'})
+export class CartService {
+  private apiUrl = '/api/cart';
+  cart = signal<Cart | null>(null);
 
-  constructor(private router: Router,
-              public jwtHelper: JwtHelperService) {
+  constructor(private http: HttpClient, private storage: StorageService) {
   }
 
-  // ورود کاربر و ذخیره JWT
-  login(token: string): void {
-    localStorage.setItem('token', token);
+  /** گرفتن سبد */
+  loadCart(userId?: string): void {
+    const anonymousId = userId ? null : this.storage.getAnonymousId();
+    this.http.get<Cart>(`${this.apiUrl}?userId=${userId ?? ''}&anonymousId=${anonymousId ?? ''}`)
+      .subscribe(c => this.cart.set(c));
   }
 
-  // دریافت توکن
-  getToken(): string | null {
-    return localStorage.getItem('token');
+  /** افزودن به سبد */
+  addToCart(item: CartItem, userId?: string): void {
+    const anonymousId = userId ? null : this.storage.getAnonymousId();
+    this.http.post<Cart>(`${this.apiUrl}/add?userId=${userId ?? ''}&anonymousId=${anonymousId ?? ''}`, item)
+      .subscribe(c => this.cart.set(c));
   }
 
-  isAdmin(): boolean {
-    return this.userInRole('superadmin') || this.userInRole('admin');
+  /** حذف از سبد */
+  removeFromCart(itemId: string, userId?: string): void {
+    const anonymousId = userId ? null : this.storage.getAnonymousId();
+    this.http.delete<Cart>(`${this.apiUrl}/remove?userId=${userId ?? ''}&anonymousId=${anonymousId ?? ''}&itemId=${itemId}`)
+      .subscribe(c => this.cart.set(c));
   }
 
-  userInRole(role: string): boolean {
-    if (!this.isLoggedIn()) {
-      return false;
-    }
-    const decodedToken = this.jwtHelper.decodeToken(this.getToken() ?? '');
-    const roles = decodedToken.role?.split(',');
-    return !!roles.find((s: string) => s.toLowerCase() === role);
-  }
-
-  // بررسی ورود کاربر
-  isLoggedIn(): boolean {
-    const token = this.getToken();
-    return !!token && !this.jwtHelper.isTokenExpired(token); // چک می‌کنه که توکن باشه و منقضی نشده باشه
-  }
-
-  // خروج کاربر
-  logout(): void {
-    localStorage.removeItem('token');
-    this.router.navigate(['/']);
+  /** ادغام بعد از لاگین */
+  mergeCart(userId: string): void {
+    const anonymousId = this.storage.getAnonymousId();
+    this.http.post<Cart>(`${this.apiUrl}/merge?anonymousId=${anonymousId}&userId=${userId}`, {})
+      .subscribe(c => {
+        this.cart.set(c);
+        this.storage.clearAnonymousId(); // بعد از ادغام، ناشناس پاک میشه
+      });
   }
 }

@@ -1,4 +1,5 @@
-﻿using ParsMedeQ.Application.Persistance.Schema.MediaRepositories;
+﻿using ParsMedeQ.Application.Persistance.Schema.CartRepositories;
+using ParsMedeQ.Application.Persistance.Schema.MediaRepositories;
 using ParsMedeQ.Application.Persistance.Schema.ProductRepositories;
 using ParsMedeQ.Application.Persistance.Schema.ResourceRepositories;
 using ParsMedeQ.Application.Persistance.Schema.UserRepositories;

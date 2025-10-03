@@ -1,4 +1,6 @@
-﻿using ParsMedeQ.Domain.Aggregates.MediaAggregate;
+﻿using ParsMedeQ.Domain.Aggregates.CartAggregate;
+using ParsMedeQ.Domain.Aggregates.CartAggregate.Entities;
+using ParsMedeQ.Domain.Aggregates.MediaAggregate;
 using ParsMedeQ.Domain.Aggregates.ProductAggregate;
 using ParsMedeQ.Domain.Aggregates.ProductAggregate.Entities;
 using ParsMedeQ.Domain.Aggregates.ProductCategoryAggregate;
@@ -24,6 +26,8 @@ public sealed class ReadDbContext : DbContextBase<ReadDbContext>
     public DbSet<ProductCategoryTranslation> ProductCategoryTranslation { get; set; }
     public DbSet<Purchase> Purchase { get; set; }
     public DbSet<Media> Media { get; set; }
+    public DbSet<Cart> Cart { get; set; }
+    public DbSet<CartItem> CartItems { get; set; }
 
     public ReadDbContext(DbContextOptions<ReadDbContext> opts) : base(opts) { }
 

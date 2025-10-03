@@ -1,18 +1,15 @@
-export interface SendOtpRequest {
-  mobile: string;
+export interface CartItem {
+  id?: string;
+  productId: string;
+  productType: string;
+  productName: string;
+  unitPrice: number;
+  quantity: number;
 }
 
-export interface SendOtpResponse {
-  otp?: string;
-}
-
-export interface MobileRequest {
-  mobile: string;
-  otp: string;
-}
-
-export interface MobileResponse {
-  token: string;
-  fullname: string;
-  mobile: string;
+export interface Cart {
+  id?: string;
+  userId?: string;
+  anonymousId?: string;
+  items: CartItem[];
 }

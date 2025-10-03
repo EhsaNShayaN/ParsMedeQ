@@ -12,6 +12,7 @@ const pagesChildren: Routes = [
     children: [
       {path: '', loadChildren: () => import('./features/home/home-module').then(m => m.HomeModule)},
       {path: 'home', loadChildren: () => import('./features/home/home-module').then(m => m.HomeModule)},
+      {path: 'cart', loadChildren: () => import('./features/cart/cart-module').then(m => m.CartModule)},
       {path: 'about', loadChildren: () => import('./features/about/about-module').then(m => m.AboutModule)},
       {path: 'articles', loadChildren: () => import('./features/resources/articles/articles-module').then(m => m.ArticlesModule)},
       {path: 'news', loadChildren: () => import('./features/resources/news/news-module').then(m => m.NewsModule)},
