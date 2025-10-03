@@ -5,18 +5,28 @@ import {Product, ProductResponse, ProductsRequest} from '../../../../core/models
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort, Sort} from '@angular/material/sort';
 import {Helpers} from '../../../../core/helpers';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-product-list',
   styleUrls: ['product-list.component.scss'],
   templateUrl: 'product-list.component.html',
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('750ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
   standalone: false
 })
 export class ProductListComponent extends BaseComponent implements OnInit {
   displayedColumns: string[] = [/*'row', */'title', 'productCategoryTitle', 'image', 'creationDate', 'actions'];
+  columnsToDisplayWithExpand = [...this.displayedColumns, 'expand'];
   languages: string[] = [];
   colors: string[] = ['warn', 'primary', 'success', 'secondary', 'info', 'danger'];
   dataSource!: MatTableDataSource<Product>;
+  expandedElement: any | null;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator | null = null;
   @ViewChild(MatSort, {static: true}) sort: MatSort | null = null;
   pageIndex = 1;

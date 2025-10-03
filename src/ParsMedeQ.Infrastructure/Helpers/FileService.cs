@@ -25,25 +25,17 @@ public class FileService : IFileService
         var tuple = await this.FullUploadFile(file, folderName, fileName, cancellationToken);
         return tuple.Item1;
     }
-    public async Task<Tuple<string, string>> FullUploadFile(IFormFile file, string folderName, CancellationToken cancellationToken)
+    public async Task<(string Path, string MimeType)> FullUploadFile(IFormFile file, string folderName, CancellationToken cancellationToken)
     {
         var fileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
         return await this.FullUploadFile(file, folderName, fileName, cancellationToken);
     }
-    public async Task<Tuple<string, string>> FullUploadFile(IFormFile file, string folderName, string fileName, CancellationToken cancellationToken)
+    public async Task<(string Path, string MimeType)> FullUploadFile(IFormFile file, string folderName, string fileName, CancellationToken cancellationToken)
     {
         var bytes = await ToByteArrayAsync(file, cancellationToken).ConfigureAwait(false);
         return await this.FullUploadFile(bytes, folderName, fileName, cancellationToken);
-        /*var dir = $"{folderName}";
-        var path = CreateDirectory(dir, fileName, out string relativePath);
-        //////////////////
-        await using var stream = File.Create(path);
-        await file.CopyToAsync(stream, cancellationToken);
-        //////////////////
-        var mimetype = GetMimeType(Path.GetFileName(path));
-        return new Tuple<string, string>(relativePath, mimetype);*/
     }
-    public async Task<Tuple<string, string>> FullUploadFile(byte[] file, string folderName, string fileName, CancellationToken cancellationToken)
+    public async Task<(string Path, string MimeType)> FullUploadFile(byte[] file, string folderName, string fileName, CancellationToken cancellationToken)
     {
         var dir = $"{folderName}";
         var path = CreateDirectory(dir, fileName, out string relativePath);
@@ -53,7 +45,7 @@ public class FileService : IFileService
         //await file.CopyToAsync(stream, cancellationToken);
         //////////////////
         var mimetype = GetMimeType(Path.GetFileName(path));
-        return new Tuple<string, string>(relativePath, mimetype);
+        return new(relativePath, mimetype);
     }
     public string GetMimeType(string fileName)
     {

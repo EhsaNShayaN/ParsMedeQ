@@ -5,9 +5,9 @@ public interface IFileService
 {
     Task<string> UploadFile(IFormFile file, string folderName, CancellationToken cancellationToken);
     Task<string> UploadFile(byte[] file, string extension, string folderName, CancellationToken cancellationToken);
-    Task<Tuple<string, string>> FullUploadFile(IFormFile file, string folderName, CancellationToken cancellationToken);
-    Task<Tuple<string, string>> FullUploadFile(IFormFile file, string folderName, string fileName, CancellationToken cancellationToken);
-    Task<Tuple<string, string>> FullUploadFile(byte[] file, string folderName, string fileName, CancellationToken cancellationToken);
+    Task<(string Path, string MimeType)> FullUploadFile(IFormFile file, string folderName, CancellationToken cancellationToken);
+    Task<(string Path, string MimeType)> FullUploadFile(IFormFile file, string folderName, string fileName, CancellationToken cancellationToken);
+    Task<(string Path, string MimeType)> FullUploadFile(byte[] file, string folderName, string fileName, CancellationToken cancellationToken);
     string GetMimeType(string fileName);
     string CreateDirectory(string dir, string fileName, out string relativePath);
     void BytesToFile(byte[] bytes, string path);
