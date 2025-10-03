@@ -6,17 +6,17 @@
       <ng-container [ngSwitch]="column">
         <ng-container *ngSwitchCase="'image'">
           <th *matHeaderCellDef mat-header-cell>
-            {{ getColName(column) }}
+            {{ getColName(column) | translate }}
           </th>
         </ng-container>
         <ng-container *ngSwitchCase="'actions'">
           <th *matHeaderCellDef mat-header-cell>
-            {{ getColName(column) }}
+            {{ getColName(column) | translate }}
           </th>
         </ng-container>
         <ng-container *ngSwitchDefault>
           <th *matHeaderCellDef mat-header-cell>
-            {{ getColName(column) }}
+            {{ getColName(column) | translate }}
           </th>
         </ng-container>
       </ng-container>
@@ -27,7 +27,7 @@
           </ng-container>
           <ng-container *ngSwitchCase="'actions'">
             <a [routerLink]="['/' + lang + '/admin/product/edit', element.id]" target="_blank" mat-icon-button
-               matTooltip="ویرایش {{('LANG.' + lang.toUpperCase()) | translate}}"
+               matTooltip="{{'EDIT' | translate}} {{('LANG.' + lang.toUpperCase()) | translate}}"
                *ngFor="let lang of languages; let i = index">
               <mat-icon [color]="colors[i]">edit</mat-icon>
             </a>
@@ -47,7 +47,7 @@
     </tr>
   </table>
   <p *ngIf="(dataSource?.data?.length ?? 0) === 0" class="py-5 mb-0 text-center">
-    هیچ موردی پیدا نشد.
+    {{ 'NO_RESULTS_FOUND' | translate }}
   </p>
 </div>
 <!--<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>-->

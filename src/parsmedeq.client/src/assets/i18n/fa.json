@@ -65,5 +65,8 @@
   "EXPIRATION_TIME": "ساعت انقضا",
   "ANCHOR": "لنگر",
   "ANCHORS": "لنگرها",
-  "AT_LEAST_ONE_IMAGE_IS_REQUIRED": "حداقل یک تصویر انتخاب نمایید."
+  "AT_LEAST_ONE_IMAGE_IS_REQUIRED": "حداقل یک تصویر انتخاب نمایید.",
+  "NO_DATA_AVAILABLE": "هیچ موردی پیدا نشد.",
+  "NO_RESULTS_FOUND": "هیچ موردی پیدا نشد.",
+  "DOWNLOAD_COUNT": "تعداد دانلود"
 }

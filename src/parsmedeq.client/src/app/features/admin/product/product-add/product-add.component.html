@@ -76,17 +76,6 @@
               {{ 'IS_REQUIRED' | translate }}
             </mat-error>
           </div>
-          <div class="px-2 mb-4" fxFlex="100" fxFlex.gt-xs="100">
-            <app-multi-file-upload
-              formControlName="gallery"
-              [label]="'IMAGES' | translate"
-              [maxFiles]="-1"
-              [maxSizeMb]="-1"
-              [minWidth]="-1"
-              [minHeight]="-1"
-              [aspectRatio]="-1"
-            ></app-multi-file-upload>
-          </div>
           <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
             <mat-form-field appearance="outline" class="w-100 mt-2">
               <mat-icon class="mr-1 text-muted" matPrefix>money</mat-icon>

@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {BaseComponent} from '../../../../base-component';
 import {MatTableDataSource} from '@angular/material/table';
 import {Product, ProductResponse, ProductsRequest} from '../../../../core/models/ProductResponse';
@@ -12,8 +12,8 @@ import {Helpers} from '../../../../core/helpers';
   templateUrl: 'product-list.component.html',
   standalone: false
 })
-export class ProductListComponent extends BaseComponent implements OnInit, OnDestroy {
-  displayedColumns: string[] = [/*'row', */'title', 'productCategoryTitle', 'downloadCount', 'image', 'creationDate', 'actions'];
+export class ProductListComponent extends BaseComponent implements OnInit {
+  displayedColumns: string[] = [/*'row', */'title', 'productCategoryTitle', 'image', 'creationDate', 'actions'];
   languages: string[] = [];
   colors: string[] = ['warn', 'primary', 'success', 'secondary', 'info', 'danger'];
   dataSource!: MatTableDataSource<Product>;
@@ -83,30 +83,12 @@ export class ProductListComponent extends BaseComponent implements OnInit, OnDes
 
   getColName(column: string) {
     column = column.toLowerCase();
-    if (column === 'title') {
-      column = 'عنوان';
-    }
     if (column === 'productcategorytitle') {
-      column = 'دسته بندی';
-    }
-    if (column === 'downloadcount') {
-      column = 'تعداد دانلود';
-    }
-    if (column === 'expirationdate') {
-      column = 'تاریخ انقضا';
-    }
-    if (column === 'image') {
-      column = 'تصویر';
+      column = 'category';
     }
     if (column === 'creationdate') {
-      column = 'تاریخ ایجاد';
-    }
-    if (column === 'actions') {
-      column = 'عملیات';
+      column = 'CREATION_DATE';
     }
     return column.toUpperCase();
-  }
-
-  ngOnDestroy() {
   }
 }

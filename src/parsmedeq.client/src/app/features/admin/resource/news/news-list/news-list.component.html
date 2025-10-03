@@ -47,7 +47,7 @@
     </tr>
   </table>
   <p *ngIf="(dataSource?.data?.length ?? 0) === 0" class="py-5 mb-0 text-center">
-    هیچ موردی پیدا نشد.
+    {{ 'NO_RESULTS_FOUND' | translate }}
   </p>
 </div>
 <!--<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>-->

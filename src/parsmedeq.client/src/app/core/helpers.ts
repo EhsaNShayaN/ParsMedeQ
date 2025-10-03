@@ -9,7 +9,7 @@ export class Helpers {
   }
 
   public setPaginationLang() {
-    this.paginatorIntl.itemsPerPageLabel = 'مورد در هر صفحه';
+    this.paginatorIntl.itemsPerPageLabel =  'مورد در هر صفحه';
     this.paginatorIntl.firstPageLabel = 'صفحه اول';
     this.paginatorIntl.previousPageLabel = 'صفحه قبل';
     this.paginatorIntl.nextPageLabel = 'صفحه بعد';

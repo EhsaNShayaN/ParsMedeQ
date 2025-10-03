@@ -53,7 +53,6 @@ export class ProductAddComponent extends BaseComponent implements OnInit, OnDest
               fileId: null,
               price: this.editItem.price,
               discount: this.editItem.discount,
-              gallery: [null, Validators.required]
             });
             this.oldImagePath = this.editItem.image;
             this.oldFileId = this.editItem.fileId ?? 0;
@@ -68,7 +67,6 @@ export class ProductAddComponent extends BaseComponent implements OnInit, OnDest
             fileId: null,
             price: null,
             discount: null,
-            gallery: [null, Validators.required]
           });
         }
       });

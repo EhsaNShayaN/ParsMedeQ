@@ -13,7 +13,7 @@ export class AdminLayout extends PureComponent implements OnInit, AfterViewInit 
   public sidenavOpen = true;
   public links = [
     {name: 'پروفایل', href: '/account/profile', icon: 'person'},
-    {name: 'کاربران', href: 'user', icon: 'view_list'},
+    {name: 'کاربران', href: 'users', icon: 'view_list'},
     {name: 'محصولات', href: 'product', icon: 'view_list'},
     {name: 'مقالات', href: 'article', icon: 'view_list'},
     {name: 'اخبار', href: 'news', icon: 'view_list'},

@@ -65,5 +65,8 @@
   "EXPIRATION_TIME": "Expiration time",
   "ANCHOR": "Anchor",
   "ANCHORS": "Anchors",
-  "AT_LEAST_ONE_IMAGE_IS_REQUIRED": "At least one image is required"
+  "AT_LEAST_ONE_IMAGE_IS_REQUIRED": "At least one image is required",
+  "NO_DATA_AVAILABLE": "No data available",
+  "NO_RESULTS_FOUND": "No results found",
+  "DOWNLOAD_COUNT": "Download count"
 }
