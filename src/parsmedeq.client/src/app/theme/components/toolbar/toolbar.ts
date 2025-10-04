@@ -44,7 +44,7 @@ export class Toolbar extends PureComponent implements OnInit, OnDestroy {
     });
   }
 
-  removeItem(itemId: string) {
+  removeItem(itemId: number) {
     this.cartService.removeFromCart(itemId);
   }
 

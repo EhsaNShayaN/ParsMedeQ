@@ -48,7 +48,7 @@
               <span>{{ item.productName }}</span>
               <span>تعداد: {{ item.quantity }}</span>
               <span>{{ item.unitPrice * item.quantity | number }} تومان</span>
-              <button (click)="removeItem(item.id)">❌</button>
+              <button (click)="removeItem(item.id!)">❌</button>
             </div>
             <div class="checkout">
               <a routerLink="/checkout">رفتن به پرداخت</a>

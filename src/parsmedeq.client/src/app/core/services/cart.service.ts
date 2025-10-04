@@ -37,7 +37,7 @@ export class CartService {
   }
 
   /** حذف از سبد */
-  removeFromCart(itemId: string, userId?: string): void {
+  removeFromCart(itemId: number, userId?: string): void {
     const anonymousId = userId ? null : this.storage.getAnonymousId();
     this.http.delete<Cart>(`${this.apiUrl}/remove?userId=${userId ?? ''}&anonymousId=${anonymousId ?? ''}&itemId=${itemId}`)
       .subscribe(c => {

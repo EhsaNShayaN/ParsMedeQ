@@ -1,6 +1,6 @@
 export interface CartItem {
-  id?: string;
-  productId: string;
+  id?: number;
+  productId: number;
   productType: string;
   productName: string;
   unitPrice: number;
@@ -8,7 +8,7 @@ export interface CartItem {
 }
 
 export interface Cart {
-  id?: string;
+  id?: number;
   userId?: string;
   anonymousId?: string;
   items: CartItem[];

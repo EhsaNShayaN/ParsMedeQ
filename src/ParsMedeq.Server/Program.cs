@@ -1,4 +1,3 @@
-using Hangfire;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
@@ -113,9 +112,9 @@ app.MapMinimalEndpoits();
 // Configure the HTTP request pipeline.
 
 app.UseHttpsRedirection();
-app.UseHangfireDashboard("/hangfire");
+//app.UseHangfireDashboard("/hangfire");
 // اجرای Job زمان‌بندی‌شده هر 5 دقیقه
-RecurringJob.AddOrUpdate<CartStockValidator>("ValidateCarts", service => service.ValidateCartsAsync(), Cron.MinuteInterval(5));
+//RecurringJob.AddOrUpdate<CartStockValidator>("ValidateCarts", service => service.ValidateCartsAsync(), Cron.MinuteInterval(5));
 
 var summaries = new[]
 {

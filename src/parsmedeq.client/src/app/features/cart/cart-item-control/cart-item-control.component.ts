@@ -1,6 +1,6 @@
-import {Component, Input, computed} from '@angular/core';
+import {Component, computed, Input, Signal} from '@angular/core';
 import {CartService} from '../../../core/services/cart.service';
-import {CartItem} from '../../../core/models/Cart';
+import {Cart, CartItem} from '../../../core/models/Cart';
 
 @Component({
   selector: 'app-cart-item-control',
@@ -9,13 +9,13 @@ import {CartItem} from '../../../core/models/Cart';
   standalone: false
 })
 export class CartItemControlComponent {
-  @Input() productId!: string;
+  @Input() productId!: number;
   @Input() productType!: string;
   @Input() productName!: string;
   @Input() unitPrice!: number;
   @Input() stock!: number;   // 👈 موجودی محصول
 
-  cart = this.cartService.cart;
+  cart!: Signal<Cart | null>; // or appropriate type
 
   item = computed(() =>
     this.cart()?.items.find(i => i.productId === this.productId && i.productType === this.productType)
@@ -23,7 +23,9 @@ export class CartItemControlComponent {
 
   quantity = computed(() => this.item()?.quantity ?? 0);
 
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService) {
+    this.cart = this.cartService.cart;
+  }
 
   add() {
     if (this.stock <= 0) {
@@ -53,7 +55,7 @@ export class CartItemControlComponent {
 
   increase() {
     if (this.quantity() < this.stock) {
-      this.cartService.addToCart({ ...this.item()!, quantity: 1 }, this.cart()?.userId);
+      this.cartService.addToCart({...this.item()!, quantity: 1}, this.cart()?.userId);
     } else {
       alert(`حداکثر تعداد قابل سفارش ${this.stock} عدد است`);
     }
@@ -62,7 +64,7 @@ export class CartItemControlComponent {
   decrease() {
     const item = this.item();
     if (item && item.quantity > 1) {
-      this.cartService.addToCart({ ...item, quantity: -1 }, this.cart()?.userId);
+      this.cartService.addToCart({...item, quantity: -1}, this.cart()?.userId);
     } else {
       this.remove();
     }
