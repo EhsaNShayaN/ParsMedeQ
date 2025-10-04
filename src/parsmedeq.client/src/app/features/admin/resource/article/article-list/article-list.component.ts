@@ -1,4 +1,4 @@
-import {Component, Injector} from '@angular/core';
+import {Component} from '@angular/core';
 import {Tables} from '../../../../../core/constants/server.constants';
 import {BaseResourcesComponent} from '../../base-resources.component';
 

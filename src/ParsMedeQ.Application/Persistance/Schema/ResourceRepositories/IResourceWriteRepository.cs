@@ -11,4 +11,5 @@ public interface IResourceWriteRepository : IDomainRepository
     ValueTask<PrimitiveResult<ResourceCategory>> FindCategoryById(int id, CancellationToken cancellationToken);
     ValueTask<PrimitiveResult<ResourceCategory>> AddResourceCategory(ResourceCategory resourceCategory, CancellationToken cancellationToken);
     ValueTask<PrimitiveResult<ResourceCategory>> UpdateResourceCategory(ResourceCategory resourceCategory, CancellationToken cancellationToken);
+    ValueTask<PrimitiveResult<Resource>> Delete(Resource resource, CancellationToken cancellationToken);
 }

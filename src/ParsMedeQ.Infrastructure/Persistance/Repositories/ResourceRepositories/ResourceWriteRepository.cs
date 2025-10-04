@@ -30,4 +30,6 @@ internal sealed class ResourceWriteRepository : GenericPrimitiveWriteRepositoryB
         this.Add(resourceCategory);
     public ValueTask<PrimitiveResult<ResourceCategory>> UpdateResourceCategory(ResourceCategory resourceCategory, CancellationToken cancellationToken) =>
         this.Update(resourceCategory);
+    public ValueTask<PrimitiveResult<Resource>> Delete(Resource resource, CancellationToken cancellationToken) =>
+            this.Remove(resource);
 }

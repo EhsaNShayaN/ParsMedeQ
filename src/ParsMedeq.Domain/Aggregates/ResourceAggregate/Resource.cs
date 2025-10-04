@@ -11,6 +11,8 @@ public sealed class Resource : EntityBase<int>
     #region " Fields "
     private List<ResourceCategoryRelations> _resourceCategoryRelations = [];
     private List<ResourceTranslation> _resourceTranslations = [];
+    /*private Media _image;
+    private Media _file;*/
     #endregion
 
     #region " Properties "
@@ -38,6 +40,8 @@ public sealed class Resource : EntityBase<int>
     public ResourceCategory[]? ResourceCategories { get; set; }
     public IReadOnlyCollection<ResourceCategoryRelations> ResourceCategoryRelations => this._resourceCategoryRelations.AsReadOnly();
     public IReadOnlyCollection<ResourceTranslation> ResourceTranslations => this._resourceTranslations.AsReadOnly();
+    /*public Media Image => this._image;
+    public Media File => this._file;*/
     #endregion
 
     #region " Constructors "

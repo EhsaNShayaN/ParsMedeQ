@@ -69,6 +69,13 @@ export class RestApiService {
     );
   }
 
+  deleteResource(id: number): Observable<any> {
+    const model = {id};
+    return this.http.post<BaseResult<AddResult>>(`${endpoint()}resource/delete`, model).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   ////////////////////////
 
   getProductCategories(): Observable<any> {

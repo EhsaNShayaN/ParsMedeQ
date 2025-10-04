@@ -9,8 +9,6 @@ sealed class ResourceEntityConfiguration : IEntityTypeConfiguration<Resource>
     {
         builder.ToTable(TableNames.Resource);
 
-        //builder.Property(x => x.Title).IsTitleColumn();
-
         builder
             .HasMany(x => x.ResourceTranslations)
             .WithOne(x => x.Resource)

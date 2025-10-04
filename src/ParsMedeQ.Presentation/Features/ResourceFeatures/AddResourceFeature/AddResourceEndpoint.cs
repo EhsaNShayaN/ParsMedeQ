@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using ParsMedeQ.Application.Features.ResourceFeatures.AddResourceFeature;
+using ParsMedeQ.Application.Features.ResourceFeatures.DeleteResourceFeature;
 using ParsMedeQ.Contracts;
 using ParsMedeQ.Contracts.ResourceContracts;
 using ParsMedeQ.Contracts.ResourceContracts.AddResourceContract;

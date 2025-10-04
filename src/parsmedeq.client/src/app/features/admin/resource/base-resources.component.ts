@@ -6,6 +6,8 @@ import {BaseReportComponent} from '../../../base-report-component';
 import {Resource, ResourceResponse, ResourcesRequest} from '../../../core/models/ResourceResponse';
 import {TranslateService} from '@ngx-translate/core';
 import {Helpers} from '../../../core/helpers';
+import {DialogService} from '../../../core/services/dialog-service';
+import {ToastrService} from 'ngx-toastr';
 
 @Directive()
 export class BaseResourcesComponent extends BaseReportComponent implements OnInit, OnDestroy {
@@ -19,6 +21,8 @@ export class BaseResourcesComponent extends BaseReportComponent implements OnIni
   pageSize = 5;
   totalCount = 0;
   helpers = inject(Helpers);
+  dialogService = inject(DialogService);
+  toaster = inject(ToastrService);
 
   constructor(tableId: number) {
     super();
@@ -52,18 +56,22 @@ export class BaseResourcesComponent extends BaseReportComponent implements OnIni
     this.dataSource.sort = this.sort;
   }
 
-  remove(property: Resource) {
-    /*const index: number = this.dataSource.data.indexOf(property);
+  remove(item: any) {
+    const index: number = this.dataSource.data.indexOf(item);
     if (index !== -1) {
-      const message = this.appService.getTranslateValue('MESSAGE.SURE_DELETE') ?? '';
-      let dialogRef = this.dialogService.openConfirmDialog('', message);
+      let dialogRef = this.dialogService.openConfirmDialog('', this.getTranslateValue('SURE_DELETE'));
       dialogRef.afterClosed().subscribe(dialogResult => {
         if (dialogResult) {
-          this.dataSource.data.splice(index, 1);
-          this.initDataSource(this.dataSource.data);
+          this.restApiService.deleteResource(item.id).subscribe({
+            next: (response) => {
+              this.dataSource.data.splice(index, 1);
+              this.dataSource._updateChangeSubscription();
+              this.toaster.success(this.getTranslateValue('ITEM_DELETED_SUCCESSFULLY'), '', {});
+            }
+          });
         }
       });
-    }*/
+    }
   }
 
   onPaginateChange(event: any) {

@@ -32,6 +32,9 @@ import {DatePickerComponent} from './date-picker/date-picker.component';
 import {MultiFileUploadComponent} from './components/multi-file-upload/multi-file-upload.component';
 import {CdkDrag, CdkDropList} from '@angular/cdk/drag-drop';
 import {CartItemControlComponent} from '../features/cart/cart-item-control/cart-item-control.component';
+import {ConfirmDialogComponent} from './dialogs/confirm-dialog/confirm-dialog.component';
+import {MatDialogActions, MatDialogContent, MatDialogTitle} from '@angular/material/dialog';
+import {CommonModule} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -47,8 +50,10 @@ import {CartItemControlComponent} from '../features/cart/cart-item-control/cart-
     Comments,
     MultiFileUploadComponent,
     CartItemControlComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     DirectivesModule,
@@ -97,6 +102,9 @@ import {CartItemControlComponent} from '../features/cart/cart-item-control/cart-
     MatList,
     MatError,
     MatCardImage,
+    MatDialogTitle,
+    MatDialogContent,
+    MatDialogActions,
     //////////////////////
     DefaultFlexDirective,
     DefaultClassDirective,
@@ -152,6 +160,9 @@ import {CartItemControlComponent} from '../features/cart/cart-item-control/cart-
     MatList,
     MatError,
     MatCardImage,
+    MatDialogTitle,
+    MatDialogContent,
+    MatDialogActions,
     //////////////////////
     DefaultFlexDirective,
     DefaultClassDirective,
@@ -161,6 +172,7 @@ import {CartItemControlComponent} from '../features/cart/cart-item-control/cart-
     TreeViewComponent,
     CommentForm,
     MultiFileUploadComponent,
+    ConfirmDialogComponent,
   ],
   providers: [
     CurrencyFormatterPipe,

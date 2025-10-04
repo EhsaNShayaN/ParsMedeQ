@@ -1,6 +1,7 @@
 ﻿using ParsMedeQ.Application.Features.ResourceFeatures.AddResourceCategoryFeature;
 using ParsMedeQ.Contracts;
 using ParsMedeQ.Contracts.ResourceContracts.AddResourceCategoryContract;
+using ParsMedeQ.Contracts.ResourceContracts.DeleteResourceContract;
 
 namespace ParsMedeQ.Presentation.Features.ResourceFeatures.AddResourceCategoryFeature;
 sealed class AddResourceCategoryEndpoint : EndpointHandlerBase<

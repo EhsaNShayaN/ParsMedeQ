@@ -4,6 +4,9 @@ namespace ParsMedeQ.Domain.Aggregates.MediaAggregate;
 
 public sealed class Media : EntityBase<int>
 {
+    #region " Fields "
+    //private Resource _resource;
+    #endregion
     #region " Properties "
     public int TableId { get; private set; }
     public string Path { get; private set; } = null!;
@@ -11,6 +14,7 @@ public sealed class Media : EntityBase<int>
     #endregion
 
     #region " Navigation Properties "
+    //public Resource Resource => this._resource;
     #endregion
 
     #region " Constructors "

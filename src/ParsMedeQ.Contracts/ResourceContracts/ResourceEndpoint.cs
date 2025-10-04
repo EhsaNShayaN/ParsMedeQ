@@ -9,6 +9,7 @@ public sealed class ResourceEndpoint : ApiEndpointBase
     protected override ApiEndpointItem MyEndpoint => EndpointMetadata.Resource;
 
     public EndpointInfo AddResource { get; private set; }
+    public EndpointInfo DeleteResource { get; private set; }
     public EndpointInfo EditResource { get; private set; }
     public EndpointInfo Resources { get; private set; }
     public EndpointInfo Resource { get; private set; }
@@ -24,6 +25,13 @@ public sealed class ResourceEndpoint : ApiEndpointBase
            this.GetUrl("add"),
            "Add Resource",
            "افزودن خبر، مقاله و ...",
+           _tag);
+
+        DeleteResource = new EndpointInfo(
+           this.GetUrl("delete"),
+           this.GetUrl("delete"),
+           "Delete Resource",
+           "حذف خبر، مقاله و ...",
            _tag);
 
         EditResource = new EndpointInfo(
