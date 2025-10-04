@@ -5,6 +5,7 @@ using System.Reflection;
 namespace ParsMedeQ.Contracts.ProductContracts.AddProductMediaContract;
 public sealed class AddProductMediaApiRequest
 {
+    public int ProductId { get; private set; }
     public IFormFile[] Files { get; private set; }
     public static async ValueTask<AddProductMediaApiRequest?> BindAsync(HttpContext context, ParameterInfo _)
     {

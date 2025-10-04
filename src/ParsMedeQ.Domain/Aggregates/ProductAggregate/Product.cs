@@ -141,7 +141,7 @@ public sealed class Product : EntityBase<int>
 
     public async ValueTask<PrimitiveResult> AddMediaList(int[] mediaIds)
     {
-        var maxOrdinal = this._productMediaList.Max(a => a.Ordinal);
+        var maxOrdinal = (this._productMediaList?.Count ?? 0) == 0 ? 0 : this._productMediaList!.Max(a => a.Ordinal);
 
         await PrimitiveResult.BindAll(mediaIds, (mediaId, itemIndex) => ProductMedia.Create(
             this.Id,

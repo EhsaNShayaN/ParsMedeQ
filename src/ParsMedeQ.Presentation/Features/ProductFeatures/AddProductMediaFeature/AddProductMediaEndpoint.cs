@@ -25,22 +25,20 @@ internal sealed class AddProductMediaApiRequestMapper : IPresentationMapper<AddP
 {
     public async ValueTask<PrimitiveResult<AddProductMediaCommand>> Map(AddProductMediaApiRequest src, CancellationToken cancellationToken)
     {
-        byte[] imageBytes = [];
-        string imageExtension = string.Empty;
-        if (src.Image is not null)
+        List<byte[]> files = [];
+        List<string> extensions = [];
+        foreach (var file in src.Files)
         {
-            imageBytes = await this.ReadStream(src.Image.OpenReadStream()).ConfigureAwait(false);
-            imageExtension = Path.GetExtension(src.Image.FileName);
+            files.Add(await this.ReadStream(file.OpenReadStream()).ConfigureAwait(false));
+            extensions.Add(Path.GetExtension(file.FileName));
         }
+
         return await ValueTask.FromResult(
             PrimitiveResult.Success(
                 new AddProductMediaCommand(
-                    src.TableId,
-                    src.Title,
-                    src.Description,
-                    src.ParentId,
-                    imageBytes,
-                    imageExtension)));
+                    src.ProductId,
+                    files.ToArray(),
+                    extensions.ToArray())));
     }
     async ValueTask<byte[]> ReadStream(Stream stream)
     {

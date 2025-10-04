@@ -5,7 +5,7 @@
   (dragover)="onDragOver($event)"
   (dragleave)="onDragLeave($event)"
 >
-  <mat-label>{{label}}</mat-label>
+  <mat-label>{{ label }}</mat-label>
   <input
     type="file"
     [accept]="accept"
@@ -26,7 +26,7 @@
   </div>
 
   <!-- Angular Form Required Error -->
-  @if (control?.hasError('required')) {
+  @if (control?.touched && control?.hasError('required')) {
     <mat-error>{{ 'AT_LEAST_ONE_IMAGE_IS_REQUIRED' | translate }}</mat-error>
   }
   <!-- Custom Validation Errors -->

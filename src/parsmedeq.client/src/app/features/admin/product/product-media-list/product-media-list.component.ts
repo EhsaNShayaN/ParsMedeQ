@@ -16,6 +16,7 @@ export class ProductMediaListComponent extends BaseComponent implements OnInit, 
   sub: any;
   items: ProductMedia[] = [];
   form!: UntypedFormGroup;
+  productId: number = 0;
 
   constructor(public formBuilder: UntypedFormBuilder,
               private activatedRoute: ActivatedRoute,
@@ -28,12 +29,13 @@ export class ProductMediaListComponent extends BaseComponent implements OnInit, 
 
   ngOnInit() {
     this.sub = this.activatedRoute.params.subscribe(params => {
-      this.getItems(params['id']);
+      this.productId = Number(params['id']);
+      this.getItems();
     });
   }
 
-  getItems(productId: number) {
-    this.restApiService.getProductMediaList(productId).subscribe((res: ProductMediaListResponse) => {
+  getItems() {
+    this.restApiService.getProductMediaList(this.productId).subscribe((res: ProductMediaListResponse) => {
       this.items = res.data;
     });
   }
@@ -46,6 +48,7 @@ export class ProductMediaListComponent extends BaseComponent implements OnInit, 
     this.restApiService.deleteProductMedia({productId, mediaId}).subscribe((res: BaseResult<AddResult>) => {
       if (res.data.changed) {
         this.toaster.success(this.getTranslateValue('THE_OPERATION_WAS_SUCCESSFUL'), '', {});
+        this.getItems();
       } else {
         this.toaster.error(this.getTranslateValue('UNKNOWN_ERROR'), '', {});
       }
@@ -53,6 +56,22 @@ export class ProductMediaListComponent extends BaseComponent implements OnInit, 
   }
 
   onFormSubmit(values: any): void {
-
+    console.log(values);
+    if (!this.form.valid) {
+      this.form.markAllAsTouched();
+      console.log(this.findInvalidControls(this.form));
+      return;
+    }
+    this.restApiService.addProductMedia(this.productId, values.gallery.new).subscribe((res: BaseResult<AddResult>) => {
+      if (res.data.changed) {
+        this.toaster.success(this.getTranslateValue('THE_OPERATION_WAS_SUCCESSFUL'), '', {});
+        this.form.reset();
+        this.form.markAsPristine();
+        this.form.markAsUntouched();
+        this.getItems();
+      } else {
+        this.toaster.error(this.getTranslateValue('UNKNOWN_ERROR'), '', {});
+      }
+    });
   }
 }

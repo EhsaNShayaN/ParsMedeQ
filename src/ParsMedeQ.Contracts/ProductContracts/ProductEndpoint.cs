@@ -86,8 +86,8 @@ public sealed class ProductEndpoint : ApiEndpointBase
            _tag);
 
         AddProductMedia = new EndpointInfo(
-           this.GetUrl("media/add/{productId}"),
-           this.GetUrl("media/add/{productId}"),
+           this.GetUrl("media/add"),
+           this.GetUrl("media/add"),
            "AddProductMedia",
            "AddProductMedia",
            _tag);

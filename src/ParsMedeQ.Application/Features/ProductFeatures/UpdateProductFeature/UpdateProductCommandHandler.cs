@@ -34,7 +34,7 @@ public sealed class UpdateProductCommandHandler : IPrimitiveResultCommandHandler
                 data => string.IsNullOrEmpty(data.filePath),
                 data => ValueTask.FromResult(PrimitiveResult.Success((data.Product, data.imagePath, data.filePath, media: defaultMedia))),
                 data => Media.Create(request.TableId, data.filePath, string.Empty)
-                    .Map(media => _writeUnitOfWork.MediaWriteRepository.AddMedia(media, cancellationToken))
+                    .Map(media => _writeUnitOfWork.MediaWriteRepository.AddMedia(media))
                     .Map(media => this._writeUnitOfWork.SaveChangesAsync(CancellationToken.None)
                         .Map(_ => media))
                     .Map(media => (data.Product, data.imagePath, data.filePath, media)))

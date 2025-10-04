@@ -91,10 +91,11 @@ export class RestApiService {
 
   addProductMedia(productId: number, files: File[]): Observable<any> {
     const formData: FormData = new FormData();
+    formData.append('productId', productId.toString());
     for (const file of files) {
       formData.append('files', file);
     }
-    return this.http.post<BaseResult<AddResult>>(`${endpoint()}product/media/add?productId=${productId}`, formData).pipe(
+    return this.http.post<BaseResult<AddResult>>(`${endpoint()}product/media/add`, formData).pipe(
       catchError(this.handleError)
     );
   }
