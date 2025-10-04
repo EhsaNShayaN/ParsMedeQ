@@ -2,13 +2,13 @@
 using ParsMedeQ.Domain.Aggregates.ProductAggregate.Entities;
 using ParsMedeQ.Domain.Aggregates.ProductCategoryAggregate;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Runtime.CompilerServices;
 
 namespace ParsMedeQ.Domain.Aggregates.ProductAggregate;
 public sealed class Product : EntityBase<int>
 {
     #region " Fields "
     private List<ProductTranslation> _productTranslations = [];
+    private List<ProductMedia> _productMediaList = [];
     #endregion
 
     #region " Properties "
@@ -28,6 +28,7 @@ public sealed class Product : EntityBase<int>
     [NotMapped]
     public ProductCategory[]? ProductCategories { get; set; }
     public IReadOnlyCollection<ProductTranslation> ProductTranslations => this._productTranslations.AsReadOnly();
+    public IReadOnlyCollection<ProductMedia> ProductMediaList => this._productMediaList.AsReadOnly();
     #endregion
 
     #region " Constructors "
@@ -136,5 +137,29 @@ public sealed class Product : EntityBase<int>
     {
         this.Stock += quantity;
         return ValueTask.FromResult(PrimitiveResult.Success(this));
+    }
+
+    public async ValueTask<PrimitiveResult> AddMediaList(int[] mediaIds)
+    {
+        var maxOrdinal = this._productMediaList.Max(a => a.Ordinal);
+
+        await PrimitiveResult.BindAll(mediaIds, (mediaId, itemIndex) => ProductMedia.Create(
+            this.Id,
+            mediaId,
+            maxOrdinal + itemIndex + 1),
+            BindAllIterationStrategy.BreakOnFirstError)
+        .OnSuccess(mediaList => this._productMediaList.AddRange(mediaList.Value));
+
+        return PrimitiveResult.Success();
+    }
+
+    public PrimitiveResult DeleteMedia(int mediaId)
+    {
+        var x = _productMediaList.FirstOrDefault(s => s.MediaId == mediaId);
+        if (x is not null)
+        {
+            _productMediaList.Remove(x);
+        }
+        return PrimitiveResult.Success();
     }
 }

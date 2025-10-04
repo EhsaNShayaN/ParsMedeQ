@@ -1,0 +1,2 @@
+﻿namespace ParsMedeQ.Application.Features.ProductFeatures.DeleteProductMediaFeature;
+public sealed record DeleteProductMediaCommandResponse(bool Changed);

@@ -54,6 +54,7 @@
   "MAIN_IMAGE": "Main Image",
   "DELETE": "Delete",
   "THE_OPERATION_WAS_SUCCESSFUL": "The operation was successful",
+  "UNKNOWN_ERROR": "Unknown error",
   "LANGUAGE": "Language",
   "PUBLISHED": "Published",
   "PUBLISHER": "Publisher",
@@ -68,5 +69,6 @@
   "AT_LEAST_ONE_IMAGE_IS_REQUIRED": "At least one image is required",
   "NO_DATA_AVAILABLE": "No data available",
   "NO_RESULTS_FOUND": "No results found",
-  "DOWNLOAD_COUNT": "Download count"
+  "DOWNLOAD_COUNT": "Download count",
+  "MANAGEMENT_IMAGES": "Management of images"
 }

@@ -33,6 +33,7 @@ import {ProductListComponent} from './product/product-list/product-list.componen
 import { ProductAddComponent } from './product/product-add/product-add.component';
 import {ProductCategoryListComponent} from './product/product-category-list/product-category-list.component';
 import {ProductCategoryAddComponent} from './product/product-category-add/product-category-add.component';
+import {ProductMediaListComponent} from './product/product-media-list/product-media-list.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import {ProductCategoryAddComponent} from './product/product-category-add/produc
     ProductAddComponent,
     ProductCategoryListComponent,
     ProductCategoryAddComponent,
+    ProductMediaListComponent,
   ],
   imports: [
     CommonModule,

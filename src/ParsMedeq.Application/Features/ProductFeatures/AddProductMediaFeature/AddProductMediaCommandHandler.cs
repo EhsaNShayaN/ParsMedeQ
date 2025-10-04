@@ -1,5 +1,5 @@
 ﻿using ParsMedeQ.Domain;
-using ParsMedeQ.Domain.Aggregates.ProductAggregate.Entities;
+using ParsMedeQ.Domain.Aggregates.MediaAggregate;
 
 namespace ParsMedeQ.Application.Features.ProductFeatures.AddProductMediaFeature;
 public sealed class AddProductMediaCommandHandler : IPrimitiveResultCommandHandler<AddProductMediaCommand, AddProductMediaCommandResponse>
@@ -16,24 +16,16 @@ public sealed class AddProductMediaCommandHandler : IPrimitiveResultCommandHandl
 
     public async Task<PrimitiveResult<AddProductMediaCommandResponse>> Handle(AddProductMediaCommand request, CancellationToken cancellationToken)
     {
-        for (var i = 0; i< request.FilesArray.Length; i++)
-        {
-            var file = request.FilesArray[i];
-            var extension = request.FileExtensions[i];
-            UploadFile(this._fileService, file, extension, "Products", cancellationToken)
-                .Map(path=> ProductMedia.Create())
-            //await ProductMedia.Create(request.ProductId)
-        }
-        return await ProductMedia.Create(
-            request.ParentId,
-            DateTime.Now)
-            .Map(resource => UploadFile(this._fileService, request.Image, request.ImageExtension, "Images", cancellationToken)
-                .Map(imagePath => (resource, imagePath)))
-            .Map(data => data.resource.AddTranslation(Constants.LangCode_Farsi.ToLower(), request.Title, request.Description, data.imagePath)
-                .Map(() => data.resource))
-            .Map(productMedia => this._writeUnitOfWork.ProductWriteRepository.AddProductMedia(productMedia, cancellationToken)
-            .Map(productMedia => this._writeUnitOfWork.SaveChangesAsync(CancellationToken.None).Map(_ => productMedia))
-            .Map(productMedia => new AddProductMediaCommandResponse(productMedia is not null)))
+        return await this._writeUnitOfWork.ProductWriteRepository.FindByIdWithMediaList(request.ProductId, cancellationToken)
+            .Map(product =>
+                PrimitiveResult.BindAll(request.FilesArray, (file, itemIndex) =>
+                    UploadFile(this._fileService, file, request.FileExtensions[itemIndex], "Products", cancellationToken)
+                    .Map(path => Media.Create(Tables.Product.GetHashCode(), path, string.Empty))
+                    .Map(media => _writeUnitOfWork.MediaWriteRepository.AddMedia(media)),
+                    BindAllIterationStrategy.BreakOnFirstError)
+                .Map(medias => _writeUnitOfWork.SaveChangesAsync(CancellationToken.None).Map(_ => medias))
+                .Map(medias => product.AddMediaList(medias.Select(m => m.Id).ToArray()).Map(() => medias)))
+            .Map(medias => _writeUnitOfWork.SaveChangesAsync(CancellationToken.None).Map(affectedRows => new AddProductMediaCommandResponse(affectedRows > 0)))
             .ConfigureAwait(false);
     }
 

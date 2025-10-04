@@ -54,6 +54,7 @@
   "MAIN_IMAGE": "تصویر اصلی",
   "DELETE": "حذف",
   "THE_OPERATION_WAS_SUCCESSFUL": "عملیات مورد نظر با موفقیت انجام شد.",
+  "UNKNOWN_ERROR": "خطای نامشخص",
   "LANGUAGE": "زبان",
   "PUBLISHED": "تاریخ ایجاد",
   "PUBLISHER": "ناشر",
@@ -68,5 +69,6 @@
   "AT_LEAST_ONE_IMAGE_IS_REQUIRED": "حداقل یک تصویر انتخاب نمایید.",
   "NO_DATA_AVAILABLE": "هیچ موردی پیدا نشد.",
   "NO_RESULTS_FOUND": "هیچ موردی پیدا نشد.",
-  "DOWNLOAD_COUNT": "تعداد دانلود"
+  "DOWNLOAD_COUNT": "تعداد دانلود",
+  "MANAGEMENT_IMAGES": "مدیریت تصاویر"
 }

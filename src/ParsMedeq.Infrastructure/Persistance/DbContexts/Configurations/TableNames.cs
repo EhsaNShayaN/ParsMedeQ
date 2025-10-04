@@ -7,6 +7,10 @@ internal static class TableNames
     internal static string ResourceCategory = "ResourceCategory";
     internal static string ResourceCategoryTranslation = "ResourceCategoryTranslation";
     internal static string ResourceCategoryRelations = "ResourceCategoryRelations";
+    internal static string Product = "Product";
+    internal static string ProductTranslation = "ProductTranslation";
+    internal static string ProductCategory = "ProductCategory";
+    internal static string ProductMedia = "ProductMedia";
     internal static string Cart = "Cart";
     internal static string CartItems = "CartItems";
 }

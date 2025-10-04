@@ -21,6 +21,7 @@ import {ProductListComponent} from './product/product-list/product-list.componen
 import {ProductAddComponent} from './product/product-add/product-add.component';
 import {ProductCategoryListComponent} from './product/product-category-list/product-category-list.component';
 import {ProductCategoryAddComponent} from './product/product-category-add/product-category-add.component';
+import {ProductMediaListComponent} from './product/product-media-list/product-media-list.component';
 
 const routes: Routes = [
   {path: '', component: Admin},
@@ -56,6 +57,7 @@ const routes: Routes = [
   {path: 'product/category/list', component: ProductCategoryListComponent},
   {path: 'product/category/add', component: ProductCategoryAddComponent},
   {path: 'product/category/edit/:id', component: ProductCategoryAddComponent},
+  {path: 'product/media/list/:id', component: ProductMediaListComponent},
 ];
 
 @NgModule({

@@ -1,0 +1,35 @@
+<div class="p-3">
+  <div class="theme-container">
+    <div>
+      <h3 class="text-center">
+        {{ 'MANAGEMENT_IMAGES' | translate }}
+      </h3>
+      <div fxLayout="row wrap" fxLayoutAlign="center center">
+        @for (item of items; track item.id) {
+          <div class="p-3 position-relative" fxFlex="100" fxFlex.gt-xs="25">
+            <img src="https://localhost:7232{{item.path}}" class="w-100">
+            <mat-icon class="position-absolute background-color red-bg-color p-1 icon-remove"
+                      (click)="deleteImage(item.productId,item.mediaId)">close
+            </mat-icon>
+          </div>
+        }
+      </div>
+      @if (form) {
+        <form (ngSubmit)="onFormSubmit(form.value)" [formGroup]="form">
+          <div fxLayout="row wrap" fxLayoutAlign="center center">
+            <div fxFlex="100" fxFlex.gt-xs="100">
+              <app-multi-file-upload
+                [label]="'IMAGES' | translate"
+                [maxFiles]="-1"
+                [maxSizeMb]="-1"
+                [minWidth]="-1"
+                [minHeight]="-1"
+                [aspectRatio]="-1"
+              ></app-multi-file-upload>
+            </div>
+          </div>
+        </form>
+      }
+    </div>
+  </div>
+</div>

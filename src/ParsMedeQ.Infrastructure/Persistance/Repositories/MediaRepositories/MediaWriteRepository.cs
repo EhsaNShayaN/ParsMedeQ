@@ -7,5 +7,5 @@ namespace ParsMedeQ.Infrastructure.Persistance.Repositories.MediaRepositories;
 internal sealed class MediaWriteRepository : GenericPrimitiveWriteRepositoryBase<WriteDbContext>, IMediaWriteRepository
 {
     public MediaWriteRepository(WriteDbContext dbContext) : base(dbContext) { }
-    public ValueTask<PrimitiveResult<Media>> AddMedia(Media Media, CancellationToken cancellationToken) => this.Add(Media);
+    public ValueTask<PrimitiveResult<Media>> AddMedia(Media media) => this.Add(media);
 }

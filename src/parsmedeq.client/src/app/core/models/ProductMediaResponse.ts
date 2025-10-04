@@ -1,13 +1,12 @@
-export interface ProductCategoriesResponse {
-  data: ProductCategory[];
+import {BaseResult} from "./BaseResult";
+
+export interface ProductMediaListResponse extends BaseResult<ProductMedia[]> {
 }
 
-export interface ProductCategory {
+export interface ProductMedia {
   id: number;
-  parentId: number;
-  parentTitle: string;
-  title: string;
-  description: string;
-  image: string;
-  creationDate: string;
+  productId: number;
+  mediaId: number;
+  ordinal: number;
+  path: string;
 }

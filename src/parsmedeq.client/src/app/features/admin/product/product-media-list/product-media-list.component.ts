@@ -1,0 +1,58 @@
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {BaseComponent} from '../../../../base-component';
+import {ActivatedRoute} from '@angular/router';
+import {ProductMedia, ProductMediaListResponse} from '../../../../core/models/ProductMediaResponse';
+import {AddResult, BaseResult} from '../../../../core/models/BaseResult';
+import {ToastrService} from 'ngx-toastr';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
+
+@Component({
+  selector: 'app-product-media-list',
+  styleUrls: ['product-media-list.component.scss'],
+  templateUrl: 'product-media-list.component.html',
+  standalone: false
+})
+export class ProductMediaListComponent extends BaseComponent implements OnInit, OnDestroy {
+  sub: any;
+  items: ProductMedia[] = [];
+  form!: UntypedFormGroup;
+
+  constructor(public formBuilder: UntypedFormBuilder,
+              private activatedRoute: ActivatedRoute,
+              private toaster: ToastrService) {
+    super();
+    this.form = this.formBuilder.group({
+      gallery: [null, Validators.required]
+    });
+  }
+
+  ngOnInit() {
+    this.sub = this.activatedRoute.params.subscribe(params => {
+      this.getItems(params['id']);
+    });
+  }
+
+  getItems(productId: number) {
+    this.restApiService.getProductMediaList(productId).subscribe((res: ProductMediaListResponse) => {
+      this.items = res.data;
+    });
+  }
+
+  ngOnDestroy() {
+    this.sub?.unsubscribe();
+  }
+
+  deleteImage(productId: number, mediaId: number) {
+    this.restApiService.deleteProductMedia({productId, mediaId}).subscribe((res: BaseResult<AddResult>) => {
+      if (res.data.changed) {
+        this.toaster.success(this.getTranslateValue('THE_OPERATION_WAS_SUCCESSFUL'), '', {});
+      } else {
+        this.toaster.error(this.getTranslateValue('UNKNOWN_ERROR'), '', {});
+      }
+    });
+  }
+
+  onFormSubmit(values: any): void {
+
+  }
+}

@@ -10,6 +10,7 @@ import {AuthService} from './services/auth.service';
 import {ProductCategoriesResponse} from './models/ProductCategoryResponse';
 import {AddProductRequest, Product, ProductRequest, ProductResponse, ProductsRequest} from './models/ProductResponse';
 import {MobileRequest, MobileResponse, SendOtpRequest, SendOtpResponse} from './models/Login';
+import {ProductMediaListResponse} from './models/ProductMediaResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -72,6 +73,28 @@ export class RestApiService {
 
   getProductCategories(): Observable<any> {
     return this.http.get<ProductCategoriesResponse>(`${endpoint()}product/category/list`,).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getProductMediaList(productId: number): Observable<any> {
+    return this.http.get<ProductMediaListResponse>(`${endpoint()}product/media/list?productId=${productId}`,).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  deleteProductMedia(model: any): Observable<any> {
+    return this.http.post<BaseResult<AddResult>>(`${endpoint()}product/media/delete`, model).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  addProductMedia(productId: number, files: File[]): Observable<any> {
+    const formData: FormData = new FormData();
+    for (const file of files) {
+      formData.append('files', file);
+    }
+    return this.http.post<BaseResult<AddResult>>(`${endpoint()}product/media/add?productId=${productId}`, formData).pipe(
       catchError(this.handleError)
     );
   }

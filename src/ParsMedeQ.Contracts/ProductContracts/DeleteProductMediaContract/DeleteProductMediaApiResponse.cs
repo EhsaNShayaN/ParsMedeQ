@@ -1,0 +1,2 @@
+﻿namespace ParsMedeQ.Contracts.ProductContracts.DeleteProductMediaContract;
+public readonly record struct DeleteProductMediaApiResponse(bool Changed);

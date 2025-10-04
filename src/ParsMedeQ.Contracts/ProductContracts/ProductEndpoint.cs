@@ -16,6 +16,9 @@ public sealed class ProductEndpoint : ApiEndpointBase
     public EndpointInfo EditProductCategory { get; private set; }
     public EndpointInfo ProductCategories { get; private set; }
     public EndpointInfo ProductCategory { get; private set; }
+    public EndpointInfo ProductMediaList { get; private set; }
+    public EndpointInfo AddProductMedia { get; private set; }
+    public EndpointInfo DeleteProductMedia { get; private set; }
 
     public ProductEndpoint()
     {
@@ -73,6 +76,27 @@ public sealed class ProductEndpoint : ApiEndpointBase
            this.GetUrl("category/details"),
            "Details of Productcategory",
            "جزئیات دسته بندی خبر، مقاله و ...",
+           _tag);
+
+        ProductMediaList = new EndpointInfo(
+           this.GetUrl("media/list"),
+           this.GetUrl("media/list"),
+           "ProductMediaList",
+           "ProductMediaList",
+           _tag);
+
+        AddProductMedia = new EndpointInfo(
+           this.GetUrl("media/add/{productId}"),
+           this.GetUrl("media/add/{productId}"),
+           "AddProductMedia",
+           "AddProductMedia",
+           _tag);
+
+        DeleteProductMedia = new EndpointInfo(
+           this.GetUrl("media/delete"),
+           this.GetUrl("media/delete"),
+           "DeleteProductMedia",
+           "DeleteProductMedia",
            _tag);
     }
 }

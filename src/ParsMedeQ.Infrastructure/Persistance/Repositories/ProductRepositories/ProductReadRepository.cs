@@ -1,6 +1,7 @@
 ﻿using ParsMedeQ.Application.Features.ProductFeatures.ProductCategoryListFeature;
 using ParsMedeQ.Application.Features.ProductFeatures.ProductDetailsFeature;
 using ParsMedeQ.Application.Features.ProductFeatures.ProductListFeature;
+using ParsMedeQ.Application.Features.ProductFeatures.ProductMediaListFeature;
 using ParsMedeQ.Application.Helpers;
 using ParsMedeQ.Application.Persistance.Schema.ProductRepositories;
 using ParsMedeQ.Domain.Aggregates.ProductAggregate;
@@ -159,6 +160,26 @@ internal sealed class ProductReadRepository : GenericPrimitiveReadRepositoryBase
                     Description = a.Description
                 };
         return q.Run(q => q.FirstOrDefaultAsync(cancellationToken), PrimitiveError.Create("", "آیتمی با شناسه مورد نظر پیدا نشد"));
+    }
+
+    public ValueTask<PrimitiveResult<ProductMediaListDbQueryResponse[]>> GetProductMediaList(
+        int productId,
+        CancellationToken cancellationToken)
+    {
+        var q = from p in this.DbContext.Product
+                join pm in this.DbContext.ProductMedia on p.Id equals pm.ProductId
+                join m in this.DbContext.Media on pm.MediaId equals m.Id
+                where p.Id.Equals(productId)
+                orderby pm.Ordinal ascending
+                select new ProductMediaListDbQueryResponse
+                {
+                    Id = pm.Id,
+                    ProductId = p.Id,
+                    MediaId = m.Id,
+                    Ordinal = pm.Ordinal,
+                    Path = m.Path
+                };
+        return q.Run(q => q.ToArrayAsync(cancellationToken), PrimitiveError.Create("", "آیتمی با شناسه مورد نظر پیدا نشد"));
     }
 }
 
