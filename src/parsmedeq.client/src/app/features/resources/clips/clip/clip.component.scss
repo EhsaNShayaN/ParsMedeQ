@@ -1,0 +1,66 @@
+@import '../../../../theme/styles/variables';
+
+$width: 300px;
+.mat-mdc-card {
+  .anchor-fix {
+    position: fixed;
+    width: $width;
+
+    &.top {
+      top: 120px;
+    }
+
+    .single-line {
+      line-height: 2.5em;
+      height: 2.5em;
+    }
+  }
+
+  .mr {
+    margin-right: $width;
+  }
+
+  .agent-wrapper {
+    // margin: 0 -32px;
+    // padding: 0 16px;
+    margin: -24px !important;
+
+    img {
+      border-radius: 4px;
+    }
+
+    .listed-count {
+      font-weight: 600;
+      min-width: 24px;
+    }
+  }
+
+  .property-status {
+    position: absolute;
+    z-index: 2;
+
+    span {
+      padding: 3px 6px;
+      margin: 0;
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      border-radius: 4px;
+      /*background-color: #ffa000;
+      color: #fff;*/
+    }
+  }
+}
+
+.hover:hover {
+  color: $primary;
+}
+
+.wh-100 {
+  width: 100px;
+  height: 100px;
+}
+
+.left-0 {
+  left: 0;
+}

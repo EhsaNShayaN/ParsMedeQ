@@ -1,0 +1,59 @@
+<div class="px-3">
+  <div class="theme-container">
+    <mat-card appearance="outlined" class="my-5 p-5">
+      <ng-container *ngIf="item">
+        <div class="anchor-fix" [class.top]="top" *ngIf="item?.anchors?.length > 0">
+          <ng-container *ngFor="let anchor of item?.anchors">
+            <a (click)="scrollToItem(anchor.id)" class="red-color d-block not-link cursor-pointer">
+              <span>-</span>{{ anchor.name }}
+            </a>
+          </ng-container>
+        </div>
+        <div [ngClass]="{'mr' : item?.anchors?.length > 0}">
+          <div fxLayout="row wrap" class="agent-wrapper">
+            <div fxLayout="row wrap" fxFlex="100" fxFlex.gt-sm="100" class="p-3 mx-4">
+              <div fxFlex="100" fxFlex.gt-sm="25" class="p-3 position-relative">
+                <div fxLayout="row wrap" class="property-status left-0 px-3" *ngIf="item?.isVip">
+                  <span class="background-color bg-green">vip</span>
+                </div>
+                <img [src]="item?.image" [alt]="item?.title" class="w-100">
+                <!--<app-download-management *ngIf="item?.registered || (item?.price ?? 0) === 0" [id]="item.id"
+                                         [price]="item.price" [tableId]="Tables.Clip"></app-download-management>-->
+                <app-wish-management *ngIf="item" [items]="wishes" [item]="item" [tableId]="Tables.Clip"
+                                     [price]="item?.price"></app-wish-management>
+              </div>
+              <div fxFlex="100" fxFlex.gt-sm="75" class="p-3">
+                <h2>{{ item?.title }}</h2>
+                <ng-container *ngIf="item?.description">
+                  <p [innerHTML]="item?.description | safeHtml" class="text-justify"></p>
+                </ng-container>
+                <div *ngIf="item?.keywords" class="mt-1">
+                  <h3 class="my-2">{{ 'KEYWORDS' | translate }}:</h3>
+                  <div fxLayout="row wrap mt-2">
+                    <div class="property-status position-relative ml-2 mt-3"
+                         *ngFor="let key of item.keywords.split(',')">
+                      <span class="background-color bg-warn px-3 py-2">{{ key }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div fxFlex="100" fxFlex.gt-sm="100" class="p-3 mx-4">
+              <div *ngIf="item?.journal" class="mt-2">
+                <h3 class="my-2">{{ 'JOURNAL' | translate }}:</h3>
+                <h4>{{ item.journal.title }}</h4>
+                <img src="{{item.journal.image}}" *ngIf="item.journal.image" class="wh-100"/>
+              </div>
+            </div>
+          </div>
+        </div>
+        <app-comments *ngIf="item" [relatedId]="item.id" [tableId]="Tables.Clip"></app-comments>
+      </ng-container>
+      <ng-container *ngIf="!item">
+        <b class="font-large text-center">
+          آیتم مورد نظر وجود ندارد.
+        </b>
+      </ng-container>
+    </mat-card>
+  </div>
+</div>
