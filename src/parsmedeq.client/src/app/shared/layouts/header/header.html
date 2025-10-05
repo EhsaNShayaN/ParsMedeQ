@@ -11,12 +11,13 @@
 
   <nav class="main-menu desktop-only">
     <a mat-button [routerLink]="'/' | langPack">{{ 'HOME' | translate }}</a>
-    <a mat-button [routerLink]="('/about' | langPack)">{{ 'ABOUT_US' | translate }}</a>
     <a mat-button [routerLink]="'/products' | langPack">{{ 'PRODUCTS' | translate }}</a>
     <a mat-button [routerLink]="'/articles' | langPack">{{ 'ARTICLES' | translate }}</a>
     <a mat-button [routerLink]="'/news' | langPack">{{ 'NEWS' | translate }}</a>
-    <a mat-button [routerLink]="'/faq' | langPack">{{ 'FAQ' | translate }}</a>
-    <a mat-button [routerLink]="'/contact' | langPack">{{ 'CONTACT_US' | translate }}</a>
+    <a mat-button [routerLink]="'/clips' | langPack">{{ 'CLIPS' | translate }}</a>
+    <!--<a mat-button [routerLink]="'/faq' | langPack">{{ 'FAQ' | translate }}</a>
+    <a mat-button [routerLink]="('/about' | langPack)">{{ 'ABOUT_US' | translate }}</a>
+    <a mat-button [routerLink]="'/contact' | langPack">{{ 'CONTACT_US' | translate }}</a>-->
     @if (auth.isLoggedIn()) {
       @if (auth.isAdmin()) {
         <a mat-button [routerLink]="'/admin' | langPack">{{ 'MANAGEMENT' | translate }}</a>

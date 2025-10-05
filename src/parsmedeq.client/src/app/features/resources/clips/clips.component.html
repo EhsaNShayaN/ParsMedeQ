@@ -12,7 +12,7 @@
         <mat-card appearance="outlined" class="px-3">
           <div class="widget">
             <mat-card-title>
-              <h4 class="py-2">{{ 'GROUPING' | translate }}</h4>
+              <h4 class="py-2">{{ 'CATEGORY' | translate }}</h4>
             </mat-card-title>
             <mat-divider></mat-divider>
             @if ((data?.length ?? 0) > 0) {
@@ -28,14 +28,14 @@
         </mat-card>
       </div>
       <div fxFlex="100" fxFlex.gt-md="80" fxFlex.gt-sm="60" fxFlex.sm="50" fxLayout="row wrap" class="main">
-        <div fxFlex="100">
-          <!--<app-properties-toolbar [isHomePage]="false"
+        <!--<div fxFlex="100">
+          <app-properties-toolbar [isHomePage]="false"
                                   (onChangeCount)="changeCount($event)"
                                   (onChangeSorting)="changeSorting($event)"
                                   (onChangeViewType)="changeViewType($event)">
-          </app-properties-toolbar>-->
-        </div>
-        <div fxFlex="100" class="my-2">
+          </app-properties-toolbar>
+        </div>-->
+        <div fxFlex="100" class="mb-2">
           <mat-card appearance="outlined" class="p-3">
             <div class="widget">
               <mat-card-title><h4>{{ 'CLIPS' | translate }} {{ title }}</h4></mat-card-title>
@@ -57,28 +57,6 @@
                         <h3 class="two-lines fw-600" [ngClass]="item.language === 'انگلیسی' ? 'ltr' : ''">
                           {{ item.title }}
                         </h3>
-                        <!-- <p class="mt-2 three-lines" [ngClass]="item.language === 'انگلیسی' ? 'ltr' : ''"
-                            [innerHTML]="item.description">
-                         </p>-->
-                        <!--<p fxLayoutAlign="start center">
-                          <mat-icon color="primary" [matTooltip]="'KEYWORDS' | translate" matTooltipPosition="above"
-                                    class="text-right" fxFlex="10" fxFlex.gt-md="10" fxFlex.gt-sm="5">
-                            business
-                          </mat-icon>
-                          <span class="mx-2 single-line" fxFlex="90" fxFlex.gt-md="90" fxFlex.gt-sm="95">
-                              {{ item.publisher }}
-                            </span>
-                        </p>-->
-                        <!-- <p fxLayoutAlign="start center">
-                           <mat-icon color="primary" class="text-right"
-                                     fxFlex="10" fxFlex.gt-md="10" fxFlex.gt-sm="5">
-                             date_range
-                           </mat-icon>
-                           <span class="text-right mx-2"
-                                 fxFlex="90" fxFlex.gt-md="90" fxFlex.gt-sm="95">
-                               {{ item.publishInfo }}
-                             </span>
-                         </p>-->
                       </mat-card-content>
                       <mat-divider></mat-divider>
                       <mat-card-actions fxLayoutAlign="space-between center">

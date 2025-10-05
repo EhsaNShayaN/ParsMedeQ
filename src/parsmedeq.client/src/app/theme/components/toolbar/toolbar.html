@@ -20,12 +20,12 @@
     </div>
     <div></div>
     <div fxLayout="row" fxLayoutAlign="end center" class="right-section" ngClass.xs="w-100">
-      <a [routerLink]="['/search' | langPack]" mat-icon-button matTooltip="{{'SEARCH' | translate}}"
+      <!--<a [routerLink]="['/search' | langPack]" mat-icon-button matTooltip="{{'SEARCH' | translate}}"
          class="shop ml-1">
         <mat-icon>
           search
         </mat-icon>
-      </a>
+      </a>-->
       <!--*************-->
       @if (!authService.isLoggedIn()) {
         <a [routerLink]="['/auth/login' | langPack]" class="background-color not-link">
@@ -40,7 +40,7 @@
 
       <div class="cart-dropdown">
         <button class="cart-btn">
-          🛒 سبد خرید ({{ totalItems }})
+          🛒({{ totalItems }})
         </button>
         <div class="cart-menu">
           <ng-container *ngIf="cartItems.length > 0; else empty">
