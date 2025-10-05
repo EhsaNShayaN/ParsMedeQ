@@ -15,7 +15,7 @@ const pagesChildren: Routes = [
       {path: 'cart', loadChildren: () => import('./features/cart/cart-module').then(m => m.CartModule)},
       {path: 'about', loadChildren: () => import('./features/about/about-module').then(m => m.AboutModule)},
       {path: 'articles', loadChildren: () => import('./features/resources/articles/articles.module').then(m => m.ArticlesModule)},
-      {path: 'news', loadChildren: () => import('./features/resources/news/news-module').then(m => m.NewsModule)},
+      {path: 'news', loadChildren: () => import('./features/resources/news/news.module').then(m => m.NewsModule)},
       //{path: 'clips', loadChildren: () => import('./features/clips/clips-module').then(m => m.ClipsModule)},
       //{path: 'products', loadChildren: () => import('./features/products/products-module').then(m => m.ProductsModule)},
       //{path: 'auth', loadChildren: () => import('./features/auth/auth-module').then(m => m.AuthModule)},

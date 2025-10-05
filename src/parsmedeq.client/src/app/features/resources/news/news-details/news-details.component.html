@@ -1,15 +1,15 @@
 <div class="px-3">
   <div class="theme-container">
     <mat-card appearance="outlined" class="my-5 p-5">
-      <ng-container *ngIf="item">
+      @if (item) {
         <div fxLayout="row wrap" class="agent-wrapper p-3 mx-4">
           <div fxFlex="100" fxFlex.gt-sm="25" class="p-3  position-relative">
             <div class="mask-div background-color" fxLayout="row wrap"
                  fxLayoutAlign="center center" *ngIf="item?.expired">
-              {{'ENDED' | translate}}
+              {{ 'ENDED' | translate }}
             </div>
             <div fxLayout="row wrap" class="property-status">
-              <span class="background-color bg-orange px-3 py-2">{{item?.categoryTitle}}</span>
+              <span class="background-color bg-orange px-3 py-2">{{ item?.resourceCategoryTitle }}</span>
             </div>
             <img [src]="item?.image" [alt]="item?.title" class="w-100 d-block">
           </div>
@@ -26,19 +26,21 @@
               <div fxLayout="row wrap mt-2">
                 <div class="property-status position-relative ml-2 mt-3"
                      *ngFor="let key of item.keywords.split(',')">
-                  <a [routerLink]="['/search' | langPack, key ]" class="background-color bg-warn px-3 py-2 not-link">{{key}}</a>
+                  <a [routerLink]="['/search' | langPack, key ]"
+                     class="background-color bg-warn px-3 py-2 not-link">{{ key }}</a>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <app-comments *ngIf="item" [relatedId]="item.id" [tableId]="Tables.Notice"></app-comments>
-      </ng-container>
-      <ng-container *ngIf="!item">
+        @if (item) {
+          <app-comments [relatedId]="item.id" [tableId]="Tables.News"></app-comments>
+        }
+      } @else {
         <b class="font-large text-center">
           آیتم مورد نظر وجود ندارد.
         </b>
-      </ng-container>
+      }
     </mat-card>
   </div>
 </div>

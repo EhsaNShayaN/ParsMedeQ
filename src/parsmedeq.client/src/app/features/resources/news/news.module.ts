@@ -1,20 +1,20 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
-import {SharedModule} from '../../../shared/shared.module';
-import {NoticesComponent} from './notices.component';
-import {NoticeComponent} from './notice/notice.component';
+import {NewsComponent} from './news.component';
+import {NewsDetailsComponent} from './news-details/news-details.component';
+import {SharedModule} from '../../../shared/shared-module';
 
 export const routes: Routes = [
-  {path: '', component: NoticesComponent, pathMatch: 'full'},
-  {path: ':id', component: NoticeComponent},
-  {path: ':id/:title', component: NoticeComponent},
+  {path: '', component: NewsComponent, pathMatch: 'full'},
+  {path: ':id', component: NewsDetailsComponent},
+  {path: ':id/:title', component: NewsDetailsComponent},
 ];
 
 @NgModule({
   declarations: [
-    NoticesComponent,
-    NoticeComponent
+    NewsComponent,
+    NewsDetailsComponent
   ],
   imports: [
     CommonModule,
@@ -22,5 +22,5 @@ export const routes: Routes = [
     SharedModule
   ]
 })
-export class NoticesModule {
+export class NewsModule {
 }

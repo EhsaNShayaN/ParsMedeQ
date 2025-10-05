@@ -35,6 +35,7 @@ import {CartItemControlComponent} from '../features/cart/cart-item-control/cart-
 import {ConfirmDialogComponent} from './dialogs/confirm-dialog/confirm-dialog.component';
 import {MatDialogActions, MatDialogContent, MatDialogTitle} from '@angular/material/dialog';
 import {CommonModule} from '@angular/common';
+import {TreeCategoriesComponent} from './tree-categories/tree-categories.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import {CommonModule} from '@angular/common';
     MultiFileUploadComponent,
     CartItemControlComponent,
     ConfirmDialogComponent,
+    TreeCategoriesComponent,
   ],
   imports: [
     CommonModule,
@@ -173,6 +175,7 @@ import {CommonModule} from '@angular/common';
     CommentForm,
     MultiFileUploadComponent,
     ConfirmDialogComponent,
+    TreeCategoriesComponent,
   ],
   providers: [
     CurrencyFormatterPipe,
