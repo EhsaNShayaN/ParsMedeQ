@@ -76,5 +76,6 @@
     "YES": "بله",
     "NO": "خیر"
   },
-  "ITEM_DELETED_SUCCESSFULLY": "آیتم مورد نظر با موفقیت حذف گردید."
+  "ITEM_DELETED_SUCCESSFULLY": "آیتم مورد نظر با موفقیت حذف گردید.",
+  "VIEW": "مشاهده"
 }

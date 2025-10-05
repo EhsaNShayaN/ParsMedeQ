@@ -1,132 +1,67 @@
-import {Directive, DoCheck, inject, OnInit} from '@angular/core';
+import {AfterViewInit, Directive, HostListener, inject, OnDestroy} from '@angular/core';
 import {BaseComponent} from '../../base-component';
-import {ResourceCategoriesResponse, ResourceCategory} from '../../core/models/ResourceCategoryResponse';
-import {createTree, Tree} from '../../core/models/MenusResponse';
+import {Resource} from '../../core/models/ResourceResponse';
 import {AppSettings, Settings} from '../../app.settings';
-import {Pagination} from '../../core/models/Pagination';
-import {Resource, ResourceResponse, ResourcesRequest} from '../../core/models/ResourceResponse';
+import {ActivatedRoute} from '@angular/router';
+import {BaseResult} from '../../core/models/BaseResult';
+import {Tables} from '../../core/constants/server.constants';
 
 @Directive()
-export class BasePageResources extends BaseComponent implements OnInit, DoCheck {
+export class BasePageResource extends BaseComponent implements AfterViewInit, OnDestroy {
+  public readonly Tables = Tables;
   isLoading: boolean = true;
-  viewText = 'VIEW';
-  public articleCategories: ResourceCategory[] = [];
-  data: Tree[] = [];
-  title?: string;
-  start = 0;
-  selectedId: number = 0;
-
   public appSettings: AppSettings;
   public settings: Settings;
-  public viewType: string = 'grid';
-  public viewCol: number = 25;
-  public count: number = 12;
-  public sort: number = 1;
-  public pagination: Pagination = new Pagination(1, this.count, null, 2, 0, 0);
-  public message: string | null = null;
-  public items: Resource[] = [];
+  private activatedRoute: ActivatedRoute;
+  private sub: any;
+  public item?: Resource;
+  public message: string = '';
+  ltr = '';
+  tabIndex: string = '';
 
   constructor(private tableId: number) {
     super();
     this.appSettings = inject(AppSettings);
+    this.activatedRoute = inject(ActivatedRoute);
     this.settings = this.appSettings.settings;
   }
 
-  ngOnInit() {
-    this.restApiService.getResourceCategories(this.tableId).subscribe((s: ResourceCategoriesResponse) => {
-      this.articleCategories = s.data;
-      this.data = createTree(this.articleCategories);
-      this.getItems();
-    });
-  }
-
-  itemClicked($event: Tree) {
-    if ($event.id === this.selectedId) {
-      return;
-    }
-    this.selectedId = $event.id;
-    this.resetLoadMore();
-    this.items.length = 0;
-    this.getItems();
-  }
-
-  getItems() {
-    const model: ResourcesRequest = {
-      pageIndex: this.pagination.page,
-      pageSize: this.pagination.perPage,
-      sort: this.sort,
-      resourceCategoryId: this.selectedId,
-      tableId: this.tableId,
-    };
-    this.title = this.articleCategories.find(s => s.id === this.selectedId)?.title;
-    this.restApiService.getResources(model).subscribe((result: ResourceResponse) => {
-      if (this.items && this.items.length > 0) {
-        this.settings.loadMore.page++;
-        this.pagination.page = this.settings.loadMore.page;
-      }
-      if (result.data.items.length == 0) {
-        this.items = [];
-        this.items.length = 0;
-        this.pagination = new Pagination(1, this.count, null, 2, 0, 0);
-        this.message = 'No Results Found';
-        return false;
-      }
-      if (this.items && this.items.length > 0) {
-        this.items = this.items.concat(result.data.items);
+  @HostListener('window:scroll') onWindowScroll() {
+    const scrollTop = Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop);
+    const productItem = document.getElementById('product-item');
+    if (productItem) {
+      const fixTabs = (scrollTop) > (productItem?.offsetTop ?? 0);
+      if (fixTabs) {
+        productItem.style.marginTop = '-8px';
       } else {
-        this.items = result.data.items;
+        productItem.style.marginTop = '0';
       }
-      this.pagination = {
-        page: result.data.pageNumber + 1,
-        perPage: result.data.pageSize,
-        prePage: result.data.pageNumber - 1 ? result.data.pageNumber - 1 : null,
-        nextPage: (result.data.totalPages > result.data.pageNumber) ? result.data.pageNumber + 1 : null,
-        total: result.data.totalCount,
-        totalPages: result.data.totalPages,
-      };
-      this.message = null;
-      if (this.items.length == this.pagination.total) {
-        this.settings.loadMore.complete = true;
-        this.settings.loadMore.result = this.items.length;
-      } else {
-        this.settings.loadMore.complete = false;
-      }
-      return true;
-    });
-  }
-
-  resetLoadMore() {
-    this.settings.loadMore.complete = false;
-    this.settings.loadMore.start = false;
-    this.settings.loadMore.page = 1;
-    this.pagination = new Pagination(1, this.count, null, null, this.pagination.total, this.pagination.totalPages);
-  }
-
-  changeCount(count: number) {
-    this.count = count;
-    this.resetLoadMore();
-    this.items.length = 0;
-    this.getItems();
-  }
-
-  changeSorting(sort: number) {
-    this.sort = sort;
-    this.resetLoadMore();
-    this.items.length = 0;
-    this.getItems();
-  }
-
-  changeViewType(obj: any) {
-    this.viewType = obj.viewType;
-    this.viewCol = obj.viewCol;
-  }
-
-  ngDoCheck() {
-    if (this.settings.loadMore.load) {
-      this.settings.loadMore.load = false;
-      console.log(this.pagination);
-      this.getItems();
     }
   }
 
+  ngAfterViewInit(): void {
+    this.sub = this.activatedRoute.params.subscribe(params => {
+      this.getArticleById(Number(params['id']));
+    });
+  }
+
+  public getArticleById(id: number) {
+    this.restApiService.getResource({id: id, tableId: this.tableId}).subscribe((d: BaseResult<Resource>) => {
+      this.item = d.data;
+      this.setTitle(this.item.title);
+      this.setMetaDescription(this.item.abstract);
+      this.ltr = this.item.language === 'انگلیسی' ? 'ltr' : '';
+    });
+  }
+
+  scrollToItem(str: string) {
+    this.tabIndex = str;
+    const x = document.getElementById(str);
+    const f: ScrollToOptions = {behavior: 'smooth', top: (x?.offsetTop ?? 0) - 80};
+    window.scrollTo(f);
+  }
+
+  ngOnDestroy() {
+    this.sub?.unsubscribe();
+  }
 }

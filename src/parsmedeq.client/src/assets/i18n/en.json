@@ -76,5 +76,6 @@
     "YES": "Yes",
     "NO": "No"
   },
-  "ITEM_DELETED_SUCCESSFULLY": "Item deleted successfully"
+  "ITEM_DELETED_SUCCESSFULLY": "Item deleted successfully",
+  "VIEW": "VIEW"
 }

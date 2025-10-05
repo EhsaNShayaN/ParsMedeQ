@@ -79,6 +79,11 @@ sealed class ResourceListApiResponseMapper : IPresentationMapper<
                         data.ResourceCategoryId,
                         data.ResourceCategoryTitle,
                         data.Title,
+                        //////////////////////////
+                        data.Keywords,
+                        data.Abstract,
+                        data.Description,
+                        //////////////////////////
                         data.Image,
                         data.Language,
                         data.Price,

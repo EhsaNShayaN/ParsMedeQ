@@ -19,7 +19,8 @@
         <div class="p-2 flex-grow-1">
           <mat-form-field appearance="outline" class="w-100 mt-3">
             <mat-label>{{ 'MOBILE' | translate }}</mat-label>
-            <input matInput [placeholder]="'MOBILE' | translate" formControlName="mobile" required>
+            <input matInput [placeholder]="'MOBILE' | translate" formControlName="mobile" onlyNumber class="ltr"
+                   required>
             @if (commentForm.get('mobile')?.hasError('required')) {
               <mat-error>
                 {{ 'MOBILE' | translate }}

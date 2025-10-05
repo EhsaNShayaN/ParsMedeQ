@@ -1,4 +1,4 @@
-@import '../../../../theme/styles/variables';
+@use '../../../../theme/styles/variables' as *;
 
 .mat-mdc-card {
   .anchor-fix {
@@ -101,10 +101,11 @@
   box-shadow: rgba(55, 55, 55, 0.06) 0 0 24px 24px;
 }
 
-.content{
-  padding: 15px!important;
-  margin: 0!important;
-  h1{
+.content {
+  padding: 15px !important;
+  margin: 0 !important;
+
+  h1 {
     font-size: 16px;
   }
 }

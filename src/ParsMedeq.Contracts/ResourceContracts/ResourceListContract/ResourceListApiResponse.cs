@@ -5,6 +5,11 @@ public readonly record struct ResourceListApiResponse(
     int? ResourceCategoryId,
     string ResourceCategoryTitle,
     string Title,
+    //////////////////////////
+    string Keywords,
+    string Abstract,
+    string Description,
+    //////////////////////////
     string Image,
     string Language,
     int? Price,

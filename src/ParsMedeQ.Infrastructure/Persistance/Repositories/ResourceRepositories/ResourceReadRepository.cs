@@ -59,6 +59,9 @@ internal sealed class ResourceReadRepository : GenericPrimitiveReadRepositoryBas
                 Disabled = res.Disabled,
                 ExpirationDate = res.ExpirationDate,
                 CreationDate = res.CreationDate,
+                Keywords = res.ResourceTranslations.SingleOrDefault(s => s.LanguageCode == langCode).Keywords ?? string.Empty,
+                Abstract = res.ResourceTranslations.SingleOrDefault(s => s.LanguageCode == langCode).Abstract ?? string.Empty,
+                Description = res.ResourceTranslations.SingleOrDefault(s => s.LanguageCode == langCode).Description ?? string.Empty,
             };
 
         if (lastId.Equals(0))

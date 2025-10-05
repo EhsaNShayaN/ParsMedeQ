@@ -15,6 +15,11 @@ public sealed class ResourceListDbQueryResponse
     public int Stock { get; set; }
     public bool Deleted { get; set; }
     public bool Disabled { get; set; }
+    //////////////////////////
+    public string Keywords { get; set; } = string.Empty;
+    public string Abstract { get; set; } = string.Empty;
+    public string Description { get; set; } = string.Empty;
+    //////////////////////////
     public DateTime? ExpirationDate { get; set; }
     public DateTime CreationDate { get; set; }
 }

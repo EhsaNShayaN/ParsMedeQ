@@ -2,15 +2,15 @@ import {Directive, inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort, Sort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-import {BaseReportComponent} from '../../../base-report-component';
 import {Resource, ResourceResponse, ResourcesRequest} from '../../../core/models/ResourceResponse';
 import {TranslateService} from '@ngx-translate/core';
 import {Helpers} from '../../../core/helpers';
 import {DialogService} from '../../../core/services/dialog-service';
 import {ToastrService} from 'ngx-toastr';
+import {BaseComponent} from '../../../base-component';
 
 @Directive()
-export class BaseResourcesComponent extends BaseReportComponent implements OnInit, OnDestroy {
+export class BaseResourcesComponent extends BaseComponent implements OnInit, OnDestroy {
   languages: string[] = [];
   colors: string[] = ['warn', 'primary', 'success', 'secondary', 'info', 'danger'];
   tableId: number;
