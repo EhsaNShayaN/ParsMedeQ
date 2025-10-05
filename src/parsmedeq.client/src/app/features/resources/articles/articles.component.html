@@ -1,10 +1,10 @@
-<!--<app-header-image [backgroundImage]="'assets/images/others/resources_articles_header.jpg'"
+<app-header-image [backgroundImage]="'assets/images/others/resources_articles_header.jpg'"
                   [bgImageAnimate]="false"
                   [contentOffsetToTop]="false"
                   [hideMask]="true"
-                  [title]="''"
+                  [title]="'' | translate"
                   [desc]="">
-</app-header-image>-->
+</app-header-image>
 <div class="theme-container px-3">
   <div fxLayout="row wrap" class="agents-wrapper">
     <div fxLayout="row wrap" fxFlex="100" fxFlex.gt-sm="100" class="p-3">
@@ -12,10 +12,14 @@
         <mat-card appearance="outlined">
           <div class="widget">
             <mat-card-title>
-              <h4 class="p-2">دسته بندی</h4>
+              <h4 class="p-2">{{ 'GROUPING' | translate }}</h4>
             </mat-card-title>
             <mat-divider></mat-divider>
-            <mat-card-content class="p-0" *ngIf="(data?.length ?? 0) > 0">
+            <mat-card-content class="p-0" *ngIf="data?.length > 0">
+              <!--<ng-container *ngFor="let item of data">
+                <app-tree-categories [parent]="item" [isTopLevel]="true"
+                                     (onItemClicked)="itemClicked($event)" [selectedId]="selectedId"></app-tree-categories>
+              </ng-container>-->
               <app-tree-view [data]="data" (onItemClicked)="itemClicked($event)" [selectedId]="selectedId"
                              [marginClass]="'mr-2'"></app-tree-view>
             </mat-card-content>
@@ -34,7 +38,7 @@
           <mat-card appearance="outlined" class="p-3">
             <div class="widget">
               <mat-card-title><h4>
-                مقالات
+                {{ 'ARTICLES' | translate }}
                 {{ title }}
               </h4>
               </mat-card-title>
@@ -45,13 +49,13 @@
                        fxFlex="100" fxFlex.gt-md="33.3">
                     <mat-card appearance="outlined">
                       <div fxLayout="row wrap" class="property-status">
-                        <span class="background-color bg-orange">{{ item.resourceCategoryTitle }}</span>
+                        <span class="background-color bg-orange">{{ item.categoryTitle }}</span>
                       </div>
-                      <div fxLayout="row wrap" class="property-status left-0" *ngIf="(item.price ?? 0) > 0">
-                        <span class="background-color bg-orange">vip</span>
+                      <div fxLayout="row wrap" class="property-status left-0" *ngIf="item.isVip">
+                        <span class="background-color bg-green">vip</span>
                       </div>
                       <a
-                        [routerLink]="['/articles', item.id, item.title | replaceUrlSpaces ]"
+                        [routerLink]="['/articles' | langPack, item.secondId, item.title | replaceUrlSpaces ]"
                         class="agent-img">
                         <img mat-card-image [src]="item.image" [alt]="item.title" class="w-100 img-square"/>
                       </a>
@@ -63,7 +67,7 @@
                            [innerHTML]="item.abstract">
                         </p>
                         <p fxLayoutAlign="start center">
-                          <mat-icon color="primary" [matTooltip]="'کلمات کلیدی'" matTooltipPosition="above"
+                          <mat-icon color="primary" [matTooltip]="'KEYWORDS' | translate" matTooltipPosition="above"
                                     class="text-right" fxFlex="10" fxFlex.gt-md="10" fxFlex.gt-sm="5">
                             business
                           </mat-icon>
@@ -85,9 +89,10 @@
                       <mat-card-actions fxLayoutAlign="space-between center">
                         <div fxLayout="row" fxLayoutAlign="start center" class="text-muted"></div>
                         <div>
-                          <a [routerLink]="['/articles', item.id, item.title | replaceUrlSpaces ]"
-                             mat-button color="primary" class="uppercase">
-                            مشاهده
+                          <a
+                            [routerLink]="['/articles' | langPack, item.secondId, item.title | replaceUrlSpaces ]"
+                            mat-button color="primary" class="uppercase">
+                            {{ viewText | translate }}
                           </a>
                         </div>
                       </mat-card-actions>
