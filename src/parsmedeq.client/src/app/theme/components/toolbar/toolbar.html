@@ -44,11 +44,13 @@
         </button>
         <div class="cart-menu">
           <ng-container *ngIf="cartItems.length > 0; else empty">
-            <div class="cart-item" *ngFor="let item of cartItems">
+            <div *ngFor="let item of cartItems" class="cart-item"
+                 [ngClass]="{'reduced': (item.delta ?? 0) < 0, 'removed': item.quantity === 0}">
               <span>{{ item.productName }}</span>
               <span>تعداد: {{ item.quantity }}</span>
               <span>{{ item.unitPrice * item.quantity | number }} تومان</span>
-              <button (click)="removeItem(item.id!)">❌</button>
+              <span *ngIf="(item.delta ?? 0) < 0" class="icon-warning">⚠️</span>
+              <button (click)="removeItem(item.id ?? 0)">❌</button>
             </div>
             <div class="checkout">
               <a routerLink="/checkout">رفتن به پرداخت</a>
@@ -59,6 +61,7 @@
           </ng-template>
         </div>
       </div>
+
 
       <button mat-button class="menu" fxHide="false" fxHide.gt-sm (click)="sidenavToggle()">
         <mat-icon>menu</mat-icon>

@@ -42,7 +42,8 @@ export class CartItemControlComponent {
       productType: this.productType,
       productName: this.productName,
       unitPrice: this.unitPrice,
-      quantity: 1
+      quantity: 1,
+      originalQuantity: 0
     };
     this.cartService.addToCart(item, this.cart()?.userId);
   }

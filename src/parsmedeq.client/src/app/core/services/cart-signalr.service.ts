@@ -33,7 +33,7 @@ export class CartSignalRService {
     }
   }
 
-  onCartUpdatedDetailed(callback: (data: any) => void) {
-    this.hubConnection.on('CartUpdatedDetailed', callback);
+  onCartVisualUpdate(callback: (data: any) => void) {
+    this.hubConnection.on('CartVisualUpdate', callback);
   }
 }

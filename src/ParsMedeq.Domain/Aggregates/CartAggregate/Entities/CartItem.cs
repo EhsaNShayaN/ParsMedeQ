@@ -10,6 +10,7 @@ public sealed class CartItem : EntityBase<int>
     public string ProductName { get; set; } = "";
     public decimal UnitPrice { get; set; }
     public int Quantity { get; set; } = 1;
+    public int QuantityBeforeUpdate { get; set; } = 1;
     #endregion
 
     #region " Navigation Properties "

@@ -142,4 +142,19 @@ input {
   color: #888;
 }
 
+.cart-item.reduced {
+  background-color: #fff7e6; /* زرد روشن */
+}
+
+.cart-item.removed {
+  background-color: #fff1f0; /* قرمز روشن */
+  text-decoration: line-through;
+}
+
+.icon-warning {
+  margin-left: 5px;
+  color: #faad14; /* نارنجی */
+  font-weight: bold;
+}
+
 /****END CART****/

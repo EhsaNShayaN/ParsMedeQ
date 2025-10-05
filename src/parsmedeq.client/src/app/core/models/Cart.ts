@@ -1,10 +1,16 @@
-export interface CartItem {
+export class CartItem {
   id?: number;
-  productId: number;
-  productType: string;
-  productName: string;
-  unitPrice: number;
-  quantity: number;
+  delta?: number;
+  productId!: number;
+  productType!: string;
+  productName!: string;
+  unitPrice!: number;
+  quantity!: number;
+  originalQuantity!: number;
+
+  constructor() {
+    this.delta = this.quantity - this.originalQuantity;
+  }
 }
 
 export interface Cart {

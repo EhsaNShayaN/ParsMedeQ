@@ -27,28 +27,30 @@ export class App implements OnInit {
 
       this.cartSignalR.startConnection(userId);
 
-      this.cartSignalR.onCartUpdatedDetailed((data) => {
-        const items = data.modifiedItems;
-        if (items.length > 0) {
-          items.forEach((item: any) => {
-            const text = `محصول ${item.ProductName} تغییر کرد. تعداد جدید: ${item.Quantity}`;
-            this.toastr.warning(text, 'سبد خرید', {
-              progressBar: true,
-              closeButton: true,
-              timeOut: 6000,
-              tapToDismiss: true,
-            });
-          });
-        } else {
-          this.toastr.warning(data.message, 'سبد خرید', {
-            progressBar: true,
-            closeButton: true,
-            timeOut: 5000,
-          });
-        }
-
-        // Auto-Refresh سبد
+      this.cartSignalR.onCartVisualUpdate((data) => {
         this.cartService.loadCart(userId);
+
+        data.modifiedItems.forEach((item: any) => {
+          if (item.delta < 0) {
+            this.toastr.warning(
+              `محصول ${item.ProductName} کاهش یافت. تعداد جدید: ${item.Quantity}`,
+              'کاهش تعداد',
+              {closeButton: true, progressBar: true, timeOut: 5000}
+            );
+          }
+        });
+
+        data.removedItems.forEach((item: any) => {
+          this.toastr.error(
+            `محصول ${item.ProductName} حذف شد`,
+            'حذف محصول',
+            {closeButton: true, progressBar: true, timeOut: 5000}
+          );
+        });
+
+        if (data.modifiedItems.length === 0 && data.removedItems.length === 0) {
+          this.toastr.success(data.message, 'سبد خرید', {timeOut: 3000});
+        }
       });
     }
   }

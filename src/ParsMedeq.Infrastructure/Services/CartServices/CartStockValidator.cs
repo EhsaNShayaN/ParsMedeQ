@@ -52,20 +52,30 @@ public class CartStockValidator
                 await _writeUnitOfWork.SaveChangesAsync();
                 if (!string.IsNullOrEmpty(cart.UserId))
                 {
-                    var modifiedItems = cart.CartItems.Select(i => new {
+                    var modifiedItems = cart.CartItems.Select(i => new
+                    {
                         i.ProductId,
                         i.ProductName,
-                        i.Quantity
+                        i.Quantity,
+                        OriginalQuantity = i.QuantityBeforeUpdate // فرض می‌کنیم این فیلد موجوده
+                    }).ToList();
+
+                    var removedItems = cart.CartItems.Where(i => i.Quantity == 0).Select(i => new
+                    {
+                        i.ProductId,
+                        i.ProductName
                     }).ToList();
 
                     await _hub.Clients.Group($"cart-{cart.UserId}")
-                        .SendAsync("CartUpdatedDetailed", new
+                        .SendAsync("CartVisualUpdate", new
                         {
                             cartId = cart.Id,
-                            message = "سبد خرید شما اصلاح شد",
-                            modifiedItems
+                            modifiedItems,
+                            removedItems,
+                            message = "سبد خرید شما به‌روز شد"
                         });
                 }
+
             }
         }
     }
