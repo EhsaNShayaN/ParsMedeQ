@@ -77,5 +77,6 @@
     "NO": "خیر"
   },
   "ITEM_DELETED_SUCCESSFULLY": "آیتم مورد نظر با موفقیت حذف گردید.",
-  "VIEW": "مشاهده"
+  "VIEW": "مشاهده",
+  "THE_DESIRED_ITEM_DOES_NOT_EXIST": "آیتم مورد نظر وجود ندارد."
 }

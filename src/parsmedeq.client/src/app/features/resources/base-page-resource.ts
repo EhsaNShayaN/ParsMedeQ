@@ -18,6 +18,7 @@ export class BasePageResource extends BaseComponent implements AfterViewInit, On
   public message: string = '';
   ltr = '';
   tabIndex: string = '';
+  top = false;
 
   constructor(private tableId: number) {
     super();
@@ -28,6 +29,7 @@ export class BasePageResource extends BaseComponent implements AfterViewInit, On
 
   @HostListener('window:scroll') onWindowScroll() {
     const scrollTop = Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop);
+    this.top = scrollTop >= 40;
     const productItem = document.getElementById('product-item');
     if (productItem) {
       const fixTabs = (scrollTop) > (productItem?.offsetTop ?? 0);

@@ -74,7 +74,7 @@
           </h3>
           <p class="text-muted"><small>{{ review.creationDate }}</small></p>
           <p class="text">{{ review.description }}</p>
-          @if ((review.answers.length ?? 0) > 0) {
+          @if ((review.answers?.length ?? 0) > 0) {
             <div>
               @for (answer of review.answers; track answer) {
                 <div class="mr-5">

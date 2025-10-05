@@ -36,7 +36,7 @@
     </ng-container>
     <div class="text-center" *ngIf="!item">
       <img src="/assets/loading.gif" alt="loading" class="w-50" *ngIf="isLoading"/>
-      <span class="fw-600 font-large" *ngIf="!isLoading">آیتم مورد نظر وجود ندارد.</span>
+      <span class="fw-600 font-large" *ngIf="!isLoading">{{ 'THE_DESIRED_ITEM_DOES_NOT_EXIST' | translate }}</span>
     </div>
   </mat-card>
 </div>

@@ -1,10 +1,10 @@
-<app-header-image [backgroundImage]="'assets/images/others/resources_clips_header.jpg?v=1'"
+<!--<app-header-image [backgroundImage]="'assets/images/others/resources_clips_header.jpg?v=1'"
                   [bgImageAnimate]="false"
                   [contentOffsetToTop]="false"
                   [hideMask]="true"
                   [title]="'' | translate"
                   [desc]="'' | translate">
-</app-header-image>
+</app-header-image>-->
 <div class="theme-container px-3">
   <div fxLayout="row wrap" class="agents-wrapper">
     <div fxLayout="row wrap" fxFlex="100" fxFlex.gt-sm="100" class="p-3">
@@ -15,22 +15,25 @@
               <h4 class="py-2">{{ 'GROUPING' | translate }}</h4>
             </mat-card-title>
             <mat-divider></mat-divider>
-            <mat-card-content class="p-0" *ngIf="data?.length > 0">
-              <ng-container *ngFor="let item of data">
-                <app-tree-categories [parent]="item" [isTopLevel]="true"
-                                     (onItemClicked)="itemClicked($event)" [selectedId]="selectedId"></app-tree-categories>
-              </ng-container>
-            </mat-card-content>
+            @if ((data?.length ?? 0) > 0) {
+              <mat-card-content class="p-0">
+                <ng-container *ngFor="let item of data">
+                  <app-tree-categories [parent]="item" [isTopLevel]="true"
+                                       (onItemClicked)="itemClicked($event)"
+                                       [selectedId]="selectedId"></app-tree-categories>
+                </ng-container>
+              </mat-card-content>
+            }
           </div>
         </mat-card>
       </div>
       <div fxFlex="100" fxFlex.gt-md="80" fxFlex.gt-sm="60" fxFlex.sm="50" fxLayout="row wrap" class="main">
         <div fxFlex="100">
-          <app-properties-toolbar [isHomePage]="false"
+          <!--<app-properties-toolbar [isHomePage]="false"
                                   (onChangeCount)="changeCount($event)"
                                   (onChangeSorting)="changeSorting($event)"
                                   (onChangeViewType)="changeViewType($event)">
-          </app-properties-toolbar>
+          </app-properties-toolbar>-->
         </div>
         <div fxFlex="100" class="my-2">
           <mat-card appearance="outlined" class="p-3">
@@ -42,9 +45,11 @@
                   <div *ngFor="let item of items; let i = index" class="p-3"
                        fxFlex="100" fxFlex.gt-md="33.3">
                     <mat-card appearance="outlined">
-                      <div fxLayout="row wrap" class="property-status left-0" *ngIf="item.isVip">
-                        <span class="background-color bg-green">vip</span>
-                      </div>
+                      @if ((item.price ?? 0) > 0) {
+                        <div fxLayout="row wrap" class="property-status left-0">
+                          <span class="background-color bg-green">vip</span>
+                        </div>
+                      }
                       <a [routerLink]="['/clips' | langPack, item.id ]" class="agent-img">
                         <img mat-card-image [src]="item.image" [alt]="item.title" class="w-100 img-square"/>
                       </a>
@@ -52,9 +57,9 @@
                         <h3 class="two-lines fw-600" [ngClass]="item.language === 'انگلیسی' ? 'ltr' : ''">
                           {{ item.title }}
                         </h3>
-                       <!-- <p class="mt-2 three-lines" [ngClass]="item.language === 'انگلیسی' ? 'ltr' : ''"
-                           [innerHTML]="item.description">
-                        </p>-->
+                        <!-- <p class="mt-2 three-lines" [ngClass]="item.language === 'انگلیسی' ? 'ltr' : ''"
+                            [innerHTML]="item.description">
+                         </p>-->
                         <!--<p fxLayoutAlign="start center">
                           <mat-icon color="primary" [matTooltip]="'KEYWORDS' | translate" matTooltipPosition="above"
                                     class="text-right" fxFlex="10" fxFlex.gt-md="10" fxFlex.gt-sm="5">
@@ -64,22 +69,23 @@
                               {{ item.publisher }}
                             </span>
                         </p>-->
-                       <!-- <p fxLayoutAlign="start center">
-                          <mat-icon color="primary" class="text-right"
-                                    fxFlex="10" fxFlex.gt-md="10" fxFlex.gt-sm="5">
-                            date_range
-                          </mat-icon>
-                          <span class="text-right mx-2"
-                                fxFlex="90" fxFlex.gt-md="90" fxFlex.gt-sm="95">
-                              {{ item.publishInfo }}
-                            </span>
-                        </p>-->
+                        <!-- <p fxLayoutAlign="start center">
+                           <mat-icon color="primary" class="text-right"
+                                     fxFlex="10" fxFlex.gt-md="10" fxFlex.gt-sm="5">
+                             date_range
+                           </mat-icon>
+                           <span class="text-right mx-2"
+                                 fxFlex="90" fxFlex.gt-md="90" fxFlex.gt-sm="95">
+                               {{ item.publishInfo }}
+                             </span>
+                         </p>-->
                       </mat-card-content>
                       <mat-divider></mat-divider>
                       <mat-card-actions fxLayoutAlign="space-between center">
                         <div fxLayout="row" fxLayoutAlign="start center" class="text-muted"></div>
                         <div>
-                          <a [routerLink]="['/clips' | langPack, item.id ]" mat-button color="primary" class="uppercase">
+                          <a [routerLink]="['/clips' | langPack, item.id ]" mat-button color="primary"
+                             class="uppercase">
                             {{ viewText | translate }}
                           </a>
                         </div>

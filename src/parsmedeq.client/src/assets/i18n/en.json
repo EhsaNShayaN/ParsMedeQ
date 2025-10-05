@@ -77,5 +77,6 @@
     "NO": "No"
   },
   "ITEM_DELETED_SUCCESSFULLY": "Item deleted successfully",
-  "VIEW": "VIEW"
+  "VIEW": "VIEW",
+  "THE_DESIRED_ITEM_DOES_NOT_EXIST": "The desired item does not exist"
 }
