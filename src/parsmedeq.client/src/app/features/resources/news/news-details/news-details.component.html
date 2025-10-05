@@ -1,0 +1,44 @@
+<div class="px-3">
+  <div class="theme-container">
+    <mat-card appearance="outlined" class="my-5 p-5">
+      <ng-container *ngIf="item">
+        <div fxLayout="row wrap" class="agent-wrapper p-3 mx-4">
+          <div fxFlex="100" fxFlex.gt-sm="25" class="p-3  position-relative">
+            <div class="mask-div background-color" fxLayout="row wrap"
+                 fxLayoutAlign="center center" *ngIf="item?.expired">
+              {{'ENDED' | translate}}
+            </div>
+            <div fxLayout="row wrap" class="property-status">
+              <span class="background-color bg-orange px-3 py-2">{{item?.categoryTitle}}</span>
+            </div>
+            <img [src]="item?.image" [alt]="item?.title" class="w-100 d-block">
+          </div>
+          <div fxFlex="100" fxFlex.gt-md="75" class="p-3 ">
+            <h2 [innerHTML]="item?.title | safeHtml"></h2>
+            <ng-container *ngIf="item?.abstract">
+              <p [innerHTML]="item?.abstract" class="text-justify"
+                 [ngClass]="ltr"></p>
+            </ng-container>
+            <div class="mt-3 text-justify" [innerHTML]="item?.description | safeHtml"></div>
+            <div *ngIf="item?.keywords" class="mt-1">
+              <h3 class="my-2">{{ 'KEYWORDS' | translate }}:</h3>
+              <!--<h4>{{item?.keywords}}</h4>-->
+              <div fxLayout="row wrap mt-2">
+                <div class="property-status position-relative ml-2 mt-3"
+                     *ngFor="let key of item.keywords.split(',')">
+                  <a [routerLink]="['/search' | langPack, key ]" class="background-color bg-warn px-3 py-2 not-link">{{key}}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <app-comments *ngIf="item" [relatedId]="item.id" [tableId]="Tables.Notice"></app-comments>
+      </ng-container>
+      <ng-container *ngIf="!item">
+        <b class="font-large text-center">
+          آیتم مورد نظر وجود ندارد.
+        </b>
+      </ng-container>
+    </mat-card>
+  </div>
+</div>

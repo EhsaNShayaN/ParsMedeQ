@@ -1,6 +1,0 @@
-<h2>اخبار و رویدادها</h2>
-<mat-card *ngFor="let item of newsList" class="mb-3">
-  <mat-card-title>{{ item.title }}</mat-card-title>
-  <mat-card-content>{{ item.summary }}</mat-card-content>
-  <button mat-button color="accent" [routerLink]="['/news', item.id]">مطالعه خبر</button>
-</mat-card>

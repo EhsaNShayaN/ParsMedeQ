@@ -1,0 +1,28 @@
+@import '../../theme/styles/variables';
+
+.next-root,
+.next-level {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  line-height: 200%;
+}
+
+.next-root {
+  padding: .5rem 0;
+  border-bottom: solid 1px $silver;
+}
+
+.next-level {
+  padding-right: 1rem;
+}
+
+::ng-deep {
+  .widget {
+    .mat-mdc-card-content :last-child {
+      .next-root {
+        border-bottom: none;
+      }
+    }
+  }
+}
