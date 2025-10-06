@@ -42,7 +42,6 @@
     "moment-jalaali": "^0.10.4",
     "ngx-flexible-layout": "^20.0.0",
     "ngx-mat-timepicker": "^20.0.1",
-    "ngx-owl-carousel-o": "^20.0.1",
     "ngx-toastr": "^19.0.0",
     "run-script-os": "*",
     "rxjs": "~7.8.0",

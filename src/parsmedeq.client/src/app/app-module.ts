@@ -32,7 +32,6 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {BidiModule} from '@angular/cdk/bidi';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AuthGuard} from './core/guards/auth.guard';
-import {CarouselModule} from 'ngx-owl-carousel-o';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -89,7 +88,6 @@ export function tokenGetter() {
         deps: [HttpClient],
       },
     }),
-    CarouselModule,
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
