@@ -6,41 +6,41 @@ import {SwiperDirective} from './swiper.directive';
 
 export {SwiperComponent} from './swiper.component';
 export {SwiperDirective} from './swiper.directive';
-export type {SwiperOptions as SwiperConfigInterface} from 'swiper';
+export type {SwiperOptions as SwiperConfigInterface} from 'swiper/types';
 
 export {
-  SWIPER_CONFIG,
-
-  SwiperConfig
+  SWIPER_CONFIG
 } from './swiper.interfaces';
+
 export type {
-    SwiperBreakpointsInterface,
+  SwiperConfig,
+  SwiperBreakpointsInterface,
 
-    SwiperA11YInterface,
-    SwiperLazyInterface,
-    SwiperZoomInterface,
-    SwiperHistoryInterface,
-    SwiperVirtualInterface,
-    SwiperAutoplayInterface,
-    SwiperKeyboardInterface,
-    SwiperScrollbarInterface,
-    SwiperMousewheelInterface,
-    SwiperControllerInterface,
-    SwiperNavigationInterface,
-    SwiperPaginationInterface,
-    SwiperHashNavigationInterface,
+  SwiperA11YInterface,
+  SwiperLazyInterface,
+  SwiperZoomInterface,
+  SwiperHistoryInterface,
+  SwiperVirtualInterface,
+  SwiperAutoplayInterface,
+  SwiperKeyboardInterface,
+  SwiperScrollbarInterface,
+  SwiperMousewheelInterface,
+  SwiperControllerInterface,
+  SwiperNavigationInterface,
+  SwiperPaginationInterface,
+  SwiperHashNavigationInterface,
 
-    SwiperFadeEffectInterface,
-    SwiperFlipEffectInterface,
-    SwiperCubeEffectInterface,
-    SwiperCoverflowEffectInterface,
+  SwiperFadeEffectInterface,
+  SwiperFlipEffectInterface,
+  SwiperCubeEffectInterface,
+  SwiperCoverflowEffectInterface,
 
-    SwiperRenderSlideFunction,
-    SwiperRenderCustomFunction,
-    SwiperRenderBulletFunction,
-    SwiperRenderExternalFunction,
-    SwiperRenderFractionFunction,
-    SwiperRenderProgressbarFunction
+  SwiperRenderSlideFunction,
+  SwiperRenderCustomFunction,
+  SwiperRenderBulletFunction,
+  SwiperRenderExternalFunction,
+  SwiperRenderFractionFunction,
+  SwiperRenderProgressbarFunction
 } from './swiper.interfaces';
 
 

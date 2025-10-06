@@ -6,7 +6,7 @@ import {
   ViewChild, ViewEncapsulation, ChangeDetectorRef
 } from '@angular/core';
 
-import {SwiperOptions} from 'swiper';
+import type {SwiperOptions} from 'swiper/types';
 
 import {SwiperDirective} from './swiper.directive';
 import {SWIPER_CONFIG, SwiperConfig, SwiperEventNames, SwiperEvent} from './swiper.interfaces';
@@ -18,10 +18,10 @@ import {SWIPER_CONFIG, SwiperConfig, SwiperEventNames, SwiperEvent} from './swip
   templateUrl: './swiper.component.html',
   styleUrls: [
     './swiper.component.scss',
-    '../../../../../node_modules/swiper/swiper-bundle.css'
+    '../../../../../node_modules/swiper/swiper.min.css'
   ],
   encapsulation: ViewEncapsulation.None,
-  standalone:false
+  standalone: false
 })
 export class SwiperComponent implements AfterViewInit, OnDestroy {
   private mo: MutationObserver | null = null;

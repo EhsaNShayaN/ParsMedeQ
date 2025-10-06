@@ -1,25 +1,13 @@
-import Swiper from 'swiper/bundle';
-import {SwiperOptions} from 'swiper';
+import Swiper from 'swiper';
+import type {SwiperOptions} from 'swiper/types';
 
-import {
-  AfterViewInit,
-  Directive,
-  DoCheck,
-  ElementRef,
-  EventEmitter,
-  Inject,
-  Input,
-  KeyValueDiffer,
-  KeyValueDiffers,
-  NgZone,
-  OnChanges,
-  OnDestroy,
-  Optional,
-  Output,
-  PLATFORM_ID,
-  SimpleChanges
-} from '@angular/core';
+import {PLATFORM_ID} from '@angular/core';
 import {isPlatformBrowser} from '@angular/common';
+import {
+  NgZone, Inject, Optional, ElementRef, Directive,
+  AfterViewInit, OnDestroy, DoCheck, OnChanges, Input, Output, EventEmitter,
+  SimpleChanges, KeyValueDiffer, KeyValueDiffers
+} from '@angular/core';
 import {SWIPER_CONFIG, SwiperConfig, SwiperEvent, SwiperEventNames} from './swiper.interfaces';
 
 @Directive({
@@ -147,11 +135,6 @@ export class SwiperDirective implements AfterViewInit, OnDestroy, DoCheck, OnCha
       };
     }
 
-    // Ensure controller object exists to avoid accessing properties on undefined in Swiper internals
-    if (!params.controller) {
-      params.controller = {} as any;
-    }
-
     if (this.disabled) {
       params.allowSlidePrev = false;
       params.allowSlideNext = false;
@@ -170,6 +153,7 @@ export class SwiperDirective implements AfterViewInit, OnDestroy, DoCheck, OnCha
         }
       }
     };
+
     this.zone.runOutsideAngular(() => {
       this.instance = new Swiper(this.elementRef.nativeElement, params);
     });
@@ -209,19 +193,7 @@ export class SwiperDirective implements AfterViewInit, OnDestroy, DoCheck, OnCha
   ngOnDestroy(): void {
     if (this.instance) {
       this.zone.runOutsideAngular(() => {
-        try {
-          // Avoid loop teardown touching missing DOM when component is being removed
-          if (this.instance.params && this.instance.params.loop) {
-            this.instance.params.loop = false;
-          }
-
-          if (this.instance.initialized) {
-            // Do not attempt to clean styles when DOM may be gone
-            this.instance.destroy(false, true);
-          }
-        } catch {
-          // Swallow errors from Swiper internals during teardown
-        }
+        this.instance.destroy(true, this.instance.initialized || false);
       });
 
       this.instance = null;
@@ -286,20 +258,11 @@ export class SwiperDirective implements AfterViewInit, OnDestroy, DoCheck, OnCha
 
   public update(): void {
     setTimeout(() => {
-      const inst: any = this.instance as any;
-      if (!inst || inst.destroyed || !inst.el || !inst.wrapperEl || !inst.el.children) {
-        return;
+      if (this.instance) {
+        this.zone.runOutsideAngular(() => {
+          this.instance.update();
+        });
       }
-      if (!inst.initialized) {
-        return;
-      }
-      this.zone.runOutsideAngular(() => {
-        try {
-          inst.update();
-        } catch {
-          // Ignore update errors when DOM is in flux
-        }
-      });
     }, 0);
   }
 
@@ -312,7 +275,7 @@ export class SwiperDirective implements AfterViewInit, OnDestroy, DoCheck, OnCha
   }
 
   public setIndex(index: number, speed?: number, silent?: boolean): void {
-    if (!this.instance || !(this.instance as any).wrapperEl) {
+    if (!this.instance) {
       this.initialIndex = index;
     } else {
       let realIndex = index * this.instance.params.slidesPerGroup;
