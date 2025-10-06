@@ -1,0 +1,82 @@
+<div class="header-carousel-wrapper">
+  <div class="header-carousel" [class.offset-bottom]="contentOffsetToTop" [class.fullscreen]="fullscreen"
+       [ngClass]="'toolbar-' + settings.toolbar">
+    <div class="swiper-container h-100" [swiper]="config" (indexChange)="onIndexChange($event)">
+      <div class="swiper-wrapper h-100">
+        <div *ngFor="let slide of slides;" class="swiper-slide">
+          <div [attr.data-background]="slide.image" class="slide-item swiper-lazy">
+            <div class="swiper-lazy-preloader"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start end" class="slide-info" [dir]="(settings.rtl) ? 'rtl' : 'ltr'"
+         *ngIf="currentSlide.title && currentSlide.description && currentSlide">
+      <div class="theme-container">
+        <div fxLayout="row wrap" fxLayoutAlign="space-between end" fxFlex="100" fxFlex.gt-md="100" fxFlex.gt-sm="80"
+             class="slide-actions">
+          <div fxFlex.gt-sm="65" fxFlex.gt-xs="85" fxFlex.xs="100">
+            <mat-card appearance="outlined" [style.background-color]="currentSlide.back" [style.border-radius]="0"
+                      [style.min-width]="'unset'" class="p-4">
+              <p class="slide-section">{{ currentSlide.section }}</p>
+              <h2 class="slide-title">{{ currentSlide.title }}</h2>
+              <p class="location" fxLayout="row" fxLayoutAlign="start center" fxShow="false" fxShow.gt-xs>
+                <span class="px-1 three-lines" [innerHTML]="currentSlide.description | safeHtml"></span>
+              </p>
+              <div fxLayout="row wrap" fxLayoutAlign="start center" class="mb-3">
+                <a>
+                  <h4>{{ 'JOIN_NOW' | translate }}</h4>
+                </a>
+                <div fxLayout="row wrap" fxLayoutAlign="center center" class="mx-3 p-2 background-color circle">
+                  <svg stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"
+                       [style.fill]="currentSlide.back">
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                    <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
+                  </svg>
+                </div>
+              </div>
+            </mat-card>
+          </div>
+          <div fxLayoutAlign="end" fxFlex.gt-sm="35" fxFlex.gt-xs="15" fxFlex.xs="100" class="swiper-button-wrapper">
+            <button mat-mini-fab color="primary" class="swiper-button-prev swipe-arrow"
+                    [title]="'PREVIOUS' | translate">
+              <mat-icon class="primary-color">keyboard_arrow_left</mat-icon>
+            </button>
+
+            <button mat-mini-fab color="primary" class="swiper-button-play swipe-arrow mx-2" (click)="togglePlay()"
+                    [title]="(config.autoplay ? 'PAUSE' : 'PLAY') | translate">
+              <mat-icon class="primary-color play">
+                {{ config.autoplay ? 'pause' : 'play_arrow' }}
+              </mat-icon>
+            </button>
+            <button mat-mini-fab color="primary" class="swiper-button-next swipe-arrow"
+                    [title]="'NEXT' | translate">
+              <mat-icon class="primary-color">keyboard_arrow_right</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-detail" fxShow="false" fxShow.gt-md>
+    <div class="theme-container">
+      <div fxLayout="row" class="indicator">
+        <div fxFlex="25" *ngFor="let slide of slides; let i = index"
+             [ngClass]="{'selected' : i === currentIndex}">
+        </div>
+      </div>
+      <div class="slide-box mt-4">
+        <div class="slide-box-item" fxFlex="25" *ngFor="let slide of slides; let i = index" (click)="goToIndex(i)">
+          <p class="slide-box-section">{{ slide.section }}</p>
+          <h2 class="slide-box-title two-lines">{{ slide.title }}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <mat-card appearance="outlined" class="custom-card p-4" [style.background-color]="currentSlide.back"
+            fxShow="true" fxShow.gt-xs="false">
+    <p class="location" fxLayout="row" fxLayoutAlign="center center">
+      <span class="px-1 four-lines" [innerHTML]="currentSlide.description | safeHtml"></span>
+    </p>
+  </mat-card>
+</div>

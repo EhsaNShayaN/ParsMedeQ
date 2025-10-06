@@ -73,11 +73,11 @@ a {
   text-transform: capitalize;
 }
 
-.translateion {
-  -webkit-translateion: 0.3s;
-  -moz-translateion: 0.3s;
-  -ms-translateion: 0.3s;
-  translateion: 0.3s;
+.transition {
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  transition: 0.3s;
 }
 
 .text-truncate {
@@ -255,7 +255,7 @@ a {
   position: relative;
   height: $main-toolbar-height;
   /*height: auto;*/
-  translateion: 0.2s;
+  transition: 0.2s;
   z-index: 9;
   box-shadow: none;
 }
@@ -410,7 +410,7 @@ main.content-offset-to-top {
   &.main-toolbar-fixed {
     #main-toolbar {
       position: fixed;
-      top: 0;
+      top: 0px;
       width: 100%;
     }
 
@@ -499,7 +499,6 @@ main.content-offset-to-top {
 
   button {
     min-width: 120px;
-
     &.search-btn .mat-button-wrapper {
       display: flex;
       align-items: center;
@@ -655,7 +654,7 @@ main.content-offset-to-top {
 /******* Account *******/
 .account {
   .mat-drawer {
-    width: $sidenav-width;
+    width: 280px;
     border: 0 !important;
     box-shadow: none !important;
     background-color: transparent !important;
@@ -818,6 +817,44 @@ main.content-offset-to-top {
   }
 
 }
+
+
+/******* Carousel *******/
+button.swipe-arrow {
+  position: absolute;
+  top: 50%;
+  margin-top: -22px;
+  z-index: 10;
+  background-image: none !important;
+
+  &.transparent {
+    background: transparent !important;
+    box-shadow: none;
+  }
+}
+
+.swiper-pagination.white .swiper-pagination-bullet {
+  background: #fff;
+}
+
+.swiper-pagination-bullet-active {
+  width: 10px;
+  height: 10px;
+  vertical-align: -1px;
+}
+
+.carousel-outer {
+  margin: -2px;
+  padding: 2px;
+}
+
+.swiper-button-prev:after,
+.swiper-container-rtl .swiper-button-next:after,
+.swiper-button-next:after,
+.swiper-container-rtl .swiper-button-prev:after {
+  content: none;
+}
+
 
 /******* Section *******/
 .section {
@@ -1044,8 +1081,8 @@ main.content-offset-to-top {
 .ps__rail-x {
   display: none;
   opacity: 0;
-  translateion: background-color .2s linear, opacity .2s linear;
-  -webkit-translateion: background-color .2s linear, opacity .2s linear;
+  transition: background-color .2s linear, opacity .2s linear;
+  -webkit-transition: background-color .2s linear, opacity .2s linear;
   height: 9px;
   bottom: 0;
   position: absolute;
@@ -1054,8 +1091,8 @@ main.content-offset-to-top {
 .ps__rail-y {
   display: none;
   opacity: 0;
-  translateion: background-color .2s linear, opacity .2s linear;
-  -webkit-translateion: background-color .2s linear, opacity .2s linear;
+  transition: background-color .2s linear, opacity .2s linear;
+  -webkit-transition: background-color .2s linear, opacity .2s linear;
   width: 9px;
   right: 0;
   left: auto !important;
@@ -1089,8 +1126,8 @@ main.content-offset-to-top {
 .ps__thumb-x {
   background-color: #aaa;
   border-radius: 6px;
-  translateion: background-color .2s linear, height .2s ease-in-out;
-  -webkit-translateion: background-color .2s linear, height .2s ease-in-out;
+  transition: background-color .2s linear, height .2s ease-in-out;
+  -webkit-transition: background-color .2s linear, height .2s ease-in-out;
   height: 4px;
   bottom: 1px;
   position: absolute;
@@ -1099,8 +1136,8 @@ main.content-offset-to-top {
 .ps__thumb-y {
   background-color: #aaa;
   border-radius: 6px;
-  translateion: background-color .2s linear, width .2s ease-in-out;
-  -webkit-translateion: background-color .2s linear, width .2s ease-in-out;
+  transition: background-color .2s linear, width .2s ease-in-out;
+  -webkit-transition: background-color .2s linear, width .2s ease-in-out;
   width: 4px;
   right: 1px;
   position: absolute;
