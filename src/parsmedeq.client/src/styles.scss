@@ -8,6 +8,8 @@
 @use 'assets/fonts/alborzchem/alborzchem';
 @use './app/theme/styles/variables' as *;
 @use 'ngx-toastr/toastr.css';
+@use 'ngx-owl-carousel-o/lib/styles/scss/owl.carousel' as owl;
+@use 'ngx-owl-carousel-o/lib/styles/scss/owl.theme.default' as owl-theme;
 
 .single-line {
   white-space: nowrap;
