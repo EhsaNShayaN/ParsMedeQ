@@ -819,44 +819,6 @@ main.content-offset-to-top {
 
 }
 
-
-/******* Carousel *******/
-button.swipe-arrow {
-  position: absolute;
-  top: 50%;
-  margin-top: -22px;
-  z-index: 10;
-  background-image: none !important;
-
-  &.transparent {
-    background: transparent !important;
-    box-shadow: none;
-  }
-}
-
-.swiper-pagination.white .swiper-pagination-bullet {
-  background: #fff;
-}
-
-.swiper-pagination-bullet-active {
-  width: 10px;
-  height: 10px;
-  vertical-align: -1px;
-}
-
-.carousel-outer {
-  margin: -2px;
-  padding: 2px;
-}
-
-.swiper-button-prev:after,
-.swiper-container-rtl .swiper-button-next:after,
-.swiper-button-next:after,
-.swiper-container-rtl .swiper-button-prev:after {
-  content: none;
-}
-
-
 /******* Section *******/
 .section {
   position: relative;

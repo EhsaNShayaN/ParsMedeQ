@@ -154,25 +154,14 @@
       }
     }
   }
-
-  .header-carousel .slide-info .mat-mdc-card {
-    background: rgba(mat.m2-get-color-from-palette($background, card), 0.85);
-
-    &:hover {
-      background: mat.m2-get-color-from-palette($background, card);
-    }
-  }
-
   .user-menu .user-info {
     color: mat.m2-get-color-from-palette($foreground, text);
   }
-
   main.content-offset-to-top {
     .main-content-header {
       border-top: 5px solid mat.m2-get-color-from-palette($primary);
     }
   }
-
   .map-info-window {
     .si-content-wrapper {
       padding: 2px;
@@ -217,7 +206,6 @@
       }
     }
   }
-
   .property-item .title a,
   .compare-item .title a {
     color: mat.m2-get-color-from-palette($foreground, text);
@@ -230,17 +218,9 @@
   .compare-item .details .item {
     border-bottom: 1px dotted mat.m2-get-color-from-palette($foreground, divider);
   }
-
-  .small-carousel .swiper-slide.active-thumb img {
-    border-color: mat.m2-get-color-from-palette($primary);
-  }
-
-
   .ps__thumb-y {
     background-color: mat.m2-get-color-from-palette($primary, 900);
   }
-
-
   .active-link {
     background-color: mat.m2-get-color-from-palette($primary);
     color: #fff;
@@ -258,19 +238,13 @@
       }
     }
   }
-
-
-  .section .section-title:after,
-  .section.testimonials .swiper-pagination-bullet-active {
+  .section .section-title:after, .section.testimonials {
     background-color: mat.m2-get-color-from-palette($primary);
   }
-
-
   .custom-table.mat-mdc-table .mat-mdc-header-row,
   .custom-table.mat-table .mat-mdc-row {
     border-color: mat.m2-get-color-from-palette($foreground, divider);
   }
-
   .submit-property .step-section,
   .edit-property .step-section {
     background: rgba(mat.m2-get-color-from-palette($background, background), 0.7);

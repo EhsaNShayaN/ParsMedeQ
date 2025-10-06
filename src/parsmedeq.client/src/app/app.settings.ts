@@ -5,9 +5,7 @@ export class Settings {
               public theme: string,
               public toolbar: number,
               public stickyMenuToolbar: boolean,
-              public header: string,
               public rtl: boolean,
-              public searchPanelVariant: number,
               public mainToolbarFixed: boolean,
               public contentOffsetToTop: boolean,
               public loadMore: {
@@ -37,9 +35,7 @@ export class AppSettings {
     'green-custom',      // blue, blue-dark, green, red, green-custom, pink, purple, grey, orange-dark
     1,           // 1 or 2 or 3
     true,        // true = sticky, false = not sticky
-    'carousel',     // default, image, carousel, map, video
     true,       // true = rtl, false = ltr
-    2,           //  1, 2  or 3
     false,
     false,
     {

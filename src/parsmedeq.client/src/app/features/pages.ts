@@ -12,8 +12,6 @@ import {PureComponent} from '../pure-component';
 export class Pages extends PureComponent {
   @ViewChild('sidenav') sidenav: any;
   public toolbarTypeOption: number;
-  public headerTypeOption: string;
-  public searchPanelVariantOption: number;
   public showBackToTop = false;
   public scrolledCount = 0;
   public settings: Settings;
@@ -23,8 +21,6 @@ export class Pages extends PureComponent {
     super();
     this.settings = this.appSettings.settings;
     this.toolbarTypeOption = this.settings.toolbar;
-    this.headerTypeOption = this.settings.header;
-    this.searchPanelVariantOption = this.settings.searchPanelVariant;
   }
 
   @HostListener('window:scroll') onWindowScroll() {
