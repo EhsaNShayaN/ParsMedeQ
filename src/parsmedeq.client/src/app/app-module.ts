@@ -32,7 +32,6 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {BidiModule} from '@angular/cdk/bidi';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AuthGuard} from './core/guards/auth.guard';
-import {SliderComponent} from './shared/components/slider/slider.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -53,7 +52,6 @@ export function tokenGetter() {
     Toolbar,
     SocialIcons,
     UserMenu,
-    SliderComponent,
     ////////////////////////////
     Lang,
     Header,
