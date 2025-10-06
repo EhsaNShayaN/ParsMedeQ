@@ -218,11 +218,6 @@
   .compare-item .details .item {
     border-bottom: 1px dotted mat.m2-get-color-from-palette($foreground, divider);
   }
-
-  .small-carousel .swiper-slide.active-thumb img {
-    border-color: mat.m2-get-color-from-palette($primary);
-  }
-
   .ps__thumb-y {
     background-color: mat.m2-get-color-from-palette($primary, 900);
   }
@@ -242,10 +237,6 @@
         color: mat.m2-get-color-from-palette($primary);
       }
     }
-  }
-  .section .section-title:after,
-  .section.testimonials .swiper-pagination-bullet-active {
-    background-color: mat.m2-get-color-from-palette($primary);
   }
   .section .section-title:after, .section.testimonials {
     background-color: mat.m2-get-color-from-palette($primary);
