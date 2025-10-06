@@ -8,6 +8,7 @@
 @use 'assets/fonts/alborzchem/alborzchem';
 @use './app/theme/styles/variables' as *;
 @use 'ngx-toastr/toastr.css';
+@use 'swiper/swiper-bundle.min.css';
 
 .single-line {
   white-space: nowrap;

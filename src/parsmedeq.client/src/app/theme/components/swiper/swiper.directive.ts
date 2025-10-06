@@ -147,6 +147,11 @@ export class SwiperDirective implements AfterViewInit, OnDestroy, DoCheck, OnCha
       };
     }
 
+    // Ensure controller object exists to avoid accessing properties on undefined in Swiper internals
+    if (!params.controller) {
+      params.controller = {} as any;
+    }
+
     if (this.disabled) {
       params.allowSlidePrev = false;
       params.allowSlideNext = false;
@@ -165,7 +170,6 @@ export class SwiperDirective implements AfterViewInit, OnDestroy, DoCheck, OnCha
         }
       }
     };
-
     this.zone.runOutsideAngular(() => {
       this.instance = new Swiper(this.elementRef.nativeElement, params);
     });
@@ -205,7 +209,19 @@ export class SwiperDirective implements AfterViewInit, OnDestroy, DoCheck, OnCha
   ngOnDestroy(): void {
     if (this.instance) {
       this.zone.runOutsideAngular(() => {
-        this.instance.destroy(true, this.instance.initialized || false);
+        try {
+          // Avoid loop teardown touching missing DOM when component is being removed
+          if (this.instance.params && this.instance.params.loop) {
+            this.instance.params.loop = false;
+          }
+
+          if (this.instance.initialized) {
+            // Do not attempt to clean styles when DOM may be gone
+            this.instance.destroy(false, true);
+          }
+        } catch {
+          // Swallow errors from Swiper internals during teardown
+        }
       });
 
       this.instance = null;
@@ -270,11 +286,20 @@ export class SwiperDirective implements AfterViewInit, OnDestroy, DoCheck, OnCha
 
   public update(): void {
     setTimeout(() => {
-      if (this.instance) {
-        this.zone.runOutsideAngular(() => {
-          this.instance.update();
-        });
+      const inst: any = this.instance as any;
+      if (!inst || inst.destroyed || !inst.el || !inst.wrapperEl || !inst.el.children) {
+        return;
       }
+      if (!inst.initialized) {
+        return;
+      }
+      this.zone.runOutsideAngular(() => {
+        try {
+          inst.update();
+        } catch {
+          // Ignore update errors when DOM is in flux
+        }
+      });
     }, 0);
   }
 
@@ -287,7 +312,7 @@ export class SwiperDirective implements AfterViewInit, OnDestroy, DoCheck, OnCha
   }
 
   public setIndex(index: number, speed?: number, silent?: boolean): void {
-    if (!this.instance) {
+    if (!this.instance || !(this.instance as any).wrapperEl) {
       this.initialIndex = index;
     } else {
       let realIndex = index * this.instance.params.slidesPerGroup;

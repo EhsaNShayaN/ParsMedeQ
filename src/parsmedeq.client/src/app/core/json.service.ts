@@ -1,7 +1,7 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {AppSettings} from '../../../../app/app.settings';
 import {Observable} from 'rxjs';
+import {TranslateService} from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +10,8 @@ export class JsonService {
   public url = '/assets/data/';
 
   constructor(private http: HttpClient,
-              private appSettings: AppSettings) {
-    this.url += this.appSettings.settings.lang + '/';
+              private translateService: TranslateService) {
+    this.url += this.translateService.getDefaultLang() + '/';
   }
 
   public getFirstResult() {

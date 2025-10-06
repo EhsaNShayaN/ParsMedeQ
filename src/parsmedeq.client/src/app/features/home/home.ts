@@ -1,4 +1,6 @@
 import {Component} from '@angular/core';
+import {BaseComponent} from '../../base-component';
+import {JsonService} from '../../core/json.service';
 
 @Component({
   selector: 'app-home',
@@ -6,5 +8,13 @@ import {Component} from '@angular/core';
   templateUrl: './home.html',
   styleUrl: './home.scss'
 })
-export class Home {
+export class Home extends BaseComponent {
+  public slides: any[] = [];
+
+  constructor(private jsonService: JsonService) {
+    super();
+    this.jsonService.getHomeCarouselSlides().subscribe(res => {
+      this.slides = res;
+    });
+  }
 }
