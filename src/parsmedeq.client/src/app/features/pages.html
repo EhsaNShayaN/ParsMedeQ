@@ -12,7 +12,7 @@
     <header [ngClass]="'toolbar-' + settings.toolbar" [class.main-toolbar-fixed]="settings.mainToolbarFixed">
       <app-toolbar (onMenuIconClick)="sidenav.toggle()"></app-toolbar>
     </header>
-    <main [class.content-offset-to-top]="settings.contentOffsetToTop" class="theme-container my-2">
+    <main [class.content-offset-to-top]="settings.contentOffsetToTop" class="my-20">
       <router-outlet (activate)="activateComponent($event)"></router-outlet>
     </main>
     <div class="sticky-footer-helper" fxFlex="grow"></div>

@@ -1,0 +1,26 @@
+<div class="image-slider" *ngIf="slides?.length">
+  <div class="slider-viewport" [style.background]="slides[currentIndex]?.back || 'transparent'">
+    <button class="nav prev" type="button" (click)="prev()" [attr.aria-label]="'Previous'">
+      <span class="material-icons">chevron_left</span>
+    </button>
+
+    <div class="slide">
+      <img class="slide-image" [src]="slides[currentIndex]?.image" [alt]="slides[currentIndex]?.title || 'slide'">
+      <div class="slide-caption">
+        <h3 class="slide-title">{{ slides[currentIndex]?.title }}</h3>
+        <p class="slide-description">{{ slides[currentIndex]?.description }}</p>
+      </div>
+    </div>
+
+    <button class="nav next" type="button" (click)="next()" [attr.aria-label]="'Next'">
+      <span class="material-icons">chevron_right</span>
+    </button>
+  </div>
+
+  <div class="dots" *ngIf="slides.length > 1">
+    <button *ngFor="let s of slides; let i = index" type="button" class="dot"
+            [class.active]="i === currentIndex" (click)="goTo(i)" [attr.aria-label]="'Go to slide ' + (i + 1)"></button>
+  </div>
+</div>
+
+
