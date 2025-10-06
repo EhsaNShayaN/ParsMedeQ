@@ -37,6 +37,8 @@ import {MatDialogActions, MatDialogContent, MatDialogTitle} from '@angular/mater
 import {CommonModule} from '@angular/common';
 import {TreeCategoriesComponent} from './tree-categories/tree-categories.component';
 import {SliderComponent} from './components/slider/slider.component';
+import {SwiperModule} from '../theme/components/swiper/swiper.module';
+import {HeaderCarouselComponent} from './header-carousel/header-carousel.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +57,7 @@ import {SliderComponent} from './components/slider/slider.component';
     ConfirmDialogComponent,
     TreeCategoriesComponent,
     SliderComponent,
+    HeaderCarouselComponent,
   ],
   imports: [
     CommonModule,
@@ -116,6 +119,7 @@ import {SliderComponent} from './components/slider/slider.component';
     DefaultLayoutAlignDirective,
     //////////////////////
     TreeViewComponent,
+    SwiperModule,
   ],
   exports: [
     FormsModule,
@@ -179,6 +183,8 @@ import {SliderComponent} from './components/slider/slider.component';
     ConfirmDialogComponent,
     TreeCategoriesComponent,
     SliderComponent,
+    SwiperModule,
+    HeaderCarouselComponent,
   ],
   providers: [
     CurrencyFormatterPipe,
