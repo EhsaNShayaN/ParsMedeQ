@@ -1,7 +1,7 @@
 <div class="header-carousel-wrapper">
   <div class="header-carousel" [class.offset-bottom]="contentOffsetToTop" [class.fullscreen]="fullscreen"
        [ngClass]="'toolbar-' + settings.toolbar">
-    <div class="swiper-container h-100" [swiper]="config" (indexChange)="onIndexChange($event)" #swiperDirective>
+    <div class="swiper-container h-100" [swiper]="config" (indexChange)="onIndexChange($event)" #swiperDirective="ngxSwiper">
       <div class="swiper-wrapper h-100">
         <div *ngFor="let slide of slides;" class="swiper-slide">
           <div [attr.data-background]="slide.image" class="slide-item swiper-lazy">

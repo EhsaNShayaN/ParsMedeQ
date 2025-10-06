@@ -278,10 +278,19 @@ export class SwiperDirective implements AfterViewInit, OnDestroy, DoCheck, OnCha
     if (!this.instance) {
       this.initialIndex = index;
     } else {
-      let realIndex = index * this.instance.params.slidesPerGroup;
+      const params: any = this.instance.params || {};
+      const slidesPerGroup: number = typeof params.slidesPerGroup === 'number' && !isNaN(params.slidesPerGroup)
+        ? params.slidesPerGroup
+        : 1;
 
-      if (this.instance.params.loop) {
-        realIndex += this.instance.loopedSlides;
+      let realIndex = index * slidesPerGroup;
+
+      if (params.loop) {
+        const loopedSlides: number = typeof (this.instance as any).loopedSlides === 'number' && !isNaN((this.instance as any).loopedSlides)
+          ? (this.instance as any).loopedSlides
+          : 0;
+
+        realIndex += loopedSlides;
       }
 
       this.zone.runOutsideAngular(() => {
