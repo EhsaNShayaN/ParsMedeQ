@@ -19,6 +19,7 @@ export class BasePageResource extends BaseComponent implements AfterViewInit, On
   ltr = '';
   tabIndex: string = '';
   top = false;
+  id: number = 0;
 
   constructor(private tableId: number) {
     super();
@@ -43,12 +44,13 @@ export class BasePageResource extends BaseComponent implements AfterViewInit, On
 
   ngAfterViewInit(): void {
     this.sub = this.activatedRoute.params.subscribe(params => {
-      this.getArticleById(Number(params['id']));
+      this.id = Number(params['id']);
+      this.getResourceById();
     });
   }
 
-  public getArticleById(id: number) {
-    this.restApiService.getResource({id: id, tableId: this.tableId}).subscribe((d: BaseResult<Resource>) => {
+  public getResourceById() {
+    this.restApiService.getResource({id: this.id, tableId: this.tableId}).subscribe((d: BaseResult<Resource>) => {
       this.item = d.data;
       this.setTitle(this.item.title);
       this.setMetaDescription(this.item.abstract);

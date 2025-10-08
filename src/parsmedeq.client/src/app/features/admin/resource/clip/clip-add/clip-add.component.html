@@ -51,9 +51,9 @@
           </div>
           <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
             <div class="border-radius border pad">
-              <mat-label class="ml-2 gray-color">{{ 'FILE' | translate }}</mat-label>
+              <mat-label class="ml-2 gray-color">{{ 'CLIP' | translate }}</mat-label>
               <input (change)="handleFileInput($event.target)" class="py-1" formControlName="fileId"
-                     [placeholder]="'FILE' | translate" type="file"/>
+                     [placeholder]="'CLIP' | translate" type="file"/>
               <button *ngIf="oldFileId" mat-icon-button (click)="deleteFile()" class="mx-3" color="primary"
                       [matTooltip]="('DELETE' | translate) + ' ' + ('FILE' | translate)" matTooltipPosition="after" type="button">
                 <mat-icon>close</mat-icon>

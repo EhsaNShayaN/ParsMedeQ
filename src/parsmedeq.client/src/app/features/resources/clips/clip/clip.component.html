@@ -14,30 +14,39 @@
         <div [ngClass]="{'mr' : (item?.anchors?.length ?? 0) > 0}">
           <div fxLayout="row wrap" class="agent-wrapper">
             <div fxLayout="row wrap" fxFlex="100" fxFlex.gt-sm="100" class="p-3 mx-4">
-              <div fxFlex="100" fxFlex.gt-sm="25" class="p-3 position-relative">
-                @if ((item?.price ?? 0) > 0) {
-                  <div fxLayout="row wrap" class="property-status left-0 px-3">
-                    <span class="background-color bg-green">vip</span>
+              <div fxFlex="100" fxFlex.gt-sm="35" class="p-3 position-relative">
+                <div>
+                  @if ((item?.price ?? 0) > 0) {
+                    <div fxLayout="row wrap" class="property-status left-0 px-3">
+                      <span class="background-color bg-green">vip</span>
+                    </div>
+                  }
+                  <img [src]="item?.image" [alt]="item?.title" class="w-100">
+                  <!--<app-download-management *ngIf="item?.registered || (item?.price ?? 0) === 0" [id]="item.id"
+                                           [price]="item.price" [tableId]="Tables.Clip"></app-download-management>-->
+                </div>
+                <div>
+                  <h2>{{ item?.title }}</h2>
+                  <ng-container *ngIf="item?.description">
+                    <p [innerHTML]="item?.description | safeHtml" class="text-justify"></p>
+                  </ng-container>
+                  <div *ngIf="item?.keywords" class="mt-1">
+                    <h3 class="my-2">{{ 'KEYWORDS' | translate }}:</h3>
+                    <div fxLayout="row wrap mt-2">
+                      @for (key of item.keywords.split(','); track key) {
+                        <div class="property-status position-relative ml-2 mt-3">
+                          <span class="background-color bg-warn px-3 py-2">{{ key }}</span>
+                        </div>
+                      }
+                    </div>
                   </div>
-                }
-                <img [src]="item?.image" [alt]="item?.title" class="w-100">
-                <!--<app-download-management *ngIf="item?.registered || (item?.price ?? 0) === 0" [id]="item.id"
-                                         [price]="item.price" [tableId]="Tables.Clip"></app-download-management>-->
+                </div>
               </div>
-              <div fxFlex="100" fxFlex.gt-sm="75" class="p-3">
-                <h2>{{ item?.title }}</h2>
-                <ng-container *ngIf="item?.description">
-                  <p [innerHTML]="item?.description | safeHtml" class="text-justify"></p>
-                </ng-container>
-                <div *ngIf="item?.keywords" class="mt-1">
-                  <h3 class="my-2">{{ 'KEYWORDS' | translate }}:</h3>
-                  <div fxLayout="row wrap mt-2">
-                    @for (key of item.keywords.split(','); track key) {
-                      <div class="property-status position-relative ml-2 mt-3">
-                        <span class="background-color bg-warn px-3 py-2">{{ key }}</span>
-                      </div>
-                    }
-                  </div>
+              <div fxFlex="100" fxFlex.gt-sm="65" class="p-3">
+                <div class="=w-100 bg-primary  h-100">
+                  <video controls [src]="getFilePath(item?.fileId)" class="w-100 h-100">
+                    Your browser does not support the video tag.
+                  </video>
                 </div>
               </div>
             </div>
