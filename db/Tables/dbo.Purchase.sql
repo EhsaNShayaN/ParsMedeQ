@@ -5,7 +5,7 @@ CREATE TABLE [dbo].[Purchase]
 [RelatedId] [int] NOT NULL,
 [TableId] [int] NOT NULL,
 [Purchased] [bit] NOT NULL,
-[Data] [nvarchar] (max) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+[Data] [nvarchar] (4000) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
 [CreationDate] [datetime] NOT NULL
 ) ON [PRIMARY]
 GO

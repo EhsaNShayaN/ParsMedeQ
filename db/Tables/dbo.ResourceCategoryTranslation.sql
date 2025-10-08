@@ -4,7 +4,7 @@ CREATE TABLE [dbo].[ResourceCategoryTranslation]
 [LanguageCode] [varchar] (10) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 [ResourceCategoryId] [int] NOT NULL,
 [Title] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-[Description] [nvarchar] (max) COLLATE SQL_Latin1_General_CP1_CI_AS NULL
+[Description] [nvarchar] (4000) COLLATE SQL_Latin1_General_CP1_CI_AS NULL
 ) ON [PRIMARY]
 GO
 ALTER TABLE [dbo].[ResourceCategoryTranslation] ADD CONSTRAINT [PK_ResourceCategoryTranslation_1] PRIMARY KEY CLUSTERED ([Id]) ON [PRIMARY]
