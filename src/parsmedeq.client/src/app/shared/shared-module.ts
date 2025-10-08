@@ -36,7 +36,6 @@ import {ConfirmDialogComponent} from './dialogs/confirm-dialog/confirm-dialog.co
 import {MatDialogActions, MatDialogContent, MatDialogTitle} from '@angular/material/dialog';
 import {CommonModule} from '@angular/common';
 import {TreeCategoriesComponent} from './tree-categories/tree-categories.component';
-import {ImageSliderComponent} from './components/image-slider/image-slider';
 import {SwiperModule} from '../theme/components/swiper/swiper.module';
 import {HeaderCarouselComponent} from './header-carousel/header-carousel.component';
 
@@ -56,7 +55,6 @@ import {HeaderCarouselComponent} from './header-carousel/header-carousel.compone
     CartItemControlComponent,
     ConfirmDialogComponent,
     TreeCategoriesComponent,
-    ImageSliderComponent,
     HeaderCarouselComponent,
   ],
   imports: [
@@ -182,7 +180,6 @@ import {HeaderCarouselComponent} from './header-carousel/header-carousel.compone
     MultiFileUploadComponent,
     ConfirmDialogComponent,
     TreeCategoriesComponent,
-    ImageSliderComponent,
     SwiperModule,
     HeaderCarouselComponent,
   ],
