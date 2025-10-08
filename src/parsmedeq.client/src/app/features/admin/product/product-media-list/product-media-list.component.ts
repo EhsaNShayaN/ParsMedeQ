@@ -20,7 +20,7 @@ export class ProductMediaListComponent extends BaseComponent implements OnInit, 
 
   constructor(public formBuilder: UntypedFormBuilder,
               private activatedRoute: ActivatedRoute,
-              private toaster: ToastrService) {
+              private toastr: ToastrService) {
     super();
     this.form = this.formBuilder.group({
       gallery: [null, Validators.required]
@@ -47,10 +47,10 @@ export class ProductMediaListComponent extends BaseComponent implements OnInit, 
   deleteImage(productId: number, mediaId: number) {
     this.restApiService.deleteProductMedia({productId, mediaId}).subscribe((res: BaseResult<AddResult>) => {
       if (res.data.changed) {
-        this.toaster.success(this.getTranslateValue('THE_OPERATION_WAS_SUCCESSFUL'), '', {});
+        this.toastr.success(this.getTranslateValue('THE_OPERATION_WAS_SUCCESSFUL'), '', {});
         this.getItems();
       } else {
-        this.toaster.error(this.getTranslateValue('UNKNOWN_ERROR'), '', {});
+        this.toastr.error(this.getTranslateValue('UNKNOWN_ERROR'), '', {});
       }
     });
   }
@@ -64,13 +64,13 @@ export class ProductMediaListComponent extends BaseComponent implements OnInit, 
     }
     this.restApiService.addProductMedia(this.productId, values.gallery.new).subscribe((res: BaseResult<AddResult>) => {
       if (res.data.changed) {
-        this.toaster.success(this.getTranslateValue('THE_OPERATION_WAS_SUCCESSFUL'), '', {});
+        this.toastr.success(this.getTranslateValue('THE_OPERATION_WAS_SUCCESSFUL'), '', {});
         this.form.reset();
         this.form.markAsPristine();
         this.form.markAsUntouched();
         this.getItems();
       } else {
-        this.toaster.error(this.getTranslateValue('UNKNOWN_ERROR'), '', {});
+        this.toastr.error(this.getTranslateValue('UNKNOWN_ERROR'), '', {});
       }
     });
   }

@@ -31,7 +31,7 @@ export class Comments extends PureComponent implements OnInit, DoCheck {
   public count: number = 12;
   public pagination: Pagination = new Pagination(1, this.count, null, 2, 0, 0);
 
-  constructor(private toaster: ToastrService,
+  constructor(private toastr: ToastrService,
               public appSettings: AppSettings,
               public fb: UntypedFormBuilder,
               public authService: AuthService) {
@@ -104,7 +104,7 @@ export class Comments extends PureComponent implements OnInit, DoCheck {
     if (this.commentForm?.valid) {
       /*this.restClientService.addComment(values).subscribe((c: Comment) => {
         this.items.splice(0, 0, c);
-        this.toaster.success('نظر شما با موفقیت ثبت گردید.', '', {});
+        this.toastr.success('نظر شما با موفقیت ثبت گردید.', '', {});
       });*/
     }
   }

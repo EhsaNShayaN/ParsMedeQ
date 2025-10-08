@@ -33,7 +33,7 @@ export class ProductAddComponent extends BaseComponent implements OnInit, OnDest
 
   constructor(public formBuilder: UntypedFormBuilder,
               private activatedRoute: ActivatedRoute,
-              private toaster: ToastrService) {
+              private toastr: ToastrService) {
     super();
     this.lang = this.translateService.getDefaultLang();
   }
@@ -123,7 +123,7 @@ export class ProductAddComponent extends BaseComponent implements OnInit, OnDest
     delete values.imagePath;
     delete values.fileId;
     this.restApiService.addProduct(values, this.image, this.file).subscribe((d: BaseResult<AddResult>) => {
-      this.toaster.success(this.getTranslateValue('THE_OPERATION_WAS_SUCCESSFUL'), '', {});
+      this.toastr.success(this.getTranslateValue('THE_OPERATION_WAS_SUCCESSFUL'), '', {});
       if (!this.editItem) {
         //this.formDir.resetForm();
       }

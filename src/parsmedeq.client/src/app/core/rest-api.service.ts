@@ -76,6 +76,27 @@ export class RestApiService {
     );
   }
 
+  deleteResourceCategory(id: number): Observable<any> {
+    const model = {id};
+    return this.http.post<BaseResult<AddResult>>(`${endpoint()}resource/category/delete`, model).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  deleteProduct(id: number): Observable<any> {
+    const model = {id};
+    return this.http.post<BaseResult<AddResult>>(`${endpoint()}product/delete`, model).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  deleteProductCategory(id: number): Observable<any> {
+    const model = {id};
+    return this.http.post<BaseResult<AddResult>>(`${endpoint()}product/category/delete`, model).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   ////////////////////////
 
   getProductCategories(): Observable<any> {

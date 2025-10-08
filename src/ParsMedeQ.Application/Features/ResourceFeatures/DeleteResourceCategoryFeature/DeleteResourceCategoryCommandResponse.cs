@@ -1,0 +1,2 @@
+﻿namespace ParsMedeQ.Application.Features.ResourceFeatures.DeleteResourceCategoryFeature;
+public sealed record DeleteResourceCategoryCommandResponse(bool Changed);

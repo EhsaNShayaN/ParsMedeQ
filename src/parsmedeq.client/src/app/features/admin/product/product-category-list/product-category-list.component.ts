@@ -4,8 +4,11 @@ import {ProductCategoriesResponse, ProductCategory} from '../../../../core/model
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {tap} from 'rxjs';
-import {Product} from '../../../../core/models/ProductResponse';
 import {Helpers} from '../../../../core/helpers';
+import {AddResult, BaseResult} from '../../../../core/models/BaseResult';
+import {DialogService} from '../../../../core/services/dialog-service';
+import {ToastrService} from 'ngx-toastr';
+import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-product-category-list',
@@ -18,12 +21,14 @@ export class ProductCategoryListComponent extends BaseComponent implements OnIni
   languages: string[] = [];
   colors: string[] = ['warn', 'primary', 'success', 'secondary', 'info', 'danger'];
   ///////////
-  dataSource: ProductCategory[] = [];
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator | undefined;
-  @ViewChild(MatSort, {static: true}) sort: MatSort | undefined;
+  dataSource!: MatTableDataSource<ProductCategory>;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator | null = null;
+  @ViewChild(MatSort, {static: true}) sort: MatSort | null = null;
   totalCount = 0;
 
-  constructor(private helpers: Helpers) {
+  constructor(private helpers: Helpers,
+              private dialogService: DialogService,
+              private toastr: ToastrService,) {
     super();
     this.languages = this.translateService.getLangs();
   }
@@ -34,17 +39,23 @@ export class ProductCategoryListComponent extends BaseComponent implements OnIni
   }
 
   getServerData() {
-    this.restApiService.getProductCategories().subscribe((resp: ProductCategoriesResponse) => {
-      if (resp?.data) {
-        this.dataSource = resp.data;
-        this.totalCount = resp.data.length;
-        this.dataSource.forEach(s => {
+    this.restApiService.getProductCategories().subscribe((res: ProductCategoriesResponse) => {
+      if (res?.data) {
+        this.initDataSource(res);
+        /*this.dataSource.forEach(s => {
           if (s.parentId) {
             s.parentTitle = this.dataSource.find(d => d.id === s.parentId)?.title ?? '';
           }
-        });
+        });*/
       }
     });
+  }
+
+  initDataSource(res: ProductCategoriesResponse) {
+    this.totalCount = res.data.length;
+    this.dataSource = new MatTableDataSource<ProductCategory>(res.data);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   ngAfterViewInit() {
@@ -55,43 +66,27 @@ export class ProductCategoryListComponent extends BaseComponent implements OnIni
       .subscribe();
   }
 
-  remove(property: Product) {
-    /*const index: number = this.dataSource.data.indexOf(property);
+  remove(item: any) {
+    const index: number = this.dataSource.data.indexOf(item);
     if (index !== -1) {
-      const message = this.appService.getTranslateValue('MESSAGE.SURE_DELETE') ?? '';
-      let dialogRef = this.dialogService.openConfirmDialog('', message);
+      let dialogRef = this.dialogService.openConfirmDialog('', this.getTranslateValue('SURE_DELETE'));
       dialogRef.afterClosed().subscribe(dialogResult => {
         if (dialogResult) {
-          this.dataSource.data.splice(index, 1);
-          this.initDataSource(this.dataSource.data);
+          this.restApiService.deleteProductCategory(item.id).subscribe({
+            next: (response: BaseResult<AddResult>) => {
+              if (response.data.changed) {
+                this.dataSource.data.splice(index, 1);
+                this.dataSource._updateChangeSubscription();
+                this.toastr.success(this.getTranslateValue('ITEM_DELETED_SUCCESSFULLY'), '', {});
+              } else {
+                this.toastr.error(this.getTranslateValue('THIS_ITEM_CANNOT_BE_DELETED_PLEASE_DELETE_ITS_SUBCATEGORIES_FIRST'), '', {});
+              }
+            }
+          });
         }
       });
-    }*/
+    }
   }
-
-  getColName0(column: string) {
-    column = column.toLowerCase();
-    if (column === 'title') {
-      column = 'عنوان';
-    }
-    if (column === 'parentid') {
-      column = 'دسته بندی';
-    }
-    if (column === 'downloadcount') {
-      column = 'تعداد دانلود';
-    }
-    if (column === 'expirationdate') {
-      column = 'تاریخ انقضا';
-    }
-    if (column === 'creationdate') {
-      column = 'تاریخ ایجاد';
-    }
-    if (column === 'actions') {
-      column = 'عملیات';
-    }
-    return column.toUpperCase();
-  }
-
 
   getColName(column: string) {
     column = column.toUpperCase();

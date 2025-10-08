@@ -10,6 +10,7 @@ public sealed class ResourceEndpoint : ApiEndpointBase
 
     public EndpointInfo AddResource { get; private set; }
     public EndpointInfo DeleteResource { get; private set; }
+    public EndpointInfo DeleteResourceCategory { get; private set; }
     public EndpointInfo EditResource { get; private set; }
     public EndpointInfo Resources { get; private set; }
     public EndpointInfo Resource { get; private set; }
@@ -32,6 +33,13 @@ public sealed class ResourceEndpoint : ApiEndpointBase
            this.GetUrl("delete"),
            "Delete Resource",
            "حذف خبر، مقاله و ...",
+           _tag);
+
+        DeleteResourceCategory = new EndpointInfo(
+           this.GetUrl("category/delete"),
+           this.GetUrl("category/delete"),
+           "Delete Resource Category",
+           "حذف دسته بندی خبر، مقاله و ...",
            _tag);
 
         EditResource = new EndpointInfo(

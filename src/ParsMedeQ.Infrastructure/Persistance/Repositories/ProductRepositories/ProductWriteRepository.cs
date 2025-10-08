@@ -37,8 +37,19 @@ internal sealed class ProductWriteRepository : GenericPrimitiveWriteRepositoryBa
             .Include(s => s.ProductCategoryTranslations)
             .Where(s => s.Id.Equals(id))
             .Run(q => q.FirstOrDefaultAsync(cancellationToken), PrimitiveError.Create("", "دسته بندی با شناسه مورد نظر پیدا نشد"));
+    public ValueTask<PrimitiveResult<ProductCategory>> FindCategoryWithProducts(int id, CancellationToken cancellationToken) =>
+        this.DbContext
+            .ProductCategory
+            .Include(s => s.ProductCategoryTranslations)
+            .Include(s => s.Products).ThenInclude(s => s.ProductTranslations)
+            .Where(s => s.Id.Equals(id))
+            .Run(q => q.FirstOrDefaultAsync(cancellationToken), PrimitiveError.Create("", "دسته بندی با شناسه مورد نظر پیدا نشد"));
     public ValueTask<PrimitiveResult<ProductCategory>> AddProductCategory(ProductCategory ProductCategory, CancellationToken cancellationToken) =>
         this.Add(ProductCategory);
     public ValueTask<PrimitiveResult<ProductCategory>> UpdateProductCategory(ProductCategory ProductCategory, CancellationToken cancellationToken) =>
         this.Update(ProductCategory);
+    public ValueTask<PrimitiveResult<Product>> Delete(Product product, CancellationToken cancellationToken) =>
+            this.Remove(product);
+    public ValueTask<PrimitiveResult<ProductCategory>> DeleteCategory(ProductCategory productCategory, CancellationToken cancellationToken) =>
+        this.Remove(productCategory);
 }

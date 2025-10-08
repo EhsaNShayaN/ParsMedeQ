@@ -1,5 +1,6 @@
-export interface ResourceCategoriesResponse {
-  data: ResourceCategory[];
+import { BaseResult } from "./BaseResult";
+
+export interface ResourceCategoriesResponse extends BaseResult<ResourceCategory[]> {
 }
 
 export interface ResourceCategory {

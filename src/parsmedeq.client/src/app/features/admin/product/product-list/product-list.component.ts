@@ -6,6 +6,9 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort, Sort} from '@angular/material/sort';
 import {Helpers} from '../../../../core/helpers';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import {DialogService} from '../../../../core/services/dialog-service';
+import {ToastrService} from 'ngx-toastr';
+import {AddResult, BaseResult} from '../../../../core/models/BaseResult';
 
 @Component({
   selector: 'app-product-list',
@@ -33,7 +36,9 @@ export class ProductListComponent extends BaseComponent implements OnInit {
   pageSize = 5;
   totalCount = 0;
 
-  constructor(private helpers: Helpers) {
+  constructor(private helpers: Helpers,
+              private dialogService: DialogService,
+              private toastr: ToastrService) {
     super();
     this.languages = this.translateService.getLangs();
   }
@@ -62,18 +67,26 @@ export class ProductListComponent extends BaseComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  remove(property: Product) {
-    /*const index: number = this.dataSource.data.indexOf(property);
+  remove(item: any) {
+    const index: number = this.dataSource.data.indexOf(item);
     if (index !== -1) {
-      const message = this.appService.getTranslateValue('MESSAGE.SURE_DELETE') ?? '';
-      let dialogRef = this.dialogService.openConfirmDialog('', message);
+      let dialogRef = this.dialogService.openConfirmDialog('', this.getTranslateValue('SURE_DELETE'));
       dialogRef.afterClosed().subscribe(dialogResult => {
         if (dialogResult) {
-          this.dataSource.data.splice(index, 1);
-          this.initDataSource(this.dataSource.data);
+          this.restApiService.deleteProduct(item.id).subscribe({
+            next: (response: BaseResult<AddResult>) => {
+              if (response.data.changed) {
+                this.dataSource.data.splice(index, 1);
+                this.dataSource._updateChangeSubscription();
+                this.toastr.success(this.getTranslateValue('ITEM_DELETED_SUCCESSFULLY'), '', {});
+              } else {
+                this.toastr.error(this.getTranslateValue('UNKNOWN_ERROR'), '', {});
+              }
+            }
+          });
         }
       });
-    }*/
+    }
   }
 
   onPaginateChange(event: any) {

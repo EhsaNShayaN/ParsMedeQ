@@ -1,5 +1,6 @@
-export interface ProductCategoriesResponse {
-  data: ProductCategory[];
+import {BaseResult} from './BaseResult';
+
+export interface ProductCategoriesResponse extends BaseResult<ProductCategory[]> {
 }
 
 export interface ProductCategory {

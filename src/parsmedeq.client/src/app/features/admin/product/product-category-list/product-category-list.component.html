@@ -18,7 +18,8 @@
              *ngFor="let lang of languages; let i = index">
             <mat-icon [color]="colors[i]">edit</mat-icon>
           </a>
-          <button (click)="remove(element)" class="remove" color="warn" mat-icon-button matTooltip="حذف">
+          <button mat-icon-button color="warn" (click)="remove(element)"
+                  [matTooltip]="'DELETE' | translate" class="remove">
             <mat-icon>delete</mat-icon>
           </button>
         </ng-container>

@@ -79,5 +79,6 @@
   },
   "ITEM_DELETED_SUCCESSFULLY": "Item deleted successfully",
   "VIEW": "VIEW",
-  "THE_DESIRED_ITEM_DOES_NOT_EXIST": "The desired item does not exist"
+  "THE_DESIRED_ITEM_DOES_NOT_EXIST": "The desired item does not exist",
+  "THIS_ITEM_CANNOT_BE_DELETED_PLEASE_DELETE_ITS_SUBCATEGORIES_FIRST": "This item cannot be deleted. Please delete its subcategories first."
 }

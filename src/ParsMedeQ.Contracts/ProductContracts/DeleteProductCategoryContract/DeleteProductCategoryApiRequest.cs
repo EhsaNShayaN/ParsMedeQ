@@ -1,0 +1,2 @@
+﻿namespace ParsMedeQ.Contracts.ProductContracts.DeleteProductCategoryContract;
+public readonly record struct DeleteProductCategoryApiRequest(int Id);

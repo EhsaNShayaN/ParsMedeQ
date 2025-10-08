@@ -1,0 +1,2 @@
+﻿namespace ParsMedeQ.Contracts.ResourceContracts.DeleteResourceCategoryContract;
+public readonly record struct DeleteResourceCategoryApiResponse(bool Changed);

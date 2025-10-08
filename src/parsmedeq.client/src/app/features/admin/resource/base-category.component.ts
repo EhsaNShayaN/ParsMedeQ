@@ -12,7 +12,7 @@ import {TranslateService} from '@ngx-translate/core';
 export class BaseCategoryComponent extends BaseComponent implements OnInit, OnDestroy {
   lang: string;
   tableId: number;
-  toaster = inject(ToastrService);
+  toastr = inject(ToastrService);
   formBuilder = inject(UntypedFormBuilder);
   public myForm!: UntypedFormGroup;
   @ViewChild(FormGroupDirective) formDir!: FormGroupDirective;
@@ -70,7 +70,7 @@ export class BaseCategoryComponent extends BaseComponent implements OnInit, OnDe
       values.id = this.editItem.id;
     }
     this.restApiService.addResourceCategory(values).subscribe((d: BaseResult<AddResult>) => {
-      this.toaster.success(this.getTranslateValue('THE_OPERATION_WAS_SUCCESSFUL'), '', {});
+      this.toastr.success(this.getTranslateValue('THE_OPERATION_WAS_SUCCESSFUL'), '', {});
       if (!this.editItem) {
         this.formDir.resetForm();
       }

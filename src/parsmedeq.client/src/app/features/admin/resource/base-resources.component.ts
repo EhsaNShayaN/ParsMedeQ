@@ -8,6 +8,7 @@ import {Helpers} from '../../../core/helpers';
 import {DialogService} from '../../../core/services/dialog-service';
 import {ToastrService} from 'ngx-toastr';
 import {BaseComponent} from '../../../base-component';
+import {AddResult, BaseResult} from '../../../core/models/BaseResult';
 
 @Directive()
 export class BaseResourcesComponent extends BaseComponent implements OnInit, OnDestroy {
@@ -22,7 +23,7 @@ export class BaseResourcesComponent extends BaseComponent implements OnInit, OnD
   totalCount = 0;
   helpers = inject(Helpers);
   dialogService = inject(DialogService);
-  toaster = inject(ToastrService);
+  toastr = inject(ToastrService);
 
   constructor(tableId: number) {
     super();
@@ -63,10 +64,14 @@ export class BaseResourcesComponent extends BaseComponent implements OnInit, OnD
       dialogRef.afterClosed().subscribe(dialogResult => {
         if (dialogResult) {
           this.restApiService.deleteResource(item.id).subscribe({
-            next: (response) => {
-              this.dataSource.data.splice(index, 1);
-              this.dataSource._updateChangeSubscription();
-              this.toaster.success(this.getTranslateValue('ITEM_DELETED_SUCCESSFULLY'), '', {});
+            next: (response: BaseResult<AddResult>) => {
+              if (response.data.changed) {
+                this.dataSource.data.splice(index, 1);
+                this.dataSource._updateChangeSubscription();
+                this.toastr.success(this.getTranslateValue('ITEM_DELETED_SUCCESSFULLY'), '', {});
+              } else {
+                this.toastr.error(this.getTranslateValue('UNKNOWN_ERROR'), '', {});
+              }
             }
           });
         }

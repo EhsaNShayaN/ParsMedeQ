@@ -2,14 +2,11 @@
 public sealed class DeleteResourceCommandHandler : IPrimitiveResultCommandHandler<DeleteResourceCommand, DeleteResourceCommandResponse>
 {
     private readonly IWriteUnitOfWork _writeUnitOfWork;
-    private readonly IFileService _fileService;
 
     public DeleteResourceCommandHandler(
-        IWriteUnitOfWork writeUnitOfWork,
-        IFileService fileService)
+        IWriteUnitOfWork writeUnitOfWork)
     {
         this._writeUnitOfWork = writeUnitOfWork;
-        this._fileService = fileService;
     }
 
     public async Task<PrimitiveResult<DeleteResourceCommandResponse>> Handle(DeleteResourceCommand request, CancellationToken cancellationToken) =>

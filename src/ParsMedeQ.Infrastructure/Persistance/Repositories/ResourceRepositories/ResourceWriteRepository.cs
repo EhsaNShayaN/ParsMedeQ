@@ -26,10 +26,19 @@ internal sealed class ResourceWriteRepository : GenericPrimitiveWriteRepositoryB
             .Include(s => s.ResourceCategoryTranslations)
             .Where(s => s.Id.Equals(id))
             .Run(q => q.FirstOrDefaultAsync(cancellationToken), PrimitiveError.Create("", "دسته بندی با شناسه مورد نظر پیدا نشد"));
+    public ValueTask<PrimitiveResult<ResourceCategory>> FindCategoryWithResources(int id, CancellationToken cancellationToken) =>
+        this.DbContext
+            .ResourceCategory
+            .Include(s => s.ResourceCategoryTranslations)
+            .Include(s => s.Resources).ThenInclude(s => s.ResourceTranslations)
+            .Where(s => s.Id.Equals(id))
+            .Run(q => q.FirstOrDefaultAsync(cancellationToken), PrimitiveError.Create("", "دسته بندی با شناسه مورد نظر پیدا نشد"));
     public ValueTask<PrimitiveResult<ResourceCategory>> AddResourceCategory(ResourceCategory resourceCategory, CancellationToken cancellationToken) =>
         this.Add(resourceCategory);
     public ValueTask<PrimitiveResult<ResourceCategory>> UpdateResourceCategory(ResourceCategory resourceCategory, CancellationToken cancellationToken) =>
         this.Update(resourceCategory);
     public ValueTask<PrimitiveResult<Resource>> Delete(Resource resource, CancellationToken cancellationToken) =>
             this.Remove(resource);
+    public ValueTask<PrimitiveResult<ResourceCategory>> DeleteCategory(ResourceCategory resourceCategory, CancellationToken cancellationToken) =>
+            this.Remove(resourceCategory);
 }

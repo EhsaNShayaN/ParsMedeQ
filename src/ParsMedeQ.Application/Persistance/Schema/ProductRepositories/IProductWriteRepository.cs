@@ -13,6 +13,9 @@ public interface IProductWriteRepository : IDomainRepository
     ValueTask<PrimitiveResult<ProductMedia>> DeleteProductMedia(ProductMedia ProductMedia, CancellationToken cancellationToken);
     ValueTask<PrimitiveResult<Product>> UpdateProduct(Product Product, CancellationToken cancellationToken);
     ValueTask<PrimitiveResult<ProductCategory>> FindCategoryById(int id, CancellationToken cancellationToken);
+    ValueTask<PrimitiveResult<ProductCategory>> FindCategoryWithProducts(int id, CancellationToken cancellationToken);
     ValueTask<PrimitiveResult<ProductCategory>> AddProductCategory(ProductCategory ProductCategory, CancellationToken cancellationToken);
     ValueTask<PrimitiveResult<ProductCategory>> UpdateProductCategory(ProductCategory ProductCategory, CancellationToken cancellationToken);
+    ValueTask<PrimitiveResult<Product>> Delete(Product product, CancellationToken cancellationToken);
+    ValueTask<PrimitiveResult<ProductCategory>> DeleteCategory(ProductCategory productCategory, CancellationToken cancellationToken);
 }

@@ -1,0 +1,2 @@
+﻿namespace ParsMedeQ.Application.Features.ProductFeatures.DeleteProductCategoryFeature;
+public sealed record DeleteProductCategoryCommandResponse(bool Changed);

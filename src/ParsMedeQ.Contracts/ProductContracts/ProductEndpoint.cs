@@ -10,6 +10,8 @@ public sealed class ProductEndpoint : ApiEndpointBase
 
     public EndpointInfo AddProduct { get; private set; }
     public EndpointInfo EditProduct { get; private set; }
+    public EndpointInfo DeleteProduct { get; private set; }
+    public EndpointInfo DeleteProductCategory { get; private set; }
     public EndpointInfo Products { get; private set; }
     public EndpointInfo Product { get; private set; }
     public EndpointInfo AddProductCategory { get; private set; }
@@ -26,56 +28,70 @@ public sealed class ProductEndpoint : ApiEndpointBase
            this.GetUrl("add"),
            this.GetUrl("add"),
            "Add Product",
-           "افزودن خبر، مقاله و ...",
+           "افزودن محصول ...",
            _tag);
 
         EditProduct = new EndpointInfo(
            this.GetUrl("edit"),
            this.GetUrl("edit"),
            "Edit Product",
-           "ویرایش خبر، مقاله و ...",
+           "ویرایش محصول ...",
+           _tag);
+
+        DeleteProduct = new EndpointInfo(
+           this.GetUrl("delete"),
+           this.GetUrl("delete"),
+           "Delete Product",
+           "حذف محصول ...",
+           _tag);
+
+        DeleteProductCategory = new EndpointInfo(
+           this.GetUrl("category/delete"),
+           this.GetUrl("category/delete"),
+           "Delete Product Category",
+           "حذف دسته بندی محصول ...",
            _tag);
 
         Products = new EndpointInfo(
            this.GetUrl("list"),
            this.GetUrl("list"),
            "List of Products",
-           "لیست اخبار، مقاله و ...",
+           "لیست محصولات ...",
            _tag);
 
         Product = new EndpointInfo(
            this.GetUrl("details"),
            this.GetUrl("details"),
            "Details of Product",
-           "جزئیات خبر، مقاله و ...",
+           "جزئیات محصول ...",
            _tag);
 
         AddProductCategory = new EndpointInfo(
            this.GetUrl("category/add"),
            this.GetUrl("category/add"),
            "Add Product Category",
-           "افزودن دسته بندی خبر، مقاله و ...",
+           "افزودن دسته بندی محصول ...",
            _tag);
 
         EditProductCategory = new EndpointInfo(
            this.GetUrl("category/edit"),
            this.GetUrl("category/edit"),
            "Edit Product Category",
-           "ویرایش دسته بندی خبر، مقاله و ...",
+           "ویرایش دسته بندی محصول ...",
            _tag);
 
         ProductCategories = new EndpointInfo(
            this.GetUrl("category/list"),
            this.GetUrl("category/list"),
            "List of ProductCategories",
-           "لیست اخبار، مقاله و ...",
+           "لیست دسته بندی محصولات ...",
            _tag);
 
         ProductCategory = new EndpointInfo(
            this.GetUrl("category/details"),
            this.GetUrl("category/details"),
            "Details of Productcategory",
-           "جزئیات دسته بندی خبر، مقاله و ...",
+           "جزئیات دسته بندی محصول ...",
            _tag);
 
         ProductMediaList = new EndpointInfo(
