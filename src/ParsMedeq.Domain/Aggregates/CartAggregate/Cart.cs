@@ -3,15 +3,15 @@ using ParsMedeQ.Domain.Aggregates.CartAggregate.Entities;
 
 namespace ParsMedeQ.Domain.Aggregates.CartAggregate;
 
-public sealed class Cart : EntityBase<string>
+public sealed class Cart : EntityBase<int>
 {
     #region " Fields "
     private List<CartItem> _CartItems = [];
     #endregion
 
     #region " Properties "
-    public string? UserId { get; set; }
-    public string? AnonymousId { get; set; }
+    public int? UserId { get; set; }
+    public Guid? AnonymousId { get; set; }
     #endregion
 
     #region " Navigation Properties "
@@ -19,12 +19,12 @@ public sealed class Cart : EntityBase<string>
     #endregion
 
     #region " Constructors "
-    private Cart() : base(string.Empty) { }
-    public Cart(string id) : base(id) { }
+    private Cart() : base(0) { }
+    public Cart(int id) : base(id) { }
     #endregion
 
     #region " Factory "
-    public static PrimitiveResult<Cart> Create(string userId, string anonymousId) =>
+    public static PrimitiveResult<Cart> Create(int? userId, Guid? anonymousId) =>
         PrimitiveResult.Success(
             new Cart
             {
@@ -33,23 +33,23 @@ public sealed class Cart : EntityBase<string>
             });
 
     public ValueTask<PrimitiveResult<Cart>> Update(
-        string userId)
+        int userId)
     {
         this.UserId = userId;
         return ValueTask.FromResult(PrimitiveResult.Success(this));
     }
     public ValueTask<PrimitiveResult<Cart>> Update(
-        string userId,
-        string productType,
-        int productId,
-        string productName,
+        int userId,
+        int tableId,
+        int relatedId,
+        string relatedName,
         decimal unitPrice,
         int quantity)
         => this.Update(userId)
         .Map(_ => this.UpdateCartItem(
-            productType,
-            productId,
-            productName,
+            tableId,
+            relatedId,
+            relatedName,
             unitPrice,
             quantity)
         .Map(() => this));
@@ -61,15 +61,15 @@ public sealed class Cart : EntityBase<string>
             success => PrimitiveResult.Success(),
             PrimitiveResult.Failure);
     public ValueTask<PrimitiveResult> AddCartItem(
-        string productType,
-        int productId,
-        string productName,
+        int tableId,
+        int relatedtId,
+        string relatedName,
         decimal unitPrice,
         int quantity)
         => CartItem.Create(
-            productType,
-            productId,
-            productName,
+            tableId,
+            relatedtId,
+            relatedName,
             unitPrice,
             quantity)
         .OnSuccess(item => this._CartItems.Add(item.Value))
@@ -78,24 +78,24 @@ public sealed class Cart : EntityBase<string>
             PrimitiveResult.Failure);
 
     public ValueTask<PrimitiveResult> UpdateCartItem(
-        string productType,
-        int productId,
-        string productName,
+        int tableId,
+        int relatedId,
+        string relatedName,
         decimal unitPrice,
         int quantity)
     {
-        var current = _CartItems.FirstOrDefault(s => s.ProductId.Equals(productId));
+        var current = _CartItems.FirstOrDefault(s => s.RelatedId.Equals(relatedId));
         if (current is null)
         {
             return this.AddCartItem(
-                productType,
-                productId,
-                productName,
+                tableId,
+                relatedId,
+                relatedName,
                 unitPrice,
                 quantity);
         }
         return current.Update(
-            productName,
+            relatedName,
             unitPrice,
             quantity)
             .Match(

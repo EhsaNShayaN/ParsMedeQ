@@ -14,7 +14,7 @@ internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<
     {
         return await this.DbContext.Cart.Include(c => c.CartItems).ToArrayAsync();
     }
-    public async ValueTask<Cart> GetCartAsync(string? userId, string? anonymousId)
+    public async ValueTask<Cart> GetCartAsync(int? userId, Guid? anonymousId)
     {
         var cart = await this.DbContext.Cart
             .Include(c => c.CartItems)
@@ -29,10 +29,10 @@ internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<
 
         return cart;
     }
-    public async ValueTask<Cart> AddToCartAsync(string? userId, string? anonymousId, CartItem item)
+    public async ValueTask<Cart> AddToCartAsync(int? userId, Guid? anonymousId, CartItem item)
     {
         // گرفتن محصول از دیتابیس
-        var product = await this.DbContext.Set<Product>().FindAsync(item.ProductId);
+        var product = await this.DbContext.Set<Product>().FindAsync(item.RelatedId);
         if (product == null)
             throw new InvalidOperationException("محصول پیدا نشد");
 
@@ -41,7 +41,7 @@ internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<
 
         var cart = await GetCartAsync(userId, anonymousId);
 
-        var existingItem = cart.CartItems.FirstOrDefault(i => i.ProductId == item.ProductId && i.ProductType == item.ProductType);
+        var existingItem = cart.CartItems.FirstOrDefault(i => i.RelatedId == item.RelatedId && i.TableId == item.TableId);
 
         if (existingItem != null)
         {
@@ -62,16 +62,16 @@ internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<
         await this.DbContext.SaveChangesAsync();
         return cart;
     }
-    public async ValueTask<bool> CheckoutAsync(string userId)
+    public async ValueTask<bool> CheckoutAsync(int userId)
     {
         var cart = await this.DbContext.Cart.Include(c => c.CartItems).FirstOrDefaultAsync(c => c.UserId == userId);
         if (cart == null || !cart.CartItems.Any()) return false;
 
         foreach (var item in cart.CartItems)
         {
-            var product = await this.DbContext.Set<Product>().FindAsync(item.ProductId);
+            var product = await this.DbContext.Set<Product>().FindAsync(item.RelatedId);
             if (product == null || product.Stock < item.Quantity)
-                throw new InvalidOperationException($"موجودی محصول {item.ProductName} کافی نیست");
+                throw new InvalidOperationException($"موجودی محصول {item.RelatedName} کافی نیست");
 
             await product.UpdateStock(item.Quantity);
         }
@@ -82,7 +82,7 @@ internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<
 
         return true;
     }
-    public async ValueTask<Cart> RemoveFromCartAsync(string? userId, string? anonymousId, int itemId)
+    public async ValueTask<Cart> RemoveFromCartAsync(int? userId, Guid? anonymousId, int itemId)
     {
         var cart = await GetCartAsync(userId, anonymousId);
         var item = cart.CartItems.FirstOrDefault(i => i.Id == itemId);
@@ -95,7 +95,7 @@ internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<
         await this.DbContext.SaveChangesAsync();
         return cart;
     }
-    public async ValueTask<Cart> MergeCartAsync(string anonymousId, string userId)
+    public async ValueTask<Cart> MergeCartAsync(Guid anonymousId, int userId)
     {
         var userCart = await this.DbContext.Cart.Include(c => c.CartItems).FirstOrDefaultAsync(c => c.UserId == userId);
         var anonCart = await this.DbContext.Cart.Include(c => c.CartItems).FirstOrDefaultAsync(c => c.AnonymousId == anonymousId);
@@ -113,7 +113,7 @@ internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<
         // merge items
         foreach (var item in anonCart.CartItems)
         {
-            var existing = userCart.CartItems.FirstOrDefault(i => i.ProductId == item.ProductId && i.ProductType == item.ProductType);
+            var existing = userCart.CartItems.FirstOrDefault(i => i.RelatedId == item.RelatedId && i.TableId == item.TableId);
             if (existing != null)
                 existing.Quantity += item.Quantity;
             else
@@ -125,5 +125,4 @@ internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<
 
         return userCart;
     }
-    public ValueTask<bool> CheckPriceAsync(Cart cart) => throw new NotImplementedException();
 }

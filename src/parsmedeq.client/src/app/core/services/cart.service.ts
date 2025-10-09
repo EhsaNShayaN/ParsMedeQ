@@ -11,7 +11,8 @@ export class CartService {
   private apiUrl = '/api/cart';
   cart = signal<Cart | null>(null);
 
-  constructor(private http: HttpClient, private storage: StorageService) {
+  constructor(private http: HttpClient,
+              private storage: StorageService) {
   }
 
   /** گرفتن سبد */
