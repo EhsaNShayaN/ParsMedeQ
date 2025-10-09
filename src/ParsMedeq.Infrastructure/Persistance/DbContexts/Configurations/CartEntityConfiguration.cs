@@ -9,12 +9,12 @@ sealed class CartEntityConfiguration : IEntityTypeConfiguration<Cart>
     {
         builder.ToTable(TableNames.Cart);
 
-        /*builder
+        builder
             .HasMany(x => x.CartItems)
             .WithOne(x => x.Cart)
             .HasForeignKey(a => a.CartId)
             .HasPrincipalKey(a => a.Id)
-            .OnDelete(DeleteBehavior.Cascade);*/
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }
 
