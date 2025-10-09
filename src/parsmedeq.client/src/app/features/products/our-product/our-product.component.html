@@ -1,0 +1,34 @@
+<div class="section">
+  <div class="px-3">
+    <div class="theme-container">
+      <div fxLayout="row warp" fxLayoutAlign="space-between center" class="mx-1 my-3">
+        <span class="our-title">{{ 'PRODUCTS' | translate }}</span>
+      </div>
+      <div class="agents-carousel">
+        <div class="swiper-container h-100 carousel-outer" [swiper]="config">
+          <div class="swiper-wrapper h-100">
+            <div *ngFor="let item of items" class="swiper-slide">
+              <mat-card appearance="outlined" class="my-card">
+                <a [routerLink]="['/products' | langPack, item.id ]" class="scale-rotate-wrapper">
+                  <img mat-card-image [src]="item.image" [alt]="item.title" class="w-100 h-100 img-square"/>
+                </a>
+                <mat-card-content>
+                  <h3 class="fw-600 text-center">
+                    {{ item.title }}
+                  </h3>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </div>
+          <button mat-mini-fab color="primary" class="swiper-button-prev swipe-arrow">
+            <mat-icon>keyboard_arrow_right</mat-icon>
+          </button>
+          <button mat-mini-fab color="primary" class="swiper-button-next swipe-arrow">
+            <mat-icon>keyboard_arrow_left</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

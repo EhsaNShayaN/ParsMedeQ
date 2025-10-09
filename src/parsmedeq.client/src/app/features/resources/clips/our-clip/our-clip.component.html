@@ -1,0 +1,50 @@
+<div class="section">
+  <div class="px-3">
+    <div class="theme-container">
+      <div fxLayout="row warp" fxLayoutAlign="space-between center" class="mx-1 my-3">
+        <h1>{{'NEWS_AND_ANNOUNCEMENTS' | translate}}</h1>
+        <a [routerLink]="['/clips' | langPack]" mat-raised-button color="warn"
+           class="py-2 px-4">{{'VIEW_ALL_CLIPS' | translate}}</a>
+      </div>
+      <div class="agents-carousel">
+        <div class="swiper-container h-100 carousel-outer" [swiper]="config">
+          <div class="swiper-wrapper h-100">
+            <div *ngFor="let item of items" class="swiper-slide">
+              <mat-card appearance="outlined" class="overflow-hidden">
+                <div fxLayout="row wrap" class="property-status">
+                  <span class="background-color bg-orange">{{item.clipCategoryTitle}}</span>
+                </div>
+                <a [routerLink]="['/clips' | langPack, item.id ]" class="scale-rotate-wrapper">
+                  <img mat-card-image [src]="item.image" [alt]="item.title" class="w-100 h-100 img-square"/>
+                </a>
+                <mat-card-content>
+                  <h3 class="two-lines fw-600 mb-10">
+                    {{item.title}}
+                  </h3>
+                  <mat-divider></mat-divider>
+                  <p class="my-3 two-lines" [innerHTML]="item.abstract"></p>
+                </mat-card-content>
+                <mat-divider></mat-divider>
+                <mat-card-actions fxLayoutAlign="space-between center">
+                  <div fxLayout="row" fxLayoutAlign="start center" class="text-muted"></div>
+                  <div>
+                    <a [routerLink]="['/clips' | langPack, item.id ]" mat-button color="primary">
+                      {{viewText | translate}}
+                    </a>
+                  </div>
+                </mat-card-actions>
+              </mat-card>
+            </div>
+          </div>
+          <button mat-mini-fab color="primary" class="swiper-button-prev swipe-arrow">
+            <mat-icon>keyboard_arrow_right</mat-icon>
+          </button>
+          <button mat-mini-fab color="primary" class="swiper-button-next swipe-arrow">
+            <mat-icon>keyboard_arrow_left</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

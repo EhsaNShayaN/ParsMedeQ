@@ -1,0 +1,46 @@
+<div class="section mt-0">
+  <div class="px-3">
+    <div class="theme-container" ngClass.xs="my-3">
+      <div fxLayout="row wrap" fxLayoutAlign="space-between start" class="mb-3">
+        <div fxFlex="40" fxFlex.gt-md="70">
+          <span class="our-title">{{'NEWS_AND_ANNOUNCEMENTS' | translate}}</span>
+          <span class="our-desc">{{'ARTICLES_DESCRIPTION' | translate}}</span>
+        </div>
+          <a fxLayoutAlign="start start" [routerLink]="['/news' | langPack]" color="warn" class="not-link">
+            {{ 'VIEW_ALL_NOTICES' | translate }}
+            <mat-icon>chevron_left</mat-icon>
+          </a>
+      </div>
+      <div class="agents-carousel">
+        <div class="swiper-container h-100 carousel-outer" [swiper]="config">
+          <div class="swiper-wrapper h-100">
+            <div *ngFor="let item of items" class="swiper-slide">
+              <mat-card appearance="outlined" class="overflow-hidden">
+                <a [routerLink]="['/news' | langPack, item.id ]" class="scale-rotate-wrapper">
+                  <div class="position-relative">
+                    <div class="mask-div not-link background-color" fxLayout="row wrap"
+                         fxLayoutAlign="center center" *ngIf="item.expired">
+                      {{'ENDED' | translate}}
+                    </div>
+                    <img mat-card-image [src]="item.image" [alt]="item.title" class="w-100"/>
+                  </div>
+                </a>
+                <mat-card-content class="pb-0">
+                  <h3 class="two-lines fw-600 text-center" [innerHTML]="item.title | safeHtml">
+                  </h3>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </div>
+          <button mat-mini-fab color="primary" class="swiper-button-prev swipe-arrow">
+            <mat-icon>keyboard_arrow_right</mat-icon>
+          </button>
+          <button mat-mini-fab color="primary" class="swiper-button-next swipe-arrow">
+            <mat-icon>keyboard_arrow_left</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
