@@ -1,0 +1,14 @@
+<ng-container>
+  <div fxLayout="row" fxLayoutAlign="center center" *ngIf="!icon">
+    <ng-container *ngIf="(price ?? 0) === 0">
+      <button mat-raised-button color="accent" type="button" class="w-100 mt-2 py-4" (click)="download()">
+        {{ buttonTitle }}
+      </button>
+    </ng-container>
+  </div>
+  <a mat-icon-button class="green-color" matTooltip="{{'VIEW' | translate}} {{'FACTOR' | translate}}"
+     (click)="download()" *ngIf="icon">
+    <mat-icon>{{ icon }}</mat-icon>
+  </a>
+  <a fxShow="false" [href]="fileUrl" [download]="downloadName" #hiddenA>Click Me!</a>
+</ng-container>
