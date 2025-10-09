@@ -1,4 +1,4 @@
-import {Component, HostListener, OnDestroy, OnInit, Injector} from '@angular/core';
+import {Component, HostListener, OnDestroy, OnInit, AfterViewInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {BaseComponent} from '../../../base-component';
 import {AppSettings, Settings} from '../../../app.settings';
@@ -11,7 +11,7 @@ import {Product} from '../../../core/models/ProductResponse';
   styleUrl: './product-detail.scss',
   standalone: false
 })
-export class ProductDetail extends BaseComponent implements OnInit, OnDestroy {
+export class ProductDetail extends BaseComponent implements OnInit, AfterViewInit, OnDestroy {
   private sub: any;
   public item: Product | undefined;
   public message: string | undefined;
@@ -45,19 +45,17 @@ export class ProductDetail extends BaseComponent implements OnInit, OnDestroy {
 
   ngAfterViewInit(): void {
     this.sub = this.activatedRoute.params.subscribe(params => {
-      const title = Number(params['id']).toString() === params['id'] ? Number(params['id']) : null;
-      const id = !!title ? null : params['id'];
-      this.getProductById(id, title);
+      this.getProductById(params['id']);
     });
   }
 
-  public getProductById(id: string, secondId: number | null) {
-    /*this.restClientService.getProduct({id, secondId, tableId: this.Tables.Thesis}).subscribe((d: Product) => {
+  public getProductById(id: number) {
+    this.restApiService.getProduct({id}).subscribe((d: Product) => {
       this.item = d;
       this.setTitle(this.item.title);
-      this.setMetaDescription(this.item.abstract);
-      this.ltr = this.item.language === 'انگلیسی' ? 'ltr' : '';
-    });*/
+      this.setMetaDescription(this.item.description);
+      //this.ltr = this.item.language === 'انگلیسی' ? 'ltr' : '';
+    });
   }
 
   scrollToItem(str: string) {
