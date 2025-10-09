@@ -1,4 +1,4 @@
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {map, Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
@@ -159,6 +159,22 @@ export class RestApiService {
     return this.http.post<BaseResult<boolean>>(`${endpoint()}product/${model.id ? 'edit' : 'add'}`, formData).pipe(
       catchError(this.handleError)
     );
+  }
+
+  download(id: number, tableId: number, model: any = null): Observable<any> {
+    const headers = new HttpHeaders({
+      'ngsw-bypass': 'true'
+    });
+    let url = `${endpoint()}general/download?id=${id}&tableId=${tableId}`;
+    if (model) {
+      url += '&model=' + model;
+    }
+    return this.http.get(url, {
+      headers,
+      reportProgress: true,
+      observe: 'events',
+      responseType: 'arraybuffer'
+    });
   }
 
   modelToQuery(model: any) {

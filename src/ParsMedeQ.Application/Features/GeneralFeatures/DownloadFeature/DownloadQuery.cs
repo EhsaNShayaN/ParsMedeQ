@@ -42,7 +42,7 @@ sealed class DownloadQueryHandler : IPrimitiveResultQueryHandler<DownloadQuery, 
     {
         return ValueTask.FromResult(
             PrimitiveResult.Success(
-                ctx.SetFileName($"{ctx.Id}{Path.GetExtension(ctx.Media.Path)}")));
+                ctx.SetFileName($"{Guid.NewGuid().ToString().Replace("-", "")}{Path.GetExtension(ctx.Media.Path)}")));
     }
     ValueTask<PrimitiveResult<DownloadContext>> GeneratePdf(DownloadContext ctx)
     {

@@ -22,8 +22,11 @@
                     </div>
                   }
                   <img [src]="item?.image" [alt]="item?.title" class="w-100">
-                  <!--<app-download-management *ngIf="item?.registered || (item?.price ?? 0) === 0" [id]="item.id"
-                                           [price]="item.price" [tableId]="Tables.Clip"></app-download-management>-->
+                  @if ((item.fileId ?? 0) > 0 && (item.registered || item.price === 0)) {
+                    <app-download-management
+                      [id]="item.fileId!" [price]="item.price ?? 0" [tableId]="Tables.Clip">
+                    </app-download-management>
+                  }
                 </div>
                 <div>
                   <h2>{{ item?.title }}</h2>

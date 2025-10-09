@@ -1,20 +1,21 @@
 import {Component, ElementRef, Inject, Input, OnInit, ViewChild} from '@angular/core';
-import {PureComponent} from '../../pure-component';
 import {HttpEvent, HttpEventType} from '@angular/common/http';
 import {DomSanitizer} from '@angular/platform-browser';
-import {DOCUMENT} from "@angular/common";
+import {DOCUMENT} from '@angular/common';
+import {PureComponent} from '../../../pure-component';
 
 @Component({
   selector: 'app-download-management',
   templateUrl: './download-management.component.html',
-  styleUrls: ['./download-management.component.scss']
+  styleUrl: './download-management.component.scss',
+  standalone: false
 })
 export class DownloadManagementComponent extends PureComponent implements OnInit {
-  @Input() id: string;
-  @Input() price: number;
-  @Input() tableId: number;
-  @Input() icon: string;
-  @Input() model: string = null;
+  @Input() id!: number;
+  @Input() price!: number;
+  @Input() tableId!: number;
+  @Input() icon?: string;
+  @Input() model: string | null = null;
   @Input() buttonTitle = 'DOWNLOAD';
   @ViewChild('hiddenA') hiddenARef: ElementRef | undefined;
 
@@ -32,15 +33,15 @@ export class DownloadManagementComponent extends PureComponent implements OnInit
   }
 
   ngOnInit() {
-    this.buttonTitle = this.appService.getTranslateValue(this.buttonTitle);
+    this.buttonTitle = this.getTranslateValue(this.buttonTitle);
   }
 
   download0() {
-    this.restClientService.download(this.id, this.tableId, this.model).subscribe((blob: Blob) => {
+    this.restApiService.download(this.id, this.tableId, this.model).subscribe((blob: Blob) => {
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = "rtl-sample.pdf"; // suggested filename
+      a.download = 'rtl-sample.pdf'; // suggested filename
       a.click();
       window.URL.revokeObjectURL(url);
     });
@@ -64,7 +65,7 @@ export class DownloadManagementComponent extends PureComponent implements OnInit
     }
 
     this.isDownloading = true;
-    this.restClientService.download(this.id, this.tableId, this.model).subscribe((event: HttpEvent<any>) => {
+    this.restApiService.download(this.id, this.tableId, this.model).subscribe((event: HttpEvent<any>) => {
       console.log('download', event);
       if (event.type === HttpEventType.ResponseHeader) {
         const contentDisposition = event.headers.get('Content-Disposition');

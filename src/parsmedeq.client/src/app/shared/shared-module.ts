@@ -38,6 +38,7 @@ import {CommonModule} from '@angular/common';
 import {TreeCategoriesComponent} from './tree-categories/tree-categories.component';
 import {SwiperModule} from '../theme/components/swiper/swiper.module';
 import {HeaderCarouselComponent} from './header-carousel/header-carousel.component';
+import {DownloadManagementComponent} from './components/download-management/download-management.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import {HeaderCarouselComponent} from './header-carousel/header-carousel.compone
     ConfirmDialogComponent,
     TreeCategoriesComponent,
     HeaderCarouselComponent,
+    DownloadManagementComponent,
   ],
   imports: [
     CommonModule,
@@ -182,6 +184,7 @@ import {HeaderCarouselComponent} from './header-carousel/header-carousel.compone
     TreeCategoriesComponent,
     SwiperModule,
     HeaderCarouselComponent,
+    DownloadManagementComponent,
   ],
   providers: [
     CurrencyFormatterPipe,

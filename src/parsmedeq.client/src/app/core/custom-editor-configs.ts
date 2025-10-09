@@ -9,7 +9,7 @@ export function getCustomEditorConfigs(): AngularEditorConfig {
     // placeholder: 'Enter text here...',
     translate: 'no',
     defaultParagraphSeparator: 'p',
-    defaultFontName: 'Arial',
+    defaultFontName: 'Alborzchem',
     toolbarHiddenButtons: [
       ['bold']
     ],
@@ -28,6 +28,16 @@ export function getCustomEditorConfigs(): AngularEditorConfig {
         tag: 'h1',
       },
     ],
-    sanitize: false
+    sanitize: false,
+    fonts: [
+      { class: 'arial', name: 'Arial' },
+      { class: 'times-new-roman', name: 'Times New Roman' },
+      { class: 'calibri', name: 'Calibri' },
+      { class: 'comic-sans-ms', name: 'Comic Sans MS' },
+
+      // 👇 Add your custom font here
+      { class: 'Alborzchem', name: 'Alborzchem' },
+      { class: 'Alborzchem_en', name: 'Alborzchem_en' },
+    ],
   };
 }

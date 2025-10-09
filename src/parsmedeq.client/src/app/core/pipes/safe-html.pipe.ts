@@ -13,8 +13,9 @@ export class SafeHtmlPipe implements PipeTransform {
     if (!value) {
       return '';
     }
-    value = value.replace(/face="Arial"/g, '');
-    value = value.replace(/@@@/g, window.location.pathname);
+    /*value = value.replaceAll(/face="Arial"/g, '');
+    value = value.replaceAll(/face="Calibri"/g, '');*/
+    value = value.replaceAll(/@@@/g, window.location.pathname);
     return this.sanitized.bypassSecurityTrustHtml(value);
   }
 }

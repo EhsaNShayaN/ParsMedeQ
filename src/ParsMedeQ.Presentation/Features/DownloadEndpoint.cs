@@ -16,8 +16,8 @@ internal sealed class DownloadEndpoint : EndpointHandlerBase<
         Endpoints.General.Download,
         HttpMethod.Get,
         handlerResponseMapper.Map,
-        response => Results.File(response.Value.FileContent, "video/mp4"))
-    //response => TypedResults.File(response.Value.FileContent, "application/octet-stream", response.Value.FileName, true))
+        //response => Results.File(response.Value.FileContent, "application/octet-stream"))
+        response => TypedResults.File(response.Value.FileContent, "application/octet-stream", response.Value.FileName, true))
     {
     }
     protected override Delegate EndpointDelegate =>

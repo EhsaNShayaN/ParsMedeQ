@@ -12,25 +12,31 @@
               <span class="background-color bg-orange px-3 py-2">{{ item?.resourceCategoryTitle }}</span>
             </div>
             <img [src]="item?.image" [alt]="item?.title" class="w-100 d-block">
+            @if ((item.fileId ?? 0) > 0 && (item.registered || item.price === 0)) {
+              <app-download-management
+                [id]="item.fileId!" [price]="item.price ?? 0" [tableId]="Tables.News">
+              </app-download-management>
+            }
           </div>
           <div fxFlex="100" fxFlex.gt-md="75" class="p-3 ">
             <h2 [innerHTML]="item?.title | safeHtml"></h2>
-            <ng-container *ngIf="item?.abstract">
-              <p [innerHTML]="item?.abstract" class="text-justify"
-                 [ngClass]="ltr"></p>
-            </ng-container>
+            @if (item?.abstract) {
+              <p [innerHTML]="item?.abstract" class="text-justify" [ngClass]="ltr"></p>
+            }
             <div class="mt-3 text-justify" [innerHTML]="item?.description | safeHtml"></div>
-            <div *ngIf="item?.keywords" class="mt-1">
-              <h3 class="my-2">{{ 'KEYWORDS' | translate }}:</h3>
-              <!--<h4>{{item?.keywords}}</h4>-->
-              <div fxLayout="row wrap mt-2">
-                <div class="property-status position-relative ml-2 mt-3"
-                     *ngFor="let key of item.keywords.split(',')">
-                  <a [routerLink]="['/search' | langPack, key ]"
-                     class="background-color bg-warn px-3 py-2 not-link">{{ key }}</a>
+            @if (item?.keywords) {
+              <div class="mt-1">
+                <h3 class="my-2">{{ 'KEYWORDS' | translate }}:</h3>
+                <!--<h4>{{item?.keywords}}</h4>-->
+                <div fxLayout="row wrap mt-2">
+                  <div class="property-status position-relative ml-2 mt-3"
+                       *ngFor="let key of item.keywords.split(',')">
+                    <a [routerLink]="['/search' | langPack, key ]"
+                       class="background-color bg-warn px-3 py-2 not-link">{{ key }}</a>
+                  </div>
                 </div>
               </div>
-            </div>
+            }
           </div>
         </div>
         @if (item) {

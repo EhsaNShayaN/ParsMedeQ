@@ -70,6 +70,7 @@
   "AT_LEAST_ONE_IMAGE_IS_REQUIRED": "At least one image is required",
   "NO_DATA_AVAILABLE": "No data available",
   "NO_RESULTS_FOUND": "No results found",
+  "DOWNLOAD": "Download",
   "DOWNLOAD_COUNT": "Download count",
   "MANAGEMENT_IMAGES": "Management of images",
   "SURE_DELETE": "Are you sure you want to delete?",
