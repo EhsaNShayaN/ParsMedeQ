@@ -16,6 +16,7 @@
   overflow: hidden;
   line-height: 1.5em;
   height: 1.5em;
+  text-align: justify;
 
   @supports (-webkit-line-clamp: 1) {
     overflow: hidden;
@@ -33,6 +34,7 @@
   overflow: hidden;
   line-height: 1.5em;
   height: 3em;
+  text-align: justify;
 
   @supports (-webkit-line-clamp: 2) {
     overflow: hidden;
@@ -50,6 +52,7 @@
   overflow: hidden;
   line-height: 1.5em;
   height: 4.5em;
+  text-align: justify;
 
   @supports (-webkit-line-clamp: 3) {
     overflow: hidden;
@@ -67,6 +70,7 @@
   overflow: hidden;
   line-height: 1.5em;
   height: 6em;
+  text-align: justify;
 
   @supports (-webkit-line-clamp: 4) {
     overflow: hidden;
@@ -76,14 +80,6 @@
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
   }
-}
-
-.two-lines1 {
-  line-height: 1.5em;
-  height: 3em;
-  overflow: hidden;
-  /*white-space: nowrap;
-  text-overflow: ellipsis;*/
 }
 
 .mat-toolbar-single-row {

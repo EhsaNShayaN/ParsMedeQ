@@ -39,6 +39,8 @@ import {TreeCategoriesComponent} from './tree-categories/tree-categories.compone
 import {SwiperModule} from '../theme/components/swiper/swiper.module';
 import {HeaderCarouselComponent} from './header-carousel/header-carousel.component';
 import {DownloadManagementComponent} from './components/download-management/download-management.component';
+import {OurArticleComponent} from '../features/resources/articles/our-article/our-article.component';
+import {RouterLink} from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,7 @@ import {DownloadManagementComponent} from './components/download-management/down
     TreeCategoriesComponent,
     HeaderCarouselComponent,
     DownloadManagementComponent,
+    OurArticleComponent,
   ],
   imports: [
     CommonModule,
@@ -120,6 +123,7 @@ import {DownloadManagementComponent} from './components/download-management/down
     //////////////////////
     TreeViewComponent,
     SwiperModule,
+    RouterLink,
   ],
   exports: [
     FormsModule,
@@ -185,6 +189,8 @@ import {DownloadManagementComponent} from './components/download-management/down
     SwiperModule,
     HeaderCarouselComponent,
     DownloadManagementComponent,
+    OurArticleComponent,
+    RouterLink,
   ],
   providers: [
     CurrencyFormatterPipe,

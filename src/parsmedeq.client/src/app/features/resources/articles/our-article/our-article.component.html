@@ -3,33 +3,34 @@
     <div class="theme-container" ngClass.xs="my-3">
       <div fxLayout="row wrap" fxLayoutAlign="space-between start" class="mb-3">
         <div fxFlex="40" fxFlex.gt-md="70">
-          <span class="our-title">{{'ARTICLES' | translate}}</span>
-          <span class="our-desc">{{'NEWS_AND_ANNOUNCEMENTS_DESCRIPTION' | translate}}</span>
+          <span class="our-title">{{ 'ARTICLES' | translate }}</span>
         </div>
-          <a fxLayoutAlign="start start" [routerLink]="['/articles' | langPack]" color="warn" class="not-link">
-            {{ 'VIEW_ALL_ARTICLES' | translate }}
-            <mat-icon>chevron_left</mat-icon>
-          </a>
+        <a fxLayoutAlign="start start" [routerLink]="['/articles' | langPack]" color="warn" class="not-link">
+          {{ 'VIEW_ALL' | translate }}
+          <mat-icon>chevron_left</mat-icon>
+        </a>
       </div>
       <div class="agents-carousel">
         <div class="swiper-container h-100 carousel-outer" [swiper]="config">
           <div class="swiper-wrapper h-100">
-            <div *ngFor="let item of items" class="swiper-slide">
-              <mat-card appearance="outlined" class="overflow-hidden">
-                <a [routerLink]="['/articles' | langPack, item.secondId, item.title | replaceUrlSpaces ]" class="scale-rotate-wrapper">
-                  <img mat-card-image [src]="item.image" [alt]="item.title" class="w-100 img-square"/>
-                </a>
-                <mat-card-content>
-                  <h3 class="single-line fw-600 mb-2" [title]="item.title"
-                      [ngClass]="item.language === 'انگلیسی' ? 'ltr' : ''">
-                    {{item.title}}
-                  </h3>
-                  <mat-divider></mat-divider>
-                  <p class="my-3 four-lines" [innerHTML]="item.abstract"
-                     [ngClass]="item.language === 'انگلیسی' ? 'ltr' : ''"></p>
-                </mat-card-content>
-              </mat-card>
-            </div>
+            @for (item of items; track item.id) {
+              <div class="swiper-slide">
+                <mat-card appearance="outlined" class="overflow-hidden">
+                  <a [routerLink]="['/articles' | langPack, item.id, item.title | replaceUrlSpaces ]" class="scale-rotate-wrapper">
+                    <img mat-card-image [src]="item.image" [alt]="item.title" class="w-100 img-square"/>
+                  </a>
+                  <mat-card-content>
+                    <h3 class="single-line fw-600 mb-2" [title]="item.title"
+                        [ngClass]="item.language === 'انگلیسی' ? 'ltr' : ''">
+                      {{ item.title }}
+                    </h3>
+                    <mat-divider></mat-divider>
+                    <p class="my-3 four-lines" [innerHTML]="item.abstract"
+                       [ngClass]="item.language === 'انگلیسی' ? 'ltr' : ''"></p>
+                  </mat-card-content>
+                </mat-card>
+              </div>
+            }
           </div>
           <button mat-mini-fab color="primary" class="swiper-button-prev swipe-arrow">
             <mat-icon>keyboard_arrow_right</mat-icon>

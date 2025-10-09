@@ -1,13 +1,6 @@
-@import '../../../../theme/styles/variables';
-
 .section {
   mat-card {
     box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
     border-radius: 1rem;
-
-    img {
-      /*aspect-ratio: 1/.54;
-      object-fit: cover;*/
-    }
   }
 }

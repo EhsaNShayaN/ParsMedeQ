@@ -1,29 +1,35 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {SwiperConfigInterface} from 'ngx-swiper-wrapper';
-import {ArticleResponse} from '../../../../../lib/models/ArticleResponse';
 import {PureComponent} from '../../../../pure-component';
-import {Tables} from "../../../../../lib/core/constants/server.constants";
-import {ResourcesRequest} from "../../../../../lib/models/ResourceResponse";
+import {Resource, ResourceResponse, ResourcesRequest} from '../../../../core/models/ResourceResponse';
+import {Tables} from '../../../../core/constants/server.constants';
 
 @Component({
   selector: 'app-our-article',
   templateUrl: './our-article.component.html',
-  styleUrls: ['./our-article.component.scss']
+  styleUrl: './our-article.component.scss',
+  standalone: false
 })
 export class OurArticleComponent extends PureComponent implements OnInit, AfterViewInit {
-  public items = [];
+  public items: Resource[] = [];
   public config: SwiperConfigInterface = {};
 
   ngOnInit() {
-    const model: ResourcesRequest = {
-      page: 1,
+    let model: ResourcesRequest = {
+      pageIndex: 1,
       pageSize: 10,
       sort: 1,
-      pinned: true,
       tableId: Tables.Article
     };
-    this.restClientService.getResources(model).subscribe((d: ArticleResponse) => {
-      this.items = d.data;
+    this.restApiService.getResources(model).subscribe((d: ResourceResponse) => {
+      this.items.push(d.data.items[0]);
+      this.items.push(d.data.items[0]);
+      this.items.push(d.data.items[0]);
+      this.items.push(d.data.items[0]);
+      this.items.push(d.data.items[0]);
+      this.items.push(d.data.items[0]);
+      this.items.push(d.data.items[0]);
+      this.items.push(d.data.items[0]);
     });
   }
 
