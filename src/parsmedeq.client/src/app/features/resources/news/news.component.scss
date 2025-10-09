@@ -27,21 +27,3 @@
 .left-0 {
   left: 0;
 }
-.sidebar{
-  padding-left: 16px;
-
-}
-.main{
-  padding-right: 16px;
-}
-// sm
-@media screen and (max-width: 480px) {
-  .sidebar{
-    padding-left: 0;
-  }
-  .main{
-    padding-top: 16px;
-    padding-right: 0;
-  }
-}
-

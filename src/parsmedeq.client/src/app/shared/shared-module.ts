@@ -44,6 +44,7 @@ import {RouterLink} from '@angular/router';
 import {OurNewsComponent} from '../features/resources/news/our-news/our-news.component';
 import {OurclipComponent} from '../features/resources/clips/our-clip/our-clip.component';
 import {OurProductComponent} from '../features/products/our-product/our-product.component';
+import {HeaderImageComponent} from './header-image/header-image.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import {OurProductComponent} from '../features/products/our-product/our-product.
     TreeCategoriesComponent,
     HeaderCarouselComponent,
     DownloadManagementComponent,
+    HeaderImageComponent,
     OurArticleComponent,
     OurNewsComponent,
     OurclipComponent,
@@ -196,6 +198,7 @@ import {OurProductComponent} from '../features/products/our-product/our-product.
     SwiperModule,
     HeaderCarouselComponent,
     DownloadManagementComponent,
+    HeaderImageComponent,
     OurArticleComponent,
     OurNewsComponent,
     OurclipComponent,

@@ -381,3 +381,39 @@
 .px-7 {
   padding-left: 6rem !important;
 }
+
+// Direction-aware spacing utilities (LTR + RTL)
+// Supports: ps-, pe-, ms-, me- for padding/margin start/end
+// Example usage:
+//   .ps-2 => padding-inline-start: 0.5rem;
+//   .me-4 => margin-inline-end: 1.5rem;
+
+$spacer-unit: 0.25rem;
+$spacers: (
+  0: 0,
+  1: $spacer-unit,
+  2: $spacer-unit * 2,
+  3: $spacer-unit * 3,
+  4: $spacer-unit * 4,
+  5: $spacer-unit * 5,
+  6: $spacer-unit * 6,
+  7: $spacer-unit * 7
+);
+
+@each $key, $value in $spacers {
+  // Padding Start & End
+  .ps-#{$key} {
+    padding-inline-start: #{$value};
+  }
+  .pe-#{$key} {
+    padding-inline-end: #{$value};
+  }
+
+  // Margin Start & End
+  .ms-#{$key} {
+    margin-inline-start: #{$value};
+  }
+  .me-#{$key} {
+    margin-inline-end: #{$value};
+  }
+}

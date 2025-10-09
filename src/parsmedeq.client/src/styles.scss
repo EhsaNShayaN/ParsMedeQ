@@ -296,10 +296,6 @@
   background-color: $black !important;
 }
 
-.sidebar {
-  padding-right: 16px;
-}
-
 .main {
   padding-left: 16px;
 }
@@ -385,11 +381,6 @@
 
 // sm
 @media screen and (max-width: 480px) {
-  .sidebar {
-    padding-left: 0;
-    padding-right: 0;
-  }
-
   .main {
     padding-top: 16px;
     padding-right: 0;

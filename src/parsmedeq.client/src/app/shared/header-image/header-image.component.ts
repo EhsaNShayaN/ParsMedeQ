@@ -1,30 +1,28 @@
 import {Component, OnInit, Input, OnDestroy} from '@angular/core';
-import {DomSanitizer} from '@angular/platform-browser';
+import {DomSanitizer, SafeStyle} from '@angular/platform-browser';
 import {Settings, AppSettings} from '../../app.settings';
 
 @Component({
   selector: 'app-header-image',
   templateUrl: './header-image.component.html',
-  styleUrls: ['./header-image.component.scss']
+  styleUrl: './header-image.component.scss',
+  standalone: false
 })
 export class HeaderImageComponent implements OnInit, OnDestroy {
-  @Input('backgroundImage') backgroundImage;
-  @Input('bgImageAnimate') bgImageAnimate;
-  @Input('contentOffsetToTop') contentOffsetToTop;
-  @Input('contentMinHeight') contentMinHeight;
-  @Input('title') title;
-  @Input('desc') desc;
-  @Input('isHomePage') isHomePage = false;
-  @Input('fullscreen') fullscreen = false;
-  @Input('hideMask') hideMask = true;
-  public bgImage;
+  @Input('backgroundImage') backgroundImage?: string;
+  @Input('bgImageAnimate') bgImageAnimate: boolean = false;
+  @Input('contentOffsetToTop') contentOffsetToTop: boolean = false;
+  @Input('hideMask') hideMask: boolean = true;
+  @Input('contentMinHeight') contentMinHeight: number = 0;
+  @Input('title') title?: string;
+  @Input('desc') desc?: string;
+  @Input('isHomePage') isHomePage: boolean = false;
+  @Input('fullscreen') fullscreen: boolean = false;
+  public bgImage?: any;
   public settings: Settings;
 
   constructor(public appSettings: AppSettings, private sanitizer: DomSanitizer) {
     this.settings = this.appSettings.settings;
-    setTimeout(() => {
-      this.settings.headerBgImage = true;
-    });
   }
 
   ngOnInit() {
@@ -35,14 +33,13 @@ export class HeaderImageComponent implements OnInit, OnDestroy {
     }
     if (this.backgroundImage) {
       this.bgImage = this.sanitizer.bypassSecurityTrustStyle('url(' + this.backgroundImage + ')');
+      console.log('bgImage', this.bgImage);
     }
   }
 
   ngOnDestroy() {
     setTimeout(() => {
-      this.settings.headerBgImage = false;
       this.settings.contentOffsetToTop = false;
     });
   }
-
 }

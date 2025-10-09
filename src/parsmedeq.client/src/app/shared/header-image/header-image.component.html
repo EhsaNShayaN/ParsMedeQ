@@ -1,6 +1,9 @@
 <div class="header-image-wrapper" [dir]="(settings.rtl) ? 'rtl' : 'ltr'" [class.fullscreen]="fullscreen"
      [ngClass]="'toolbar-'+settings.toolbar">
-  <div class="bg" [style.background-image]="bgImage" [class.bg-anime]="bgImageAnimate"></div>
+  <div class="bg"
+       [style.background-image]="bgImage"
+       [class.bg-anime]="bgImageAnimate">
+  </div>
   <div class="mask" *ngIf="!hideMask"></div>
   <div class="header-image-content" fxLayout="column" fxLayoutAlign="center center"
        [class.offset-bottom]="contentOffsetToTop" [class.home-page]="isHomePage"
