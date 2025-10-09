@@ -70,6 +70,12 @@ sealed class ProductDetailsApiResponseMapper : IPresentationMapper<
                         src.Deleted,
                         src.Disabled,
                         src.CreationDate.ToPersianDate(),
-                        src.Registered)));
+                        src.Registered,
+                        src.Images.Select(s => new ProductMediaApiResponse
+                        {
+                            Id = s.Id,
+                            Ordinal = s.Ordinal,
+                            Path = s.Path
+                        }).ToArray())));
     }
 }

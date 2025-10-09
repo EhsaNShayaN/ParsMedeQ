@@ -105,7 +105,10 @@ internal sealed class ProductReadRepository : GenericPrimitiveReadRepositoryBase
         CancellationToken cancellationToken)
     {
         var query =
-            from res in this.DbContext.Product.Include(r => r.ProductCategory)
+            from res in this.DbContext.Product
+            .Include(r => r.ProductCategory)
+            .Include(r => r.ProductMediaList.OrderByDescending(s => s.Ordinal))
+                .ThenInclude(r => r.Media)
             where res.Id == ProductId
             select new
             {
@@ -137,7 +140,14 @@ internal sealed class ProductReadRepository : GenericPrimitiveReadRepositoryBase
                 Deleted = res.Product.Deleted,
                 Disabled = res.Product.Disabled,
                 CreationDate = res.Product.CreationDate,
-                Registered = res.Product.Registered
+                Registered = res.Product.Registered,
+                Images = res.Product.ProductMediaList
+                    .Select(s => new ProductMediaDbQueryResponse
+                    {
+                        Id = s.Id,
+                        Ordinal = s.Ordinal,
+                        Path = s.Media.Path
+                    }).ToArray()
             });
     }
 

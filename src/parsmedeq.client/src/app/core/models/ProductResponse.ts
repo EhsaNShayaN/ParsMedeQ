@@ -24,7 +24,13 @@ export class Product {
   creationDate!: string;
   registered!: boolean;
 
-  productCategories: ProductCategory[] = [];
+  images: ProductImage[] = [];
+}
+
+export interface ProductImage {
+  id: number;
+  ordinal: number;
+  path: string;
 }
 
 export interface ProductAnchor {

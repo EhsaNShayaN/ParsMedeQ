@@ -5,23 +5,24 @@
         <mat-card appearance="outlined">
           <div class="widget">
             <mat-card-title>
-              <h4 class="p-2">دسته بندی</h4>
+              <h4 class="p-2">{{ 'CATEGORY' | translate }}</h4>
             </mat-card-title>
             <mat-divider></mat-divider>
-            <mat-card-content class="p-0" *ngIf="(data?.length ?? 0) > 0">
-              <app-tree-view [data]="data" (onItemClicked)="itemClicked($event)" [selectedId]="selectedId"
-                             [marginClass]="'mr-2'"></app-tree-view>
-            </mat-card-content>
+            @if ((data?.length ?? 0) > 0) {
+              <mat-card-content class="p-0">
+                <app-tree-view [data]="data" (onItemClicked)="itemClicked($event)" [selectedId]="selectedId"
+                               [marginClass]="'mr-2'"></app-tree-view>
+              </mat-card-content>
+            }
           </div>
         </mat-card>
       </div>
       <div fxFlex="100" fxFlex.gt-md="80" fxFlex.gt-sm="60" fxFlex.sm="50" fxLayout="row wrap" class="main">
-
         <div fxFlex="100">
           <mat-card appearance="outlined" class="p-3">
             <div class="widget">
               <mat-card-title><h4>
-                مقالات
+                {{ 'PRODUCTS' | translate }}
                 {{ title }}
               </h4>
               </mat-card-title>

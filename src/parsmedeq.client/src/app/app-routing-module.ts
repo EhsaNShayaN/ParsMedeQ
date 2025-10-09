@@ -17,7 +17,7 @@ const pagesChildren: Routes = [
       {path: 'articles', loadChildren: () => import('./features/resources/articles/articles.module').then(m => m.ArticlesModule)},
       {path: 'news', loadChildren: () => import('./features/resources/news/news.module').then(m => m.NewsModule)},
       {path: 'clips', loadChildren: () => import('./features/resources/clips/clips.module').then(m => m.ClipsModule)},
-      //{path: 'products', loadChildren: () => import('./features/products/products-module').then(m => m.ProductsModule)},
+      {path: 'products', loadChildren: () => import('./features/products/products-module').then(m => m.ProductsModule)},
       //{path: 'auth', loadChildren: () => import('./features/auth/auth-module').then(m => m.AuthModule)},
       {path: 'auth', loadChildren: () => import('./features/login/login.module').then(m => m.LoginModule)},
       {path: 'contact', loadChildren: () => import('./features/contact/contact-module').then(m => m.ContactModule)},

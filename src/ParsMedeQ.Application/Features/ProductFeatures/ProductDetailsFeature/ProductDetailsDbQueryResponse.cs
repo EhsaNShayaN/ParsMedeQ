@@ -15,6 +15,13 @@ public sealed class ProductDetailsDbQueryResponse
     public bool Disabled { get; set; }
     public DateTime CreationDate { get; set; }
     public bool Registered { get; set; }
-    public ProductCategoryDbQueryResponse[] ProductCategories { get; set; } = [];
+    public ProductMediaDbQueryResponse[] Images { get; set; }
 }
+public sealed class ProductMediaDbQueryResponse
+{
+    public int Id { get; set; }
+    public string Path { get; set; } = string.Empty;
+    public int Ordinal { get; set; }
+}
+
 public sealed record ProductCategoryDbQueryResponse(int Id, string Title);

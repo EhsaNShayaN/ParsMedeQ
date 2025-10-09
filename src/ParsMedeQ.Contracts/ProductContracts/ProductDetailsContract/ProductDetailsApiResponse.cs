@@ -12,4 +12,10 @@ public readonly record struct ProductDetailsApiResponse(
     bool Deleted,
     bool Disabled,
     string CreationDate,
-    bool Registered);
+    bool Registered,
+    ProductMediaApiResponse[] Images);
+
+public readonly record struct ProductMediaApiResponse(
+    int Id,
+    string Path,
+    int Ordinal);

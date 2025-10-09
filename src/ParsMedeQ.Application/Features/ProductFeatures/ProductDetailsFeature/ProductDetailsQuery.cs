@@ -1,6 +1,4 @@
 ﻿using ParsMedeQ.Application.Services.UserLangServices;
-using Polly;
-using Polly.Contrib.DuplicateRequestCollapser;
 using SRH.MediatRMessaging.Queries;
 
 namespace ParsMedeQ.Application.Features.ProductFeatures.ProductDetailsFeature;

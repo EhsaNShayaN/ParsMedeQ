@@ -1,71 +1,63 @@
-import {Component, HostListener, OnDestroy, OnInit, AfterViewInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {BaseComponent} from '../../../base-component';
-import {AppSettings, Settings} from '../../../app.settings';
-import {Tables} from '../../../core/constants/server.constants';
+import {ActivatedRoute} from '@angular/router';
 import {Product} from '../../../core/models/ProductResponse';
+import {ProductCategoriesResponse, ProductCategory} from '../../../core/models/ProductCategoryResponse';
+import {BaseResult} from '../../../core/models/BaseResult';
 
 @Component({
   selector: 'app-product',
-  templateUrl: './product-detail.html',
-  styleUrl: './product-detail.scss',
+  templateUrl: './product.component.html',
+  styleUrl: './product.component.scss',
   standalone: false
 })
-export class ProductDetail extends BaseComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ProductComponent extends BaseComponent implements OnInit, OnDestroy {
   private sub: any;
-  public item: Product | undefined;
-  public message: string | undefined;
-  public settings: Settings;
-  ltr = '';
-  tabIndex: string | undefined;
-  isLoading = true;
-  protected readonly Tables = Tables;
+  product?: Product;
+  productCategories: ProductCategory[] = [];
+  parents: ProductCategory[] = [];
+  fixTabs = false;
 
-  constructor(public appSettings: AppSettings,
-              private activatedRoute: ActivatedRoute) {
+  constructor(private activatedRoute: ActivatedRoute) {
     super();
-    this.settings = this.appSettings.settings;
+  }
+
+  ngOnInit() {
+    this.restApiService.getProductCategories().subscribe((res: ProductCategoriesResponse) => {
+      this.productCategories = res.data;
+      this.sub = this.activatedRoute.params.subscribe(params => {
+        this.restApiService.getProduct({id: params['id']}).subscribe((p: BaseResult<Product>) => {
+          this.product = p.data;
+          this.getParents(this.product?.productCategoryId);
+          this.setTitle(this.product.title);
+          this.setMetaDescription(this.product.description);
+        });
+      });
+    });
+  }
+
+  getParents(categoryId: number | undefined) {
+    if (categoryId) {
+      const parent = this.productCategories.find(s => s.id === categoryId);
+      if (parent) {
+        this.parents.push(parent);
+        if (parent.parentId) {
+          this.getParents(parent.parentId);
+        }
+      }
+    }
   }
 
   @HostListener('window:scroll') onWindowScroll() {
     const scrollTop = Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop);
     const productItem = document.getElementById('product-item');
-    const fixTabs = (scrollTop) > (productItem?.offsetTop ?? 0);
-    if (productItem) {
-      if (fixTabs) {
-        productItem.style.marginTop = '-8px';
-      } else {
-        productItem.style.marginTop = '0';
-      }
-    }
-  }
-
-  ngOnInit() {
-  }
-
-  ngAfterViewInit(): void {
-    this.sub = this.activatedRoute.params.subscribe(params => {
-      this.getProductById(params['id']);
-    });
-  }
-
-  public getProductById(id: number) {
-    this.restApiService.getProduct({id}).subscribe((d: Product) => {
-      this.item = d;
-      this.setTitle(this.item.title);
-      this.setMetaDescription(this.item.description);
-      //this.ltr = this.item.language === 'انگلیسی' ? 'ltr' : '';
-    });
-  }
-
-  scrollToItem(str: string) {
-    this.tabIndex = str;
-    const x = document.getElementById(str);
-    const f: ScrollToOptions = {behavior: 'smooth', top: (x?.offsetTop ?? 0) - 80};
-    window.scrollTo(f);
+    this.fixTabs = (scrollTop + 150) > (productItem?.offsetTop ?? 0);
   }
 
   ngOnDestroy() {
-    this.sub?.unsubscribe();
+    this.sub.unsubscribe();
   }
+
+  protected readonly parent = parent;
 }
+
