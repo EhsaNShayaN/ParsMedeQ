@@ -46,9 +46,7 @@ internal sealed class ProjectInstaller : IServiceInstaller
             .InstallHealthChecks(config)
             .InstallOpenTelemtryTracingAndMetrics(config)
             .InstallFileService()
-            .InstallUserAuthenticationTokenService(config)
-            .InstallHangfire(config)
-            .InstallSignalR();
+            .InstallUserAuthenticationTokenService(config);
 }
 static class ServiceCollectionExtension
 {
@@ -312,20 +310,6 @@ static class ServiceCollectionExtension
         return services;
     }
 
-    internal static IServiceCollection InstallHangfire(this IServiceCollection services, IConfiguration config)
-    {
-        /*services.AddHangfire(hangfireConfig =>
-        hangfireConfig.UseSqlServerStorage(config.GetConnectionString("DefaultConnection")));
-        services.AddHangfireServer();*/
-        return services;
-    }
-
-    internal static IServiceCollection InstallSignalR(this IServiceCollection services)
-    {
-        services.AddSignalR();
-        return services;
-    }
-
     #region " Private Methods "
     static void AddAllDapperTypeHandlers()
     {
@@ -387,5 +371,4 @@ static class ServiceCollectionExtension
         return services;
     }
     #endregion
-
 }

@@ -1,17 +1,14 @@
-﻿using Microsoft.AspNetCore.SignalR;
-using ParsMedeQ.Application.Persistance.Schema;
+﻿using ParsMedeQ.Application.Persistance.Schema;
 
 namespace ParsMedeQ.Infrastructure.Services.CartServices;
 
 public class CartStockValidator
 {
     private readonly IWriteUnitOfWork _writeUnitOfWork;
-    private readonly IHubContext<CartHub> _hub;
 
-    public CartStockValidator(IWriteUnitOfWork writeUnitOfWork, IHubContext<CartHub> hub)
+    public CartStockValidator(IWriteUnitOfWork writeUnitOfWork)
     {
         this._writeUnitOfWork = writeUnitOfWork;
-        this._hub = hub;
     }
 
     public async Task ValidateCartsAsync()
@@ -50,32 +47,6 @@ public class CartStockValidator
             {
                 Console.WriteLine($"Cart {cart.Id} اصلاح شد.");
                 await _writeUnitOfWork.SaveChangesAsync();
-                if (!string.IsNullOrEmpty(cart.UserId))
-                {
-                    var modifiedItems = cart.CartItems.Select(i => new
-                    {
-                        i.ProductId,
-                        i.ProductName,
-                        i.Quantity,
-                        OriginalQuantity = i.QuantityBeforeUpdate // فرض می‌کنیم این فیلد موجوده
-                    }).ToList();
-
-                    var removedItems = cart.CartItems.Where(i => i.Quantity == 0).Select(i => new
-                    {
-                        i.ProductId,
-                        i.ProductName
-                    }).ToList();
-
-                    await _hub.Clients.Group($"cart-{cart.UserId}")
-                        .SendAsync("CartVisualUpdate", new
-                        {
-                            cartId = cart.Id,
-                            modifiedItems,
-                            removedItems,
-                            message = "سبد خرید شما به‌روز شد"
-                        });
-                }
-
             }
         }
     }
