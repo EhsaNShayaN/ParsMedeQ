@@ -1,10 +1,14 @@
 <div class="section">
   <div class="px-3">
     <div class="theme-container">
-      <div fxLayout="row warp" fxLayoutAlign="space-between center" class="mx-1 my-3">
-        <h1>{{'NEWS_AND_ANNOUNCEMENTS' | translate}}</h1>
-        <a [routerLink]="['/clips' | langPack]" mat-raised-button color="warn"
-           class="py-2 px-4">{{'VIEW_ALL_CLIPS' | translate}}</a>
+      <div fxLayout="row wrap" fxLayoutAlign="space-between start" class="mb-3">
+        <div fxFlex="40" fxFlex.gt-md="70">
+          <h1>{{ 'CLIPS' | translate }}</h1>
+        </div>
+        <a fxLayoutAlign="start start" [routerLink]="['/clips' | langPack]" color="warn" class="not-link">
+          {{ 'VIEW_ALL' | translate }}
+          <mat-icon>chevron_left</mat-icon>
+        </a>
       </div>
       <div class="agents-carousel">
         <div class="swiper-container h-100 carousel-outer" [swiper]="config">
@@ -12,14 +16,14 @@
             <div *ngFor="let item of items" class="swiper-slide">
               <mat-card appearance="outlined" class="overflow-hidden">
                 <div fxLayout="row wrap" class="property-status">
-                  <span class="background-color bg-orange">{{item.clipCategoryTitle}}</span>
+                  <span class="background-color bg-orange">{{ item.resourceCategoryTitle }}</span>
                 </div>
                 <a [routerLink]="['/clips' | langPack, item.id ]" class="scale-rotate-wrapper">
                   <img mat-card-image [src]="item.image" [alt]="item.title" class="w-100 h-100 img-square"/>
                 </a>
                 <mat-card-content>
                   <h3 class="two-lines fw-600 mb-10">
-                    {{item.title}}
+                    {{ item.title }}
                   </h3>
                   <mat-divider></mat-divider>
                   <p class="my-3 two-lines" [innerHTML]="item.abstract"></p>
@@ -29,7 +33,7 @@
                   <div fxLayout="row" fxLayoutAlign="start center" class="text-muted"></div>
                   <div>
                     <a [routerLink]="['/clips' | langPack, item.id ]" mat-button color="primary">
-                      {{viewText | translate}}
+                      {{ 'VIEW' | translate }}
                     </a>
                   </div>
                 </mat-card-actions>

@@ -2,7 +2,13 @@
   <div class="px-3">
     <div class="theme-container">
       <div fxLayout="row warp" fxLayoutAlign="space-between center" class="mx-1 my-3">
-        <span class="our-title">{{ 'PRODUCTS' | translate }}</span>
+        <div>
+          <span class="our-title">{{ 'PRODUCTS' | translate }}</span>
+        </div>
+        <a fxLayoutAlign="start start" [routerLink]="['/products' | langPack]" color="warn" class="not-link">
+          {{ 'VIEW_ALL' | translate }}
+          <mat-icon>chevron_left</mat-icon>
+        </a>
       </div>
       <div class="agents-carousel">
         <div class="swiper-container h-100 carousel-outer" [swiper]="config">

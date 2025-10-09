@@ -1,33 +1,27 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {SwiperConfigInterface} from 'ngx-swiper-wrapper';
 import {PureComponent} from '../../../pure-component';
-import {ProductCategoriesResponse} from '../../../../lib/models/ProductResponse';
+import {Product, ProductResponse, ProductsRequest} from '../../../core/models/ProductResponse';
 
 @Component({
   selector: 'app-our-product',
   templateUrl: './our-product.component.html',
-  styleUrls: ['./our-product.component.scss']
+  styleUrl: './our-product.component.scss',
+  standalone: false
 })
 export class OurProductComponent extends PureComponent implements OnInit, AfterViewInit {
-  public items = [];
+  public items: Product[] = [];
   public config: SwiperConfigInterface = {};
-  viewText = 'نمایش محصول';
 
   ngOnInit() {
-    const model = {
-      page: 1,
-      pageSize: -1,
+    let model: ProductsRequest = {
+      pageIndex: 1,
+      pageSize: 10,
       sort: 1,
-      isHome: true,
-      url: 'general'
     };
-    this.restClientService.getProductCategories().subscribe((d: ProductCategoriesResponse) => {
-      this.items = d.productCategories.filter(s => !s.parentId);
+    this.restApiService.getProducts(model).subscribe((d: ProductResponse) => {
+      this.items = d.data.items;
     });
-  }
-
-  func(a, b) {
-    return 0.5 - Math.random();
   }
 
   ngAfterViewInit() {

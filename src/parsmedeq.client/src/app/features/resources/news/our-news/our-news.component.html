@@ -3,11 +3,10 @@
     <div class="theme-container" ngClass.xs="my-3">
       <div fxLayout="row wrap" fxLayoutAlign="space-between start" class="mb-3">
         <div fxFlex="40" fxFlex.gt-md="70">
-          <span class="our-title">{{'NEWS_AND_ANNOUNCEMENTS' | translate}}</span>
-          <span class="our-desc">{{'ARTICLES_DESCRIPTION' | translate}}</span>
+          <span class="our-title">{{'NEWS' | translate}}</span>
         </div>
           <a fxLayoutAlign="start start" [routerLink]="['/news' | langPack]" color="warn" class="not-link">
-            {{ 'VIEW_ALL_NOTICES' | translate }}
+            {{ 'VIEW_ALL' | translate }}
             <mat-icon>chevron_left</mat-icon>
           </a>
       </div>

@@ -41,6 +41,9 @@ import {HeaderCarouselComponent} from './header-carousel/header-carousel.compone
 import {DownloadManagementComponent} from './components/download-management/download-management.component';
 import {OurArticleComponent} from '../features/resources/articles/our-article/our-article.component';
 import {RouterLink} from '@angular/router';
+import {OurNewsComponent} from '../features/resources/news/our-news/our-news.component';
+import {OurclipComponent} from '../features/resources/clips/our-clip/our-clip.component';
+import {OurProductComponent} from '../features/products/our-product/our-product.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +64,9 @@ import {RouterLink} from '@angular/router';
     HeaderCarouselComponent,
     DownloadManagementComponent,
     OurArticleComponent,
+    OurNewsComponent,
+    OurclipComponent,
+    OurProductComponent,
   ],
   imports: [
     CommonModule,
@@ -115,6 +121,7 @@ import {RouterLink} from '@angular/router';
     MatDialogTitle,
     MatDialogContent,
     MatDialogActions,
+    RouterLink,
     //////////////////////
     DefaultFlexDirective,
     DefaultClassDirective,
@@ -123,7 +130,6 @@ import {RouterLink} from '@angular/router';
     //////////////////////
     TreeViewComponent,
     SwiperModule,
-    RouterLink,
   ],
   exports: [
     FormsModule,
@@ -175,6 +181,7 @@ import {RouterLink} from '@angular/router';
     MatDialogTitle,
     MatDialogContent,
     MatDialogActions,
+    RouterLink,
     //////////////////////
     DefaultFlexDirective,
     DefaultClassDirective,
@@ -190,7 +197,9 @@ import {RouterLink} from '@angular/router';
     HeaderCarouselComponent,
     DownloadManagementComponent,
     OurArticleComponent,
-    RouterLink,
+    OurNewsComponent,
+    OurclipComponent,
+    OurProductComponent,
   ],
   providers: [
     CurrencyFormatterPipe,

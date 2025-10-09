@@ -1,5 +1,4 @@
 import {AlborzPagingRequest, Paginated} from './Pagination';
-import {ProductCategory} from './ProductCategoryResponse';
 import {FileUploadValue} from '../../shared/components/multi-file-upload/multi-file-upload.component';
 
 export interface ProductResponse {

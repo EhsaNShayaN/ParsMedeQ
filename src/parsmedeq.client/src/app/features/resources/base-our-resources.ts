@@ -1,71 +1,55 @@
-import {AfterViewInit, Directive, HostListener, inject, OnDestroy} from '@angular/core';
-import {BaseComponent} from '../../base-component';
-import {Resource} from '../../core/models/ResourceResponse';
-import {AppSettings, Settings} from '../../app.settings';
-import {ActivatedRoute} from '@angular/router';
-import {BaseResult} from '../../core/models/BaseResult';
-import {Tables} from '../../core/constants/server.constants';
+import {AfterViewInit, Directive, OnInit} from '@angular/core';
+import {Resource, ResourceResponse, ResourcesRequest} from '../../core/models/ResourceResponse';
+import {PureComponent} from '../../pure-component';
+import {SwiperConfigInterface} from 'ngx-swiper-wrapper';
 
 @Directive()
-export class BasePageResource extends BaseComponent implements AfterViewInit, OnDestroy {
-  public readonly Tables = Tables;
-  isLoading: boolean = true;
-  public appSettings: AppSettings;
-  public settings: Settings;
-  private activatedRoute: ActivatedRoute;
-  private sub: any;
-  public item?: Resource;
-  public message: string = '';
-  ltr = '';
-  tabIndex: string = '';
-  top = false;
-  id: number = 0;
+export class BaseOurResource extends PureComponent implements OnInit, AfterViewInit {
+  public items: Resource[] = [];
+  public config: SwiperConfigInterface = {};
 
   constructor(private tableId: number) {
     super();
-    this.appSettings = inject(AppSettings);
-    this.activatedRoute = inject(ActivatedRoute);
-    this.settings = this.appSettings.settings;
   }
 
-  @HostListener('window:scroll') onWindowScroll() {
-    const scrollTop = Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop);
-    this.top = scrollTop >= 40;
-    const productItem = document.getElementById('product-item');
-    if (productItem) {
-      const fixTabs = (scrollTop) > (productItem?.offsetTop ?? 0);
-      if (fixTabs) {
-        productItem.style.marginTop = '-8px';
-      } else {
-        productItem.style.marginTop = '0';
+  ngOnInit() {
+    let model: ResourcesRequest = {
+      pageIndex: 1,
+      pageSize: 10,
+      sort: 1,
+      tableId: this.tableId
+    };
+    this.restApiService.getResources(model).subscribe((d: ResourceResponse) => {
+      this.items = d.data.items;
+    });
+  }
+
+  ngAfterViewInit() {
+    this.config = {
+      observer: true,
+      slidesPerView: 4,
+      spaceBetween: 16,
+      keyboard: false,
+      navigation: true,
+      pagination: false,
+      grabCursor: true,
+      loop: false,
+      preloadImages: false,
+      lazy: true,
+      breakpoints: {
+        320: {
+          slidesPerView: 1
+        },
+        600: {
+          slidesPerView: 2
+        },
+        960: {
+          slidesPerView: 3
+        },
+        1280: {
+          slidesPerView: 4
+        }
       }
-    }
-  }
-
-  ngAfterViewInit(): void {
-    this.sub = this.activatedRoute.params.subscribe(params => {
-      this.id = Number(params['id']);
-      this.getResourceById();
-    });
-  }
-
-  public getResourceById() {
-    this.restApiService.getResource({id: this.id, tableId: this.tableId}).subscribe((d: BaseResult<Resource>) => {
-      this.item = d.data;
-      this.setTitle(this.item.title);
-      this.setMetaDescription(this.item.abstract);
-      this.ltr = this.item.language === 'انگلیسی' ? 'ltr' : '';
-    });
-  }
-
-  scrollToItem(str: string) {
-    this.tabIndex = str;
-    const x = document.getElementById(str);
-    const f: ScrollToOptions = {behavior: 'smooth', top: (x?.offsetTop ?? 0) - 80};
-    window.scrollTo(f);
-  }
-
-  ngOnDestroy() {
-    this.sub?.unsubscribe();
+    };
   }
 }
