@@ -10,6 +10,7 @@ public sealed class CartEndpoint : ApiEndpointBase
 
     public EndpointInfo List { get; private set; }
     public EndpointInfo Add { get; private set; }
+    public EndpointInfo Merge { get; private set; }
     public EndpointInfo Remove { get; private set; }
 
     public CartEndpoint()
@@ -33,6 +34,13 @@ public sealed class CartEndpoint : ApiEndpointBase
            this.GetUrl("add"),
            "add",
            "افزودن به سبد",
+           _tag);
+
+        Merge = new EndpointInfo(
+           this.GetUrl("merge"),
+           this.GetUrl("merge"),
+           "merge",
+           "ادغام سبد",
            _tag);
     }
 }

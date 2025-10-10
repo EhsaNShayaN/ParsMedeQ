@@ -1,8 +1,6 @@
 ﻿using ParsMedeQ.Application.Features.CartFeature.AddToCartFeature;
-using ParsMedeQ.Application.Features.CartFeature.MergeCartFeature;
 using ParsMedeQ.Contracts;
 using ParsMedeQ.Contracts.CartContracts.AddToCartContract;
-using ParsMedeQ.Contracts.CartContracts.MergeCartContract;
 
 namespace ParsMedeQ.Presentation.Features.CartFeatures.AddToCartFeature;
 sealed class AddToCartEndpoint : EndpointHandlerBase<

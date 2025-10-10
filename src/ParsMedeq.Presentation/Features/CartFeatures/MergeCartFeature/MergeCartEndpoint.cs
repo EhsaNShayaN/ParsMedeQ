@@ -15,7 +15,7 @@ sealed class MergeCartEndpoint : EndpointHandlerBase<
     public MergeCartEndpoint(
         IPresentationMapper<MergeCartApiRequest, MergeCartCommand> apiRequestMapper
         ) : base(
-            Endpoints.Cart.Add,
+            Endpoints.Cart.Merge,
             HttpMethod.Post,
             apiRequestMapper,
             DefaultResponseFactory.Instance.CreateOk)

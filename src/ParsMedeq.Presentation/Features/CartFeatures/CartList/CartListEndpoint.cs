@@ -19,7 +19,7 @@ sealed class CartListEndpoint : EndpointHandlerBase<
         IPresentationMapper<CartListApiRequest, CartListQuery> requestMapper,
         IPresentationMapper<CartListQueryResponse, CartListApiResponse> responseMapper)
         : base(
-            Endpoints.Product.ProductCategories,
+            Endpoints.Cart.List,
             HttpMethod.Get,
             requestMapper,
             responseMapper,
