@@ -1,6 +1,5 @@
 ﻿using ParsMedeQ.Application.Persistance.Schema.CartRepositories;
 using ParsMedeQ.Domain.Aggregates.CartAggregate;
-using ParsMedeQ.Domain.Aggregates.CartAggregate.Entities;
 using ParsMedeQ.Domain.Aggregates.ProductAggregate;
 using ParsMedeQ.Infrastructure.Persistance.DbContexts;
 using SRH.Persistance.Repositories.Write;
@@ -10,11 +9,7 @@ internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<
 {
     public CartWriteRepository(WriteDbContext dbContext) : base(dbContext) { }
 
-    public async ValueTask<Cart[]> GetCartsAsync()
-    {
-        return await this.DbContext.Cart.Include(c => c.CartItems).ToArrayAsync();
-    }
-    public async ValueTask<Cart> GetCartAsync(int? userId, Guid? anonymousId)
+    public async ValueTask<Cart> GetCarts(int? userId, Guid? anonymousId, string Lang)
     {
         var cart = await this.DbContext.Cart
             .Include(c => c.CartItems)
@@ -29,37 +24,39 @@ internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<
 
         return cart;
     }
-    public async ValueTask<Cart> AddToCartAsync(int? userId, Guid? anonymousId, CartItem item)
+    public async ValueTask<Cart> AddToCart(int? userId, Guid? anonymousId, int tableId, int relatedId, int quantity, string Lang)
     {
         // گرفتن محصول از دیتابیس
-        var product = await this.DbContext.Set<Product>().FindAsync(item.RelatedId);
+        var product = await this.DbContext.Set<Product>().FindAsync(relatedId);
         if (product == null)
             throw new InvalidOperationException("محصول پیدا نشد");
 
         if (product.Stock <= 0)
             throw new InvalidOperationException("محصول ناموجود است");
 
-        var cart = await GetCartAsync(userId, anonymousId);
+        var cart = await GetCarts(userId, anonymousId, Lang);
 
-        var existingItem = cart.CartItems.FirstOrDefault(i => i.RelatedId == item.RelatedId && i.TableId == item.TableId);
+        var existingItem = cart.CartItems.FirstOrDefault(i => i.RelatedId == relatedId && i.TableId == tableId);
 
         if (existingItem != null)
         {
             // چک موجودی
-            if (existingItem.Quantity + item.Quantity > product.Stock)
+            if (existingItem.Quantity + quantity > product.Stock)
                 throw new InvalidOperationException($"حداکثر تعداد سفارش {product.Stock} عدد است");
 
-            existingItem.Quantity += item.Quantity;
+            existingItem.Quantity += quantity;
         }
         else
         {
-            if (item.Quantity > product.Stock)
+            if (quantity > product.Stock)
                 throw new InvalidOperationException($"حداکثر تعداد سفارش {product.Stock} عدد است");
 
-            await cart.AddCartItem(item);
+            await cart.AddCartItem(
+                tableId,
+                relatedId,
+                product!.ProductTranslations.First(s => s.LanguageCode.Equals(Lang))!.Title,
+                product!.Price ?? 0, quantity);
         }
-
-        await this.DbContext.SaveChangesAsync();
         return cart;
     }
     public async ValueTask<bool> CheckoutAsync(int userId)
@@ -82,17 +79,16 @@ internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<
 
         return true;
     }
-    public async ValueTask<Cart> RemoveFromCartAsync(int? userId, Guid? anonymousId, int itemId)
+    public async ValueTask<Cart> RemoveFromCart(int? userId, Guid? anonymousId, int relatedId)
     {
-        var cart = await GetCartAsync(userId, anonymousId);
-        var item = cart.CartItems.FirstOrDefault(i => i.Id == itemId);
+        var cart = await GetCarts(userId, anonymousId, string.Empty);
+        var item = cart.CartItems.FirstOrDefault(i => i.Id == relatedId);
         if (item != null)
         {
             await cart.RemoveCartItem(item);
             this.DbContext.CartItems.Remove(item);
         }
 
-        await this.DbContext.SaveChangesAsync();
         return cart;
     }
     public async ValueTask<Cart> MergeCartAsync(Guid anonymousId, int userId)

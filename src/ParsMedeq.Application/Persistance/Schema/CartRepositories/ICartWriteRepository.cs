@@ -1,14 +1,12 @@
 ﻿using ParsMedeQ.Domain.Aggregates.CartAggregate;
-using ParsMedeQ.Domain.Aggregates.CartAggregate.Entities;
 using ParsMedeQ.Domain.Persistance;
 
 namespace ParsMedeQ.Application.Persistance.Schema.CartRepositories;
 public interface ICartWriteRepository : IDomainRepository
 {
-    ValueTask<Cart[]> GetCartsAsync();
-    ValueTask<Cart> GetCartAsync(int? userId, Guid? anonymousId);
-    ValueTask<Cart> AddToCartAsync(int? userId, Guid? anonymousId, CartItem item);
+    ValueTask<Cart> GetCarts(int? userId, Guid? anonymousId, string Lang);
+    ValueTask<Cart> AddToCart(int? userId, Guid? anonymousId, int tableId, int relatedId, int quantity, string Lang);
     ValueTask<bool> CheckoutAsync(int userId);
-    ValueTask<Cart> RemoveFromCartAsync(int? userId, Guid? anonymousId, int itemId);
+    ValueTask<Cart> RemoveFromCart(int? userId, Guid? anonymousId, int relatedId);
     ValueTask<Cart> MergeCartAsync(Guid anonymousId, int userId);
 }

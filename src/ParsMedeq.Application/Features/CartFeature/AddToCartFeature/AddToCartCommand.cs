@@ -1,12 +1,13 @@
-﻿using ParsMedeQ.Domain.Aggregates.CartAggregate.Entities;
-using SRH.MediatRMessaging;
+﻿using SRH.MediatRMessaging;
 
-namespace ParsMedeQ.Application.Features.GeneralFeatures.AddToCartFeature;
+namespace ParsMedeQ.Application.Features.CartFeature.AddToCartFeature;
 
 public sealed record class AddToCartCommand(
     int? UserId,
     Guid? AnonymousId,
-    CartItem CartItem) : IPrimitiveResultCommand<AddToCartCommandResponse>,
+    int RelatedId,
+    int TableId,
+    int Quantity) : IPrimitiveResultCommand<AddToCartCommandResponse>,
     IValidatableRequest<AddToCartCommand>
 {
     public ValueTask<PrimitiveResult<AddToCartCommand>> Validate() => PrimitiveResult.Success(this)
