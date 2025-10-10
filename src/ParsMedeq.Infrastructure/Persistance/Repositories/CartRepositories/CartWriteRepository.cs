@@ -91,7 +91,7 @@ internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<
 
         return cart;
     }
-    public async ValueTask<Cart> MergeCartAsync(Guid anonymousId, int userId)
+    public async ValueTask<Cart> MergeCart(int userId, Guid anonymousId)
     {
         var userCart = await this.DbContext.Cart.Include(c => c.CartItems).FirstOrDefaultAsync(c => c.UserId == userId);
         var anonCart = await this.DbContext.Cart.Include(c => c.CartItems).FirstOrDefaultAsync(c => c.AnonymousId == anonymousId);
@@ -102,7 +102,6 @@ internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<
         {
             anonCart.UserId = userId;
             anonCart.AnonymousId = null;
-            await this.DbContext.SaveChangesAsync();
             return anonCart;
         }
 
@@ -117,7 +116,6 @@ internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<
         }
 
         this.DbContext.Cart.Remove(anonCart);
-        await this.DbContext.SaveChangesAsync();
 
         return userCart;
     }
