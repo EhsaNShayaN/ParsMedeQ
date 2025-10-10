@@ -4,6 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Product} from '../../../core/models/ProductResponse';
 import {ProductCategoriesResponse, ProductCategory} from '../../../core/models/ProductCategoryResponse';
 import {BaseResult} from '../../../core/models/BaseResult';
+import {Tables} from '../../../core/constants/server.constants';
 
 @Component({
   selector: 'app-product',
@@ -59,5 +60,6 @@ export class ProductComponent extends BaseComponent implements OnInit, OnDestroy
   }
 
   protected readonly parent = parent;
+  protected readonly Tables = Tables;
 }
 

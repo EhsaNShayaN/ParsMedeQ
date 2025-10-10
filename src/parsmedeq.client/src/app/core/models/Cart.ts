@@ -1,9 +1,9 @@
 export class CartItem {
   id?: number;
   delta?: number;
-  productId!: number;
-  productType!: string;
-  productName!: string;
+  relatedId!: number;
+  tableId!: number;
+  relatedName!: string;
   unitPrice!: number;
   quantity!: number;
   originalQuantity!: number;

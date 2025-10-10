@@ -2,7 +2,7 @@
   <h2>سبد خرید</h2>
   <ul>
     <li *ngFor="let item of c.items">
-      {{ item.productName }} - {{ item.quantity }} × {{ item.unitPrice | number }} تومان
+      {{ item.relatedName }} - {{ item.quantity }} × {{ item.unitPrice | number }} تومان
       <button (click)="removeItem(item.id!)">حذف</button>
     </li>
   </ul>

@@ -46,7 +46,7 @@
           <ng-container *ngIf="cartItems.length > 0; else empty">
             <div *ngFor="let item of cartItems" class="cart-item"
                  [ngClass]="{'reduced': (item.delta ?? 0) < 0, 'removed': item.quantity === 0}">
-              <span>{{ item.productName }}</span>
+              <span>{{ item.relatedName }}</span>
               <span>تعداد: {{ item.quantity }}</span>
               <span>{{ item.unitPrice * item.quantity | number }} تومان</span>
               <span *ngIf="(item.delta ?? 0) < 0" class="icon-warning">⚠️</span>

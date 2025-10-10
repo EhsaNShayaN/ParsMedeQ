@@ -9,16 +9,16 @@ import {Cart, CartItem} from '../../../core/models/Cart';
   standalone: false
 })
 export class CartItemControlComponent {
-  @Input() productId!: number;
-  @Input() productType!: string;
-  @Input() productName!: string;
+  @Input() relatedId!: number;
+  @Input() tableId!: number;
+  @Input() relatedName!: string;
   @Input() unitPrice!: number;
   @Input() stock!: number;   // 👈 موجودی محصول
 
   cart!: Signal<Cart | null>; // or appropriate type
 
   item = computed(() =>
-    this.cart()?.items.find(i => i.productId === this.productId && i.productType === this.productType)
+    this.cart()?.items.find(i => i.relatedId === this.relatedId && i.tableId === this.tableId)
   );
 
   quantity = computed(() => this.item()?.quantity ?? 0);
@@ -38,9 +38,9 @@ export class CartItemControlComponent {
     }
 
     const item: CartItem = {
-      productId: this.productId,
-      productType: this.productType,
-      productName: this.productName,
+      relatedId: this.relatedId,
+      tableId: this.tableId,
+      relatedName: this.relatedName,
       unitPrice: this.unitPrice,
       quantity: 1,
       originalQuantity: 0

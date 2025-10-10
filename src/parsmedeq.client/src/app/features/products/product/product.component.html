@@ -26,6 +26,20 @@
             [id]="item.fileId!" [price]="item.price ?? 0" [tableId]="Tables.Article">
           </app-download-management>
         }-->
+        @if (product) {
+          <!--relatedId: {{ product!.id }}<br/>
+          tableId: {{ Tables.Product }}<br/>
+          relatedName: {{ product!.title }}<br/>
+          unitPrice: {{ (product!.price ?? 0) }}<br/>
+          stock: {{ product!.stock ?? 99999999 }}<br/>-->
+          <app-cart-item-control
+            [relatedId]="product!.id"
+            [tableId]="Tables.Product"
+            [relatedName]="product!.title"
+            [unitPrice]="product!.price ?? 0"
+            [stock]="product!.stock ?? 99999999">
+          </app-cart-item-control>
+        }
       </div>
       <div fxLayout="row wrap" class="agents-wrapper">
         <div class="p-3" fxFlex="100" fxFlex.gt-md="50">

@@ -1,21 +1,25 @@
-<div *ngIf="stock === 0">
-  <button disabled class="out-of-stock">ناموجود</button>
-</div>
-
-<div *ngIf="stock > 0">
-  <div *ngIf="quantity() === 0; else inCart">
-    <button (click)="add()">➕ افزودن به سبد</button>
+@if (stock === 0) {
+  <div>
+    <button disabled class="out-of-stock">ناموجود</button>
   </div>
-
-  <ng-template #inCart>
-    <div class="cart-control">
-      <button (click)="decrease()">➖</button>
-      <span>{{ quantity() }}</span>
-      <button (click)="increase()" [disabled]="quantity() >= stock">➕</button>
-      <button class="remove" (click)="remove()">❌</button>
-    </div>
-    <p *ngIf="quantity() >= stock" class="warning">
-      حداکثر تعداد قابل سفارش {{ stock }} عدد است
-    </p>
-  </ng-template>
-</div>
+} @else if (stock > 0) {
+  <div>
+    @if (quantity() === 0) {
+      <div>
+        <button (click)="add()">➕ افزودن به سبد</button>
+      </div>
+    } @else {
+      <div class="cart-control">
+        <button (click)="decrease()">➖</button>
+        <span>{{ quantity() }}</span>
+        <button (click)="increase()" [disabled]="quantity() >= stock">➕</button>
+        <button class="remove" (click)="remove()">❌</button>
+      </div>
+      @if (quantity() >= stock) {
+        <p class="warning">
+          حداکثر تعداد قابل سفارش {{ stock }} عدد است
+        </p>
+      }
+    }
+  </div>
+}
