@@ -130,6 +130,17 @@ app.MapGet("/api/v1/weatherforecast", () =>
     return forecast;
 });
 
+app.MapPost("/api/f", (
+    [AsParameters] AAParameter p,
+    AAParameter p2) =>
+{
+    return TypedResults.Ok(new
+    {
+        p,
+        p2
+    });
+});
+
 app.UseSwagger();
 app.UseSwaggerUI(options =>
 {
@@ -157,3 +168,4 @@ static class CommandArgReader
         return string.IsNullOrWhiteSpace(result) ? defaultValue : result;
     }
 }
+sealed record AAParameter(string Name, int Age);

@@ -21,7 +21,7 @@
                       <span class="background-color bg-green">vip</span>
                     </div>
                   }
-                  <img [src]="item?.image" [alt]="item?.title" class="w-100">
+                  <img mat-card-image defaultImage [src]="item?.image" [alt]="item?.title" class="w-100">
                   @if ((item.fileId ?? 0) > 0 && (item.registered || item.price === 0)) {
                     <app-download-management
                       [id]="item.fileId!" [price]="item.price ?? 0" [tableId]="Tables.Clip">

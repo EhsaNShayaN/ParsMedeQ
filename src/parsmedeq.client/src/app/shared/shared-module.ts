@@ -45,7 +45,6 @@ import {OurNewsComponent} from '../features/resources/news/our-news/our-news.com
 import {OurclipComponent} from '../features/resources/clips/our-clip/our-clip.component';
 import {OurProductComponent} from '../features/products/our-product/our-product.component';
 import {HeaderImageComponent} from './header-image/header-image.component';
-import {DefaultImageDirective} from "../core/directives/default-image";
 
 @NgModule({
   declarations: [

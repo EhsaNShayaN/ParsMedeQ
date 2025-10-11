@@ -15,7 +15,6 @@ export class CartItem {
 
 export interface Cart {
   id?: number;
-  userId?: string;
   anonymousId?: string;
   items: CartItem[];
 }

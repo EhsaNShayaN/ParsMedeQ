@@ -1,10 +1,11 @@
-﻿using ParsMedeQ.Application.Features.CartFeature.AddToCartFeature;
+﻿using MediatR;
+using Microsoft.AspNetCore.Http;
+using ParsMedeQ.Application.Features.CartFeature.AddToCartFeature;
 using ParsMedeQ.Contracts;
 using ParsMedeQ.Contracts.CartContracts.AddToCartContract;
 
 namespace ParsMedeQ.Presentation.Features.CartFeatures.AddToCartFeature;
 sealed class AddToCartEndpoint : EndpointHandlerBase<
-    AddToCartApiRequest,
     AddToCartCommand,
     AddToCartCommandResponse,
     AddToCartApiResponse>
@@ -12,26 +13,30 @@ sealed class AddToCartEndpoint : EndpointHandlerBase<
     protected override bool NeedAuthentication => false;
     protected override bool NeedTaxPayerFile => false;
 
-    public AddToCartEndpoint(
-        IPresentationMapper<AddToCartApiRequest, AddToCartCommand> apiRequestMapper
-        ) : base(
+    public AddToCartEndpoint(IPresentationMapper<AddToCartCommandResponse, AddToCartApiResponse> responseMapper) : base(
             Endpoints.Cart.Add,
             HttpMethod.Post,
-            apiRequestMapper,
-            DefaultResponseFactory.Instance.CreateOk)
+            responseMapper)
     { }
-}
-internal sealed class AddCartApiRequestMapper : IPresentationMapper<AddToCartApiRequest, AddToCartCommand>
-{
-    public async ValueTask<PrimitiveResult<AddToCartCommand>> Map(AddToCartApiRequest src, CancellationToken cancellationToken)
-    {
-        return await ValueTask.FromResult(
+
+    protected override Delegate EndpointDelegate =>
+    (
+        [AsParameters] Guid anonymousId,
+        AddToCartApiRequest request,
+        ISender sender,
+        CancellationToken cancellationToken) => this.CallMediatRHandler(
+        sender,
+        () => ValueTask.FromResult(
             PrimitiveResult.Success(
-                new AddToCartCommand(
-                    src.UserId,
-                    src.AnonymousId,
-                    src.RelatedId,
-                    src.TableId,
-                    1)));
+                new AddToCartCommand(anonymousId, request.RelatedId, request.TableId, request.Quantity))),
+        cancellationToken);
+}
+sealed class AddToCartCommandResponseMapper : IPresentationMapper<AddToCartCommandResponse, AddToCartApiResponse>
+{
+    public ValueTask<PrimitiveResult<AddToCartApiResponse>> Map(AddToCartCommandResponse src, CancellationToken cancellationToken)
+    {
+        return ValueTask.FromResult(
+            PrimitiveResult.Success(
+                new AddToCartApiResponse(src.Changed)));
     }
 }

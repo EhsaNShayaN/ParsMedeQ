@@ -1,4 +1,2 @@
 ﻿namespace ParsMedeQ.Contracts.CartContracts.MergeCartContract;
-public record struct MergeCartApiRequest(
-    int UserId,
-    Guid AnonymousId);
+public record struct MergeCartApiRequest(Guid AnonymousId);

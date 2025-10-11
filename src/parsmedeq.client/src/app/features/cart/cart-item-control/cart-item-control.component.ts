@@ -45,18 +45,18 @@ export class CartItemControlComponent {
       quantity: 1,
       originalQuantity: 0
     };
-    this.cartService.addToCart(item, this.cart()?.userId);
+    this.cartService.addToCart(item);
   }
 
   remove() {
     if (this.item()) {
-      this.cartService.removeFromCart(this.item()!.id!, this.cart()?.userId);
+      this.cartService.removeFromCart(this.item()!.id!);
     }
   }
 
   increase() {
     if (this.quantity() < this.stock) {
-      this.cartService.addToCart({...this.item()!, quantity: 1}, this.cart()?.userId);
+      this.cartService.addToCart({...this.item()!, quantity: 1});
     } else {
       alert(`حداکثر تعداد قابل سفارش ${this.stock} عدد است`);
     }
@@ -65,7 +65,7 @@ export class CartItemControlComponent {
   decrease() {
     const item = this.item();
     if (item && item.quantity > 1) {
-      this.cartService.addToCart({...item, quantity: -1}, this.cart()?.userId);
+      this.cartService.addToCart({...item, quantity: -1});
     } else {
       this.remove();
     }

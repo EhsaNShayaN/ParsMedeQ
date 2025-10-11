@@ -34,7 +34,7 @@ sealed class CartListEndpoint : EndpointHandlerBase<
             sender,
             () => ValueTask.FromResult(
                 PrimitiveResult.Success(
-                    new CartListQuery(request.UserId, request.AnonymousId))),
+                    new CartListQuery(request.AnonymousId))),
             cancellationToken);
 
 }
@@ -48,7 +48,7 @@ sealed class CartListApiRequestMapper : IPresentationMapper<
     {
         return ValueTask.FromResult(
             PrimitiveResult.Success(
-                new CartListQuery(src.UserId, src.AnonymousId)));
+                new CartListQuery(src.AnonymousId)));
     }
 }
 sealed class CartListApiResponseMapper : IPresentationMapper<
@@ -63,8 +63,6 @@ sealed class CartListApiResponseMapper : IPresentationMapper<
             PrimitiveResult.Success(
                 new CartListApiResponse(
                     src.Id,
-                    src.UserId,
-                    src.AnonymousId,
                     src.CartItems.Select(item => new CartItemListApiResponse(
                         item.TableId,
                         item.RelatedId,

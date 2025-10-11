@@ -21,7 +21,7 @@ public sealed class CartEndpoint : ApiEndpointBase
            "list",
            "لیست سبد",
            _tag);
-        
+
         Remove = new EndpointInfo(
            this.GetUrl("remove"),
            this.GetUrl("remove"),

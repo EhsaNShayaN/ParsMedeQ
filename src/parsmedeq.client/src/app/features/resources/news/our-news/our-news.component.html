@@ -3,12 +3,12 @@
     <div class="theme-container" ngClass.xs="my-3">
       <div fxLayout="row wrap" fxLayoutAlign="space-between start" class="mb-3">
         <div fxFlex="40" fxFlex.gt-md="70">
-          <span class="our-title">{{'NEWS' | translate}}</span>
+          <span class="our-title">{{ 'NEWS' | translate }}</span>
         </div>
-          <a fxLayoutAlign="start start" [routerLink]="['/news' | langPack]" color="warn" class="not-link">
-            {{ 'VIEW_ALL' | translate }}
-            <mat-icon>chevron_left</mat-icon>
-          </a>
+        <a fxLayoutAlign="start start" [routerLink]="['/news' | langPack]" color="warn" class="not-link">
+          {{ 'VIEW_ALL' | translate }}
+          <mat-icon>chevron_left</mat-icon>
+        </a>
       </div>
       <div class="agents-carousel">
         <div class="swiper-container h-100 carousel-outer" [swiper]="config">
@@ -19,9 +19,9 @@
                   <div class="position-relative">
                     <div class="mask-div not-link background-color" fxLayout="row wrap"
                          fxLayoutAlign="center center" *ngIf="item.expired">
-                      {{'ENDED' | translate}}
+                      {{ 'ENDED' | translate }}
                     </div>
-                    <img mat-card-image [src]="item.image" [alt]="item.title" class="w-100"/>
+                    <img mat-card-image defaultImage [src]="item.image" [alt]="item.title" class="w-100"/>
                   </div>
                 </a>
                 <mat-card-content class="pb-0">

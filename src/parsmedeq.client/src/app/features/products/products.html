@@ -41,7 +41,8 @@
                       <a
                         [routerLink]="['/products', item.id, item.title | replaceUrlSpaces ]"
                         class="agent-img">
-                        <img mat-card-image [src]="item.image" [alt]="item.title" class="w-100 img-square"/>
+                        <img mat-card-image defaultImage [src]="item.image" [alt]="item.title"
+                             class="w-100 img-square"/>
                       </a>
                       <mat-card-content>
                         <h3 class="two-lines fw-600">

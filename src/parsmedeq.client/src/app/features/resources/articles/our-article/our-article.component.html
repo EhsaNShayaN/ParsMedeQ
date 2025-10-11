@@ -16,8 +16,9 @@
             @for (item of items; track item.id) {
               <div class="swiper-slide">
                 <mat-card appearance="outlined" class="overflow-hidden">
-                  <a [routerLink]="['/articles' | langPack, item.id, item.title | replaceUrlSpaces ]" class="scale-rotate-wrapper">
-                    <img mat-card-image [src]="item.image" [alt]="item.title" class="w-100 img-square"/>
+                  <a [routerLink]="['/articles' | langPack, item.id, item.title | replaceUrlSpaces ]"
+                     class="scale-rotate-wrapper">
+                    <img mat-card-image defaultImage [src]="item.image" [alt]="item.title" class="w-100 img-square"/>
                   </a>
                   <mat-card-content>
                     <h3 class="single-line fw-600 mb-2" [title]="item.title"

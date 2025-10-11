@@ -17,8 +17,8 @@ export class CartService {
   }
 
   /** گرفتن سبد */
-  loadCart(userId?: string) {
-    const url = userId ? `${this.apiUrl}list?userId=${userId}` : this.apiUrl;
+  loadCart() {
+    const url = `${this.apiUrl}list`;
     this.http.get<Cart>(url).subscribe({
       next: (c) => {
         this.cart.set(c);
@@ -29,12 +29,12 @@ export class CartService {
   }
 
   /** افزودن به سبد */
-  addToCart(item: CartItem, userId?: string): void {
-    const anonymousId = userId ? null : this.storage.getAnonymousId();
+  addToCart(item: CartItem): void {
+    console.log('item', item);
+    const anonymousId = this.storage.getAnonymousId();
     const model: any = item;
-    model.userId = userId;
     model.anonymousId = anonymousId;
-    this.http.post<Cart>(`${this.apiUrl}add?userId=${userId ?? ''}&anonymousId=${anonymousId ?? ''}`, model)
+    this.http.post<Cart>(`${this.apiUrl}add?anonymousId=${anonymousId ?? ''}`, model)
       .subscribe(c => {
         this.cart.set(c);
         this.cartSubject.next(c);
@@ -42,10 +42,10 @@ export class CartService {
   }
 
   /** حذف از سبد */
-  removeFromCart(relatedId: number, userId?: string): void {
-    const anonymousId = userId ? null : this.storage.getAnonymousId();
-    const model: any = {userId, anonymousId, relatedId};
-    this.http.post<Cart>(`${this.apiUrl}remove?userId=${userId ?? ''}&anonymousId=${anonymousId ?? ''}&relatedId=${relatedId}`, model)
+  removeFromCart(relatedId: number): void {
+    const anonymousId = this.storage.getAnonymousId();
+    const model: any = {anonymousId, relatedId};
+    this.http.post<Cart>(`${this.apiUrl}remove?anonymousId=${anonymousId ?? ''}&relatedId=${relatedId}`, model)
       .subscribe(c => {
         this.cart.set(c);
         this.cartSubject.next(c);
@@ -53,10 +53,10 @@ export class CartService {
   }
 
   /** ادغام بعد از لاگین */
-  mergeCart(userId: string): void {
+  mergeCart(): void {
     const anonymousId = this.storage.getAnonymousId();
-    const model: any = {userId, anonymousId};
-    this.http.post<Cart>(`${this.apiUrl}merge?anonymousId=${anonymousId}&userId=${userId}`, model)
+    const model: any = {anonymousId};
+    this.http.post<Cart>(`${this.apiUrl}merge?anonymousId=${anonymousId}`, model)
       .subscribe(c => {
         this.cart.set(c);
         this.cartSubject.next(c);

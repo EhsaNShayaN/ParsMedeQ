@@ -23,4 +23,8 @@
 		<ProjectReference Include="..\ParsMedeQ.Domain\ParsMedeQ.Domain.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Features\CommentFeature\" />
+	</ItemGroup>
+
 </Project>

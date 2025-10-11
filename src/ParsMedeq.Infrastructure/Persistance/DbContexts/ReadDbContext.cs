@@ -1,5 +1,6 @@
 ﻿using ParsMedeQ.Domain.Aggregates.CartAggregate;
 using ParsMedeQ.Domain.Aggregates.CartAggregate.Entities;
+using ParsMedeQ.Domain.Aggregates.CommentAggregate;
 using ParsMedeQ.Domain.Aggregates.MediaAggregate;
 using ParsMedeQ.Domain.Aggregates.ProductAggregate;
 using ParsMedeQ.Domain.Aggregates.ProductAggregate.Entities;
@@ -28,6 +29,7 @@ public sealed class ReadDbContext : DbContextBase<ReadDbContext>
     public DbSet<Media> Media { get; set; }
     public DbSet<Cart> Cart { get; set; }
     public DbSet<CartItem> CartItems { get; set; }
+    public DbSet<Comment> Comment { get; set; }
 
     public ReadDbContext(DbContextOptions<ReadDbContext> opts) : base(opts) { }
 

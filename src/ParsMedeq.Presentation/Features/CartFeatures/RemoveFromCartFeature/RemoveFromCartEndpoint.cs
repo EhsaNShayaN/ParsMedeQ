@@ -27,7 +27,6 @@ internal sealed class RemoveFromCartApiRequestMapper : IPresentationMapper<Remov
         ValueTask.FromResult(
             PrimitiveResult.Success(
                 new RemoveFromCartCommand(
-                    src.UserId,
                     src.AnonymousId,
                     src.RelatedId)));
 }

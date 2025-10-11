@@ -57,6 +57,17 @@ internal abstract class EndpointHandlerBase<THandlerRequest, THandlerResponse, T
     { }
 
     protected EndpointHandlerBase(
+        EndpointInfo endpointInfo,
+        HttpMethod httpMethod,
+        IPresentationMapper<THandlerResponse, TEndpointResponse> handlerResponseMapper) : this(
+            endpointInfo,
+            httpMethod,
+            () => default,
+            handlerResponseMapper.Map,
+            DefaultResponseFactory.Instance.CreateOk)
+    { }
+
+    protected EndpointHandlerBase(
        EndpointInfo endpointInfo,
        HttpMethod httpMethod,
        Func<THandlerResponse, CancellationToken, ValueTask<PrimitiveResult<TEndpointResponse>>> handlerResponseMapper,
@@ -72,6 +83,17 @@ internal abstract class EndpointHandlerBase<THandlerRequest, THandlerResponse, T
        Func<THandlerResponse, CancellationToken, ValueTask<PrimitiveResult<TEndpointResponse>>> handlerResponseMapper)
         : this(endpointInfo, httpMethod, handlerResponseMapper, DefaultResponseFactory.Instance.CreateOk)
     { }
+    protected EndpointHandlerBase(
+      EndpointInfo endpointInfo,
+      HttpMethod httpMethod,
+      Func<THandlerResponse, CancellationToken, TEndpointResponse> handlerResponseMapper)
+       : this(
+             endpointInfo,
+             httpMethod,
+             (handlerResponse, cancellationToken) => ValueTask.FromResult(PrimitiveResult.Success(handlerResponseMapper.Invoke(handlerResponse, cancellationToken))),
+             DefaultResponseFactory.Instance.CreateOk)
+    { }
+
 
 
     public override RouteHandlerBuilder AddRoute(IEndpointRouteBuilder routeBuilder)

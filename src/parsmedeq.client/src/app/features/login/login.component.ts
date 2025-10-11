@@ -102,8 +102,7 @@ export class LoginComponent extends BaseComponent implements OnInit, OnDestroy {
         if (d.data.token) {
           this.auth.login(d.data.token);
           this.navigateToLink(this.returnUrl, 'fa');
-          const anonymousId = this.storageService.getAnonymousId();
-          this.cartService.mergeCart(anonymousId);
+          this.cartService.mergeCart();
           this.storageService.clearAnonymousId();
         } else {
           this.error = this.getTranslateValue('PASSWORD_IS_WRONG');

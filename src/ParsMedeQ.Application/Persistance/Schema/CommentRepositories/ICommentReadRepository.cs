@@ -1,0 +1,11 @@
+﻿using ParsMedeQ.Domain.Persistance;
+
+namespace ParsMedeQ.Application.Persistance.Schema.CommentRepositories;
+public interface ICommentReadRepository : IDomainRepository
+{
+    /*public ValueTask<PrimitiveResult<BasePaginatedApiResponse<CommentListDbQueryResponse>>> FilterComments(
+        BasePaginatedQuery paginated,
+        int? relatedId,
+        int lastId,
+        CancellationToken cancellationToken);*/
+}

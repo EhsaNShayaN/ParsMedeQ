@@ -27,8 +27,6 @@ internal sealed class AddCartApiRequestMapper : IPresentationMapper<MergeCartApi
     {
         return await ValueTask.FromResult(
             PrimitiveResult.Success(
-                new MergeCartCommand(
-                    src.UserId,
-                    src.AnonymousId)));
+                new MergeCartCommand(src.AnonymousId)));
     }
 }
