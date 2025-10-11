@@ -8,10 +8,5 @@ internal sealed class CommentWriteRepository : GenericPrimitiveWriteRepositoryBa
 {
     public CommentWriteRepository(WriteDbContext dbContext) : base(dbContext) { }
 
-    /*public ValueTask<Comment> AddComment(int userId, int tableId, string tableName, int relatedId, string icon, string description)
-    {
-        
-    }*/
-
     public ValueTask<PrimitiveResult<Comment>> AddComment(Comment comment) => this.Add(comment);
 }

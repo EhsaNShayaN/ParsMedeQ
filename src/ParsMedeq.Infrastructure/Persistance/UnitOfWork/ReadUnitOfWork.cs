@@ -1,5 +1,6 @@
 ﻿using ParsMedeQ.Application.Persistance.Schema;
 using ParsMedeQ.Application.Persistance.Schema.CartRepositories;
+using ParsMedeQ.Application.Persistance.Schema.CommentRepositories;
 using ParsMedeQ.Application.Persistance.Schema.MediaRepositories;
 using ParsMedeQ.Application.Persistance.Schema.ProductRepositories;
 using ParsMedeQ.Application.Persistance.Schema.PurchaseRepositories;
@@ -22,6 +23,8 @@ public sealed class ReadUnitOfWork : UnitofWorkBase<ReadDbContext>, IReadUnitOfW
     public IMediaReadRepository MediaReadRepository => this.GetService<IMediaReadRepository>();
 
     public ICartReadRepository CartReadRepository => this.GetService<ICartReadRepository>();
+
+    public ICommentReadRepository CommentReadRepository => this.GetService<ICommentReadRepository>();
 
     public ReadUnitOfWork(ReadDbContext dbContext, IServiceProvider serviceProvider) : base(dbContext, serviceProvider) { }
 }

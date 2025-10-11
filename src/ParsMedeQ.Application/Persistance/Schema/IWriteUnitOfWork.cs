@@ -1,4 +1,5 @@
 ﻿using ParsMedeQ.Application.Persistance.Schema.CartRepositories;
+using ParsMedeQ.Application.Persistance.Schema.CommentRepositories;
 using ParsMedeQ.Application.Persistance.Schema.MediaRepositories;
 using ParsMedeQ.Application.Persistance.Schema.ProductRepositories;
 using ParsMedeQ.Application.Persistance.Schema.ResourceRepositories;
@@ -12,4 +13,5 @@ public interface IWriteUnitOfWork : IBaseWriteUnitOfWork
     IProductWriteRepository ProductWriteRepository { get; }
     IMediaWriteRepository MediaWriteRepository { get; }
     ICartWriteRepository CartWriteRepository { get; }
+    ICommentWriteRepository CommentWriteRepository { get; }
 }

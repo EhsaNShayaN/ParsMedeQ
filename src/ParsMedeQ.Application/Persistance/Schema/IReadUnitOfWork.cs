@@ -1,4 +1,5 @@
 ﻿using ParsMedeQ.Application.Persistance.Schema.CartRepositories;
+using ParsMedeQ.Application.Persistance.Schema.CommentRepositories;
 using ParsMedeQ.Application.Persistance.Schema.MediaRepositories;
 using ParsMedeQ.Application.Persistance.Schema.ProductRepositories;
 using ParsMedeQ.Application.Persistance.Schema.PurchaseRepositories;
@@ -15,4 +16,5 @@ public interface IReadUnitOfWork : IUnitOfWork
     IMediaReadRepository MediaReadRepository { get; }
     IPurchaseReadRepository PurchaseReadRepository { get; }
     ICartReadRepository CartReadRepository { get; }
+    ICommentReadRepository CommentReadRepository { get; }
 }

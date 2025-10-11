@@ -14,6 +14,7 @@ public static class Endpoints
     public readonly static ProductEndpoint Product = new();
     public readonly static GeneralEndpoint General = new();
     public readonly static CartEndpoint Cart = new();
+    public readonly static CartEndpoint Comment = new();
 }
 public static class EndpointMetadata
 {
@@ -25,5 +26,6 @@ public static class EndpointMetadata
     public readonly static ApiEndpointItem Product = new("product", V1);
     public readonly static ApiEndpointItem General = new("general", V1);
     public readonly static ApiEndpointItem Cart = new("cart", V1);
+    public readonly static ApiEndpointItem Comment = new("comment", V1);
     public readonly static ApiEndpointItem Admin = new("admin", V1);
 }
