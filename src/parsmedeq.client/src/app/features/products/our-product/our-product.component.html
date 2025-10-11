@@ -16,7 +16,8 @@
             <div *ngFor="let item of items" class="swiper-slide">
               <mat-card appearance="outlined" class="my-card">
                 <a [routerLink]="['/products' | langPack, item.id ]" class="scale-rotate-wrapper">
-                  <img mat-card-image [src]="item.image" [alt]="item.title" class="w-100 h-100 img-square"/>
+                  <img mat-card-image defaultImage [src]="item.image" [alt]="item.title"
+                       class="w-100 h-100 img-square"/>
                 </a>
                 <mat-card-content>
                   <h3 class="fw-600 text-center">
