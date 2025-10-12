@@ -15,7 +15,7 @@ sealed class AddCommentEndpoint : EndpointHandlerBase<
     public AddCommentEndpoint(
         IPresentationMapper<AddCommentApiRequest, AddCommentCommand> apiRequestMapper
         ) : base(
-            Endpoints.Comment.Add,
+            Endpoints.Comment.AddComment,
             HttpMethod.Post,
             apiRequestMapper,
             DefaultResponseFactory.Instance.CreateOk)

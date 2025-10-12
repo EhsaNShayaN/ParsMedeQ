@@ -1,4 +1,5 @@
 ﻿using ParsMedeQ.Contracts.CartContracts;
+using ParsMedeQ.Contracts.CommentContracts;
 using ParsMedeQ.Contracts.GeneralContracts;
 using ParsMedeQ.Contracts.ProductContracts;
 using ParsMedeQ.Contracts.ResourceContracts;
@@ -14,7 +15,7 @@ public static class Endpoints
     public readonly static ProductEndpoint Product = new();
     public readonly static GeneralEndpoint General = new();
     public readonly static CartEndpoint Cart = new();
-    public readonly static CartEndpoint Comment = new();
+    public readonly static CommentEndpoint Comment = new();
 }
 public static class EndpointMetadata
 {

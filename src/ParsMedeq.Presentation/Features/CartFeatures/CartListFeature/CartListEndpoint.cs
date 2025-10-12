@@ -5,7 +5,7 @@ using ParsMedeQ.Application.Features.CartFeature.GetCartFeature;
 using ParsMedeQ.Contracts;
 using ParsMedeQ.Contracts.CartContracts.CartListContract;
 
-namespace ParsMedeQ.Presentation.Features.CartFeatures.CartList;
+namespace ParsMedeQ.Presentation.Features.CartFeatures.CartListFeature;
 
 sealed class CartListEndpoint : EndpointHandlerBase<
     CartListApiRequest,
@@ -19,7 +19,7 @@ sealed class CartListEndpoint : EndpointHandlerBase<
         IPresentationMapper<CartListApiRequest, CartListQuery> requestMapper,
         IPresentationMapper<CartListQueryResponse, CartListApiResponse> responseMapper)
         : base(
-            Endpoints.Cart.List,
+            Endpoints.Cart.Carts,
             HttpMethod.Get,
             requestMapper,
             responseMapper,

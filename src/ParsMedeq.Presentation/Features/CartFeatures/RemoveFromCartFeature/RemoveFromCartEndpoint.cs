@@ -15,7 +15,7 @@ sealed class RemoveFromCartEndpoint : EndpointHandlerBase<
     public RemoveFromCartEndpoint(
         IPresentationMapper<RemoveFromCartApiRequest, RemoveFromCartCommand> apiRequestMapper
         ) : base(
-            Endpoints.Cart.Remove,
+            Endpoints.Cart.RemoveCart,
             HttpMethod.Post,
             apiRequestMapper,
             DefaultResponseFactory.Instance.CreateOk)

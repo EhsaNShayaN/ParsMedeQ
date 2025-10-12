@@ -8,23 +8,23 @@ public sealed class CommentEndpoint : ApiEndpointBase
 
     protected override ApiEndpointItem MyEndpoint => EndpointMetadata.Comment;
 
-    public EndpointInfo List { get; private set; }
-    public EndpointInfo Add { get; private set; }
+    public EndpointInfo Comments { get; private set; }
+    public EndpointInfo AddComment { get; private set; }
 
     public CommentEndpoint()
     {
-        List = new EndpointInfo(
+        Comments = new EndpointInfo(
            this.GetUrl("list"),
            this.GetUrl("list"),
-           "list",
-           "لیست سبد",
+           "List of Comments",
+           "لیست نظرات",
            _tag);
 
-        Add = new EndpointInfo(
+        AddComment = new EndpointInfo(
            this.GetUrl("add"),
            this.GetUrl("add"),
-           "add",
-           "افزودن به سبد",
+           "Add Comment",
+           "افزودن نظر",
            _tag);
     }
 }

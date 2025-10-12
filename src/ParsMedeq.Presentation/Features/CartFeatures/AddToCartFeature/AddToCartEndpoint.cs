@@ -14,7 +14,7 @@ sealed class AddToCartEndpoint : EndpointHandlerBase<
     protected override bool NeedTaxPayerFile => false;
 
     public AddToCartEndpoint(IPresentationMapper<AddToCartCommandResponse, AddToCartApiResponse> responseMapper) : base(
-            Endpoints.Cart.Add,
+            Endpoints.Cart.AddCart,
             HttpMethod.Post,
             responseMapper)
     { }

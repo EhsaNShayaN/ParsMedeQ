@@ -20,7 +20,7 @@ sealed class CommentListEndpoint : EndpointHandlerBase<
         IPresentationMapper<CommentListApiRequest, CommentListQuery> requestMapper,
         IPresentationMapper<BasePaginatedApiResponse<CommentListDbQueryResponse>, BasePaginatedApiResponse<CommentListApiResponse>> responseMapper)
         : base(
-            Endpoints.Comment.List,
+            Endpoints.Comment.Comments,
             HttpMethod.Get,
             requestMapper,
             responseMapper,
