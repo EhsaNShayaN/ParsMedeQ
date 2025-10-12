@@ -1,19 +1,14 @@
-.login-container {
-  direction: rtl;
+.login {
+  min-width: 500px;
+  min-height: 400px;
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 80vh;
+}
 
-  .login-card {
+@media screen and (max-width: 600px) {
+  .login {
+    min-width: unset !important;
+    min-height: unset !important;
     width: 100%;
-    max-width: 400px;
-    padding: 2rem;
-    text-align: center;
-
-    .full-width {
-      width: 100%;
-      margin-bottom: 1rem;
-    }
   }
 }

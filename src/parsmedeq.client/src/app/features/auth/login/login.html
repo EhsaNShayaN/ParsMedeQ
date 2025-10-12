@@ -1,21 +1,74 @@
-<div class="login-container">
-  <mat-card class="login-card">
-    <h2>ورود به حساب کاربری</h2>
-
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>نام کاربری</mat-label>
-        <input matInput formControlName="username" required>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>رمز عبور</mat-label>
-        <input matInput type="password" formControlName="password" required>
-      </mat-form-field>
-
-      <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">
-        ورود
-      </button>
-    </form>
-  </mat-card>
+<div class="p-3">
+  <div class="theme-container">
+    <div fxLayout="row" fxLayoutAlign="center center" class="my-3">
+      <mat-card appearance="outlined" class="login p-3">
+        <div fxLayout="column" fxLayoutAlign="center center" class="text-center">
+          <h1 class="uppercase">{{ 'SIGNIN' | translate }}</h1>
+          <h3 *ngIf="!hasMobile"></h3>
+        </div>
+        <div *ngIf="error" [innerHTML]="error" class="mat-error"></div>
+        <form [formGroup]="loginForm" (ngSubmit)="onLoginFormSubmit(loginForm.value)">
+          <ng-container *ngIf="!hasMobile">
+            <mat-form-field appearance="outline" class="w-100 mt-2">
+              <mat-icon matPrefix class="mr-1 text-muted">smartphone</mat-icon>
+              <mat-label>{{ 'MOBILE' | translate }}</mat-label>
+              <input matInput [placeholder]="'MOBILE' | translate" formControlName="username" name="username"
+                     class="ltr" onlyNumber [maxlength]="11" required>
+              <mat-error *ngIf="submitted && !hasMobile && loginForm.controls['username'].errors?.['required']">
+                {{ 'MOBILE' | translate }} {{ 'IS_REQUIRED' | translate }}
+              </mat-error>
+              <mat-error
+                *ngIf="submitted && !hasMobile && loginForm.controls['username'].hasError('minlength')">
+                {{ 'MOBILE_MIN_LENGTH' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </ng-container>
+          <ng-container *ngIf="hasMobile">
+            <mat-form-field appearance="outline" class="w-100 mt-1">
+              <mat-icon matPrefix class="mr-1 text-muted">lock</mat-icon>
+              <mat-label>
+                {{ (hasCode > 0 ? 'CODE' : 'PASSWORD') | translate }}
+              </mat-label>
+              <input matInput [placeholder]="'PASSWORD' | translate" formControlName="password" name="password"
+                     [type]="hide || hasCode > 0 ? 'password' : 'text'"
+                     class="ltr">
+              <mat-error *ngIf="submitted && hasMobile && loginForm.controls['password'].errors?.['required']">
+                {{ 'PASSWORD' | translate }} {{ 'IS_REQUIRED' | translate }}
+              </mat-error>
+              <mat-error
+                *ngIf="submitted && hasMobile && loginForm.controls['password'].hasError('minlength')">
+                Password isn't long enough, minimum of 6 characters
+              </mat-error>
+              <button mat-icon-button matSuffix *ngIf="hasCode === 0" (click)="hide = !hide" type="button"
+                      class="text-muted">
+                <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+              </button>
+            </mat-form-field>
+          </ng-container>
+          <div class="text-center mt-2">
+            <button [disabled]="submitClick" mat-raised-button color="accent" class="uppercase"
+                    type="submit">
+              {{ (!hasMobile ? 'CONTINUE' : 'SIGNIN') | translate }}
+            </button>
+          </div>
+        </form>
+        <!--<mat-card-actions fxLayoutAlign="start center">
+          <div *ngIf="hasMobile" class="ws-nowrap">
+            <button mat-button (click)="sendOTP(2)">
+              <mat-icon class="text-muted">lock</mat-icon>
+              <span class="mx-1">{{ 'FORGOT_YOUR_PASSWORD' | translate }}</span>
+            </button>
+            <button mat-button (click)="back()">
+              <mat-icon class="text-muted">smartphone</mat-icon>
+              <span class="mx-1">{{ 'CHANGE_MOBILE' | translate }}</span>
+            </button>
+            <button mat-button (click)="sendOTP(1)">
+              <mat-icon class="text-muted">vpn_key</mat-icon>
+              <span class="mx-1">{{ 'ENTER_WITH_OTP' | translate }}</span>
+            </button>
+          </div>
+        </mat-card-actions>-->
+      </mat-card>
+    </div>
+  </div>
 </div>
