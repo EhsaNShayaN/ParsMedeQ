@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {BaseComponent} from '../../../base-component';
@@ -12,11 +12,12 @@ import {StorageService} from '../../../core/services/storage.service';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss',
+  templateUrl: './login.html',
+  styleUrl: './login.scss',
   standalone: false
 })
-export class LoginComponent extends BaseComponent implements OnInit, OnDestroy {
+export class Login extends BaseComponent implements OnInit, OnDestroy {
+  @Input() isDialog: boolean = false;
   hasMobile = false;
   hasCode = 0;
   mobile = '';
@@ -101,9 +102,11 @@ export class LoginComponent extends BaseComponent implements OnInit, OnDestroy {
         }
         if (d.data.token) {
           this.auth.login(d.data.token);
-          this.navigateToLink(this.returnUrl, 'fa');
           this.cartService.mergeCart();
           this.storageService.clearAnonymousId();
+          if (!this.isDialog) {
+            this.navigateToLink(this.returnUrl, 'fa');
+          }
         } else {
           this.error = this.getTranslateValue('PASSWORD_IS_WRONG');
         }

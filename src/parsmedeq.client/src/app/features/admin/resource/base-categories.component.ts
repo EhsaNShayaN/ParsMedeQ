@@ -14,7 +14,6 @@ import {AddResult, BaseResult} from '../../../core/models/BaseResult';
 @Directive()
 export class BaseCategoriesComponent extends BaseComponent implements OnInit, AfterViewInit {
   helpers = inject(Helpers);
-  dialogService = inject(DialogService);
   toastr = inject(ToastrService);
   languages: string[] = [];
   colors: string[] = ['warn', 'primary', 'success', 'secondary', 'info', 'danger'];

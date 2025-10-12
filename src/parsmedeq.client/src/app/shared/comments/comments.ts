@@ -41,14 +41,16 @@ export class Comments extends PureComponent implements OnInit, DoCheck {
 
   ngOnInit() {
     this.getItems(this.relatedId);
-    this.commentForm = this.fb.group({
-      description: [null, Validators.required],
-      mobile: [null, this.authService.isLoggedIn() ? null : Validators.compose([Validators.required, mobileValidator])],
-      icon: null,
-      relatedId: this.relatedId,
-      tableId: this.tableId,
-      tableName: null,
-    });
+    if (this.authService.isLoggedIn()) {
+      this.commentForm = this.fb.group({
+        description: [null, Validators.required],
+        mobile: [null, this.authService.isLoggedIn() ? null : Validators.compose([Validators.required, mobileValidator])],
+        icon: null,
+        relatedId: this.relatedId,
+        tableId: this.tableId,
+        tableName: null,
+      });
+    }
   }
 
   public getItems(id: number) {
@@ -98,11 +100,12 @@ export class Comments extends PureComponent implements OnInit, DoCheck {
     }
   }
 
-  public onCommentFormSubmit(values: any) {
+  public onSubmit(values: any) {
     let enumKey = Tables[this.tableId];
-    values.tableName = enumKey = enumKey.substring(0, 1).toUpperCase() + enumKey.substring(1, enumKey.length);
+    values.tableName = enumKey.substring(0, 1).toUpperCase() + enumKey.substring(1, enumKey.length);
     if (this.commentForm?.valid) {
-      /*this.restClientService.addComment(values).subscribe((c: Comment) => {
+      console.log(values);
+      /*this.restApiService.addComment(values).subscribe((c: Comment) => {
         this.items.splice(0, 0, c);
         this.toastr.success('نظر شما با موفقیت ثبت گردید.', '', {});
       });*/

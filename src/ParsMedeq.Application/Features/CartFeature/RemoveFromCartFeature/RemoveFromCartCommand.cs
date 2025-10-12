@@ -3,7 +3,7 @@
 namespace ParsMedeQ.Application.Features.CartFeature.RemoveFromCartFeature;
 
 public sealed record class RemoveFromCartCommand(
-    Guid AnonymousId,
+    Guid? AnonymousId,
     int RelatedId) : IPrimitiveResultCommand<RemoveFromCartCommandResponse>,
     IValidatableRequest<RemoveFromCartCommand>
 {

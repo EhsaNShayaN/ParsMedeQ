@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {ConfirmDialogComponent, ConfirmDialogModel} from '../../shared/dialogs/confirm-dialog/confirm-dialog.component';
+import {LoginDialogComponent, LoginDialogModel} from '../../shared/dialogs/login-dialog/login-dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,14 @@ export class DialogService {
     const dialogData = new ConfirmDialogModel(title, message);
     return this.dialog.open(ConfirmDialogComponent, {
       maxWidth: '400px',
+      data: dialogData
+    });
+  }
+
+  public openLoginDialog(title: string, message: string) {
+    const dialogData = new LoginDialogModel(title, message);
+    return this.dialog.open(LoginDialogComponent, {
+      maxWidth: '500px',
       data: dialogData
     });
   }

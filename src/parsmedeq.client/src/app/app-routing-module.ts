@@ -19,7 +19,7 @@ const pagesChildren: Routes = [
       {path: 'clips', loadChildren: () => import('./features/resources/clips/clips.module').then(m => m.ClipsModule)},
       {path: 'products', loadChildren: () => import('./features/products/products-module').then(m => m.ProductsModule)},
       //{path: 'auth', loadChildren: () => import('./features/auth/auth-module').then(m => m.AuthModule)},
-      {path: 'auth', loadChildren: () => import('./features/login/login.module').then(m => m.LoginModule)},
+      {path: 'auth', loadChildren: () => import('./features/auth/login/login.module').then(m => m.LoginModule)},
       {path: 'contact', loadChildren: () => import('./features/contact/contact-module').then(m => m.ContactModule)},
       {path: 'faq', loadChildren: () => import('./features/faq/faq-module').then(m => m.FaqModule)},
     ]

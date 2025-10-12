@@ -8,7 +8,6 @@ using ParsMedeQ.Contracts.CartContracts.CartListContract;
 namespace ParsMedeQ.Presentation.Features.CartFeatures.CartListFeature;
 
 sealed class CartListEndpoint : EndpointHandlerBase<
-    CartListApiRequest,
     CartListQuery,
     CartListQueryResponse,
     CartListApiResponse>
@@ -16,40 +15,23 @@ sealed class CartListEndpoint : EndpointHandlerBase<
     protected override bool NeedTaxPayerFile => true;
 
     public CartListEndpoint(
-        IPresentationMapper<CartListApiRequest, CartListQuery> requestMapper,
         IPresentationMapper<CartListQueryResponse, CartListApiResponse> responseMapper)
         : base(
             Endpoints.Cart.Carts,
             HttpMethod.Get,
-            requestMapper,
-            responseMapper,
-            DefaultResponseFactory.Instance.CreateOk)
+            responseMapper)
     { }
 
     protected override Delegate EndpointDelegate =>
     (
-            [AsParameters] CartListApiRequest request,
-            ISender sender,
-            CancellationToken cancellationToken) => this.CallMediatRHandler(
-            sender,
-            () => ValueTask.FromResult(
-                PrimitiveResult.Success(
-                    new CartListQuery(request.AnonymousId))),
-            cancellationToken);
-
-}
-sealed class CartListApiRequestMapper : IPresentationMapper<
-    CartListApiRequest,
-    CartListQuery>
-{
-    public ValueTask<PrimitiveResult<CartListQuery>> Map(
-        CartListApiRequest src,
-        CancellationToken cancellationToken)
-    {
-        return ValueTask.FromResult(
+        [AsParameters] Guid? anonymousId,
+        ISender sender,
+        CancellationToken cancellationToken) => this.CallMediatRHandler(
+        sender,
+        () => ValueTask.FromResult(
             PrimitiveResult.Success(
-                new CartListQuery(src.AnonymousId)));
-    }
+                new CartListQuery(anonymousId))),
+        cancellationToken);
 }
 sealed class CartListApiResponseMapper : IPresentationMapper<
     CartListQueryResponse,

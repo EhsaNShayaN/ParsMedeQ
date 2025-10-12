@@ -3,12 +3,14 @@ import {UntypedFormGroup} from '@angular/forms';
 import {RestApiService} from './core/rest-api.service';
 import {TranslateService} from '@ngx-translate/core';
 import {Router} from '@angular/router';
+import {DialogService} from './core/services/dialog-service';
 
 @Directive()
 export class PureComponent {
   restApiService = inject(RestApiService);
   translateService = inject(TranslateService);
   router = inject(Router);
+  dialogService = inject(DialogService);
 
   constructor() {
   }
@@ -38,5 +40,9 @@ export class PureComponent {
       value = res;
     });
     return value ?? '';
+  }
+
+  showLoginDialog() {
+    this.dialogService.openLoginDialog('', '');
   }
 }

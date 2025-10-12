@@ -8,5 +8,5 @@ public interface ICartWriteRepository : IDomainRepository
     ValueTask<Cart> AddToCart(int? userId, Guid? anonymousId, int tableId, int relatedId, int quantity, string Lang);
     ValueTask<bool> CheckoutAsync(int userId);
     ValueTask<Cart> RemoveFromCart(int? userId, Guid? anonymousId, int relatedId);
-    ValueTask<Cart> MergeCart(int userId, Guid anonymousId);
+    ValueTask<Cart> MergeCart(int userId, Guid? anonymousId);
 }

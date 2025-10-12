@@ -18,7 +18,8 @@ export class CartService {
 
   /** گرفتن سبد */
   loadCart() {
-    const url = `${this.apiUrl}list`;
+    const anonymousId = this.storage.getAnonymousId();
+    const url = `${this.apiUrl}list?anonymousId=${anonymousId ?? ''}`;
     this.http.get<Cart>(url).subscribe({
       next: (c) => {
         this.cart.set(c);
@@ -29,11 +30,8 @@ export class CartService {
   }
 
   /** افزودن به سبد */
-  addToCart(item: CartItem): void {
-    console.log('item', item);
+  addToCart(model: CartItem): void {
     const anonymousId = this.storage.getAnonymousId();
-    const model: any = item;
-    model.anonymousId = anonymousId;
     this.http.post<Cart>(`${this.apiUrl}add?anonymousId=${anonymousId ?? ''}`, model)
       .subscribe(c => {
         this.cart.set(c);
@@ -44,8 +42,8 @@ export class CartService {
   /** حذف از سبد */
   removeFromCart(relatedId: number): void {
     const anonymousId = this.storage.getAnonymousId();
-    const model: any = {anonymousId, relatedId};
-    this.http.post<Cart>(`${this.apiUrl}remove?anonymousId=${anonymousId ?? ''}&relatedId=${relatedId}`, model)
+    const model: any = {relatedId};
+    this.http.post<Cart>(`${this.apiUrl}remove?anonymousId=${anonymousId ?? ''}`, model)
       .subscribe(c => {
         this.cart.set(c);
         this.cartSubject.next(c);
@@ -55,8 +53,7 @@ export class CartService {
   /** ادغام بعد از لاگین */
   mergeCart(): void {
     const anonymousId = this.storage.getAnonymousId();
-    const model: any = {anonymousId};
-    this.http.post<Cart>(`${this.apiUrl}merge?anonymousId=${anonymousId}`, model)
+    this.http.post<Cart>(`${this.apiUrl}merge?anonymousId=${anonymousId}`, null)
       .subscribe(c => {
         this.cart.set(c);
         this.cartSubject.next(c);

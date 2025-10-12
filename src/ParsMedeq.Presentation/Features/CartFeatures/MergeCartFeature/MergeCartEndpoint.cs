@@ -1,10 +1,11 @@
-﻿using ParsMedeQ.Application.Features.CartFeature.MergeCartFeature;
+﻿using MediatR;
+using Microsoft.AspNetCore.Http;
+using ParsMedeQ.Application.Features.CartFeature.MergeCartFeature;
 using ParsMedeQ.Contracts;
 using ParsMedeQ.Contracts.CartContracts.MergeCartContract;
 
 namespace ParsMedeQ.Presentation.Features.CartFeatures.MergeCartFeature;
 sealed class MergeCartEndpoint : EndpointHandlerBase<
-    MergeCartApiRequest,
     MergeCartCommand,
     MergeCartCommandResponse,
     MergeCartApiResponse>
@@ -12,21 +13,30 @@ sealed class MergeCartEndpoint : EndpointHandlerBase<
     protected override bool NeedAuthentication => false;
     protected override bool NeedTaxPayerFile => false;
 
-    public MergeCartEndpoint(
-        IPresentationMapper<MergeCartApiRequest, MergeCartCommand> apiRequestMapper
-        ) : base(
-            Endpoints.Cart.MergeCarts,
+    public MergeCartEndpoint(IPresentationMapper<MergeCartCommandResponse, MergeCartApiResponse> responseMapper) : base(
+            Endpoints.Cart.AddCart,
             HttpMethod.Post,
-            apiRequestMapper,
-            DefaultResponseFactory.Instance.CreateOk)
+            responseMapper)
     { }
-}
-internal sealed class AddCartApiRequestMapper : IPresentationMapper<MergeCartApiRequest, MergeCartCommand>
-{
-    public async ValueTask<PrimitiveResult<MergeCartCommand>> Map(MergeCartApiRequest src, CancellationToken cancellationToken)
-    {
-        return await ValueTask.FromResult(
+
+    protected override Delegate EndpointDelegate =>
+    (
+        [AsParameters] Guid? anonymousId,
+        MergeCartApiRequest request,
+        ISender sender,
+        CancellationToken cancellationToken) => this.CallMediatRHandler(
+        sender,
+        () => ValueTask.FromResult(
             PrimitiveResult.Success(
-                new MergeCartCommand(src.AnonymousId)));
+                new MergeCartCommand(anonymousId))),
+        cancellationToken);
+}
+sealed class MergeCartCommandResponseMapper : IPresentationMapper<MergeCartCommandResponse, MergeCartApiResponse>
+{
+    public ValueTask<PrimitiveResult<MergeCartApiResponse>> Map(MergeCartCommandResponse src, CancellationToken cancellationToken)
+    {
+        return ValueTask.FromResult(
+            PrimitiveResult.Success(
+                new MergeCartApiResponse(src.Changed)));
     }
 }

@@ -45,9 +45,12 @@ import {OurNewsComponent} from '../features/resources/news/our-news/our-news.com
 import {OurclipComponent} from '../features/resources/clips/our-clip/our-clip.component';
 import {OurProductComponent} from '../features/products/our-product/our-product.component';
 import {HeaderImageComponent} from './header-image/header-image.component';
+import {Login} from '../features/auth/login/login';
+import {LoginDialogComponent} from './dialogs/login-dialog/login-dialog.component';
 
 @NgModule({
   declarations: [
+    Login,
     CommentForm,
     DatePickerComponent,
     /////////////////
@@ -61,6 +64,7 @@ import {HeaderImageComponent} from './header-image/header-image.component';
     MultiFileUploadComponent,
     CartItemControlComponent,
     ConfirmDialogComponent,
+    LoginDialogComponent,
     TreeCategoriesComponent,
     HeaderCarouselComponent,
     DownloadManagementComponent,
@@ -194,6 +198,7 @@ import {HeaderImageComponent} from './header-image/header-image.component';
     CommentForm,
     MultiFileUploadComponent,
     ConfirmDialogComponent,
+    LoginDialogComponent,
     TreeCategoriesComponent,
     SwiperModule,
     HeaderCarouselComponent,

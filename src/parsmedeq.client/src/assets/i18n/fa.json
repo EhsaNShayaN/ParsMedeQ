@@ -83,5 +83,9 @@
   "THE_DESIRED_ITEM_DOES_NOT_EXIST": "آیتم مورد نظر وجود ندارد.",
   "THIS_ITEM_CANNOT_BE_DELETED_PLEASE_DELETE_ITS_SUBCATEGORIES_FIRST": "امکان حذف این آیتم وجود ندارد. ابتدا زیر مجموعه هایش را پاک کنید.",
   "VIEW_ALL": "مشاهده همه",
-  "JOIN_NOW": "به ما بپیوندید"
+  "JOIN_NOW": "به ما بپیوندید",
+  "WRITE_YOUR_COMMENT": "نظر خود را بیان نمایید",
+  "YOUR_SCORE": "امتیاز شما",
+  "ANSWER": "پاسخ",
+  "LOGIN_TO_WRITE_YOUR_COMMENTS": "برای بیان نظرات خود وارد سیستم شوید."
 }

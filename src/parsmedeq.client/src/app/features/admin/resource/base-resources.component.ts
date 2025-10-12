@@ -22,7 +22,6 @@ export class BaseResourcesComponent extends BaseComponent implements OnInit, OnD
   pageSize = 5;
   totalCount = 0;
   helpers = inject(Helpers);
-  dialogService = inject(DialogService);
   toastr = inject(ToastrService);
 
   constructor(tableId: number) {

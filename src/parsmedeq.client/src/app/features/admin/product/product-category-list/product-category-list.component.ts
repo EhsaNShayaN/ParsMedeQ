@@ -6,7 +6,6 @@ import {MatSort} from '@angular/material/sort';
 import {tap} from 'rxjs';
 import {Helpers} from '../../../../core/helpers';
 import {AddResult, BaseResult} from '../../../../core/models/BaseResult';
-import {DialogService} from '../../../../core/services/dialog-service';
 import {ToastrService} from 'ngx-toastr';
 import {MatTableDataSource} from '@angular/material/table';
 
@@ -27,7 +26,6 @@ export class ProductCategoryListComponent extends BaseComponent implements OnIni
   totalCount = 0;
 
   constructor(private helpers: Helpers,
-              private dialogService: DialogService,
               private toastr: ToastrService,) {
     super();
     this.languages = this.translateService.getLangs();

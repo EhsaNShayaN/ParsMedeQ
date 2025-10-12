@@ -13,7 +13,8 @@ sealed class AddToCartEndpoint : EndpointHandlerBase<
     protected override bool NeedAuthentication => false;
     protected override bool NeedTaxPayerFile => false;
 
-    public AddToCartEndpoint(IPresentationMapper<AddToCartCommandResponse, AddToCartApiResponse> responseMapper) : base(
+    public AddToCartEndpoint(
+        IPresentationMapper<AddToCartCommandResponse, AddToCartApiResponse> responseMapper) : base(
             Endpoints.Cart.AddCart,
             HttpMethod.Post,
             responseMapper)
@@ -21,7 +22,7 @@ sealed class AddToCartEndpoint : EndpointHandlerBase<
 
     protected override Delegate EndpointDelegate =>
     (
-        [AsParameters] Guid anonymousId,
+        [AsParameters] Guid? anonymousId,
         AddToCartApiRequest request,
         ISender sender,
         CancellationToken cancellationToken) => this.CallMediatRHandler(

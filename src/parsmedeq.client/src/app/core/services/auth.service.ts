@@ -1,11 +1,14 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {JwtHelperService} from '@auth0/angular-jwt';
+import {BehaviorSubject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private loginSubject = new BehaviorSubject<boolean>(false);
+  login$ = this.loginSubject.asObservable();
 
   constructor(private router: Router,
               public jwtHelper: JwtHelperService) {
@@ -14,6 +17,7 @@ export class AuthService {
   // ورود کاربر و ذخیره JWT
   login(token: string): void {
     localStorage.setItem('token', token);
+    this.loginSubject.next(true);
   }
 
   // دریافت توکن

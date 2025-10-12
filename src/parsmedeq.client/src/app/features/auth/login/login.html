@@ -7,7 +7,7 @@
           <h3 *ngIf="!hasMobile"></h3>
         </div>
         <div *ngIf="error" [innerHTML]="error" class="mat-error"></div>
-        <form [formGroup]="loginForm" (ngSubmit)="onLoginFormSubmit(loginForm.value)">
+        <form [formGroup]="loginForm" (ngSubmit)="onLoginFormSubmit(loginForm.value)" class="m-7">
           <ng-container *ngIf="!hasMobile">
             <mat-form-field appearance="outline" class="w-100 mt-2">
               <mat-icon matPrefix class="mr-1 text-muted">smartphone</mat-icon>

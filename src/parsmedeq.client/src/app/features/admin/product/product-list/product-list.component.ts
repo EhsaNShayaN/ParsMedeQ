@@ -6,7 +6,6 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort, Sort} from '@angular/material/sort';
 import {Helpers} from '../../../../core/helpers';
 import {animate, state, style, transition, trigger} from '@angular/animations';
-import {DialogService} from '../../../../core/services/dialog-service';
 import {ToastrService} from 'ngx-toastr';
 import {AddResult, BaseResult} from '../../../../core/models/BaseResult';
 
@@ -37,7 +36,6 @@ export class ProductListComponent extends BaseComponent implements OnInit {
   totalCount = 0;
 
   constructor(private helpers: Helpers,
-              private dialogService: DialogService,
               private toastr: ToastrService) {
     super();
     this.languages = this.translateService.getLangs();

@@ -1,98 +1,108 @@
-@if (commentForm) {
-  <mat-card class="p-2 mt-5">
-    <span class="mt-3 font-large ">نظر خود را بیان نمایید:</span>
-    <div class="divider"></div>
-    <form [formGroup]="commentForm" (ngSubmit)="onCommentFormSubmit(commentForm.value)" fxLayout="row wrap"
-          fxLayoutAlign="space-between" class="comment-form">
-      <div class="p-2">
-        <h3 fxLayoutAlign="start center" class="mt-3 text-muted">
-          <span>امتیاز شما:</span>
-          @for (rating of ratings; track rating.id) {
-            <button mat-icon-button [matTooltip]="rating.title" matTooltipPosition="above" (click)="rate(rating)"
-                    class="p-0">
-              <mat-icon class="mat-icon-lg" [class.primary-color]="rating.selected">{{ rating.icon }}</mat-icon>
-            </button>
-          }
-        </h3>
-      </div>
-      @if (!authService.isLoggedIn()) {
-        <div class="p-2 flex-grow-1">
-          <mat-form-field appearance="outline" class="w-100 mt-3">
-            <mat-label>{{ 'MOBILE' | translate }}</mat-label>
-            <input matInput [placeholder]="'MOBILE' | translate" formControlName="mobile" onlyNumber class="ltr"
-                   required>
-            @if (commentForm.get('mobile')?.hasError('required')) {
-              <mat-error>
-                {{ 'MOBILE' | translate }}
-                {{ 'IS_REQUIRED' | translate }}
-              </mat-error>
+@if (this.authService.isLoggedIn()) {
+  @if (commentForm) {
+    <mat-card class="p-2 mt-5">
+      <span class="mt-3 font-large ">{{ 'WRITE_YOUR_COMMENT' | translate }}:</span>
+      <div class="divider"></div>
+      <form [formGroup]="commentForm" (ngSubmit)="onSubmit(commentForm.value)" fxLayout="row wrap"
+            fxLayoutAlign="space-between" class="comment-form">
+        <div class="p-2">
+          <h3 fxLayoutAlign="start center" class="mt-3 text-muted">
+            <span>{{ 'YOUR_SCORE' }}:</span>
+            @for (rating of ratings; track rating.id) {
+              <button mat-icon-button [matTooltip]="rating.title" matTooltipPosition="above" (click)="rate(rating)"
+                      class="p-0">
+                <mat-icon class="mat-icon-lg" [class.primary-color]="rating.selected">{{ rating.icon }}</mat-icon>
+              </button>
             }
-            @if (commentForm.get('mobile')?.hasError('invalidMobile')) {
+          </h3>
+        </div>
+        @if (!authService.isLoggedIn()) {
+          <div class="p-2 flex-grow-1">
+            <mat-form-field appearance="outline" class="w-100 mt-3">
+              <mat-label>{{ 'MOBILE' | translate }}</mat-label>
+              <input matInput [placeholder]="'MOBILE' | translate" formControlName="mobile" onlyNumber class="ltr"
+                     required>
+              @if (commentForm.get('mobile')?.hasError('required')) {
+                <mat-error>
+                  {{ 'MOBILE' | translate }}
+                  {{ 'IS_REQUIRED' | translate }}
+                </mat-error>
+              }
+              @if (commentForm.get('mobile')?.hasError('invalidMobile')) {
+                <mat-error>
+                  {{ 'MOBILE' | translate }}
+                  {{ 'IS_INVALID' | translate }}
+                </mat-error>
+              }
+            </mat-form-field>
+          </div>
+        }
+        <div fxFlex="100" class="p-2">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>{{ 'COMMENT_TEXT' | translate }}</mat-label>
+            <textarea matInput [placeholder]="'COMMENT_TEXT' | translate" formControlName="description" required
+                      rows="5"></textarea>
+            @if (commentForm.controls['description'].errors?.['required']) {
               <mat-error>
-                {{ 'MOBILE' | translate }}
-                {{ 'IS_INVALID' | translate }}
+                {{ 'COMMENT_TEXT' | translate }}
+                {{ 'IS_REQUIRED' | translate }}
               </mat-error>
             }
           </mat-form-field>
         </div>
+        <div fxFlex="100" class="text-center w-100">
+          <button mat-raised-button color="primary" type="submit" class="uppercase">ارسال</button>
+        </div>
+      </form>
+      @if ((items?.length ?? 0) > 0) {
+        <mat-card-header fxLayoutAlign="center center">
+          <mat-card-title class="uppercase">{{ 'COMMENTS' | translate }}</mat-card-title>
+        </mat-card-header>
       }
-      <div fxFlex="100" class="p-2">
-        <mat-form-field appearance="outline" class="w-100">
-          <mat-label>{{ 'COMMENT_TEXT' | translate }}</mat-label>
-          <textarea matInput [placeholder]="'COMMENT_TEXT' | translate" formControlName="description" required
-                    rows="5"></textarea>
-          @if (commentForm.controls['description'].errors?.['required']) {
-            <mat-error>
-              {{ 'COMMENT_TEXT' | translate }}
-              {{ 'IS_REQUIRED' | translate }}
-            </mat-error>
-          }
-        </mat-form-field>
-      </div>
-      <div fxFlex="100" class="text-center w-100">
-        <button mat-raised-button color="primary" type="submit" class="uppercase">ارسال</button>
-      </div>
-    </form>
-    @if ((items?.length ?? 0) > 0) {
-      <mat-card-header fxLayoutAlign="center center">
-        <mat-card-title class="uppercase">{{ 'COMMENTS' | translate }}</mat-card-title>
-      </mat-card-header>
-    }
-    @if ((items?.length ?? 0) > 0) {
-      <div class="divider"></div>
-    }
-    <mat-list class="reviews mt-3">
-      @for (review of items; track review.id) {
-        <mat-list-item class="h-100">
-          @if (review.profile?.image) {
-            <img matListItemAvatar [src]="review.profile?.image" alt="image"
-                 class="review-author">
-          }
-          <h3 fxLayoutAlign="start center">
-            <span class="fw-500">{{ review.profile?.firstName }} {{ review.profile?.lastName }}</span>
-            <mat-icon class="text-muted px-1">{{ review.icon }}</mat-icon>
-          </h3>
-          <p class="text-muted"><small>{{ review.creationDate }}</small></p>
-          <p class="text">{{ review.description }}</p>
-          @if ((review.answers?.length ?? 0) > 0) {
-            <div>
-              @for (answer of review.answers; track answer) {
-                <div class="mr-5">
-                  <p>
-                    ---پاسخ:
-                    {{ answer }}
-                  </p>
-                </div>
-              }
-            </div>
-          }
-        </mat-list-item>
+      @if ((items?.length ?? 0) > 0) {
+        <div class="divider"></div>
       }
-    </mat-list>
-    @if (items.length) {
-      <div fxFlex="100" fxLayoutAlign="center center">
-        <app-load-more [step]="1"></app-load-more>
-      </div>
-    }
-  </mat-card>
+      <mat-list class="reviews mt-3">
+        @for (review of items; track review.id) {
+          <mat-list-item class="h-100">
+            @if (review.profile?.image) {
+              <img matListItemAvatar [src]="review.profile?.image" alt="image"
+                   class="review-author">
+            }
+            <h3 fxLayoutAlign="start center">
+              <span class="fw-500">{{ review.profile?.firstName }} {{ review.profile?.lastName }}</span>
+              <mat-icon class="text-muted px-1">{{ review.icon }}</mat-icon>
+            </h3>
+            <p class="text-muted"><small>{{ review.creationDate }}</small></p>
+            <p class="text">{{ review.description }}</p>
+            @if ((review.answers?.length ?? 0) > 0) {
+              <div>
+                @for (answer of review.answers; track answer) {
+                  <div class="mr-5">
+                    <p>
+                      ---{{ 'ANSWER' | translate }}:
+                      {{ answer }}
+                    </p>
+                  </div>
+                }
+              </div>
+            }
+          </mat-list-item>
+        }
+      </mat-list>
+      @if (items.length) {
+        <div fxFlex="100" fxLayoutAlign="center center">
+          <app-load-more [step]="1"></app-load-more>
+        </div>
+      }
+    </mat-card>
+  }
+} @else {
+  <div>
+    <mat-divider></mat-divider>
+    <h3 class="mt-2">
+      {{ 'LOGIN_TO_WRITE_YOUR_COMMENTS' | translate }}
+      <button mat-raised-button color="primary" (click)="showLoginDialog()">{{ 'LOGIN' | translate }}</button>
+    </h3>
+  </div>
 }
