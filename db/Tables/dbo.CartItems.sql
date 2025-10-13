@@ -1,4 +1,4 @@
-CREATE TABLE [dbo].[CartItem]
+CREATE TABLE [dbo].[CartItems]
 (
 [Id] [int] NOT NULL IDENTITY(1, 1),
 [CartId] [int] NOT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE [dbo].[CartItem]
 [Quantity] [int] NOT NULL
 ) ON [PRIMARY]
 GO
-ALTER TABLE [dbo].[CartItem] ADD CONSTRAINT [PK_CartItem] PRIMARY KEY CLUSTERED ([Id]) ON [PRIMARY]
+ALTER TABLE [dbo].[CartItems] ADD CONSTRAINT [PK_CartItems] PRIMARY KEY CLUSTERED ([Id]) ON [PRIMARY]
 GO
-ALTER TABLE [dbo].[CartItem] ADD CONSTRAINT [FK_CartItem_Cart] FOREIGN KEY ([CartId]) REFERENCES [dbo].[Cart] ([Id])
+ALTER TABLE [dbo].[CartItems] ADD CONSTRAINT [FK_CartItems_Cart] FOREIGN KEY ([CartId]) REFERENCES [dbo].[Cart] ([Id])
 GO
