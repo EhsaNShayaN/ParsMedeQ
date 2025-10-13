@@ -14,14 +14,14 @@ sealed class MergeCartEndpoint : EndpointHandlerBase<
     protected override bool NeedTaxPayerFile => false;
 
     public MergeCartEndpoint(IPresentationMapper<MergeCartCommandResponse, MergeCartApiResponse> responseMapper) : base(
-            Endpoints.Cart.AddCart,
+            Endpoints.Cart.MergeCarts,
             HttpMethod.Post,
             responseMapper)
     { }
 
     protected override Delegate EndpointDelegate =>
     (
-        [AsParameters] Guid? anonymousId,
+        [AsParameters] Guid anonymousId,
         MergeCartApiRequest request,
         ISender sender,
         CancellationToken cancellationToken) => this.CallMediatRHandler(

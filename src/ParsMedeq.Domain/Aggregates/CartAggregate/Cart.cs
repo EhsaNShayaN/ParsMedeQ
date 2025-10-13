@@ -11,7 +11,7 @@ public sealed class Cart : EntityBase<int>
 
     #region " Properties "
     public int? UserId { get; set; }
-    public Guid? AnonymousId { get; set; }
+    public Guid AnonymousId { get; set; }
     #endregion
 
     #region " Navigation Properties "
@@ -24,7 +24,7 @@ public sealed class Cart : EntityBase<int>
     #endregion
 
     #region " Factory "
-    public static PrimitiveResult<Cart> Create(int? userId, Guid? anonymousId) =>
+    public static PrimitiveResult<Cart> Create(int? userId, Guid anonymousId) =>
         PrimitiveResult.Success(
             new Cart
             {

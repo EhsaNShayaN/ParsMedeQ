@@ -4,7 +4,7 @@ using ParsMedeQ.Application.Services.UserLangServices;
 using SRH.MediatRMessaging.Queries;
 
 namespace ParsMedeQ.Application.Features.CartFeature.CartListFeature;
-public sealed record CartListQuery(Guid? AnonymousId) : IPrimitiveResultQuery<CartListQueryResponse>;
+public sealed record CartListQuery(Guid AnonymousId) : IPrimitiveResultQuery<CartListQueryResponse>;
 
 sealed class GetCartQueryHandler : IPrimitiveResultQueryHandler<CartListQuery, CartListQueryResponse>
 {

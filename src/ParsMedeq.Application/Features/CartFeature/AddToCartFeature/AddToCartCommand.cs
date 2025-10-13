@@ -3,7 +3,7 @@
 namespace ParsMedeQ.Application.Features.CartFeature.AddToCartFeature;
 
 public sealed record class AddToCartCommand(
-    Guid? AnonymousId,
+    Guid AnonymousId,
     int RelatedId,
     int TableId,
     int Quantity) : IPrimitiveResultCommand<AddToCartCommandResponse>,

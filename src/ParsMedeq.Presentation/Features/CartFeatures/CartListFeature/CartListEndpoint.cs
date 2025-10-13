@@ -24,7 +24,7 @@ sealed class CartListEndpoint : EndpointHandlerBase<
 
     protected override Delegate EndpointDelegate =>
     (
-        [AsParameters] Guid? anonymousId,
+        [AsParameters] Guid anonymousId,
         ISender sender,
         CancellationToken cancellationToken) => this.CallMediatRHandler(
         sender,

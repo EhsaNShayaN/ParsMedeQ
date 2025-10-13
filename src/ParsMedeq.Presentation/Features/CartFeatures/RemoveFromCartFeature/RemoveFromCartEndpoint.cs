@@ -4,7 +4,7 @@ using ParsMedeQ.Application.Features.CartFeature.RemoveFromCartFeature;
 using ParsMedeQ.Contracts;
 using ParsMedeQ.Contracts.CartContracts.DeleteFromCartContract;
 
-namespace ParsMedeQ.Presentation.Features.ProductFeatures.RemoveFromCartFeature;
+namespace ParsMedeQ.Presentation.Features.CartFeatures.RemoveFromCartFeature;
 sealed class RemoveFromCartEndpoint : EndpointHandlerBase<
     RemoveFromCartCommand,
     RemoveFromCartCommandResponse,
@@ -22,7 +22,7 @@ sealed class RemoveFromCartEndpoint : EndpointHandlerBase<
 
     protected override Delegate EndpointDelegate =>
     (
-        [AsParameters] Guid? anonymousId,
+        [AsParameters] Guid anonymousId,
         RemoveFromCartApiRequest request,
         ISender sender,
         CancellationToken cancellationToken) => this.CallMediatRHandler(
@@ -31,4 +31,13 @@ sealed class RemoveFromCartEndpoint : EndpointHandlerBase<
             PrimitiveResult.Success(
                 new RemoveFromCartCommand(anonymousId, request.RelatedId))),
         cancellationToken);
+}
+sealed class RemoveFromCartCommandResponseMapper : IPresentationMapper<RemoveFromCartCommandResponse, RemoveFromCartApiResponse>
+{
+    public ValueTask<PrimitiveResult<RemoveFromCartApiResponse>> Map(RemoveFromCartCommandResponse src, CancellationToken cancellationToken)
+    {
+        return ValueTask.FromResult(
+            PrimitiveResult.Success(
+                new RemoveFromCartApiResponse(src.Changed)));
+    }
 }

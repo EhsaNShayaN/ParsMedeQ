@@ -32,7 +32,7 @@ public sealed class CartEndpoint : ApiEndpointBase
         AddCart = new EndpointInfo(
            this.GetUrl("add"),
            this.GetUrl("add"),
-           "Add Cart",
+           "Add to cart",
            "افزودن به سبد",
            _tag);
 

@@ -22,7 +22,7 @@ sealed class AddToCartEndpoint : EndpointHandlerBase<
 
     protected override Delegate EndpointDelegate =>
     (
-        [AsParameters] Guid? anonymousId,
+        [AsParameters] Guid anonymousId,
         AddToCartApiRequest request,
         ISender sender,
         CancellationToken cancellationToken) => this.CallMediatRHandler(
