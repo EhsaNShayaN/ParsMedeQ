@@ -22,7 +22,7 @@ sealed class MergeCartEndpoint : EndpointHandlerBase<
     protected override Delegate EndpointDelegate =>
     (
         [AsParameters] Guid anonymousId,
-        MergeCartApiRequest request,
+        //MergeCartApiRequest request,
         ISender sender,
         CancellationToken cancellationToken) => this.CallMediatRHandler(
         sender,

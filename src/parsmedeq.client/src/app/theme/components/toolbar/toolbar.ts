@@ -38,7 +38,7 @@ export class Toolbar extends PureComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.cartService.cart$.subscribe(cart => {
-      this.cartItems = cart?.items.map((i: any) => {
+      this.cartItems = cart?.items?.map((i: any) => {
         const delta = i.OriginalQuantity ? i.Quantity - i.OriginalQuantity : 0;
         return { ...i, delta };
       }) ?? [];

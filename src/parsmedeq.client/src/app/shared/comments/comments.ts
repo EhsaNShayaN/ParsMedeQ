@@ -19,7 +19,7 @@ export class Comments extends PureComponent implements OnInit, DoCheck {
   @Input() relatedId: number = 0;
   @Input() tableId: number = 0;
   public commentForm!: UntypedFormGroup;
-  public ratings = [
+  public ratings: any[] = [
     {id: 1, title: 'Very Dissatisfied', icon: 'sentiment_very_dissatisfied', percentage: 20, selected: false},
     {id: 2, title: 'Dissatisfied', icon: 'sentiment_dissatisfied', percentage: 40, selected: false},
     {id: 3, title: 'Neutral', icon: 'sentiment_neutral', percentage: 60, selected: false},

@@ -9,7 +9,7 @@ internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<
 {
     public CartWriteRepository(WriteDbContext dbContext) : base(dbContext) { }
 
-    public async ValueTask<Cart> GetCarts(int? userId, Guid anonymousId, string Lang)
+    public async ValueTask<Cart> GetCarts(int? userId, Guid? anonymousId, string Lang)
     {
         var cart = await this.DbContext.Cart
             .Include(c => c.CartItems)
@@ -19,12 +19,11 @@ internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<
         {
             cart = Cart.Create(userId, anonymousId).Value;
             this.DbContext.Cart.Add(cart);
-            await this.DbContext.SaveChangesAsync();
         }
 
         return cart;
     }
-    public async ValueTask<Cart> AddToCart(int? userId, Guid anonymousId, int tableId, int relatedId, int quantity, string Lang)
+    public async ValueTask<Cart> AddToCart(int? userId, Guid? anonymousId, int tableId, int relatedId, int quantity, string Lang)
     {
         // گرفتن محصول از دیتابیس
         var product = await this.DbContext.Set<Product>().FindAsync(relatedId);
@@ -75,11 +74,9 @@ internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<
 
         // سبد بعد از خرید خالی میشه
         this.DbContext.CartItems.RemoveRange(cart.CartItems);
-        await this.DbContext.SaveChangesAsync();
-
         return true;
     }
-    public async ValueTask<Cart> RemoveFromCart(int? userId, Guid anonymousId, int relatedId)
+    public async ValueTask<Cart> RemoveFromCart(int? userId, Guid? anonymousId, int relatedId)
     {
         var cart = await GetCarts(userId, anonymousId, string.Empty);
         var item = cart.CartItems.FirstOrDefault(i => i.Id == relatedId);
@@ -91,7 +88,7 @@ internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<
 
         return cart;
     }
-    public async ValueTask<Cart> MergeCart(int userId, Guid anonymousId)
+    public async ValueTask<Cart> MergeCart(int userId, Guid? anonymousId)
     {
         var userCart = await this.DbContext.Cart.Include(c => c.CartItems).FirstOrDefaultAsync(c => c.UserId == userId);
         var anonCart = await this.DbContext.Cart.Include(c => c.CartItems).FirstOrDefaultAsync(c => c.AnonymousId == anonymousId);
@@ -101,7 +98,7 @@ internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<
         if (userCart == null)
         {
             anonCart.UserId = userId;
-            //anonCart.AnonymousId = null;
+            anonCart.AnonymousId = null;
             return anonCart;
         }
 

@@ -7,7 +7,7 @@
             fxLayoutAlign="space-between" class="comment-form">
         <div class="p-2">
           <h3 fxLayoutAlign="start center" class="mt-3 text-muted">
-            <span>{{ 'YOUR_SCORE' }}:</span>
+            <span>{{ 'YOUR_SCORE' | translate }}:</span>
             @for (rating of ratings; track rating.id) {
               <button mat-icon-button [matTooltip]="rating.title" matTooltipPosition="above" (click)="rate(rating)"
                       class="p-0">
@@ -98,9 +98,9 @@
     </mat-card>
   }
 } @else {
-  <div>
+  <div class="mt-4">
     <mat-divider></mat-divider>
-    <h3 class="mt-2">
+    <h3 class="mt-3">
       {{ 'LOGIN_TO_WRITE_YOUR_COMMENTS' | translate }}
       <button mat-raised-button color="primary" (click)="showLoginDialog()">{{ 'LOGIN' | translate }}</button>
     </h3>

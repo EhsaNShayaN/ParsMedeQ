@@ -10,8 +10,8 @@ public sealed class Cart : EntityBase<int>
     #endregion
 
     #region " Properties "
+    public Guid? AnonymousId { get; set; }
     public int? UserId { get; set; }
-    public Guid AnonymousId { get; set; }
     #endregion
 
     #region " Navigation Properties "
@@ -24,7 +24,7 @@ public sealed class Cart : EntityBase<int>
     #endregion
 
     #region " Factory "
-    public static PrimitiveResult<Cart> Create(int? userId, Guid anonymousId) =>
+    public static PrimitiveResult<Cart> Create(int? userId, Guid? anonymousId) =>
         PrimitiveResult.Success(
             new Cart
             {
@@ -33,19 +33,22 @@ public sealed class Cart : EntityBase<int>
             });
 
     public ValueTask<PrimitiveResult<Cart>> Update(
+        Guid? anonymousId,
         int userId)
     {
+        this.AnonymousId = anonymousId;
         this.UserId = userId;
         return ValueTask.FromResult(PrimitiveResult.Success(this));
     }
     public ValueTask<PrimitiveResult<Cart>> Update(
+        Guid? anonymousId,
         int userId,
         int tableId,
         int relatedId,
         string relatedName,
         decimal unitPrice,
         int quantity)
-        => this.Update(userId)
+        => this.Update(anonymousId, userId)
         .Map(_ => this.UpdateCartItem(
             tableId,
             relatedId,
