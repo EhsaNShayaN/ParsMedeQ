@@ -18,7 +18,7 @@ sealed class CartListEndpoint : EndpointHandlerBase<
         IPresentationMapper<CartListQueryResponse, CartListApiResponse> responseMapper)
         : base(
             Endpoints.Cart.Carts,
-            HttpMethod.Get,
+            HttpMethod.Post,
             requestMapper,
             responseMapper,
             DefaultResponseFactory.Instance.CreateOk)

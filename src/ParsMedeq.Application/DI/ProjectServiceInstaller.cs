@@ -1,6 +1,4 @@
-﻿using MediatR;
-using MediatR.Pipeline;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.FeatureManagement;
@@ -10,7 +8,6 @@ using ParsMedeQ.Domain.Abstractions;
 using ParsMedeQ.Domain.DomainServices.SigninService;
 using Polly.Contrib.DuplicateRequestCollapser;
 using SRH.MediatRMessaging;
-using SRH.MediatRMessaging.Behaviours;
 using SRH.ServiceInstaller;
 using System.Reflection;
 
@@ -53,10 +50,10 @@ static class ServiceCollectionExtension
         services.AddMediatR(config =>
         {
             config.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly(), MediatRMessaginAssemblyReference.Assembly);
-            config.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ExceptionHandlingBehaviour<,>));
-            config.AddBehavior(typeof(IPipelineBehavior<,>), typeof(RequestLoggingBehaviour<,>));
-            config.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
-            config.AddBehavior(typeof(IRequestExceptionHandler<,,>), typeof(ValidationExceptionHandlerBehaviour<,,>));
+            //config.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ExceptionHandlingBehaviour<,>));
+            //config.AddBehavior(typeof(IPipelineBehavior<,>), typeof(RequestLoggingBehaviour<,>));
+            //config.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+            //config.AddBehavior(typeof(IRequestExceptionHandler<,,>), typeof(ValidationExceptionHandlerBehaviour<,,>));
         });
 
         return services;

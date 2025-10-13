@@ -42,7 +42,7 @@ internal abstract class TspMinimalApiHandlerBase<TRequest, TResponse> : MinimalA
 internal abstract class EndpointHandlerBase<THandlerRequest, THandlerResponse, TEndpointResponse> : TspMinimalApiHandlerBase<THandlerRequest, TEndpointResponse>
     where THandlerRequest : IRequest<PrimitiveResult<THandlerResponse>>
 {
-    protected virtual bool NeedAuthentication { get; } = true;
+    protected virtual bool NeedAuthentication { get; } = false;
     protected virtual bool NeedTaxPayerFile { get; } = true;
     protected virtual bool NeedAdminPrivilage { get; } = false;
 
@@ -137,7 +137,10 @@ internal abstract class EndpointHandlerBase<TApiRequest, THandlerRequest, THandl
     #endregion
 
     protected override Delegate EndpointDelegate =>
-        (TApiRequest request, ISender sender, CancellationToken cancellationToken) => this.CallMediatRHandler(
+        (
+            TApiRequest request,
+            ISender sender,
+            CancellationToken cancellationToken) => this.CallMediatRHandler(
             sender,
             () => this._requestFactory.Invoke(request, cancellationToken),
             cancellationToken);

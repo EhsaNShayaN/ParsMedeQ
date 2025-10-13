@@ -25,7 +25,7 @@ public sealed class EndpointCallEndpointFilter : IEndpointFilter
     {
         var stopwatch = Stopwatch.StartNew();
 
-        var message = "The user '{requestor_id}({requestor_type})' with profile id:'{requestor_profile_id}', branch id:'{requestor_profile_branchId}', branch code:'{requestor_profile_branchCode}', branch name:'{requestor_profile_branchName}', memoryId: '{requestor_profile_memoryId}' called '{endpoint}' at {request_time}. duration is : '{duration}'ms";
+        var message = "user with id '{userid}' called endpoint : '{endpoint}' at '{request_time}'. duration : {duration}ms";
 
         var result = await next(context);
 

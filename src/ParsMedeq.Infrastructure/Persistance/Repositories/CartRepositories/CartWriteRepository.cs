@@ -26,7 +26,13 @@ internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<
     public async ValueTask<Cart> AddToCart(int? userId, Guid? anonymousId, int tableId, int relatedId, int quantity, string Lang)
     {
         // گرفتن محصول از دیتابیس
-        var product = await this.DbContext.Set<Product>().FindAsync(relatedId);
+        var product = await this.DbContext
+            .Set<Product>()
+            .Include(a => a.ProductTranslations)
+            .Where(a => a.Id.Equals(relatedId))
+            .FirstOrDefaultAsync()
+            .ConfigureAwait(false);
+
         if (product == null)
             throw new InvalidOperationException("محصول پیدا نشد");
 

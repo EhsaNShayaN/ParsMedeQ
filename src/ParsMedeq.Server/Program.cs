@@ -86,6 +86,7 @@ ServiceInstallerHelper.InstallServicesRecursively(builder.Services,
            ApiAssemblyReference.Assembly);
 ////////////////////////////////
 var app = builder.Build();
+app.UseMiddleware<UserContextAccessorMiddleware>();
 app.UseMiddleware<UserLangContextAccessorMiddleware>();
 app.UseHsts();
 app.UseDefaultFiles();
@@ -105,7 +106,6 @@ app.UseCors(opts =>
     opts.AllowAnyOrigin();
 });
 
-app.UseMiddleware<UserContextAccessorMiddleware>();
 app.UseOutputCache();
 app.MapMinimalEndpoits();
 
@@ -149,7 +149,7 @@ app.UseSwaggerUI(options =>
     options.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.None);
 });
 app.UseAuthorization();
-//app.UseExceptionHandler();
+app.UseExceptionHandler();
 //app.UseMiddleware<UserContextAccessorMiddleware>();
 
 app.MapControllers();
