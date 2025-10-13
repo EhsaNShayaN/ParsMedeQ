@@ -20,14 +20,21 @@ sealed class CartListEndpoint : EndpointHandlerBase<
             Endpoints.Cart.Carts,
             HttpMethod.Get,
             requestMapper,
-            responseMapper)
+            responseMapper,
+            DefaultResponseFactory.Instance.CreateOk)
     { }
 }
-internal sealed class CartListApiRequestMapper : IPresentationMapper<CartListApiRequest, CartListQuery>
+sealed class CartListApiRequestMapper : IPresentationMapper<
+    CartListApiRequest,
+    CartListQuery>
 {
-    public async ValueTask<PrimitiveResult<CartListQuery>> Map(CartListApiRequest src, CancellationToken cancellationToken)
+    public ValueTask<PrimitiveResult<CartListQuery>> Map(
+        CartListApiRequest src,
+        CancellationToken cancellationToken)
     {
-        return await ValueTask.FromResult(PrimitiveResult.Success(new CartListQuery(src.AnonymousId)));
+        return ValueTask.FromResult(
+            PrimitiveResult.Success(
+                new CartListQuery(src.AnonymousId)));
     }
 }
 sealed class CartListApiResponseMapper : IPresentationMapper<
@@ -40,7 +47,7 @@ sealed class CartListApiResponseMapper : IPresentationMapper<
     {
         return ValueTask.FromResult(
             PrimitiveResult.Success(
-                new CartListApiResponse(
+                    new CartListApiResponse(
                     src.Id,
                     src.CartItems.Select(item => new CartItemListApiResponse(
                         item.TableId,

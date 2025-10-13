@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
+using ParsMedeQ.Presentation.EndpointFilters;
 
 namespace ParsMedeQ.Presentation.Abstraction;
 internal static class EndpointHandlerBase
@@ -8,11 +9,37 @@ internal static class EndpointHandlerBase
        handlerResponse is null
            ? ValueTask.FromResult(PrimitiveResult.InternalFailure<TEndpointResponse>("", "Handler response is null"))
            : ValueTask.FromResult(PrimitiveResult.Success(handlerResponse.Adapt<TEndpointResponse>()));
-    internal static ValueTask<PrimitiveResult<THandlerRequest>> DefaultMapper<TApiRequest, THandlerRequest>(TApiRequest apiRequest, CancellationToken cancellationToken) =>
-        ValueTask.FromResult(PrimitiveResult.Success(apiRequest.Adapt<THandlerRequest>()));
-}
+    internal static ValueTask<PrimitiveResult<THandlerRequest>> DefaultMapper<TApiRequest, THandlerRequest>(
+        TApiRequest apiRequest,
+        CancellationToken cancellationToken)
+    {
+        var result = apiRequest.Adapt<THandlerRequest>();
+        return ValueTask.FromResult(PrimitiveResult.Success(result));
+    }
 
-internal abstract class EndpointHandlerBase<THandlerRequest, THandlerResponse, TEndpointResponse> : MinimalApiHandlerBase<THandlerRequest, TEndpointResponse>
+}
+internal abstract class TspMinimalApiHandlerBase<TRequest, TResponse> : MinimalApiHandlerBase<TRequest, TResponse> where TRequest : notnull
+{
+    protected virtual string ContentType { get; } = "application/json";
+
+    protected TspMinimalApiHandlerBase(EndpointInfo endpointInfo, bool isStream, HttpMethod method) : base(endpointInfo, isStream, method)
+    {
+    }
+
+    protected override RouteHandlerBuilder MapRoute(IEndpointRouteBuilder app, Delegate @delegate)
+    {
+        if (this._method.Equals(HttpMethod.Get))
+        {
+            return base
+                .MapRoute(app, @delegate)
+                .WithSwaggerDocs<TResponse>();
+        }
+        return base
+                .MapRoute(app, @delegate)
+                .WithSwaggerDocs<TRequest, TResponse>(this.ContentType);
+    }
+}
+internal abstract class EndpointHandlerBase<THandlerRequest, THandlerResponse, TEndpointResponse> : TspMinimalApiHandlerBase<THandlerRequest, TEndpointResponse>
     where THandlerRequest : IRequest<PrimitiveResult<THandlerResponse>>
 {
     protected virtual bool NeedAuthentication { get; } = true;
@@ -57,17 +84,6 @@ internal abstract class EndpointHandlerBase<THandlerRequest, THandlerResponse, T
     { }
 
     protected EndpointHandlerBase(
-        EndpointInfo endpointInfo,
-        HttpMethod httpMethod,
-        IPresentationMapper<THandlerResponse, TEndpointResponse> handlerResponseMapper) : this(
-            endpointInfo,
-            httpMethod,
-            () => default,
-            handlerResponseMapper.Map,
-            DefaultResponseFactory.Instance.CreateOk)
-    { }
-
-    protected EndpointHandlerBase(
        EndpointInfo endpointInfo,
        HttpMethod httpMethod,
        Func<THandlerResponse, CancellationToken, ValueTask<PrimitiveResult<TEndpointResponse>>> handlerResponseMapper,
@@ -83,32 +99,18 @@ internal abstract class EndpointHandlerBase<THandlerRequest, THandlerResponse, T
        Func<THandlerResponse, CancellationToken, ValueTask<PrimitiveResult<TEndpointResponse>>> handlerResponseMapper)
         : this(endpointInfo, httpMethod, handlerResponseMapper, DefaultResponseFactory.Instance.CreateOk)
     { }
-    protected EndpointHandlerBase(
-      EndpointInfo endpointInfo,
-      HttpMethod httpMethod,
-      Func<THandlerResponse, CancellationToken, TEndpointResponse> handlerResponseMapper)
-       : this(
-             endpointInfo,
-             httpMethod,
-             (handlerResponse, cancellationToken) => ValueTask.FromResult(PrimitiveResult.Success(handlerResponseMapper.Invoke(handlerResponse, cancellationToken))),
-             DefaultResponseFactory.Instance.CreateOk)
-    { }
-
 
 
     public override RouteHandlerBuilder AddRoute(IEndpointRouteBuilder routeBuilder)
     {
         var result = this.MapRoute(routeBuilder, this.EndpointDelegate);
 
-        /*if (this.NeedTaxPayerAuthentication && !this.AdminPrivilages)
+        if (this.NeedAuthentication && !this.NeedAdminPrivilage)
         {
-            result.AddEndpointFilter<TaxPayerAuthenticationEndpointFilter>();
+            result.AddEndpointFilter<AuthenticationEndpointFilter>();
         }
 
-        if (this.NeedTaxPayerFile && !this.AdminPrivilages)
-        {
-            result.AddEndpointFilter<TaxPayerFileEndpointFilter>();
-        }*/
+        result.AddEndpointFilter<EndpointCallEndpointFilter>();
 
         return result;
     }
@@ -229,37 +231,6 @@ internal abstract class EndpointHandlerBase<TApiRequest, THandlerRequest, THandl
             DefaultResponseFactory.Instance.CreateOk)
     { }
     #endregion
-
-    //public override RouteHandlerBuilder AddRoute(IEndpointRouteBuilder routeBuilder)
-    //{
-    //    var result = this.MapRoute(
-    //        routeBuilder,
-    //        async (
-    //            TApiRequest request,
-    //            ISender sender,
-    //            CancellationToken cancellationToken) =>
-    //        {
-    //            var result = await this._requestFactory.Invoke(request, cancellationToken)
-    //                .Map(handlerRequest => sender.SendRequest(handlerRequest, cancellationToken))
-    //                .Map(handlerResponse => this._handlerResponseMapper.Invoke(handlerResponse, cancellationToken))
-    //                .ConfigureAwait(false);
-
-    //            return this._responseFactory.Invoke(result);
-    //        });
-
-    //    if (this.NeedTaxPayerAuthentication)
-    //    {
-    //        result.AddEndpointFilter<TaxPayerAuthenticationEndpointFilter>();
-    //    }
-
-    //    if (this.NeedTaxPayerFile)
-    //    {
-    //        result.AddEndpointFilter<TaxPayerFileEndpointFilter>();
-    //    }
-
-    //    return result;
-    //}
-
 }
 
 /// <summary>
@@ -298,6 +269,7 @@ internal abstract class GetEndpointHandlerBase<THandlerRequest, THandlerResponse
             DefaultResponseFactory.Instance.CreateOk)
     {
     }
+
     protected GetEndpointHandlerBase(
         EndpointInfo endpointInfo,
         HttpMethod httpMethod,
@@ -308,5 +280,24 @@ internal abstract class GetEndpointHandlerBase<THandlerRequest, THandlerResponse
             EndpointHandlerBase.DefaultHandlerResponseMapper<THandlerResponse, TEndpointResponse>,
             DefaultResponseFactory.Instance.CreateOk)
     {
+    }
+}
+
+public static class EndpointExtensions
+{
+    public static RouteHandlerBuilder WithSwaggerDocs<TRequest, TResponse>(
+        this RouteHandlerBuilder builder,
+        string accepts = "application/json") where TRequest : notnull
+    {
+        return builder
+            //.Accepts<TRequest>(string.IsNullOrWhiteSpace(accepts) ? accepts : "application/json")
+            .Produces<TResponse>(StatusCodes.Status200OK)
+            .ProducesValidationProblem();
+    }
+    public static RouteHandlerBuilder WithSwaggerDocs<TResponse>(this RouteHandlerBuilder builder)
+    {
+        return builder
+            .Produces<TResponse>(StatusCodes.Status200OK)
+            .ProducesValidationProblem();
     }
 }

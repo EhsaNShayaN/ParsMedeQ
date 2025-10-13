@@ -1,30 +1,9 @@
 [
   {
     "link": "",
-    "title": "متن 1",
-    "description": "توضیح متن 1",
-    "image": "/assets/slider/slide1.jpg",
-    "back": "#aaa0a0a0"
-  },
-  {
-    "link": "",
-    "title": "متن 2",
-    "description": "توضیح متن 2",
-    "image": "/assets/slider/slide2.jpg",
-    "back": "#aaa0a0a0"
-  },
-  {
-    "link": "",
-    "title": "متن 3",
-    "description": "توضیح متن 3",
-    "image": "/assets/slider/slide3.jpg",
-    "back": "#aaa0a0a0"
-  },
-  {
-    "link": "",
-    "title": "متن 4",
-    "description": "توضیح متن 4",
-    "image": "/assets/slider/slide4.jpg",
+    "title": "اکتروکموتراپی در سرطان",
+    "description": "برگزاری سمینار یکروزه معرفی و کاربردهای بالینی در ECT",
+    "image": "/assets/slider/slider-1.png",
     "back": "#aaa0a0a0"
   }
 ]

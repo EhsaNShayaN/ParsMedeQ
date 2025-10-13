@@ -7,6 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Features\CartFeatures\AddToCartFeature\**" />
+    <Compile Remove="Features\CartFeatures\CartListFeature\**" />
+    <Compile Remove="Features\CartFeatures\MergeCartFeature\**" />
+    <Compile Remove="Features\CartFeatures\RemoveFromCartFeature\**" />
+    <EmbeddedResource Remove="Features\CartFeatures\AddToCartFeature\**" />
+    <EmbeddedResource Remove="Features\CartFeatures\CartListFeature\**" />
+    <EmbeddedResource Remove="Features\CartFeatures\MergeCartFeature\**" />
+    <EmbeddedResource Remove="Features\CartFeatures\RemoveFromCartFeature\**" />
+    <None Remove="Features\CartFeatures\AddToCartFeature\**" />
+    <None Remove="Features\CartFeatures\CartListFeature\**" />
+    <None Remove="Features\CartFeatures\MergeCartFeature\**" />
+    <None Remove="Features\CartFeatures\RemoveFromCartFeature\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Mapster" />
   </ItemGroup>
 
@@ -17,6 +32,10 @@
 		<ProjectReference Include="..\ParsMedeQ.Application\ParsMedeQ.Application.csproj" />
 		<ProjectReference Include="..\ParsMedeQ.Contracts\ParsMedeQ.Contracts.csproj" />
 		<ProjectReference Include="..\ParsMedeQ.Domain\ParsMedeQ.Domain.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Features\CartFeatures\" />
 	</ItemGroup>
 
 </Project>
