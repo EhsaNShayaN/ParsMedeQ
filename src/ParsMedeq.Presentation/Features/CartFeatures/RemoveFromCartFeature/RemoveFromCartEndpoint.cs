@@ -1,11 +1,10 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Mvc;
-using ParsMedeQ.Application.Features.CartFeature.RemoveFromCartFeature;
+﻿using ParsMedeQ.Application.Features.CartFeature.RemoveFromCartFeature;
 using ParsMedeQ.Contracts;
 using ParsMedeQ.Contracts.CartContracts.DeleteFromCartContract;
 
 namespace ParsMedeQ.Presentation.Features.CartFeatures.RemoveFromCartFeature;
 sealed class RemoveFromCartEndpoint : EndpointHandlerBase<
+    RemoveFromCartApiRequest,
     RemoveFromCartCommand,
     RemoveFromCartCommandResponse,
     RemoveFromCartApiResponse>
@@ -14,23 +13,24 @@ sealed class RemoveFromCartEndpoint : EndpointHandlerBase<
     protected override bool NeedTaxPayerFile => false;
 
     public RemoveFromCartEndpoint(
-                IPresentationMapper<RemoveFromCartCommandResponse, RemoveFromCartApiResponse> responseMapper) : base(
+        IPresentationMapper<RemoveFromCartApiRequest, RemoveFromCartCommand> requestMapper,
+        IPresentationMapper<RemoveFromCartCommandResponse, RemoveFromCartApiResponse> responseMapper) : base(
             Endpoints.Cart.RemoveCart,
             HttpMethod.Post,
+            requestMapper,
             responseMapper)
     { }
-
-    protected override Delegate EndpointDelegate =>
-    (
-        [FromQuery] Guid anonymousId,
-        RemoveFromCartApiRequest request,
-        ISender sender,
-        CancellationToken cancellationToken) => this.CallMediatRHandler(
-        sender,
-        () => ValueTask.FromResult(
+}
+internal sealed class RemoveFromCartApiRequestMapper : IPresentationMapper<RemoveFromCartApiRequest, RemoveFromCartCommand>
+{
+    public async ValueTask<PrimitiveResult<RemoveFromCartCommand>> Map(RemoveFromCartApiRequest src, CancellationToken cancellationToken)
+    {
+        return await ValueTask.FromResult(
             PrimitiveResult.Success(
-                new RemoveFromCartCommand(anonymousId, request.RelatedId))),
-        cancellationToken);
+                new RemoveFromCartCommand(
+                    src.AnonymousId,
+                    src.RelatedId)));
+    }
 }
 sealed class RemoveFromCartCommandResponseMapper : IPresentationMapper<RemoveFromCartCommandResponse, RemoveFromCartApiResponse>
 {

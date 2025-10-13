@@ -6,6 +6,7 @@ using ParsMedeQ.Contracts.CartContracts.AddToCartContract;
 
 namespace ParsMedeQ.Presentation.Features.CartFeatures.AddToCartFeature;
 sealed class AddToCartEndpoint : EndpointHandlerBase<
+    AddToCartApiRequest,
     AddToCartCommand,
     AddToCartCommandResponse,
     AddToCartApiResponse>
@@ -14,9 +15,11 @@ sealed class AddToCartEndpoint : EndpointHandlerBase<
     protected override bool NeedTaxPayerFile => false;
 
     public AddToCartEndpoint(
+        IPresentationMapper<AddToCartApiRequest, AddToCartCommand> requestMapper,
         IPresentationMapper<AddToCartCommandResponse, AddToCartApiResponse> responseMapper) : base(
             Endpoints.Cart.AddCart,
             HttpMethod.Post,
+            requestMapper,
             responseMapper)
     { }
 
@@ -31,6 +34,19 @@ sealed class AddToCartEndpoint : EndpointHandlerBase<
             PrimitiveResult.Success(
                 new AddToCartCommand(anonymousId, request.RelatedId, request.TableId, request.Quantity))),
         cancellationToken);
+}
+internal sealed class AddToCartApiRequestMapper : IPresentationMapper<AddToCartApiRequest, AddToCartCommand>
+{
+    public async ValueTask<PrimitiveResult<AddToCartCommand>> Map(AddToCartApiRequest src, CancellationToken cancellationToken)
+    {
+        return await ValueTask.FromResult(
+            PrimitiveResult.Success(
+                new AddToCartCommand(
+                    src.AnonymousId,
+                    src.RelatedId,
+                    src.TableId,
+                    src.Quantity)));
+    }
 }
 sealed class AddToCartCommandResponseMapper : IPresentationMapper<AddToCartCommandResponse, AddToCartApiResponse>
 {

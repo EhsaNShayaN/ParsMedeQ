@@ -1,6 +1,4 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Mvc;
-using ParsMedeQ.Application.Features.CartFeature.CartListFeature;
+﻿using ParsMedeQ.Application.Features.CartFeature.CartListFeature;
 using ParsMedeQ.Application.Features.CartFeature.GetCartFeature;
 using ParsMedeQ.Contracts;
 using ParsMedeQ.Contracts.CartContracts.CartListContract;
@@ -8,6 +6,7 @@ using ParsMedeQ.Contracts.CartContracts.CartListContract;
 namespace ParsMedeQ.Presentation.Features.CartFeatures.CartListFeature;
 
 sealed class CartListEndpoint : EndpointHandlerBase<
+    CartListApiRequest,
     CartListQuery,
     CartListQueryResponse,
     CartListApiResponse>
@@ -15,23 +14,21 @@ sealed class CartListEndpoint : EndpointHandlerBase<
     protected override bool NeedTaxPayerFile => true;
 
     public CartListEndpoint(
+        IPresentationMapper<CartListApiRequest, CartListQuery> requestMapper,
         IPresentationMapper<CartListQueryResponse, CartListApiResponse> responseMapper)
         : base(
             Endpoints.Cart.Carts,
             HttpMethod.Get,
+            requestMapper,
             responseMapper)
     { }
-
-    protected override Delegate EndpointDelegate =>
-    (
-        [FromQuery] Guid anonymousId,
-        ISender sender,
-        CancellationToken cancellationToken) => this.CallMediatRHandler(
-        sender,
-        () => ValueTask.FromResult(
-            PrimitiveResult.Success(
-                new CartListQuery(anonymousId))),
-        cancellationToken);
+}
+internal sealed class CartListApiRequestMapper : IPresentationMapper<CartListApiRequest, CartListQuery>
+{
+    public async ValueTask<PrimitiveResult<CartListQuery>> Map(CartListApiRequest src, CancellationToken cancellationToken)
+    {
+        return await ValueTask.FromResult(PrimitiveResult.Success(new CartListQuery(src.AnonymousId)));
+    }
 }
 sealed class CartListApiResponseMapper : IPresentationMapper<
     CartListQueryResponse,
