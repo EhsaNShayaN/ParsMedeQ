@@ -30,8 +30,7 @@ internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<
         if (product == null)
             throw new InvalidOperationException("محصول پیدا نشد");
 
-        if (product.Stock <= 0)
-            throw new InvalidOperationException("محصول ناموجود است");
+        //if (product.Stoc0k <= 0) throw new InvalidOperationException("محصول ناموجود است");
 
         var cart = await GetCarts(userId, anonymousId, Lang);
 
@@ -40,15 +39,13 @@ internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<
         if (existingItem != null)
         {
             // چک موجودی
-            if (existingItem.Quantity + quantity > product.Stock)
-                throw new InvalidOperationException($"حداکثر تعداد سفارش {product.Stock} عدد است");
+            //if (existingItem.Quantity + quantity > product.Stoc0k) throw new InvalidOperationException($"حداکثر تعداد سفارش {product.Stoc0k} عدد است");
 
             existingItem.Quantity += quantity;
         }
         else
         {
-            if (quantity > product.Stock)
-                throw new InvalidOperationException($"حداکثر تعداد سفارش {product.Stock} عدد است");
+            //if (quantity > product.Stoc0k) throw new InvalidOperationException($"حداکثر تعداد سفارش {product.Stoc0k} عدد است");
 
             await cart.AddCartItem(
                 tableId,
@@ -66,10 +63,11 @@ internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<
         foreach (var item in cart.CartItems)
         {
             var product = await this.DbContext.Set<Product>().FindAsync(item.RelatedId);
-            if (product == null || product.Stock < item.Quantity)
-                throw new InvalidOperationException($"موجودی محصول {item.RelatedName} کافی نیست");
+            if (product == null)
+                throw new InvalidOperationException($"محصول {item.RelatedName} پیدا نشد");
+            //if (product.Stoc0k < item.Quantity) throw new InvalidOperationException($"موجودی محصول {item.RelatedName} کافی نیست");
 
-            await product.UpdateStock(item.Quantity);
+            //await product.UpdateStoc0k(item.Quantity);
         }
 
         // سبد بعد از خرید خالی میشه
