@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using ParsMedeQ.Application.Features.CartFeature.CartListFeature;
 using ParsMedeQ.Application.Features.CartFeature.GetCartFeature;
 using ParsMedeQ.Contracts;
@@ -24,7 +24,7 @@ sealed class CartListEndpoint : EndpointHandlerBase<
 
     protected override Delegate EndpointDelegate =>
     (
-        [AsParameters] Guid anonymousId,
+        [FromQuery] Guid anonymousId,
         ISender sender,
         CancellationToken cancellationToken) => this.CallMediatRHandler(
         sender,

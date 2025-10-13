@@ -1,15 +1,14 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using ParsMedeQ.Application.Persistance.Schema;
+using ParsMedeQ.Application.Services.TokenGeneratorService;
 using ParsMedeQ.Application.Services.UserContextAccessorServices;
-using ParsMedeQ.Domain.Helpers;
-using ParsMedeQ.Domain.Types.UserId;
 
 namespace ParsMedeQ.Presentation.Services.ApplicationServices.UserContextAccessorServices;
 
 public sealed class UserContextAccessorMiddleware
 {
+    const string _authorizationHeaderName = "Authorization";
     private readonly RequestDelegate _next;
 
     public UserContextAccessorMiddleware(RequestDelegate requestDelegate)
@@ -20,36 +19,32 @@ public sealed class UserContextAccessorMiddleware
     public async Task Invoke(HttpContext httpContext,
         IUserContextAccessor UserContextAccessor,
         IServiceScopeFactory serviceScopeFactory,
+        ITokenGeneratorService userAuthenticationTokenService,
         ILogger<UserContextAccessorMiddleware> logger)
     {
-        UserContext taxPayerUserContext = UserContext.Guest;
+        UserContext currentUser = UserContext.Guest;
         try
         {
-            if (httpContext.Request.Query.TryGetValue("userId", out var userId))
+            if (httpContext.Request.Headers.TryGetValue(_authorizationHeaderName, out var authHeader)
+                && !string.IsNullOrWhiteSpace(authHeader))
             {
-                using var scope = serviceScopeFactory.CreateScope();
-                var repo = scope.ServiceProvider.GetRequiredService<IReadUnitOfWork>().UserReadRepository;
-
-                if (HashIdsHelper.Instance.TryDecodeSingle(userId, out int uid))
+                var tokenItems = authHeader.ToString().Split(" ");
+                if (tokenItems.Length == 2 && tokenItems.First().Equals("bearer", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    var userInfoResult = await repo.FindUser(
-                        UserIdType.FromDb(uid),
-                        httpContext.RequestAborted);
-
-                    if (userInfoResult.IsSuccess)
+                    var userId = await userAuthenticationTokenService.ValidateToken(tokenItems.Last(), true, string.Empty, httpContext.RequestAborted)
+                        .Map(AuthenticationHelper.GetUserId)
+                        .Match(
+                            s => s,
+                            _ => 0)
+                        .ConfigureAwait(false);
+                    if (userId > 0)
                     {
-                        var userInfo = userInfoResult.Value;
-                        UserContextAccessor.Current = new UserContext(
-                            userInfo.Id,
-                            new UserInfo(
-                                userInfo.Email,
-                                userInfo.Mobile,
-                                userInfo.IsMobileConfirmed,
-                                userInfo.IsEmailConfirmed,
-                                userInfo.FullName));
+                        currentUser = new UserContext(userId);
                     }
                 }
             }
+
+            UserContextAccessor.Current = currentUser;
             await this._next(httpContext);
         }
         catch

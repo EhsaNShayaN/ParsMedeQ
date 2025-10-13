@@ -1,6 +1,4 @@
 ﻿using ParsMedeQ.Application.Services.UserLangServices;
-using Polly;
-using Polly.Contrib.DuplicateRequestCollapser;
 using SRH.MediatRMessaging.Queries;
 
 namespace ParsMedeQ.Application.Features.ResourceFeatures.ResourceCategoryListFeature;
@@ -13,7 +11,6 @@ sealed class ResourceCategoryListQueryHandler : IPrimitiveResultQueryHandler<Res
 
     public ResourceCategoryListQueryHandler(
         IUserLangContextAccessor userLangContextAccessor,
-        IAsyncRequestCollapserPolicy asyncRequestCollapserPolicy,
         IReadUnitOfWork taxMemoryReadUnitOfWork)
     {
         this._userLangContextAccessor = userLangContextAccessor;

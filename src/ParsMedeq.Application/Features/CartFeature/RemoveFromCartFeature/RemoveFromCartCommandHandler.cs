@@ -17,7 +17,7 @@ public sealed class RemoveFromCartCommandHandler : IPrimitiveResultCommandHandle
     public async Task<PrimitiveResult<RemoveFromCartCommandResponse>> Handle(RemoveFromCartCommand request, CancellationToken cancellationToken)
     {
         var cart = await this._writeUnitOfWork.CartWriteRepository.RemoveFromCart(
-            this._userContextAccessor.GetCurrent().Id.Value,
+            this._userContextAccessor.GetCurrent().UserId,
             request.AnonymousId,
             request.RelatedId);
 

@@ -17,7 +17,7 @@ public sealed class AddCommentCommandHandler : IPrimitiveResultCommandHandler<Ad
 
     public async Task<PrimitiveResult<AddCommentCommandResponse>> Handle(AddCommentCommand request, CancellationToken cancellationToken) =>
         await Comment.Create(
-            this._userContextAccessor.GetCurrent().Id.Value,
+            this._userContextAccessor.GetCurrent().UserId,
             request.TableId,
             request.TableName,
             request.RelatedId,

@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using ParsMedeQ.Application.Features.CartFeature.MergeCartFeature;
 using ParsMedeQ.Contracts;
 using ParsMedeQ.Contracts.CartContracts.MergeCartContract;
@@ -21,8 +21,7 @@ sealed class MergeCartEndpoint : EndpointHandlerBase<
 
     protected override Delegate EndpointDelegate =>
     (
-        [AsParameters] Guid anonymousId,
-        //MergeCartApiRequest request,
+        [FromQuery] Guid anonymousId,
         ISender sender,
         CancellationToken cancellationToken) => this.CallMediatRHandler(
         sender,

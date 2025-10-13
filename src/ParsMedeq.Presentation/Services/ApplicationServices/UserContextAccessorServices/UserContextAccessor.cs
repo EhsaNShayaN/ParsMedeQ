@@ -13,6 +13,6 @@ sealed class UserContextAccessor : IUserContextAccessor
     public bool IsGuest()
     {
         var current = this.GetCurrent();
-        return current.Equals(UserContext.Guest) || current.Id.Equals(default) || current.Id.Value.Equals(0);
+        return current.Equals(UserContext.Guest) || current.UserId.Equals(default) || current.UserId.Equals(0);
     }
 }

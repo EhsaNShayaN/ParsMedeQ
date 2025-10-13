@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using ParsMedeQ.Application.Features.CartFeature.AddToCartFeature;
 using ParsMedeQ.Contracts;
 using ParsMedeQ.Contracts.CartContracts.AddToCartContract;
@@ -22,7 +22,7 @@ sealed class AddToCartEndpoint : EndpointHandlerBase<
 
     protected override Delegate EndpointDelegate =>
     (
-        [AsParameters] Guid anonymousId,
+        [FromQuery] Guid anonymousId,
         AddToCartApiRequest request,
         ISender sender,
         CancellationToken cancellationToken) => this.CallMediatRHandler(

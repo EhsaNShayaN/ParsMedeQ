@@ -13,12 +13,14 @@ using ParsMedeQ.Application.Services.EmailSenderService;
 using ParsMedeQ.Application.Services.OTP;
 using ParsMedeQ.Application.Services.SmsSenderService;
 using ParsMedeQ.Application.Services.TokenGeneratorService;
+using ParsMedeQ.Application.Services.UserAuthenticationServices;
 using ParsMedeQ.Domain.Persistance;
 using ParsMedeQ.Infrastructure.Helpers;
 using ParsMedeQ.Infrastructure.Persistance.DbContexts;
 using ParsMedeQ.Infrastructure.Services.EmailSenderService;
 using ParsMedeQ.Infrastructure.Services.OTP;
 using ParsMedeQ.Infrastructure.Services.SmsSenderService;
+using ParsMedeQ.Infrastructure.Services.TokenGeneratorService;
 using ParsMedeQ.Infrastructure.Services.UserAuthenticationToken;
 using Polly;
 using System.Net;
@@ -57,6 +59,7 @@ static class ServiceCollectionExtension
     {
         services.Configure<UserAuthenticationTokenServiceOptions>(configuration.GetSection("Jwt"));
         services.TryAddSingleton<ITokenGeneratorService, TokenGeneratorService>();
+        services.TryAddSingleton<IUserAuthenticationTokenService, UserAuthenticationTokenService>();
 
         return services;
     }
@@ -309,6 +312,8 @@ static class ServiceCollectionExtension
         services.TryAddSingleton<IFileService, FileService>();
         return services;
     }
+
+
 
     #region " Private Methods "
     static void AddAllDapperTypeHandlers()

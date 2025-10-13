@@ -6,7 +6,7 @@ using ParsMedeQ.Application.Services.TokenGeneratorService;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
-namespace ParsMedeQ.Infrastructure.Services.UserAuthenticationToken;
+namespace ParsMedeQ.Infrastructure.Services.TokenGeneratorService;
 public sealed class TokenGeneratorService : ITokenGeneratorService
 {
     private readonly AuthenticationOptions _authenticationOptions;
@@ -21,7 +21,7 @@ public sealed class TokenGeneratorService : ITokenGeneratorService
         string audience,
         CancellationToken cancellationToken)
     {
-        var roles = userId == 1 ? "SuperAdmin" : (userId == 2 ? "Admin" : "");
+        var roles = userId == 1 ? "SuperAdmin" : userId == 2 ? "Admin" : "";
         var claims = new List<Claim>
         {
             new(AuthenticationHelper.USERID_CLAIM,  AuthenticationHelper.GenerateTokenUserId(userId)),
@@ -121,14 +121,4 @@ public sealed class TokenGeneratorService : ITokenGeneratorService
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this._authenticationOptions.SecretKey));
         return ValueTask.FromResult(PrimitiveResult.Success(securityKey));
     }
-}
-
-public sealed class UserAuthenticationTokenServiceOptions
-{
-    public string SecretKey { get; set; } = "a3d6f9c1b7e48d2f6c5a9e0b3f7d4a1c8e2f9b7a5d4c3e6f8a9b1c2d3e4f5a6";
-    public string Issuer { get; set; } = "Bazneshastegi";
-    public string[] Audiences { get; set; } = [];
-    public bool ValidateIssuer { get; set; } = true;
-    public bool ValidateAudience { get; set; } = true;
-    public TimeSpan Expiry { get; set; } = TimeSpan.FromDays(1);
 }

@@ -1,22 +1,8 @@
-﻿using ParsMedeQ.Domain.Types.UserId;
+﻿namespace ParsMedeQ.Application.Services.UserContextAccessorServices;
 
-namespace ParsMedeQ.Application.Services.UserContextAccessorServices;
-
-public sealed record UserContext(UserIdType Id, UserInfo UserInfo)
+public sealed record UserContext(int UserId)
 {
-    UserProfileItem? _profile = null;
+    public readonly static UserContext Guest = new(0);
 
-    public readonly static UserContext Guest = new(UserIdType.FromDb(0), UserInfo.Empty);
-
-    public UserProfileItem Profile
-    {
-        get
-        {
-            if (this.Id.Value.Equals(0)) new UserProfileItem(UserContextProfileId.Serialize(new UserContextProfileId(UserIdType.FromDb(0))));
-            this._profile ??= new UserProfileItem(UserContextProfileId.Serialize(new UserContextProfileId(this.Id)));
-            return this._profile;
-        }
-    }
-
-    public static UserContext Create(UserIdType Id, UserInfo value) => new(Id, value);
+    public static UserContext Create(int id) => new(id);
 }

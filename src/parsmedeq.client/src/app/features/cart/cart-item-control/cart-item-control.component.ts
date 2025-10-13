@@ -18,7 +18,7 @@ export class CartItemControlComponent {
   cart!: Signal<Cart | null>; // or appropriate type
 
   item = computed(() =>
-    this.cart()?.items.find(i => i.relatedId === this.relatedId && i.tableId === this.tableId)
+    this.cart()?.items?.find(i => i.relatedId === this.relatedId && i.tableId === this.tableId)
   );
 
   quantity = computed(() => this.item()?.quantity ?? 0);

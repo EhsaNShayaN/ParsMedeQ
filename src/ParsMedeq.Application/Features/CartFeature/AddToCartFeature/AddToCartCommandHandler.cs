@@ -21,7 +21,7 @@ public sealed class AddToCartCommandHandler : IPrimitiveResultCommandHandler<Add
     public async Task<PrimitiveResult<AddToCartCommandResponse>> Handle(AddToCartCommand request, CancellationToken cancellationToken)
     {
         var cart = await this._writeUnitOfWork.CartWriteRepository.AddToCart(
-            this._userContextAccessor.GetCurrent().Id.Value,
+            this._userContextAccessor.GetCurrent().UserId,
             request.AnonymousId,
             request.TableId,
             request.RelatedId,

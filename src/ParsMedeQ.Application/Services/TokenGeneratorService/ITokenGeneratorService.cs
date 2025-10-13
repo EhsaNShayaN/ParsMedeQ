@@ -17,13 +17,13 @@ public static class AuthenticationHelper
     public const string MOBILE_AUDIENCE = "mobile";
 
 
-    public static long GetUserId(ClaimsPrincipal? claims)
+    public static int GetUserId(ClaimsPrincipal? claims)
     {
         var result = GetClaim(claims, AuthenticationHelper.USERID_CLAIM);
 
         if (string.IsNullOrWhiteSpace(result)) return 0;
 
-        if (HashIdsHelper.Instance.TryDecodeSingleLong(result, out var id) && id > 0)
+        if (HashIdsHelper.Instance.TryDecodeSingle(result, out var id) && id > 0)
         {
             return id;
         }

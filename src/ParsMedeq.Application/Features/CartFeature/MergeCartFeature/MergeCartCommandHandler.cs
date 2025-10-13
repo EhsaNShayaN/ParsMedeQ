@@ -17,7 +17,7 @@ public sealed class MergeCartCommandHandler : IPrimitiveResultCommandHandler<Mer
     public async Task<PrimitiveResult<MergeCartCommandResponse>> Handle(MergeCartCommand request, CancellationToken cancellationToken)
     {
         var cart = await this._writeUnitOfWork.CartWriteRepository.MergeCart(
-            this._userContextAccessor.GetCurrent().Id.Value,
+            this._userContextAccessor.GetCurrent().UserId,
             request.AnonymousId);
 
         return await this._writeUnitOfWork.SaveChangesAsync(CancellationToken.None).Map(_ => cart)

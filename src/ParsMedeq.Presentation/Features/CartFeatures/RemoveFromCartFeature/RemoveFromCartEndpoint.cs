@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using ParsMedeQ.Application.Features.CartFeature.RemoveFromCartFeature;
 using ParsMedeQ.Contracts;
 using ParsMedeQ.Contracts.CartContracts.DeleteFromCartContract;
@@ -22,7 +22,7 @@ sealed class RemoveFromCartEndpoint : EndpointHandlerBase<
 
     protected override Delegate EndpointDelegate =>
     (
-        [AsParameters] Guid anonymousId,
+        [FromQuery] Guid anonymousId,
         RemoveFromCartApiRequest request,
         ISender sender,
         CancellationToken cancellationToken) => this.CallMediatRHandler(
