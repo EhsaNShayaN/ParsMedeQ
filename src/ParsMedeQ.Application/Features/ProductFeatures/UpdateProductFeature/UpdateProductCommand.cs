@@ -19,10 +19,8 @@ public sealed record class UpdateProductCommand(
     int Price,
     int Discount,
     DateTime? ExpirationDate,
-    byte[] Image,
-    string ImageExtension,
-    byte[] File,
-    string FileExtension,
+    FileData? ImageInfo,
+    FileData? FileInfo,
     string OldImagePath,
     int? OldFileId) : IPrimitiveResultCommand<UpdateProductCommandResponse>,
     IValidatableRequest<UpdateProductCommand>

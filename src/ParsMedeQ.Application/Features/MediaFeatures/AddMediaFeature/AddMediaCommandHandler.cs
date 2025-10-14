@@ -16,7 +16,8 @@ public sealed class AddMediaCommandHandler : IPrimitiveResultCommandHandler<AddM
         return await Media.Create(
             request.TableId,
             request.Path,
-            request.MimeType)
+            request.MimeType,
+            request.FileName)
             .Map(media => this._writeUnitOfWork.MediaWriteRepository.AddMedia(media)
             .Map(media => this._writeUnitOfWork.SaveChangesAsync(CancellationToken.None).Map(_ => media))
             .Map(media => new AddMediaCommandResponse(media is not null)))

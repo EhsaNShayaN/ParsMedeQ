@@ -6,7 +6,7 @@ using ParsMedeQ.Application.Options;
 
 namespace ParsMedeQ.Infrastructure.Helpers;
 
-public class FileService : IFileService
+public sealed class FileService : IFileService
 {
     private readonly IOptionsMonitor<RepositoryOptions> _options;
 
@@ -80,5 +80,31 @@ public class FileService : IFileService
         using var ms = new MemoryStream();
         await file.CopyToAsync(ms, cancellationToken);
         return ms.ToArray();
+    }
+    public async Task<FileData?> ReadStream(IFormFile? file)
+    {
+        if (file is null)
+        {
+            return null;
+        }
+        var stream = file.OpenReadStream();
+        // Ensure the stream is positioned at the beginning
+        if (stream.CanSeek)
+        {
+            stream.Seek(0, SeekOrigin.Begin);
+        }
+        using MemoryStream memoryStream = new();
+        byte[] buffer = new byte[8192]; // 8KB buffer
+        int bytesRead;
+
+        // Asynchronously read chunks from the input stream
+        while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+        {
+            // Write the read bytes to the memory stream
+            await memoryStream.WriteAsync(buffer.AsMemory(0, bytesRead));
+        }
+        // Return the accumulated bytes
+        //return memoryStream.ToArray();
+        return new FileData(memoryStream.ToArray(), file.FileName, file.ContentType, Path.GetExtension(file.FileName));
     }
 }

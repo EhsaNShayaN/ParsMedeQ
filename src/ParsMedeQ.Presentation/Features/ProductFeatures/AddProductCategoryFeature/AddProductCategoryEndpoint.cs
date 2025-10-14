@@ -1,7 +1,6 @@
-﻿using ParsMedeQ.Application.Features.CommentFeatures.AddCommentFeature;
+﻿using ParsMedeQ.Application;
 using ParsMedeQ.Application.Features.ProductFeatures.AddProductCategoryFeature;
 using ParsMedeQ.Contracts;
-using ParsMedeQ.Contracts.CommentContracts.AddCommentContract;
 using ParsMedeQ.Contracts.ProductContracts.AddProductCategoryContract;
 
 namespace ParsMedeQ.Presentation.Features.ProductFeatures.AddProductCategoryFeature;
@@ -25,15 +24,13 @@ sealed class AddProductCategoryEndpoint : EndpointHandlerBase<
 }
 internal sealed class AddProductCategoryApiRequestMapper : IPresentationMapper<AddProductCategoryApiRequest, AddProductCategoryCommand>
 {
+    public IFileService _fileService { get; set; }
+
+    public AddProductCategoryApiRequestMapper(IFileService fileService) => this._fileService = fileService;
+
     public async ValueTask<PrimitiveResult<AddProductCategoryCommand>> Map(AddProductCategoryApiRequest src, CancellationToken cancellationToken)
     {
-        byte[] imageBytes = [];
-        string imageExtension = string.Empty;
-        if (src.Image is not null)
-        {
-            imageBytes = await this.ReadStream(src.Image.OpenReadStream()).ConfigureAwait(false);
-            imageExtension = Path.GetExtension(src.Image.FileName);
-        }
+        var imageInfo = await _fileService.ReadStream(src.Image).ConfigureAwait(false);
         return await ValueTask.FromResult(
             PrimitiveResult.Success(
                 new AddProductCategoryCommand(
@@ -41,29 +38,6 @@ internal sealed class AddProductCategoryApiRequestMapper : IPresentationMapper<A
                     src.Title,
                     src.Description,
                     src.ParentId,
-                    imageBytes,
-                    imageExtension)));
-    }
-    async ValueTask<byte[]> ReadStream(Stream stream)
-    {
-        // Ensure the stream is positioned at the beginning
-        if (stream.CanSeek)
-        {
-            stream.Seek(0, SeekOrigin.Begin);
-        }
-        using (MemoryStream memoryStream = new MemoryStream())
-        {
-            byte[] buffer = new byte[8192]; // 8KB buffer
-            int bytesRead;
-
-            // Asynchronously read chunks from the input stream
-            while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
-            {
-                // Write the read bytes to the memory stream
-                await memoryStream.WriteAsync(buffer, 0, bytesRead);
-            }
-            // Return the accumulated bytes
-            return memoryStream.ToArray();
-        }
+                    imageInfo)));
     }
 }

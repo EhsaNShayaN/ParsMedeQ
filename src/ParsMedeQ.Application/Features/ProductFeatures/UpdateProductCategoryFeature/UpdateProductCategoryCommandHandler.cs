@@ -23,7 +23,7 @@ public sealed class UpdateProductCategoryCommandHandler : IPrimitiveResultComman
         var langCode = _userLangContextAccessor.GetCurrentLang();
         return
             await this._writeUnitOfWork.ProductWriteRepository.FindCategoryById(request.Id, cancellationToken)
-            .Map(resource => UploadFile(this._fileService, request.Image, request.ImageExtension, "Images", cancellationToken)
+            .Map(resource => UploadFile(this._fileService, request.ImageInfo?.Bytes, request.ImageInfo?.Extension, "Images", cancellationToken)
                 .Map(imagePath => (resource, imagePath)))
             .MapIf(
                 _ => langCode.Equals(Constants.LangCode_Farsi, StringComparison.OrdinalIgnoreCase),

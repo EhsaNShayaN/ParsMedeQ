@@ -5,12 +5,12 @@ namespace ParsMedeQ.Domain.Aggregates.MediaAggregate;
 public sealed class Media : EntityBase<int>
 {
     #region " Fields "
-    //private Resource _resource;
     #endregion
     #region " Properties "
     public int TableId { get; private set; }
     public string Path { get; private set; } = null!;
     public string MimeType { get; private set; } = string.Empty;
+    public string FileName { get; private set; } = string.Empty;
     #endregion
 
     #region " Navigation Properties "
@@ -26,14 +26,16 @@ public sealed class Media : EntityBase<int>
     public static PrimitiveResult<Media> Create(
         int tableId,
         string path,
-        string mimeType)
+        string mimeType,
+        string fileName)
     {
         return PrimitiveResult.Success(
             new Media()
             {
                 TableId = tableId,
                 Path = path,
-                MimeType = mimeType
+                MimeType = mimeType,
+                FileName = fileName
             });
     }
     #endregion

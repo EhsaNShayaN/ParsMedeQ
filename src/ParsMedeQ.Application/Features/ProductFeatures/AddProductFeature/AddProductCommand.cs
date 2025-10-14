@@ -17,10 +17,8 @@ public sealed record class AddProductCommand
     DateTime? ExpirationDate,
     string Keywords,
     string PublishDate,
-    byte[] Image,
-    string ImageExtension,
-    byte[] File,
-    string FileExtension) : IPrimitiveResultCommand<AddProductCommandResponse>,
+    FileData? ImageInfo,
+    FileData? FileInfo) : IPrimitiveResultCommand<AddProductCommandResponse>,
     IValidatableRequest<AddProductCommand>
 {
     public ValueTask<PrimitiveResult<AddProductCommand>> Validate() => PrimitiveResult.Success(this)

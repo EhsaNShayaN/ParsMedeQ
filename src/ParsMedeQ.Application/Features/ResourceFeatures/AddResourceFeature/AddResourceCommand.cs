@@ -18,10 +18,8 @@ public sealed record class AddResourceCommand
     DateTime? ExpirationDate,
     string Keywords,
     string PublishDate,
-    byte[] Image,
-    string ImageExtension,
-    byte[] File,
-    string FileExtension) : IPrimitiveResultCommand<AddResourceCommandResponse>,
+    FileData? ImageInfo,
+    FileData? FileInfo) : IPrimitiveResultCommand<AddResourceCommandResponse>,
     IValidatableRequest<AddResourceCommand>
 {
     public ValueTask<PrimitiveResult<AddResourceCommand>> Validate() => PrimitiveResult.Success(this)

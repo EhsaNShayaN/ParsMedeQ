@@ -5,7 +5,8 @@ namespace ParsMedeQ.Application.Features.MediaFeatures.AddMediaFeature;
 public sealed record class AddMediaCommand(
     int TableId,
     string Path,
-    string MimeType) : IPrimitiveResultCommand<AddMediaCommandResponse>,
+    string MimeType,
+    string FileName) : IPrimitiveResultCommand<AddMediaCommandResponse>,
     IValidatableRequest<AddMediaCommand>
 {
     public ValueTask<PrimitiveResult<AddMediaCommand>> Validate() => PrimitiveResult.Success(this)

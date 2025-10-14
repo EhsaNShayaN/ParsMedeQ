@@ -1,6 +1,6 @@
 ﻿using MediatR;
+using ParsMedeQ.Application;
 using ParsMedeQ.Application.Features.ResourceFeatures.AddResourceFeature;
-using ParsMedeQ.Application.Features.ResourceFeatures.DeleteResourceFeature;
 using ParsMedeQ.Contracts;
 using ParsMedeQ.Contracts.ResourceContracts;
 using ParsMedeQ.Contracts.ResourceContracts.AddResourceContract;
@@ -25,23 +25,12 @@ sealed class AddResourceEndpoint : EndpointHandlerBase<
     protected override Delegate EndpointDelegate =>
         async (
         AddResourceApiRequest request,
+        IFileService fileService,
         ISender sender,
         CancellationToken cancellationToken) =>
     {
-        byte[] imageBytes = [];
-        string imageExtension = string.Empty;
-        byte[] fileBytes = [];
-        string fileExtension = string.Empty;
-        if (request.Image is not null)
-        {
-            imageBytes = await this.ReadStream(request.Image.OpenReadStream()).ConfigureAwait(false);
-            imageExtension = Path.GetExtension(request.Image.FileName);
-        }
-        if (request.File is not null)
-        {
-            fileBytes = await this.ReadStream(request.File.OpenReadStream()).ConfigureAwait(false);
-            fileExtension = Path.GetExtension(request.File.FileName);
-        }
+        var imageInfo = await fileService.ReadStream(request.Image).ConfigureAwait(false);
+        var fileInfo = await fileService.ReadStream(request.File).ConfigureAwait(false);
 
         var description = HttpUtility.HtmlDecode(request.Description ?? string.Empty);
         var anchors = string.Empty;
@@ -75,10 +64,8 @@ sealed class AddResourceEndpoint : EndpointHandlerBase<
              string.IsNullOrEmpty(request.ExpirationDate) ? default : CreateExpirationDate(request.ExpirationDate, request.ExpirationTime),
              request.Keywords?.Replace("،", ","),
              request.PublishDate,
-             imageBytes,
-             imageExtension,
-             fileBytes,
-             fileExtension);
+             imageInfo,
+             fileInfo);
 
         return await this.CallMediatRHandler(sender,
                 () => ValueTask.FromResult(PrimitiveResult.Success(command)),
@@ -100,28 +87,5 @@ sealed class AddResourceEndpoint : EndpointHandlerBase<
             }
         }
         return date;
-    }
-
-    async ValueTask<byte[]> ReadStream(Stream stream)
-    {
-        // Ensure the stream is positioned at the beginning
-        if (stream.CanSeek)
-        {
-            stream.Seek(0, SeekOrigin.Begin);
-        }
-        using (MemoryStream memoryStream = new MemoryStream())
-        {
-            byte[] buffer = new byte[8192]; // 8KB buffer
-            int bytesRead;
-
-            // Asynchronously read chunks from the input stream
-            while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
-            {
-                // Write the read bytes to the memory stream
-                await memoryStream.WriteAsync(buffer, 0, bytesRead);
-            }
-            // Return the accumulated bytes
-            return memoryStream.ToArray();
-        }
     }
 }

@@ -12,4 +12,11 @@ public interface IFileService
     string CreateDirectory(string dir, string fileName, out string relativePath);
     void BytesToFile(byte[] bytes, string path);
     byte[] FileToBytes(string path);
+    Task<FileData?> ReadStream(IFormFile? file);
 }
+
+public readonly record struct FileData(
+    byte[] Bytes,
+    string Name,
+    string MimeType,
+    string Extension);

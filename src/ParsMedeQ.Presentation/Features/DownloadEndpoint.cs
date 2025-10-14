@@ -16,8 +16,7 @@ internal sealed class DownloadEndpoint : EndpointHandlerBase<
         Endpoints.General.Download,
         HttpMethod.Get,
         handlerResponseMapper.Map,
-        //response => Results.File(response.Value.FileContent, "application/octet-stream"))
-        response => TypedResults.File(response.Value.FileContent, "application/octet-stream", response.Value.FileName, true))
+        response => TypedResults.File(response.Value.FileContent, response.Value.MimeType, response.Value.FileName, true))
     {
     }
     protected override Delegate EndpointDelegate =>
@@ -33,7 +32,7 @@ sealed class DownloadApiResponseMpper : IPresentationMapper<DownloadQueryRespons
     {
         return ValueTask.FromResult(
             PrimitiveResult.Success(
-                new DownloadApiResponse(src.Data, src.FileName)));
+                new DownloadApiResponse(src.FileInfo.Bytes, src.FileInfo.Name, src.FileInfo.MimeType)));
     }
 }
-sealed record DownloadApiResponse(byte[] FileContent, string FileName);
+sealed record DownloadApiResponse(byte[] FileContent, string FileName, string MimeType);

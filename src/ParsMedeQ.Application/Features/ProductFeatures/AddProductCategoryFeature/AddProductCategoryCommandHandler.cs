@@ -19,7 +19,7 @@ public sealed class AddProductCategoryCommandHandler : IPrimitiveResultCommandHa
         return await ProductCategory.Create(
             request.ParentId,
             DateTime.Now)
-            .Map(resource => UploadFile(this._fileService, request.Image, request.ImageExtension, "Images", cancellationToken)
+            .Map(resource => UploadFile(this._fileService, request.ImageInfo?.Bytes, request.ImageInfo?.Extension, "Images", cancellationToken)
                 .Map(imagePath => (resource, imagePath)))
             .Map(data => data.resource.AddTranslation(Constants.LangCode_Farsi.ToLower(), request.Title, request.Description, data.imagePath)
                 .Map(() => data.resource))

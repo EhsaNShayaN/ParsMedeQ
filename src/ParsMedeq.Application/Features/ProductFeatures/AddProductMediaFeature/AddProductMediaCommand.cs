@@ -4,13 +4,12 @@ namespace ParsMedeQ.Application.Features.ProductFeatures.AddProductMediaFeature;
 
 public sealed record class AddProductMediaCommand(
     int ProductId,
-    byte[][] FilesArray,
-    string[] FileExtensions) : IPrimitiveResultCommand<AddProductMediaCommandResponse>,
+    FileData[] FileInfoArray) : IPrimitiveResultCommand<AddProductMediaCommandResponse>,
     IValidatableRequest<AddProductMediaCommand>
 {
     public ValueTask<PrimitiveResult<AddProductMediaCommand>> Validate() => PrimitiveResult.Success(this)
             .Ensure([
-                value => PrimitiveResult.Success(this.FilesArray)
+                value => PrimitiveResult.Success(this.FileInfoArray)
                 .Match(
                     _ => PrimitiveResult.Success() ,
                     _ => PrimitiveResult.Failure("Validation.Error", "موبایل ارسالی نامعتبر است"))

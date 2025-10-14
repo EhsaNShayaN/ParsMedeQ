@@ -2,8 +2,8 @@
 using SRH.MediatRMessaging.Queries;
 
 namespace ParsMedeQ.Application.Features.GeneralFeatures.DownloadFeature;
-public readonly record struct DownloadQuery(int id) : IPrimitiveResultQuery<DownloadQueryResponse>;
-public readonly record struct DownloadQueryResponse(byte[] Data, string FileName);
+public readonly record struct DownloadQuery(int Id) : IPrimitiveResultQuery<DownloadQueryResponse>;
+public readonly record struct DownloadQueryResponse(FileData FileInfo);
 
 sealed class DownloadQueryHandler : IPrimitiveResultQueryHandler<DownloadQuery, DownloadQueryResponse>
 {
@@ -18,7 +18,7 @@ sealed class DownloadQueryHandler : IPrimitiveResultQueryHandler<DownloadQuery, 
             .Execute(FindMedia)
             .Execute(SetFileName)
             .Execute(GeneratePdf)
-            .Map(ctx => new DownloadQueryResponse(ctx.Result, ctx.FileName))
+            .Map(ctx => new DownloadQueryResponse(new FileData(ctx.Result, ctx.FileName, ctx.MimeType, Path.GetExtension(ctx.FileName))))
             .ConfigureAwait(false);
     }
 
@@ -26,7 +26,7 @@ sealed class DownloadQueryHandler : IPrimitiveResultQueryHandler<DownloadQuery, 
     {
         return ValueTask.FromResult(
             PrimitiveResult.Success
-            (ctx.SetMediaId(ctx.Request.id)));
+            (ctx.SetMediaId(ctx.Request.Id)));
     }
 
     ValueTask<PrimitiveResult<DownloadContext>> FindMedia(DownloadContext ctx)
@@ -40,10 +40,21 @@ sealed class DownloadQueryHandler : IPrimitiveResultQueryHandler<DownloadQuery, 
 
     ValueTask<PrimitiveResult<DownloadContext>> SetFileName(DownloadContext ctx)
     {
+        var fileName = string.IsNullOrWhiteSpace(ctx.Media.FileName)
+            ? $"{Guid.NewGuid().ToString().Replace("-", "")}{Path.GetExtension(ctx.Media.Path)}"
+            : ctx.Media.FileName;
         return ValueTask.FromResult(
             PrimitiveResult.Success(
-                ctx.SetFileName($"{Guid.NewGuid().ToString().Replace("-", "")}{Path.GetExtension(ctx.Media.Path)}")));
+                ctx.SetFileName(fileName)));
     }
+
+    ValueTask<PrimitiveResult<DownloadContext>> SetMimeType(DownloadContext ctx)
+    {
+        return ValueTask.FromResult(
+            PrimitiveResult.Success(
+                ctx.SetMimeType(ctx.Media.MimeType)));
+    }
+
     ValueTask<PrimitiveResult<DownloadContext>> GeneratePdf(DownloadContext ctx)
     {
         var x = Directory.GetCurrentDirectory();
@@ -55,10 +66,12 @@ sealed record DownloadContext(DownloadQuery Request, CancellationToken Cancellat
     public int Id { get; private set; }
     public Media Media { get; private set; }
     public string FileName { get; private set; } = string.Empty;
+    public string MimeType { get; private set; } = string.Empty;
     public byte[] Result { get; private set; } = [];
 
     public DownloadContext SetMediaId(int value) => this with { Id = value };
     public DownloadContext SetMedia(Media value) => this with { Media = value };
     public DownloadContext SetFileName(string value) => this with { FileName = value };
+    public DownloadContext SetMimeType(string value) => this with { MimeType = value };
     public DownloadContext SetResult(byte[] value) => this with { Result = value };
 }

@@ -7,8 +7,7 @@ public sealed record class UpdateProductCategoryCommand(
     string Title,
     string Description,
     int? ParentId,
-    byte[] Image,
-    string ImageExtension,
+    FileData? ImageInfo,
     string OldImagePath) : IPrimitiveResultCommand<UpdateProductCategoryCommandResponse>,
     IValidatableRequest<UpdateProductCategoryCommand>
 {

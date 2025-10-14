@@ -1,4 +1,5 @@
-﻿using ParsMedeQ.Application.Features.ProductFeatures.AddProductMediaFeature;
+﻿using ParsMedeQ.Application;
+using ParsMedeQ.Application.Features.ProductFeatures.AddProductMediaFeature;
 using ParsMedeQ.Contracts;
 using ParsMedeQ.Contracts.ProductContracts.AddProductMediaContract;
 
@@ -23,43 +24,25 @@ sealed class AddProductMediaEndpoint : EndpointHandlerBase<
 }
 internal sealed class AddProductMediaApiRequestMapper : IPresentationMapper<AddProductMediaApiRequest, AddProductMediaCommand>
 {
+    public IFileService _fileService { get; set; }
+
+    public AddProductMediaApiRequestMapper(IFileService fileService) => this._fileService = fileService;
+
     public async ValueTask<PrimitiveResult<AddProductMediaCommand>> Map(AddProductMediaApiRequest src, CancellationToken cancellationToken)
     {
-        List<byte[]> files = [];
-        List<string> extensions = [];
+
+
+        List<FileData> files = [];
         foreach (var file in src.Files)
         {
-            files.Add(await this.ReadStream(file.OpenReadStream()).ConfigureAwait(false));
-            extensions.Add(Path.GetExtension(file.FileName));
+            var fileInfo = await _fileService.ReadStream(file).ConfigureAwait(false);
+            files.Add(fileInfo.Value);
         }
 
         return await ValueTask.FromResult(
             PrimitiveResult.Success(
                 new AddProductMediaCommand(
                     src.ProductId,
-                    files.ToArray(),
-                    extensions.ToArray())));
-    }
-    async ValueTask<byte[]> ReadStream(Stream stream)
-    {
-        // Ensure the stream is positioned at the beginning
-        if (stream.CanSeek)
-        {
-            stream.Seek(0, SeekOrigin.Begin);
-        }
-        using (MemoryStream memoryStream = new MemoryStream())
-        {
-            byte[] buffer = new byte[8192]; // 8KB buffer
-            int bytesRead;
-
-            // Asynchronously read chunks from the input stream
-            while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
-            {
-                // Write the read bytes to the memory stream
-                await memoryStream.WriteAsync(buffer, 0, bytesRead);
-            }
-            // Return the accumulated bytes
-            return memoryStream.ToArray();
-        }
+                    files.ToArray())));
     }
 }

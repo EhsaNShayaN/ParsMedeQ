@@ -28,14 +28,14 @@ public sealed class AddProductCommandHandler : IPrimitiveResultCommandHandler<Ad
             request.Price,
             request.Discount,
             request.ExpirationDate)
-            .Map(Product => UploadFile(this._fileService, request.Image, request.ImageExtension, "Images", cancellationToken)
+            .Map(Product => UploadFile(this._fileService, request.ImageInfo?.Bytes, request.ImageInfo?.Extension, "Images", cancellationToken)
                 .Map(imagePath => (Product, imagePath)))
-            .Map(data => UploadFile(this._fileService, request.File, request.FileExtension, "Files", cancellationToken)
+            .Map(data => UploadFile(this._fileService, request.FileInfo?.Bytes, request.FileInfo?.Extension, "Files", cancellationToken)
                 .Map(filePath => (data.Product, data.imagePath, filePath)))
             .MapIf(
                 data => string.IsNullOrEmpty(data.filePath),
                 data => ValueTask.FromResult(PrimitiveResult.Success((data.Product, data.imagePath, data.filePath, media: defaultMedia))),
-                data => Media.Create(Tables.Product.GetHashCode(), data.filePath, string.Empty)
+                data => Media.Create(Tables.Product.GetHashCode(), data.filePath, request.FileInfo?.MimeType, request.FileInfo?.Name)
                     .Map(media => _writeUnitOfWork.MediaWriteRepository.AddMedia(media))
                     .Map(media => this._writeUnitOfWork.SaveChangesAsync(CancellationToken.None)
                         .Map(_ => media))

@@ -8,14 +8,8 @@
 
   <ItemGroup>
     <Compile Remove="Features\CartFeatures\AddToCartFeature\**" />
-    <Compile Remove="Features\CartFeatures\MergeCartFeature\**" />
-    <Compile Remove="Features\CartFeatures\RemoveFromCartFeature\**" />
     <EmbeddedResource Remove="Features\CartFeatures\AddToCartFeature\**" />
-    <EmbeddedResource Remove="Features\CartFeatures\MergeCartFeature\**" />
-    <EmbeddedResource Remove="Features\CartFeatures\RemoveFromCartFeature\**" />
     <None Remove="Features\CartFeatures\AddToCartFeature\**" />
-    <None Remove="Features\CartFeatures\MergeCartFeature\**" />
-    <None Remove="Features\CartFeatures\RemoveFromCartFeature\**" />
   </ItemGroup>
 
   <ItemGroup>

@@ -18,9 +18,9 @@ public sealed class AddProductMediaCommandHandler : IPrimitiveResultCommandHandl
     {
         return await this._writeUnitOfWork.ProductWriteRepository.FindByIdWithMediaList(request.ProductId, cancellationToken)
             .Map(product =>
-                PrimitiveResult.BindAll(request.FilesArray, (file, itemIndex) =>
-                    UploadFile(this._fileService, file, request.FileExtensions[itemIndex], "Products", cancellationToken)
-                    .Map(path => Media.Create(Tables.Product.GetHashCode(), path, string.Empty))
+                PrimitiveResult.BindAll(request.FileInfoArray, (file) =>
+                    UploadFile(this._fileService, file.Bytes, file.Extension, "Products", cancellationToken)
+                    .Map(path => Media.Create(Tables.Product.GetHashCode(), path, file.MimeType, file.Name))
                     .Map(media => _writeUnitOfWork.MediaWriteRepository.AddMedia(media)),
                     BindAllIterationStrategy.BreakOnFirstError)
                 .Map(medias => _writeUnitOfWork.SaveChangesAsync(CancellationToken.None).Map(_ => medias))
