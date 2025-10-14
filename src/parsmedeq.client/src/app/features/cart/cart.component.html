@@ -1,7 +1,7 @@
 <div *ngIf="cart() as c">
   <h2>سبد خرید</h2>
   <ul>
-    <li *ngFor="let item of c.items">
+    <li *ngFor="let item of c.cartItems">
       {{ item.relatedName }} - {{ item.quantity }} × {{ item.unitPrice | number }} تومان
       <button (click)="removeItem(item.id!)">حذف</button>
     </li>

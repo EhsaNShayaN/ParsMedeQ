@@ -1,10 +1,11 @@
-﻿using SRH.MediatRMessaging;
+﻿using ParsMedeQ.Application.Features.CartFeature.GetCartFeature;
+using SRH.MediatRMessaging;
 
 namespace ParsMedeQ.Application.Features.CartFeature.RemoveFromCartFeature;
 
 public sealed record class RemoveFromCartCommand(
     Guid? AnonymousId,
-    int RelatedId) : IPrimitiveResultCommand<RemoveFromCartCommandResponse>,
+    int RelatedId) : IPrimitiveResultCommand<CartListQueryResponse>,
     IValidatableRequest<RemoveFromCartCommand>
 {
     public ValueTask<PrimitiveResult<RemoveFromCartCommand>> Validate() => PrimitiveResult.Success(this)

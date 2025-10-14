@@ -1,3 +1,14 @@
+import {BaseResult} from "./BaseResult";
+
+export interface CartResponse extends BaseResult<Cart> {
+}
+
+export interface Cart {
+  id?: number;
+  anonymousId?: string;
+  cartItems: CartItem[];
+}
+
 export class CartItem {
   id?: number;
   delta?: number;
@@ -11,10 +22,4 @@ export class CartItem {
   constructor() {
     this.delta = this.quantity - this.originalQuantity;
   }
-}
-
-export interface Cart {
-  id?: number;
-  anonymousId?: string;
-  items: CartItem[];
 }

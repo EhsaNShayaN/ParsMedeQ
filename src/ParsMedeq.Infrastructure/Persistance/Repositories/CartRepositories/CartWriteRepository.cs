@@ -83,7 +83,7 @@ internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<
     public async ValueTask<Cart> RemoveFromCart(int? userId, Guid? anonymousId, int relatedId)
     {
         var cart = await GetCarts(userId, anonymousId, string.Empty);
-        var item = cart.CartItems.FirstOrDefault(i => i.Id == relatedId);
+        var item = cart.CartItems.FirstOrDefault(i => i.RelatedId == relatedId);
         if (item != null)
         {
             await cart.RemoveCartItem(item);

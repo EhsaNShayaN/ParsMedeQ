@@ -100,6 +100,13 @@ internal abstract class EndpointHandlerBase<THandlerRequest, THandlerResponse, T
         : this(endpointInfo, httpMethod, handlerResponseMapper, DefaultResponseFactory.Instance.CreateOk)
     { }
 
+    protected EndpointHandlerBase(
+       EndpointInfo endpointInfo,
+       HttpMethod httpMethod,
+       IPresentationMapper<THandlerResponse, TEndpointResponse> handlerResponseMapper)
+        : this(endpointInfo, httpMethod, handlerResponseMapper.Map, DefaultResponseFactory.Instance.CreateOk)
+    { }
+
 
     public override RouteHandlerBuilder AddRoute(IEndpointRouteBuilder routeBuilder)
     {

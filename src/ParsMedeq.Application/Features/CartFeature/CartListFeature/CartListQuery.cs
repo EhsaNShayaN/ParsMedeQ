@@ -24,7 +24,7 @@ sealed class GetCartQueryHandler : IPrimitiveResultQueryHandler<CartListQuery, C
     public async Task<PrimitiveResult<CartListQueryResponse>> Handle(CartListQuery request, CancellationToken cancellationToken)
     {
         var cart = await this._writeUnitOfWork.CartWriteRepository.GetCarts(
-            this._userContextAccessor.GetCurrent().UserId,
+            this._userContextAccessor.GetCurrent().GetUserId(),
             request.AnonymousId,
             this._userLangContextAccessor.GetCurrentLang());
         return await this._writeUnitOfWork.SaveChangesAsync(cancellationToken)

@@ -9,7 +9,7 @@ import {Cart} from '../../core/models/Cart';
 })
 export class CartComponent implements OnInit {
   cart!: Signal<Cart | null>; // or appropriate type
-  total = computed(() => this.cart()?.items.reduce((s, i) => s + i.unitPrice * i.quantity, 0) ?? 0);
+  total = computed(() => this.cart()?.cartItems.reduce((s, i) => s + i.unitPrice * i.quantity, 0) ?? 0);
 
   constructor(private cartService: CartService) {
     this.cart = this.cartService.cart;

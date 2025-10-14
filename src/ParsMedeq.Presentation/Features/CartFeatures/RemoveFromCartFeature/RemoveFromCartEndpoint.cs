@@ -1,20 +1,22 @@
-﻿using ParsMedeQ.Application.Features.CartFeature.RemoveFromCartFeature;
+﻿using ParsMedeQ.Application.Features.CartFeature.GetCartFeature;
+using ParsMedeQ.Application.Features.CartFeature.RemoveFromCartFeature;
 using ParsMedeQ.Contracts;
+using ParsMedeQ.Contracts.CartContracts.CartListContract;
 using ParsMedeQ.Contracts.CartContracts.DeleteFromCartContract;
 
 namespace ParsMedeQ.Presentation.Features.CartFeatures.RemoveFromCartFeature;
 sealed class RemoveFromCartEndpoint : EndpointHandlerBase<
     RemoveFromCartApiRequest,
     RemoveFromCartCommand,
-    RemoveFromCartCommandResponse,
-    RemoveFromCartApiResponse>
+    CartListQueryResponse,
+    CartListApiResponse>
 {
     protected override bool NeedAuthentication => false;
     protected override bool NeedTaxPayerFile => false;
 
     public RemoveFromCartEndpoint(
         IPresentationMapper<RemoveFromCartApiRequest, RemoveFromCartCommand> requestMapper,
-        IPresentationMapper<RemoveFromCartCommandResponse, RemoveFromCartApiResponse> responseMapper) : base(
+        IPresentationMapper<CartListQueryResponse, CartListApiResponse> responseMapper) : base(
             Endpoints.Cart.RemoveCart,
             HttpMethod.Post,
             requestMapper,
@@ -32,12 +34,19 @@ internal sealed class RemoveFromCartApiRequestMapper : IPresentationMapper<Remov
                     src.RelatedId)));
     }
 }
-sealed class RemoveFromCartCommandResponseMapper : IPresentationMapper<RemoveFromCartCommandResponse, RemoveFromCartApiResponse>
+sealed class CartListQueryResponseMapper : IPresentationMapper<CartListQueryResponse, CartListApiResponse>
 {
-    public ValueTask<PrimitiveResult<RemoveFromCartApiResponse>> Map(RemoveFromCartCommandResponse src, CancellationToken cancellationToken)
+    public ValueTask<PrimitiveResult<CartListApiResponse>> Map(CartListQueryResponse src, CancellationToken cancellationToken)
     {
         return ValueTask.FromResult(
             PrimitiveResult.Success(
-                new RemoveFromCartApiResponse(src.Changed)));
+                    new CartListApiResponse(
+                    src.Id,
+                    src.CartItems.Select(item => new CartItemListApiResponse(
+                        item.TableId,
+                        item.RelatedId,
+                        item.RelatedName,
+                        item.UnitPrice,
+                        item.Quantity)).ToArray())));
     }
 }

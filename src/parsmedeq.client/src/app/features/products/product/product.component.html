@@ -5,7 +5,8 @@
       <span>{{ 'PRODUCTS' | translate }}</span>
       @for (category of parents; track category.id) {
         <mat-icon>keyboard_arrow_left</mat-icon>
-        <a [routerLink]="['/products/category/' | langPack, category?.id, category?.title ]" class="not-link" target="_blank">
+        <a [routerLink]="['/products/category/' | langPack, category?.id, category?.title ]" class="not-link"
+           target="_blank">
           {{ category?.title }}
         </a>
       }
@@ -27,11 +28,6 @@
           </app-download-management>
         }-->
         @if (product) {
-          <!--relatedId: {{ product!.id }}<br/>
-          tableId: {{ Tables.Product }}<br/>
-          relatedName: {{ product!.title }}<br/>
-          unitPrice: {{ (product!.price ?? 0) }}<br/>
-          stock: {{ product!.stock ?? 99999999 }}<br/>-->
           <app-cart-item-control
             [relatedId]="product!.id"
             [tableId]="Tables.Product"
@@ -55,7 +51,7 @@
         </div>
         <div class="p-3" fxFlex="100" fxFlex.gt-md="50">
           @for (item of product?.images; track product?.id) {
-            <img src="{{item?.path}}" class="wh-100">
+            <img src="{{item?.path}}" class="wh-100" [alt]="product?.title">
           }
         </div>
       </div>

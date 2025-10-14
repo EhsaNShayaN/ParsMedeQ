@@ -19,8 +19,8 @@ export class App implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.authService.isLoggedIn()) {
-      this.cartService.loadCart();
-    }
+    //if (this.authService.isLoggedIn()) {
+    this.cartService.loadCart();
+    //}
   }
 }

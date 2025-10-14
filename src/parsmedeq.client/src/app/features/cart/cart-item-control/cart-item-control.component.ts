@@ -18,7 +18,7 @@ export class CartItemControlComponent {
   cart!: Signal<Cart | null>; // or appropriate type
 
   item = computed(() =>
-    this.cart()?.items?.find(i => i.relatedId === this.relatedId && i.tableId === this.tableId)
+    this.cart()?.cartItems?.find(i => i.relatedId === this.relatedId && i.tableId === this.tableId)
   );
 
   quantity = computed(() => this.item()?.quantity ?? 0);
@@ -50,7 +50,8 @@ export class CartItemControlComponent {
 
   remove() {
     if (this.item()) {
-      this.cartService.removeFromCart(this.item()!.id!);
+      console.log('item', this.item());
+      this.cartService.removeFromCart(this.item()!.relatedId!);
     }
   }
 
@@ -70,4 +71,6 @@ export class CartItemControlComponent {
       this.remove();
     }
   }
+
+  protected readonly print = print;
 }

@@ -1,25 +1,27 @@
-@if (stock === 0) {
-  <div>
-    <button disabled class="out-of-stock">ناموجود</button>
-  </div>
-} @else if (stock > 0) {
-  <div>
-    @if (quantity() === 0) {
-      <div>
-        <button (click)="add()">➕ افزودن به سبد</button>
-      </div>
-    } @else {
-      <div class="cart-control">
-        <button (click)="decrease()">➖</button>
-        <span>{{ quantity() }}</span>
-        <button (click)="increase()" [disabled]="quantity() >= stock">➕</button>
-        <button class="remove" (click)="remove()">❌</button>
-      </div>
-      @if (quantity() >= stock) {
-        <p class="warning">
-          حداکثر تعداد قابل سفارش {{ stock }} عدد است
-        </p>
+@if (unitPrice > 0) {
+  @if (stock <= 0) {
+    <div>
+      <button disabled class="out-of-stock">ناموجود</button>
+    </div>
+  } @else {
+    <div>
+      @if (quantity() === 0) {
+        <div>
+          <button (click)="add()">➕ افزودن به سبد</button>
+        </div>
+      } @else {
+        <div class="cart-control">
+          <button (click)="decrease()">➖</button>
+          <span>{{ quantity() }}</span>
+          <button (click)="increase()" [disabled]="quantity() >= stock">➕</button>
+          <button class="remove" (click)="remove()">❌</button>
+        </div>
+        @if (quantity() >= stock) {
+          <p class="warning">
+            حداکثر تعداد قابل سفارش {{ stock }} عدد است
+          </p>
+        }
       }
-    }
-  </div>
+    </div>
+  }
 }

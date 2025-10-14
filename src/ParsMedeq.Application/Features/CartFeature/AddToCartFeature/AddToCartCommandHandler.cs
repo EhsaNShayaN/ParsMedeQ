@@ -1,8 +1,9 @@
-﻿using ParsMedeQ.Application.Services.UserContextAccessorServices;
+﻿using ParsMedeQ.Application.Features.CartFeature.GetCartFeature;
+using ParsMedeQ.Application.Services.UserContextAccessorServices;
 using ParsMedeQ.Application.Services.UserLangServices;
 
 namespace ParsMedeQ.Application.Features.CartFeature.AddToCartFeature;
-public sealed class AddToCartCommandHandler : IPrimitiveResultCommandHandler<AddToCartCommand, AddToCartCommandResponse>
+public sealed class AddToCartCommandHandler : IPrimitiveResultCommandHandler<AddToCartCommand, CartListQueryResponse>
 {
     private readonly IWriteUnitOfWork _writeUnitOfWork;
     private readonly IUserContextAccessor _userContextAccessor;
@@ -18,7 +19,7 @@ public sealed class AddToCartCommandHandler : IPrimitiveResultCommandHandler<Add
         this._userLangContextAccessor = userLangContextAccessor;
     }
 
-    public async Task<PrimitiveResult<AddToCartCommandResponse>> Handle(AddToCartCommand request, CancellationToken cancellationToken)
+    public async Task<PrimitiveResult<CartListQueryResponse>> Handle(AddToCartCommand request, CancellationToken cancellationToken)
     {
         var cart = await this._writeUnitOfWork.CartWriteRepository.AddToCart(
             this._userContextAccessor.GetCurrent().UserId,
@@ -29,8 +30,15 @@ public sealed class AddToCartCommandHandler : IPrimitiveResultCommandHandler<Add
             this._userLangContextAccessor.GetCurrentLang()
         );
 
-        return await this._writeUnitOfWork.SaveChangesAsync(CancellationToken.None).Map(_ => cart)
-            .Map(cart => new AddToCartCommandResponse(cart is not null))
+        return await this._writeUnitOfWork.SaveChangesAsync(cancellationToken)
+            .Map(_ => new CartListQueryResponse(
+                cart.Id,
+                cart.CartItems.Select(item => new GetCartItemQueryResponse(
+                    item.TableId,
+                    item.RelatedId,
+                    item.RelatedName,
+                    item.UnitPrice,
+                    item.Quantity)).ToArray()))
             .ConfigureAwait(false);
     }
 }

@@ -4,13 +4,13 @@ import {Injectable} from '@angular/core';
 export class StorageService {
   private readonly key = 'anonymousId';
 
-  getAnonymousId(forQueryString: boolean = true): string | null {
+  getAnonymousId(): string | null {
     let anonId = localStorage.getItem(this.key);
     if (!anonId) {
       anonId = crypto.randomUUID(); // تولید شناسه یکتا
       localStorage.setItem(this.key, anonId);
     }
-    return forQueryString ? `?anonymousId=${anonId}` : anonId;
+    return anonId;
   }
 
   clearAnonymousId() {
