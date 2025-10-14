@@ -9,12 +9,12 @@ import {JsonService} from '../../core/json.service';
   styleUrl: './home.scss'
 })
 export class Home extends BaseComponent {
-  public slides: any[] = [];
+  public items: any[] = [];
 
   constructor(private jsonService: JsonService) {
     super();
     this.jsonService.getHomeCarouselSlides().subscribe(res => {
-      this.slides = res;
+      this.items = res;
     });
   }
 }

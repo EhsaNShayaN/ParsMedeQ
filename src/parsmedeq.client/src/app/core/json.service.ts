@@ -14,12 +14,12 @@ export class JsonService {
     this.url += this.translateService.getDefaultLang() + '/';
   }
 
-  public getFirstResult() {
-    return this.http.get<any[]>(this.url + 'first.json');
+  getHomeCarouselSlides() {
+    return this.http.get<any[]>(this.url + 'slides.json');
   }
 
-  public getHomeCarouselSlides() {
-    return this.http.get<any[]>(this.url + 'slides.json');
+  getClients() {
+    return this.http.get<any[]>(this.url + 'clients.json');
   }
 
   public getUsefulLinks() {

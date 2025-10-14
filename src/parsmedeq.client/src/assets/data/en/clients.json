@@ -1,30 +1,32 @@
 [
   {
-    "section": "About why alborz chemie",
-    "title": "Company's Mission",
-    "description": "Knowledge development and   processes optimization of concrete production to enhance the strength and durability of concrete structures in line with sustainable development in society",
-    "image": "assets/images/slider/company_goals.jpg",
-    "back": "#64646D"
+    "text": "Donec molestie turpis ut mollis efficitur. Nam fringilla libero vel dictum vulputate. In malesuada, ligula non ornare consequat, augue nibh luctus nisl, et lobortis justo ipsum nec velit. Praesent lacinia quam ut nulla gravida, at viverra libero euismod. Sed tincidunt tempus augue vitae malesuada. Vestibulum eu lectus nisi. Aliquam erat volutpat.",
+    "author": "Mr. Adam Sandler",
+    "position": "General Director",
+    "image": "/assets/agents/a-1.jpg"
   },
   {
-    "section": "Mission",
-    "title": "Mission Statement",
-    "description": "Our endeavor is to assist researchers, experts, and concrete producers in producing high-quality concrete that leads to the high-quality and long-lasting structures. This initiative seeks to enhance the efficiency of financial, natural, and social resource utilization, thereby promoting sustainable development within our communities.",
-    "image": "assets/images/slider/mission_statement.jpg",
-    "back": "#788c46"
+    "text": "Donec molestie turpis ut mollis efficitur. Nam fringilla libero vel dictum vulputate. In malesuada, ligula non ornare consequat, augue nibh luctus nisl, et lobortis justo ipsum nec velit. Praesent lacinia quam ut nulla gravida, at viverra libero euismod. Sed tincidunt tempus augue vitae malesuada. Vestibulum eu lectus nisi. Aliquam erat volutpat.",
+    "author": "Ashley Ahlberg",
+    "position": "Housewife",
+    "image": "/assets/agents/a-2.jpg"
   },
   {
-    "section": "Values",
-    "title": "Organizational Values",
-    "description": "- <b>Customer orientation:</b> Our utmost priority is to attend to the needs of our customers.<br>- <b>Continuous learning:</b> Our dedication lies in permanent study and learning endeavors aimed at attaining innovative pedagogical techniques.<br>- <b>to be accountable:</b> The outcomes of our actions are our responsibility. <br>- <b>Employee participation:</b> Together, we will achieve our objectives.<br>- <b>Differentiation:</b> The primary prerequisite for achieving sustainability is to strive for uniqueness.<br>- <b>creativity and innovation:</b> The initial requirement for achieving both success and sustainability<br>- <b>Advanced technology:</b> We're expanding by keeping pace with cutting-edge global technologies and adjusting to market shifts.<br>- <b>customers' benefits:</b> By helping each other, we create levels of mutual satisfaction and aim to benefit all stakeholders in all matters.<br>- <b>Environmental issues:</b> Our products play a significant role in reducing water usage and preventing environmental degradation, thereby aiding in environmental preservation.<br>- <b>Society:</b> We assist children in their studies to elevate the standard of public culture.<br>",
-    "image": "assets/images/slider/company_values.jpg",
-    "back": "#788c46"
+    "text": "Donec molestie turpis ut mollis efficitur. Nam fringilla libero vel dictum vulputate. In malesuada, ligula non ornare consequat, augue nibh luctus nisl, et lobortis justo ipsum nec velit. Praesent lacinia quam ut nulla gravida, at viverra libero euismod. Sed tincidunt tempus augue vitae malesuada. Vestibulum eu lectus nisi. Aliquam erat volutpat.",
+    "author": "Bruno Vespa",
+    "position": "Blogger",
+    "image": "/assets/agents/a-3.jpg"
   },
   {
-    "section": "position",
-    "title": "Brand positioning statement",
-    "description": "For individuals seeking reliable and long-lasting concrete structures, as well as those interested in concrete production methods informed by the latest knowledge, Alborz Chemie Asia presents a diverse array of sustainable solutions. Our services, products, and expertise embody a commitment to fortifying concrete structures for societal stability and environmental preservation. Alborz Chemie Asia prioritizes consumer needs and endeavors to foster sustainability within society.",
-    "image": "assets/images/slider/status_announcement.jpg",
-    "back": "#64646D"
+    "text": "Donec molestie turpis ut mollis efficitur. Nam fringilla libero vel dictum vulputate. In malesuada, ligula non ornare consequat, augue nibh luctus nisl, et lobortis justo ipsum nec velit. Praesent lacinia quam ut nulla gravida, at viverra libero euismod. Sed tincidunt tempus augue vitae malesuada. Vestibulum eu lectus nisi. Aliquam erat volutpat.",
+    "author": "Mrs. Julia Aniston",
+    "position": "Marketing Manager",
+    "image": "/assets/agents/a-4.jpg"
+  },
+  {
+    "text": "Donec molestie turpis ut mollis efficitur. Nam fringilla libero vel dictum vulputate. In malesuada, ligula non ornare consequat, augue nibh luctus nisl, et lobortis justo ipsum nec velit. Praesent lacinia quam ut nulla gravida, at viverra libero euismod. Sed tincidunt tempus augue vitae malesuada. Vestibulum eu lectus nisi. Aliquam erat volutpat.",
+    "author": "Mrs. Ana Peni",
+    "position": "CEO",
+    "image": "/assets/agents/a-5.jpg"
   }
 ]

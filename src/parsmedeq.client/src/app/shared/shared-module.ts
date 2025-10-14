@@ -47,6 +47,7 @@ import {OurProductComponent} from '../features/products/our-product/our-product.
 import {HeaderImageComponent} from './header-image/header-image.component';
 import {Login} from '../features/auth/login/login';
 import {LoginDialogComponent} from './dialogs/login-dialog/login-dialog.component';
+import {ClientsComponent} from './clients/clients.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import {LoginDialogComponent} from './dialogs/login-dialog/login-dialog.componen
     OurNewsComponent,
     OurclipComponent,
     OurProductComponent,
+    ClientsComponent,
   ],
   imports: [
     CommonModule,
@@ -208,6 +210,7 @@ import {LoginDialogComponent} from './dialogs/login-dialog/login-dialog.componen
     OurNewsComponent,
     OurclipComponent,
     OurProductComponent,
+    ClientsComponent,
   ],
   providers: [
     CurrencyFormatterPipe,
