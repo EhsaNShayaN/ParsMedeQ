@@ -1,38 +1,264 @@
-.translation-test {
-  padding: 20px;
+$primary: #137749;
+$gray-light: #f3f3f3;
+$white: #ffffff;
+$text: #333;
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.site-header {
+  background: $white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+  }
+
+  .logo {
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: $primary;
+  }
+
+  .main-nav a {
+    margin: 0 1rem;
+    color: $text;
+    text-decoration: none;
+    font-weight: 500;
+
+    &:hover {
+      color: $primary;
+    }
+  }
+
+  .header-actions {
+    display: flex;
+    gap: 0.5rem;
+
+    .btn-cart,
+    .btn-login {
+      background: $primary;
+      border: none;
+      color: white;
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background 0.2s ease;
+
+      &:hover {
+        background: darken($primary, 5%);
+      }
+    }
+  }
+}
+
+.hero {
+  background: linear-gradient(135deg, $primary, darken($primary, 10%));
+  color: $white;
+  padding: 5rem 0;
   text-align: center;
-  max-width: 600px;
-  margin: 0 auto;
+
+  .hero-content {
+    max-width: 700px;
+    margin: auto;
+  }
+
+  h1 {
+    font-size: 2.4rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+  }
+
+  .btn-primary {
+    background: $white;
+    color: $primary;
+    padding: 0.8rem 1.6rem;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s;
+
+    &:hover {
+      background: $gray-light;
+    }
+  }
 }
 
-.translation-test h2 {
-  color: #333;
-  margin-bottom: 20px;
+.section {
+  padding: 4rem 0;
+
+  h2 {
+    text-align: center;
+    color: $primary;
+    margin-bottom: 2.5rem;
+    font-size: 1.8rem;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 2rem;
+  }
+
+  .card {
+    background: $white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    padding-bottom: 1rem;
+
+    &:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    h3 {
+      color: $primary;
+      margin: 1rem 0 0.5rem;
+    }
+
+    p {
+      color: $text;
+      font-size: 0.95rem;
+      padding: 0 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+  }
+
+  &.alt-bg {
+    background: $gray-light;
+  }
 }
 
-.translation-test p {
-  font-size: 16px;
-  margin-bottom: 30px;
+.btn {
+  &.btn-outline {
+    border: 1px solid $primary;
+    background: transparent;
+    color: $primary;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+
+    &:hover {
+      background: $primary;
+      color: $white;
+    }
+  }
+
+  &.btn-primary {
+    background: $primary;
+    border: none;
+    color: $white;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+
+    &:hover {
+      background: darken($primary, 5%);
+    }
+  }
 }
 
-.language-info {
-  margin-top: 30px;
-  padding: 20px;
-  background-color: #f5f5f5;
-  border-radius: 8px;
+/* ویدیو کارت */
+.video-thumb {
+  position: relative;
+
+  img {
+    height: 180px;
+  }
+
+  .play-icon {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+    background: rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  &:hover .play-icon {
+    opacity: 1;
+  }
 }
 
-.language-info button {
-  margin: 0 10px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  background-color: #007bff;
-  color: white;
-  cursor: pointer;
-  font-size: 14px;
+/* انیمیشن ساده هنگام اسکرول */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 0.8s forwards;
 }
 
-.language-info button:hover {
-  background-color: #0056b3;
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.site-footer {
+  background: $primary;
+  color: $white;
+  padding: 2rem 0;
+  text-align: center;
+
+  .social a {
+    color: $white;
+    margin: 0 0.5rem;
+    text-decoration: none;
+    font-weight: 500;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .site-header .main-nav {
+    display: none;
+  }
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }

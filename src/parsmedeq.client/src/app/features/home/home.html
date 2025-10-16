@@ -1,14 +1,112 @@
-@if (items.length > 0) {
-  <app-header-carousel
-    [slides]="items"
-    [contentOffsetToTop]="true"
-    [fullscreen]="false">
-  </app-header-carousel>
-}
-<div class="theme-container">
-  <app-clients></app-clients>
-  <app-our-product></app-our-product>
-  <app-our-article></app-our-article>
-  <app-our-news></app-our-news>
-  <app-our-clip></app-our-clip>
-</div>
+<header class="site-header">
+  <div class="container">
+    <div class="logo">ParsMEDEQ</div>
+    <nav class="main-nav">
+      <a href="#products">محصولات</a>
+      <a href="#articles">مقالات</a>
+      <a href="#clips">کلیپ‌ها</a>
+      <a href="#centers">سانترهای درمانی</a>
+      <a href="#news">اخبار</a>
+    </nav>
+    <div class="header-actions">
+      <button class="btn-cart">🛒</button>
+      <button class="btn-login">ورود</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <h1>پارس مدیک — نوآوری در خدمات و تجهیزات پزشکی</h1>
+      <p>دسترسی به جدیدترین محصولات، مقالات و آموزش‌های تخصصی پزشکی در یک سامانه حرفه‌ای</p>
+      <a href="#products" class="btn btn-primary">مشاهده محصولات</a>
+    </div>
+  </div>
+</section>
+
+<section id="products" class="section">
+  <div class="container">
+    <h2>محصولات</h2>
+    <div class="grid fade-in">
+      <div class="card" *ngFor="let product of products">
+        <img [src]="product.imageUrl || 'assets/images/placeholder-product.jpg'" alt="{{product.name}}">
+        <h3>{{ product.name }}</h3>
+        <p>{{ product.shortDescription }}</p>
+        <div class="actions">
+          <button class="btn btn-outline">جزئیات</button>
+          <button class="btn btn-primary">افزودن به سبد</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="articles" class="section alt-bg">
+  <div class="container">
+    <h2>مقالات</h2>
+    <div class="grid fade-in">
+      <div class="card" *ngFor="let article of articles">
+        <img [src]="article.imageUrl || 'assets/images/placeholder-article.jpg'" alt="{{article.title}}">
+        <h3>{{ article.title }}</h3>
+        <p>{{ article.summary }}</p>
+        <button class="btn btn-outline">مطالعه مقاله</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="clips" class="section">
+  <div class="container">
+    <h2>کلیپ‌های آموزشی</h2>
+    <div class="grid fade-in">
+      <div class="card video-card" *ngFor="let clip of clips">
+        <div class="video-thumb">
+          <img [src]="clip.thumbnail || 'assets/images/placeholder-video.jpg'" alt="{{clip.title}}">
+          <div class="play-icon">▶</div>
+        </div>
+        <h3>{{ clip.title }}</h3>
+        <button class="btn btn-outline">مشاهده ویدیو</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="centers" class="section alt-bg">
+  <div class="container">
+    <h2>سانترهای درمانی</h2>
+    <div class="grid fade-in">
+      <div class="card center-card" *ngFor="let center of centers">
+        <img [src]="center.imageUrl || 'assets/images/placeholder-center.jpg'" alt="{{center.name}}">
+        <h3>{{ center.name }}</h3>
+        <p>{{ center.city }} - {{ center.specialty }}</p>
+        <button class="btn btn-outline">جزئیات بیشتر</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="news" class="section">
+  <div class="container">
+    <h2>آخرین اخبار</h2>
+    <div class="grid fade-in">
+      <div class="card news-card" *ngFor="let news of newsList">
+        <img [src]="news.imageUrl || 'assets/images/placeholder-news.jpg'" alt="{{news.title}}">
+        <h3>{{ news.title }}</h3>
+        <p>{{ news.summary }}</p>
+        <button class="btn btn-outline">ادامه خبر</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© 2025 ParsMEDEQ — تمامی حقوق محفوظ است</p>
+    <div class="social">
+      <a href="#">Instagram</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">YouTube</a>
+    </div>
+  </div>
+</footer>
