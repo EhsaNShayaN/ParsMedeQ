@@ -1,3 +1,4 @@
+<!--
 <mat-toolbar id="top-toolbar" class="top-toolbar d-none0">
   <div class="theme-container " fxLayout="row" fxLayoutAlign="space-between center">
     <div class="mr-2">
@@ -20,13 +21,13 @@
     </div>
     <div></div>
     <div fxLayout="row" fxLayoutAlign="end center" class="right-section" ngClass.xs="w-100">
-      <!--<a [routerLink]="['/search' | langPack]" mat-icon-button matTooltip="{{'SEARCH' | translate}}"
+      &lt;!&ndash;<a [routerLink]="['/search' | langPack]" mat-icon-button matTooltip="{{'SEARCH' | translate}}"
          class="shop ml-1">
         <mat-icon>
           search
         </mat-icon>
-      </a>-->
-      <!--*************-->
+      </a>&ndash;&gt;
+      &lt;!&ndash;*************&ndash;&gt;
       @if (!authService.isLoggedIn()) {
         <a [routerLink]="['/auth/login' | langPack]" class="background-color not-link">
           {{ 'LOGIN' | translate }}
@@ -74,3 +75,4 @@
     <app-header></app-header>
   </div>
 </mat-toolbar>
+-->

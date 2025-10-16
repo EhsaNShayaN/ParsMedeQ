@@ -1,112 +1,187 @@
-<header class="site-header">
-  <div class="container">
-    <div class="logo">ParsMEDEQ</div>
-    <nav class="main-nav">
-      <a href="#products">محصولات</a>
-      <a href="#articles">مقالات</a>
-      <a href="#clips">کلیپ‌ها</a>
-      <a href="#centers">سانترهای درمانی</a>
-      <a href="#news">اخبار</a>
+<header class="site-header" role="banner">
+  <div class="container header-inner">
+    <a class="logo" routerLink="/">ParsMEDEQ</a>
+
+    <nav class="main-nav" role="navigation" aria-label="Main menu">
+      <a routerLink="#products">محصولات</a>
+      <a routerLink="#articles">مقالات</a>
+      <a routerLink="#clips">کلیپ‌ها</a>
+      <a routerLink="#centers">سانترها</a>
+      <a routerLink="#news">اخبار</a>
+      <a routerLink="#about">درباره ما</a>
+      <a routerLink="#contact">تماس</a>
     </nav>
+
     <div class="header-actions">
-      <button class="btn-cart">🛒</button>
-      <button class="btn-login">ورود</button>
+      <button class="icon-btn" aria-label="سبد خرید" (click)="openCart()">
+        🛒 <span class="cart-count" *ngIf="cartCount>0">{{ cartCount }}</span>
+      </button>
+      <button class="btn btn-outline" (click)="onLogin()">ورود</button>
     </div>
   </div>
 </header>
 
-<section class="hero">
-  <div class="container">
-    <div class="hero-content">
+<section class="hero" [@heroAnimation]>
+  <div class="container hero-inner">
+    <div class="hero-text">
       <h1>پارس مدیک — نوآوری در خدمات و تجهیزات پزشکی</h1>
-      <p>دسترسی به جدیدترین محصولات، مقالات و آموزش‌های تخصصی پزشکی در یک سامانه حرفه‌ای</p>
-      <a href="#products" class="btn btn-primary">مشاهده محصولات</a>
+      <p>دسترسی به جدیدترین محصولات، مقالات و آموزش‌های تخصصی پزشکی در یک سامانهٔ یکپارچه</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#products">مشاهده محصولات</a>
+        <a class="btn btn-outline" href="#articles">مطالعه مقالات</a>
+      </div>
+    </div>
+    <div class="hero-image" aria-hidden="true">
+      <img src="assets/images/hero-placeholder.jpg" alt="" loading="lazy">
     </div>
   </div>
 </section>
 
+<!-- PRODUCTS -->
 <section id="products" class="section">
   <div class="container">
     <h2>محصولات</h2>
-    <div class="grid fade-in">
-      <div class="card" *ngFor="let product of products">
-        <img [src]="product.imageUrl || 'assets/images/placeholder-product.jpg'" alt="{{product.name}}">
-        <h3>{{ product.name }}</h3>
-        <p>{{ product.shortDescription }}</p>
-        <div class="actions">
-          <button class="btn btn-outline">جزئیات</button>
-          <button class="btn btn-primary">افزودن به سبد</button>
+    <div class="grid" [@listAnimation]="products?.length">
+      <article class="card" *ngFor="let product of products">
+        <img [src]="product.imageUrl || 'assets/images/placeholder-product.jpg'"
+             [alt]="product.name"
+             loading="lazy">
+        <div class="card-body">
+          <h3>{{ product.name }}</h3>
+          <p class="muted">{{ product.shortDescription }}</p>
+          <div class="card-actions">
+            <button class="btn btn-outline" (click)="viewProduct(product)">جزئیات</button>
+            <button class="btn btn-primary" (click)="addToCart(product)">افزودن به سبد</button>
+          </div>
         </div>
-      </div>
+      </article>
     </div>
   </div>
 </section>
 
+<!-- ARTICLES -->
 <section id="articles" class="section alt-bg">
   <div class="container">
     <h2>مقالات</h2>
-    <div class="grid fade-in">
-      <div class="card" *ngFor="let article of articles">
-        <img [src]="article.imageUrl || 'assets/images/placeholder-article.jpg'" alt="{{article.title}}">
-        <h3>{{ article.title }}</h3>
-        <p>{{ article.summary }}</p>
-        <button class="btn btn-outline">مطالعه مقاله</button>
-      </div>
+    <div class="grid" [@listAnimation]="articles?.length">
+      <article class="card" *ngFor="let article of articles">
+        <img [src]="article.imageUrl || 'assets/images/placeholder-article.jpg'"
+             [alt]="article.title"
+             loading="lazy">
+        <div class="card-body">
+          <h3>{{ article.title }}</h3>
+          <p class="muted">{{ article.summary }}</p>
+          <div class="card-actions">
+            <button class="btn btn-outline" (click)="readArticle(article)">مطالعه مقاله</button>
+          </div>
+        </div>
+      </article>
     </div>
   </div>
 </section>
 
+<!-- CLIPS (Video) -->
 <section id="clips" class="section">
   <div class="container">
     <h2>کلیپ‌های آموزشی</h2>
-    <div class="grid fade-in">
-      <div class="card video-card" *ngFor="let clip of clips">
-        <div class="video-thumb">
-          <img [src]="clip.thumbnail || 'assets/images/placeholder-video.jpg'" alt="{{clip.title}}">
+    <div class="grid" [@listAnimation]="clips?.length">
+      <article class="card video-card" *ngFor="let clip of clips">
+        <div class="video-thumb" (click)="playClip(clip)" role="button" tabindex="0">
+          <img [src]="clip.thumbnail || 'assets/images/placeholder-video.jpg'"
+               [alt]="clip.title" loading="lazy">
           <div class="play-icon">▶</div>
         </div>
-        <h3>{{ clip.title }}</h3>
-        <button class="btn btn-outline">مشاهده ویدیو</button>
-      </div>
+        <div class="card-body">
+          <h3>{{ clip.title }}</h3>
+          <div class="card-actions">
+            <button class="btn btn-outline" (click)="playClip(clip)">مشاهده ویدیو</button>
+          </div>
+        </div>
+      </article>
     </div>
   </div>
 </section>
 
+<!-- CENTERS -->
 <section id="centers" class="section alt-bg">
   <div class="container">
     <h2>سانترهای درمانی</h2>
-    <div class="grid fade-in">
-      <div class="card center-card" *ngFor="let center of centers">
-        <img [src]="center.imageUrl || 'assets/images/placeholder-center.jpg'" alt="{{center.name}}">
-        <h3>{{ center.name }}</h3>
-        <p>{{ center.city }} - {{ center.specialty }}</p>
-        <button class="btn btn-outline">جزئیات بیشتر</button>
-      </div>
+    <div class="grid" [@listAnimation]="centers?.length">
+      <article class="card center-card" *ngFor="let center of centers">
+        <img [src]="center.imageUrl || 'assets/images/placeholder-center.jpg'"
+             [alt]="center.name" loading="lazy">
+        <div class="card-body">
+          <h3>{{ center.name }}</h3>
+          <p class="muted">{{ center.city }} — {{ center.specialty }}</p>
+          <div class="card-actions">
+            <button class="btn btn-outline" (click)="viewCenter(center)">جزئیات بیشتر</button>
+          </div>
+        </div>
+      </article>
     </div>
   </div>
 </section>
 
+<!-- NEWS -->
 <section id="news" class="section">
   <div class="container">
-    <h2>آخرین اخبار</h2>
-    <div class="grid fade-in">
-      <div class="card news-card" *ngFor="let news of newsList">
-        <img [src]="news.imageUrl || 'assets/images/placeholder-news.jpg'" alt="{{news.title}}">
-        <h3>{{ news.title }}</h3>
-        <p>{{ news.summary }}</p>
-        <button class="btn btn-outline">ادامه خبر</button>
-      </div>
+    <h2>اخبار</h2>
+    <div class="grid" [@listAnimation]="newsList?.length">
+      <article class="card" *ngFor="let news of newsList">
+        <img [src]="news.imageUrl || 'assets/images/placeholder-news.jpg'"
+             [alt]="news.title" loading="lazy">
+        <div class="card-body">
+          <h3>{{ news.title }}</h3>
+          <p class="muted">{{ news.summary }}</p>
+          <div class="card-actions">
+            <button class="btn btn-outline" (click)="readNews(news)">ادامه خبر</button>
+          </div>
+        </div>
+      </article>
     </div>
   </div>
 </section>
 
-<footer class="site-footer">
-  <div class="container">
+<!-- ABOUT -->
+<section id="about" class="section about-section alt-bg" [@fadeInSimple]>
+  <div class="container about-inner">
+    <div class="about-text">
+      <h2>دربارهٔ ما</h2>
+      <p>پارس مدیک با هدف فراهم آوردن تجهیزات، آموزش و محتوای تخصصی پزشکی برای مراکز درمانی و متخصصین، خدمات جامع و قابل اعتماد ارائه می‌دهد.</p>
+      <a class="btn btn-primary" routerLink="/about">بیشتر بدانید</a>
+    </div>
+    <div class="about-image" aria-hidden="true">
+      <img src="assets/images/about-placeholder.jpg" alt="" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section contact-section" [@fadeInSimple]>
+  <div class="container contact-inner">
+    <div class="contact-card">
+      <h2>تماس با ما</h2>
+      <p>هر سوالی داشتی، اینجا سریع با ما در ارتباط باش.</p>
+      <form (ngSubmit)="sendContact()" #contactForm="ngForm" class="contact-form">
+        <input name="name" ngModel placeholder="نام و نام خانوادگی" required>
+        <input name="email" ngModel type="email" placeholder="ایمیل" required>
+        <textarea name="message" ngModel placeholder="پیام" rows="4" required></textarea>
+        <button type="submit" class="btn btn-primary">ارسال پیام</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="container footer-inner">
     <p>© 2025 ParsMEDEQ — تمامی حقوق محفوظ است</p>
     <div class="social">
-      <a href="#">Instagram</a>
-      <a href="#">LinkedIn</a>
-      <a href="#">YouTube</a>
+      <a href="#" aria-label="Instagram">Instagram</a>
+      <a href="#" aria-label="LinkedIn">LinkedIn</a>
+      <a href="#" aria-label="YouTube">YouTube</a>
     </div>
   </div>
 </footer>
+
+<!-- Simple toast for add-to-cart -->
+<div class="toast" *ngIf="toastMessage">{{ toastMessage }}</div>
