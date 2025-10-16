@@ -1,7 +1,6 @@
 import {Component, OnInit, Inject, Renderer2} from '@angular/core';
 import {AppSettings, Settings} from './app.settings';
 import {CartService} from './core/services/cart.service';
-import {AuthService} from './core/services/auth.service';
 import {OverlayContainer} from '@angular/cdk/overlay';
 import {DOCUMENT} from '@angular/common';
 
@@ -16,7 +15,6 @@ export class App implements OnInit {
 
   constructor(public appSettings: AppSettings,
               private cartService: CartService,
-              private authService: AuthService,
               private overlayContainer: OverlayContainer,
               private renderer: Renderer2,
               @Inject(DOCUMENT) private document: Document) {
@@ -24,9 +22,7 @@ export class App implements OnInit {
   }
 
   ngOnInit(): void {
-    //if (this.authService.isLoggedIn()) {
     this.cartService.loadCart();
-    //}
 
     // Ensure Angular Material overlays (dialogs, menus, etc.) inherit theme and direction
     const containerEl = this.overlayContainer.getContainerElement();

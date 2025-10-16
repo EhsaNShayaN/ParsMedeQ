@@ -1,7 +1,7 @@
 import {AfterViewInit, Component} from '@angular/core';
 import {SwiperConfigInterface, SwiperPaginationInterface} from 'ngx-swiper-wrapper';
-import {BaseComponent} from "../../base-component";
-import {JsonService} from "../../core/json.service";
+import {BaseComponent} from '../../base-component';
+import {JsonService} from '../../core/json.service';
 
 @Component({
   selector: 'app-clients',
