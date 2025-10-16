@@ -49,6 +49,7 @@ import {Login} from '../features/auth/login/login';
 import {LoginDialogComponent} from './dialogs/login-dialog/login-dialog.component';
 import {ClientsComponent} from './clients/clients.component';
 import {CustomDialogComponent} from './dialogs/custom-dialog/custom-dialog.component';
+import {MatBadge} from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -132,6 +133,7 @@ import {CustomDialogComponent} from './dialogs/custom-dialog/custom-dialog.compo
     MatDialogContent,
     MatDialogActions,
     RouterLink,
+    MatBadge,
     //////////////////////
     DefaultFlexDirective,
     DefaultClassDirective,
@@ -192,6 +194,7 @@ import {CustomDialogComponent} from './dialogs/custom-dialog/custom-dialog.compo
     MatDialogContent,
     MatDialogActions,
     RouterLink,
+    MatBadge,
     //////////////////////
     DefaultFlexDirective,
     DefaultClassDirective,
