@@ -1,8 +1,4 @@
-/* Palette */
-$white: #ffffff;
-$muted-bg: #f3f3f3;
-$primary: #137749;
-$text: #222;
+@use '../../theme/styles/variables' as *;
 
 /* Layout container */
 .container {
@@ -73,18 +69,6 @@ $text: #222;
         padding: 2px 6px;
         border-radius: 999px;
       }
-    }
-
-    .btn {
-      padding: 0.45rem 0.8rem;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    .btn-outline {
-      border: 1px solid $primary;
-      background: transparent;
-      color: $primary;
     }
   }
 }

@@ -1,26 +1,3 @@
-<header class="site-header" role="banner">
-  <div class="container header-inner">
-    <a class="logo" routerLink="/">ParsMEDEQ</a>
-
-    <nav class="main-nav" role="navigation" aria-label="Main menu">
-      <a routerLink="#products">محصولات</a>
-      <a routerLink="#articles">مقالات</a>
-      <a routerLink="#clips">کلیپ‌ها</a>
-      <a routerLink="#centers">سانترها</a>
-      <a routerLink="#news">اخبار</a>
-      <a routerLink="#about">درباره ما</a>
-      <a routerLink="#contact">تماس</a>
-    </nav>
-
-    <div class="header-actions">
-      <button class="icon-btn" aria-label="سبد خرید" (click)="openCart()">
-        🛒 <span class="cart-count" *ngIf="cartCount>0">{{ cartCount }}</span>
-      </button>
-      <button class="btn btn-outline" (click)="onLogin()">ورود</button>
-    </div>
-  </div>
-</header>
-
 <section class="hero" [@heroAnimation]>
   <div class="container hero-inner">
     <div class="hero-text">
@@ -41,7 +18,7 @@
 <section id="products" class="section">
   <div class="container">
     <h2>محصولات</h2>
-    <div class="grid" [@listAnimation]="products?.length">
+    <div class="grid" [@productsAnimation]="products?.length">
       <article class="card" *ngFor="let product of products">
         <img [src]="product.imageUrl || 'assets/images/placeholder-product.jpg'"
              [alt]="product.name"
@@ -50,8 +27,8 @@
           <h3>{{ product.name }}</h3>
           <p class="muted">{{ product.shortDescription }}</p>
           <div class="card-actions">
-            <button class="btn btn-outline" (click)="viewProduct(product)">جزئیات</button>
-            <button class="btn btn-primary" (click)="addToCart(product)">افزودن به سبد</button>
+            <button mat-stroked-button (click)="viewProduct(product)">جزئیات</button>
+            <button mat-raised-button color="primary" (click)="addToCart(product)">افزودن به سبد</button>
           </div>
         </div>
       </article>
@@ -63,7 +40,7 @@
 <section id="articles" class="section alt-bg">
   <div class="container">
     <h2>مقالات</h2>
-    <div class="grid" [@listAnimation]="articles?.length">
+    <div class="grid" [@articlesAnimation]="articles?.length">
       <article class="card" *ngFor="let article of articles">
         <img [src]="article.imageUrl || 'assets/images/placeholder-article.jpg'"
              [alt]="article.title"
@@ -72,7 +49,7 @@
           <h3>{{ article.title }}</h3>
           <p class="muted">{{ article.summary }}</p>
           <div class="card-actions">
-            <button class="btn btn-outline" (click)="readArticle(article)">مطالعه مقاله</button>
+            <button mat-raised-button color="primary" (click)="readArticle(article)">مطالعه مقاله</button>
           </div>
         </div>
       </article>
@@ -84,7 +61,7 @@
 <section id="clips" class="section">
   <div class="container">
     <h2>کلیپ‌های آموزشی</h2>
-    <div class="grid" [@listAnimation]="clips?.length">
+    <div class="grid" [@clipsAnimation]="clips?.length">
       <article class="card video-card" *ngFor="let clip of clips">
         <div class="video-thumb" (click)="playClip(clip)" role="button" tabindex="0">
           <img [src]="clip.thumbnail || 'assets/images/placeholder-video.jpg'"
@@ -94,7 +71,7 @@
         <div class="card-body">
           <h3>{{ clip.title }}</h3>
           <div class="card-actions">
-            <button class="btn btn-outline" (click)="playClip(clip)">مشاهده ویدیو</button>
+            <button mat-raised-button color="primary" (click)="playClip(clip)">مشاهده ویدیو</button>
           </div>
         </div>
       </article>
@@ -106,7 +83,7 @@
 <section id="centers" class="section alt-bg">
   <div class="container">
     <h2>سانترهای درمانی</h2>
-    <div class="grid" [@listAnimation]="centers?.length">
+    <div class="grid" [@centersAnimation]="centers?.length">
       <article class="card center-card" *ngFor="let center of centers">
         <img [src]="center.imageUrl || 'assets/images/placeholder-center.jpg'"
              [alt]="center.name" loading="lazy">
@@ -114,7 +91,7 @@
           <h3>{{ center.name }}</h3>
           <p class="muted">{{ center.city }} — {{ center.specialty }}</p>
           <div class="card-actions">
-            <button class="btn btn-outline" (click)="viewCenter(center)">جزئیات بیشتر</button>
+            <button mat-raised-button color="primary" (click)="viewCenter(center)">جزئیات بیشتر</button>
           </div>
         </div>
       </article>
@@ -126,7 +103,7 @@
 <section id="news" class="section">
   <div class="container">
     <h2>اخبار</h2>
-    <div class="grid" [@listAnimation]="newsList?.length">
+    <div class="grid" [@newsAnimation]="newsList?.length">
       <article class="card" *ngFor="let news of newsList">
         <img [src]="news.imageUrl || 'assets/images/placeholder-news.jpg'"
              [alt]="news.title" loading="lazy">
@@ -134,7 +111,7 @@
           <h3>{{ news.title }}</h3>
           <p class="muted">{{ news.summary }}</p>
           <div class="card-actions">
-            <button class="btn btn-outline" (click)="readNews(news)">ادامه خبر</button>
+            <button mat-raised-button color="primary" (click)="readNews(news)">ادامه خبر</button>
           </div>
         </div>
       </article>
@@ -166,7 +143,7 @@
         <input name="name" ngModel placeholder="نام و نام خانوادگی" required>
         <input name="email" ngModel type="email" placeholder="ایمیل" required>
         <textarea name="message" ngModel placeholder="پیام" rows="4" required></textarea>
-        <button type="submit" class="btn btn-primary">ارسال پیام</button>
+        <button mat-raised-button color="primary" type="submit">ارسال پیام</button>
       </form>
     </div>
   </div>

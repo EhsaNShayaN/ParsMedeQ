@@ -9,26 +9,51 @@ import {BaseComponent} from '../../base-component';
   templateUrl: './home.html',
   styleUrls: ['./home.scss'],
   animations: [
-    trigger('heroAnimation', [
-      transition(':enter', [
-        style({opacity: 0, transform: 'translateY(8px)'}),
-        animate('500ms ease-out', style({opacity: 1, transform: 'translateY(0)'}))
-      ])
-    ]),
-    trigger('listAnimation', [
+    // Products Animation
+    trigger('productsAnimation', [
       transition('* => *', [
         query(':enter', [
-          style({opacity: 0, transform: 'translateY(18px)'}),
-          stagger(80, [
-            animate('420ms ease-out', style({opacity: 1, transform: 'translateY(0)'}))
+          style({ opacity: 0, transform: 'scale(0.9)' }),
+          stagger(100, [
+            animate('400ms ease-out', style({ opacity: 1, transform: 'scale(1)' }))
           ])
-        ], {optional: true})
+        ], { optional: true })
       ])
     ]),
-    trigger('fadeInSimple', [
-      transition(':enter', [
-        style({opacity: 0, transform: 'translateY(12px)'}),
-        animate('420ms ease-out', style({opacity: 1, transform: 'translateY(0)'}))
+    // Articles Animation
+    trigger('articlesAnimation', [
+      transition('* => *', [
+        query(':enter', [
+          style({ opacity: 0, transform: 'translateX(-20px)' }),
+          stagger(100, [animate('400ms ease-out', style({ opacity: 1, transform: 'translateX(0)' }))])
+        ], { optional: true })
+      ])
+    ]),
+    // Clips Animation
+    trigger('clipsAnimation', [
+      transition('* => *', [
+        query(':enter', [
+          style({ opacity: 0, transform: 'scale(0.85)' }),
+          stagger(100, [animate('400ms ease-out', style({ opacity: 1, transform: 'scale(1)' }))])
+        ], { optional: true })
+      ])
+    ]),
+    // Centers Animation
+    trigger('centersAnimation', [
+      transition('* => *', [
+        query(':enter', [
+          style({ opacity: 0, transform: 'translateY(20px)' }),
+          stagger(100, [animate('400ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))])
+        ], { optional: true })
+      ])
+    ]),
+    // News Animation
+    trigger('newsAnimation', [
+      transition('* => *', [
+        query(':enter', [
+          style({ opacity: 0 }),
+          stagger(150, [animate('400ms ease-out', style({ opacity: 1 }))])
+        ], { optional: true })
       ])
     ])
   ],

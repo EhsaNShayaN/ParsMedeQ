@@ -10,48 +10,6 @@
 @use './app/theme/styles/variables' as *;
 @use 'ngx-toastr/toastr.css';
 
-/* src/styles.scss */
-
-/* System font stack */
-:root {
-  --pm-white: #ffffff;
-  --pm-muted: #f3f3f3;
-  --pm-primary: #137749;
-  --pm-text: #222222;
-}
-
-/* Use system fonts */
-html, body {
-  background: var(--pm-white);
-  color: var(--pm-text);
-  margin: 0;
-  padding: 0;
-}
-
-/* Override some material button colors to match brand (light override) */
-.mat-raised-button.mat-primary {
-  background-color: var(--pm-primary) !important;
-  color: white !important;
-}
-
-/* outline (stroked) override */
-.mat-stroked-button {
-  border-color: var(--pm-primary) !important;
-  color: var(--pm-primary) !important;
-}
-
-/* small utility */
-.container {
-  width: 92%;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* basic body gutter so toolbar doesn't overlap content when sticky */
-main {
-  padding-top: 72px; /* toolbar height approx */
-}
-
 //////////////////////////////////
 .single-line {
   white-space: nowrap;

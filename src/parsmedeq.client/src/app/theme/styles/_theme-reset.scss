@@ -91,6 +91,11 @@
   .mat-mdc-mini-fab,
   .mat-mdc-unelevated-button[color=primary] {
     color: mat.m2-get-color-from-palette($background, card);
+
+    &.mat-primary {
+      background-color: var(--pm-primary) !important;
+      color: var(--pm-white) !important;
+    }
   }
   .top-toolbar.mat-toolbar .v-divider {
     background-color: mat.m2-get-color-from-palette($primary, lighter, 0.2);

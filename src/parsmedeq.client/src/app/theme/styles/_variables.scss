@@ -21,11 +21,26 @@ $mobile-size: 680px;
 $tablet-size: 770px;
 
 /*green*/
-$primary: #388E3C;
-$accent: #64646D;
+
+/* System font stack */
+
+:root {
+  --pm-white: #ffffff;
+  --pm-muted: #f3f3f3;
+  --pm-primary: #137749;
+  --pm-text: #222222;
+}
+
+/*green*/
+
+$white: #ffffff;
+$muted-bg: #f3f3f3;
+$primary: #137749;
+$text: #222;
+
+$accent: #f3f3f3;
 $warn: #ED1C24;
 
-$white: #F7F5F5;
 $silver: #DEDEDE;
 $black: #373435;
 
