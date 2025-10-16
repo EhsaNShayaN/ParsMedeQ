@@ -1,26 +1,27 @@
 import {Component, OnInit} from '@angular/core';
-import {BaseComponent} from '../../../base-component';
-import {DialogService} from "../../../../lib/core/services/dialog-service";
+import {BaseComponent} from '../../base-component';
+import {JsonService} from '../../core/json.service';
 
 @Component({
-  selector: 'app-projects',
-  templateUrl: './projects.component.html',
-  styleUrls: ['./projects.component.scss']
+  selector: 'app-centers',
+  templateUrl: './centers.component.html',
+  styleUrl: './centers.component.scss',
+  standalone: false
 })
-export class ProjectsComponent extends BaseComponent implements OnInit {
-  array = [];
+export class CentersComponent extends BaseComponent implements OnInit {
+  array: any[] = [];
 
-  constructor(private dialogService: DialogService) {
+  constructor(private jsonService: JsonService) {
     super();
   }
 
   ngOnInit(): void {
-    this.jsonService.getAbout('projects').subscribe(res => {
-      this.array = res.filter(s => !s.deleted);
+    this.jsonService.getClients().subscribe(res => {
+      this.array = res;
     });
   }
 
   openDialog(item: any) {
-    this.dialogService.openCustomDialog(item.name, item.description, `/assets/images/projects/${item.id}.jpg`);
+    this.dialogService.openCustomDialog(item.title, item.description, item.image);
   }
 }

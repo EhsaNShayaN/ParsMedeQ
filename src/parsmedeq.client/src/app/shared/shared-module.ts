@@ -48,6 +48,7 @@ import {HeaderImageComponent} from './header-image/header-image.component';
 import {Login} from '../features/auth/login/login';
 import {LoginDialogComponent} from './dialogs/login-dialog/login-dialog.component';
 import {ClientsComponent} from './clients/clients.component';
+import {CustomDialogComponent} from './dialogs/custom-dialog/custom-dialog.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import {ClientsComponent} from './clients/clients.component';
     MultiFileUploadComponent,
     CartItemControlComponent,
     ConfirmDialogComponent,
+    CustomDialogComponent,
     LoginDialogComponent,
     TreeCategoriesComponent,
     HeaderCarouselComponent,
@@ -200,6 +202,7 @@ import {ClientsComponent} from './clients/clients.component';
     CommentForm,
     MultiFileUploadComponent,
     ConfirmDialogComponent,
+    CustomDialogComponent,
     LoginDialogComponent,
     TreeCategoriesComponent,
     SwiperModule,

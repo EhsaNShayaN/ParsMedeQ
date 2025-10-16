@@ -8,32 +8,11 @@
 
       img {
         border-radius: 50%;
-        width: 140px;
-        height: 140px;
+        width: 180px;
+        height: 180px;
         object-fit: cover;
         display: block;
         margin: 0 auto;
-      }
-
-      .quote {
-        font-size: 50px;
-        line-height: 14px;
-
-        &.open {
-          margin-top: 24px;
-        }
-
-        &.close {
-          margin-bottom: 24px;
-        }
-      }
-
-      .text {
-        font-weight: 500;
-      }
-
-      .author {
-        text-transform: uppercase;
       }
     }
   }

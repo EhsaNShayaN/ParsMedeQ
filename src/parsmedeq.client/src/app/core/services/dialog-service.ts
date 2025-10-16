@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {ConfirmDialogComponent, ConfirmDialogModel} from '../../shared/dialogs/confirm-dialog/confirm-dialog.component';
 import {LoginDialogComponent, LoginDialogModel} from '../../shared/dialogs/login-dialog/login-dialog.component';
+import {CustomDialogComponent, CustomDialogModel} from '../../shared/dialogs/custom-dialog/custom-dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +11,13 @@ export class DialogService {
   constructor(public dialog: MatDialog) {
   }
 
-  /*public openCustomDialog(title: string, message: string, image: string, data: any = null, dialogConfirmed: (id: string, reply: any) => void = null) {
-    const dialogData = new CustomDialogModel(title, message, image, data, dialogConfirmed);
+  public openCustomDialog(title: string, description: string, image: string) {
+    const dialogData = new CustomDialogModel(title, description, image);
     return this.dialog.open(CustomDialogComponent, {
       maxWidth: '600px',
       data: dialogData
     });
-  }*/
+  }
 
   public openConfirmDialog(title: string, message: string) {
     const dialogData = new ConfirmDialogModel(title, message);

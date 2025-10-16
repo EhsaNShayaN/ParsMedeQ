@@ -9,16 +9,18 @@
   <div class="px-3">
     <mat-card appearance="outlined" class="main-content-header">
       <div class="section mt-3">
-        <h1 class="section-title">{{'OUR_PROJECTS' | translate}}</h1>
+        <h1 class="section-title">{{ 'TREATMENT_CENTERS' | translate }}</h1>
         <div fxLayout="row wrap" class="services-wrapper">
-          <div fxFlex="100" fxFlex.gt-md="25" fxFlex.gt-sm="50" class="p-2" *ngFor="let item of array">
-            <mat-card appearance="outlined" fxLayout="column" fxLayoutAlign="start center"
-                      class="text-center cursor-pointer" (click)="openDialog(item)">
-              <img src="/assets/images/projects/{{item?.id}}.jpg" class="w-100 h-100 img-square"/>
-              <h2 class="capitalize fw-600 mx-3 mt-3 two-lines">{{item?.name}}</h2>
-              <p>{{item?.title}}</p>
-            </mat-card>
-          </div>
+          @for (item of array; track item.title) {
+            <div fxFlex="100" fxFlex.gt-md="25" fxFlex.gt-sm="50" class="p-2">
+              <mat-card appearance="outlined" fxLayout="column" fxLayoutAlign="start center"
+                        class="text-center cursor-pointer" (click)="openDialog(item)">
+                <img [src]="item.image" class="w-100 h-100 img-square" [alt]="item.title"/>
+                <h2 class="capitalize fw-600 mx-3 mt-3 two-lines">{{ item.title }}</h2>
+                <p>{{ item.description }}</p>
+              </mat-card>
+            </div>
+          }
         </div>
       </div>
     </mat-card>
