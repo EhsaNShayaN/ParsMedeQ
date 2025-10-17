@@ -1,32 +1,27 @@
 [
   {
-    "text": "Donec molestie turpis ut mollis efficitur. Nam fringilla libero vel dictum vulputate. In malesuada, ligula non ornare consequat, augue nibh luctus nisl, et lobortis justo ipsum nec velit. Praesent lacinia quam ut nulla gravida, at viverra libero euismod. Sed tincidunt tempus augue vitae malesuada. Vestibulum eu lectus nisi. Aliquam erat volutpat.",
-    "author": "Mr. Adam Sandler",
-    "position": "General Director",
-    "image": "/assets/agents/a-1.jpg"
+    "title": "بیمارستان امام خمینی",
+    "description": "بیمارستان امام خمینی",
+    "image": "/assets/centers/بیمارستان امام خمینی.jpg"
   },
   {
-    "text": "Donec molestie turpis ut mollis efficitur. Nam fringilla libero vel dictum vulputate. In malesuada, ligula non ornare consequat, augue nibh luctus nisl, et lobortis justo ipsum nec velit. Praesent lacinia quam ut nulla gravida, at viverra libero euismod. Sed tincidunt tempus augue vitae malesuada. Vestibulum eu lectus nisi. Aliquam erat volutpat.",
-    "author": "Ashley Ahlberg",
-    "position": "Housewife",
-    "image": "/assets/agents/a-2.jpg"
+    "title": "بیمارستان رسول اکرم",
+    "description": "بیمارستان رسول اکرم",
+    "image": "/assets/centers/بیمارستان رسول اکرم.jpg"
   },
   {
-    "text": "Donec molestie turpis ut mollis efficitur. Nam fringilla libero vel dictum vulputate. In malesuada, ligula non ornare consequat, augue nibh luctus nisl, et lobortis justo ipsum nec velit. Praesent lacinia quam ut nulla gravida, at viverra libero euismod. Sed tincidunt tempus augue vitae malesuada. Vestibulum eu lectus nisi. Aliquam erat volutpat.",
-    "author": "Bruno Vespa",
-    "position": "Blogger",
-    "image": "/assets/agents/a-3.jpg"
+    "title": "بیمارستان امیر اعلم",
+    "description": "بیمارستان امیر اعلم",
+    "image": "/assets/centers/بیمارستان امیر اعلم.png"
   },
   {
-    "text": "Donec molestie turpis ut mollis efficitur. Nam fringilla libero vel dictum vulputate. In malesuada, ligula non ornare consequat, augue nibh luctus nisl, et lobortis justo ipsum nec velit. Praesent lacinia quam ut nulla gravida, at viverra libero euismod. Sed tincidunt tempus augue vitae malesuada. Vestibulum eu lectus nisi. Aliquam erat volutpat.",
-    "author": "Mrs. Julia Aniston",
-    "position": "Marketing Manager",
-    "image": "/assets/agents/a-4.jpg"
+    "title": "بیمارستان شهدای تجریش",
+    "description": "بیمارستان شهدای تجریش",
+    "image": "/assets/centers/بیمارستان شهدای تجریش.png"
   },
   {
-    "text": "Donec molestie turpis ut mollis efficitur. Nam fringilla libero vel dictum vulputate. In malesuada, ligula non ornare consequat, augue nibh luctus nisl, et lobortis justo ipsum nec velit. Praesent lacinia quam ut nulla gravida, at viverra libero euismod. Sed tincidunt tempus augue vitae malesuada. Vestibulum eu lectus nisi. Aliquam erat volutpat.",
-    "author": "Mrs. Ana Peni",
-    "position": "CEO",
-    "image": "/assets/agents/a-5.jpg"
+    "title": "بیمارستان بنت الهدی مشهد",
+    "description": "بیمارستان بنت الهدی مشهد",
+    "image": "/assets/centers/بیمارستان بنت الهدی مشهد.png"
   }
 ]

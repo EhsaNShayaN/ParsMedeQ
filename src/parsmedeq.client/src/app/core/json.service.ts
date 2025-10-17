@@ -2,6 +2,7 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {TranslateService} from '@ngx-translate/core';
+import {CenterModel} from '../features/centers/our-centers/our-centers.component';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +19,8 @@ export class JsonService {
     return this.http.get<any[]>(this.url + 'slides.json');
   }
 
-  getClients() {
-    return this.http.get<any[]>(this.url + 'clients.json');
+  getCenters() {
+    return this.http.get<CenterModel[]>(this.url + 'centers.json');
   }
 
   public getUsefulLinks() {

@@ -1,19 +1,327 @@
-@use '@angular/material' as mat;
 @use './variables' as *;
-@use 'theme-reset' as *;
 
-$custom-typography: mat.m2-define-typography-config(
-  $font-family: $font-family,
-  $body-1: mat.m2-define-typography-level(14px, 20px, 400),
-  $button: mat.m2-define-typography-level(14px, 14px, 500),
-);
-@include mat.all-component-typographies($custom-typography);
-@include mat.core();
+/* Header (sticky) */
+.site-header {
+  position: sticky;
+  top: 0;
+  background: $white;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+  z-index: 1000;
 
-.app {
-  &.green-custom {
-    @import "skins/green-custom";
-    @include mat.all-component-colors($green-custom-theme);
-    @include theme-reset($green-custom-theme);
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.9rem 0;
+  }
+
+  .logo {
+    font-weight: 700;
+    color: $primary;
+    font-size: 1.25rem;
+    text-decoration: none;
+  }
+
+  .main-nav {
+    display: flex;
+    gap: 1rem;
+
+    a {
+      color: $text;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.45rem;
+      border-radius: 6px;
+
+      &:hover {
+        color: $primary;
+        background: rgba(19, 119, 73, 0.06);
+      }
+    }
+  }
+
+  .header-actions {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+
+    .icon-btn {
+      background: transparent;
+      border: none;
+      font-size: 1.05rem;
+      cursor: pointer;
+      position: relative;
+
+      .cart-count {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background: $primary;
+        color: $white;
+        font-size: 0.75rem;
+        padding: 2px 6px;
+        border-radius: 999px;
+      }
+    }
+  }
+}
+
+/* HERO */
+.hero {
+  background: linear-gradient(135deg, $primary, darken($primary, 6%));
+  color: $white;
+  padding: 3.4rem 0;
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .hero-text {
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.6rem;
+    }
+
+    p {
+      opacity: 0.95;
+      margin-bottom: 1.2rem;
+    }
+  }
+
+  .hero-image img {
+    width: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+    height: 240px;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 0.75rem;
+  }
+}
+
+/* SERVICES */
+.services {
+  padding: 3rem 0;
+
+  h2 {
+    text-align: center;
+    color: $secondary;
+    margin-bottom: 2rem;
+  }
+
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+
+    .card {
+      background: white;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 2rem;
+      width: 260px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      }
+
+      .icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+
+      h3 {
+        color: $secondary;
+        margin-bottom: 0.5rem;
+      }
+
+      p {
+        color: $text;
+      }
+    }
+  }
+}
+
+/* Sections */
+section {
+  padding: 3rem 0;
+
+  h2 {
+    text-align: center;
+    color: $primary;
+    margin-bottom: 1.6rem;
+  }
+}
+
+.alt-bg {
+  background: $muted-bg;
+}
+
+/* Grid & cards */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+.card {
+  background: $white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(16, 24, 40, 0.06);
+  transition: transform .22s ease, box-shadow .22s ease;
+  cursor: default;
+
+  img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .card-body {
+    padding: 0.9rem;
+    text-align: center;
+
+    h3 {
+      color: $primary;
+      margin-bottom: 0.4rem;
+      font-size: 1.05rem;
+    }
+
+    .muted {
+      color: darken($text, 8%);
+      font-size: 0.95rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .card-actions {
+      display: flex;
+      justify-content: center;
+      gap: 0.6rem;
+    }
+  }
+
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(16, 24, 40, 0.08);
+  }
+}
+
+/* video card specifics */
+.video-card .video-thumb {
+  position: relative;
+
+  img {
+    height: 160px;
+  }
+
+  .play-icon {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    color: $white;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.36));
+    opacity: 0;
+    transition: opacity .18s;
+  }
+
+  &:hover .play-icon {
+    opacity: 1;
+  }
+}
+
+/* about & contact */
+.about-inner, .contact-inner {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 1.2rem;
+  align-items: center;
+}
+
+.about-image img, .about-image {
+  border-radius: 10px;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+  }
+}
+
+.contact-card {
+  background: $white;
+  padding: 1.2rem;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(16, 24, 40, 0.04);
+}
+
+.contact-form {
+  display: grid;
+  gap: 0.6rem;
+
+  input, textarea {
+    padding: 0.6rem;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 8px;
+  }
+}
+
+/* Footer */
+.site-footer {
+  background: $primary;
+  color: $white;
+  padding: 1.4rem 0;
+  text-align: center;
+
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .social a {
+    color: $white;
+    margin-left: 0.6rem;
+  }
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  background: rgba(19, 119, 73, 0.95);
+  color: $white;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Responsiveness */
+@media (max-width: 900px) {
+  .hero-inner, .about-inner, .contact-inner {
+    grid-template-columns: 1fr;
+  }
+  .main-nav {
+    display: none;
+  }
+  /* you can replace by a hamburger menu implementation */
+  .site-header {
+    padding: 0 0.6rem;
   }
 }

@@ -1,7 +1,7 @@
 <section class="hero" [@heroAnimation]>
-  <div class="container hero-inner">
+  <div class="theme-container hero-inner">
     <div class="hero-text">
-      <h1>پارس مدیک — نوآوری در خدمات و تجهیزات پزشکی</h1>
+      <h1>پارس مدیکیو — نوآوری در خدمات و تجهیزات پزشکی</h1>
       <p>دسترسی به جدیدترین محصولات، مقالات و آموزش‌های تخصصی پزشکی در یک سامانهٔ یکپارچه</p>
       <div class="hero-ctas">
         <a class="btn btn-primary" href="#products">مشاهده محصولات</a>
@@ -9,14 +9,40 @@
       </div>
     </div>
     <div class="hero-image" aria-hidden="true">
-      <img src="assets/images/hero-placeholder.jpg" alt="" loading="lazy">
+      <img src="assets/images/hero.png" alt="" loading="lazy">
     </div>
   </div>
 </section>
 
+<section id="services" class="services">
+  <div class="theme-container">
+    <h2>خدمات ما</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="icon">🩺</div>
+        <h3>خدمت ۱</h3>
+        <p>توضیح خدمت اول</p>
+      </div>
+      <div class="card">
+        <div class="icon">⚙️</div>
+        <h3>خدمت ۲</h3>
+        <p>توضیح خدمت دوم</p>
+      </div>
+      <div class="card">
+        <div class="icon">📦</div>
+        <h3>خدمت ۳</h3>
+        <p>توضیح خدمت سوم</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CENTERS -->
+<app-our-centers></app-our-centers>
+
 <!-- PRODUCTS -->
-<section id="products" class="section">
-  <div class="container">
+<section id="products">
+  <div class="theme-container">
     <h2>محصولات</h2>
     <div class="grid" [@productsAnimation]="products?.length">
       <article class="card" *ngFor="let product of products">
@@ -37,8 +63,8 @@
 </section>
 
 <!-- ARTICLES -->
-<section id="articles" class="section alt-bg">
-  <div class="container">
+<section id="articles" class="alt-bg">
+  <div class="theme-container">
     <h2>مقالات</h2>
     <div class="grid" [@articlesAnimation]="articles?.length">
       <article class="card" *ngFor="let article of articles">
@@ -58,8 +84,8 @@
 </section>
 
 <!-- CLIPS (Video) -->
-<section id="clips" class="section">
-  <div class="container">
+<section id="clips">
+  <div class="theme-container">
     <h2>کلیپ‌های آموزشی</h2>
     <div class="grid" [@clipsAnimation]="clips?.length">
       <article class="card video-card" *ngFor="let clip of clips">
@@ -79,29 +105,9 @@
   </div>
 </section>
 
-<!-- CENTERS -->
-<section id="centers" class="section alt-bg">
-  <div class="container">
-    <h2>سانترهای درمانی</h2>
-    <div class="grid" [@centersAnimation]="centers?.length">
-      <article class="card center-card" *ngFor="let center of centers">
-        <img [src]="center.imageUrl || 'assets/images/placeholder-center.jpg'"
-             [alt]="center.name" loading="lazy">
-        <div class="card-body">
-          <h3>{{ center.name }}</h3>
-          <p class="muted">{{ center.city }} — {{ center.specialty }}</p>
-          <div class="card-actions">
-            <button mat-raised-button color="primary" (click)="viewCenter(center)">جزئیات بیشتر</button>
-          </div>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
 <!-- NEWS -->
-<section id="news" class="section">
-  <div class="container">
+<section id="news">
+  <div class="theme-container">
     <h2>اخبار</h2>
     <div class="grid" [@newsAnimation]="newsList?.length">
       <article class="card" *ngFor="let news of newsList">
@@ -120,22 +126,22 @@
 </section>
 
 <!-- ABOUT -->
-<section id="about" class="section about-section alt-bg" [@fadeInSimple]>
-  <div class="container about-inner">
+<section id="about" class="about-section alt-bg" [@fadeInSimple]>
+  <div class="theme-container about-inner">
     <div class="about-text">
       <h2>دربارهٔ ما</h2>
-      <p>پارس مدیک با هدف فراهم آوردن تجهیزات، آموزش و محتوای تخصصی پزشکی برای مراکز درمانی و متخصصین، خدمات جامع و قابل اعتماد ارائه می‌دهد.</p>
+      <p>پارس مدیکیو با هدف فراهم آوردن تجهیزات، آموزش و محتوای تخصصی پزشکی برای مراکز درمانی و متخصصین، خدمات جامع و قابل اعتماد ارائه می‌دهد.</p>
       <a class="btn btn-primary" routerLink="/about">بیشتر بدانید</a>
     </div>
     <div class="about-image" aria-hidden="true">
-      <img src="assets/images/about-placeholder.jpg" alt="" loading="lazy">
+      <img src="assets/images/about.png" alt="" loading="lazy">
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
-<section id="contact" class="section contact-section" [@fadeInSimple]>
-  <div class="container contact-inner">
+<section id="contact" class="contact-section" [@fadeInSimple]>
+  <div class="theme-container contact-inner">
     <div class="contact-card">
       <h2>تماس با ما</h2>
       <p>هر سوالی داشتی، اینجا سریع با ما در ارتباط باش.</p>
@@ -150,7 +156,7 @@
 </section>
 
 <footer class="site-footer" role="contentinfo">
-  <div class="container footer-inner">
+  <div class="theme-container footer-inner">
     <p>© 2025 ParsMEDEQ — تمامی حقوق محفوظ است</p>
     <div class="social">
       <a href="#" aria-label="Instagram">Instagram</a>

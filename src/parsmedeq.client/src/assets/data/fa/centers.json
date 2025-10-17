@@ -1,27 +1,32 @@
 [
   {
     "title": "بیمارستان امام خمینی",
-    "description": "بیمارستان امام خمینی",
-    "image": "/assets/centers/بیمارستان امام خمینی.jpg"
+    "city": "تهران",
+    "image": "/assets/centers/بیمارستان امام خمینی.jpg",
+    "description": "بیمارستان امام خمینی"
   },
   {
     "title": "بیمارستان رسول اکرم",
-    "description": "بیمارستان رسول اکرم",
-    "image": "/assets/centers/بیمارستان رسول اکرم.jpg"
+    "city": "تهران",
+    "image": "/assets/centers/بیمارستان رسول اکرم.jpg",
+    "description": "بیمارستان رسول اکرم"
   },
   {
     "title": "بیمارستان امیر اعلم",
-    "description": "بیمارستان امیر اعلم",
-    "image": "/assets/centers/بیمارستان امیر اعلم.png"
+    "city": "تهران",
+    "image": "/assets/centers/بیمارستان امیر اعلم.png",
+    "description": "بیمارستان امیر اعلم"
   },
   {
     "title": "بیمارستان شهدای تجریش",
-    "description": "بیمارستان شهدای تجریش",
-    "image": "/assets/centers/بیمارستان شهدای تجریش.png"
+    "city": "تهران",
+    "image": "/assets/centers/بیمارستان شهدای تجریش.png",
+    "description": "بیمارستان شهدای تجریش"
   },
   {
     "title": "بیمارستان بنت الهدی مشهد",
-    "description": "بیمارستان بنت الهدی مشهد",
-    "image": "/assets/centers/بیمارستان بنت الهدی مشهد.png"
+    "city": "مشهد",
+    "image": "/assets/centers/بیمارستان بنت الهدی مشهد.png",
+    "description": "بیمارستان بنت الهدی مشهد"
   }
 ]

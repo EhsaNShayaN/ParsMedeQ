@@ -16,7 +16,7 @@ export class CentersComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.jsonService.getClients().subscribe(res => {
+    this.jsonService.getCenters().subscribe(res => {
       this.array = res;
     });
   }

@@ -9,51 +9,54 @@ import {BaseComponent} from '../../base-component';
   templateUrl: './home.html',
   styleUrls: ['./home.scss'],
   animations: [
+    trigger('heroAnimation', [
+      transition(':enter', [
+        style({opacity: 0, transform: 'translateY(8px)'}),
+        animate('500ms ease-out', style({opacity: 1, transform: 'translateY(0)'}))
+      ])
+    ]),
     // Products Animation
     trigger('productsAnimation', [
       transition('* => *', [
         query(':enter', [
-          style({ opacity: 0, transform: 'scale(0.9)' }),
+          style({opacity: 0, transform: 'scale(0.9)'}),
           stagger(100, [
-            animate('400ms ease-out', style({ opacity: 1, transform: 'scale(1)' }))
+            animate('400ms ease-out', style({opacity: 1, transform: 'scale(1)'}))
           ])
-        ], { optional: true })
+        ], {optional: true})
       ])
     ]),
     // Articles Animation
     trigger('articlesAnimation', [
       transition('* => *', [
         query(':enter', [
-          style({ opacity: 0, transform: 'translateX(-20px)' }),
-          stagger(100, [animate('400ms ease-out', style({ opacity: 1, transform: 'translateX(0)' }))])
-        ], { optional: true })
+          style({opacity: 0, transform: 'translateX(-20px)'}),
+          stagger(100, [animate('400ms ease-out', style({opacity: 1, transform: 'translateX(0)'}))])
+        ], {optional: true})
       ])
     ]),
     // Clips Animation
     trigger('clipsAnimation', [
       transition('* => *', [
         query(':enter', [
-          style({ opacity: 0, transform: 'scale(0.85)' }),
-          stagger(100, [animate('400ms ease-out', style({ opacity: 1, transform: 'scale(1)' }))])
-        ], { optional: true })
-      ])
-    ]),
-    // Centers Animation
-    trigger('centersAnimation', [
-      transition('* => *', [
-        query(':enter', [
-          style({ opacity: 0, transform: 'translateY(20px)' }),
-          stagger(100, [animate('400ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))])
-        ], { optional: true })
+          style({opacity: 0, transform: 'scale(0.85)'}),
+          stagger(100, [animate('400ms ease-out', style({opacity: 1, transform: 'scale(1)'}))])
+        ], {optional: true})
       ])
     ]),
     // News Animation
     trigger('newsAnimation', [
       transition('* => *', [
         query(':enter', [
-          style({ opacity: 0 }),
-          stagger(150, [animate('400ms ease-out', style({ opacity: 1 }))])
-        ], { optional: true })
+          style({opacity: 0}),
+          stagger(150, [animate('400ms ease-out', style({opacity: 1}))])
+        ], {optional: true})
+      ])
+    ]),
+    trigger('fadeInSimple', [
+      transition(':enter', [
+        style({opacity: 0, transform: 'translateY(12px)'}),
+        animate('420ms ease-out', style({opacity: 1, transform: 'translateY(0)'}))
       ])
     ])
   ],
@@ -78,11 +81,6 @@ export class Home extends BaseComponent {
   clips = [
     {id: 1, title: 'آموزش کار با ECG', thumbnail: 'assets/images/c1.jpg'},
     {id: 2, title: 'کالیبراسیون فشارسنج', thumbnail: 'assets/images/c2.jpg'},
-  ];
-
-  centers = [
-    {id: 1, name: 'سانتر تهران', city: 'تهران', specialty: 'قلب و عروق', imageUrl: 'assets/images/center1.jpg'},
-    {id: 2, name: 'سانتر شیراز', city: 'شیراز', specialty: 'بیهوشی', imageUrl: 'assets/images/center2.jpg'},
   ];
 
   newsList = [
@@ -117,10 +115,6 @@ export class Home extends BaseComponent {
 
   playClip(c: any) {
     console.log('play clip', c); /* open modal player */
-  }
-
-  viewCenter(c: any) {
-    console.log('view center', c);
   }
 
   readNews(n: any) {
