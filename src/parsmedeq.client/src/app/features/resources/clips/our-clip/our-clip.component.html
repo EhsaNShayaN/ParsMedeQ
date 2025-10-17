@@ -1,10 +1,9 @@
-<div class="section">
-  <div class="px-3">
+<div [@clipsAnimation]="items?.length">
+  <div class="section">
     <div class="theme-container">
       <div fxLayout="row wrap" fxLayoutAlign="space-between start" class="mb-3">
-        <div fxFlex="40" fxFlex.gt-md="70">
-          <h1>{{ 'CLIPS' | translate }}</h1>
-        </div>
+        <div></div>
+        <div class="our-title"> {{ 'EDUCATIONAL_CLIPS' | translate }}</div>
         <a fxLayoutAlign="start start" [routerLink]="['/clips' | langPack]" color="warn" class="not-link">
           {{ 'VIEW_ALL' | translate }}
           <mat-icon>chevron_left</mat-icon>
@@ -13,32 +12,23 @@
       <div class="agents-carousel">
         <div class="swiper-container h-100 carousel-outer" [swiper]="config">
           <div class="swiper-wrapper h-100">
-            <div *ngFor="let item of items" class="swiper-slide">
-              <mat-card appearance="outlined" class="overflow-hidden">
-                <div fxLayout="row wrap" class="property-status">
-                  <span class="background-color bg-orange">{{ item.resourceCategoryTitle }}</span>
+            <div *ngFor="let clip of items" class="swiper-slide">
+              <article class="card video-card">
+                <div class="video-thumb" role="button" tabindex="0">
+                  <img [src]="clip.image"
+                       [alt]="clip.title" loading="lazy">
+                  <div class="play-icon">▶</div>
                 </div>
-                <a [routerLink]="['/clips' | langPack, item.id ]" class="scale-rotate-wrapper">
-                  <img mat-card-image defaultImage [src]="item.image" [alt]="item.title"
-                       class="w-100 h-100 img-square"/>
-                </a>
-                <mat-card-content>
-                  <h3 class="two-lines fw-600 mb-10">
-                    {{ item.title }}
-                  </h3>
-                  <mat-divider></mat-divider>
-                  <p class="my-3 two-lines" [innerHTML]="item.abstract"></p>
-                </mat-card-content>
-                <mat-divider></mat-divider>
-                <mat-card-actions fxLayoutAlign="space-between center">
-                  <div fxLayout="row" fxLayoutAlign="start center" class="text-muted"></div>
-                  <div>
-                    <a [routerLink]="['/clips' | langPack, item.id ]" mat-button color="primary">
-                      {{ 'VIEW' | translate }}
+                <div class="card-body">
+                  <h2>{{ clip.title }}</h2>
+                  <div class="card-actions">
+                    <a mat-raised-button color="primary"
+                       [routerLink]="['/clips' | langPack, clip.id, clip.title | replaceUrlSpaces ]">
+                      {{ 'PLAY_VIDEO' | translate }}
                     </a>
                   </div>
-                </mat-card-actions>
-              </mat-card>
+                </div>
+              </article>
             </div>
           </div>
           <button mat-mini-fab color="primary" class="swiper-button-prev swipe-arrow">

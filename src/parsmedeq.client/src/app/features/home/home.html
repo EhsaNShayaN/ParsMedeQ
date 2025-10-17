@@ -37,27 +37,27 @@
   </div>
 </section>
 
-<!-- CENTERS -->
-<app-our-centers></app-our-centers>
-
-<!-- PRODUCTS -->
-<section id="products">
+<section id="centers" class="alt-bg">
   <div class="theme-container">
-    <h2>{{ 'PRODUCTS' | translate }}</h2>
-    <div class="grid" [@productsAnimation]="products?.length">
-      @for (product of products; track product.id) {
+    <div fxLayout="row warp" fxLayoutAlign="space-between center" class="mx-1 my-3">
+      <div>
+        <span class="our-title">{{ '' | translate }}</span>
+      </div>
+      <a fxLayoutAlign="start start" [routerLink]="['/centers' | langPack]" color="warn" class="not-link">
+        {{ 'VIEW_ALL' | translate }}
+        <mat-icon>chevron_left</mat-icon>
+      </a>
+    </div>
+    <h2>{{ 'TREATMENT_CENTERS' | translate }}</h2>
+    <div class="grid" [@centersAnimation]="centers?.length">
+      @for (center of centers; track center.title) {
         <article class="card">
-          <img [src]="product.image" [alt]="product.title" loading="lazy">
+          <img [src]="center.image" [alt]="center.title" loading="lazy">
           <div class="card-body">
-            <h3>{{ product.title }}</h3>
-            <p class="muted">{{ product.description }}</p>
+            <h3>{{ center.title }}</h3>
+            <p class="muted">{{ center.city }}</p>
             <div class="card-actions">
-              <a [routerLink]="['/products' | langPack, product.id ]" mat-stroked-button>
-                {{ 'DETAILS' | translate }}
-              </a>
-              <button mat-raised-button color="primary">
-                {{ 'ADD_TO_CART' | translate }}
-              </button>
+              <button mat-raised-button color="primary" (click)="openDialog(center)">جزئیات بیشتر</button>
             </div>
           </div>
         </article>
@@ -66,83 +66,16 @@
   </div>
 </section>
 
-<!-- ARTICLES -->
-<section id="articles" class="alt-bg">
-  <div class="theme-container">
-    <h2>{{ 'ARTICLES' | translate }}</h2>
-    <div class="grid" [@articlesAnimation]="articles?.length">
-      @for (article of articles; track article.id) {
-        <article class="card" *ngFor="let article of articles">
-          <img [src]="article.image"
-               [alt]="article.title"
-               loading="lazy">
-          <div class="card-body">
-            <h3>{{ article.title }}</h3>
-            <p class="muted four-lines" [innerHTML]="article.abstract | safeHtml"></p>
-            <div class="card-actions">
-              <a mat-raised-button color="primary"
-                 [routerLink]="['/articles' | langPack, article.id, article.title | replaceUrlSpaces ]">
-                {{ 'READ_ARTICLE' | translate }}
-              </a>
-            </div>
-          </div>
-        </article>
-      }
-    </div>
-  </div>
-</section>
 
-<!-- CLIPS (Video) -->
-<section id="clips">
-  <div class="theme-container">
-    <h2>{{ 'EDUCATIONAL_CLIPS' | translate }}</h2>
-    <div class="grid" [@clipsAnimation]="clips?.length">
-      @for (clip of clips; track clip.id) {
-        <article class="card video-card">
-          <div class="video-thumb" role="button" tabindex="0">
-            <img [src]="clip.image"
-                 [alt]="clip.title" loading="lazy">
-            <div class="play-icon">▶</div>
-          </div>
-          <div class="card-body">
-            <h3>{{ clip.title }}</h3>
-            <div class="card-actions">
-              <a mat-raised-button color="primary"
-                 [routerLink]="['/clips' | langPack, clip.id, clip.title | replaceUrlSpaces ]">
-                {{ 'PLAY_VIDEO' | translate }}
-              </a>
-            </div>
-          </div>
-        </article>
-      }
-    </div>
-  </div>
-</section>
+<app-clients></app-clients>
 
-<!-- NEWS -->
-<section id="news">
-  <div class="theme-container">
-    <h2>{{ 'NEWS' | translate }}</h2>
-    <div class="grid" [@newsAnimation]="news?.length">
-      @for (newsItem of news; track newsItem.id) {
-        <article class="card">
-          <img [src]="newsItem.image"
-               [alt]="newsItem.title" loading="lazy">
-          <div class="card-body">
-            <h3>{{ newsItem.title }}</h3>
-            <p class="muted">{{ newsItem.abstract }}</p>
-            <div class="card-actions">
-              <button mat-raised-button color="primary"
-                      [routerLink]="['/news' | langPack, newsItem.id, newsItem.title | replaceUrlSpaces ]">
-                {{ 'CONTINUE_READING' | translate }}
-              </button>
-            </div>
-          </div>
-        </article>
-      }
-    </div>
-  </div>
-</section>
+<app-our-product></app-our-product>
+
+<app-our-article></app-our-article>
+
+<app-our-clip></app-our-clip>
+
+<app-our-news></app-our-news>
 
 <!-- ABOUT -->
 <section id="about" class="about-section alt-bg" [@fadeInSimple]>

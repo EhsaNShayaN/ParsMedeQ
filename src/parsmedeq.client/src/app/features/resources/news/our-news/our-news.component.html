@@ -1,10 +1,9 @@
-<div class="section mt-0">
-  <div class="px-3">
+<div [@newsAnimation]="items?.length">
+  <div class="section">
     <div class="theme-container" ngClass.xs="my-3">
       <div fxLayout="row wrap" fxLayoutAlign="space-between start" class="mb-3">
-        <div fxFlex="40" fxFlex.gt-md="70">
-          <span class="our-title">{{ 'NEWS' | translate }}</span>
-        </div>
+        <div></div>
+        <div class="our-title"> {{ 'NEWS' | translate }}</div>
         <a fxLayoutAlign="start start" [routerLink]="['/news' | langPack]" color="warn" class="not-link">
           {{ 'VIEW_ALL' | translate }}
           <mat-icon>chevron_left</mat-icon>
@@ -13,22 +12,21 @@
       <div class="agents-carousel">
         <div class="swiper-container h-100 carousel-outer" [swiper]="config">
           <div class="swiper-wrapper h-100">
-            <div *ngFor="let item of items" class="swiper-slide">
-              <mat-card appearance="outlined" class="overflow-hidden">
-                <a [routerLink]="['/news' | langPack, item.id ]" class="scale-rotate-wrapper">
-                  <div class="position-relative">
-                    <div class="mask-div not-link background-color" fxLayout="row wrap"
-                         fxLayoutAlign="center center" *ngIf="item.expired">
-                      {{ 'ENDED' | translate }}
-                    </div>
-                    <img mat-card-image defaultImage [src]="item.image" [alt]="item.title" class="w-100"/>
+            <div *ngFor="let news of items" class="swiper-slide">
+              <article class="card">
+                <img [src]="news.image"
+                     [alt]="news.title" loading="lazy">
+                <div class="card-body">
+                  <h3>{{ news.title }}</h3>
+                  <p class="muted">{{ news.abstract }}</p>
+                  <div class="card-actions">
+                    <button mat-raised-button color="primary"
+                            [routerLink]="['/news' | langPack, news.id, news.title | replaceUrlSpaces ]">
+                      {{ 'CONTINUE_READING' | translate }}
+                    </button>
                   </div>
-                </a>
-                <mat-card-content class="pb-0">
-                  <h3 class="two-lines fw-600 text-center" [innerHTML]="item.title | safeHtml">
-                  </h3>
-                </mat-card-content>
-              </mat-card>
+                </div>
+              </article>
             </div>
           </div>
           <button mat-mini-fab color="primary" class="swiper-button-prev swipe-arrow">

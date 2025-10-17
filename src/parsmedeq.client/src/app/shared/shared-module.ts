@@ -42,15 +42,14 @@ import {DownloadManagementComponent} from './components/download-management/down
 import {OurArticleComponent} from '../features/resources/articles/our-article/our-article.component';
 import {RouterLink} from '@angular/router';
 import {OurNewsComponent} from '../features/resources/news/our-news/our-news.component';
-import {OurclipComponent} from '../features/resources/clips/our-clip/our-clip.component';
+import {OurClipComponent} from '../features/resources/clips/our-clip/our-clip.component';
 import {OurProductComponent} from '../features/products/our-product/our-product.component';
 import {HeaderImageComponent} from './header-image/header-image.component';
 import {Login} from '../features/auth/login/login';
 import {LoginDialogComponent} from './dialogs/login-dialog/login-dialog.component';
-import {ClientsComponent} from './clients/clients.component';
+import {ClientsComponent} from '../features/centers/clients/clients.component';
 import {CustomDialogComponent} from './dialogs/custom-dialog/custom-dialog.component';
 import {MatBadge} from '@angular/material/badge';
-import {OurCentersComponent} from '../features/centers/our-centers/our-centers.component';
 
 @NgModule({
   declarations: [
@@ -76,10 +75,9 @@ import {OurCentersComponent} from '../features/centers/our-centers/our-centers.c
     HeaderImageComponent,
     OurArticleComponent,
     OurNewsComponent,
-    OurclipComponent,
+    OurClipComponent,
     OurProductComponent,
     ClientsComponent,
-    OurCentersComponent,
   ],
   imports: [
     CommonModule,
@@ -216,10 +214,9 @@ import {OurCentersComponent} from '../features/centers/our-centers/our-centers.c
     HeaderImageComponent,
     OurArticleComponent,
     OurNewsComponent,
-    OurclipComponent,
+    OurClipComponent,
     OurProductComponent,
     ClientsComponent,
-    OurCentersComponent,
   ],
   providers: [
     CurrencyFormatterPipe,

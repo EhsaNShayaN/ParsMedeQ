@@ -8,7 +8,7 @@ import {Tables} from '../../../../core/constants/server.constants';
   styleUrl: './our-clip.component.scss',
   standalone: false
 })
-export class OurclipComponent extends BaseOurResource {
+export class OurClipComponent extends BaseOurResource {
   constructor() {
     super(Tables.Clip);
   }

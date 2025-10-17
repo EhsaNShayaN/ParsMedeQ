@@ -1,10 +1,9 @@
-<div class="section">
-  <div class="px-3">
+<div [@productsAnimation]="items?.length">
+  <div class="section">
     <div class="theme-container">
       <div fxLayout="row warp" fxLayoutAlign="space-between center" class="mx-1 my-3">
-        <div>
-          <span class="our-title">{{ 'PRODUCTS' | translate }}</span>
-        </div>
+        <div></div>
+        <div class="our-title"> {{ 'PRODUCTS' | translate }}</div>
         <a fxLayoutAlign="start start" [routerLink]="['/products' | langPack]" color="warn" class="not-link">
           {{ 'VIEW_ALL' | translate }}
           <mat-icon>chevron_left</mat-icon>
@@ -14,17 +13,25 @@
         <div class="swiper-container h-100 carousel-outer" [swiper]="config">
           <div class="swiper-wrapper h-100">
             <div *ngFor="let item of items" class="swiper-slide">
-              <mat-card appearance="outlined" class="my-card">
+              <article class="card">
                 <a [routerLink]="['/products' | langPack, item.id ]" class="scale-rotate-wrapper">
                   <img mat-card-image defaultImage [src]="item.image" [alt]="item.title"
                        class="w-100 h-100 img-square"/>
                 </a>
-                <mat-card-content>
-                  <h3 class="fw-600 text-center">
+                <div class="card-body">
+                  <h2 class="fw-600 text-center primary-color">
                     {{ item.title }}
-                  </h3>
-                </mat-card-content>
-              </mat-card>
+                  </h2>
+                  <div class="card-actions">
+                    <a [routerLink]="['/products' | langPack, item.id ]" mat-stroked-button>
+                      {{ 'DETAILS' | translate }}
+                    </a>
+                    <button mat-raised-button color="primary">
+                      {{ 'ADD_TO_CART' | translate }}
+                    </button>
+                  </div>
+                </div>
+              </article>
             </div>
           </div>
           <button mat-mini-fab color="primary" class="swiper-button-prev swipe-arrow">
@@ -38,4 +45,3 @@
     </div>
   </div>
 </div>
-

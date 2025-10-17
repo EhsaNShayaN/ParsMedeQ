@@ -1,10 +1,9 @@
-<div class="section">
-  <div class="px-3">
+<div [@articlesAnimation]="items?.length">
+  <div class="section">
     <div class="theme-container" ngClass.xs="my-3">
       <div fxLayout="row wrap" fxLayoutAlign="space-between start" class="mb-3">
-        <div fxFlex="40" fxFlex.gt-md="70">
-          <span class="our-title">{{ 'ARTICLES' | translate }}</span>
-        </div>
+        <div></div>
+        <div class="our-title"> {{ 'ARTICLES' | translate }}</div>
         <a fxLayoutAlign="start start" [routerLink]="['/articles' | langPack]" color="warn" class="not-link">
           {{ 'VIEW_ALL' | translate }}
           <mat-icon>chevron_left</mat-icon>
@@ -13,23 +12,23 @@
       <div class="agents-carousel">
         <div class="swiper-container h-100 carousel-outer" [swiper]="config">
           <div class="swiper-wrapper h-100">
-            @for (item of items; track item.id) {
+            @for (article of items; track article.id) {
               <div class="swiper-slide">
-                <mat-card appearance="outlined" class="overflow-hidden">
-                  <a [routerLink]="['/articles' | langPack, item.id, item.title | replaceUrlSpaces ]"
-                     class="scale-rotate-wrapper">
-                    <img mat-card-image defaultImage [src]="item.image" [alt]="item.title" class="w-100 img-square"/>
-                  </a>
-                  <mat-card-content>
-                    <h3 class="single-line fw-600 mb-2" [title]="item.title"
-                        [ngClass]="item.language === 'انگلیسی' ? 'ltr' : ''">
-                      {{ item.title }}
-                    </h3>
-                    <mat-divider></mat-divider>
-                    <p class="my-3 four-lines" [innerHTML]="item.abstract"
-                       [ngClass]="item.language === 'انگلیسی' ? 'ltr' : ''"></p>
-                  </mat-card-content>
-                </mat-card>
+                <article class="card">
+                  <img [src]="article.image"
+                       [alt]="article.title"
+                       loading="lazy">
+                  <div class="card-body">
+                    <h3>{{ article.title }}</h3>
+                    <p class="muted four-lines" [innerHTML]="article.abstract | safeHtml"></p>
+                    <div class="card-actions">
+                      <a mat-raised-button color="primary"
+                         [routerLink]="['/articles' | langPack, article.id, article.title | replaceUrlSpaces ]">
+                        {{ 'READ_ARTICLE' | translate }}
+                      </a>
+                    </div>
+                  </div>
+                </article>
               </div>
             }
           </div>

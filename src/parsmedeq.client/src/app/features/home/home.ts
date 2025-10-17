@@ -7,12 +7,21 @@ import {Product, ProductResponse, ProductsRequest} from '../../core/models/Produ
 import {Resource, ResourceResponse, ResourcesRequest} from '../../core/models/ResourceResponse';
 import {Tables} from '../../core/constants/server.constants';
 import {ToastrService} from 'ngx-toastr';
+import {CenterModel, JsonService} from '../../core/json.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.html',
   styleUrls: ['./home.scss'],
   animations: [
+    trigger('centersAnimation', [
+      transition('* => *', [
+        query(':enter', [
+          style({opacity: 0, transform: 'translateY(20px)'}),
+          stagger(100, [animate('400ms ease-out', style({opacity: 1, transform: 'translateY(0)'}))])
+        ], {optional: true})
+      ])
+    ]),
     trigger('heroAnimation', [
       transition(':enter', [
         style({opacity: 0, transform: 'translateY(8px)'}),
@@ -68,39 +77,23 @@ import {ToastrService} from 'ngx-toastr';
 })
 export class Home extends BaseComponent {
 
-  /*products = [
-    {id: 1, name: 'مانیتور علائم حیاتی', shortDescription: 'پیشرفته و دقیق', imageUrl: 'assets/images/p1.jpg'},
-    {id: 2, name: 'دستگاه نوار قلب', shortDescription: 'طراحی ارگونومیک', imageUrl: 'assets/images/p2.jpg'},
-    {id: 3, name: 'پالس اکسیمتر', shortDescription: 'سبک و قابل حمل', imageUrl: 'assets/images/p3.jpg'},
-    // ... می‌تونی با API جایگزین کنی
-  ];
-
-  articles = [
-    {id: 1, title: 'نکاتی در انتخاب تجهیزات پزشکی', summary: 'راهنمای خرید دستگاه‌های حیاتی', imageUrl: 'assets/images/a1.jpg'},
-    {id: 2, title: 'ایمنی بیمار در اتاق عمل', summary: 'اصول نگهداری تجهیزات حیاتی', imageUrl: 'assets/images/a2.jpg'},
-  ];
-
-  clips = [
-    {id: 1, title: 'آموزش کار با ECG', thumbnail: 'assets/images/c1.jpg'},
-    {id: 2, title: 'کالیبراسیون فشارسنج', thumbnail: 'assets/images/c2.jpg'},
-  ];
-
-  newsList = [
-    {id: 1, title: 'ورود دستگاه جدید اکسیژن‌ساز', summary: 'تجهیز جدید به انبار شرکت اضافه شد', imageUrl: 'assets/images/n1.jpg'},
-    {id: 2, title: 'قرارداد همکاری با بیمارستان میلاد', summary: 'تفاهم‌نامه جدید برای تأمین تجهیزات', imageUrl: 'assets/images/n2.jpg'},
-  ];*/
-
   products: Product[] = [];
   articles: Resource[] = [];
   clips: Resource[] = [];
   news: Resource[] = [];
+  centers: CenterModel[] = [];
 
-  constructor(private toastr: ToastrService) {
+  constructor(private toastr: ToastrService,
+              private jsonService: JsonService) {
     super();
     this.getProducts();
     this.getResources(Tables.Article);
     this.getResources(Tables.Clip);
     this.getResources(Tables.News);
+
+    this.jsonService.getCenters().subscribe(res => {
+      this.centers = res;
+    });
   }
 
   getProducts() {
@@ -138,5 +131,9 @@ export class Home extends BaseComponent {
 
   sendContact() {
     this.toastr.success(this.getTranslateValue('پیام شما با موفقیت ارسال گردید.'), '', {});
+  }
+
+  openDialog(item: CenterModel) {
+    this.dialogService.openCustomDialog(item.title, item.city + '<br/>' + item.description, item.image);
   }
 }

@@ -2,7 +2,13 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {TranslateService} from '@ngx-translate/core';
-import {CenterModel} from '../features/centers/our-centers/our-centers.component';
+
+export interface CenterModel {
+  title: string;
+  image: string;
+  city: string;
+  description: string;
+}
 
 @Injectable({
   providedIn: 'root'
