@@ -37,37 +37,7 @@
   </div>
 </section>
 
-<section id="centers" class="alt-bg">
-  <div class="theme-container">
-    <div fxLayout="row warp" fxLayoutAlign="space-between center" class="mx-1 my-3">
-      <div>
-        <span class="our-title">{{ '' | translate }}</span>
-      </div>
-      <a fxLayoutAlign="start start" [routerLink]="['/centers' | langPack]" color="warn" class="not-link">
-        {{ 'VIEW_ALL' | translate }}
-        <mat-icon>chevron_left</mat-icon>
-      </a>
-    </div>
-    <h2>{{ 'TREATMENT_CENTERS' | translate }}</h2>
-    <div class="grid" [@centersAnimation]="centers?.length">
-      @for (center of centers; track center.title) {
-        <article class="card">
-          <img [src]="center.image" [alt]="center.title" loading="lazy">
-          <div class="card-body">
-            <h3>{{ center.title }}</h3>
-            <p class="muted">{{ center.city }}</p>
-            <div class="card-actions">
-              <button mat-raised-button color="primary" (click)="openDialog(center)">جزئیات بیشتر</button>
-            </div>
-          </div>
-        </article>
-      }
-    </div>
-  </div>
-</section>
-
-
-<app-clients></app-clients>
+<app-our-center></app-our-center>
 
 <app-our-product></app-our-product>
 

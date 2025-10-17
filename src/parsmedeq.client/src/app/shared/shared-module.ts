@@ -47,7 +47,7 @@ import {OurProductComponent} from '../features/products/our-product/our-product.
 import {HeaderImageComponent} from './header-image/header-image.component';
 import {Login} from '../features/auth/login/login';
 import {LoginDialogComponent} from './dialogs/login-dialog/login-dialog.component';
-import {ClientsComponent} from '../features/centers/clients/clients.component';
+import {OurCenterComponent} from '../features/centers/our-centers/our-center.component';
 import {CustomDialogComponent} from './dialogs/custom-dialog/custom-dialog.component';
 import {MatBadge} from '@angular/material/badge';
 
@@ -77,7 +77,7 @@ import {MatBadge} from '@angular/material/badge';
     OurNewsComponent,
     OurClipComponent,
     OurProductComponent,
-    ClientsComponent,
+    OurCenterComponent,
   ],
   imports: [
     CommonModule,
@@ -216,7 +216,7 @@ import {MatBadge} from '@angular/material/badge';
     OurNewsComponent,
     OurClipComponent,
     OurProductComponent,
-    ClientsComponent,
+    OurCenterComponent,
   ],
   providers: [
     CurrencyFormatterPipe,

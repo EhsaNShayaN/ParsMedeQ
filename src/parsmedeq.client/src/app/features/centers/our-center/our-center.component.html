@@ -1,0 +1,44 @@
+<div [@centersAnimation]="items?.length">
+  <div class="section">
+    <div class="theme-container">
+      <div fxLayout="row warp" fxLayoutAlign="space-between center" class="mx-1 my-3">
+        <div></div>
+        <div class="our-title"> {{ 'TREATMENT_CENTERS' | translate }}</div>
+        <a fxLayoutAlign="start start" [routerLink]="['/centers' | langPack]" color="warn" class="not-link">
+          {{ 'VIEW_ALL' | translate }}
+          <mat-icon>chevron_left</mat-icon>
+        </a>
+      </div>
+      <div class="agents-carousel">
+        <div class="swiper-container h-100 carousel-outer" [swiper]="config">
+          <div class="swiper-wrapper h-100">
+            <div *ngFor="let item of items" class="swiper-slide">
+              <article class="card">
+                <a [routerLink]="['/centers' | langPack, item.id ]" class="scale-rotate-wrapper">
+                  <img mat-card-image defaultImage [src]="item.image" [alt]="item.title"
+                       class="w-100 h-100 img-square"/>
+                </a>
+                <div class="card-body">
+                  <h3 class="fw-600 text-center primary-color">
+                    {{ item.title }}
+                  </h3>
+                  <div class="card-actions">
+                    <button mat-raised-button color="primary" (click)="openDialog(item)">
+                      {{ 'DETAILS' | translate }}
+                    </button>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+          <button mat-mini-fab color="primary" class="swiper-button-prev swipe-arrow">
+            <mat-icon>keyboard_arrow_right</mat-icon>
+          </button>
+          <button mat-mini-fab color="primary" class="swiper-button-next swipe-arrow">
+            <mat-icon>keyboard_arrow_left</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
