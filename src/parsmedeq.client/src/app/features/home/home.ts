@@ -3,6 +3,10 @@ import {
   trigger, transition, style, animate, query, stagger
 } from '@angular/animations';
 import {BaseComponent} from '../../base-component';
+import {Product, ProductResponse, ProductsRequest} from '../../core/models/ProductResponse';
+import {Resource, ResourceResponse, ResourcesRequest} from '../../core/models/ResourceResponse';
+import {Tables} from '../../core/constants/server.constants';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -63,10 +67,8 @@ import {BaseComponent} from '../../base-component';
   standalone: false
 })
 export class Home extends BaseComponent {
-  cartCount = 0;
-  toastMessage = '';
 
-  products = [
+  /*products = [
     {id: 1, name: 'مانیتور علائم حیاتی', shortDescription: 'پیشرفته و دقیق', imageUrl: 'assets/images/p1.jpg'},
     {id: 2, name: 'دستگاه نوار قلب', shortDescription: 'طراحی ارگونومیک', imageUrl: 'assets/images/p2.jpg'},
     {id: 3, name: 'پالس اکسیمتر', shortDescription: 'سبک و قابل حمل', imageUrl: 'assets/images/p3.jpg'},
@@ -86,46 +88,55 @@ export class Home extends BaseComponent {
   newsList = [
     {id: 1, title: 'ورود دستگاه جدید اکسیژن‌ساز', summary: 'تجهیز جدید به انبار شرکت اضافه شد', imageUrl: 'assets/images/n1.jpg'},
     {id: 2, title: 'قرارداد همکاری با بیمارستان میلاد', summary: 'تفاهم‌نامه جدید برای تأمین تجهیزات', imageUrl: 'assets/images/n2.jpg'},
-  ];
+  ];*/
 
-  // ساده‌ترین نمونه‌ی افزودن به سبد (تو اینجا فقط شمارش و نمایش toast است)
-  addToCart(item: any) {
-    this.cartCount++;
-    this.showToast(`${item.name} به سبد اضافه شد.`);
-    // TODO: در عمل اینجا باید سرویس CartService را صدا بزنی تا در localStorage یا سرور ذخیره شود
+  products: Product[] = [];
+  articles: Resource[] = [];
+  clips: Resource[] = [];
+  news: Resource[] = [];
+
+  constructor(private toastr: ToastrService) {
+    super();
+    this.getProducts();
+    this.getResources(Tables.Article);
+    this.getResources(Tables.Clip);
+    this.getResources(Tables.News);
   }
 
-  showToast(msg: string) {
-    this.toastMessage = msg;
-    setTimeout(() => this.toastMessage = '', 2500);
+  getProducts() {
+    let model: ProductsRequest = {
+      pageIndex: 1,
+      pageSize: 10,
+      sort: 1,
+    };
+    this.restApiService.getProducts(model).subscribe((d: ProductResponse) => {
+      this.products = d.data.items.slice(0, 4);
+    });
   }
 
-  openCart() {
-    // TODO: باز کردن پنل سبد خرید یا روت به صفحه cart
-    console.log('open cart');
-  }
-
-  viewProduct(p: any) {
-    console.log('view product', p); /* navigate to product page */
-  }
-
-  readArticle(a: any) {
-    console.log('read article', a); /* navigate to article */
-  }
-
-  playClip(c: any) {
-    console.log('play clip', c); /* open modal player */
-  }
-
-  readNews(n: any) {
-    console.log('read news', n);
-  }
-
-  onLogin() {
-    console.log('open login');
+  getResources(tableId: number) {
+    let model: ResourcesRequest = {
+      pageIndex: 1,
+      pageSize: 10,
+      sort: 1,
+      tableId: tableId
+    };
+    this.restApiService.getResources(model).subscribe((d: ResourceResponse) => {
+      switch (tableId) {
+        case Tables.Article:
+          this.articles = d.data.items.slice(0, 4);
+          break;
+        case Tables.Clip:
+          this.clips = d.data.items.slice(0, 4);
+          break;
+        case Tables.News:
+          this.news = d.data.items.slice(0, 4);
+          break;
+      }
+    });
   }
 
   sendContact() {
-    this.showToast('پیام شما ارسال شد.');
+    this.toastr.success(this.getTranslateValue('پیام شما با موفقیت ارسال گردید.'), '', {});
   }
 }

@@ -38,6 +38,7 @@
   "CATEGORY": "دسته بندی",
   "TITLE": "عنوان",
   "DESCRIPTION": "توضیحات",
+  "EDUCATIONAL_CLIPS": "کلیپ های آموزشی",
   "CLIPS": "کلیپ ها",
   "CLIP": "کلیپ",
   "IMAGE": "تصویر",
@@ -90,5 +91,10 @@
   "LOGIN_TO_WRITE_YOUR_COMMENTS": "برای بیان نظرات خود وارد سیستم شوید.",
   "TREATMENT_CENTER": "سانتر درمانی",
   "TREATMENT_CENTERS": "سانترهای درمانی",
-  "CLOSE": "بستن"
+  "CLOSE": "بستن",
+  "ADD_TO_CART": "افزودن به سبد",
+  "DETAILS": "جزئیات",
+  "READ_ARTICLE": "مطالعه مقاله",
+  "CONTINUE_READING": "ادامه مطلب",
+  "PLAY_VIDEO": "مشاهده ویدیو"
 }

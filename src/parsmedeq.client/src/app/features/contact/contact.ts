@@ -20,7 +20,7 @@ export class Contact {
 
   onSubmit(): void {
     if (this.form.valid) {
-      alert('پیام شما با موفقیت ارسال شد.');
+      alert('پیام شما با موفقیت ارسال گردید.');
       this.form.reset();
     }
   }

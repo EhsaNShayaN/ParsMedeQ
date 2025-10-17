@@ -38,6 +38,7 @@
   "CATEGORY": "Category",
   "TITLE": "Title",
   "DESCRIPTION": "Description",
+  "EDUCATIONAL_CLIPS": "Educational clips",
   "CLIPS": "Clips",
   "CLIP": "Clip",
   "IMAGE": "Image",
@@ -90,5 +91,10 @@
   "LOGIN_TO_WRITE_YOUR_COMMENTS": "Login to write your comments",
   "TREATMENT_CENTER": "Treatment center",
   "TREATMENT_CENTERS": "Treatment centers",
-  "CLOSE": "Close"
+  "CLOSE": "Close",
+  "ADD_TO_CART": "Add to cart",
+  "DETAILS": "Details",
+  "READ_ARTICLE": "Read Article",
+  "CONTINUE_READING": "Continue reading",
+  "PLAY_VIDEO": "Play video"
 }

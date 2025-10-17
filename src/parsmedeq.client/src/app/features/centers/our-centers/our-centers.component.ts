@@ -38,7 +38,7 @@ export class OurCentersComponent extends PureComponent implements AfterViewInit 
   constructor(private jsonService: JsonService) {
     super();
     this.jsonService.getCenters().subscribe(res => {
-      this.centers = res;
+      this.centers = res.slice(0, 4);
     });
   }
 
@@ -75,7 +75,7 @@ export class OurCentersComponent extends PureComponent implements AfterViewInit 
     };
   }
 
-  viewCenter(c: any) {
-    console.log('view center', c);
+  openDialog(item: CenterModel) {
+    this.dialogService.openCustomDialog(item.title, item.city + '<br/>' + item.description, item.image);
   }
 }

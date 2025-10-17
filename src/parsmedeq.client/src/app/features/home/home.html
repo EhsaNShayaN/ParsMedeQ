@@ -43,21 +43,25 @@
 <!-- PRODUCTS -->
 <section id="products">
   <div class="theme-container">
-    <h2>محصولات</h2>
+    <h2>{{ 'PRODUCTS' | translate }}</h2>
     <div class="grid" [@productsAnimation]="products?.length">
-      <article class="card" *ngFor="let product of products">
-        <img [src]="product.imageUrl || 'assets/images/placeholder-product.jpg'"
-             [alt]="product.name"
-             loading="lazy">
-        <div class="card-body">
-          <h3>{{ product.name }}</h3>
-          <p class="muted">{{ product.shortDescription }}</p>
-          <div class="card-actions">
-            <button mat-stroked-button (click)="viewProduct(product)">جزئیات</button>
-            <button mat-raised-button color="primary" (click)="addToCart(product)">افزودن به سبد</button>
+      @for (product of products; track product.id) {
+        <article class="card">
+          <img [src]="product.image" [alt]="product.title" loading="lazy">
+          <div class="card-body">
+            <h3>{{ product.title }}</h3>
+            <p class="muted">{{ product.description }}</p>
+            <div class="card-actions">
+              <a [routerLink]="['/products' | langPack, product.id ]" mat-stroked-button>
+                {{ 'DETAILS' | translate }}
+              </a>
+              <button mat-raised-button color="primary">
+                {{ 'ADD_TO_CART' | translate }}
+              </button>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
+      }
     </div>
   </div>
 </section>
@@ -65,20 +69,25 @@
 <!-- ARTICLES -->
 <section id="articles" class="alt-bg">
   <div class="theme-container">
-    <h2>مقالات</h2>
+    <h2>{{ 'ARTICLES' | translate }}</h2>
     <div class="grid" [@articlesAnimation]="articles?.length">
-      <article class="card" *ngFor="let article of articles">
-        <img [src]="article.imageUrl || 'assets/images/placeholder-article.jpg'"
-             [alt]="article.title"
-             loading="lazy">
-        <div class="card-body">
-          <h3>{{ article.title }}</h3>
-          <p class="muted">{{ article.summary }}</p>
-          <div class="card-actions">
-            <button mat-raised-button color="primary" (click)="readArticle(article)">مطالعه مقاله</button>
+      @for (article of articles; track article.id) {
+        <article class="card" *ngFor="let article of articles">
+          <img [src]="article.image"
+               [alt]="article.title"
+               loading="lazy">
+          <div class="card-body">
+            <h3>{{ article.title }}</h3>
+            <p class="muted four-lines" [innerHTML]="article.abstract | safeHtml"></p>
+            <div class="card-actions">
+              <a mat-raised-button color="primary"
+                 [routerLink]="['/articles' | langPack, article.id, article.title | replaceUrlSpaces ]">
+                {{ 'READ_ARTICLE' | translate }}
+              </a>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
+      }
     </div>
   </div>
 </section>
@@ -86,21 +95,26 @@
 <!-- CLIPS (Video) -->
 <section id="clips">
   <div class="theme-container">
-    <h2>کلیپ‌های آموزشی</h2>
+    <h2>{{ 'EDUCATIONAL_CLIPS' | translate }}</h2>
     <div class="grid" [@clipsAnimation]="clips?.length">
-      <article class="card video-card" *ngFor="let clip of clips">
-        <div class="video-thumb" (click)="playClip(clip)" role="button" tabindex="0">
-          <img [src]="clip.thumbnail || 'assets/images/placeholder-video.jpg'"
-               [alt]="clip.title" loading="lazy">
-          <div class="play-icon">▶</div>
-        </div>
-        <div class="card-body">
-          <h3>{{ clip.title }}</h3>
-          <div class="card-actions">
-            <button mat-raised-button color="primary" (click)="playClip(clip)">مشاهده ویدیو</button>
+      @for (clip of clips; track clip.id) {
+        <article class="card video-card">
+          <div class="video-thumb" role="button" tabindex="0">
+            <img [src]="clip.image"
+                 [alt]="clip.title" loading="lazy">
+            <div class="play-icon">▶</div>
           </div>
-        </div>
-      </article>
+          <div class="card-body">
+            <h3>{{ clip.title }}</h3>
+            <div class="card-actions">
+              <a mat-raised-button color="primary"
+                 [routerLink]="['/clips' | langPack, clip.id, clip.title | replaceUrlSpaces ]">
+                {{ 'PLAY_VIDEO' | translate }}
+              </a>
+            </div>
+          </div>
+        </article>
+      }
     </div>
   </div>
 </section>
@@ -108,19 +122,24 @@
 <!-- NEWS -->
 <section id="news">
   <div class="theme-container">
-    <h2>اخبار</h2>
-    <div class="grid" [@newsAnimation]="newsList?.length">
-      <article class="card" *ngFor="let news of newsList">
-        <img [src]="news.imageUrl || 'assets/images/placeholder-news.jpg'"
-             [alt]="news.title" loading="lazy">
-        <div class="card-body">
-          <h3>{{ news.title }}</h3>
-          <p class="muted">{{ news.summary }}</p>
-          <div class="card-actions">
-            <button mat-raised-button color="primary" (click)="readNews(news)">ادامه خبر</button>
+    <h2>{{ 'NEWS' | translate }}</h2>
+    <div class="grid" [@newsAnimation]="news?.length">
+      @for (newsItem of news; track newsItem.id) {
+        <article class="card">
+          <img [src]="newsItem.image"
+               [alt]="newsItem.title" loading="lazy">
+          <div class="card-body">
+            <h3>{{ newsItem.title }}</h3>
+            <p class="muted">{{ newsItem.abstract }}</p>
+            <div class="card-actions">
+              <button mat-raised-button color="primary"
+                      [routerLink]="['/news' | langPack, newsItem.id, newsItem.title | replaceUrlSpaces ]">
+                {{ 'CONTINUE_READING' | translate }}
+              </button>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
+      }
     </div>
   </div>
 </section>
@@ -165,6 +184,3 @@
     </div>
   </div>
 </footer>
-
-<!-- Simple toast for add-to-cart -->
-<div class="toast" *ngIf="toastMessage">{{ toastMessage }}</div>

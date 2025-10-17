@@ -17,6 +17,7 @@
                         class="text-center cursor-pointer" (click)="openDialog(item)">
                 <img [src]="item.image" class="w-100 h-100 img-square" [alt]="item.title"/>
                 <h2 class="capitalize fw-600 mx-3 mt-3 two-lines">{{ item.title }}</h2>
+                <p>{{ item.city }}</p>
                 <p>{{ item.description }}</p>
               </mat-card>
             </div>
