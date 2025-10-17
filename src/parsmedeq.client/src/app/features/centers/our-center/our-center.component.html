@@ -14,14 +14,17 @@
           <div class="swiper-wrapper h-100">
             <div *ngFor="let item of items" class="swiper-slide">
               <article class="card">
-                <a [routerLink]="['/centers' | langPack, item.id ]" class="scale-rotate-wrapper">
+                <a (click)="openDialog(item)" class="scale-rotate-wrapper">
                   <img mat-card-image defaultImage [src]="item.image" [alt]="item.title"
-                       class="w-100 h-100 img-square"/>
+                       class="w-100"/>
                 </a>
                 <div class="card-body">
                   <h3 class="fw-600 text-center primary-color">
                     {{ item.title }}
                   </h3>
+                  <div class="mb-2">
+                    {{ item.city }}
+                  </div>
                   <div class="card-actions">
                     <button mat-raised-button color="primary" (click)="openDialog(item)">
                       {{ 'DETAILS' | translate }}

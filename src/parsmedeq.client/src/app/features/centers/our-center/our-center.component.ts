@@ -51,4 +51,8 @@ export class OurCenterComponent extends PureComponent implements OnInit, AfterVi
       }
     };
   }
+
+  openDialog(item: any) {
+    this.dialogService.openCustomDialog(item.title, item.description, item.image);
+  }
 }
