@@ -10,7 +10,7 @@ const pagesChildren: Routes = [
   {
     path: '',
     children: [
-      {path: '', loadChildren: () => import('./features/home/home-module').then(m => m.HomeModule)},
+      {path: '', loadChildren: () => import('./features/home3/home3-module').then(m => m.Home3Module)},
       {path: 'home', loadChildren: () => import('./features/home/home-module').then(m => m.HomeModule)},
       {path: 'home2', loadChildren: () => import('./features/home2/home2-module').then(m => m.Home2Module)},
       {path: 'home3', loadChildren: () => import('./features/home3/home3-module').then(m => m.Home3Module)},
