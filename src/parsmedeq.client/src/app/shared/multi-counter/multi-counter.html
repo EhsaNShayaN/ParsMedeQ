@@ -1,0 +1,8 @@
+<div class="counter-section" #counterSection>
+  @for (item of counters; track item.label) {
+    <div class="counter-item">
+      <h2>{{ item.current }}</h2>
+      <p>{{ item.label }}</p>
+    </div>
+  }
+</div>

@@ -50,6 +50,7 @@ import {LoginDialogComponent} from './dialogs/login-dialog/login-dialog.componen
 import {OurCenterComponent} from '../features/centers/our-center/our-center.component';
 import {CustomDialogComponent} from './dialogs/custom-dialog/custom-dialog.component';
 import {MatBadge} from '@angular/material/badge';
+import {MultiCounterComponent} from './multi-counter/multi-counter';
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import {MatBadge} from '@angular/material/badge';
     OurClipComponent,
     OurProductComponent,
     OurCenterComponent,
+    MultiCounterComponent,
   ],
   imports: [
     CommonModule,
@@ -217,6 +219,7 @@ import {MatBadge} from '@angular/material/badge';
     OurClipComponent,
     OurProductComponent,
     OurCenterComponent,
+    MultiCounterComponent,
   ],
   providers: [
     CurrencyFormatterPipe,
