@@ -14,56 +14,10 @@ import {CenterModel, JsonService} from '../../core/json.service';
   templateUrl: './home.html',
   styleUrls: ['./home.scss'],
   animations: [
-    trigger('centersAnimation', [
-      transition('* => *', [
-        query(':enter', [
-          style({opacity: 0, transform: 'translateY(20px)'}),
-          stagger(100, [animate('400ms ease-out', style({opacity: 1, transform: 'translateY(0)'}))])
-        ], {optional: true})
-      ])
-    ]),
     trigger('heroAnimation', [
       transition(':enter', [
         style({opacity: 0, transform: 'translateY(8px)'}),
         animate('500ms ease-out', style({opacity: 1, transform: 'translateY(0)'}))
-      ])
-    ]),
-    // Products Animation
-    trigger('productsAnimation', [
-      transition('* => *', [
-        query(':enter', [
-          style({opacity: 0, transform: 'scale(0.9)'}),
-          stagger(100, [
-            animate('400ms ease-out', style({opacity: 1, transform: 'scale(1)'}))
-          ])
-        ], {optional: true})
-      ])
-    ]),
-    // Articles Animation
-    trigger('articlesAnimation', [
-      transition('* => *', [
-        query(':enter', [
-          style({opacity: 0, transform: 'translateX(-20px)'}),
-          stagger(100, [animate('400ms ease-out', style({opacity: 1, transform: 'translateX(0)'}))])
-        ], {optional: true})
-      ])
-    ]),
-    // Clips Animation
-    trigger('clipsAnimation', [
-      transition('* => *', [
-        query(':enter', [
-          style({opacity: 0, transform: 'scale(0.85)'}),
-          stagger(100, [animate('400ms ease-out', style({opacity: 1, transform: 'scale(1)'}))])
-        ], {optional: true})
-      ])
-    ]),
-    // News Animation
-    trigger('newsAnimation', [
-      transition('* => *', [
-        query(':enter', [
-          style({opacity: 0}),
-          stagger(150, [animate('400ms ease-out', style({opacity: 1}))])
-        ], {optional: true})
       ])
     ]),
     trigger('fadeInSimple', [

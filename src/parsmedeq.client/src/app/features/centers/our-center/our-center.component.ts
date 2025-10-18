@@ -2,12 +2,21 @@ import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {SwiperConfigInterface} from 'ngx-swiper-wrapper';
 import {PureComponent} from '../../../pure-component';
 import {CenterModel, JsonService} from '../../../core/json.service';
+import {animate, query, stagger, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-our-center',
   templateUrl: './our-center.component.html',
   styleUrl: './our-center.component.scss',
-  standalone: false
+  standalone: false,
+  animations: [trigger('centersAnimation', [
+    transition('* => *', [
+      query(':enter', [
+        style({opacity: 0, transform: 'translateY(20px)'}),
+        stagger(100, [animate('400ms ease-out', style({opacity: 1, transform: 'translateY(0)'}))])
+      ], {optional: true})
+    ])
+  ])]
 })
 export class OurCenterComponent extends PureComponent implements OnInit, AfterViewInit {
   public items: CenterModel[] = [];

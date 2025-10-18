@@ -2,12 +2,23 @@ import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {SwiperConfigInterface} from 'ngx-swiper-wrapper';
 import {PureComponent} from '../../../pure-component';
 import {Product, ProductResponse, ProductsRequest} from '../../../core/models/ProductResponse';
+import {animate, query, stagger, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-our-product',
   templateUrl: './our-product.component.html',
   styleUrl: './our-product.component.scss',
-  standalone: false
+  standalone: false,
+  animations: [trigger('productsAnimation', [
+    transition('* => *', [
+      query(':enter', [
+        style({opacity: 0, transform: 'scale(0.9)'}),
+        stagger(100, [
+          animate('400ms ease-out', style({opacity: 1, transform: 'scale(1)'}))
+        ])
+      ], {optional: true})
+    ])
+  ])]
 })
 export class OurProductComponent extends PureComponent implements OnInit, AfterViewInit {
   public items: Product[] = [];

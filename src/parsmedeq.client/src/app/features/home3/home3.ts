@@ -1,10 +1,17 @@
 import {AfterViewInit, Component, ElementRef, HostListener} from '@angular/core';
+import {animate, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-home3',
   templateUrl: './home3.html',
   styleUrls: ['./home3.scss'],
-  standalone: false
+  standalone: false,
+  animations: [trigger('fadeInSimple', [
+    transition(':enter', [
+      style({opacity: 0, transform: 'translateY(12px)'}),
+      animate('420ms ease-out', style({opacity: 1, transform: 'translateY(0)'}))
+    ])
+  ])]
 })
 export class Home3 implements AfterViewInit {
 
