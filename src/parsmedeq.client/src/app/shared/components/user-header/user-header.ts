@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
+import {CustomConstants} from '../../../core/constants/custom.constants';
 
 @Component({
   selector: 'app-user-header',
@@ -13,7 +14,7 @@ export class UserHeader {
 
   logout() {
     // TODO: حذف توکن از localStorage یا سرویس Auth
-    localStorage.removeItem('token');
+    localStorage.removeItem(CustomConstants.tokenName);
     this.router.navigate(['/login']);
   }
 }

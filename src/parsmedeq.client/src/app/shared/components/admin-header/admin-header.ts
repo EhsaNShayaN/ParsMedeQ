@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
+import {CustomConstants} from '../../../core/constants/custom.constants';
 
 @Component({
   selector: 'app-admin-header',
@@ -12,7 +13,7 @@ export class AdminHeader {
   }
 
   logout() {
-    localStorage.removeItem('token');
+    localStorage.removeItem(CustomConstants.tokenName);
     this.router.navigate(['/login']);
   }
 }

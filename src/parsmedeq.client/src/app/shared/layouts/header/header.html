@@ -18,14 +18,14 @@
     <!--<a mat-button [routerLink]="'/faq' | langPack">{{ 'FAQ' | translate }}</a>
     <a mat-button [routerLink]="('/about' | langPack)">{{ 'ABOUT_US' | translate }}</a>
     <a mat-button [routerLink]="'/contact' | langPack">{{ 'CONTACT_US' | translate }}</a>-->
-    @if (auth.isLoggedIn()) {
+    <!--@if (auth.isLoggedIn()) {
       @if (auth.isAdmin()) {
         <a mat-button [routerLink]="'/admin' | langPack">{{ 'MANAGEMENT' | translate }}</a>
       }
       <a mat-button (click)="auth.logout()">{{ 'LOGOUT' | translate }}</a>
     } @else {
       <a mat-button [routerLink]="'/auth/login' | langPack">{{ 'LOGIN' | translate }}</a>
-    }
+    }-->
   </nav>
 </mat-toolbar>
 
