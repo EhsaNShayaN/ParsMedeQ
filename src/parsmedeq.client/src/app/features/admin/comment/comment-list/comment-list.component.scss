@@ -1,0 +1,13 @@
+@import '../../../../theme/styles/variables.scss';
+
+.mat-elevation-z8 {
+  .img-square {
+    max-width: 150px;
+  }
+}
+
+
+/*Mat-Table End*/
+td.cdk-column-description {
+  white-space: normal !important;
+}
