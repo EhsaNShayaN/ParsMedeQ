@@ -1,0 +1,165 @@
+<!-- Hero with Parallax -->
+<section class="hero scroll-section">
+  <div class="overlay"></div>
+  <div class="hero-content">
+    <h1>تکنولوژی هوشمند پارس مدیکیو</h1>
+    <p>تحول در دقت، کارایی و عدالت در خدمات پزشکی</p>
+    <button mat-raised-button color="primary">کشف فناوری</button>
+  </div>
+</section>
+
+<!-- Services -->
+<section id="services" class="services">
+  <div class="theme-container">
+    <h2>خدمات ما</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="icon">🩺</div>
+        <h3>خدمت ۱</h3>
+        <p>توضیح خدمت اول</p>
+      </div>
+      <div class="card">
+        <div class="icon">⚙️</div>
+        <h3>خدمت ۲</h3>
+        <p>توضیح خدمت دوم</p>
+      </div>
+      <div class="card">
+        <div class="icon">📦</div>
+        <h3>خدمت ۳</h3>
+        <p>توضیح خدمت سوم</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-our-center></app-our-center>
+
+<!-- About -->
+<section class="scroll-section about">
+  <div class="container">
+    <h2>نگاهی به آینده پزشکی</h2>
+    <p>
+      پارس مدیکیو با استفاده از فناوری‌های پیشرفته، داده‌های پزشکی را با دقت بالا تحلیل کرده
+      و پزشکان را در تصمیم‌گیری سریع‌تر و دقیق‌تر یاری می‌دهد.
+    </p>
+  </div>
+</section>
+
+<app-our-product></app-our-product>
+
+<!-- How It Works -->
+<section class="scroll-section how">
+  <div class="container">
+    <h2>چگونه کار می‌کند</h2>
+    <div class="steps">
+      <div class="step">
+        <mat-icon>science</mat-icon>
+        <h3>تحلیل داده</h3>
+        <p>داده‌های حیاتی به‌صورت بلادرنگ بررسی و تفسیر می‌شوند.</p>
+      </div>
+      <div class="step">
+        <mat-icon>hub</mat-icon>
+        <h3>یکپارچگی سیستم</h3>
+        <p>ارتباطی امن بین دستگاه‌ها، نرم‌افزارها و کاربران برقرار می‌شود.</p>
+      </div>
+      <div class="step">
+        <mat-icon>favorite</mat-icon>
+        <h3>دقت در نتیجه</h3>
+        <p>هر تصمیم درمانی بر پایه‌ی داده‌های واقعی است.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-our-article></app-our-article>
+
+<!-- Benefits -->
+<section class="scroll-section benefits">
+  <div class="container">
+    <h2>مزایای برجسته</h2>
+    <div class="cards">
+      <mat-card>
+        <mat-icon color="primary">speed</mat-icon>
+        <h3>سرعت پردازش بالا</h3>
+        <p>نتایج در کمتر از چند ثانیه نمایش داده می‌شوند.</p>
+      </mat-card>
+      <mat-card>
+        <mat-icon color="primary">security</mat-icon>
+        <h3>امنیت داده‌ها</h3>
+        <p>رمزگذاری کامل اطلاعات بیماران و تجهیزات.</p>
+      </mat-card>
+      <mat-card>
+        <mat-icon color="primary">psychology</mat-icon>
+        <h3>یادگیری خودکار</h3>
+        <p>سیستم به‌مرور هوشمندتر و دقیق‌تر می‌شود.</p>
+      </mat-card>
+    </div>
+  </div>
+</section>
+
+<app-our-clip></app-our-clip>
+
+<!-- Applications -->
+<section class="scroll-section applications">
+  <div class="container">
+    <h2>کاربردهای فناوری</h2>
+    <div class="image-grid">
+      <img src="assets/images/about.png" alt="Application 1">
+      <img src="assets/images/hero.png" alt="Application 2">
+      <img src="assets/images/about.png" alt="Application 3">
+    </div>
+  </div>
+</section>
+
+<app-our-news></app-our-news>
+
+<!-- ABOUT -->
+<section id="about" class="about-section alt-bg" [@fadeInSimple]>
+  <div class="theme-container about-inner">
+    <div class="about-text">
+      <h2>دربارهٔ ما</h2>
+      <p>پارس مدیکیو با هدف فراهم آوردن تجهیزات، آموزش و محتوای تخصصی پزشکی برای مراکز درمانی و متخصصین، خدمات جامع و
+        قابل اعتماد ارائه می‌دهد.</p>
+      <a class="btn btn-primary" routerLink="/about">بیشتر بدانید</a>
+    </div>
+    <div class="about-image" aria-hidden="true">
+      <img src="assets/images/about.png" alt="" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section" [@fadeInSimple]>
+  <div class="theme-container contact-inner">
+    <div class="contact-card">
+      <h2>تماس با ما</h2>
+      <p>هر سوالی داشتی، اینجا سریع با ما در ارتباط باش.</p>
+      <form class="contact-form">
+        <input name="name" ngModel placeholder="نام و نام خانوادگی" required>
+        <input name="email" ngModel type="email" placeholder="ایمیل" required>
+        <textarea name="message" ngModel placeholder="پیام" rows="4" required></textarea>
+        <button mat-raised-button color="primary" type="submit">ارسال پیام</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- CTA with Parallax -->
+<section class="cta scroll-section">
+  <div class="overlay"></div>
+  <div class="content">
+    <h2>پیوستن به آینده‌ی پزشکی امروز آغاز می‌شود</h2>
+    <button mat-raised-button color="primary">درخواست دمو</button>
+  </div>
+</section>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="theme-container footer-inner">
+    <p>© 2025 ParsMEDEQ — تمامی حقوق محفوظ است</p>
+    <div class="social">
+      <a href="#" aria-label="Instagram">Instagram</a>
+      <a href="#" aria-label="LinkedIn">LinkedIn</a>
+      <a href="#" aria-label="YouTube">YouTube</a>
+    </div>
+  </div>
+</footer>
