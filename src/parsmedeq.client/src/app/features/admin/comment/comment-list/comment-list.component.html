@@ -48,6 +48,10 @@
                       matTooltip="{{'REPLY' | translate}}">
                 <mat-icon>reply</mat-icon>
               </button>
+              <button mat-icon-button color="warn" (click)="remove(element)"
+                      [matTooltip]="'DELETE' | translate" class="remove">
+                <mat-icon>delete</mat-icon>
+              </button>
             </ng-container>
             <a [routerLink]="['/' + (element.tableName === 'JournalScientific' ? 'ScienceAndResearche' : element.tableName ||
             element.tableName === 'Notice' ? 'New' : element.tableName).toLowerCase() + 's', element.relatedId]"
@@ -68,7 +72,7 @@
   <p *ngIf="dataSource?.data?.length === 0" class="py-5 mb-0 text-center">{{ 'NO_DATA_AVAILABLE' | translate }}</p>
 </div>
 <!--<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>-->
-<mat-paginator *ngIf="dataSource?.data?.length > 0"
+<mat-paginator *ngIf="(dataSource?.data?.length ?? 0) > 0"
                [pageSizeOptions]="[5, 10, 25, 100]"
                (page)="onPaginateChange($event)"
                [pageSize]="pageSize"

@@ -1,5 +1,8 @@
 /*import {Profile} from './UserResponse';*/
-import {Paginated} from './Pagination';
+import {AlborzPagingRequest, Paginated} from './Pagination';
+
+export class CommentsRequest extends AlborzPagingRequest {
+}
 
 export interface CommentResponse {
   data: Paginated<Comment>;

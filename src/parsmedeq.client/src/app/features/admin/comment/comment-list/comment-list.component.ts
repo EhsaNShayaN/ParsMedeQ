@@ -2,48 +2,46 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort, Sort} from '@angular/material/sort';
 import {BaseComponent} from '../../../../base-component';
-import {Comment, CommentResponse} from '../../../../../lib/models/CommentResponse';
 import {MatTableDataSource} from '@angular/material/table';
-import {BaseResult} from '../../../../../lib/models/BaseResult';
-import {RestAdminService} from '../../../../../lib/core/services/client/rest-admin.service';
 import {ToastrService} from 'ngx-toastr';
-import {DialogService} from "../../../../../lib/core/services/dialog-service";
+import {Helpers} from '../../../../core/helpers';
+import {CommentResponse, CommentsRequest, Comment} from '../../../../core/models/CommentResponse';
+import {AddResult, BaseResult} from '../../../../core/models/BaseResult';
 
 @Component({
   selector: 'app-comment-list',
   styleUrls: ['comment-list.component.scss'],
-  templateUrl: 'comment-list.component.html'
+  templateUrl: 'comment-list.component.html',
+  standalone: false
 })
 export class CommentListComponent extends BaseComponent implements OnInit {
-  dataSource: MatTableDataSource<Comment>;
+  dataSource!: MatTableDataSource<Comment>;
   ///////////////////////
   displayedColumns: string[] = [/*'row', */'title', 'description', 'creationDate', 'status', 'actions'];
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator | null = null;
+  @ViewChild(MatSort, {static: true}) sort: MatSort | null = null;
   pageIndex = 1;
   pageSize = 10;
   totalCount = 0;
   adminSort: Sort = {active: 'creationDate', direction: 'desc'};
 
-  constructor(private dialogService: DialogService,
-              private restAdminService: RestAdminService,
-              private toaster: ToastrService) {
+  constructor(private helpers: Helpers,
+              private toastr: ToastrService) {
     super();
   }
 
   ngOnInit() {
-    this.appService.setPaginationLang();
+    this.helpers.setPaginationLang();
     this.getItems();
   }
 
   getItems() {
-    const model = {
-      page: this.pageIndex,
+    const model: CommentsRequest = {
+      pageIndex: this.pageIndex,
       pageSize: this.pageSize,
       sort: 0,
-      adminSort: this.adminSort,
     };
-    this.restClientService.getComments(model).subscribe((res: CommentResponse) => {
+    this.restApiService.getComments(model).subscribe((res: CommentResponse) => {
       this.initDataSource(res);
     });
   }
@@ -55,19 +53,26 @@ export class CommentListComponent extends BaseComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  public remove(property: Comment) {
-    console.log('delete');
-    /*const index: number = this.dataSource.data.indexOf(property);
+  remove(item: any) {
+    const index: number = this.dataSource.data.indexOf(item);
     if (index !== -1) {
-      const message = this.appService.getTranslateValue('MESSAGE.SURE_DELETE') ?? '';
-      let dialogRef = this.dialogService.openConfirmDialog('', message);
+      let dialogRef = this.dialogService.openConfirmDialog('', this.getTranslateValue('SURE_DELETE'));
       dialogRef.afterClosed().subscribe(dialogResult => {
         if (dialogResult) {
-          this.dataSource.data.splice(index, 1);
-          this.initDataSource(this.dataSource.data);
+          this.restApiService.deleteComment(item.id).subscribe({
+            next: (response: BaseResult<AddResult>) => {
+              if (response.data.changed) {
+                this.dataSource.data.splice(index, 1);
+                this.dataSource._updateChangeSubscription();
+                this.toastr.success(this.getTranslateValue('ITEM_DELETED_SUCCESSFULLY'), '', {});
+              } else {
+                this.toastr.error(this.getTranslateValue('UNKNOWN_ERROR'), '', {});
+              }
+            }
+          });
         }
       });
-    }*/
+    }
   }
 
   /*public applyFilter(filterValue: string) {
@@ -77,7 +82,7 @@ export class CommentListComponent extends BaseComponent implements OnInit {
     }
   }*/
 
-  onPaginateChange(event) {
+  onPaginateChange(event: any) {
     if (event.previousPageIndex !== event.pageIndex) {
       this.pageIndex = event.pageIndex + 1;
     }
@@ -115,17 +120,17 @@ export class CommentListComponent extends BaseComponent implements OnInit {
   }
 
   setStatus(comment: Comment, isConfirmed: boolean) {
-    this.restClientService.confirmComment(comment.id, isConfirmed).subscribe((res: BaseResult<boolean>) => {
+    this.restApiService.confirmComment(comment.id, isConfirmed).subscribe((res: BaseResult<AddResult>) => {
       comment.isConfirmed = isConfirmed;
     });
   }
 
   setReply(element: Comment) {
-    const dialogRef = this.dialogService.openConfirmDialog(this.appService.getTranslateValue('REPLY'), null, {id: element.id});
+    const dialogRef = this.dialogService.openConfirmDialog(this.getTranslateValue('REPLY'), '');
     dialogRef.afterClosed().subscribe(s => {
       if (s) {
-        this.restAdminService.addCommentAnswer(element.id, s.answer).subscribe((res: BaseResult<boolean>) => {
-          this.toaster.success(this.appService.getTranslateValue('THE_OPERATION_WAS_SUCCESSFUL'), '', {});
+        this.restApiService.addCommentAnswer(element.id, s.answer).subscribe((res: BaseResult<boolean>) => {
+          this.toastr.success(this.getTranslateValue('THE_OPERATION_WAS_SUCCESSFUL'), '', {});
         });
       }
     });
