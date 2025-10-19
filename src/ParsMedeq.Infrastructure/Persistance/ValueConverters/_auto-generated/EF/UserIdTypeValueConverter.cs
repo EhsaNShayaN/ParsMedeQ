@@ -1,20 +1,19 @@
-﻿global using ParsMedeQ.Domain.Types.UserId;
-
-namespace ParsMedeQ.Infrastructure.Persistance.ValueConverters;
-sealed class UserIdTypeValueConverter : ValueConverter<UserIdType, int>
+﻿namespace ParsMedeQ.Infrastructure.Persistance.ValueConverters;
+sealed class intValueConverter : ValueConverter<int, int>
 {
-	public UserIdTypeValueConverter(): base(
-		src => src.GetDbValue(),
-		value => UserIdType.FromDb(value)
-	){}
+    public intValueConverter() : base(
+        src => src,
+        value => value
+    )
+    { }
 }
 
 
-sealed class UserIdTypeValueComparer : ValueComparer<UserIdType>
+sealed class intValueComparer : ValueComparer<int>
 {
-	public UserIdTypeValueComparer(): base(
-		(a, b) => a.Equals(b),
-		a => a.GetHashCode())
-	{}
+    public intValueComparer() : base(
+        (a, b) => a.Equals(b),
+        a => a.GetHashCode())
+    { }
 }
 

@@ -70,7 +70,7 @@ public sealed class SigninOrSignupIfMobileNotExistsCommandHandler : IPrimitiveRe
     {
         return this._tokenGeneratorService
             .GenerateToken(
-                ctx.SigninResult.UserId.Value,
+                ctx.SigninResult.UserId,
                 AuthenticationHelper.WEB_AUDIENCE,
                 ctx.CancellationToken)
             .Map(ctx.SetGenerateTokenResult);

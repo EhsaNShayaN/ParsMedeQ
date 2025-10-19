@@ -1,5 +1,4 @@
 ﻿using Microsoft.FeatureManagement;
-using ParsMedeQ.Domain.Types.UserId;
 
 namespace ParsMedeQ.Application.Features.UserFeatures.SigninFeature.SendPasswordOtpBySMSFeature;
 
@@ -28,14 +27,14 @@ public sealed class SendPasswordOtpBySMSCommandHandler : IPrimitiveResultCommand
             .GetOneOrDefault(
                 x => x.Mobile.Equals(MobileType.CreateUnsafe(request.Mobile)),
                 x => new { x.Id, x.Mobile },
-                new { Id = UserIdType.Empty, Mobile = MobileType.Empty },
+                new { Id = 0, Mobile = MobileType.Empty },
                 cancellationToken)
             .MapIf(
                 user => user.Mobile.IsDefault(),
                 _ => ValueTask.FromResult(PrimitiveResult.Failure<SendPasswordOtpBySMSCommandResponse>("", "موبایلی برای شما تعریف نشده است")),
                 user => otpService.SendSMS(
                 user.Mobile,
-                ApplicationCacheTokens.CreateOTPKey(user.Id.Value.ToString(), ApplicationCacheTokens.SetPasswordOTP),
+                ApplicationCacheTokens.CreateOTPKey(user.Id.ToString(), ApplicationCacheTokens.SetPasswordOTP),
                 cancellationToken)
                     .Map(otp => IsDummy().Map(d => d ? otp : string.Empty))
                     .Map(otp => new SendPasswordOtpBySMSCommandResponse(otp)))

@@ -9,26 +9,26 @@ namespace ParsMedeQ.Infrastructure.Persistance.Repositories.UserRepositories;
 internal sealed class UserReadRepository : GenericDomainEntityReadRepositoryBase<User>, IUserReadRepository
 {
     public UserReadRepository(ReadDbContext dbContext) : base(dbContext) { }
-    public ValueTask<PrimitiveResult> EnsureEmailIsUnique(UserIdType id, EmailType email, CancellationToken cancellationToken)
+    public ValueTask<PrimitiveResult> EnsureEmailIsUnique(int id, EmailType email, CancellationToken cancellationToken)
     {
         return this.DbContext.
             Users
             .Where(user => !user.Id.Equals(id) && user.Email.Equals(email))
             .Select(a => a.Id)
-            .Run(q => q.FirstOrDefaultAsync(cancellationToken), PrimitiveResult.Success(UserIdType.Empty))
+            .Run(q => q.FirstOrDefaultAsync(cancellationToken), PrimitiveResult.Success(0))
             .Match(
-                userId => userId.Equals(UserIdType.Empty) ? PrimitiveResult.Success(true) : PrimitiveResult.Failure<bool>("", "پست الکترونیکی تکراری است"),
+                userId => userId.Equals(0) ? PrimitiveResult.Success(true) : PrimitiveResult.Failure<bool>("", "پست الکترونیکی تکراری است"),
                 errors => PrimitiveResult.Failure<bool>("", "خطا در بررسی پست الکترونیکی تکرای")
             ).ToPrimitiveResult();
     }
-    public ValueTask<PrimitiveResult> EnsureMobileIsUnique(UserIdType id, MobileType mobile, CancellationToken cancellationToken)
+    public ValueTask<PrimitiveResult> EnsureMobileIsUnique(int id, MobileType mobile, CancellationToken cancellationToken)
     {
         return this.DbContext.Users
             .Where(user => !user.Id.Equals(id) && user.Mobile.Equals(mobile))
             .Select(a => a.Id)
-            .Run(q => q.FirstOrDefaultAsync(cancellationToken), PrimitiveResult.Success(UserIdType.Empty))
+            .Run(q => q.FirstOrDefaultAsync(cancellationToken), PrimitiveResult.Success(0))
             .Match(
-                userId => userId.Equals(UserIdType.Empty) ? PrimitiveResult.Success(true) : PrimitiveResult.Failure<bool>("", "موبایل تکراری است"),
+                userId => userId.Equals(0) ? PrimitiveResult.Success(true) : PrimitiveResult.Failure<bool>("", "موبایل تکراری است"),
                 errors => PrimitiveResult.Failure<bool>("", "خطا در بررسی موبایل تکرای"))
             .ToPrimitiveResult();
     }
@@ -60,14 +60,14 @@ internal sealed class UserReadRepository : GenericDomainEntityReadRepositoryBase
         }
         return result!;
     }
-    public ValueTask<PrimitiveResult<User>> FindUser(UserIdType id, CancellationToken cancellationToken)
+    public ValueTask<PrimitiveResult<User>> FindUser(int id, CancellationToken cancellationToken)
     {
         return this.DbContext.Users
             .Where(a => a.Id.Equals(id))
             .AsSplitQuery()
             .Run(q => q.FirstOrDefaultAsync(cancellationToken), PrimitiveError.Create("", "کاربری با شناسه مورد نظر پیدا نشد"))
             .Map(a => a!);
-    }  
+    }
 }
 internal static class UserReadRepositoryCompiledQueries
 {

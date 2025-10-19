@@ -30,7 +30,7 @@ public sealed class ResetPasswordCommandHandler : IPrimitiveResultCommandHandler
                         _ => ValueTask.FromResult(PrimitiveResult.Failure<ResetPasswordCommandResponse>("", "موبایلی برای شما تعریف نشده است")),
                         user => otpService.Validate(
                             request.Otp,
-                            ApplicationCacheTokens.CreateOTPKey(user.Id.Value.ToString(), ApplicationCacheTokens.SetPasswordOTP),
+                            ApplicationCacheTokens.CreateOTPKey(user.Id.ToString(), ApplicationCacheTokens.SetPasswordOTP),
                             OtpServiceValidationRemoveKeyStrategy.RemoveIfSuccess,
                             cancellationToken)
                         .Map(() => PasswordHelper.HashAndSaltPassword(request.Password))

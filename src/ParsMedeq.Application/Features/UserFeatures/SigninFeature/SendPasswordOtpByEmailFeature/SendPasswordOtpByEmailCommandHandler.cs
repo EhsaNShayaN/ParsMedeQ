@@ -1,6 +1,5 @@
 ﻿using Microsoft.FeatureManagement;
 using ParsMedeQ.Domain.Types.Email;
-using ParsMedeQ.Domain.Types.UserId;
 
 namespace ParsMedeQ.Application.Features.UserFeatures.SigninFeature.SendPasswordOtpByEmailFeature;
 
@@ -29,7 +28,7 @@ public sealed class SendPasswordOtpByEmailCommandHandler : IPrimitiveResultComma
             .GetOneOrDefault(
                 x => x.Email.Equals(request.Email),
                 x => new { x.Id, x.Email },
-                new { Id = UserIdType.Empty, Email = EmailType.Empty },
+                new { Id = 0, Email = EmailType.Empty },
                 cancellationToken)
             .MapIf(
                 user => user.Email.IsDefault(),
@@ -38,7 +37,7 @@ public sealed class SendPasswordOtpByEmailCommandHandler : IPrimitiveResultComma
                 .SendEmail(
                     user.Email,
                     "ورود به سیستم", $"کد یکبار مصرف : {{otp}}",
-                    ApplicationCacheTokens.CreateOTPKey(user.Id.Value.ToString(), ApplicationCacheTokens.SetPasswordOTP),
+                    ApplicationCacheTokens.CreateOTPKey(user.Id.ToString(), ApplicationCacheTokens.SetPasswordOTP),
                     cancellationToken)
                 .Map(otp => IsDummy().Map(d => d ? otp : string.Empty))
                 .Map(otp => new SendPasswordOtpByEmailCommandResponse(otp)))

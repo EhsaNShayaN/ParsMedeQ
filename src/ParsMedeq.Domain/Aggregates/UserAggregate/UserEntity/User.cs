@@ -3,7 +3,6 @@ using ParsMedeQ.Domain.Aggregates.CartAggregate;
 using ParsMedeQ.Domain.Aggregates.CommentAggregate;
 using ParsMedeQ.Domain.Aggregates.OrderAggregate;
 using ParsMedeQ.Domain.Aggregates.PurchaseAggregate;
-using ParsMedeQ.Domain.Aggregates.UserAggregate.Events;
 using ParsMedeQ.Domain.Aggregates.UserAggregate.Validators;
 using ParsMedeQ.Domain.Types.Email;
 using ParsMedeQ.Domain.Types.FirstName;
@@ -11,10 +10,9 @@ using ParsMedeQ.Domain.Types.FullName;
 using ParsMedeQ.Domain.Types.LastName;
 using ParsMedeQ.Domain.Types.Mobile;
 using ParsMedeQ.Domain.Types.Password;
-using ParsMedeQ.Domain.Types.UserId;
 
 namespace ParsMedeQ.Domain.Aggregates.UserAggregate.UserEntity;
-public sealed class User : AggregateRoot<UserIdType>
+public sealed class User : AggregateRoot<int>
 {
     #region " Fields "
     private List<Cart> _carts = [];
@@ -64,8 +62,8 @@ public sealed class User : AggregateRoot<UserIdType>
     public IReadOnlyCollection<Purchase> Purchases => this._purchases.AsReadOnly();
     #endregion
 
-    private User(UserIdType id) : base(id) { }
-    public User() : this(UserIdType.Empty) { }
+    private User(int id) : base(id) { }
+    public User() : this(0) { }
 
     private static ValueTask<PrimitiveResult<User>> Create(
         MobileType mobile,
@@ -133,7 +131,6 @@ public sealed class User : AggregateRoot<UserIdType>
                 this.Email = email;
             })
             .Map(_ => userValidatorService.IsEmailUnique(this.Id, this.Email, cancellationToken))
-            .OnSuccess(_ => this.AddDomainEvent(new UserReferencedProfileUpdatedEvent(this)))
             .Map(_ => this);
     }
 

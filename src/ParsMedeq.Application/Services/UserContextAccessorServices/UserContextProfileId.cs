@@ -1,13 +1,12 @@
 ﻿using ParsMedeQ.Domain.Helpers;
-using ParsMedeQ.Domain.Types.UserId;
 
 namespace ParsMedeQ.Application.Services.UserContextAccessorServices;
 
-public readonly record struct UserContextProfileId(UserIdType UserId)
+public readonly record struct UserContextProfileId(int UserId)
 {
     public static string Serialize(UserContextProfileId item)
     {
-        return HashIdsHelper.HexSerializer.Serialize($"{item.UserId.Value}");
+        return HashIdsHelper.HexSerializer.Serialize($"{item.UserId}");
     }
     public string Serialize()
     {
@@ -18,7 +17,7 @@ public readonly record struct UserContextProfileId(UserIdType UserId)
         return HashIdsHelper.HexSerializer.Deserialize(src, item =>
         {
             var parts = item.Split('|');
-            return new UserContextProfileId(UserIdType.FromDb(Convert.ToInt32(parts[0])));
+            return new UserContextProfileId(Convert.ToInt32(parts[0]));
         });
     }
 }

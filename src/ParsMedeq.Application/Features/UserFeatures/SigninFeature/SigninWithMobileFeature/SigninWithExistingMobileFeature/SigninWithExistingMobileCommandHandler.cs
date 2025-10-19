@@ -27,7 +27,7 @@ public sealed class SigninWithExistingMobileCommandHandler : IPrimitiveResultCom
                 .Execute(ValidateOtp)
                 .Execute(SigninMobileExists)
                 .Map(ctx => new UserTokenInfo(
-                    HashIdsHelper.Instance.EncodeLong(ctx.SigninResult.UserId.Value),
+                    HashIdsHelper.Instance.EncodeLong(ctx.SigninResult.UserId),
                     ctx.SigninResult.FullName.GetValue(),
                     ctx.Mobile.Value))
             .ConfigureAwait(false);
