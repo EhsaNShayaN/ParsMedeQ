@@ -1,7 +1,7 @@
 import {Component, OnInit, ElementRef, AfterViewInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {NewsService} from '../news.service';
-import {News} from '../news.model';
+import {News} from '../models/news.model';
 import {BaseComponent} from '../../../base-component';
 
 @Component({

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { News } from './news.model';
+import { News } from './models/news.model';
 
 @Injectable({ providedIn: 'root' })
 export class NewsService {

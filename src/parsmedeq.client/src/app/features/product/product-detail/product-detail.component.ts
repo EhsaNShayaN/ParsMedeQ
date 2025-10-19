@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {Product} from '../product.model';
+import {Product} from '../models/product.model';
 import {ProductService} from '../product.service';
 
 @Component({
@@ -27,7 +27,7 @@ export class ProductDetailComponent implements OnInit {
       this.coverImage = p?.coverImage;
       this.selectedImage = p?.gallery[0];
       this.loading = false;
-      
+
       // Debug: Check if cover image is loaded
       console.log('Product loaded:', p);
       console.log('Cover image:', this.coverImage);

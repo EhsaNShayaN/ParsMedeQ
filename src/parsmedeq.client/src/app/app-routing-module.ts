@@ -20,6 +20,7 @@ const pagesChildren: Routes = [
       {path: 'products', loadChildren: () => import('./features/products/products-module').then(m => m.ProductsModule)},
       {path: 'p', loadChildren: () => import('./features/product/product-module').then(m => m.ProductModule)},
       {path: 'n', loadChildren: () => import('./features/news/news-module').then(m => m.NewsModule)},
+      {path: 'c', loadChildren: () => import('./features/clip/clip-module').then(m => m.ClipModule)},
       {path: 'centers', loadChildren: () => import('./features/centers/centers-module').then(m => m.CentersModule)},
       //{path: 'auth', loadChildren: () => import('./features/auth/auth-module').then(m => m.AuthModule)},
       {path: 'auth', loadChildren: () => import('./features/auth/login/login.module').then(m => m.LoginModule)},
