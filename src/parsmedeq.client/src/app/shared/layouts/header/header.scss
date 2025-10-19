@@ -1,4 +1,6 @@
 .header-toolbar {
+  box-shadow: 0 0.22222rem 0.22222rem rgba(0, 0, 0, .1), 0 0 0.44444rem rgba(0, 0, 0, .08);
+  background: var(--pm-bg);
   direction: rtl;
   display: flex;
   justify-content: space-between;
@@ -11,7 +13,7 @@
   .main-menu a {
     margin: 0 0.5rem;
     font-weight: 500;
-    color: white;
+    color: var(--pm-secondary);
   }
 
   .mobile-toggle {

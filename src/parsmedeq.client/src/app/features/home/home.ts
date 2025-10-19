@@ -1,93 +1,60 @@
-import {Component} from '@angular/core';
-import {
-  trigger, transition, style, animate, query, stagger
-} from '@angular/animations';
-import {BaseComponent} from '../../base-component';
-import {Product, ProductResponse, ProductsRequest} from '../../core/models/ProductResponse';
-import {Resource, ResourceResponse, ResourcesRequest} from '../../core/models/ResourceResponse';
-import {Tables} from '../../core/constants/server.constants';
-import {ToastrService} from 'ngx-toastr';
-import {CenterModel, JsonService} from '../../core/json.service';
+import {AfterViewInit, Component, ElementRef, HostListener} from '@angular/core';
+import {animate, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.html',
   styleUrls: ['./home.scss'],
-  animations: [
-    trigger('heroAnimation', [
-      transition(':enter', [
-        style({opacity: 0, transform: 'translateY(8px)'}),
-        animate('500ms ease-out', style({opacity: 1, transform: 'translateY(0)'}))
-      ])
-    ]),
-    trigger('fadeInSimple', [
-      transition(':enter', [
-        style({opacity: 0, transform: 'translateY(12px)'}),
-        animate('420ms ease-out', style({opacity: 1, transform: 'translateY(0)'}))
-      ])
+  standalone: false,
+  animations: [trigger('fadeInSimple', [
+    transition(':enter', [
+      style({opacity: 0, transform: 'translateY(12px)'}),
+      animate('420ms ease-out', style({opacity: 1, transform: 'translateY(0)'}))
     ])
-  ],
-  standalone: false
+  ])]
 })
-export class Home extends BaseComponent {
+export class Home implements AfterViewInit {
 
-  products: Product[] = [];
-  articles: Resource[] = [];
-  clips: Resource[] = [];
-  news: Resource[] = [];
-  centers: CenterModel[] = [];
-
-  constructor(private toastr: ToastrService,
-              private jsonService: JsonService) {
-    super();
-    this.getProducts();
-    this.getResources(Tables.Article);
-    this.getResources(Tables.Clip);
-    this.getResources(Tables.News);
-
-    this.jsonService.getCenters().subscribe(res => {
-      this.centers = res;
-    });
+  constructor(private el: ElementRef) {
   }
 
-  getProducts() {
-    let model: ProductsRequest = {
-      pageIndex: 1,
-      pageSize: 10,
-      sort: 1,
-    };
-    this.restApiService.getProducts(model).subscribe((d: ProductResponse) => {
-      this.products = d.data.items.slice(0, 4);
-    });
+  ngAfterViewInit() {
+    // Scroll animation observer
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {threshold: 0.2}
+    );
+
+    this.el.nativeElement
+      .querySelectorAll('.scroll-section')
+      .forEach((section: HTMLElement) => observer.observe(section));
+
+    // Initial parallax update
+    this.updateParallax();
   }
 
-  getResources(tableId: number) {
-    let model: ResourcesRequest = {
-      pageIndex: 1,
-      pageSize: 10,
-      sort: 1,
-      tableId: tableId
-    };
-    this.restApiService.getResources(model).subscribe((d: ResourceResponse) => {
-      switch (tableId) {
-        case Tables.Article:
-          this.articles = d.data.items.slice(0, 4);
-          break;
-        case Tables.Clip:
-          this.clips = d.data.items.slice(0, 4);
-          break;
-        case Tables.News:
-          this.news = d.data.items.slice(0, 4);
-          break;
-      }
-    });
+  @HostListener('window:scroll', [])
+  onScroll() {
+    window.requestAnimationFrame(() => this.updateParallax());
   }
 
-  sendContact() {
-    this.toastr.success(this.getTranslateValue('پیام شما با موفقیت ارسال گردید.'), '', {});
+  updateParallax() {
+    const scrolled = window.scrollY;
+    const hero = this.el.nativeElement.querySelector('.hero');
+    const cta = this.el.nativeElement.querySelector('.cta');
+
+    if (hero) hero.style.backgroundPositionY = `${scrolled * 0.4}px`;
+    if (cta) cta.style.backgroundPositionY = `${scrolled * 0.2 - 1000}px`;
   }
 
-  openDialog(item: CenterModel) {
-    this.dialogService.openCustomDialog(item.title, item.city + '<br/>' + item.description, item.image);
+  testr() {
+    console.log('testr');
   }
 }

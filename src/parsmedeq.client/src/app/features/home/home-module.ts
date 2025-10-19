@@ -4,6 +4,7 @@ import {Home} from './home';
 import {SharedModule} from '../../shared/shared-module';
 import {HomeRoutingModule} from './home-routing-module';
 import {TranslateModule} from '@ngx-translate/core';
+import {LoadingComponent} from "../../shared/loading.component/loading.component";
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import {TranslateModule} from '@ngx-translate/core';
     SharedModule,
     HomeRoutingModule,
     TranslateModule,
+    LoadingComponent,
   ]
 })
 export class HomeModule {

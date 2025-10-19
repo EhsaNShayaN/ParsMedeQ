@@ -10,10 +10,8 @@ const pagesChildren: Routes = [
   {
     path: '',
     children: [
-      {path: '', loadChildren: () => import('./features/home3/home3-module').then(m => m.Home3Module)},
+      {path: '', loadChildren: () => import('./features/home/home-module').then(m => m.HomeModule)},
       {path: 'home', loadChildren: () => import('./features/home/home-module').then(m => m.HomeModule)},
-      {path: 'home2', loadChildren: () => import('./features/home2/home2-module').then(m => m.Home2Module)},
-      {path: 'home3', loadChildren: () => import('./features/home3/home3-module').then(m => m.Home3Module)},
       {path: 'cart', loadChildren: () => import('./features/cart/cart-module').then(m => m.CartModule)},
       {path: 'about', loadChildren: () => import('./features/about/about-module').then(m => m.AboutModule)},
       {path: 'articles', loadChildren: () => import('./features/resources/articles/articles.module').then(m => m.ArticlesModule)},
