@@ -1,7 +1,6 @@
 CREATE TABLE [dbo].[Users]
 (
 [Id] [int] NOT NULL IDENTITY(1, 1),
-[RegistrantId] [int] NOT NULL,
 [Email] [varchar] (255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 [Mobile] [varchar] (11) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 [IsEmailConfirmed] [bit] NOT NULL,
