@@ -3,20 +3,6 @@
   margin-bottom: 1rem;
 }
 
-/* Fix header image height */
-app-header-image {
-  display: block;
-  min-height: 400px;
-  
-  ::ng-deep .header-image-wrapper {
-    min-height: 400px;
-    
-    .header-image-content {
-      min-height: 400px;
-    }
-  }
-}
-
 /* gallery */
 .gallery {
   .main-image img {
