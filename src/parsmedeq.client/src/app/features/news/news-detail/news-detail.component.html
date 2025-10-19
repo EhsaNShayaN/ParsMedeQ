@@ -1,0 +1,50 @@
+<div class="news-detail container" *ngIf="item; else loadingTpl">
+  <div class="breadcrumb">
+    <button mat-button (click)="back()">&larr; بازگشت به اخبار</button>
+  </div>
+
+  <header class="hero" [style.backgroundImage]="'url(' + item.coverImage + ')'">
+    <div class="overlay"></div>
+    <div class="hero-body fade-section">
+      <div class="meta">
+        <span class="category">{{ item.category }}</span>
+        <span class="date">{{ formatDate(item.publishDate) }}</span>
+      </div>
+      <h1 class="title">{{ item.title }}</h1>
+    </div>
+  </header>
+
+  <article class="content fade-section">
+    <div class="text" [innerHTML]="item.content"></div>
+
+    <div class="share">
+      <span>اشتراک‌گذاری:</span>
+      <button mat-icon-button aria-label="share telegram" (click)="share('Telegram')">
+        <mat-icon>send</mat-icon>
+      </button>
+      <button mat-icon-button aria-label="share linkedin" (click)="share('LinkedIn')">
+        <mat-icon>linkedin</mat-icon>
+      </button>
+      <button mat-icon-button aria-label="share twitter" (click)="share('Twitter')">
+        <mat-icon>share</mat-icon>
+      </button>
+    </div>
+  </article>
+
+  <aside class="related fade-section" *ngIf="item.related?.length">
+    <h3>مطالب مرتبط</h3>
+    <div class="rel-grid">
+      <article *ngFor="let r of item.related" class="rel-card" (click)="navigateToLink('/news/'+ r.id, 'fa2')">
+        <img [src]="r.coverImage" alt="{{ r.title }}">
+        <div class="rmeta">
+          <h4>{{ r.title }}</h4>
+          <p class="rdate">{{ formatDate(r.publishDate) }}</p>
+        </div>
+      </article>
+    </div>
+  </aside>
+</div>
+
+<ng-template #loadingTpl>
+  <div class="loading container">در حال بارگذاری...</div>
+</ng-template>
