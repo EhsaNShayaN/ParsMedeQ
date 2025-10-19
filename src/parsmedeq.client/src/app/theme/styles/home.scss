@@ -118,13 +118,13 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 2rem;
+    gap: 1rem;
 
     .card {
       background: white;
       border: 1px solid #e0e0e0;
       border-radius: 8px;
-      padding: 2rem;
+      padding: 1rem 2rem;
       width: 260px;
       text-align: center;
       transition: transform 0.3s, box-shadow 0.3s;
@@ -146,6 +146,7 @@
 
       p {
         color: $text;
+        line-height: 2;
       }
     }
   }
