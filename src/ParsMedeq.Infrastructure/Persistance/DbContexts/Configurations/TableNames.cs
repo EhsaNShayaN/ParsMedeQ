@@ -11,6 +11,7 @@ internal static class TableNames
     internal static string ProductTranslation = "ProductTranslation";
     internal static string ProductCategory = "ProductCategory";
     internal static string ProductMedia = "ProductMedia";
+    internal static string Comment = "Comment";
     internal static string Cart = "Cart";
     internal static string CartItems = "CartItems";
 }

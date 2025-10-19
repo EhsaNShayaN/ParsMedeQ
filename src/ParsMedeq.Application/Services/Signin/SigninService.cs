@@ -1,11 +1,10 @@
-﻿using ParsMedeQ.Application.Errors;
+﻿using Medallion.Threading;
+using ParsMedeQ.Application.Errors;
 using ParsMedeQ.Domain.Aggregates.UserAggregate.UserEntity;
 using ParsMedeQ.Domain.Aggregates.UserAggregate.Validators;
 using ParsMedeQ.Domain.DomainServices.SigninService;
 using ParsMedeQ.Domain.Types.FullName;
 using ParsMedeQ.Domain.Types.Password;
-using ParsMedeQ.Domain.Types.UserId;
-using Medallion.Threading;
 
 namespace ParsMedeQ.Application.Services.Signin;
 internal sealed class SigninService : ISigninService
@@ -27,7 +26,7 @@ internal sealed class SigninService : ISigninService
         this._writeUnitOfWork = writeUnitOfWork;
     }
 
-    public async ValueTask<PrimitiveResult<SigninResult>> SigninOrSignupIfMobileNotExists(MobileType mobile, UserIdType registrantId, CancellationToken cancellationToken)
+    public async ValueTask<PrimitiveResult<SigninResult>> SigninOrSignupIfMobileNotExists(MobileType mobile, CancellationToken cancellationToken)
     {
         var sessionName = $"SigninOrSignupIfMobileNotExists:{mobile.Value}";
 
@@ -45,7 +44,6 @@ internal sealed class SigninService : ISigninService
             user.Value.Mobile);
 
         return await User.CreateUnknownUser(
-                registrantId,
                 mobile,
                 this._userValidatorService,
                 cancellationToken)
@@ -57,7 +55,7 @@ internal sealed class SigninService : ISigninService
                 newUser.Mobile))
             .ConfigureAwait(false);
     }
-    public async ValueTask<PrimitiveResult<SigninResult>> SigninWithExistingMobile(MobileType mobile, UserIdType registrantId, CancellationToken cancellationToken)
+    public async ValueTask<PrimitiveResult<SigninResult>> SigninWithExistingMobile(MobileType mobile, CancellationToken cancellationToken)
     {
         var sessionName = $"SigninMobileExists:{mobile.Value}";
 
@@ -76,7 +74,7 @@ internal sealed class SigninService : ISigninService
 
         return await ValueTask.FromResult(PrimitiveResult.Failure<SigninResult>("", "کاربر مورد نظر یافت نشد"));
     }
-    public async ValueTask<PrimitiveResult<SigninResult>> SignupIfMobileNotExists(MobileType mobile, FullNameType fullname, UserIdType registrantId, CancellationToken cancellationToken)
+    public async ValueTask<PrimitiveResult<SigninResult>> SignupIfMobileNotExists(MobileType mobile, FullNameType fullname, CancellationToken cancellationToken)
     {
         var sessionName = $"SignupIfMobileNotExists:{mobile.Value}";
 
@@ -91,7 +89,6 @@ internal sealed class SigninService : ISigninService
         if (user.IsSuccess) return PrimitiveResult.Failure<SigninResult>("", "شماره موبایل مورد نظر وجود دارد");
 
         return await User.CreateUser(
-                registrantId,
                 mobile,
                 fullname,
                 PasswordType.Empty,

@@ -1,7 +1,6 @@
 ﻿using ParsMedeQ.Application.Services.UserContextAccessorServices;
 using ParsMedeQ.Domain.DomainServices.SigninService;
 using ParsMedeQ.Domain.Helpers;
-using ParsMedeQ.Domain.Types.UserId;
 
 namespace ParsMedeQ.Application.Features.UserFeatures.SigninFeature.SigninWithMobileFeature.SigninWithExistingMobileFeature;
 
@@ -48,7 +47,7 @@ public sealed class SigninWithExistingMobileCommandHandler : IPrimitiveResultCom
     {
         return this._signinService.SigninWithExistingMobile(
             ctx.Mobile,
-            UserIdType.Empty, ctx.CancellationToken)
+            ctx.CancellationToken)
             .Map(ctx.SetSigninResult);
     }
 }

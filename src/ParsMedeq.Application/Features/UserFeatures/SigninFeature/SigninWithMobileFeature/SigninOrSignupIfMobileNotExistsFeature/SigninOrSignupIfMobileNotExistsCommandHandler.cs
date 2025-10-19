@@ -2,7 +2,6 @@
 using ParsMedeQ.Application.Services.TokenGeneratorService;
 using ParsMedeQ.Application.Services.UserContextAccessorServices;
 using ParsMedeQ.Domain.DomainServices.SigninService;
-using ParsMedeQ.Domain.Types.UserId;
 
 namespace ParsMedeQ.Application.Features.UserFeatures.SigninFeature.SigninWithMobileFeature.SigninOrSignupIfMobileNotExistsFeature;
 
@@ -64,7 +63,7 @@ public sealed class SigninOrSignupIfMobileNotExistsCommandHandler : IPrimitiveRe
     {
         return this._signinService.SigninOrSignupIfMobileNotExists(
             ctx.Mobile,
-            UserIdType.Empty, ctx.CancellationToken)
+            ctx.CancellationToken)
             .Map(ctx.SetSigninResult);
     }
     ValueTask<PrimitiveResult<LoginContext>> GenerateToken(LoginContext ctx)

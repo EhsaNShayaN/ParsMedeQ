@@ -1,5 +1,6 @@
 ﻿using ParsMedeQ.Domain.Abstractions;
 using ParsMedeQ.Domain.Aggregates.CartAggregate.Entities;
+using ParsMedeQ.Domain.Aggregates.UserAggregate.UserEntity;
 
 namespace ParsMedeQ.Domain.Aggregates.CartAggregate;
 
@@ -15,6 +16,7 @@ public sealed class Cart : EntityBase<int>
     #endregion
 
     #region " Navigation Properties "
+    public User User { get; private set; }
     public IReadOnlyCollection<CartItem> CartItems => this._CartItems.AsReadOnly();
     #endregion
 

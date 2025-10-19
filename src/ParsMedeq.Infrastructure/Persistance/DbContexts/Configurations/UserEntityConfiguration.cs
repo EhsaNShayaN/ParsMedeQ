@@ -25,5 +25,34 @@ sealed class UserEntityConfiguration : IEntityTypeConfiguration<User>
                 a.Property(x => x.Value).HasMaxLength(2500).IsUnicode(false).HasColumnName("Password");
                 a.Property(x => x.Salt).HasMaxLength(2500).IsUnicode(false).HasColumnName("Salt");
             });
+
+
+        builder
+                .HasMany(x => x.Carts)
+                .WithOne(x => x.User)
+                .HasForeignKey(a => a.UserId)
+                .HasPrincipalKey(a => a.Id)
+                .OnDelete(DeleteBehavior.Cascade);
+
+        builder
+                .HasMany(x => x.Comments)
+                .WithOne(x => x.User)
+                .HasForeignKey(a => a.UserId)
+                .HasPrincipalKey(a => a.Id)
+                .OnDelete(DeleteBehavior.Cascade);
+
+        builder
+                .HasMany(x => x.Orders)
+                .WithOne(x => x.User)
+                .HasForeignKey(a => a.UserId)
+                .HasPrincipalKey(a => a.Id)
+                .OnDelete(DeleteBehavior.Cascade);
+
+        builder
+                .HasMany(x => x.Purchases)
+                .WithOne(x => x.User)
+                .HasForeignKey(a => a.UserId)
+                .HasPrincipalKey(a => a.Id)
+                .OnDelete(DeleteBehavior.Cascade);
     }
 }

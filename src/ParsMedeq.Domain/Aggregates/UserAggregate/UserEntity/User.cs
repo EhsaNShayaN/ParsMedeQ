@@ -1,4 +1,8 @@
 ﻿using ParsMedeQ.Domain.Abstractions;
+using ParsMedeQ.Domain.Aggregates.CartAggregate;
+using ParsMedeQ.Domain.Aggregates.CommentAggregate;
+using ParsMedeQ.Domain.Aggregates.OrderAggregate;
+using ParsMedeQ.Domain.Aggregates.PurchaseAggregate;
 using ParsMedeQ.Domain.Aggregates.UserAggregate.Events;
 using ParsMedeQ.Domain.Aggregates.UserAggregate.Validators;
 using ParsMedeQ.Domain.Types.Email;
@@ -13,18 +17,18 @@ namespace ParsMedeQ.Domain.Aggregates.UserAggregate.UserEntity;
 public sealed class User : AggregateRoot<UserIdType>
 {
     #region " Fields "
+    private List<Cart> _carts = [];
+    private List<Comment> _comments = [];
+    private List<Order> _orders = [];
+    private List<Purchase> _purchases = [];
     #endregion
 
     #region " Properties "
-    /// <summary>
-    /// شناسه کاریر ثبت نام کننده
-    /// </summary>
-    public UserIdType RegistrantId { get; private set; }
 
     /// <summary>
     /// نام کامل کاربر
     /// </summary>
-    public FullNameType FullName { get; private set; }
+    public FullNameType FullName { get; private set; } = FullNameType.Empty;
 
     /// <summary>
     /// ایمیل
@@ -39,7 +43,7 @@ public sealed class User : AggregateRoot<UserIdType>
     /// <summary>
     /// رمز عبور
     /// </summary>
-    public PasswordType Password { get; private set; }
+    public PasswordType Password { get; private set; } = PasswordType.Empty;
 
     /// <summary>
     /// آیا ایمیل تایید شده است؟ 
@@ -53,11 +57,17 @@ public sealed class User : AggregateRoot<UserIdType>
 
     #endregion
 
+    #region " Navigation Properties "
+    public IReadOnlyCollection<Cart> Carts => this._carts.AsReadOnly();
+    public IReadOnlyCollection<Comment> Comments => this._comments.AsReadOnly();
+    public IReadOnlyCollection<Order> Orders => this._orders.AsReadOnly();
+    public IReadOnlyCollection<Purchase> Purchases => this._purchases.AsReadOnly();
+    #endregion
+
     private User(UserIdType id) : base(id) { }
-    public User() : this(null) { }
+    public User() : this(UserIdType.Empty) { }
 
     private static ValueTask<PrimitiveResult<User>> Create(
-        UserIdType registrantId,
         MobileType mobile,
         FullNameType fullName,
         PasswordType password,
@@ -73,18 +83,15 @@ public sealed class User : AggregateRoot<UserIdType>
             Password = password,
             IsEmailConfirmed = isEmailConfirmed,
             IsMobileConfirmed = isMobielConfirmed,
-            RegistrantId = registrantId,
         }).Map(user => user.Validate(validator, cancellationToken));
     }
 
     public static ValueTask<PrimitiveResult<User>> CreateUser(
-        UserIdType registrantId,
         MobileType mobile,
         FullNameType fullName,
         PasswordType password,
         IUserValidatorService validator,
         CancellationToken cancellationToken) => Create(
-            registrantId,
             mobile,
             fullName,
             password,
@@ -94,11 +101,9 @@ public sealed class User : AggregateRoot<UserIdType>
             cancellationToken);
 
     public static ValueTask<PrimitiveResult<User>> CreateUnknownUser(
-        UserIdType registrantId,
         MobileType mobile,
         IUserValidatorService validator,
         CancellationToken cancellationToken) => Create(
-            registrantId,
             mobile,
             FullNameType.Empty,
             PasswordType.Empty,
