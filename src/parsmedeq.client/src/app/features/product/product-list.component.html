@@ -1,0 +1,36 @@
+<!-- src/app/products/product-list/product-list.component.html -->
+<div class="product-list container" [@listStagger]="products.length">
+  <div class="toolbar-row">
+    <div class="breadcrumbs">فروشگاه › همه محصولات</div>
+    <!-- filters / sort can be added here -->
+  </div>
+
+  <div class="grid">
+    <mat-card class="product-card" *ngFor="let p of products">
+      <div class="media" (click)="goToDetail(p)" role="button" tabindex="0">
+        <img mat-card-image [src]="p.coverImage" [alt]="p.title" loading="lazy"/>
+      </div>
+
+      <mat-card-content>
+        <h3 class="title" (click)="goToDetail(p)">{{ p.title }}</h3>
+
+        <div class="meta">
+          <span class="price" *ngIf="p.discountPercent && p.discountPercent>0">
+            <span class="final">{{ formatPrice(Math.round(p.price * (1 - (p.discountPercent / 100)))) }}</span>
+            <span class="original">{{ formatPrice(p.price) }}</span>
+          </span>
+          <span class="price" *ngIf="!p.discountPercent || p.discountPercent === 0">
+            <span class="final">{{ formatPrice(p.price) }}</span>
+          </span>
+        </div>
+
+        <p class="desc">{{ p.description }}</p>
+      </mat-card-content>
+
+      <mat-card-actions class="card-actions">
+        <button mat-stroked-button color="primary" (click)="goToDetail(p)">جزئیات</button>
+        <button mat-raised-button color="primary" (click)="goToDetail(p)">افزودن به سبد</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

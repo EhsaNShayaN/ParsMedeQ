@@ -52,6 +52,7 @@ import {CustomDialogComponent} from './dialogs/custom-dialog/custom-dialog.compo
 import {MatBadge} from '@angular/material/badge';
 import {MultiCounterComponent} from './multi-counter/multi-counter';
 import {OurServiceComponent} from '../features/home/our-service/our-service.component';
+import {MatTab, MatTabGroup} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -138,6 +139,8 @@ import {OurServiceComponent} from '../features/home/our-service/our-service.comp
     MatDialogActions,
     RouterLink,
     MatBadge,
+    MatTab,
+    MatTabGroup,
     //////////////////////
     DefaultFlexDirective,
     DefaultClassDirective,
@@ -199,6 +202,8 @@ import {OurServiceComponent} from '../features/home/our-service/our-service.comp
     MatDialogActions,
     RouterLink,
     MatBadge,
+    MatTab,
+    MatTabGroup,
     //////////////////////
     DefaultFlexDirective,
     DefaultClassDirective,
