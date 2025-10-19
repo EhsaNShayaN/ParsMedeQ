@@ -51,6 +51,7 @@ import {OurCenterComponent} from '../features/centers/our-center/our-center.comp
 import {CustomDialogComponent} from './dialogs/custom-dialog/custom-dialog.component';
 import {MatBadge} from '@angular/material/badge';
 import {MultiCounterComponent} from './multi-counter/multi-counter';
+import {OurServiceComponent} from '../features/home/our-service/our-service.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import {MultiCounterComponent} from './multi-counter/multi-counter';
     OurProductComponent,
     OurCenterComponent,
     MultiCounterComponent,
+    OurServiceComponent,
   ],
   imports: [
     CommonModule,
@@ -220,6 +222,7 @@ import {MultiCounterComponent} from './multi-counter/multi-counter';
     OurProductComponent,
     OurCenterComponent,
     MultiCounterComponent,
+    OurServiceComponent,
   ],
   providers: [
     CurrencyFormatterPipe,
