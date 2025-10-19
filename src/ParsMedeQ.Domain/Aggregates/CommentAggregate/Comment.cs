@@ -6,13 +6,13 @@ public sealed class Comment : EntityBase<int>
 {
     #region " Properties "
     public int UserId { get; private set; }
-    public string Icon { get; private set; } = string.Empty;
+    public string? Icon { get; private set; } = string.Empty;
     public string Description { get; private set; } = string.Empty;
     public int RelatedId { get; private set; }
     public int TableId { get; private set; }
     public string TableName { get; private set; } = string.Empty;
-    public string Data { get; private set; } = string.Empty;
-    public string Answers { get; private set; } = string.Empty;
+    public string? Data { get; private set; } = string.Empty;
+    public string? Answers { get; private set; } = string.Empty;
     public bool? IsConfirmed { get; private set; }
     public DateTime CreationDate { get; private set; }
     #endregion
