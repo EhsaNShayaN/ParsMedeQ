@@ -14,8 +14,12 @@ import {animate, style, transition, trigger} from '@angular/animations';
   ])]
 })
 export class Home3 implements AfterViewInit {
+  isLoading = true;
 
   constructor(private el: ElementRef) {
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 15000)
   }
 
   ngAfterViewInit() {
@@ -52,5 +56,9 @@ export class Home3 implements AfterViewInit {
 
     if (hero) hero.style.backgroundPositionY = `${scrolled * 0.4}px`;
     if (cta) cta.style.backgroundPositionY = `${scrolled * 0.2 - 1000}px`;
+  }
+
+  testr() {
+    console.log('testr');
   }
 }

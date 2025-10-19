@@ -4,7 +4,9 @@
   <div class="hero-content">
     <h1>تکنولوژی هوشمند پارس مدیکیو</h1>
     <p>تحول در دقت، کارایی و عدالت در خدمات پزشکی</p>
-    <button mat-raised-button color="primary">کشف فناوری</button>
+    <span class="position-relative" style="background-color: yellow; height: 36px; display: inline-block">
+      <button mat-raised-button color="primary" (click)="testr()" *appLoading="isLoading">کشف فناوری</button>
+    </span>
   </div>
 </section>
 

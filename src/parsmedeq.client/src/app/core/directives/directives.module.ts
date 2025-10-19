@@ -5,6 +5,7 @@ import {OnlyFloatNumberDirective} from './only-float-number.directive';
 import {InputRestrictionDirective} from './app-input-restriction.directive';
 import {NoSpaceDirective} from './no-space.directive';
 import {DefaultImageDirective} from './default-image';
+import {LoadingDirective} from '../../shared/loading/loading.directive';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import {DefaultImageDirective} from './default-image';
     OnlyFloatNumberDirective,
     InputRestrictionDirective,
     NoSpaceDirective,
+    LoadingDirective,
   ],
   exports: [
     OnlyNumberDirective,
@@ -19,6 +21,7 @@ import {DefaultImageDirective} from './default-image';
     InputRestrictionDirective,
     NoSpaceDirective,
     DefaultImageDirective,
+    LoadingDirective,
   ],
   imports: [
     CommonModule,

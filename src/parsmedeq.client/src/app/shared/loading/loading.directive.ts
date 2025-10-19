@@ -2,7 +2,8 @@ import {Directive, EmbeddedViewRef, Input, OnDestroy, Renderer2, TemplateRef, Vi
 import {isObservable, Observable, Subscription} from 'rxjs';
 
 @Directive({
-  selector: '[appLoading]'
+  selector: '[appLoading]',
+  standalone: false,
 })
 export class LoadingDirective implements OnDestroy {
   private embeddedViewRef?: EmbeddedViewRef<any>;
@@ -44,6 +45,7 @@ export class LoadingDirective implements OnDestroy {
   }
 
   private toggleSpinner(isLoading: boolean) {
+    console.log('toggleSpinner', isLoading)
     if (isLoading) {
       this.showSpinner();
     } else {
@@ -52,6 +54,7 @@ export class LoadingDirective implements OnDestroy {
   }
 
   private showSpinner() {
+    console.log('showSpinner', this.spinnerElement);
     if (!this.spinnerElement) {
       this.spinnerElement = this.renderer.createElement('div');
       this.renderer.addClass(this.spinnerElement, 'loading-spinner');
@@ -62,6 +65,7 @@ export class LoadingDirective implements OnDestroy {
       );
       const parent =
         this.embeddedViewRef?.rootNodes[0]?.parentElement;
+      console.log('showSpinner parent', parent);
       if (parent) {
         this.renderer.appendChild(parent, this.spinnerElement);
       }

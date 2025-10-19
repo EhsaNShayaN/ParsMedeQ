@@ -10,6 +10,7 @@
 @use './app/theme/styles/variables' as *;
 @use 'ngx-toastr/toastr.css';
 @use 'app/theme/styles/home';
+@use 'app/shared/loading/loading';
 
 //////////////////////////////////
 .single-line {
