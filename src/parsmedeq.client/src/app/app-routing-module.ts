@@ -19,6 +19,7 @@ const pagesChildren: Routes = [
       {path: 'clips', loadChildren: () => import('./features/resources/clips/clips.module').then(m => m.ClipsModule)},
       {path: 'products', loadChildren: () => import('./features/products/products-module').then(m => m.ProductsModule)},
       {path: 'p', loadChildren: () => import('./features/product/product-module').then(m => m.ProductModule)},
+      {path: 'a', loadChildren: () => import('./features/article/article-module').then(m => m.ArticleModule)},
       {path: 'n', loadChildren: () => import('./features/news/news-module').then(m => m.NewsModule)},
       {path: 'c', loadChildren: () => import('./features/clip/clip-module').then(m => m.ClipModule)},
       {path: 'centers', loadChildren: () => import('./features/centers/centers-module').then(m => m.CentersModule)},

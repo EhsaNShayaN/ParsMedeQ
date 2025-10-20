@@ -1,0 +1,29 @@
+<div class="theme-container py-3">
+  <nav class="breadcrumb">
+    <a routerLink="/">خانه</a> / مقالات
+  </nav>
+
+  <h2 class="section-title">مقالات تخصصی</h2>
+
+  <div fxLayout="row wrap">
+    @for (article of articles; track article.id; let i = $index) {
+      <div fxFlex="100" fxFlex.gt-md="33.3" class="p-3">
+        <mat-card
+          class="article-card"
+          (click)="openArticle(article)">
+          <img mat-card-image [src]="article.thumbnail" [alt]="article.title"/>
+          <mat-card-content>
+            <h3>{{ article.title }}</h3>
+            <p class="meta">
+              <span>{{ article.author }}</span> | {{ article.publishDate | date }}
+            </p>
+            <p class="excerpt">{{ article.summary }}</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-stroked-button color="primary">ادامه مطلب</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    }
+  </div>
+</div>
