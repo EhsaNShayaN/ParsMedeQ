@@ -1,106 +1,28 @@
-<!--<app-header-image [backgroundImage]="'/assets/images/news_header.jpg'"
-                  [bgImageAnimate]="false"
-                  [contentOffsetToTop]="false"
-                  [hideMask]="true"
-                  [title]="'' | translate"
-                  [desc]="'' | translate">
-</app-header-image>-->
-<div class="theme-container px-3">
-  <div fxLayout="row wrap" class="agents-wrapper">
-    <div fxLayout="row wrap" fxFlex="100" fxFlex.gt-sm="100">
-      <div fxFlex="100" fxFlex.gt-md="20" fxFlex.gt-sm="40" fxFlex.sm="50" class="pe-2 py-3">
-        <mat-card appearance="outlined" class="px-3">
-          <div class="widget">
-            <mat-card-title>
-              <h4 class="py-2">{{ 'CATEGORY' | translate }}</h4>
-            </mat-card-title>
-            <mat-divider></mat-divider>
-            @if ((data?.length ?? 0) > 0) {
-              <mat-card-content class="p-0">
-                @for (item of data; track item.id) {
-                  <app-tree-categories [parent]="item" [isTopLevel]="true"
-                                       (onItemClicked)="itemClicked($event)"
-                                       [selectedId]="selectedId"></app-tree-categories>
-                }
-              </mat-card-content>
-            }
-          </div>
-        </mat-card>
-      </div>
-      <div fxFlex="100" fxFlex.gt-md="80" fxFlex.gt-sm="60" fxFlex.sm="50" fxLayout="row wrap" class="ps-2 py-3">
-        <div fxFlex="100">
-          <!--<app-properties-toolbar [isHomePage]="false"
-                                  (onChangeCount)="changeCount($event)"
-                                  (onChangeSorting)="changeSorting($event)"
-                                  (onChangeViewType)="changeViewType($event)">
-          </app-properties-toolbar>-->
-        </div>
-        <div fxFlex="100" class="mb-2">
-          <mat-card appearance="outlined" class="p-3">
-            <div class="widget">
-              <mat-card-title>
-                <h4>
-                  {{ 'NEWS' | translate }}
-                  {{ title }}
-                </h4>
-              </mat-card-title>
-              <mat-divider></mat-divider>
-              <mat-card-content>
-                <div fxLayout="row wrap" class="agents-wrapper">
-                  <div *ngFor="let item of items; let i = index" class="p-3"
-                       fxFlex="100" fxFlex.gt-md="33.3">
-                    <mat-card appearance="outlined">
-                      <div fxLayout="row wrap" class="property-status">
-                        <span class="background-color bg-orange">{{ item.resourceCategoryTitle }}</span>
-                      </div>
-                      @if ((item.price ?? 0) > 0) {
-                        <div fxLayout="row wrap" class="property-status left-0">
-                          <span class="background-color bg-green">vip</span>
-                        </div>
-                      }
-                      <a [routerLink]="['/news' | langPack, item.id ]" class="agent-img">
-                        <img mat-card-image defaultImage [src]="item.image" [alt]="item.title"
-                             class="w-100 img-square"/>
-                      </a>
-                      <mat-card-content>
-                        <h3 class="two-lines fw-600" [ngClass]="item.language === 'انگلیسی' ? 'ltr' : ''">
-                          {{ item.title }}
-                        </h3>
-                        <p class="mt-2 three-lines" [ngClass]="item.language === 'انگلیسی' ? 'ltr' : ''"
-                           [innerHTML]="item.abstract">
-                        </p>
-                        <p fxLayoutAlign="start center">
-                          <mat-icon color="primary" class="text-right"
-                                    fxFlex="10" fxFlex.gt-md="10" fxFlex.gt-sm="5">
-                            date_range
-                          </mat-icon>
-                          <span class="text-right mx-2" fxFlex="90" fxFlex.gt-md="90" fxFlex.gt-sm="95">
-                              {{ item.creationDate }}
-                            </span>
-                        </p>
-                      </mat-card-content>
-                      <mat-divider></mat-divider>
-                      <mat-card-actions fxLayoutAlign="space-between center">
-                        <div fxLayout="row" fxLayoutAlign="start center" class="text-muted"></div>
-                        <div>
-                          <a [routerLink]="['/news' | langPack, item.id ]" mat-button color="primary" class="uppercase">
-                            {{ viewText | translate }}
-                          </a>
-                        </div>
-                      </mat-card-actions>
-                    </mat-card>
-                  </div>
-                </div>
-              </mat-card-content>
-            </div>
-          </mat-card>
-        </div>
-        @if (items?.length) {
-          <div fxFlex="100" fxLayoutAlign="center center">
-            <app-load-more [step]="1"></app-load-more>
-          </div>
-        }
-      </div>
-    </div>
+<div class="news-list container">
+  <div class="header">
+    <div class="breadcrumbs">خانه › اخبار</div>
+    <h1>اخبار و مقالات</h1>
+    <p class="lead">جدیدترین اخبار و رویدادهای پارس‌مدیکیو</p>
   </div>
+
+  @if ((items?.length ?? 0) > 0) {
+    <div class="grid">
+      <article *ngFor="let n of items" class="news-card visible" (click)="goToDetail(n)" role="button" tabindex="0">
+        <div class="card-media" [style.backgroundImage]="'url(' + n.image + ')'">
+          <div class="overlay"></div>
+          <div class="meta-pill">
+            <span class="category">{{ n.resourceCategoryTitle }}</span>
+            <!--<span class="date">{{ n.publishDate }}</span>-->
+          </div>
+          <div class="card-text">
+            <h3>{{ n.title }}</h3>
+            <p class="summary" [innerHTML]="n.abstract | safeHtml"></p>
+            <button mat-stroked-button color="primary" class="mb-5" (click)="$event.stopPropagation(); goToDetail(n)">
+              مطالعه بیشتر
+            </button>
+          </div>
+        </div>
+      </article>
+    </div>
+  }
 </div>

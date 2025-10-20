@@ -1,4 +1,4 @@
-import {Component, OnInit, ElementRef, AfterViewInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit} from '@angular/core';
 import {NewsService} from '../news.service';
 import {News} from '../models/news.model';
 import {Router} from '@angular/router';
