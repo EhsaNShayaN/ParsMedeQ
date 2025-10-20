@@ -1,60 +1,79 @@
-<div>
-  <img mat-card-image src="{{product?.image}}" class="w-100 img-square" style="height: 200px; object-fit: cover">
+@if (product) {
+  <app-header-image
+    [backgroundImage]="product.image"
+    [bgImageAnimate]="false"
+    [contentOffsetToTop]="true"
+    [hideMask]="true"
+    [contentMinHeight]="400"
+    [title]="''"
+    [desc]="''">
+  </app-header-image>
   <div class="theme-container">
-    <div class="link-guid">
-      <span>{{ 'PRODUCTS' | translate }}</span>
-      @for (category of parents; track category.id) {
-        <mat-icon>keyboard_arrow_left</mat-icon>
-        <a [routerLink]="['/products/category/' | langPack, category?.id, category?.title ]" class="not-link"
-           target="_blank">
-          {{ category?.title }}
-        </a>
-      }
-      <!--<mat-icon>keyboard_arrow_left</mat-icon>
-      <a [routerLink]="['/products/category/' | langPack, productCategory2?.id, productCategory2?.title ]" class="not-link">
-        {{ productCategory2?.title }}
-      </a>
-      <mat-icon>keyboard_arrow_left</mat-icon>
-      <a [routerLink]="['/products/' | langPack, productCategory1?.parentId, productCategory1?.id, productCategory1?.title ]"
-         class="not-link">
-        {{ productCategory1?.title }}
-      </a>-->
-    </div>
-    <div id="product-item" [style.margin-top.px]="fixTabs ? '80' : '0'" class="product-item">
-      <div fxLayout="column" fxLayoutAlign="center end">
-        <!--@if ((item.fileId ?? 0) > 0 && (item.registered || item.price === 0)) {
-          <app-download-management
-            [id]="item.fileId!" [price]="item.price ?? 0" [tableId]="Tables.Article">
-          </app-download-management>
-        }-->
-        @if (product) {
-          <app-cart-item-control
-            [relatedId]="product!.id"
-            [tableId]="Tables.Product"
-            [relatedName]="product!.title"
-            [unitPrice]="product!.price ?? 0"
-            [stock]="product!.stock ?? 99999999">
-          </app-cart-item-control>
-        }
-      </div>
-      <div fxLayout="row wrap" class="agents-wrapper">
-        <div class="p-3" fxFlex="100" fxFlex.gt-md="50">
-          <div fxLayout="row">
-            <div class="category-line"></div>
-            <div class="header-title-content pt-2">
-              <h3 class="category-title">{{ product?.title }}</h3>
-            </div>
+    <div class="py-3">
+      <nav class="breadcrumb">فروشگاه › {{ product.productCategoryTitle }} › {{ product.title }}</nav>
+      <div fxLayout="row wrap">
+        <div class="gallery pe-2" fxFlex="100" fxFlex.gt-md="60">
+          <div class="main-image">
+            <img [src]="selectedImage" alt="{{ product.title }}" loading="lazy">
           </div>
-          <div>
-            <div class="multi-line-span" [innerHTML]="product?.description | safeHtml"></div>
+          <div class="thumbs">
+            <button *ngFor="let g of product.images" (click)="selectImage(g)" [class.active]="g.path === selectedImage">
+              <img [src]="g.path" alt="thumb" loading="lazy">
+            </button>
           </div>
         </div>
-        <div class="p-3" fxFlex="100" fxFlex.gt-md="50">
-          @for (item of product?.images; track product?.id) {
-            <img src="{{item?.path}}" class="wh-100" [alt]="product?.title">
+        <div class="info ps-2" fxFlex="100" fxFlex.gt-md="40">
+          <h1>{{ product.title }}</h1>
+          <div class="price-row">
+            <div class="price">
+              <span class="final">{{ formatPrice(finalPrice(product)) }}</span>
+              <span class="original"
+                    *ngIf="product.discount && product.discount>0">{{ formatPrice(product.price ?? 0) }}</span>
+            </div>
+          </div>
+
+          <p class="short-desc" [innerHTML]="product.description | safeHtml"></p>
+
+          @if (product) {
+            <app-cart-item-control
+              [relatedId]="product!.id"
+              [tableId]="Tables.Product"
+              [relatedName]="product!.title"
+              [unitPrice]="product!.price ?? 0"
+              [stock]="product!.stock ?? 99999999">
+            </app-cart-item-control>
           }
+
+          <mat-tab-group class="spec-tabs">
+            <mat-tab label="توضیحات">
+              <div class="tab-body">
+                <p [innerHTML]="product.description | safeHtml"></p>
+              </div>
+            </mat-tab>
+            <!--<mat-tab label="مشخصات">
+              <div class="tab-body specs">
+                <table>
+                  <tbody>
+                  <tr *ngFor="let s of product.specifications">
+                    <td class="key">{{ s.key }}</td>
+                    <td class="val">{{ s.value }}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </mat-tab>-->
+            <mat-tab label="گالری">
+              <div class="tab-body gallery-tab">
+                <div class="gallery-grid">
+                  <img *ngFor="let g of product.images" [src]="g.path" loading="lazy" alt="">
+                </div>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
         </div>
       </div>
     </div>
   </div>
-</div>
+} @else {
+  <div class="loading container">در حال بارگذاری...</div>
+}

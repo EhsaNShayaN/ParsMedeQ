@@ -1,7 +1,7 @@
 import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {BaseComponent} from '../../../base-component';
 import {ActivatedRoute} from '@angular/router';
-import {Product} from '../../../core/models/ProductResponse';
+import {Product, ProductImage} from '../../../core/models/ProductResponse';
 import {ProductCategoriesResponse, ProductCategory} from '../../../core/models/ProductCategoryResponse';
 import {BaseResult} from '../../../core/models/BaseResult';
 import {Tables} from '../../../core/constants/server.constants';
@@ -13,11 +13,13 @@ import {Tables} from '../../../core/constants/server.constants';
   standalone: false
 })
 export class ProductComponent extends BaseComponent implements OnInit, OnDestroy {
+  protected readonly Tables = Tables;
   private sub: any;
   product?: Product;
   productCategories: ProductCategory[] = [];
   parents: ProductCategory[] = [];
   fixTabs = false;
+  selectedImage?: string;
 
   constructor(private activatedRoute: ActivatedRoute) {
     super();
@@ -29,6 +31,8 @@ export class ProductComponent extends BaseComponent implements OnInit, OnDestroy
       this.sub = this.activatedRoute.params.subscribe(params => {
         this.restApiService.getProduct({id: params['id']}).subscribe((p: BaseResult<Product>) => {
           this.product = p.data;
+          this.selectedImage = p?.data?.images[0]?.path;
+          console.log(this.selectedImage);
           this.getParents(this.product?.productCategoryId);
           this.setTitle(this.product.title);
           this.setMetaDescription(this.product.description);
@@ -55,11 +59,24 @@ export class ProductComponent extends BaseComponent implements OnInit, OnDestroy
     this.fixTabs = (scrollTop + 150) > (productItem?.offsetTop ?? 0);
   }
 
+  selectImage(productImage: ProductImage) {
+    this.selectedImage = productImage.path;
+  }
+
+  finalPrice(p: Product): number {
+    if (!p) return 0;
+    if (p.discount && p.discount > 0) {
+      return Math.round((p.price ?? 0) * (1 - p.discount / 100));
+    }
+    return p.price ?? 0;
+  }
+
+  formatPrice(n: number) {
+    return n.toLocaleString('fa-IR') + ' تومان';
+  }
+
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
-
-  protected readonly parent = parent;
-  protected readonly Tables = Tables;
 }
 

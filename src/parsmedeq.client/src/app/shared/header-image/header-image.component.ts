@@ -33,7 +33,6 @@ export class HeaderImageComponent implements OnInit, OnDestroy {
     }
     if (this.backgroundImage) {
       this.bgImage = this.sanitizer.bypassSecurityTrustStyle('url(' + this.backgroundImage + ')');
-      console.log('bgImage', this.bgImage);
     }
   }
 

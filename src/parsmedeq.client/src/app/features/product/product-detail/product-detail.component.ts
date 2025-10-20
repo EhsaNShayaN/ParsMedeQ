@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Product} from '../models/product.model';
 import {ProductService} from '../product.service';
+import {Tables} from '../../../core/constants/server.constants';
 
 @Component({
   selector: 'app-product-detail',
@@ -49,4 +50,6 @@ export class ProductDetailComponent implements OnInit {
   formatPrice(n: number) {
     return n.toLocaleString('fa-IR') + ' تومان';
   }
+
+  protected readonly Tables = Tables;
 }

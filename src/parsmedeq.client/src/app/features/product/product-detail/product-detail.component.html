@@ -27,20 +27,23 @@
           <div class="price-row">
             <div class="price">
               <span class="final">{{ formatPrice(finalPrice(product)) }}</span>
-              <span class="original" *ngIf="product.discountPercent && product.discountPercent>0">{{ formatPrice(product.price) }}</span>
+              <span class="original"
+                    *ngIf="product.discountPercent && product.discountPercent>0">{{ formatPrice(product.price) }}</span>
             </div>
             <div class="stock" [class.out]="!product.inStock">{{ product.inStock ? 'موجود' : 'ناموجود' }}</div>
           </div>
 
           <p class="short-desc">{{ product.description }}</p>
 
-          <div class="actions">
-            <mat-form-field appearance="outline" class="qty">
-              <input matInput type="number" min="1" [(ngModel)]="quantity">
-            </mat-form-field>
-
-            <button mat-raised-button color="primary">افزودن به سبد</button>
-          </div>
+          @if (product) {
+            <app-cart-item-control
+              [relatedId]="product!.id"
+              [tableId]="Tables.Product"
+              [relatedName]="product!.title"
+              [unitPrice]="product!.price ?? 0"
+              [stock]="9999">
+            </app-cart-item-control>
+          }
 
           <mat-tab-group class="spec-tabs">
             <mat-tab label="توضیحات">

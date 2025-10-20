@@ -7,7 +7,7 @@
     <div>
       @if (quantity() === 0) {
         <div>
-          <button (click)="add()">➕ افزودن به سبد</button>
+          <button mat-raised-button color="primary" (click)="add()">افزودن به سبد</button>
         </div>
       } @else {
         <div class="cart-control">
