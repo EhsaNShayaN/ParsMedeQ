@@ -99,5 +99,6 @@
   "PLAY_VIDEO": "Play video",
   "LIST": "List",
   "STATUS": "Status",
-  "FULL_NAME": "Fullname"
+  "FULL_NAME": "Fullname",
+  "TOTAL_COUNT": "Total count"
 }

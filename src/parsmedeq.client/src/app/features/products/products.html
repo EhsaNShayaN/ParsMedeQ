@@ -1,7 +1,11 @@
-<div class="theme-container px-3">
+<div class="theme-container" [@listStagger]="items.length">
+  <div class="toolbar-row mt-3">
+    <div class="breadcrumbs">فروشگاه › همه محصولات</div>
+    <!-- filters / sort can be added here -->
+  </div>
   <div fxLayout="row wrap" class="agents-wrapper">
     <div fxLayout="row wrap" fxFlex="100" fxFlex.gt-sm="100">
-      <div fxFlex="100" fxFlex.gt-md="20" fxFlex.gt-sm="40" fxFlex.sm="50" class="pe-2 py-3">
+      <!--<div fxFlex="100" fxFlex.gt-md="20" fxFlex.gt-sm="40" fxFlex.sm="50" class="pe-2 py-3">
         <mat-card appearance="outlined">
           <div class="widget">
             <mat-card-title>
@@ -16,51 +20,44 @@
             }
           </div>
         </mat-card>
-      </div>
-      <div fxFlex="100" fxFlex.gt-md="80" fxFlex.gt-sm="60" fxFlex.sm="50" fxLayout="row wrap" class="ps-2 py-3">
+      </div>-->
+      <div fxFlex="100" fxFlex.gt-md="100" fxFlex.gt-sm="100" fxFlex.sm="100" fxLayout="row wrap">
         <div fxFlex="100">
-          <mat-card appearance="outlined" class="p-3">
+          <mat-card appearance="outlined">
             <div class="widget">
-              <mat-card-title><h4>
-                {{ 'PRODUCTS' | translate }}
-                {{ title }}
-              </h4>
+              <mat-card-title>
+                <h4 class="pt-3 ps-3">
+                  {{ 'PRODUCTS' | translate }}
+                  {{ title }}
+                </h4>
               </mat-card-title>
-              <mat-divider></mat-divider>
-              <mat-card-content>
-                <div fxLayout="row wrap" class="agents-wrapper">
-                  <div *ngFor="let item of items; let i = index" class="p-3"
-                       fxFlex="100" fxFlex.gt-md="33.3">
-                    <mat-card appearance="outlined">
-                      <div fxLayout="row wrap" class="property-status">
-                        <span class="background-color bg-orange">{{ item.productCategoryTitle }}</span>
+              <mat-card-content class="mt-3">
+                <div class="grid">
+                  <mat-card class="product-card" *ngFor="let p of items">
+                    <div class="media" (click)="goToDetail(p)" role="button" tabindex="0">
+                      <img mat-card-image [src]="p.image" [alt]="p.title" loading="lazy"/>
+                    </div>
+                    <mat-card-content>
+                      <h3 class="title text-left" (click)="goToDetail(p)">{{ p.title }}</h3>
+                      <div class="meta">
+                        <span class="price" *ngIf="p.discount && p.discount > 0">
+                          <span
+                            class="final">{{ formatPrice(Math.round((p.price ?? 0) * (1 - (p.discount / 100)))) }}</span>
+                          <span class="original">{{ formatPrice(p.price ?? 0) }}</span>
+                        </span>
+                        <span class="price" *ngIf="!p.discount || p.discount === 0">
+                          <span class="final">{{ formatPrice(p.price ?? 0) }}</span>
+                        </span>
                       </div>
-                      <div fxLayout="row wrap" class="property-status left-0" *ngIf="(item.price ?? 0) > 0">
-                        <span class="background-color bg-orange">vip</span>
-                      </div>
-                      <a
-                        [routerLink]="['/products', item.id, item.title | replaceUrlSpaces ]"
-                        class="agent-img">
-                        <img mat-card-image defaultImage [src]="item.image" [alt]="item.title"
-                             class="w-100 img-square"/>
-                      </a>
-                      <mat-card-content>
-                        <h3 class="two-lines fw-600">
-                          {{ item.title }}
-                        </h3>
-                      </mat-card-content>
-                      <mat-divider></mat-divider>
-                      <mat-card-actions fxLayoutAlign="space-between center">
-                        <div fxLayout="row" fxLayoutAlign="start center" class="text-muted"></div>
-                        <div>
-                          <a [routerLink]="['/products', item.id, item.title | replaceUrlSpaces ]"
-                             mat-button color="primary" class="uppercase">
-                            مشاهده
-                          </a>
-                        </div>
-                      </mat-card-actions>
-                    </mat-card>
-                  </div>
+
+                      <p class="desc">{{ p.description }}</p>
+                    </mat-card-content>
+
+                    <mat-card-actions class="card-actions">
+                      <button mat-stroked-button color="primary" (click)="goToDetail(p)">جزئیات</button>
+                      <button mat-raised-button color="primary" (click)="goToDetail(p)">افزودن به سبد</button>
+                    </mat-card-actions>
+                  </mat-card>
                 </div>
               </mat-card-content>
             </div>

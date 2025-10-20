@@ -5,14 +5,28 @@ import {AppSettings, Settings} from '../../app.settings';
 import {Pagination} from '../../core/models/Pagination';
 import {createTree, Tree} from '../../core/models/MenusResponse';
 import {ProductCategoriesResponse, ProductCategory} from '../../core/models/ProductCategoryResponse';
+import {animate, query, stagger, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.html',
   styleUrls: ['./products.scss'],
+  animations: [
+    trigger('listStagger', [
+      transition('* => *', [
+        query(':enter', [
+          style({opacity: 0, transform: 'translateY(12px) scale(0.98)'}),
+          stagger(80, [
+            animate('360ms ease-out', style({opacity: 1, transform: 'translateY(0) scale(1)'}))
+          ])
+        ], {optional: true})
+      ])
+    ])
+  ],
   standalone: false
 })
 export class Products extends BaseComponent implements OnInit, DoCheck {
+  protected readonly Math = Math;
   productCategories: ProductCategory[] = [];
   data: Tree[] = [];
   title: string | undefined;
@@ -129,5 +143,14 @@ export class Products extends BaseComponent implements OnInit, DoCheck {
       this.settings.loadMore.load = false;
       this.getItems();
     }
+  }
+
+  goToDetail(p: Product) {
+    const currentLang = this.translateService.getDefaultLang();
+    this.navigateToLink(`/products/${p.id}`, currentLang);
+  }
+
+  formatPrice(n: number) {
+    return n.toLocaleString('fa-IR') + ' تومان';
   }
 }

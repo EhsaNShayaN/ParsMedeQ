@@ -14,9 +14,9 @@
   }
   @if (settings.loadMore.complete) {
     <mat-chip-listbox>
-      <mat-chip-option selected disableRipple="true" color="warn" class="uppercase ws-nowrap">
-      <span class="background-color">
-        تعداد کل
+      <mat-chip-option selected disableRipple="true" color="primary" class="uppercase ws-nowrap">
+      <span class="secondary-color">
+        {{ 'TOTAL_COUNT'  | translate }}
         {{ settings.loadMore.result }}</span>
       </mat-chip-option>
     </mat-chip-listbox>
