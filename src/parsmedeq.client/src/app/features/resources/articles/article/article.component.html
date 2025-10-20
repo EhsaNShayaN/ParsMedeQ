@@ -1,57 +1,40 @@
-<div class="theme-container px-3">
-  <mat-card appearance="outlined" class="my-5 p-5" [ngClass.lt-sm]="'content'">
-    @if (item) {
-      <div id="product-item">
-        <div fxLayout="row wrap" class="agent-wrapper">
-          <div fxLayout="row wrap" fxFlex="100" fxFlex.gt-sm="100">
-            <div fxFlex="100" fxFlex.gt-sm="25" class="pl-3 position-relative" [ngClass.lt-md]="'image-article'">
-              @if ((item.price ?? 0) > 0) {
-                <div fxLayout="row wrap" class="property-status left-0 px-3">
-                  <span class="background-color bg-green">vip</span>
-                </div>
-              }
-              <div fxLayout="row wrap" class="property-status">
-                <span class="background-color bg-orange px-3 py-2">{{ item.resourceCategoryTitle }}</span>
-              </div>
-              <img mat-card-image defaultImage [src]="item.image" [alt]="item.title" class="w-100 img-square">
-              @if ((item.fileId ?? 0) > 0 && (item.registered || item.price === 0)) {
-                <app-download-management
-                  [id]="item.fileId!" [price]="item.price ?? 0" [tableId]="Tables.Article">
-                </app-download-management>
-              }
-            </div>
-            <div fxFlex="100" fxFlex.gt-sm="75" class="p-3">
-              <h1 class="mb-2 font-large">{{ item?.title }}</h1>
-            </div>
-          </div>
-          <div fxFlex="100" fxFlex.gt-sm="100">
-            <div class="mt-3 text-justify description" [innerHTML]="item?.abstract | safeHtml" [ngClass]="ltr"></div>
-            @if (item?.keywords) {
-              <div class="mt-1">
-                <span class="my-2 d-block">{{ 'KEYWORDS' | translate }}:</span>
-                <div fxLayout="row wrap mt-2">
-                  <div class="property-status position-relative ml-2 mt-3"
-                       *ngFor="let key of item.keywords.split(',')">
-                    <a [routerLink]="['/search' | langPack, key ]"
-                       class="background-color bg-warn px-3 py-2 not-link">{{ key }}</a>
-                  </div>
-                </div>
-              </div>
-            }
+<div class="article-detail theme-container">
+  <nav class="breadcrumb my-3">
+    <a routerLink="/" class="not-link">خانه</a>
+    /
+    <a routerLink="/articles" class="not-link">مقالات</a>
+    / {{ item?.title }}
+  </nav>
+
+  @if (item) {
+
+    <img class="cover" [src]="item?.image" [alt]="item.title"/>
+
+    <div class="content">
+      <h1>{{ item.title }}</h1>
+      <p class="meta">
+        تاریخ:
+        {{ item.publishDate }}
+      </p>
+      <p class="meta ">
+        کلمات کلیدی:
+        <span class="bg-primary p-2 background-color">{{ item.keywords }}</span>
+      </p>
+
+      <div class="body" [innerHTML]="item.description"></div>
+
+      <!--<div class="related" *ngIf="item.related?.length">
+        <h3>مقالات مرتبط</h3>
+        <div class="related-grid">
+          <div class="related-card" *ngFor="let related of item.related">
+            <img [src]="related.thumbnail" [alt]="related.title"/>
+            <h4>{{ related.title }}</h4>
           </div>
         </div>
-      </div>
-      @if (item) {
-        <app-comments [relatedId]="item.id" [tableId]="Tables.Article"></app-comments>
-      }
-    } @else {
-      <div class="text-center">
-        @if (isLoading) {
-          <img src="/assets/images/loading.gif" width="100" alt="loading"/>
-        } @else {
-          <span class="fw-600 font-large">{{ 'THE_DESIRED_ITEM_DOES_NOT_EXIST' | translate }}</span>
-        }
-      </div>
-    }
-  </mat-card>
+      </div>-->
+    </div>
+    <div class="mb-3">
+      <app-comments [relatedId]="item.id" [tableId]="Tables.Article"></app-comments>
+    </div>
+  }
 </div>

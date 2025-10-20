@@ -5,6 +5,7 @@ import {createTree, Tree} from '../../core/models/MenusResponse';
 import {AppSettings, Settings} from '../../app.settings';
 import {Pagination} from '../../core/models/Pagination';
 import {Resource, ResourceResponse, ResourcesRequest} from '../../core/models/ResourceResponse';
+import {Tables} from '../../core/constants/server.constants';
 
 @Directive()
 export class BasePageResources extends BaseComponent implements OnInit, DoCheck {
@@ -128,4 +129,20 @@ export class BasePageResources extends BaseComponent implements OnInit, DoCheck 
     }
   }
 
+  goToDetail(item: Resource) {
+    const currentLang = this.translateService.getDefaultLang();
+    let page = '';
+    switch (this.tableId) {
+      case Tables.Article:
+        page = 'articles';
+        break;
+      case Tables.News:
+        page = 'news';
+        break;
+      case Tables.Clip:
+        page = 'clips';
+        break;
+    }
+    this.navigateToLink(`/${page}/${item.id}`, currentLang);
+  }
 }
