@@ -9,7 +9,7 @@
       <div fxFlex="100" fxFlex.gt-sm="100">
         <div class="video-wrap">
           @if (filePath) {
-            <video #videoPlayer controls [src]="filePath" [loop]="true" preload="metadata" playsinline></video>
+            <video #videoPlayer controls [src]="filePath" preload="metadata" playsinline></video>
           } @else {
             <p>
               فایلی برای نمایش وجود ندارد.
