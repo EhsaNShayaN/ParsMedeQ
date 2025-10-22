@@ -1,5 +1,5 @@
 <div class="article-detail theme-container">
-  <nav class="breadcrumb my-3">
+  <nav class="breadcrumb m-3">
     <a routerLink="/" class="not-link">خانه</a>
     /
     <a routerLink="/articles" class="not-link">مقالات</a>
@@ -11,17 +11,19 @@
     <img class="cover" [src]="item?.image" [alt]="item.title"/>
 
     <div class="content">
-      <h1>{{ item.title }}</h1>
+      <h1 class="ltr text-left">{{ item.title }}</h1>
       <p class="meta">
         تاریخ:
-        {{ item.publishDate }}
+        {{ item.creationDate }}
       </p>
-      <p class="meta ">
-        کلمات کلیدی:
-        <span class="bg-primary p-2 background-color">{{ item.keywords }}</span>
-      </p>
+      @if (item.keywords) {
+        <p class="meta ">
+          کلمات کلیدی:
+          <span class="bg-primary p-2 background-color">{{ item.keywords }}</span>
+        </p>
+      }
 
-      <div class="body" [innerHTML]="item.description"></div>
+      <div class="body" [innerHTML]="item.abstract | safeHtml"></div>
 
       <!--<div class="related" *ngIf="item.related?.length">
         <h3>مقالات مرتبط</h3>

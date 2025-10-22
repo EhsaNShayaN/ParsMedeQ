@@ -13,11 +13,16 @@
           (click)="goToDetail(article)">
           <img mat-card-image [src]="article.image" [alt]="article.title"/>
           <mat-card-content>
-            <h3>{{ article.title }}</h3>
-            <p class="meta">
-              <span>{{ article.keywords }}</span> | {{ article.publishDate | date }}
-            </p>
-            <p class="excerpt">{{ article.abstract }}</p>
+            <h3 class="mt-2 text-left ltr two-lines">{{ article.title }}</h3>
+            <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+              <p class="meta">
+                <span>{{ article.keywords }}</span>
+              </p>
+              <p class="meta text-left">
+                {{ article.creationDate }}
+              </p>
+            </div>
+            <p class="excerpt four-lines" [innerHTML]="article.abstract | safeHtml"></p>
           </mat-card-content>
           <mat-card-actions>
             <button mat-stroked-button color="primary">ادامه مطلب</button>

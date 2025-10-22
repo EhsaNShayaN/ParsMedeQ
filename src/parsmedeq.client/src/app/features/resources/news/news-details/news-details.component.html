@@ -10,12 +10,12 @@
           <span class="category">{{ item.resourceCategoryTitle }}</span>
           <span class="date">{{ item.publishDate }}</span>
         </div>
-        <h1 class="title">{{ item.title }}</h1>
       </div>
     </header>
 
     <article class="content fade-section">
-      <div class="text" [innerHTML]="item.description"></div>
+      <h1 class="title">{{ item.title }}</h1>
+      <div class="mt-2 text" [innerHTML]="item.description | safeHtml"></div>
 
       <div class="share">
         <span>اشتراک‌گذاری:</span>
