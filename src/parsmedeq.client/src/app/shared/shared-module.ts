@@ -53,7 +53,7 @@ import {MatBadge} from '@angular/material/badge';
 import {MultiCounterComponent} from './multi-counter/multi-counter';
 import {OurServiceComponent} from '../features/home/our-service/our-service.component';
 import {MatTab, MatTabGroup} from '@angular/material/tabs';
-import {ClipDialogComponent} from '../features/resources/clips/clip-dialog/clip-dialog.component';
+import {ClipDialogComponent} from './dialogs/clip-dialog/clip-dialog.component';
 
 @NgModule({
   declarations: [

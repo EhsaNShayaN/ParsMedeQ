@@ -3,6 +3,8 @@ import {MatDialog} from '@angular/material/dialog';
 import {ConfirmDialogComponent, ConfirmDialogModel} from '../../shared/dialogs/confirm-dialog/confirm-dialog.component';
 import {LoginDialogComponent, LoginDialogModel} from '../../shared/dialogs/login-dialog/login-dialog.component';
 import {CustomDialogComponent, CustomDialogModel} from '../../shared/dialogs/custom-dialog/custom-dialog.component';
+import {Resource} from '../models/ResourceResponse';
+import {ClipDialogComponent, ClipDialogModel} from '../../shared/dialogs/clip-dialog/clip-dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +33,14 @@ export class DialogService {
     const dialogData = new LoginDialogModel(title, message);
     return this.dialog.open(LoginDialogComponent, {
       maxWidth: '500px',
+      data: dialogData
+    });
+  }
+
+  public openClipDialog(clip: Resource) {
+    const dialogData = new ClipDialogModel(clip);
+    return this.dialog.open(ClipDialogComponent, {
+      maxWidth: '600px',
       data: dialogData
     });
   }

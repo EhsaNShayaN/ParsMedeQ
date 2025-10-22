@@ -1,8 +1,6 @@
 import {AfterViewInit, Component, ElementRef} from '@angular/core';
 import {BasePageResources} from '../base-page-resources';
 import {Tables} from '../../../core/constants/server.constants';
-import {ClipDialogComponent} from './clip-dialog/clip-dialog.component';
-import {MatDialog} from '@angular/material/dialog';
 import {Resource} from '../../../core/models/ResourceResponse';
 
 @Component({
@@ -12,21 +10,13 @@ import {Resource} from '../../../core/models/ResourceResponse';
   standalone: false,
 })
 export class ClipsComponent extends BasePageResources implements AfterViewInit {
-  constructor(private dialog: MatDialog,
-              private el: ElementRef) {
+  constructor(private el: ElementRef) {
     super(Tables.Clip);
   }
 
   openDialog(clip: Resource, event?: MouseEvent) {
-    console.log(clip);
     if (event) event.stopPropagation();
-    this.dialog.open(ClipDialogComponent, {
-      data: {clip},
-      width: 'min(980px, 95vw)',
-      panelClass: 'custom-clip-dialog',
-      hasBackdrop: true,
-      backdropClass: 'dark-backdrop'
-    });
+    this.dialogService.openClipDialog(clip);
   }
 
   ngAfterViewInit() {
