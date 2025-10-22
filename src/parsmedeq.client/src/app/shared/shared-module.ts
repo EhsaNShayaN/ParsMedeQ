@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatToolbar, MatToolbarModule} from '@angular/material/toolbar';
-import {MatButton, MatButtonModule, MatIconButton} from '@angular/material/button';
+import {MatButton, MatButtonModule, MatIconButton, MatMiniFabButton} from '@angular/material/button';
 import {MatIcon, MatIconModule} from '@angular/material/icon';
 import {MatSidenav, MatSidenavContainer, MatSidenavContent, MatSidenavModule} from '@angular/material/sidenav';
 import {MatDivider, MatList, MatListItem, MatListModule, MatNavList} from '@angular/material/list';
@@ -53,6 +53,7 @@ import {MatBadge} from '@angular/material/badge';
 import {MultiCounterComponent} from './multi-counter/multi-counter';
 import {OurServiceComponent} from '../features/home/our-service/our-service.component';
 import {MatTab, MatTabGroup} from '@angular/material/tabs';
+import {ClipDialogComponent} from '../features/resources/clips/clip-dialog/clip-dialog.component';
 
 @NgModule({
   declarations: [
@@ -83,6 +84,7 @@ import {MatTab, MatTabGroup} from '@angular/material/tabs';
     OurCenterComponent,
     MultiCounterComponent,
     OurServiceComponent,
+    ClipDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -141,6 +143,7 @@ import {MatTab, MatTabGroup} from '@angular/material/tabs';
     MatBadge,
     MatTab,
     MatTabGroup,
+    MatMiniFabButton,
     //////////////////////
     DefaultFlexDirective,
     DefaultClassDirective,
@@ -204,6 +207,7 @@ import {MatTab, MatTabGroup} from '@angular/material/tabs';
     MatBadge,
     MatTab,
     MatTabGroup,
+    MatMiniFabButton,
     //////////////////////
     DefaultFlexDirective,
     DefaultClassDirective,
@@ -228,6 +232,7 @@ import {MatTab, MatTabGroup} from '@angular/material/tabs';
     OurCenterComponent,
     MultiCounterComponent,
     OurServiceComponent,
+    ClipDialogComponent,
   ],
   providers: [
     CurrencyFormatterPipe,

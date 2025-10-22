@@ -11,6 +11,7 @@ public readonly record struct ResourceListApiResponse(
     string Description,
     //////////////////////////
     string Image,
+    int? FileId,
     string Language,
     int? Price,
     int? Discount,

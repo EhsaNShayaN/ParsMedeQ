@@ -1,85 +1,32 @@
-<!--<app-header-image [backgroundImage]="'assets/images/others/resources_clips_header.jpg?v=1'"
-                  [bgImageAnimate]="false"
-                  [contentOffsetToTop]="false"
-                  [hideMask]="true"
-                  [title]="'' | translate"
-                  [desc]="'' | translate">
-</app-header-image>-->
-<div class="theme-container px-3">
-  <div fxLayout="row wrap" class="agents-wrapper">
-    <div fxLayout="row wrap" fxFlex="100" fxFlex.gt-sm="100">
-      <div fxFlex="100" fxFlex.gt-md="20" fxFlex.gt-sm="40" fxFlex.sm="50" class="pe-2 py-3">
-        <mat-card appearance="outlined" class="px-3">
-          <div class="widget">
-            <mat-card-title>
-              <h4 class="py-2">{{ 'CATEGORY' | translate }}</h4>
-            </mat-card-title>
-            <mat-divider></mat-divider>
-            @if ((data?.length ?? 0) > 0) {
-              <mat-card-content class="p-0">
-                <ng-container *ngFor="let item of data">
-                  <app-tree-categories [parent]="item" [isTopLevel]="true"
-                                       (onItemClicked)="itemClicked($event)"
-                                       [selectedId]="selectedId"></app-tree-categories>
-                </ng-container>
-              </mat-card-content>
-            }
-          </div>
-        </mat-card>
-      </div>
-      <div fxFlex="100" fxFlex.gt-md="80" fxFlex.gt-sm="60" fxFlex.sm="50" fxLayout="row wrap" class="ps-2 py-3">
-        <!--<div fxFlex="100">
-          <app-properties-toolbar [isHomePage]="false"
-                                  (onChangeCount)="changeCount($event)"
-                                  (onChangeSorting)="changeSorting($event)"
-                                  (onChangeViewType)="changeViewType($event)">
-          </app-properties-toolbar>
-        </div>-->
-        <div fxFlex="100" class="mb-2">
-          <mat-card appearance="outlined" class="p-3">
-            <div class="widget">
-              <mat-card-title><h4>{{ 'CLIPS' | translate }} {{ title }}</h4></mat-card-title>
-              <mat-divider></mat-divider>
-              <mat-card-content>
-                <div fxLayout="row wrap" class="agents-wrapper">
-                  <div *ngFor="let item of items; let i = index" class="p-3"
-                       fxFlex="100" fxFlex.gt-md="33.3">
-                    <mat-card appearance="outlined">
-                      @if ((item.price ?? 0) > 0) {
-                        <div fxLayout="row wrap" class="property-status left-0">
-                          <span class="background-color bg-green">vip</span>
-                        </div>
-                      }
-                      <a [routerLink]="['/clips' | langPack, item.id ]" class="agent-img">
-                        <img mat-card-image defaultImage [src]="item.image" [alt]="item.title"
-                             class="w-100 img-square"/>
-                      </a>
-                      <mat-card-content>
-                        <h3 class="two-lines fw-600" [ngClass]="item.language === 'انگلیسی' ? 'ltr' : ''">
-                          {{ item.title }}
-                        </h3>
-                      </mat-card-content>
-                      <mat-divider></mat-divider>
-                      <mat-card-actions fxLayoutAlign="space-between center">
-                        <div fxLayout="row" fxLayoutAlign="start center" class="text-muted"></div>
-                        <div>
-                          <a [routerLink]="['/clips' | langPack, item.id ]" mat-button color="primary"
-                             class="uppercase">
-                            {{ viewText | translate }}
-                          </a>
-                        </div>
-                      </mat-card-actions>
-                    </mat-card>
-                  </div>
-                </div>
-              </mat-card-content>
-            </div>
-          </mat-card>
-        </div>
-        <div *ngIf="items?.length" fxFlex="100" fxLayoutAlign="center center">
-          <app-load-more [step]="1"></app-load-more>
-        </div>
-      </div>
-    </div>
+<div class="theme-container">
+  <div class="header">
+    <div class="breadcrumbs">خانه › کلیپ‌ها</div>
+    <h1>کلیپ‌های آموزشی</h1>
+    <p class="lead">آموزش‌های ویدیویی مرتبط با تجهیزات و روش‌های بالینی</p>
   </div>
+
+  @if ((items?.length ?? 0) > 0) {
+    <div class="grid">
+      <article class="clip-card visible" *ngFor="let c of items" (click)="goToDetail(c)" role="button" tabindex="0">
+        <div class="thumb" [style.backgroundImage]="'url(' + c.image + ')'">
+          <div class="overlay"></div>
+          <button class="play-btn mat-mini-fab" mat-mini-fab color="primary" (click)="openDialog(c, $event)"
+                  aria-label="پخش">
+            <mat-icon>play_arrow</mat-icon>
+          </button>
+        </div>
+        <div class="card-body">
+          <h3>{{ c.title }}</h3>
+          <p class="summary two-lines" [innerHTML]="c.description | safeHtml"></p>
+          <div class="meta">
+            <span class="cat">{{ c.resourceCategoryTitle }}</span>
+            <span class="date">{{ c.publishDate }}</span>
+          </div>
+        </div>
+      </article>
+    </div>
+    <div fxLayout="row wrap" fxLayoutAlign="center center" class="my-3">
+      <app-load-more [step]="1"></app-load-more>
+    </div>
+  }
 </div>

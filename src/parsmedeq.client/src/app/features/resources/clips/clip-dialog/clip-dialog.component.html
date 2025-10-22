@@ -1,6 +1,6 @@
 <dialog mat-dialog-content class="clip-dialog" role="dialog" aria-label="پلیر ویدیو">
   <div class="video-wrap">
-    <video #videoPlayer controls [src]="data.clip.videoUrl" preload="metadata" playsinline></video>
+    <video #videoPlayer controls [src]="getFilePath(data.clip.fileId)" preload="metadata" playsinline></video>
   </div>
 
   <div class="meta">

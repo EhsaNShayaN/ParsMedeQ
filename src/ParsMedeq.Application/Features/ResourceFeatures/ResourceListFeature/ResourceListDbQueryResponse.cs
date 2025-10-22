@@ -8,6 +8,7 @@ public sealed class ResourceListDbQueryResponse
     public int ResourceCategoryId { get; set; }
     public string ResourceCategoryTitle { get; set; } = string.Empty;
     public string Image { get; set; } = string.Empty;
+    public int? FileId { get; set; }
     public string Language { get; set; } = string.Empty;
     public int? Price { get; set; }
     public int? Discount { get; set; }

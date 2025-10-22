@@ -1,4 +1,4 @@
-<div class="news-list container">
+<div class="theme-container">
   <div class="header">
     <div class="breadcrumbs">خانه › اخبار</div>
     <h1>اخبار و مقالات</h1>
@@ -6,7 +6,7 @@
   </div>
 
   @if ((items?.length ?? 0) > 0) {
-    <div class="grid">
+    <div class="grid mb-4">
       <article *ngFor="let n of items" class="news-card visible" (click)="goToDetail(n)" role="button" tabindex="0">
         <div class="card-media" [style.backgroundImage]="'url(' + n.image + ')'">
           <div class="overlay"></div>

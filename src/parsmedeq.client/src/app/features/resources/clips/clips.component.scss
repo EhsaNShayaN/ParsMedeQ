@@ -1,29 +1,98 @@
-.agents-wrapper {
-  margin: -16px;
-  padding: 32px 0;
+.header {
+  text-align: center;
+  margin-bottom: 1.2rem;
 
-  .agent-img {
-    border-top-left-radius: inherit;
-    border-top-right-radius: inherit;
+  .breadcrumbs {
+    color: #888;
+  }
+
+  h1 {
+    color: var(--pm-primary);
+  }
+
+  .lead {
+    color: #555;
   }
 }
 
-.property-status {
-  position: absolute;
-  z-index: 2;
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
 
-  span {
-    padding: 3px 6px;
-    margin: 4px;
-    font-size: 12px;
-    font-weight: 500;
-    text-transform: uppercase;
-    border-radius: 4px;
-    /*background-color: #ffa000;
-    color: #fff;*/
+/* clip card */
+.clip-card {
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--pm-white);
+  box-shadow: 0 6px 18px rgba(16, 24, 40, 0.06);
+  transition: transform .22s ease, box-shadow .22s ease;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(18px);
+
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 36px rgba(16, 24, 40, 0.12);
+  }
+
+  .thumb {
+    position: relative;
+    height: 160px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.45));
+    }
+
+    .play-btn {
+      position: relative;
+      z-index: 2;
+
+      mat-icon {
+        margin-left: 2px;
+      }
+    }
+  }
+
+  .card-body {
+    padding: 0.9rem;
+
+    h3 {
+      margin: 0 0 .4rem;
+      color: var(--pm-primary);
+    }
+
+    .summary {
+      color: #555;
+      font-size: .75rem !important;
+    }
+
+    .meta {
+      display: flex;
+      justify-content: space-between;
+      margin-top: .6rem;
+      color: #777;
+      font-size: .9rem;
+    }
   }
 }
 
-.left-0 {
-  left: 0;
+.clip-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all .6s cubic-bezier(.2, .9, .2, 1);
+}
+
+@media (max-width: 720px) {
+  .thumb {
+    height: 140px;
+  }
 }

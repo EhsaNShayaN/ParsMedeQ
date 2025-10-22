@@ -50,6 +50,7 @@ internal sealed class ResourceReadRepository : GenericPrimitiveReadRepositoryBas
                 ResourceCategoryId = res.ResourceCategoryId,
                 ResourceCategoryTitle = res.ResourceCategory.ResourceCategoryTranslations.SingleOrDefault(s => s.LanguageCode == langCode).Title ?? string.Empty,
                 Image = res.ResourceTranslations.SingleOrDefault(s => s.LanguageCode == langCode).Image ?? string.Empty,
+                FileId = res.ResourceTranslations.SingleOrDefault(s => s.LanguageCode == langCode).FileId,
                 Language = res.Language,
                 Price = res.Price,
                 Discount = res.Discount,

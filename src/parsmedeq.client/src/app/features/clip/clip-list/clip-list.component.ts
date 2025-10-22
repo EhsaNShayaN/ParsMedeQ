@@ -2,7 +2,7 @@ import {Component, OnInit, ElementRef, AfterViewInit} from '@angular/core';
 import {ClipService} from '../clip.service';
 import {Clip} from '../models/clip.model';
 import {MatDialog} from '@angular/material/dialog';
-import {ClipDialogComponent} from '../clip-dialog/clip-dialog.component';
+import {ClipDialogComponent} from '../../resources/clips/clip-dialog/clip-dialog.component';
 
 @Component({
   selector: 'app-clip-list',

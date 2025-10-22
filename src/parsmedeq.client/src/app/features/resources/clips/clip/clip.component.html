@@ -1,69 +1,47 @@
-<div class="px-3">
+@if (item) {
   <div class="theme-container">
-    <mat-card appearance="outlined" class="my-5 p-5">
-      @if (item) {
-        @if ((item?.anchors?.length ?? 0) > 0) {
-          <div class="anchor-fix" [class.top]="top">
-            <ng-container *ngFor="let anchor of item?.anchors">
-              <a (click)="scrollToItem(anchor.id)" class="red-color d-block not-link cursor-pointer">
-                <span>-</span>{{ anchor.name }}
-              </a>
-            </ng-container>
-          </div>
-        }
-        <div [ngClass]="{'mr' : (item?.anchors?.length ?? 0) > 0}">
-          <div fxLayout="row wrap" class="agent-wrapper">
-            <div fxLayout="row wrap" fxFlex="100" fxFlex.gt-sm="100" class="p-3 mx-4">
-              <div fxFlex="100" fxFlex.gt-sm="35" class="p-3 position-relative">
-                <div>
-                  @if ((item?.price ?? 0) > 0) {
-                    <div fxLayout="row wrap" class="property-status left-0 px-3">
-                      <span class="background-color bg-green">vip</span>
-                    </div>
-                  }
-                  <img mat-card-image defaultImage [src]="item?.image" [alt]="item?.title" class="w-100">
-                  @if ((item.fileId ?? 0) > 0 && (item.registered || item.price === 0)) {
-                    <app-download-management
-                      [id]="item.fileId!" [price]="item.price ?? 0" [tableId]="Tables.Clip">
-                    </app-download-management>
-                  }
-                </div>
-                <div>
-                  <h2>{{ item?.title }}</h2>
-                  <ng-container *ngIf="item?.description">
-                    <p [innerHTML]="item?.description | safeHtml" class="text-justify"></p>
-                  </ng-container>
-                  <div *ngIf="item?.keywords" class="mt-1">
-                    <h3 class="my-2">{{ 'KEYWORDS' | translate }}:</h3>
-                    <div fxLayout="row wrap mt-2">
-                      @for (key of item.keywords.split(','); track key) {
-                        <div class="property-status position-relative ml-2 mt-3">
-                          <span class="background-color bg-warn px-3 py-2">{{ key }}</span>
-                        </div>
-                      }
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div fxFlex="100" fxFlex.gt-sm="65" class="p-3">
-                <div class="=w-100 bg-primary  h-100">
-                  <video controls [src]="getFilePath(item?.fileId)" class="w-100 h-100">
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
-              </div>
-            </div>
-          </div>
+    <div class="breadcrumb">
+      <a mat-button [routerLink]="['/clips' | langPack]">&larr; بازگشت به کلیپ‌ها</a>
+    </div>
+
+    <header class="hero" [style.backgroundImage]="'url(' + item.image + ')'">
+      <div class="overlay"></div>
+      <div class="hero-body fade-in">
+        <div class="meta">
+          <span class="cat">{{ item.resourceCategoryTitle }}</span>
+          <span class="date">{{ item.publishDate }}</span>
         </div>
-        @if (item) {
-          <app-comments [relatedId]="item.id" [tableId]="Tables.Clip"></app-comments>
-        }
-      }
-      <ng-container *ngIf="!item">
-        <b class="font-large text-center">
-          {{ 'THE_DESIRED_ITEM_DOES_NOT_EXIST' | translate }}
-        </b>
-      </ng-container>
-    </mat-card>
+        <h1 class="title">{{ item.title }}</h1>
+        <p class="short" [innerHTML]="item.description | safeHtml"></p>
+        <div class="hero-actions">
+          <button mat-raised-button color="primary" (click)="openPlayer()">پخش ویدیو</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="content fade-in">
+      <section class="desc">
+        <h3>توضیحات</h3>
+        <p [innerHTML]="item.description"></p>
+        <div class="tags" *ngIf="item.keywords?.length">
+          <span class="tag" *ngFor="let t of item.keywords">#{{ t }}</span>
+        </div>
+      </section>
+
+      <!--<section class="related" *ngIf="item.related?.length">
+        <h3>کلیپ‌های مرتبط</h3>
+        <div class="rel-grid">
+          <article class="rel-card" *ngFor="let r of item.related" (click)="goToClip(r)">
+            <img [src]="r.thumbnail" alt="{{ r.title }}">
+            <div class="rmeta">
+              <h4>{{ r.title }}</h4>
+              <p class="rdate">{{ getDate(r.publishDate) }}</p>
+            </div>
+          </article>
+        </div>
+      </section>-->
+    </main>
   </div>
-</div>
+} @else {
+  <div class="loading container">در حال بارگذاری...</div>
+}
