@@ -91,7 +91,6 @@ public sealed class Product : EntityBase<int>
         return this.Update(ProductCategoryId, language, publishDate, publishInfo, publisher, price, discount, expirationDate)
              .Map(_ => this.UpdateTranslation(langCode, title, description, @abstract, anchors, keywords, imagePath, fileId).Map(() => this));
     }
-    #endregion
 
     public ValueTask<PrimitiveResult> AddTranslation(
         string langCode,
@@ -162,4 +161,5 @@ public sealed class Product : EntityBase<int>
         }
         return PrimitiveResult.Success();
     }
+    #endregion
 }

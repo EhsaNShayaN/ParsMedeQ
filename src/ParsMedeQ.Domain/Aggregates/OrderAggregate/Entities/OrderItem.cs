@@ -23,7 +23,6 @@ public sealed class OrderItem : EntityBase<int>
 
     #region " Factory "
     internal static PrimitiveResult<OrderItem> Create(
-        int orderId,
         int tableId,
         int relatedId,
         int quantity,
@@ -33,7 +32,6 @@ public sealed class OrderItem : EntityBase<int>
         return PrimitiveResult.Success(
             new OrderItem()
             {
-                OrderId = orderId,
                 TableId = tableId,
                 RelatedId = relatedId,
                 Quantity = quantity,

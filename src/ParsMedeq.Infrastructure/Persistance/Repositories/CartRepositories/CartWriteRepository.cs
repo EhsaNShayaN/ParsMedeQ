@@ -9,6 +9,13 @@ internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<
 {
     public CartWriteRepository(WriteDbContext dbContext) : base(dbContext) { }
 
+    public async ValueTask<PrimitiveResult<Cart>> GetCart(int id, CancellationToken cancellationToken)
+    {
+        return await this.DbContext.Cart
+            .Include(c => c.CartItems)
+            .Where(s => s.Id.Equals(id))
+            .FirstOrDefaultAsync(cancellationToken);
+    }
     public async ValueTask<Cart> GetCarts(int? userId, Guid? anonymousId, string Lang)
     {
         var cart = await this.DbContext.Cart

@@ -107,11 +107,14 @@ public sealed class Cart : EntityBase<int>
             _ => PrimitiveResult.Success(),
             PrimitiveResult.Failure);
     }
-    public ValueTask<PrimitiveResult> RemoveCartItem(
-        CartItem item)
+    public ValueTask<PrimitiveResult> RemoveCartItems()
     {
+        this._CartItems.RemoveRange(0, this.CartItems.Count);
         return ValueTask.FromResult(PrimitiveResult.Success());
-        //return this._CartItems.Remove(item) ? PrimitiveResult.Success() : PrimitiveResult.Failure("", "");
+    }
+    public ValueTask<PrimitiveResult> RemoveCartItem(CartItem item)
+    {
+        return this._CartItems.Remove(item) ? ValueTask.FromResult(PrimitiveResult.Success()) : ValueTask.FromResult(PrimitiveResult.Failure("", ""));
     }
     #endregion
 }

@@ -39,7 +39,7 @@ public sealed class Order : EntityBase<int>
         decimal totalAmount,
         decimal discountAmount,
         byte status,
-        DateTime creationDate)
+        string orderNumber)
     {
         return PrimitiveResult.Success(
             new Order()
@@ -48,14 +48,35 @@ public sealed class Order : EntityBase<int>
                 TotalAmount = totalAmount,
                 DiscountAmount = discountAmount,
                 Status = status,
-                CreationDate = creationDate
+                OrderNumber = orderNumber,
+                CreationDate = DateTime.UtcNow
             });
     }
+
+    public ValueTask<PrimitiveResult> AddItem(
+        int tableId,
+        int relatedId,
+        int quantity,
+        decimal unitPrice,
+        decimal subtotal)
+    {
+        return OrderItem.Create(
+            tableId,
+            relatedId,
+            quantity,
+            unitPrice,
+            subtotal)
+            .OnSuccess(item => this._orderItems.Add(item.Value))
+            .Match(
+            success => PrimitiveResult.Success(),
+            PrimitiveResult.Failure);
+    }
+
+
     public ValueTask<PrimitiveResult<Order>> Update(
-        string orderNumber,
         byte status)
     {
-        this.OrderNumber = orderNumber;
+        this.UpdateDate = DateTime.UtcNow;
         this.Status = status;
         return ValueTask.FromResult(PrimitiveResult.Success(this));
     }

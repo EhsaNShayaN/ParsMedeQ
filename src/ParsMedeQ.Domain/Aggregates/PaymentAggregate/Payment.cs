@@ -33,11 +33,7 @@ public sealed class Payment : EntityBase<int>
     public static PrimitiveResult<Payment> Create(
         int orderId,
         decimal amount,
-        byte paymentMethod,
-        string transactionId,
-        byte status,
-        DateTime? paidDate,
-        DateTime creationDate)
+        byte paymentMethod)
     {
         return PrimitiveResult.Success(
             new Payment()
@@ -45,11 +41,31 @@ public sealed class Payment : EntityBase<int>
                 OrderId = orderId,
                 Amount = amount,
                 PaymentMethod = paymentMethod,
-                TransactionId = transactionId,
-                Status = status,
-                PaidDate = paidDate,
-                CreationDate = creationDate
+                Status = (byte)PaymentStatus.Pending.GetHashCode(),
+                CreationDate = DateTime.UtcNow
             });
+    }
+
+    public ValueTask<PrimitiveResult<Payment>> ConfirmPayment(
+        string transactionId)
+    {
+        this.TransactionId = transactionId;
+        this.Status = (byte)PaymentStatus.Success.GetHashCode();
+        this.PaidDate = DateTime.UtcNow;
+        this.UpdateOrder((byte)OrderStatus.Paid.GetHashCode());
+        return ValueTask.FromResult(PrimitiveResult.Success(this));
+    }
+
+    public ValueTask<PrimitiveResult<Payment>> FailPayment()
+    {
+        this.Status = (byte)PaymentStatus.Failed.GetHashCode();
+        this.UpdateOrder((byte)OrderStatus.Pending.GetHashCode());
+        return ValueTask.FromResult(PrimitiveResult.Success(this));
+    }
+    public ValueTask<PrimitiveResult> UpdateOrder(byte status)
+    {
+        var x = this.Order.Update(status);
+        return ValueTask.FromResult(PrimitiveResult.Success());
     }
     #endregion
 }
