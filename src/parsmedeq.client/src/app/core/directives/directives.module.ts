@@ -14,6 +14,7 @@ import {LoadingDirective} from '../../shared/loading/loading.directive';
     InputRestrictionDirective,
     NoSpaceDirective,
     LoadingDirective,
+    DefaultImageDirective,
   ],
   exports: [
     OnlyNumberDirective,
@@ -25,7 +26,6 @@ import {LoadingDirective} from '../../shared/loading/loading.directive';
   ],
   imports: [
     CommonModule,
-    DefaultImageDirective,
   ]
 })
 export class DirectivesModule {

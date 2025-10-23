@@ -1,7 +1,8 @@
 import {Directive, HostListener, Input} from '@angular/core';
 
 @Directive({
-  selector: 'img[defaultImage]', // Applies to all <img> with defaultImage attribute
+  selector: 'img[defaultImage]',
+  standalone: false
 })
 export class DefaultImageDirective {
   @Input() defaultImage: string | undefined; // your default image path
