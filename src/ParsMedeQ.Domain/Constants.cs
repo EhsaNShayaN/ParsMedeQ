@@ -39,3 +39,10 @@ public enum PaymentLogTypes
     Response = 1,
     Callback = 2,
 }
+public enum TicketStatus
+{
+    Open = 0,
+    Success = 1,
+    Failed = 2,
+    Refunded = 3,
+}

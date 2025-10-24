@@ -17,4 +17,7 @@ internal static class TableNames
     internal static string Order = "Order";
     internal static string OrderItems = "OrderItems";
     internal static string Payment = "Payment";
+    internal static string Ticket = "Ticket";
+    internal static string TicketAnswers = "TicketAnswer";
+    internal static string Media = "Media";
 }

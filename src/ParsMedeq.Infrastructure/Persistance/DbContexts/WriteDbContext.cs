@@ -12,6 +12,8 @@ using ParsMedeQ.Domain.Aggregates.PurchaseAggregate;
 using ParsMedeQ.Domain.Aggregates.ResourceAggregate;
 using ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate;
 using ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate.Entities;
+using ParsMedeQ.Domain.Aggregates.TicketAggregate;
+using ParsMedeQ.Domain.Aggregates.TicketAggregate.Entities;
 
 namespace ParsMedeQ.Infrastructure.Persistance.DbContexts;
 
@@ -34,6 +36,8 @@ public sealed class WriteDbContext : DbContextBase<WriteDbContext>
     public DbSet<Order> Order { get; set; }
     public DbSet<OrderItem> OrderItems { get; set; }
     public DbSet<Payment> Payment { get; set; }
+    public DbSet<Ticket> Ticket { get; set; }
+    public DbSet<TicketAnswer> TicketAnswers { get; set; }
 
     public WriteDbContext(DbContextOptions<WriteDbContext> opts) : base(opts) { }
 

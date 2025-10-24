@@ -5,6 +5,7 @@ using ParsMedeQ.Application.Persistance.Schema.OrderRepositories;
 using ParsMedeQ.Application.Persistance.Schema.PaymentRepositories;
 using ParsMedeQ.Application.Persistance.Schema.ProductRepositories;
 using ParsMedeQ.Application.Persistance.Schema.ResourceRepositories;
+using ParsMedeQ.Application.Persistance.Schema.TicketRepositories;
 using ParsMedeQ.Application.Persistance.Schema.UserRepositories;
 
 namespace ParsMedeQ.Application.Persistance.Schema;
@@ -18,4 +19,5 @@ public interface IWriteUnitOfWork : IBaseWriteUnitOfWork
     ICommentWriteRepository CommentWriteRepository { get; }
     IOrderWriteRepository OrderWriteRepository { get; }
     IPaymentWriteRepository PaymentWriteRepository { get; }
+    ITicketWriteRepository TicketWriteRepository { get; }
 }

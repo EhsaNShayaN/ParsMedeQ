@@ -3,6 +3,8 @@ using ParsMedeQ.Domain.Aggregates.CartAggregate;
 using ParsMedeQ.Domain.Aggregates.CommentAggregate;
 using ParsMedeQ.Domain.Aggregates.OrderAggregate;
 using ParsMedeQ.Domain.Aggregates.PurchaseAggregate;
+using ParsMedeQ.Domain.Aggregates.TicketAggregate;
+using ParsMedeQ.Domain.Aggregates.TicketAggregate.Entities;
 using ParsMedeQ.Domain.Aggregates.UserAggregate.Validators;
 using ParsMedeQ.Domain.Types.Email;
 using ParsMedeQ.Domain.Types.FirstName;
@@ -19,6 +21,8 @@ public sealed class User : AggregateRoot<int>
     private List<Comment> _comments = [];
     private List<Order> _orders = [];
     private List<Purchase> _purchases = [];
+    private List<Ticket> _tickets = [];
+    private List<TicketAnswer> _ticketAnswerss = [];
     #endregion
 
     #region " Properties "
@@ -60,6 +64,8 @@ public sealed class User : AggregateRoot<int>
     public IReadOnlyCollection<Comment> Comments => this._comments.AsReadOnly();
     public IReadOnlyCollection<Order> Orders => this._orders.AsReadOnly();
     public IReadOnlyCollection<Purchase> Purchases => this._purchases.AsReadOnly();
+    public IReadOnlyCollection<Ticket> Tickets => this._tickets.AsReadOnly();
+    public IReadOnlyCollection<TicketAnswer> TicketAnswerss => this._ticketAnswerss.AsReadOnly();
     #endregion
 
     private User(int id) : base(id) { }

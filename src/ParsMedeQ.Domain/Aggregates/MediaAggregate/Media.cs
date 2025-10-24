@@ -15,7 +15,6 @@ public sealed class Media : EntityBase<int>
     #endregion
 
     #region " Navigation Properties "
-    //public Resource Resource => this._resource;
     #endregion
 
     #region " Constructors "
