@@ -9,7 +9,7 @@ export class Helpers {
   }
 
   public setPaginationLang() {
-    this.paginatorIntl.itemsPerPageLabel =  'مورد در هر صفحه';
+    this.paginatorIntl.itemsPerPageLabel = 'مورد در هر صفحه';
     this.paginatorIntl.firstPageLabel = 'صفحه اول';
     this.paginatorIntl.previousPageLabel = 'صفحه قبل';
     this.paginatorIntl.nextPageLabel = 'صفحه بعد';
@@ -28,4 +28,8 @@ export class Helpers {
     const endIndex = Math.min(startIndex + pageSize, length);
     return startIndex + 1 + ' تا ' + endIndex + ' ' + of + ' ' + length + ' مورد';
   };
+
+  delay(ms: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 }

@@ -1,8 +1,11 @@
 import {BaseResult} from './BaseResult';
 
-export interface AddOrderResponse extends BaseResult<AddOrder> {
+export interface ConfirmPaymentResponse extends BaseResult<ConfirmPayment> {
 }
 
-export interface AddOrder {
-  paymentId: number;
+export interface ConfirmPayment {
+  transactionId: string;
+  orderId: number;
+  orderNumber: string;
+  amount: number;
 }

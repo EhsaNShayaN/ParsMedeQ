@@ -1,35 +1,45 @@
-export enum Tables {
-  Article = 1,
-  News = 2,
-  Clip = 3,
-  Product = 4,
-  Payment = 5,
-  Order = 6,
-  Ticket = 7,
-  TicketAnswers = 8,
-}
+/*
+import { Tables, OrderStatus, PaymentMethods, PaymentStatus, PaymentLogTypes } from './server.constants';
 
-export enum OrderStatus {
-  Pending = 0,
-  Paid = 1,
-  Shipped = 2,
-  Completed = 3,
-  Cancelled = 4,
-}
+// 🌐 معادل فارسی برای Tables
 
-export enum PaymentMethods {
-  Gateway = 0,
-}
+export const TablesFa: Record<Tables, string> = {
+  [Tables.Article]: 'مقاله',
+  [Tables.News]: 'خبر',
+  [Tables.Clip]: 'کلیپ',
+  [Tables.Product]: 'محصول',
+  [Tables.Payment]: 'پرداخت',
+  [Tables.Order]: 'سفارش',
+  [Tables.Ticket]: 'تیکت',
+  [Tables.TicketAnswers]: 'پاسخ تیکت',
+};
 
-export enum PaymentStatus {
-  Pending = 0,
-  Success = 1,
-  Failed = 2,
-  Refunded = 3,
-}
+// 🌐 معادل فارسی برای وضعیت سفارش
+export const OrderStatusFa: Record<OrderStatus, string> = {
+  [OrderStatus.Pending]: 'در انتظار پرداخت',
+  [OrderStatus.Paid]: 'پرداخت شده',
+  [OrderStatus.Shipped]: 'ارسال شده',
+  [OrderStatus.Completed]: 'تکمیل شده',
+  [OrderStatus.Cancelled]: 'لغو شده',
+};
 
-export enum PaymentLogTypes {
-  Request = 0,
-  Response = 1,
-  Callback = 2,
-}
+// 🌐 معادل فارسی برای روش‌های پرداخت
+export const PaymentMethodsFa: Record<PaymentMethods, string> = {
+  [PaymentMethods.Gateway]: 'درگاه بانکی',
+};
+
+// 🌐 معادل فارسی برای وضعیت پرداخت
+export const PaymentStatusFa: Record<PaymentStatus, string> = {
+  [PaymentStatus.Pending]: 'در انتظار پرداخت',
+  [PaymentStatus.Success]: 'موفق',
+  [PaymentStatus.Failed]: 'ناموفق',
+  [PaymentStatus.Refunded]: 'مبلغ بازگشت داده شد',
+};
+
+// 🌐 معادل فارسی برای نوع لاگ پرداخت
+export const PaymentLogTypesFa: Record<PaymentLogTypes, string> = {
+  [PaymentLogTypes.Request]: 'درخواست پرداخت',
+  [PaymentLogTypes.Response]: 'پاسخ درگاه',
+  [PaymentLogTypes.Callback]: 'بازگشت از درگاه',
+};
+*/

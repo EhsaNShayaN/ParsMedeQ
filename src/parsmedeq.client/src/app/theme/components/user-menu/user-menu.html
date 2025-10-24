@@ -17,14 +17,14 @@
           <mat-icon class="mat-icon-sm">person</mat-icon>
           <span>{{ 'PROFILE' | translate }}</span>
       </a>
-      @if (authService.isAdmin()) {
+      @if (auth.isAdmin()) {
         <a mat-menu-item [routerLink]="['/admin']">
           <mat-icon class="mat-icon-sm">management</mat-icon>
           <span>{{ 'MANAGEMENT' | translate }}</span>
       </a>
       }
       <div class="divider"></div>
-      <a mat-menu-item (click)="logout()">
+      <a mat-menu-item (click)="auth.logout()">
         <mat-icon class="mat-icon-sm">power_settings_new</mat-icon>
         <span>{{ 'LOGOUT' | translate }}</span>
       </a>

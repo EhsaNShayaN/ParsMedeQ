@@ -11,6 +11,7 @@ sealed class ConfirmPaymentEndpoint : EndpointHandlerBase<
 {
     protected override bool NeedAuthentication => true;
     protected override bool NeedTaxPayerFile => false;
+    protected override bool NeedAdminPrivilage => true;
 
     public ConfirmPaymentEndpoint(
         IPresentationMapper<ConfirmPaymentApiRequest, ConfirmPaymentCommand> apiRequestMapper

@@ -1,2 +1,2 @@
 ﻿namespace ParsMedeQ.Contracts.PaymentContracts.ConfirmPaymentContract;
-public readonly record struct ConfirmPaymentApiResponse(bool Changed);
+public readonly record struct ConfirmPaymentApiResponse(string TransactionId, int OrderId, string OrderNumber, decimal Amount);

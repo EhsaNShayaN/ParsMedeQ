@@ -1,0 +1,50 @@
+@if (paymentResult) {
+  <div class="result-wrap">
+    <mat-card class="result-card">
+      <div class="icon">
+        @if (status === 'success') {
+          <mat-icon svgIcon="check_circle" aria-hidden="false" aria-label="موفق"></mat-icon>
+        } @else if (status === 'error') {
+          <mat-icon svgIcon="error" aria-hidden="false" aria-label="خطا"></mat-icon>
+        } @else if (status === 'pending') {
+          <mat-progress-spinner mode="indeterminate" diameter="56"></mat-progress-spinner>
+        }
+      </div>
+
+
+      <div class="content">
+        <h2 *ngIf="status === 'success'">پرداخت با موفقیت انجام شد 🎉</h2>
+        <h2 *ngIf="status === 'error'">پرداخت ناموفق بود ⚠️</h2>
+        <h2 *ngIf="status === 'pending'">در حال پردازش پرداخت...</h2>
+
+
+        <p *ngIf="message">{{ message }}</p>
+
+
+        <div class="meta" *ngIf="paymentResult.orderId || paymentResult.amount">
+          <p *ngIf="paymentResult.orderId"><strong>شماره سفارش:</strong> {{ paymentResult.orderId }}</p>
+          <p *ngIf="paymentResult.orderNumber"><strong>کد رهگیری:</strong> {{ paymentResult.orderNumber }}</p>
+          <p *ngIf="paymentResult.amount !== null">
+            <strong>مبلغ:</strong>
+            {{ paymentResult.amount | currencyFormatter }}
+            ریال
+          </p>
+        </div>
+
+
+        <mat-divider></mat-divider>
+
+
+        <div class="actions">
+          <a *ngIf="status === 'success'" mat-stroked-button [routerLink]="['/user/order' | langPack, paymentResult.orderId]">
+            مشاهده سفارش‌
+          </a>
+
+          <button *ngIf="status === 'error'" mat-flat-button color="warn" (click)="retryPayment()">تلاش دوباره</button>
+
+          <button *ngIf="status === 'success' && paymentResult.orderId" mat-button (click)="downloadReceipt()">دریافت رسید</button>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+}

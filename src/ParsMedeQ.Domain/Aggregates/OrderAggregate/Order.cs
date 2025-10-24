@@ -56,6 +56,7 @@ public sealed class Order : EntityBase<int>
     public ValueTask<PrimitiveResult> AddItem(
         int tableId,
         int relatedId,
+        string relatedName,
         int quantity,
         decimal unitPrice,
         decimal subtotal)
@@ -63,6 +64,7 @@ public sealed class Order : EntityBase<int>
         return OrderItem.Create(
             tableId,
             relatedId,
+            relatedName,
             quantity,
             unitPrice,
             subtotal)

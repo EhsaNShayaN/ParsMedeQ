@@ -1,7 +1,7 @@
 ﻿using ParsMedeQ.Application.Features.OrderFeatures.AddOrderFeature;
 using ParsMedeQ.Contracts;
 using ParsMedeQ.Contracts.OrderContracts.AddOrderContract;
-using ParsMedeQ.Contracts.PaymentContracts.AddPaymentContract;
+using ParsMedeQ.Contracts.OrderContracts.OrderDetailsContract;
 
 namespace ParsMedeQ.Presentation.Features.OrderFeatures.AddOrderFeature;
 sealed class AddOrderEndpoint : EndpointHandlerBase<

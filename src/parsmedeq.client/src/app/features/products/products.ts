@@ -6,6 +6,7 @@ import {Pagination} from '../../core/models/Pagination';
 import {createTree, Tree} from '../../core/models/MenusResponse';
 import {ProductCategoriesResponse, ProductCategory} from '../../core/models/ProductCategoryResponse';
 import {animate, query, stagger, style, transition, trigger} from '@angular/animations';
+import {Tables} from '../../core/constants/server.constants';
 
 @Component({
   selector: 'app-products',
@@ -153,4 +154,6 @@ export class Products extends BaseComponent implements OnInit, DoCheck {
   formatPrice(n: number) {
     return n.toLocaleString('fa-IR') + ' تومان';
   }
+
+    protected readonly Tables = Tables;
 }

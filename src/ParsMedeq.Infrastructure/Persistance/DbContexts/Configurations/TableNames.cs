@@ -14,4 +14,7 @@ internal static class TableNames
     internal static string Comment = "Comment";
     internal static string Cart = "Cart";
     internal static string CartItems = "CartItems";
+    internal static string Order = "Order";
+    internal static string OrderItems = "OrderItems";
+    internal static string Payment = "Payment";
 }

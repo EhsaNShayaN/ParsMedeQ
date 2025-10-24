@@ -1,12 +1,47 @@
-<div *ngIf="cart() as c">
-  <h2>سبد خرید</h2>
-  <ul>
-    <li *ngFor="let item of c.cartItems">
-      {{ item.relatedName }} - {{ item.quantity }} × {{ item.unitPrice | number }} تومان
-      <button (click)="removeItem(item.id!)">حذف</button>
-    </li>
-  </ul>
-  <p>جمع کل: {{ total() | number }} تومان</p>
-  <button (click)="checkout()">مرحله بعد</button>
-  <button (click)="payment()">پرداخت</button>
+<div class="cart theme-container ">
+  <div *ngIf="cart() as c">
+    <h2>🛒 سبد خرید شما</h2>
+
+    <div *ngIf="c.cartItems.length === 0" class="empty-cart">
+      سبد خرید شما خالی است.
+    </div>
+
+    <div *ngFor="let item of c.cartItems" class="cart-item">
+      <img [src]="item.image" defaultImage alt="{{ item.relatedName }}" class="cart-image"/>
+      <div class="cart-details">
+        <h3>{{ item.relatedName }}</h3>
+        <!--<p>{{ item.description }}</p>-->
+        <div class="cart-actions">
+          <app-cart-item-control
+            [relatedId]="item!.relatedId"
+            [tableId]="item.tableId"
+            [relatedName]="item!.relatedName"
+            [unitPrice]="item!.unitPrice ?? 0"
+            [stock]="99999999">
+          </app-cart-item-control>
+          <!--<div class="quantity">
+            <button (click)="decrease(item)">-</button>
+            <span>{{ item.quantity }}</span>
+            <button (click)="increase(item)">+</button>
+          </div>
+          <button class="remove-btn" (click)="remove(item)">حذف</button>-->
+          <div class="price">
+            {{ item.unitPrice * item.quantity | number }} تومان
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="c.cartItems.length > 0" class="cart-summary">
+      <div class="total">
+        جمع کل: <strong>{{ total() | currencyFormatter }} تومان</strong>
+      </div>
+      <div class="buttons">
+        <a mat-button [routerLink]="'/cart/shipping' | langPack" class="bg-red background-color" (click)="shipping()">
+          تائید و تکمیل سفارش
+        </a>
+      </div>
+    </div>
+
+  </div>
 </div>

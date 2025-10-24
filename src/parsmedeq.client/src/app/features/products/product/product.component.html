@@ -12,17 +12,20 @@
     <div class="py-3">
       <nav class="breadcrumb">فروشگاه › {{ product.productCategoryTitle }} › {{ product.title }}</nav>
       <div fxLayout="row wrap">
-        <div class="gallery pe-2" fxFlex="100" fxFlex.gt-md="60">
-          <div class="main-image">
-            <img [src]="selectedImage" alt="{{ product.title }}" loading="lazy">
+        @if ((product.images?.length ?? 0) > 0) {
+          <div class="gallery pe-2" fxFlex="100" fxFlex.gt-md="60">
+            <div class="main-image">
+              <img [src]="selectedImage" alt="{{ product.title }}" loading="lazy">
+            </div>
+            <div class="thumbs">
+              <button *ngFor="let g of product.images" (click)="selectImage(g)" [class.active]="g.path === selectedImage">
+                <img [src]="g.path" alt="thumb" loading="lazy">
+              </button>
+            </div>
           </div>
-          <div class="thumbs">
-            <button *ngFor="let g of product.images" (click)="selectImage(g)" [class.active]="g.path === selectedImage">
-              <img [src]="g.path" alt="thumb" loading="lazy">
-            </button>
-          </div>
-        </div>
-        <div class="info ps-2" fxFlex="100" fxFlex.gt-md="40">
+        }
+        <div class="info ps-2" fxFlex="100"
+             [fxFlex.gt-md]="(product.images?.length ?? 0) > 0 ? 40 : 100">
           <h1>{{ product.title }}</h1>
           <div class="price-row">
             <div class="price">
@@ -50,25 +53,15 @@
                 <p [innerHTML]="product.description | safeHtml"></p>
               </div>
             </mat-tab>
-            <!--<mat-tab label="مشخصات">
-              <div class="tab-body specs">
-                <table>
-                  <tbody>
-                  <tr *ngFor="let s of product.specifications">
-                    <td class="key">{{ s.key }}</td>
-                    <td class="val">{{ s.value }}</td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
-            </mat-tab>-->
-            <mat-tab label="گالری">
-              <div class="tab-body gallery-tab">
-                <div class="gallery-grid">
-                  <img *ngFor="let g of product.images" [src]="g.path" loading="lazy" alt="">
+            @if ((product.images?.length ?? 0) > 0) {
+              <mat-tab label="گالری">
+                <div class="tab-body gallery-tab">
+                  <div class="gallery-grid">
+                    <img *ngFor="let g of product.images" [src]="g.path" loading="lazy" alt="">
+                  </div>
                 </div>
-              </div>
-            </mat-tab>
+              </mat-tab>
+            }
           </mat-tab-group>
         </div>
       </div>

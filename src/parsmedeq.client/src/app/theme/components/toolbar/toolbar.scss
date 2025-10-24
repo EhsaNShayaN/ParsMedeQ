@@ -107,14 +107,15 @@ input {
 }
 
 .cart-menu {
-  display0: none;
+  display: none;
   position: absolute;
   right: 0;
   background: white;
-  border: 1px solid #ccc;
   min-width: 250px;
   z-index: 1000;
   padding: 10px;
+  margin-top: -5px;
+  box-shadow: 0 4px 10px rgba(19, 119, 73, 0.3);
 }
 
 .cart-dropdown:hover .cart-menu {
@@ -123,6 +124,7 @@ input {
 
 .cart-item {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   margin-bottom: 6px;
 }

@@ -1,2 +1,2 @@
 ﻿namespace ParsMedeQ.Application.Features.PaymentFeatures.ConfirmPaymentFeature;
-public sealed record ConfirmPaymentCommandResponse(bool Changed);
+public sealed record ConfirmPaymentCommandResponse(string TransactionId, int OrderId, string OrderNumber, decimal Amount);

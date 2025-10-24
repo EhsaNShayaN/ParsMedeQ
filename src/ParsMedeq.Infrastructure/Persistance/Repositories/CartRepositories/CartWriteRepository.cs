@@ -1,4 +1,5 @@
 ﻿using ParsMedeQ.Application.Persistance.Schema.CartRepositories;
+using ParsMedeQ.Application.Persistance.Schema.ProductRepositories;
 using ParsMedeQ.Domain.Aggregates.CartAggregate;
 using ParsMedeQ.Domain.Aggregates.ProductAggregate;
 using ParsMedeQ.Infrastructure.Persistance.DbContexts;
@@ -7,15 +8,46 @@ using SRH.Persistance.Repositories.Write;
 namespace ParsMedeQ.Infrastructure.Persistance.Repositories.CartRepositories;
 internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<WriteDbContext>, ICartWriteRepository
 {
-    public CartWriteRepository(WriteDbContext dbContext) : base(dbContext) { }
+    private readonly IProductReadRepository _productReadRepository;
+    public CartWriteRepository(WriteDbContext dbContext, IProductReadRepository productReadRepository) : base(dbContext)
+    {
+        this._productReadRepository = productReadRepository;
+    }
 
     public async ValueTask<PrimitiveResult<Cart>> GetCart(int id, CancellationToken cancellationToken)
     {
-        return await this.DbContext.Cart
+        var cart = await this.DbContext.Cart
             .Include(c => c.CartItems)
             .Where(s => s.Id.Equals(id))
             .FirstOrDefaultAsync(cancellationToken);
+
+        return cart;
     }
+
+    /*private Cart UpdateCart(Cart cart, CancellationToken cancellationToken)
+    {
+        foreach (var item in cart!.CartItems)
+        {
+            switch ((Tables)item.TableId)
+            {
+                case Tables.Product:
+                    this._productReadRepository.FindById(item.RelatedId, cancellationToken)
+                        .MapIf(
+                        product => product is null || !product.Price.HasValue,
+                        product => PrimitiveResult.Failure<Cart>("", "Invalid product."),
+                        product => item.UnitPrice = product.Price)
+
+                    break;
+                case Tables.Clip:
+                    break;
+                default:
+                    break;
+            }
+            var product = await this.DbContext.Set<Product>().FindAsync(item.RelatedId);
+            if (product == null) throw new InvalidOperationException($"محصول {item.RelatedName} پیدا نشد");
+        }
+    }*/
+
     public async ValueTask<Cart> GetCarts(int? userId, Guid? anonymousId, string Lang)
     {
         var cart = await this.DbContext.Cart

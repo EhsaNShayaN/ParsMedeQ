@@ -1,0 +1,48 @@
+.result-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+}
+
+
+.result-card {
+  direction: rtl; /* فارسی */
+  max-width: 760px;
+  width: 100%;
+  display: flex;
+  gap: 16px;
+  padding: 24px;
+  align-items: center;
+}
+
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 86px;
+  height: 86px;
+}
+
+
+.icon mat-icon {
+  font-size: 64px;
+}
+
+
+.content {
+  flex: 1;
+}
+
+
+.meta p {
+  margin: 6px 0;
+}
+
+
+.actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+}

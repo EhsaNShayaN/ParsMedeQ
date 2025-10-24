@@ -43,7 +43,6 @@ export class CartItemControlComponent {
       relatedName: this.relatedName,
       unitPrice: this.unitPrice,
       quantity: 1,
-      originalQuantity: 0
     };
     this.cartService.addToCart(item);
   }

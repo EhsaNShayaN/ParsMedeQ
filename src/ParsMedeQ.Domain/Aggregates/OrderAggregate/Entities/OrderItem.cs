@@ -7,6 +7,7 @@ public sealed class OrderItem : EntityBase<int>
     public int OrderId { get; private set; }
     public int TableId { get; private set; }
     public int RelatedId { get; private set; }
+    public string RelatedName { get; private set; } = string.Empty;
     public int Quantity { get; private set; }
     public decimal UnitPrice { get; private set; }
     public decimal? Subtotal { get; private set; }
@@ -25,6 +26,7 @@ public sealed class OrderItem : EntityBase<int>
     internal static PrimitiveResult<OrderItem> Create(
         int tableId,
         int relatedId,
+        string relatedName,
         int quantity,
         decimal unitPrice,
         decimal subtotal)
@@ -34,6 +36,7 @@ public sealed class OrderItem : EntityBase<int>
             {
                 TableId = tableId,
                 RelatedId = relatedId,
+                RelatedName = relatedName,
                 Quantity = quantity,
                 UnitPrice = unitPrice,
                 Subtotal = subtotal

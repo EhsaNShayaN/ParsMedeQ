@@ -1,0 +1,54 @@
+.order-finish {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 32px;
+  direction: rtl;
+}
+
+.order-card {
+  max-width: 800px;
+  width: 100%;
+  padding: 24px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 80px;
+}
+
+.icon mat-icon {
+  font-size: 72px;
+}
+
+.info {
+  flex: 1;
+}
+
+.order-details {
+  margin: 8px 0 16px;
+}
+
+.items {
+  margin-top: 12px;
+}
+
+.items mat-list-item {
+  border-bottom: 1px solid #eee;
+}
+
+.price {
+  font-size: 13px;
+  color: #666;
+}
+
+.actions {
+  margin-top: 16px;
+  display: flex;
+  gap: 10px;
+}

@@ -7,14 +7,14 @@
     <div>
       @if (quantity() === 0) {
         <div>
-          <button mat-raised-button color="primary" (click)="add()">افزودن به سبد</button>
+          <button class="add-to-cart" mat-raised-button color="primary" (click)="add()">افزودن به سبد</button>
         </div>
       } @else {
         <div class="cart-control">
-          <button (click)="decrease()">➖</button>
+          <mat-icon (click)="decrease()" class="pe-1 decrease">remove_circle</mat-icon>
           <span>{{ quantity() }}</span>
-          <button (click)="increase()" [disabled]="quantity() >= stock">➕</button>
-          <button class="remove" (click)="remove()">❌</button>
+          <mat-icon (click)="quantity() >= stock ? null : increase()" class="increase">add_circle</mat-icon>
+          <mat-icon (click)="remove()" class="ps-1 remove">cancel</mat-icon>
         </div>
         @if (quantity() >= stock) {
           <p class="warning">

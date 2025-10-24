@@ -8,11 +8,19 @@ public sealed class OrderEndpoint : ApiEndpointBase
 
     protected override ApiEndpointItem MyEndpoint => EndpointMetadata.Order;
 
+    public EndpointInfo Details { get; private set; }
     public EndpointInfo Orders { get; private set; }
     public EndpointInfo AddOrder { get; private set; }
 
     public OrderEndpoint()
     {
+        Details = new EndpointInfo(
+           this.GetUrl("details"),
+           this.GetUrl("details"),
+           "Order Details",
+           "جزپیات سفارش",
+           _tag);
+     
         Orders = new EndpointInfo(
            this.GetUrl("list"),
            this.GetUrl("list"),

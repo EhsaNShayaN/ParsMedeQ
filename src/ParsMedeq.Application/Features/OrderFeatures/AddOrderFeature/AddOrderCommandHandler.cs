@@ -1,5 +1,6 @@
 ﻿using ParsMedeQ.Domain;
 using ParsMedeQ.Domain.Aggregates.OrderAggregate;
+using ParsMedeQ.Domain.Aggregates.PaymentAggregate;
 
 namespace ParsMedeQ.Application.Features.OrderFeatures.AddOrderFeature;
 public sealed class AddOrderCommandHandler : IPrimitiveResultCommandHandler<AddOrderCommand, AddOrderCommandResponse>
@@ -22,13 +23,17 @@ public sealed class AddOrderCommandHandler : IPrimitiveResultCommandHandler<AddO
             (byte)OrderStatus.Pending.GetHashCode(),
             $"ORD-{DateTime.UtcNow:yyyyMMddHHmmss}-{cart.Id}")
             .Map(order =>
-                PrimitiveResult.BindAll(cart.CartItems, (ci) => order.AddItem(ci.TableId, ci.RelatedId, ci.Quantity, ci.UnitPrice, ci.Quantity * ci.UnitPrice),
+                PrimitiveResult.BindAll(cart.CartItems, (ci) => order.AddItem(
+                    ci.TableId, ci.RelatedId, ci.RelatedName, ci.Quantity, ci.UnitPrice, ci.Quantity * ci.UnitPrice),
                 BindAllIterationStrategy.BreakOnFirstError).Map(() => order)
             .Map(order => this._writeUnitOfWork.OrderWriteRepository.AddOrder(order)
             .Map(order => this._writeUnitOfWork.SaveChangesAsync(CancellationToken.None).Map(_ => order))
             .Map(order => cart.RemoveCartItems().Map(() => order))
             .Map(order => this._writeUnitOfWork.SaveChangesAsync(CancellationToken.None).Map(_ => order))
-            .Map(order => new AddOrderCommandResponse(order is not null)))))
+            .Map(order => Payment.Create(order.Id, order.FinalAmount!.Value, 0))
+            .Map(payment => this._writeUnitOfWork.PaymentWriteRepository.AddPayment(payment)
+            .Map(payment => this._writeUnitOfWork.SaveChangesAsync(CancellationToken.None).Map(_ => payment))
+            .Map(payment => new AddOrderCommandResponse(payment.Id))))))
             .ConfigureAwait(false);
     }
 }

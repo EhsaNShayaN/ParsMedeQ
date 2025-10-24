@@ -1,8 +1,6 @@
 ﻿using ParsMedeQ.Application.Features.PaymentFeatures.AddPaymentFeature;
-using ParsMedeQ.Application.Features.PaymentFeatures.FailPaymentFeature;
 using ParsMedeQ.Contracts;
 using ParsMedeQ.Contracts.PaymentContracts.AddPaymentContract;
-using ParsMedeQ.Contracts.PaymentContracts.FailPaymentContract;
 
 namespace ParsMedeQ.Presentation.Features.PaymentFeatures.AddPaymentFeature;
 sealed class AddPaymentEndpoint : EndpointHandlerBase<

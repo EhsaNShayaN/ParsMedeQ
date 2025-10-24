@@ -11,15 +11,10 @@ export interface Cart {
 
 export class CartItem {
   id?: number;
-  delta?: number;
-  relatedId!: number;
   tableId!: number;
+  relatedId!: number;
   relatedName!: string;
+  image?: string;
   unitPrice!: number;
   quantity!: number;
-  originalQuantity!: number;
-
-  constructor() {
-    this.delta = this.quantity - this.originalQuantity;
-  }
 }

@@ -39,8 +39,7 @@ export class Toolbar extends PureComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.cartService.cart$.subscribe(cart => {
       this.cartItems = cart?.cartItems?.map((i: any) => {
-        const delta = i.OriginalQuantity ? i.Quantity - i.OriginalQuantity : 0;
-        return { ...i, delta };
+        return {...i};
       }) ?? [];
       this.totalItems = this.cartItems.reduce((sum, i) => sum + i.quantity, 0);
     });
@@ -52,20 +51,6 @@ export class Toolbar extends PureComponent implements OnInit, OnDestroy {
 
   sidenavToggle() {
     this.onMenuIconClick.emit();
-  }
-
-  openResourceMenu() {
-    document.body.classList.add('open');
-    this.trigger.openMenu();
-  }
-
-  closeResourceMenu() {
-    setTimeout(() => {
-      if (!this.recheckIfInMenu) {
-        this.trigger.closeMenu();
-        document.body.classList.remove('open');
-      }
-    }, 175);
   }
 
   ngOnDestroy() {

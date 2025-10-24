@@ -3,12 +3,13 @@ import {CommonModule} from '@angular/common';
 import {UserPanelRoutingModule} from './user-panel-routing-module';
 import {UserPanel} from './user-panel';
 import {Dashboard} from './dashboard/dashboard';
-import {Orders} from './orders/orders';
+import {Orders} from './orders/order-list/orders';
 import {Warranty} from './warranty/warranty';
 import {Service} from './service/service';
 import {Repair} from './repair/repair';
 import {Invoice} from './invoice/invoice';
 import {SharedModule} from '../../shared/shared-module';
+import {OrderComponent} from './orders/order/order.component';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import {SharedModule} from '../../shared/shared-module';
     UserPanel,
     Dashboard,
     Orders,
+    OrderComponent,
     Warranty,
     Service,
     Repair,

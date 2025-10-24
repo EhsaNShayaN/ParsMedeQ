@@ -17,29 +17,36 @@
               </mat-card-title>
               <mat-card-content class="mt-3">
                 <div class="grid">
-                  <mat-card class="product-card" *ngFor="let p of items">
-                    <div class="media" (click)="goToDetail(p)" role="button" tabindex="0">
-                      <img mat-card-image [src]="p.image" [alt]="p.title" loading="lazy"/>
+                  <mat-card class="product-card" *ngFor="let product of items">
+                    <div class="media" (click)="goToDetail(product)" role="button" tabindex="0">
+                      <img mat-card-image [src]="product.image" [alt]="product.title" loading="lazy"/>
                     </div>
                     <mat-card-content>
-                      <h3 class="title text-left" (click)="goToDetail(p)">{{ p.title }}</h3>
+                      <h3 class="title text-left" (click)="goToDetail(product)">{{ product.title }}</h3>
                       <div class="meta">
-                        <span class="price" *ngIf="p.discount && p.discount > 0">
+                        <span class="price" *ngIf="product.discount && product.discount > 0">
                           <span
-                            class="final">{{ formatPrice(Math.round((p.price ?? 0) * (1 - (p.discount / 100)))) }}</span>
-                          <span class="original">{{ formatPrice(p.price ?? 0) }}</span>
+                            class="final">{{ formatPrice(Math.round((product.price ?? 0) * (1 - (product.discount / 100)))) }}</span>
+                          <span class="original">{{ formatPrice(product.price ?? 0) }}</span>
                         </span>
-                        <span class="price" *ngIf="!p.discount || p.discount === 0">
-                          <span class="final">{{ formatPrice(p.price ?? 0) }}</span>
+                        <span class="price" *ngIf="!product.discount || product.discount === 0">
+                          <span class="final">{{ formatPrice(product.price ?? 0) }}</span>
                         </span>
                       </div>
 
-                      <p class="desc">{{ p.description }}</p>
+                      <p class="desc">{{ product.description }}</p>
                     </mat-card-content>
 
                     <mat-card-actions class="card-actions">
-                      <button mat-stroked-button color="primary" (click)="goToDetail(p)">جزئیات</button>
-                      <button mat-raised-button color="primary" (click)="goToDetail(p)">افزودن به سبد</button>
+                      <button mat-stroked-button color="primary" (click)="goToDetail(product)">جزئیات</button>
+                      <!--<button mat-raised-button color="primary" (click)="goToDetail(product)">افزودن به سبد</button>-->
+                      <app-cart-item-control
+                        [relatedId]="product!.id"
+                        [tableId]="Tables.Product"
+                        [relatedName]="product!.title"
+                        [unitPrice]="product!.price ?? 0"
+                        [stock]="product!.stock ?? 99999999">
+                      </app-cart-item-control>
                     </mat-card-actions>
                   </mat-card>
                 </div>
