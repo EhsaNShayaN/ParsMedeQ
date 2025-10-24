@@ -10,6 +10,8 @@ import {Repair} from './repair/repair';
 import {Invoice} from './invoice/invoice';
 import {SharedModule} from '../../shared/shared-module';
 import {OrderComponent} from './orders/order/order.component';
+import {UserTicketComponent} from './ticket/user-ticket.component';
+import {UserTicketListComponent} from './ticket/ticket-list/user-ticket-list.component';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import {OrderComponent} from './orders/order/order.component';
     Warranty,
     Service,
     Repair,
-    Invoice
+    Invoice,
+    UserTicketComponent,
+    UserTicketListComponent,
   ],
   imports: [
     CommonModule,

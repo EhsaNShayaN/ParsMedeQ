@@ -44,6 +44,11 @@ const pagesChildren: Routes = [
     canActivate: [AuthGuard]
   },
   // مسیر پیش‌فرض
+  {
+    path: 'ticket',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./features/ticket/ticket.module').then(m => m.TicketModule)
+  }
 ];
 const faPagesChildren: Routes = pagesChildren;
 const routes: Routes = [

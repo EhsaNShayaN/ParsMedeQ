@@ -54,6 +54,11 @@ import {MultiCounterComponent} from './multi-counter/multi-counter';
 import {OurServiceComponent} from '../features/home/our-service/our-service.component';
 import {MatTab, MatTabGroup} from '@angular/material/tabs';
 import {ClipDialogComponent} from './dialogs/clip-dialog/clip-dialog.component';
+import {TicketListComponent} from './ticket/ticket-list/ticket-list.component';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatOption, MatSelect} from '@angular/material/select';
+import {MatCell, MatCellDef, MatColumnDef, MatHeaderCell, MatHeaderCellDef, MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef, MatTable} from '@angular/material/table';
+import {MatSort} from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -85,6 +90,7 @@ import {ClipDialogComponent} from './dialogs/clip-dialog/clip-dialog.component';
     MultiCounterComponent,
     OurServiceComponent,
     ClipDialogComponent,
+    TicketListComponent,
   ],
   imports: [
     CommonModule,
@@ -107,6 +113,9 @@ import {ClipDialogComponent} from './dialogs/clip-dialog/clip-dialog.component';
     FormsModule,
     CdkDrag,
     CdkDropList,
+    MatPaginator,
+    MatSelect,
+    MatOption,
     //////////////////////
     DefaultShowHideDirective,
     MatMenuTrigger,
@@ -144,6 +153,17 @@ import {ClipDialogComponent} from './dialogs/clip-dialog/clip-dialog.component';
     MatTab,
     MatTabGroup,
     MatMiniFabButton,
+    MatTable,
+    MatSort,
+    MatColumnDef,
+    MatHeaderCell,
+    MatHeaderRow,
+    MatRow,
+    MatCell,
+    MatHeaderCellDef,
+    MatCellDef,
+    MatHeaderRowDef,
+    MatRowDef,
     //////////////////////
     DefaultFlexDirective,
     DefaultClassDirective,
@@ -208,6 +228,20 @@ import {ClipDialogComponent} from './dialogs/clip-dialog/clip-dialog.component';
     MatTab,
     MatTabGroup,
     MatMiniFabButton,
+    MatPaginator,
+    MatSort,
+    MatTable,
+    MatColumnDef,
+    MatHeaderCell,
+    MatHeaderRow,
+    MatRow,
+    MatCell,
+    MatHeaderCellDef,
+    MatCellDef,
+    MatHeaderRowDef,
+    MatRowDef,
+    MatSelect,
+    MatOption,
     //////////////////////
     DefaultFlexDirective,
     DefaultClassDirective,
@@ -233,6 +267,7 @@ import {ClipDialogComponent} from './dialogs/clip-dialog/clip-dialog.component';
     MultiCounterComponent,
     OurServiceComponent,
     ClipDialogComponent,
+    TicketListComponent,
   ],
   providers: [
     CurrencyFormatterPipe,

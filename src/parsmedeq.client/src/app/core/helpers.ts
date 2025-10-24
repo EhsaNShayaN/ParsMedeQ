@@ -32,4 +32,27 @@ export class Helpers {
   delay(ms: number): Promise<void> {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
+
+  getTicketStatuses() {
+    return [
+      {id: 1, title: 'جدید'},
+      {id: 2, title: 'در دست بررسی'},
+      {id: 3, title: 'باز- در انتظار پاسخ'},
+      {id: 4, title: 'بسته شده'}
+    ];
+  }
+
+  getTicketStatus(status: number) {
+    switch (status) {
+      case 1:
+        return 'جدید';
+      case 2:
+        return 'در دست بررسی';
+      case 3:
+        return 'باز- در انتظار پاسخ';
+      case 4:
+        return 'بسته شده';
+    }
+    return status + ': نامشخص';
+  }
 }

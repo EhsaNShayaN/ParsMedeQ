@@ -24,6 +24,8 @@ import {ProductCategoryAddComponent} from './product/product-category-add/produc
 import {ProductMediaListComponent} from './product/product-media-list/product-media-list.component';
 import {CommentComponent} from './comment/comment.component';
 import {CommentListComponent} from './comment/comment-list/comment-list.component';
+import {AdminTicketComponent} from './ticket/admin-ticket.component';
+import {AdminTicketListComponent} from './ticket/ticket-list/admin-ticket-list.component';
 
 const routes: Routes = [
   {path: '', component: Admin},
@@ -63,6 +65,9 @@ const routes: Routes = [
 
   {path: 'comment', component: CommentComponent},
   {path: 'comment/list', component: CommentListComponent},
+
+  {path: 'ticket', component: AdminTicketComponent},
+  {path: 'ticket/list', component: AdminTicketListComponent},
 ];
 
 @NgModule({

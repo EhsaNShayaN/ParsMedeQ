@@ -23,19 +23,17 @@ import {ClipCategoryAddComponent} from './resource/clip/clip-category-add/clip-c
 import {AngularEditorModule} from '@kolkov/angular-editor';
 import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from '@angular/material/datepicker';
 import {NgxMatTimepickerComponent, NgxMatTimepickerDirective} from 'ngx-mat-timepicker';
-import {MatCell, MatCellDef, MatColumnDef, MatHeaderCell, MatHeaderCellDef, MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef, MatTable} from '@angular/material/table';
-import {MatSort} from '@angular/material/sort';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatOption, MatSelect} from '@angular/material/select';
 import {MatSlideToggle} from '@angular/material/slide-toggle';
 import {ProductComponent} from './product/product.component';
 import {ProductListComponent} from './product/product-list/product-list.component';
-import { ProductAddComponent } from './product/product-add/product-add.component';
+import {ProductAddComponent} from './product/product-add/product-add.component';
 import {ProductCategoryListComponent} from './product/product-category-list/product-category-list.component';
 import {ProductCategoryAddComponent} from './product/product-category-add/product-category-add.component';
 import {ProductMediaListComponent} from './product/product-media-list/product-media-list.component';
 import {CommentComponent} from './comment/comment.component';
 import {CommentListComponent} from './comment/comment-list/comment-list.component';
+import {AdminTicketComponent} from './ticket/admin-ticket.component';
+import {AdminTicketListComponent} from './ticket/ticket-list/admin-ticket-list.component';
 
 @NgModule({
   declarations: [
@@ -70,21 +68,14 @@ import {CommentListComponent} from './comment/comment-list/comment-list.componen
 
     CommentComponent,
     CommentListComponent,
+
+    AdminTicketComponent,
+    AdminTicketListComponent,
   ],
   imports: [
     CommonModule,
     SharedModule,
     AdminRoutingModule,
-    MatTable,
-    MatSort,
-    MatColumnDef,
-    MatPaginator,
-    MatHeaderCell,
-    MatHeaderRow,
-    MatRow,
-    MatCell,
-    MatSelect,
-    MatOption,
     AngularEditorModule,
     MatDatepickerToggle,
     MatDatepicker,
@@ -92,10 +83,6 @@ import {CommentListComponent} from './comment/comment-list/comment-list.componen
     NgxMatTimepickerDirective,
     NgxMatTimepickerComponent,
     MatSlideToggle,
-    MatHeaderCellDef,
-    MatCellDef,
-    MatHeaderRowDef,
-    MatRowDef,
   ]
 })
 export class AdminModule {

@@ -1,0 +1,140 @@
+<app-header-image [backgroundImage]="'assets/images/others/ticketing1.png'"
+                  [bgImageAnimate]="false"
+                  [contentOffsetToTop]="false"
+                  [hideMask]="true"
+                  [title]="'' | translate"
+                  [desc]="'' | translate">
+</app-header-image>
+<div class="px-3">
+  <div class="theme-container">
+    <mat-card appearance="outlined" class="main-content-header mb-5" *ngIf="ticket">
+      <mat-card-title class="text-center">اطلاعات تیکت</mat-card-title>
+      <div fxLayout="row wrap">
+        <div fxFlex="100" fxFlex.gt-md="100" fxFlex.gt-sm="100" class="p-2">
+          <p>
+            عنوان تیکت: {{ ticket.title }}
+          </p>
+          <p>
+            توضیحات: {{ ticket.description }}
+          </p>
+          <p>
+            ایجادکننده: {{ ticket.profile?.firstName }} {{ ticket.profile?.lastName }}
+          </p>
+          <p>
+            تاریخ ایجاد: {{ ticket.creationDate }}
+          </p>
+          <p>
+            وضعیت: {{ ticket.statusText }}
+          </p>
+          <p *ngIf="ticket.mediaId" class="w-25">
+            <app-download-management [id]="ticket.mediaId" [price]="0"
+                                     [tableId]="Tables.Ticket"></app-download-management>
+          </p>
+        </div>
+      </div>
+    </mat-card>
+    @if ((ticket?.answers?.length ?? 0) > 0) {
+      <mat-card appearance="outlined" class="main-content-header mb-5">
+        <mat-card-title class="text-center">تاریخچه</mat-card-title>
+        <mat-divider class="my-2"></mat-divider>
+        @if (ticket) {
+          <div *ngFor="let answer of ticket.answers; let i = index">
+            <div class="p-2" [ngClass]="i % 2 === 0 ? 'even' : 'odd'">
+              <p>{{ answer.creationDate }}</p>
+              <p>
+                @if ((answer.profileId?.length ?? 0) > 0) {
+                  <span>
+                  {{ ticket.profile?.firstName }} {{ ticket.profile?.lastName }}:
+                </span>
+                } @else {
+                  <span>مدیر سیستم:</span>
+                }
+                <span class="mr-1">{{ answer.answer }}</span>
+              </p>
+              <p *ngIf="answer.mediaId" class="w-25">
+                <app-download-management [id]="answer.mediaId" [price]="0"
+                                         [tableId]="Tables.TicketAnswers"></app-download-management>
+              </p>
+            </div>
+            <mat-divider class="my-2" *ngIf="i < ticket.answers.length - 1"></mat-divider>
+          </div>
+        }
+      </mat-card>
+    }
+    <mat-card appearance="outlined" class="main-content-header mb-5">
+      <mat-card-title class="text-center">
+        ارسال
+        {{ edit ? 'پاسخ' : '' }}
+        تیکت
+      </mat-card-title>
+      <div class="page my-2">
+        <div class="row justify-content-center">
+          <div class="col-md-12">
+            <div class="border border-radius-6 p-4">
+              <form *ngIf="contactForm" [formGroup]="contactForm" (ngSubmit)="onContactFormSubmit(contactForm.value)"
+                    fxLayout="row wrap" class="w-100">
+                <div fxFlex="100" fxFlex.gt-xs="50" class="px-2">
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>{{ 'TITLE' | translate }}</mat-label>
+                    <input matInput [placeholder]="'TITLE' | translate" formControlName="title" required
+                           autocomplete="off">
+                    <mat-error *ngIf="contactForm.controls['title'].errors?.['required']">
+                      {{ 'TITLE' | translate }}
+                      {{ 'IS_REQUIRED' | translate }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div fxFlex="100" fxFlex.gt-xs="50" class="px-2">
+                  <div class="file-border p-2 pb-3">
+                    <mat-label>{{ 'FILE' | translate }}</mat-label>
+                    <input type="file" placeholder="{{'FILE' | translate}}" formControlName="file"
+                           (change)="handleFileInput($event.target)" class="py-1"/>
+                  </div>
+                </div>
+                <div fxFlex="100" fxFlex.gt-sm="100" class="px-1" ngClass.sm="mt-1" ngClass.xs="mt-1">
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>{{ 'DESCRIPTION' | translate }}</mat-label>
+                    <textarea matInput placeholder="{{'DESCRIPTION' | translate}}" formControlName="description"
+                              required
+                              rows="7"></textarea>
+                    <mat-error *ngIf="contactForm.controls['description'].errors?.['required']">
+                      {{ 'DESCRIPTION' | translate }}
+                      {{ 'IS_REQUIRED' | translate }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="w-100 py-2 text-center">
+                  <button mat-raised-button color="primary" type="submit">{{ 'BTN.SUBMIT' | translate }}</button>
+                </div>
+              </form>
+              <form *ngIf="answerForm" [formGroup]="answerForm" (ngSubmit)="onAnswerFormSubmit(answerForm.value)"
+                    fxLayout="row wrap" class="w-100">
+                <div fxFlex="100" fxFlex.gt-xs="100" class="px-2">
+                  <div class="file-border p-2 pb-3">
+                    <mat-label>{{ 'FILE' | translate }}</mat-label>
+                    <input type="file" placeholder="{{'FILE' | translate}}" formControlName="file"
+                           (change)="handleAnswerFileInput($event.target)" class="py-1"/>
+                  </div>
+                </div>
+                <div fxFlex="100" fxFlex.gt-sm="100" class="px-2 mt-2">
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>{{ 'DESCRIPTION' | translate }}</mat-label>
+                    <textarea matInput placeholder="{{'DESCRIPTION' | translate}}" formControlName="answer" required
+                              rows="7"></textarea>
+                    <mat-error *ngIf="answerForm.controls['answer'].errors?.['required']">
+                      {{ 'DESCRIPTION' | translate }}
+                      {{ 'IS_REQUIRED' | translate }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="w-100 py-2 text-center">
+                  <button mat-raised-button color="primary" type="submit">{{ 'BTN.SUBMIT' | translate }}</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>
