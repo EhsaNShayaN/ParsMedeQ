@@ -112,7 +112,11 @@ internal abstract class EndpointHandlerBase<THandlerRequest, THandlerResponse, T
     {
         var result = this.MapRoute(routeBuilder, this.EndpointDelegate);
 
-        if (this.NeedAuthentication && !this.NeedAdminPrivilage)
+        if (this.NeedAdminPrivilage)
+        {
+            result.AddEndpointFilter<AuthenticationEndpointFilter>();
+        }
+        else if (this.NeedAuthentication && !this.NeedAdminPrivilage)
         {
             result.AddEndpointFilter<AuthenticationEndpointFilter>();
         }

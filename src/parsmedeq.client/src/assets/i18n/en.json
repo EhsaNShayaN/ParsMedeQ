@@ -100,5 +100,7 @@
   "LIST": "List",
   "STATUS": "Status",
   "FULL_NAME": "Fullname",
-  "TOTAL_COUNT": "Total count"
+  "TOTAL_COUNT": "Total count",
+  "TICKETS": "Tickets",
+  "TICKET": "Ticket"
 }

@@ -46,7 +46,7 @@ public sealed class TokenGeneratorService : ITokenGeneratorService
     public void PersistToken(string value, HttpContext httpContext)
     {
         httpContext.Response.Cookies.Append(
-            this._authenticationOptions.TokenCookieName,
+            this._authenticationOptions.ClientTokenCookieName,
             value,
             new CookieOptions()
             {

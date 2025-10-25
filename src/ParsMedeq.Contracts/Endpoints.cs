@@ -1,4 +1,5 @@
-﻿using ParsMedeQ.Contracts.CartContracts;
+﻿using ParsMedeQ.Contracts.AdminContracts;
+using ParsMedeQ.Contracts.CartContracts;
 using ParsMedeQ.Contracts.CommentContracts;
 using ParsMedeQ.Contracts.GeneralContracts;
 using ParsMedeQ.Contracts.OrderContracts;
@@ -12,6 +13,7 @@ namespace ParsMedeQ.Contracts;
 
 public static class Endpoints
 {
+    public readonly static AdminEndpoint Admin = new AdminEndpoint();
     public readonly static UserEndpoint User = new();
     public readonly static ResourceEndpoint Resource = new();
     public readonly static ProductEndpoint Product = new();
@@ -26,6 +28,7 @@ public static class EndpointMetadata
     public readonly static ApiEndpointItem Api = new("api", null);
     public readonly static ApiEndpointItem V1 = new("v1", Api);
 
+    public readonly static ApiEndpointItem Admin = new("admin", V1);
     public readonly static ApiEndpointItem User = new("user", V1);
     public readonly static ApiEndpointItem Resource = new("resource", V1);
     public readonly static ApiEndpointItem Product = new("product", V1);
@@ -34,5 +37,4 @@ public static class EndpointMetadata
     public readonly static ApiEndpointItem Comment = new("comment", V1);
     public readonly static ApiEndpointItem Order = new("order", V1);
     public readonly static ApiEndpointItem Payment = new("payment", V1);
-    public readonly static ApiEndpointItem Admin = new("admin", V1);
 }

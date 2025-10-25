@@ -2,7 +2,7 @@
 using SRH.MediatRMessaging.Queries;
 
 namespace ParsMedeQ.Application.Features.CommentFeatures.CommentListFeature;
-public sealed record CommentListQuery(int? RelatedId) : BasePaginatedQuery, IPrimitiveResultQuery<BasePaginatedApiResponse<CommentListDbQueryResponse>>;
+public sealed record CommentListQuery(int? RelatedId, bool? IsAdmin) : BasePaginatedQuery, IPrimitiveResultQuery<BasePaginatedApiResponse<CommentListDbQueryResponse>>;
 
 sealed class CommentListQueryHandler : IPrimitiveResultQueryHandler<CommentListQuery, BasePaginatedApiResponse<CommentListDbQueryResponse>>
 {

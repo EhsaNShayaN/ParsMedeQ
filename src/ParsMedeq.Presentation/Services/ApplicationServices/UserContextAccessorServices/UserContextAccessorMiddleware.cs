@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using ParsMedeQ.Application.Options;
 using ParsMedeQ.Application.Services.TokenGeneratorService;
 using ParsMedeQ.Application.Services.UserContextAccessorServices;
 
@@ -8,12 +10,14 @@ namespace ParsMedeQ.Presentation.Services.ApplicationServices.UserContextAccesso
 
 public sealed class UserContextAccessorMiddleware
 {
-    const string _authorizationHeaderName = "Authorization";
+    private readonly AuthenticationOptions _authenticationOptions;
     private readonly RequestDelegate _next;
 
-    public UserContextAccessorMiddleware(RequestDelegate requestDelegate)
+    public UserContextAccessorMiddleware(RequestDelegate requestDelegate,
+        IOptionsMonitor<AuthenticationOptions> authenticationOptions)
     {
         this._next = requestDelegate;
+        this._authenticationOptions = authenticationOptions.CurrentValue;
     }
 
     public async Task Invoke(HttpContext httpContext,
@@ -25,25 +29,24 @@ public sealed class UserContextAccessorMiddleware
         UserContext currentUser = UserContext.Guest;
         try
         {
-            if (httpContext.Request.Headers.TryGetValue(_authorizationHeaderName, out var authHeader)
-                && !string.IsNullOrWhiteSpace(authHeader))
+            var requestToken = GetValueFromHeaderOrCoockie(
+                this._authenticationOptions.AuthorizationHeaderName,
+                this._authenticationOptions.TokenCookieName,
+                httpContext);
+
+            if (requestToken is not null)
             {
-                var tokenItems = authHeader.ToString().Split(" ");
-                if (tokenItems.Length == 2 && tokenItems.First().Equals("bearer", StringComparison.InvariantCultureIgnoreCase))
+                var userId = await userAuthenticationTokenService.ValidateToken(requestToken.Value, true, string.Empty, httpContext.RequestAborted)
+                                         .Map(AuthenticationHelper.GetUserId)
+                                         .Match(
+                                             s => s,
+                                             _ => 0)
+                                         .ConfigureAwait(false);
+                if (userId > 0)
                 {
-                    var userId = await userAuthenticationTokenService.ValidateToken(tokenItems.Last(), true, string.Empty, httpContext.RequestAborted)
-                        .Map(AuthenticationHelper.GetUserId)
-                        .Match(
-                            s => s,
-                            _ => 0)
-                        .ConfigureAwait(false);
-                    if (userId > 0)
-                    {
-                        currentUser = new UserContext(userId);
-                    }
+                    currentUser = new UserContext(userId);
                 }
             }
-
             UserContextAccessor.Current = currentUser;
             await this._next(httpContext);
         }
@@ -55,5 +58,28 @@ public sealed class UserContextAccessorMiddleware
         {
             UserContextAccessor.Current = null;
         }
+    }
+    static ValueResult GetValueFromHeaderOrCoockie(string headerName, string cookieName, HttpContext httpContext)
+    {
+        if (httpContext.Request.Cookies.TryGetValue(cookieName, out var cookieValue) && !string.IsNullOrWhiteSpace(cookieValue))
+            return ValueResult.FromCookie(cookieValue);
+
+        if (httpContext.Request.Headers.TryGetValue(headerName, out var headerValue) && !string.IsNullOrWhiteSpace(headerValue))
+            return ValueResult.FromHeader(headerValue.ToString());
+
+        return ValueResult.Empty;
+    }
+    sealed record ValueResult
+    {
+        public static ValueResult Empty = new ValueResult() { Value = string.Empty };
+
+        public string Value { get; private set; } = string.Empty;
+        public bool Cookie { get; private set; } = false;
+        public bool Header { get; private set; } = false;
+
+        public static ValueResult FromHeader(string v) => new ValueResult() { Value = v, Header = true };
+        public static ValueResult FromCookie(string v) => new ValueResult() { Value = v, Cookie = true };
+
+
     }
 }

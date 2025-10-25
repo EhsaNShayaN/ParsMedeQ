@@ -4,21 +4,23 @@ using ParsMedeQ.Contracts;
 using ParsMedeQ.Contracts.CommentContracts.CommentListContract;
 using SRH.Utilities.EhsaN;
 
-namespace ParsMedeQ.Presentation.Features.CommentFeatures.CommentList;
+namespace ParsMedeQ.Presentation.Features.UserFeatures.CommentFeatures.UserCommentList;
 
-sealed class CommentListEndpoint : EndpointHandlerBase<
+sealed class UserCommentListEndpoint : EndpointHandlerBase<
     CommentListApiRequest,
     CommentListQuery,
     BasePaginatedApiResponse<CommentListDbQueryResponse>,
     BasePaginatedApiResponse<CommentListApiResponse>>
 {
-    protected override bool NeedTaxPayerFile => true;
+    protected override bool NeedTaxPayerFile => false;
+    protected override bool NeedAdminPrivilage => false;
+    protected override bool NeedAuthentication => true;
 
-    public CommentListEndpoint(
+    public UserCommentListEndpoint(
         IPresentationMapper<CommentListApiRequest, CommentListQuery> requestMapper,
         IPresentationMapper<BasePaginatedApiResponse<CommentListDbQueryResponse>, BasePaginatedApiResponse<CommentListApiResponse>> responseMapper)
         : base(
-            Endpoints.Comment.Comments,
+            Endpoints.User.Comments,
             HttpMethod.Post,
             requestMapper,
             responseMapper,
@@ -35,7 +37,7 @@ sealed class CommentListApiRequestMapper : IPresentationMapper<
     {
         return ValueTask.FromResult(
             PrimitiveResult.Success(
-                new CommentListQuery(src.RelatedId, null)
+                new CommentListQuery(src.RelatedId, false)
                 {
                     PageIndex = src.PageIndex,
                     PageSize = src.PageSize,
