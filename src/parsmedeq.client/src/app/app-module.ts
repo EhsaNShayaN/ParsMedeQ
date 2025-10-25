@@ -1,6 +1,6 @@
 import {APP_INITIALIZER, NgModule, provideBrowserGlobalErrorListeners} from '@angular/core';
 import {BrowserModule, DomSanitizer} from '@angular/platform-browser';
-import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule, provideHttpClient} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClient, provideHttpClient} from '@angular/common/http';
 import {AuthInterceptor} from './core/services/auth.interceptor';
 import {MatIconRegistry} from '@angular/material/icon';
 import {AppRoutingModule} from './app-routing-module';
@@ -11,10 +11,6 @@ import {Header} from './shared/layouts/header/header';
 import {Footer} from './shared/layouts/footer/footer';
 import {UserLayout} from './shared/layouts/user-layout/user-layout';
 import {AdminLayout} from './shared/layouts/admin-layout/admin-layout';
-import {AdminSidebar} from './shared/components/admin-sidebar/admin-sidebar';
-import {UserSidebar} from './shared/components/user-sidebar/user-sidebar';
-import {AdminHeader} from './shared/components/admin-header/admin-header';
-import {UserHeader} from './shared/components/user-header/user-header';
 import {AppSettings} from './app.settings';
 import {UrlSerializer} from '@angular/router';
 import {LowerCaseUrlSerializer} from './core/pipes/lower-case-url-serializer.pipe';
@@ -58,15 +54,10 @@ export function tokenGetter() {
     Footer,
     UserLayout,
     AdminLayout,
-    AdminSidebar,
-    UserSidebar,
-    AdminHeader,
-    UserHeader,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    HttpClientModule,
     BidiModule,
     AppRoutingModule,
     SharedModule,
@@ -92,6 +83,10 @@ export function tokenGetter() {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideHttpClient(),
+    /*provideAppInitializer(() => {
+      const urlInitService = inject(UrlInitService);
+      return firstValueFrom(urlInitService.init());
+    }),*/
     AppSettings,
     AuthGuard,
     {provide: APP_INITIALIZER, useFactory: urlInitFactory, deps: [UrlInitService], multi: true},

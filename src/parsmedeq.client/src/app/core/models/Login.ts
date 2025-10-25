@@ -18,6 +18,7 @@ export interface MobileResponse {
 }
 
 export interface Profile {
+  fullName: string;
   firstName: string;
   lastName: string;
 }
