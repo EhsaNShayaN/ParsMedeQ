@@ -4,6 +4,7 @@ import {PanelCommentListComponent} from './comment/panel-comment-list/panel-comm
 import {PanelTicketComponent} from './ticket/panel-ticket.component';
 import {PanelTicketListComponent} from './ticket/panel-ticket-list/panel-ticket-list.component';
 import {SharedModule} from '../shared-module';
+import {CommonModule} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import {SharedModule} from '../shared-module';
     PanelTicketListComponent,
   ],
   imports: [
+    CommonModule,
     SharedModule,
   ],
   exports: [
