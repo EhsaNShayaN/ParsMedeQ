@@ -11,7 +11,6 @@ import {ProductCategoriesResponse} from './models/ProductCategoryResponse';
 import {AddProductRequest, Product, ProductRequest, ProductResponse, ProductsRequest} from './models/ProductResponse';
 import {MobileRequest, MobileResponse, SendOtpRequest, SendOtpResponse} from './models/Login';
 import {ProductMediaListResponse} from './models/ProductMediaResponse';
-import {CommentResponse, CommentsRequest} from './models/CommentResponse';
 import {AddOrderResponse, OrderResponse} from './models/AddOrderResponse';
 import {ConfirmPaymentResponse} from './models/ConfirmPaymentResponse';
 
@@ -93,27 +92,6 @@ export class RestApiService {
     );
   }
 
-  deleteComment(id: number): Observable<any> {
-    const model = {id};
-    return this.http.post<BaseResult<AddResult>>(`${endpoint()}comment/delete`, model).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  confirmComment(id: number, isConfirmed: boolean): Observable<any> {
-    const model = {id, isConfirmed};
-    return this.http.post<BaseResult<AddResult>>(`${endpoint()}comment/confirm`, model).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  addCommentAnswer(id: number, answer: string): Observable<any> {
-    const model = {id, answer};
-    return this.http.post<BaseResult<AddResult>>(`${endpoint()}comment/addAnswer`, model).pipe(
-      catchError(this.handleError)
-    );
-  }
-
   deleteProductCategory(id: number): Observable<any> {
     const model = {id};
     return this.http.post<BaseResult<AddResult>>(`${endpoint()}product/category/delete`, model).pipe(
@@ -162,13 +140,6 @@ export class RestApiService {
   getProducts(model: ProductsRequest): Observable<any> {
     const query = this.modelToQuery(model);
     return this.http.get<ProductResponse>(`${endpoint()}product/list?${query}`).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  getComments(model: CommentsRequest): Observable<any> {
-    const query = this.modelToQuery(model);
-    return this.http.get<CommentResponse>(`${endpoint()}comment/list?${query}`).pipe(
       catchError(this.handleError)
     );
   }

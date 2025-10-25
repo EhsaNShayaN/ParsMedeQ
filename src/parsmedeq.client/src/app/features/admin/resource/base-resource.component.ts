@@ -150,7 +150,7 @@ export class BaseResourceComponent extends BaseComponent implements OnDestroy {
     delete values.imagePath;
     delete values.fileId;
     this.restApiService.addResource(values, this.image, this.file).subscribe((d: BaseResult<AddResult>) => {
-      this.toastr.success(this.getTranslateValue('THE_OPERATION_WAS_SUCCESSFUL'), '', {});
+      this.toastrService.success(this.getTranslateValue('THE_OPERATION_WAS_SUCCESSFUL'), '', {});
       if (!this.editItem) {
         this.formDir.resetForm();
       }

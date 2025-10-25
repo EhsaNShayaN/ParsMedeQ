@@ -36,7 +36,7 @@ export class ProductListComponent extends BaseComponent implements OnInit {
   totalCount = 0;
 
   constructor(private helpers: Helpers,
-              private toastr: ToastrService) {
+              private toastrService: ToastrService) {
     super();
     this.languages = this.translateService.getLangs();
   }
@@ -76,9 +76,9 @@ export class ProductListComponent extends BaseComponent implements OnInit {
               if (response.data.changed) {
                 this.dataSource.data.splice(index, 1);
                 this.dataSource._updateChangeSubscription();
-                this.toastr.success(this.getTranslateValue('ITEM_DELETED_SUCCESSFULLY'), '', {});
+                this.toastrService.success(this.getTranslateValue('ITEM_DELETED_SUCCESSFULLY'), '', {});
               } else {
-                this.toastr.error(this.getTranslateValue('UNKNOWN_ERROR'), '', {});
+                this.toastrService.error(this.getTranslateValue('UNKNOWN_ERROR'), '', {});
               }
             }
           });

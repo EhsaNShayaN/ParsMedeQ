@@ -1,20 +1,22 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort, Sort} from '@angular/material/sort';
 import {BaseComponent} from '../../../../base-component';
 import {MatTableDataSource} from '@angular/material/table';
 import {ToastrService} from 'ngx-toastr';
 import {Helpers} from '../../../../core/helpers';
-import {CommentResponse, CommentsRequest, Comment} from '../../../../core/models/CommentResponse';
+import {Comment, CommentResponse, CommentsRequest} from '../../../../core/models/CommentResponse';
 import {AddResult, BaseResult} from '../../../../core/models/BaseResult';
+import {CommentService} from '../../../../core/services/rest/comment-service';
 
 @Component({
-  selector: 'app-comment-list',
-  styleUrls: ['comment-list.component.scss'],
-  templateUrl: 'comment-list.component.html',
+  selector: 'app-panel-comment-list',
+  styleUrls: ['panel-comment-list.component.scss'],
+  templateUrl: 'panel-comment-list.component.html',
   standalone: false
 })
-export class CommentListComponent extends BaseComponent implements OnInit {
+export class PanelCommentListComponent extends BaseComponent implements OnInit {
+  @Input() url: string = '';
   dataSource!: MatTableDataSource<Comment>;
   ///////////////////////
   displayedColumns: string[] = [/*'row', */'title', 'description', 'creationDate', 'status', 'actions'];
@@ -25,8 +27,9 @@ export class CommentListComponent extends BaseComponent implements OnInit {
   totalCount = 0;
   adminSort: Sort = {active: 'creationDate', direction: 'desc'};
 
-  constructor(private helpers: Helpers,
-              private toastr: ToastrService) {
+  constructor(private commentService: CommentService,
+              private helpers: Helpers,
+              private toastrService: ToastrService) {
     super();
   }
 
@@ -41,7 +44,7 @@ export class CommentListComponent extends BaseComponent implements OnInit {
       pageSize: this.pageSize,
       sort: 0,
     };
-    this.restApiService.getComments(model).subscribe((res: CommentResponse) => {
+    this.commentService.getComments(model, this.url).subscribe((res: CommentResponse) => {
       this.initDataSource(res);
     });
   }
@@ -59,14 +62,14 @@ export class CommentListComponent extends BaseComponent implements OnInit {
       let dialogRef = this.dialogService.openConfirmDialog('', this.getTranslateValue('SURE_DELETE'));
       dialogRef.afterClosed().subscribe(dialogResult => {
         if (dialogResult) {
-          this.restApiService.deleteComment(item.id).subscribe({
+          this.commentService.deleteComment(item.id).subscribe({
             next: (response: BaseResult<AddResult>) => {
               if (response.data.changed) {
                 this.dataSource.data.splice(index, 1);
                 this.dataSource._updateChangeSubscription();
-                this.toastr.success(this.getTranslateValue('ITEM_DELETED_SUCCESSFULLY'), '', {});
+                this.toastrService.success(this.getTranslateValue('ITEM_DELETED_SUCCESSFULLY'), '', {});
               } else {
-                this.toastr.error(this.getTranslateValue('UNKNOWN_ERROR'), '', {});
+                this.toastrService.error(this.getTranslateValue('UNKNOWN_ERROR'), '', {});
               }
             }
           });
@@ -120,7 +123,7 @@ export class CommentListComponent extends BaseComponent implements OnInit {
   }
 
   setStatus(comment: Comment, isConfirmed: boolean) {
-    this.restApiService.confirmComment(comment.id, isConfirmed).subscribe((res: BaseResult<AddResult>) => {
+    this.commentService.confirmComment(comment.id, isConfirmed).subscribe((res: BaseResult<AddResult>) => {
       comment.isConfirmed = isConfirmed;
     });
   }
@@ -129,8 +132,8 @@ export class CommentListComponent extends BaseComponent implements OnInit {
     const dialogRef = this.dialogService.openConfirmDialog(this.getTranslateValue('REPLY'), '');
     dialogRef.afterClosed().subscribe(s => {
       if (s) {
-        this.restApiService.addCommentAnswer(element.id, s.answer).subscribe((res: BaseResult<boolean>) => {
-          this.toastr.success(this.getTranslateValue('THE_OPERATION_WAS_SUCCESSFUL'), '', {});
+        this.commentService.addCommentAnswer(element.id, s.answer).subscribe((res: BaseResult<boolean>) => {
+          this.toastrService.success(this.getTranslateValue('THE_OPERATION_WAS_SUCCESSFUL'), '', {});
         });
       }
     });

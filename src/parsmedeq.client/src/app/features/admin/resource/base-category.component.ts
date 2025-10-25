@@ -70,7 +70,7 @@ export class BaseCategoryComponent extends BaseComponent implements OnInit, OnDe
       values.id = this.editItem.id;
     }
     this.restApiService.addResourceCategory(values).subscribe((d: BaseResult<AddResult>) => {
-      this.toastr.success(this.getTranslateValue('THE_OPERATION_WAS_SUCCESSFUL'), '', {});
+      this.toastrService.success(this.getTranslateValue('THE_OPERATION_WAS_SUCCESSFUL'), '', {});
       if (!this.editItem) {
         this.formDir.resetForm();
       }

@@ -54,7 +54,6 @@ import {MultiCounterComponent} from './multi-counter/multi-counter';
 import {OurServiceComponent} from '../features/home/our-service/our-service.component';
 import {MatTab, MatTabGroup} from '@angular/material/tabs';
 import {ClipDialogComponent} from './dialogs/clip-dialog/clip-dialog.component';
-import {TicketListComponent} from './ticket/ticket-list/ticket-list.component';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatOption, MatSelect} from '@angular/material/select';
 import {MatCell, MatCellDef, MatColumnDef, MatHeaderCell, MatHeaderCellDef, MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef, MatTable} from '@angular/material/table';
@@ -90,7 +89,6 @@ import {MatSort} from '@angular/material/sort';
     MultiCounterComponent,
     OurServiceComponent,
     ClipDialogComponent,
-    TicketListComponent,
   ],
   imports: [
     CommonModule,
@@ -267,7 +265,6 @@ import {MatSort} from '@angular/material/sort';
     MultiCounterComponent,
     OurServiceComponent,
     ClipDialogComponent,
-    TicketListComponent,
   ],
   providers: [
     CurrencyFormatterPipe,

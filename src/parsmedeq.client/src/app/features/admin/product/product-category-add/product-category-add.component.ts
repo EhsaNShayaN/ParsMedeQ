@@ -24,7 +24,7 @@ export class ProductCategoryAddComponent extends BaseComponent implements OnInit
   image?: File;
   oldImagePath: string = '';
 
-  constructor(private toastr: ToastrService,
+  constructor(private toastrService: ToastrService,
               protected activatedRoute: ActivatedRoute,
               private formBuilder: UntypedFormBuilder) {
     super();
@@ -88,7 +88,7 @@ export class ProductCategoryAddComponent extends BaseComponent implements OnInit
     delete values.imagePath;
     this.restApiService.addProductCategory(values, this.image).subscribe((d: BaseResult<AddResult>) => {
       if (d.data.changed) {
-        this.toastr.success(this.getTranslateValue('THE_OPERATION_WAS_SUCCESSFUL'), '', {});
+        this.toastrService.success(this.getTranslateValue('THE_OPERATION_WAS_SUCCESSFUL'), '', {});
         if (!this.editItem) {
           this.formDir.resetForm();
         }

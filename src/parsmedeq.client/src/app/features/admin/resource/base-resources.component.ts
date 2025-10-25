@@ -5,7 +5,6 @@ import {MatTableDataSource} from '@angular/material/table';
 import {Resource, ResourceResponse, ResourcesRequest} from '../../../core/models/ResourceResponse';
 import {TranslateService} from '@ngx-translate/core';
 import {Helpers} from '../../../core/helpers';
-import {DialogService} from '../../../core/services/dialog-service';
 import {ToastrService} from 'ngx-toastr';
 import {BaseComponent} from '../../../base-component';
 import {AddResult, BaseResult} from '../../../core/models/BaseResult';
@@ -22,7 +21,7 @@ export class BaseResourcesComponent extends BaseComponent implements OnInit, OnD
   pageSize = 5;
   totalCount = 0;
   helpers = inject(Helpers);
-  toastr = inject(ToastrService);
+  toastrService = inject(ToastrService);
 
   constructor(tableId: number) {
     super();
@@ -67,9 +66,9 @@ export class BaseResourcesComponent extends BaseComponent implements OnInit, OnD
               if (response.data.changed) {
                 this.dataSource.data.splice(index, 1);
                 this.dataSource._updateChangeSubscription();
-                this.toastr.success(this.getTranslateValue('ITEM_DELETED_SUCCESSFULLY'), '', {});
+                this.toastrService.success(this.getTranslateValue('ITEM_DELETED_SUCCESSFULLY'), '', {});
               } else {
-                this.toastr.error(this.getTranslateValue('UNKNOWN_ERROR'), '', {});
+                this.toastrService.error(this.getTranslateValue('UNKNOWN_ERROR'), '', {});
               }
             }
           });

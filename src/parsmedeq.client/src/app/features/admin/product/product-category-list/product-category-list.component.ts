@@ -26,7 +26,7 @@ export class ProductCategoryListComponent extends BaseComponent implements OnIni
   totalCount = 0;
 
   constructor(private helpers: Helpers,
-              private toastr: ToastrService,) {
+              private toastrService: ToastrService,) {
     super();
     this.languages = this.translateService.getLangs();
   }
@@ -75,9 +75,9 @@ export class ProductCategoryListComponent extends BaseComponent implements OnIni
               if (response.data.changed) {
                 this.dataSource.data.splice(index, 1);
                 this.dataSource._updateChangeSubscription();
-                this.toastr.success(this.getTranslateValue('ITEM_DELETED_SUCCESSFULLY'), '', {});
+                this.toastrService.success(this.getTranslateValue('ITEM_DELETED_SUCCESSFULLY'), '', {});
               } else {
-                this.toastr.error(this.getTranslateValue('THIS_ITEM_CANNOT_BE_DELETED_PLEASE_DELETE_ITS_SUBCATEGORIES_FIRST'), '', {});
+                this.toastrService.error(this.getTranslateValue('THIS_ITEM_CANNOT_BE_DELETED_PLEASE_DELETE_ITS_SUBCATEGORIES_FIRST'), '', {});
               }
             }
           });

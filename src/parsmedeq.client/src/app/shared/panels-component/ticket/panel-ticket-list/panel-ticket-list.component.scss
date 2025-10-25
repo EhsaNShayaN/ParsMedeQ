@@ -1,4 +1,4 @@
-@import '../../../theme/styles/variables.scss';
+@import '../../../../theme/styles/variables.scss';
 
 .mat-elevation-z8 {
   .img-square {
@@ -9,7 +9,6 @@
 td.cdk-column-statusText {
   min-width: 200px;
 }
-
 
 td.cdk-column-title, td.cdk-column-creationDate {
   white-space: normal !important;

@@ -22,10 +22,10 @@ import {ProductAddComponent} from './product/product-add/product-add.component';
 import {ProductCategoryListComponent} from './product/product-category-list/product-category-list.component';
 import {ProductCategoryAddComponent} from './product/product-category-add/product-category-add.component';
 import {ProductMediaListComponent} from './product/product-media-list/product-media-list.component';
-import {CommentComponent} from './comment/comment.component';
-import {CommentListComponent} from './comment/comment-list/comment-list.component';
 import {AdminTicketComponent} from './ticket/admin-ticket.component';
-import {AdminTicketListComponent} from './ticket/ticket-list/admin-ticket-list.component';
+import {AdminTicketListComponent} from './ticket/admin-ticket-list/admin-ticket-list.component';
+import {AdminCommentComponent} from './comment/admin-comment.component';
+import {AdminCommentListComponent} from './comment/admin-comment-list/admin-comment-list.component';
 
 const routes: Routes = [
   {path: '', component: Admin},
@@ -63,8 +63,8 @@ const routes: Routes = [
   {path: 'product/category/edit/:id', component: ProductCategoryAddComponent},
   {path: 'product/media/list/:id', component: ProductMediaListComponent},
 
-  {path: 'comment', component: CommentComponent},
-  {path: 'comment/list', component: CommentListComponent},
+  {path: 'comment', component: AdminCommentComponent},
+  {path: 'comment/list', component: AdminCommentListComponent},
 
   {path: 'ticket', component: AdminTicketComponent},
   {path: 'ticket/list', component: AdminTicketListComponent},

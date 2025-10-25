@@ -10,9 +10,11 @@ import {Repair} from './repair/repair';
 import {Invoice} from './invoice/invoice';
 import {SharedModule} from '../../shared/shared-module';
 import {OrderComponent} from './orders/order/order.component';
+import {UserCommentComponent} from './comment/user-comment.component';
+import {UserCommentListComponent} from './comment/user-comment-list/user-comment-list.component';
 import {UserTicketComponent} from './ticket/user-ticket.component';
-import {UserTicketListComponent} from './ticket/ticket-list/user-ticket-list.component';
-
+import {UserTicketListComponent} from './ticket/user-ticket-list/user-ticket-list.component';
+import {PanelsModule} from '../../shared/panels-component/panels-module';
 
 @NgModule({
   declarations: [
@@ -24,12 +26,17 @@ import {UserTicketListComponent} from './ticket/ticket-list/user-ticket-list.com
     Service,
     Repair,
     Invoice,
+
+    UserCommentComponent,
+    UserCommentListComponent,
+
     UserTicketComponent,
     UserTicketListComponent,
   ],
   imports: [
     CommonModule,
     SharedModule,
+    PanelsModule,
     UserPanelRoutingModule
   ]
 })

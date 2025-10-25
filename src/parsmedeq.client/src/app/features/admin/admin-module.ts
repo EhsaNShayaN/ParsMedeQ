@@ -30,10 +30,11 @@ import {ProductAddComponent} from './product/product-add/product-add.component';
 import {ProductCategoryListComponent} from './product/product-category-list/product-category-list.component';
 import {ProductCategoryAddComponent} from './product/product-category-add/product-category-add.component';
 import {ProductMediaListComponent} from './product/product-media-list/product-media-list.component';
-import {CommentComponent} from './comment/comment.component';
-import {CommentListComponent} from './comment/comment-list/comment-list.component';
 import {AdminTicketComponent} from './ticket/admin-ticket.component';
-import {AdminTicketListComponent} from './ticket/ticket-list/admin-ticket-list.component';
+import {AdminTicketListComponent} from './ticket/admin-ticket-list/admin-ticket-list.component';
+import {PanelsModule} from '../../shared/panels-component/panels-module';
+import {AdminCommentComponent} from './comment/admin-comment.component';
+import {AdminCommentListComponent} from './comment/admin-comment-list/admin-comment-list.component';
 
 @NgModule({
   declarations: [
@@ -66,8 +67,8 @@ import {AdminTicketListComponent} from './ticket/ticket-list/admin-ticket-list.c
     ProductCategoryAddComponent,
     ProductMediaListComponent,
 
-    CommentComponent,
-    CommentListComponent,
+    AdminCommentComponent,
+    AdminCommentListComponent,
 
     AdminTicketComponent,
     AdminTicketListComponent,
@@ -75,6 +76,7 @@ import {AdminTicketListComponent} from './ticket/ticket-list/admin-ticket-list.c
   imports: [
     CommonModule,
     SharedModule,
+    PanelsModule,
     AdminRoutingModule,
     AngularEditorModule,
     MatDatepickerToggle,
