@@ -7,14 +7,13 @@ import {ResourceCategoriesResponse, ResourceCategory} from '../../../core/models
 import {TranslateService} from '@ngx-translate/core';
 import {Helpers} from '../../../core/helpers';
 import {MatTableDataSource} from '@angular/material/table';
-import {DialogService} from '../../../core/services/dialog-service';
 import {ToastrService} from 'ngx-toastr';
 import {AddResult, BaseResult} from '../../../core/models/BaseResult';
 
 @Directive()
 export class BaseCategoriesComponent extends BaseComponent implements OnInit, AfterViewInit {
   helpers = inject(Helpers);
-  toastr = inject(ToastrService);
+  toastrService = inject(ToastrService);
   languages: string[] = [];
   colors: string[] = ['warn', 'primary', 'success', 'secondary', 'info', 'danger'];
   tableId: number;

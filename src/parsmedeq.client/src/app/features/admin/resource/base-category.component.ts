@@ -12,7 +12,7 @@ import {TranslateService} from '@ngx-translate/core';
 export class BaseCategoryComponent extends BaseComponent implements OnInit, OnDestroy {
   lang: string;
   tableId: number;
-  toastr = inject(ToastrService);
+  toastrService = inject(ToastrService);
   formBuilder = inject(UntypedFormBuilder);
   public myForm!: UntypedFormGroup;
   @ViewChild(FormGroupDirective) formDir!: FormGroupDirective;

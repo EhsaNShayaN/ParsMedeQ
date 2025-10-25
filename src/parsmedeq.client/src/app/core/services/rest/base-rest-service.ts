@@ -1,9 +1,9 @@
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
+import {inject} from '@angular/core';
 
 export class BaseRestService {
-  constructor(protected http: HttpClient) {
-  }
+  http = inject(HttpClient);
 
   handleError<T>(error: HttpErrorResponse): Observable<any> {
     if (error.error instanceof ErrorEvent) {

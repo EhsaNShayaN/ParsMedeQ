@@ -12,7 +12,7 @@ import * as moment from 'jalali-moment';
 export class BaseResourceComponent extends BaseComponent implements OnDestroy {
   lang: string;
   formBuilder = inject(UntypedFormBuilder);
-  toastr = inject(ToastrService);
+  toastrService = inject(ToastrService);
   tableId: number;
   sub: any;
   //////////////////////
