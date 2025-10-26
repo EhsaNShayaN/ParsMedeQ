@@ -13,10 +13,9 @@ internal sealed class TicketReadRepository : GenericPrimitiveReadRepositoryBase<
     public ValueTask<PrimitiveResult<Ticket>> FindById(int id, CancellationToken cancellationToken) =>
         this.FindByIdAsync<Ticket, int>(id, cancellationToken);
     public ValueTask<PrimitiveResult<Ticket>> FindByIdWithAnswers(int id, CancellationToken cancellationToken) =>
-
         this.DbContext
             .Ticket
-            .Include(s => s.TicketAnswerss)
+            .Include(s => s.TicketAnswers)
             .Where(s => s.Id.Equals(id))
             .Run(q => q.FirstOrDefaultAsync(cancellationToken), PrimitiveError.Create("", "تیکتی با شناسه مورد نظر پیدا نشد"));
     public ValueTask<PrimitiveResult<BasePaginatedApiResponse<TicketListDbQueryResponse>>> FilterTickets(
@@ -40,28 +39,29 @@ internal sealed class TicketReadRepository : GenericPrimitiveReadRepositoryBase<
             };
         }
 
-        var query =
-            from res in this.DbContext.Ticket.Include(s => s.TicketAnswerss)
-            where
-                (userId ?? 0) == 0 || res.UserId.Equals(userId)
-            //&& (relatedId ?? 0) == 0 || res.RelatedId.Equals(relatedId)
-            select new TicketListDbQueryResponse
-            {
-                FullName = res.Users.FullName.GetValue(),
-                Title = res.Title,
-                Description = res.Description,
-                Status = res.Status,
-                MediaPath = res.MediaPath,
-                Code = res.Code,
-                CreationDate = res.CreationDate,
-                Answers = res.TicketAnswerss.Select(answer => new TicketAnswerDbQueryResponse
-                {
-                    Answer = answer.Answer,
-                    CreationDate = answer.CreationDate,
-                    FullName = answer.Users.FullName.GetValue(),
-                    MediaPath = answer.MediaPath,
-                }).ToArray(),
-            };
+        var query = from res in this.DbContext.Ticket
+                    .Include(s => s.TicketAnswers)
+                    .Include(s => s.Users)
+                    where
+                        (userId ?? 0) == 0 || res.UserId.Equals(userId)
+                    //&& (relatedId ?? 0) == 0 || res.RelatedId.Equals(relatedId)
+                    select new TicketListDbQueryResponse
+                    {
+                        FullName = res.Users.FullName.GetValue(),
+                        Title = res.Title,
+                        Description = res.Description,
+                        Status = res.Status,
+                        MediaPath = res.MediaPath,
+                        Code = res.Code,
+                        CreationDate = res.CreationDate,
+                        Answers = res.TicketAnswers.Select(answer => new TicketAnswerDbQueryResponse
+                        {
+                            Answer = answer.Answer,
+                            CreationDate = answer.CreationDate,
+                            FullName = answer.Users.FullName.GetValue(),
+                            MediaPath = answer.MediaPath,
+                        }).ToArray(),
+                    };
 
         if (lastId.Equals(0))
             return query.Paginate(

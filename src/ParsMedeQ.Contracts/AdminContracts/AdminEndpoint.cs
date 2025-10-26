@@ -9,6 +9,7 @@ public sealed class AdminEndpoint : ApiEndpointBase
     protected override ApiEndpointItem MyEndpoint => EndpointMetadata.Admin;
 
     public EndpointInfo Comments { get; private set; }
+    public EndpointInfo Tickets { get; private set; }
 
 
     public AdminEndpoint()
@@ -18,6 +19,13 @@ public sealed class AdminEndpoint : ApiEndpointBase
     this.GetUrl("comment/list"),
     "Admin Comments",
     "Admin Comments",
+    _tag);
+
+        this.Tickets = new EndpointInfo(
+    this.GetUrl("ticket/list"),
+    this.GetUrl("ticket/list"),
+    "Admin Tickets",
+    "Admin Tickets",
     _tag);
     }
 }

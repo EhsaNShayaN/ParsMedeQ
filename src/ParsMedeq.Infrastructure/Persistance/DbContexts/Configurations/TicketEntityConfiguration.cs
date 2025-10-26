@@ -10,7 +10,7 @@ sealed class TicketEntityConfiguration : IEntityTypeConfiguration<Ticket>
         builder.ToTable(TableNames.Ticket);
 
         builder
-            .HasMany(x => x.TicketAnswerss)
+            .HasMany(x => x.TicketAnswers)
             .WithOne(x => x.Ticket)
             .HasForeignKey(a => a.TicketId)
             .HasPrincipalKey(a => a.Id)

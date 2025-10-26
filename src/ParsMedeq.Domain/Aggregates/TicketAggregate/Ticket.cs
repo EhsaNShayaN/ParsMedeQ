@@ -22,7 +22,7 @@ public sealed class Ticket : EntityBase<int>
 
     #region " Navigation Properties "
     public User Users { get; private set; } = null!;
-    public IReadOnlyCollection<TicketAnswer> TicketAnswerss => this._ticketAnswerss.AsReadOnly();
+    public IReadOnlyCollection<TicketAnswer> TicketAnswers => this._ticketAnswerss.AsReadOnly();
     #endregion
 
     #region " Constructors "

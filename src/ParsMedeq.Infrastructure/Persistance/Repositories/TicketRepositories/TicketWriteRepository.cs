@@ -13,7 +13,7 @@ internal sealed class TicketWriteRepository : GenericPrimitiveWriteRepositoryBas
     public ValueTask<PrimitiveResult<Ticket>> FindByIdWithAnswers(int id, CancellationToken cancellationToken) =>
         this.DbContext
             .Ticket
-            .Include(s => s.TicketAnswerss)
+            .Include(s => s.TicketAnswers)
             .Where(s => s.Id.Equals(id))
             .Run(q => q.FirstOrDefaultAsync(cancellationToken), PrimitiveError.Create("", "تیکتی با شناسه مورد نظر پیدا نشد"));
     public ValueTask<PrimitiveResult<Ticket>> AddTicket(Ticket Ticket) => this.Add(Ticket);

@@ -26,7 +26,6 @@ export class PanelTicketListComponent extends BaseComponent implements OnInit {
   pageIndex = 1;
   pageSize = 20;
   totalCount = 0;
-  adminSort: Sort = {active: 'creationDate', direction: 'desc'};
   fromDate: string | null = null;
   toDate: string | null = null;
   query: string | null = null;
@@ -47,10 +46,9 @@ export class PanelTicketListComponent extends BaseComponent implements OnInit {
 
   getItems() {
     const model = {
-      page: this.pageIndex,
+      pageIndex: this.pageIndex,
       pageSize: this.pageSize,
       sort: 0,
-      adminSort: this.adminSort,
       fromDate: this.fromDate,
       toDate: this.toDate,
       query: this.query,
@@ -82,7 +80,6 @@ export class PanelTicketListComponent extends BaseComponent implements OnInit {
 
   sortChanged($event: Sort) {
     console.log($event);
-    this.adminSort = $event;
     this.getItems();
   }
 
