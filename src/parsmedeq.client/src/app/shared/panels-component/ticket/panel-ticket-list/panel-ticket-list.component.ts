@@ -54,7 +54,9 @@ export class PanelTicketListComponent extends BaseComponent implements OnInit {
       query: this.query,
     };
     this.ticketService.getTickets(model, this.url).subscribe((res: TicketResponse) => {
-      res.data.forEach(s => s.statusText = this.helpers.getTicketStatus(s.status));
+      /*if (res.data.length) {
+        res.data.forEach(s => s.statusText = this.helpers.getTicketStatus(s.status));
+      }*/
       this.initDataSource(res);
     });
   }

@@ -3,8 +3,8 @@ using ParsMedeQ.Application.Helpers;
 using ParsMedeQ.Application.Persistance.Schema.TicketRepositories;
 using ParsMedeQ.Domain.Aggregates.TicketAggregate;
 using ParsMedeQ.Infrastructure.Persistance.DbContexts;
+using ParsMedeQ.Infrastructure.Persistance.DbContexts.Extensions;
 using SRH.Persistance.Extensions;
-using SRH.Persistance.Models;
 
 namespace ParsMedeQ.Infrastructure.Persistance.Repositories.TicketRepositories;
 internal sealed class TicketReadRepository : GenericPrimitiveReadRepositoryBase<ReadDbContext>, ITicketReadRepository
@@ -18,64 +18,45 @@ internal sealed class TicketReadRepository : GenericPrimitiveReadRepositoryBase<
             .Include(s => s.TicketAnswers)
             .Where(s => s.Id.Equals(id))
             .Run(q => q.FirstOrDefaultAsync(cancellationToken), PrimitiveError.Create("", "تیکتی با شناسه مورد نظر پیدا نشد"));
-    public ValueTask<PrimitiveResult<BasePaginatedApiResponse<TicketListDbQueryResponse>>> FilterTickets(
+    public async ValueTask<PrimitiveResult<BasePaginatedApiResponse<TicketListDbQueryResponse>>> FilterTickets(
         BasePaginatedQuery paginated,
-        int? userId,
+        int userId,
         int lastId,
         CancellationToken cancellationToken)
     {
-        static BasePaginatedApiResponse<TicketListDbQueryResponse> MapResult(
-            PaginateListResult<TicketListDbQueryResponse> paginatedData,
-            BasePaginatedQuery pageinated)
+        Expression<Func<Ticket, TicketListDbQueryResponse>> TicketKeySelector = (res) => new TicketListDbQueryResponse
         {
-            var data = paginatedData.Data.ToArray();
-            return new BasePaginatedApiResponse<TicketListDbQueryResponse>(
-                data,
-                paginatedData.Total,
-                pageinated.PageIndex,
-                pageinated.PageSize)
+            FullName = res.User.FullName.GetValue(),
+            Title = res.Title,
+            Description = res.Description,
+            Status = res.Status,
+            MediaPath = res.MediaPath,
+            Code = res.Code,
+            CreationDate = res.CreationDate,
+            Answers = res.TicketAnswers.Select(answer => new TicketAnswerDbQueryResponse
             {
-                LastId = data.Length > 0 ? data.Last().Id : 0
-            };
-        }
+                Answer = answer.Answer,
+                CreationDate = answer.CreationDate,
+                FullName = answer.Users.FullName.GetValue(),
+                MediaPath = answer.MediaPath,
+            }).ToArray(),
+        };
 
-        var query = from res in this.DbContext.Ticket
-                    .Include(s => s.TicketAnswers)
-                    .Include(s => s.Users)
-                    where
-                        (userId ?? 0) == 0 || res.UserId.Equals(userId)
-                    //&& (relatedId ?? 0) == 0 || res.RelatedId.Equals(relatedId)
-                    select new TicketListDbQueryResponse
-                    {
-                        FullName = res.Users.FullName.GetValue(),
-                        Title = res.Title,
-                        Description = res.Description,
-                        Status = res.Status,
-                        MediaPath = res.MediaPath,
-                        Code = res.Code,
-                        CreationDate = res.CreationDate,
-                        Answers = res.TicketAnswers.Select(answer => new TicketAnswerDbQueryResponse
-                        {
-                            Answer = answer.Answer,
-                            CreationDate = answer.CreationDate,
-                            FullName = answer.Users.FullName.GetValue(),
-                            MediaPath = answer.MediaPath,
-                        }).ToArray(),
-                    };
-
-        if (lastId.Equals(0))
-            return query.Paginate(
-                PaginateQuery.Create(paginated.PageIndex, paginated.PageSize),
-                s => s.Id,
-                PaginateOrder.DESC,
-                cancellationToken)
-                .Map(data => MapResult(data, paginated));
-
-        return query.PaginateOverPK(
-            paginated.PageSize,
+        var result = await this.DbContext.PaginateByPrimaryKey(
+            this.DbContext.Ticket
+            .Include(x => x.TicketAnswers)
+            .Include(x => x.User),
             lastId,
-            PaginateOrder.DESC,
-            cancellationToken)
-            .Map(data => MapResult(data, paginated));
+             x => userId <= 0 || x.UserId == userId,
+             paginated.PageSize,
+             TicketKeySelector,
+             cancellationToken)
+            .Map(data => new BasePaginatedApiResponse<TicketListDbQueryResponse>(
+                data.Data,
+               Convert.ToInt32(data.TotalCount),
+            paginated.PageIndex,
+            paginated.PageSize))
+            .ConfigureAwait(false);
+        return result;
     }
 }

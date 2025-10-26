@@ -1,8 +1,7 @@
+import {BaseResult} from './BaseResult';
 import {Profile} from './Login';
 
-export interface TicketResponse {
-  data: Ticket[];
-  totalCount: number;
+export interface TicketResponse extends BaseResult<Ticket[]> {
 }
 
 export interface Ticket {

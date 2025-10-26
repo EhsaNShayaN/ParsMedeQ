@@ -59,6 +59,7 @@ sealed class TicketListApiResponseMapper : IPresentationMapper<
                         data.Title,
                         data.Description,
                         data.Status,
+                        data.Status.ToString(),
                         data.MediaPath,
                         data.Code,
                         data.CreationDate,

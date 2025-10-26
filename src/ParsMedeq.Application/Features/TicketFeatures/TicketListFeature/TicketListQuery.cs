@@ -19,7 +19,7 @@ sealed class TicketListQueryHandler : IPrimitiveResultQueryHandler<TicketListQue
     }
     public async Task<PrimitiveResult<BasePaginatedApiResponse<TicketListDbQueryResponse>>> Handle(TicketListQuery request, CancellationToken cancellationToken)
     {
-        int? userId = !request.IsAdmin.HasValue || request.IsAdmin.Value ? null : this._userContextAccessor.Current.UserId;
+        var userId = !request.IsAdmin.HasValue || request.IsAdmin.Value ? 0 : this._userContextAccessor.Current.UserId;
         return await this._readUnitOfWork.TicketReadRepository.FilterTickets(
             request,
             userId,

@@ -10,7 +10,7 @@ public interface ITicketReadRepository : IDomainRepository
     ValueTask<PrimitiveResult<Ticket>> FindByIdWithAnswers(int id, CancellationToken cancellationToken);
     public ValueTask<PrimitiveResult<BasePaginatedApiResponse<TicketListDbQueryResponse>>> FilterTickets(
         BasePaginatedQuery paginated,
-        int? userId,
+        int userId,
         int lastId,
         CancellationToken cancellationToken);
 }

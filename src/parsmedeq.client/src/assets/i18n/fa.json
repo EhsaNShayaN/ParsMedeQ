@@ -102,5 +102,6 @@
   "FULL_NAME": "نام و نام خانوادگی",
   "TOTAL_COUNT": "تعداد کل",
   "TICKETS": "تیکت ها",
-  "TICKET": "تیکت"
+  "TICKET": "تیکت",
+  "TICKET_NUMBER": "شماره تیکت"
 }

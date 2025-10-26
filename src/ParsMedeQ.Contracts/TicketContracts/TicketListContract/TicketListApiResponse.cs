@@ -5,6 +5,7 @@ public readonly record struct TicketListApiResponse(
     string Title,
     string Description,
     byte Status,
+    string StatusText,
     string MediaPath,
     int Code,
     DateTime CreationDate,

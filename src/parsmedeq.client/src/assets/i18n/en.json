@@ -102,5 +102,6 @@
   "FULL_NAME": "Fullname",
   "TOTAL_COUNT": "Total count",
   "TICKETS": "Tickets",
-  "TICKET": "Ticket"
+  "TICKET": "Ticket",
+  "TICKET_NUMBER": "Ticket number"
 }

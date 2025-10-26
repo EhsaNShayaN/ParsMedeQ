@@ -17,7 +17,7 @@ sealed class TicketEntityConfiguration : IEntityTypeConfiguration<Ticket>
             .OnDelete(DeleteBehavior.Cascade);
 
         builder
-            .HasOne(x => x.Users)
+            .HasOne(x => x.User)
             .WithMany(x => x.Tickets)
             .HasForeignKey(a => a.Id)
             .HasPrincipalKey(a => a.Id)

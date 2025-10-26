@@ -21,7 +21,7 @@ public sealed class Ticket : EntityBase<int>
     #endregion
 
     #region " Navigation Properties "
-    public User Users { get; private set; } = null!;
+    public User User { get; private set; } = null!;
     public IReadOnlyCollection<TicketAnswer> TicketAnswers => this._ticketAnswerss.AsReadOnly();
     #endregion
 
