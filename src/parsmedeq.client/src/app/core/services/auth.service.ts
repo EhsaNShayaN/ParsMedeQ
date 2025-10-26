@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {BehaviorSubject} from 'rxjs';
 import {CustomConstants} from '../constants/custom.constants';
+import {deleteCookie, getCookie} from './cookie-utils';
 
 @Injectable({
   providedIn: 'root'
@@ -17,13 +18,12 @@ export class AuthService {
 
   // ورود کاربر و ذخیره JWT
   login(token: string): void {
-    localStorage.setItem(CustomConstants.tokenName, token);
     this.loginSubject.next(true);
   }
 
   // دریافت توکن
   getToken(): string | null {
-    return localStorage.getItem(CustomConstants.tokenName);
+    return getCookie(CustomConstants.tokenName);
   }
 
   isAdmin(): boolean {
@@ -47,7 +47,7 @@ export class AuthService {
 
   // خروج کاربر
   logout(): void {
-    localStorage.removeItem(CustomConstants.tokenName);
+    deleteCookie(CustomConstants.tokenName);
     this.router.navigate(['/']);
   }
 }

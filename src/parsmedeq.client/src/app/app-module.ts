@@ -28,6 +28,8 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {BidiModule} from '@angular/cdk/bidi';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AuthGuard} from './core/guards/auth.guard';
+import {getCookie} from './core/services/cookie-utils';
+import {CustomConstants} from './core/constants/custom.constants';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -38,7 +40,7 @@ export function urlInitFactory(urlInitService: UrlInitService) {
 }
 
 export function tokenGetter() {
-  return localStorage.getItem('jwt');
+  return getCookie(CustomConstants.tokenName);
 }
 
 @NgModule({
