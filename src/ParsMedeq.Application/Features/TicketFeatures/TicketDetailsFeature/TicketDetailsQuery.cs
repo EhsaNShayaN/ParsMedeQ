@@ -14,7 +14,7 @@ sealed class TicketDetailsQueryHandler : IPrimitiveResultQueryHandler<TicketDeta
         this._readUnitOfWork = taxMemoryReadUnitOfWork;
     }
     public async Task<PrimitiveResult<Ticket>> Handle(TicketDetailsQuery request, CancellationToken cancellationToken) =>
-        await this._readUnitOfWork.TicketReadRepository.FindById(
+        await this._readUnitOfWork.TicketReadRepository.FindByIdWithAnswers(
             request.Id,
             cancellationToken)
         .ConfigureAwait(false);

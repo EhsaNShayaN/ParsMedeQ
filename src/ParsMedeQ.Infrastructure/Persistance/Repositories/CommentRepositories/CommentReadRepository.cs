@@ -12,6 +12,7 @@ internal sealed class CommentReadRepository : GenericPrimitiveReadRepositoryBase
 
     public ValueTask<PrimitiveResult<BasePaginatedApiResponse<CommentListDbQueryResponse>>> FilterComments(
         BasePaginatedQuery paginated,
+        int? userId,
         int? relatedId,
         int lastId,
         CancellationToken cancellationToken)
@@ -33,7 +34,9 @@ internal sealed class CommentReadRepository : GenericPrimitiveReadRepositoryBase
 
         var query =
             from res in this.DbContext.Comment
-            where (relatedId ?? 0) == 0 || res.RelatedId.Equals(relatedId)
+            where
+                (userId ?? 0) == 0 || res.UserId.Equals(userId) &&
+                (relatedId ?? 0) == 0 || res.RelatedId.Equals(relatedId)
             select new CommentListDbQueryResponse
             {
                 Id = res.Id,

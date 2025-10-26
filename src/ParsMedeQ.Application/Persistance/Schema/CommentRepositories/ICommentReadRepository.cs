@@ -7,6 +7,7 @@ public interface ICommentReadRepository : IDomainRepository
 {
     public ValueTask<PrimitiveResult<BasePaginatedApiResponse<CommentListDbQueryResponse>>> FilterComments(
         BasePaginatedQuery paginated,
+        int? userId,
         int? relatedId,
         int lastId,
         CancellationToken cancellationToken);

@@ -12,9 +12,16 @@ internal sealed class TicketReadRepository : GenericPrimitiveReadRepositoryBase<
     public TicketReadRepository(ReadDbContext dbContext) : base(dbContext) { }
     public ValueTask<PrimitiveResult<Ticket>> FindById(int id, CancellationToken cancellationToken) =>
         this.FindByIdAsync<Ticket, int>(id, cancellationToken);
+    public ValueTask<PrimitiveResult<Ticket>> FindByIdWithAnswers(int id, CancellationToken cancellationToken) =>
 
+        this.DbContext
+            .Ticket
+            .Include(s => s.TicketAnswerss)
+            .Where(s => s.Id.Equals(id))
+            .Run(q => q.FirstOrDefaultAsync(cancellationToken), PrimitiveError.Create("", "تیکتی با شناسه مورد نظر پیدا نشد"));
     public ValueTask<PrimitiveResult<BasePaginatedApiResponse<TicketListDbQueryResponse>>> FilterTickets(
         BasePaginatedQuery paginated,
+        int? userId,
         int lastId,
         CancellationToken cancellationToken)
     {
@@ -34,7 +41,10 @@ internal sealed class TicketReadRepository : GenericPrimitiveReadRepositoryBase<
         }
 
         var query =
-            from res in this.DbContext.Ticket
+            from res in this.DbContext.Ticket.Include(s => s.TicketAnswerss)
+            where
+                (userId ?? 0) == 0 || res.UserId.Equals(userId)
+            //&& (relatedId ?? 0) == 0 || res.RelatedId.Equals(relatedId)
             select new TicketListDbQueryResponse
             {
                 FullName = res.Users.FullName.GetValue(),
@@ -69,4 +79,3 @@ internal sealed class TicketReadRepository : GenericPrimitiveReadRepositoryBase<
             .Map(data => MapResult(data, paginated));
     }
 }
-
