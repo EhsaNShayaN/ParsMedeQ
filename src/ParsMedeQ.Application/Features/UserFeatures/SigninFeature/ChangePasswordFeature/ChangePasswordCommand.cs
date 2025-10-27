@@ -2,7 +2,7 @@
 
 namespace ParsMedeQ.Application.Features.UserFeatures.SigninFeature.ChangePasswordFeature;
 public sealed record class ChangePasswordCommand(
-    string Otp,
+    string OldPassword,
     string Password) : IPrimitiveResultCommand<ChangePasswordCommandResponse>,
     IValidatableRequest<ChangePasswordCommand>
 {
@@ -14,8 +14,8 @@ public sealed record class ChangePasswordCommand(
                         ? ValueTask.FromResult(PrimitiveResult.Failure("Validation.Error", "رمز عبور ارسال نشده است"))
                         : ValueTask.FromResult(PrimitiveResult.Success()),
 
-                value => string.IsNullOrWhiteSpace(value.Otp)
-                        ? ValueTask.FromResult(PrimitiveResult.Failure("Validation.Error", "رمز یکبار مصرف ارسال نشده است"))
+                value => string.IsNullOrWhiteSpace(value.OldPassword)
+                        ? ValueTask.FromResult(PrimitiveResult.Failure("Validation.Error", "رمز عبور قبلی ارسال نشده است"))
                         : ValueTask.FromResult(PrimitiveResult.Success())
             ]);
     }

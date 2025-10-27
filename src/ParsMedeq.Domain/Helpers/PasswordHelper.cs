@@ -19,6 +19,10 @@ public static class PasswordHelper
         return CreatePbkdf2(password, salt);
     }
 
+    public static PrimitiveResult VerifyPassword(string password, string hash, string salt)
+    {
+        return VerifyPassword(password, hash, Convert.FromBase64String(salt));
+    }
     public static PrimitiveResult VerifyPassword(string password, string hash, byte[] salt)
     {
         var hashToCompare = CreatePbkdf2(password, salt);

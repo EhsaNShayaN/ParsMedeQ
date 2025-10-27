@@ -2,14 +2,14 @@
 using ParsMedeQ.Domain.Aggregates.UserAggregate.Validators;
 using ParsMedeQ.Domain.Helpers;
 
-namespace ParsMedeQ.Application.Features.UserFeatures.SigninFeature.ChangePasswordFeature;
-public sealed class ChangePasswordCommandHandler : IPrimitiveResultCommandHandler<ChangePasswordCommand, ChangePasswordCommandResponse>
+namespace ParsMedeQ.Application.Features.UserFeatures.SigninFeature.SetPasswordFeature;
+public sealed class SetPasswordCommandHandler : IPrimitiveResultCommandHandler<SetPasswordCommand, SetPasswordCommandResponse>
 {
     private readonly IUserValidatorService _userValidatorService;
     private readonly IWriteUnitOfWork _writeUnitOfWork;
     private readonly IUserContextAccessor _userContextAccessor;
 
-    public ChangePasswordCommandHandler(
+    public SetPasswordCommandHandler(
         IWriteUnitOfWork writeUnitOfWork,
         IUserValidatorService userValidatorService,
         IUserContextAccessor userContextAccessor)
@@ -19,14 +19,13 @@ public sealed class ChangePasswordCommandHandler : IPrimitiveResultCommandHandle
         this._userContextAccessor = userContextAccessor;
     }
 
-    public async Task<PrimitiveResult<ChangePasswordCommandResponse>> Handle(ChangePasswordCommand request, CancellationToken cancellationToken)
+    public async Task<PrimitiveResult<SetPasswordCommandResponse>> Handle(SetPasswordCommand request, CancellationToken cancellationToken)
     {
         return await this._writeUnitOfWork.UserWriteRepository
-                    .FindById(_userContextAccessor.GetCurrent().UserId, cancellationToken)
-                    .Ensure(user =>
-                        PasswordHelper.VerifyPassword(request.OldPassword, user.Password.Value, user.Password.Salt).IsSuccess,
-                        PrimitiveError.Create("", "رمز عبور قبلی اشتباه است"))
-                    .Map(
+                    .FindById(_userContextAccessor.Current.UserId, cancellationToken)
+                    .MapIf(
+                        user => user.Mobile.IsDefault(),
+                        _ => ValueTask.FromResult(PrimitiveResult.Failure<SetPasswordCommandResponse>("", "موبایلی برای شما تعریف نشده است")),
                         user => otpService.Validate(
                             request.Otp,
                             ApplicationCacheTokens.CreateOTPKey(user.Id.ToString(), ApplicationCacheTokens.SetPasswordOTP),
@@ -37,7 +36,7 @@ public sealed class ChangePasswordCommandHandler : IPrimitiveResultCommandHandle
                         .Bind(user => user.UpdatePassword(generatedPass.HashedPassword, generatedPass.Salt, this._userValidatorService)))
                         .Bind(user => this._writeUnitOfWork.UserWriteRepository.UpdatePassword(user, cancellationToken))
                         .Bind(user => this._writeUnitOfWork.SaveChangesAsync(cancellationToken).Map(_ => user))
-                        .Map(user => new ChangePasswordCommandResponse(true)))
+                        .Map(user => new SetPasswordCommandResponse(true)))
                 .ConfigureAwait(false);
     }
 }

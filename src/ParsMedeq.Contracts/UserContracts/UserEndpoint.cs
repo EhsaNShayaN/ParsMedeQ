@@ -32,6 +32,7 @@ public sealed class UserEndpoint : ApiEndpointBase
     public EndpointInfo GetSignupingTaxPayers { get; private set; }
     public EndpointInfo Profile { get; private set; }
     public EndpointInfo UpdateProfile { get; private set; }
+    public EndpointInfo SetPassword { get; init; }
     public EndpointInfo ChangePassword { get; init; }
     public EndpointInfo ResetPassword { get; init; }
     public EndpointInfo Comments { get; init; }
@@ -174,6 +175,13 @@ public sealed class UserEndpoint : ApiEndpointBase
             GetUrl("ChangePassword"),
             "Change Password",
             "Change Password",
+            _tag);
+
+        this.SetPassword = new EndpointInfo(
+            GetUrl("SetPassword"),
+            GetUrl("SetPassword"),
+            "Set Password",
+            "Set Password",
             _tag);
 
         this.ResetPassword = new EndpointInfo(
