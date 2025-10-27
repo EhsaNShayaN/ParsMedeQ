@@ -12,3 +12,5 @@ CREATE TABLE [dbo].[OrderItems]
 GO
 ALTER TABLE [dbo].[OrderItems] ADD CONSTRAINT [PK__OrderIte__3214EC07DF281839] PRIMARY KEY CLUSTERED ([Id]) ON [PRIMARY]
 GO
+ALTER TABLE [dbo].[OrderItems] ADD CONSTRAINT [FK_OrderItems_Order] FOREIGN KEY ([OrderId]) REFERENCES [dbo].[Order] ([Id])
+GO
