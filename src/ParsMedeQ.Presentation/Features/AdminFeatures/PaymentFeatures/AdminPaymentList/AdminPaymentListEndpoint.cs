@@ -3,9 +3,9 @@ using ParsMedeQ.Application.Helpers;
 using ParsMedeQ.Contracts;
 using ParsMedeQ.Contracts.PaymentContracts.PaymentListContract;
 
-namespace ParsMedeQ.Presentation.Features.PaymentFeatures.PaymentList;
+namespace ParsMedeQ.Presentation.Features.AdminFeatures.PaymentFeatures.AdminPaymentList;
 
-sealed class PaymentListEndpoint : EndpointHandlerBase<
+sealed class AdminPaymentListEndpoint : EndpointHandlerBase<
     PaymentListApiRequest,
     PaymentListQuery,
     BasePaginatedApiResponse<PaymentListDbQueryResponse>,
@@ -13,7 +13,7 @@ sealed class PaymentListEndpoint : EndpointHandlerBase<
 {
     protected override bool NeedTaxPayerFile => true;
 
-    public PaymentListEndpoint(
+    public AdminPaymentListEndpoint(
         IPresentationMapper<PaymentListApiRequest, PaymentListQuery> requestMapper,
         IPresentationMapper<BasePaginatedApiResponse<PaymentListDbQueryResponse>, BasePaginatedApiResponse<PaymentListApiResponse>> responseMapper)
         : base(
@@ -34,7 +34,7 @@ sealed class PaymentListApiRequestMapper : IPresentationMapper<
     {
         return ValueTask.FromResult(
             PrimitiveResult.Success(
-                new PaymentListQuery(src.RelatedId, null)
+                new PaymentListQuery(src.RelatedId, true)
                 {
                     PageIndex = src.PageIndex,
                     PageSize = src.PageSize,
