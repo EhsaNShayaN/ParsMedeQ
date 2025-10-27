@@ -30,6 +30,7 @@ import {AdminOrderComponent} from './order/admin-order.component';
 import {AdminOrderListComponent} from './order/admin-order-list/admin-order-list.component';
 import {AdminPaymentComponent} from './payment/admin-payment.component';
 import {AdminPaymentListComponent} from './payment/admin-payment-list/admin-payment-list.component';
+import {OrderComponent} from './orders/order/order.component';
 
 const routes: Routes = [
   {path: '', component: Admin},
@@ -75,6 +76,7 @@ const routes: Routes = [
 
   {path: 'order', component: AdminOrderComponent},
   {path: 'order/list', component: AdminOrderListComponent},
+  {path: 'order/details/:id', component: OrderComponent},
 
   {path: 'payment', component: AdminPaymentComponent},
   {path: 'payment/list', component: AdminPaymentListComponent},

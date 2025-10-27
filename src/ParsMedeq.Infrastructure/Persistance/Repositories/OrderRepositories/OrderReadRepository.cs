@@ -13,7 +13,7 @@ internal sealed class OrderReadRepository : GenericPrimitiveReadRepositoryBase<R
 
     public ValueTask<PrimitiveResult<Order>> FindById(int id, CancellationToken cancellationToken) =>
         this.FindByIdAsync<Order, int>(id, cancellationToken);
-    public ValueTask<PrimitiveResult<Order>> FindByIdWithOrder(int id, CancellationToken cancellationToken) =>
+    public ValueTask<PrimitiveResult<Order>> FindByIdWithItems(int id, CancellationToken cancellationToken) =>
         this.DbContext
             .Order
             .Include(s => s.OrderItems)

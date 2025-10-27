@@ -4,6 +4,7 @@ import {BaseComponent} from '../../../../base-component';
 import {Order, OrderResponse} from '../../../../core/models/AddOrderResponse';
 import {OrderStatus} from '../../../../core/constants/server.constants';
 import * as moment from 'jalali-moment';
+import {OrderService} from '../../../../core/services/rest/order-service';
 
 @Component({
   selector: 'app-order-finish',
@@ -16,10 +17,11 @@ export class OrderComponent extends BaseComponent implements OnInit, OnDestroy {
   order: Order | undefined;
   protected readonly OrderStatus = OrderStatus;
 
-  constructor(private activatedRoute: ActivatedRoute) {
+  constructor(private activatedRoute: ActivatedRoute,
+              private orderService: OrderService) {
     super();
     this.sub = this.activatedRoute.params.subscribe(params => {
-      this.restApiService.getOrder(params['id']).subscribe((a: OrderResponse) => {
+      this.orderService.getOrder(params['id']).subscribe((a: OrderResponse) => {
         this.order = a.data;
       });
     });

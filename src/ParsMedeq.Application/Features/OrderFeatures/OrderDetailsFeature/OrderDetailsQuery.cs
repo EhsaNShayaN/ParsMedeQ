@@ -13,9 +13,12 @@ sealed class OrderDetailsQueryHandler : IPrimitiveResultQueryHandler<OrderDetail
     {
         this._readUnitOfWork = taxMemoryReadUnitOfWork;
     }
-    public async Task<PrimitiveResult<Order>> Handle(OrderDetailsQuery request, CancellationToken cancellationToken) =>
-        await this._readUnitOfWork.OrderReadRepository.FindByIdWithOrder(
+    public async Task<PrimitiveResult<Order>> Handle(OrderDetailsQuery request, CancellationToken cancellationToken)
+    {
+        var x = await this._readUnitOfWork.OrderReadRepository.FindByIdWithItems(
             request.Id,
             cancellationToken)
         .ConfigureAwait(false);
+        return x;
+    }
 }

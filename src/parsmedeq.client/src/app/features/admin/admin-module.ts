@@ -39,6 +39,7 @@ import {AdminOrderComponent} from './order/admin-order.component';
 import {AdminOrderListComponent} from './order/admin-order-list/admin-order-list.component';
 import {AdminPaymentComponent} from './payment/admin-payment.component';
 import {AdminPaymentListComponent} from './payment/admin-payment-list/admin-payment-list.component';
+import {OrderComponent} from './orders/order/order.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,8 @@ import {AdminPaymentListComponent} from './payment/admin-payment-list/admin-paym
 
     AdminPaymentComponent,
     AdminPaymentListComponent,
+
+    OrderComponent,
   ],
   imports: [
     CommonModule,
