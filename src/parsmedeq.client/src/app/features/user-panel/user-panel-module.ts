@@ -17,6 +17,7 @@ import {UserOrderComponent} from './order/user-order.component';
 import {UserOrderListComponent} from './order/user-order-list/user-order-list.component';
 import {UserPaymentComponent} from './payment/user-payment.component';
 import {UserPaymentListComponent} from './payment/user-payment-list/user-payment-list.component';
+import {UserOrderDetailsComponent} from './order/user-order-details/user-order-details.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import {UserPaymentListComponent} from './payment/user-payment-list/user-payment
 
     UserOrderComponent,
     UserOrderListComponent,
+    UserOrderDetailsComponent,
 
     UserPaymentComponent,
     UserPaymentListComponent,

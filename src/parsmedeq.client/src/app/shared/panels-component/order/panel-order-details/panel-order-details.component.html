@@ -1,54 +1,53 @@
 @if (order) {
   <div class="order-finish">
-    <mat-card class="order-card">
-      <div class="icon">
-        <ng-container [ngSwitch]="order.status">
-          <mat-icon *ngSwitchCase="OrderStatus.Paid" color="primary">check_circle</mat-icon>
-          <mat-icon *ngSwitchCase="OrderStatus.Error" color="warn">error</mat-icon>
-          <mat-progress-spinner *ngSwitchCase="OrderStatus.Pending" mode="indeterminate" diameter="48"></mat-progress-spinner>
-        </ng-container>
-      </div>
+    <div class="icon">
+      <ng-container [ngSwitch]="order.status">
+        <mat-icon *ngSwitchCase="OrderStatus.Paid" color="primary">check_circle</mat-icon>
+        <mat-icon *ngSwitchCase="OrderStatus.Error" color="warn">error</mat-icon>
+        <mat-progress-spinner *ngSwitchCase="OrderStatus.Pending" mode="indeterminate"
+                              diameter="48"></mat-progress-spinner>
+      </ng-container>
+    </div>
 
-      <div class="info">
-        <h2 *ngIf="order.status === OrderStatus.Paid">سفارش موفق</h2>
-        <h2 *ngIf="order.status === OrderStatus.Error">ثبت سفارش با خطا️</h2>
-        <h2 *ngIf="order.status === OrderStatus.Pending">در حال پردازش سفارش...</h2>
+    <div class="info">
+      <h2 *ngIf="order.status === OrderStatus.Paid">سفارش موفق</h2>
+      <h2 *ngIf="order.status === OrderStatus.Error">ثبت سفارش با خطا️</h2>
+      <h2 *ngIf="order.status === OrderStatus.Pending">در حال پردازش سفارش...</h2>
 
-        <div *ngIf="order.id" class="order-details">
-          <p><strong>شماره سفارش:</strong> {{ order.id }}</p>
-          <p><strong>کد رهگیری:</strong> {{ order.orderNumber }}</p>
-          <p>
-            <strong>تاریخ سفارش:</strong>
-            <span>
+      <div *ngIf="order.id" class="order-details">
+        <p><strong>شماره سفارش:</strong> {{ order.id }}</p>
+        <p><strong>کد رهگیری:</strong> {{ order.orderNumber }}</p>
+        <p>
+          <strong>تاریخ سفارش:</strong>
+          <span>
               {{ convertToPersianDate(order.updateDate ?? '') }}
             </span>
-          </p>
-          <p *ngIf="order.totalAmount">
-            <strong>مبلغ کل:</strong>
-            {{ order.totalAmount | currencyFormatter }}
-            ریال
-          </p>
-        </div>
-
-        <mat-divider></mat-divider>
-
-        <div class="items" *ngIf="order.items.length && order.status === OrderStatus.Paid">
-          <h3>محصولات خریداری‌شده:</h3>
-          <mat-list>
-            <mat-list-item *ngFor="let item of order.items">
-              <img matListAvatar [src]="item.image" alt="{{ item.relatedName }}"/>
-              <div matLine>{{ item.relatedName }}</div>
-              <div matLine class="price">
-                {{ item.unitPrice | currencyFormatter }} × {{ item.quantity }}
-              </div>
-            </mat-list-item>
-          </mat-list>
-        </div>
-
-        <div class="actions">
-          <a mat-flat-button color="primary" [routerLink]="'/user/orders' | langPack">لیست سفارشات</a>
-        </div>
+        </p>
+        <p *ngIf="order.totalAmount">
+          <strong>مبلغ کل:</strong>
+          {{ order.totalAmount | currencyFormatter }}
+          ریال
+        </p>
       </div>
-    </mat-card>
+
+      <mat-divider></mat-divider>
+
+      <div class="items" *ngIf="order.items.length && order.status === OrderStatus.Paid">
+        <h3>محصولات خریداری‌شده:</h3>
+        <mat-list>
+          <mat-list-item *ngFor="let item of order.items">
+            <img matListAvatar [src]="item.image" alt="{{ item.relatedName }}"/>
+            <div matLine>{{ item.relatedName }}</div>
+            <div matLine class="price">
+              {{ item.unitPrice | currencyFormatter }} × {{ item.quantity }}
+            </div>
+          </mat-list-item>
+        </mat-list>
+      </div>
+
+      <div class="actions">
+        <a mat-flat-button color="primary" [routerLink]="'/' + url + '/order/list' | langPack">لیست سفارشات</a>
+      </div>
+    </div>
   </div>
 }
