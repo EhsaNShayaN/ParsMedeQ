@@ -1,7 +1,7 @@
 ﻿using ParsMedeQ.Domain.Abstractions;
 using ParsMedeQ.Domain.Aggregates.OrderAggregate.Entities;
 using ParsMedeQ.Domain.Aggregates.PaymentAggregate;
-using ParsMedeQ.Domain.Aggregates.UserAggregate.UserEntity;
+using ParsMedeQ.Domain.Aggregates.UserAggregate;
 
 namespace ParsMedeQ.Domain.Aggregates.OrderAggregate;
 public sealed class Order : EntityBase<int>

@@ -1,4 +1,4 @@
-﻿using ParsMedeQ.Domain.Aggregates.UserAggregate.UserEntity;
+﻿using ParsMedeQ.Domain.Aggregates.UserAggregate;
 using ParsMedeQ.Domain.Persistance;
 using ParsMedeQ.Domain.Types.Email;
 

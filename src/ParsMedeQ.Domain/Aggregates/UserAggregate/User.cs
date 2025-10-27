@@ -13,7 +13,7 @@ using ParsMedeQ.Domain.Types.LastName;
 using ParsMedeQ.Domain.Types.Mobile;
 using ParsMedeQ.Domain.Types.Password;
 
-namespace ParsMedeQ.Domain.Aggregates.UserAggregate.UserEntity;
+namespace ParsMedeQ.Domain.Aggregates.UserAggregate;
 public sealed class User : AggregateRoot<int>
 {
     #region " Fields "

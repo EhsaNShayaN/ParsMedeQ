@@ -1,6 +1,6 @@
 ﻿using ParsMedeQ.Domain.Abstractions;
 using ParsMedeQ.Domain.Aggregates.CartAggregate.Entities;
-using ParsMedeQ.Domain.Aggregates.UserAggregate.UserEntity;
+using ParsMedeQ.Domain.Aggregates.UserAggregate;
 
 namespace ParsMedeQ.Domain.Aggregates.CartAggregate;
 

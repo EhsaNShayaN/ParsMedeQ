@@ -1,4 +1,5 @@
 ﻿using ParsMedeQ.Application.Persistance.Schema.UserRepositories;
+using ParsMedeQ.Domain.Aggregates.UserAggregate;
 using ParsMedeQ.Infrastructure.Persistance.DbContexts;
 using ParsMedeQ.Infrastructure.Schemas;
 using SRH.Persistance.Extensions;

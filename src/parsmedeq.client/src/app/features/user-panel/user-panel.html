@@ -1,1 +1,46 @@
-<p>user-panel works!</p>
+@if (passwordForm) {
+  <form [formGroup]="passwordForm" (ngSubmit)="onPasswordFormSubmit(passwordForm.value)">
+    <mat-form-field appearance="outline" class="w-100 mb-2">
+      <mat-label>{{ 'CURRENT_PASSWORD' | translate }}</mat-label>
+      <input matInput [placeholder]="'CURRENT_PASSWORD' | translate" formControlName="currentPassword" type="password"
+             minlength="0" autocomplete="off" class="ltr" required>
+      <mat-error *ngIf="passwordForm.controls.currentPassword.errors?.required">
+        {{ 'CURRENT_PASSWORD' | translate }}
+        {{ 'IS_REQUIRED' | translate }}
+      </mat-error>
+      <mat-error *ngIf="passwordForm.controls.currentPassword.hasError('minlength')">
+        {{ 'PASSWORD_MUST_BE_MORE_THAN_6_CHARACTERS' | translate }}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-100 mb-2">
+      <mat-label>{{ 'NEW_PASSWORD' | translate }}</mat-label>
+      <input matInput [placeholder]="'NEW_PASSWORD' | translate" formControlName="newPassword" type="password"
+             minlength="0" autocomplete="off" class="ltr" required>
+      <mat-error *ngIf="passwordForm.controls.newPassword.errors?.required">
+        {{ 'NEW_PASSWORD' | translate }}
+        {{ 'IS_REQUIRED' | translate }}
+      </mat-error>
+      <mat-error *ngIf="passwordForm.controls.newPassword.hasError('minlength')">
+        {{ 'PASSWORD_MUST_BE_MORE_THAN_6_CHARACTERS' | translate }}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-100 mb-2">
+      <mat-label>{{ 'REPEAT' | translate }} {{ 'NEW_PASSWORD' | translate }}</mat-label>
+      <input matInput placeholder="{{'REPEAT' | translate}} {{'NEW_PASSWORD' | translate}}"
+             formControlName="confirmNewPassword" type="password" autocomplete="off" class="ltr" required>
+      <mat-error *ngIf="passwordForm.controls.confirmNewPassword.errors?.required">
+        {{ 'REPEAT' | translate }}
+        {{ 'NEW_PASSWORD' | translate }}
+        {{ 'IS_REQUIRED' | translate }}
+      </mat-error>
+      <mat-error *ngIf="passwordForm.controls.confirmNewPassword.hasError('mismatchedPasswords')">
+        {{ 'PASSWORDS_DO_NOT_MATCH' | translate }}
+      </mat-error>
+    </mat-form-field>
+    <div class="text-center mt-2">
+      <button mat-raised-button color="primary" type="submit" class="uppercase">
+        {{ 'CHANGE_PASSWORD' | translate }}
+      </button>
+    </div>
+  </form>
+}

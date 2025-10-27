@@ -1,4 +1,5 @@
-﻿using ParsMedeQ.Infrastructure.Persistance.ValueConverters;
+﻿using ParsMedeQ.Domain.Aggregates.UserAggregate;
+using ParsMedeQ.Infrastructure.Persistance.ValueConverters;
 
 namespace ParsMedeQ.Infrastructure.Persistance.DbContexts.Configurations;
 

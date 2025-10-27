@@ -1,6 +1,6 @@
 ﻿using Medallion.Threading;
 using ParsMedeQ.Application.Errors;
-using ParsMedeQ.Domain.Aggregates.UserAggregate.UserEntity;
+using ParsMedeQ.Domain.Aggregates.UserAggregate;
 using ParsMedeQ.Domain.Aggregates.UserAggregate.Validators;
 using ParsMedeQ.Domain.DomainServices.SigninService;
 using ParsMedeQ.Domain.Types.FullName;

@@ -16,6 +16,7 @@ using ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate;
 using ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate.Entities;
 using ParsMedeQ.Domain.Aggregates.TicketAggregate;
 using ParsMedeQ.Domain.Aggregates.TicketAggregate.Entities;
+using ParsMedeQ.Domain.Aggregates.UserAggregate;
 
 namespace ParsMedeQ.Infrastructure.Persistance.DbContexts;
 public sealed class ReadDbContext : DbContextBase<ReadDbContext>
