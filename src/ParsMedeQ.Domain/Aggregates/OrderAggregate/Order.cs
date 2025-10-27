@@ -8,7 +8,7 @@ public sealed class Order : EntityBase<int>
 {
     #region " Fields "
     private List<OrderItem> _orderItems = [];
-    private List<Payment> _payments = [];
+    private Payment? _payment = null;
     #endregion
 
     #region " Properties "
@@ -25,7 +25,7 @@ public sealed class Order : EntityBase<int>
     #region " Navigation Properties "
     public User User { get; private set; } = null!;
     public IReadOnlyCollection<OrderItem> OrderItems => this._orderItems.AsReadOnly();
-    public IReadOnlyCollection<Payment> Payments => this._payments.AsReadOnly();
+    public Payment? Payment => this._payment;
     #endregion
 
     #region " Constructors "

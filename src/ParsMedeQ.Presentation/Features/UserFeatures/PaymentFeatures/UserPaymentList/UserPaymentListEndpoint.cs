@@ -55,7 +55,6 @@ sealed class PaymentListApiResponseMapper : IPresentationMapper<
                     new BasePaginatedApiResponse<PaymentListApiResponse>(src.Items.Select(data =>
                     new PaymentListApiResponse(
                         data.Id,
-                        data.OrderId,
                         data.Amount,
                         data.PaymentMethod,
                         data.TransactionId,

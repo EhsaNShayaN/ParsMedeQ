@@ -1,7 +1,7 @@
 ﻿namespace ParsMedeQ.Contracts.OrderContracts.OrderDetailsContract;
 public readonly record struct OrderDetailsApiResponse(
     int Id,
-    int PaymentId,
+    int? PaymentId,
     string OrderNumber,
     decimal TotalAmount,
     decimal DiscountAmount,

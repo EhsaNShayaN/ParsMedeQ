@@ -10,7 +10,6 @@ public sealed class Payment : EntityBase<int>
     #endregion
 
     #region " Properties "
-    public int OrderId { get; private set; }
     public decimal Amount { get; private set; }
     public byte PaymentMethod { get; private set; }
     public string? TransactionId { get; private set; }
@@ -36,9 +35,8 @@ public sealed class Payment : EntityBase<int>
         byte paymentMethod)
     {
         return PrimitiveResult.Success(
-            new Payment()
+            new Payment(orderId)
             {
-                OrderId = orderId,
                 Amount = amount,
                 PaymentMethod = paymentMethod,
                 Status = (byte)PaymentStatus.Pending.GetHashCode(),

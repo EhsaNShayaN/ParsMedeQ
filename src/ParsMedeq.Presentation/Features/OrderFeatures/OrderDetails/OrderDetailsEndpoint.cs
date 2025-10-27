@@ -59,7 +59,7 @@ sealed class OrderDetailsApiResponseMapper : IPresentationMapper<
             PrimitiveResult.Success(
                     new OrderDetailsApiResponse(
                         src.Id,
-                        src.Payments.First().Id,
+                        src.Payment?.Id,
                         src.OrderNumber,
                         src.TotalAmount,
                         src.DiscountAmount,

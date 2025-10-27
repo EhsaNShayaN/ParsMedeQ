@@ -18,7 +18,6 @@ internal sealed class PaymentReadRepository : GenericPrimitiveReadRepositoryBase
         Expression<Func<Payment, PaymentListDbQueryResponse>> PaymentKeySelector = (res) => new PaymentListDbQueryResponse
         {
             Id = res.Id,
-            OrderId = res.OrderId,
             Amount = res.Amount,
             PaymentMethod = res.PaymentMethod,
             TransactionId = res.TransactionId,

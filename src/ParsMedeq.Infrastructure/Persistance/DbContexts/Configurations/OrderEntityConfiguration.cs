@@ -1,5 +1,7 @@
 ﻿using ParsMedeQ.Domain.Aggregates.OrderAggregate;
 using ParsMedeQ.Domain.Aggregates.OrderAggregate.Entities;
+using ParsMedeQ.Domain.Aggregates.PaymentAggregate;
+using ParsMedeQ.Domain.Aggregates.PaymentAggregate.Entities;
 
 namespace ParsMedeQ.Infrastructure.Persistance.DbContexts.Configurations;
 
@@ -10,6 +12,13 @@ sealed class OrderEntityConfiguration : IEntityTypeConfiguration<Order>
         builder.ToTable(TableNames.Order);
 
         builder
+            .HasOne(x => x.User)
+            .WithMany(x => x.Orders)
+            .HasForeignKey(a => a.Id)
+            .HasPrincipalKey(a => a.Id)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder
             .HasMany(x => x.OrderItems)
             .WithOne(x => x.Order)
             .HasForeignKey(a => a.OrderId)
@@ -17,11 +26,10 @@ sealed class OrderEntityConfiguration : IEntityTypeConfiguration<Order>
             .OnDelete(DeleteBehavior.Cascade);
 
         builder
-            .HasOne(x => x.User)
-            .WithMany(x => x.Orders)
-            .HasForeignKey(a => a.Id)
-            .HasPrincipalKey(a => a.Id)
-            .OnDelete(DeleteBehavior.Cascade);
+            .HasOne(x => x.Payment)
+            .WithOne(x => x.Order)
+            .HasPrincipalKey<Order>(x => x.Id)
+            .HasForeignKey<Payment>(p => p.Id);
 
         builder
             .Property(o => o.FinalAmount)
@@ -41,5 +49,29 @@ sealed class OrderItemEntityConfiguration : IEntityTypeConfiguration<OrderItem>
             .Property(o => o.Subtotal)
             .ValueGeneratedOnAddOrUpdate()
             .HasComputedColumnSql("[Quantity] * [UnitPrice]");
+    }
+}
+sealed class PaymentEntityConfiguration : IEntityTypeConfiguration<Payment>
+{
+    public void Configure(EntityTypeBuilder<Payment> builder)
+    {
+        builder.ToTable(TableNames.Payment);
+        builder.HasKey(a => a.Id);
+
+        builder
+            .HasMany(x => x.PaymentLogs)
+            .WithOne(x => x.Payment)
+            .HasForeignKey(a => a.PaymentId)
+            .HasPrincipalKey(a => a.Id)
+            .OnDelete(DeleteBehavior.Cascade);
+    }
+}
+
+sealed class PaymentLogEntityConfiguration : IEntityTypeConfiguration<PaymentLog>
+{
+    public void Configure(EntityTypeBuilder<PaymentLog> builder)
+    {
+        builder.ToTable(TableNames.PaymentLog);
+        builder.HasKey(a => a.Id);
     }
 }

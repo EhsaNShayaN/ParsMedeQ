@@ -20,6 +20,6 @@ public sealed class ConfirmPaymentCommandHandler : IPrimitiveResultCommandHandle
                     .Map(payment => this._writeUnitOfWork.SaveChangesAsync(CancellationToken.None).Map(_ => payment)));
                     return payment;
                 })
-            .Map(payment => new ConfirmPaymentCommandResponse(payment.TransactionId, payment.OrderId, payment.Order.OrderNumber, payment.Amount))
+            .Map(payment => new ConfirmPaymentCommandResponse(payment.TransactionId, payment.Id, payment.Order.OrderNumber, payment.Amount))
            .ConfigureAwait(false);
 }
