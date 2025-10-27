@@ -17,7 +17,7 @@ sealed class UserPaymentListEndpoint : EndpointHandlerBase<
         IPresentationMapper<PaymentListApiRequest, PaymentListQuery> requestMapper,
         IPresentationMapper<BasePaginatedApiResponse<PaymentListDbQueryResponse>, BasePaginatedApiResponse<PaymentListApiResponse>> responseMapper)
         : base(
-            Endpoints.Payment.Payments,
+            Endpoints.User.Payments,
             HttpMethod.Post,
             requestMapper,
             responseMapper,

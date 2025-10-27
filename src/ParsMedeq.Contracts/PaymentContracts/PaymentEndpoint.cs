@@ -8,14 +8,15 @@ public sealed class PaymentEndpoint : ApiEndpointBase
 
     protected override ApiEndpointItem MyEndpoint => EndpointMetadata.Payment;
 
-    public EndpointInfo Payments { get; private set; }
+    public EndpointInfo Payments0 { get; private set; }
     public EndpointInfo AddPayment { get; private set; }
     public EndpointInfo ConfirmPayment { get; private set; }
     public EndpointInfo FailPayment { get; private set; }
+    public EndpointInfo Payments { get; private set; }
 
     public PaymentEndpoint()
     {
-        Payments = new EndpointInfo(
+        Payments0 = new EndpointInfo(
            this.GetUrl("list"),
            this.GetUrl("list"),
            "List of Payments",
@@ -41,6 +42,13 @@ public sealed class PaymentEndpoint : ApiEndpointBase
            this.GetUrl("fail"),
            "Fail Payment",
            "رد پرداخت",
+           _tag);
+
+        Payments = new EndpointInfo(
+           this.GetUrl("list"),
+           this.GetUrl("list"),
+           "List of Payments",
+           "لیست پرداخت ها",
            _tag);
     }
 }

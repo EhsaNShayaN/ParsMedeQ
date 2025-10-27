@@ -36,6 +36,8 @@ public sealed class UserEndpoint : ApiEndpointBase
     public EndpointInfo ResetPassword { get; init; }
     public EndpointInfo Comments { get; init; }
     public EndpointInfo Tickets { get; init; }
+    public EndpointInfo Orders { get; init; }
+    public EndpointInfo Payments { get; init; }
 
 
 
@@ -193,6 +195,20 @@ public sealed class UserEndpoint : ApiEndpointBase
             this.GetUrl("ticket/list"),
             "User Tickets",
             "User Tickets",
+            _tag);
+
+        this.Orders = new EndpointInfo(
+            this.GetUrl("order/list"),
+            this.GetUrl("order/list"),
+            "User Orders",
+            "User Orders",
+            _tag);
+
+        this.Payments = new EndpointInfo(
+            this.GetUrl("payment/list"),
+            this.GetUrl("payment/list"),
+            "User Payments",
+            "User Payments",
             _tag);
     }
 }

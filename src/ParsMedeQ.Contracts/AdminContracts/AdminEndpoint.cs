@@ -11,6 +11,9 @@ public sealed class AdminEndpoint : ApiEndpointBase
     public EndpointInfo Comments { get; private set; }
     public EndpointInfo Tickets { get; private set; }
 
+    public EndpointInfo Orders { get; private set; }
+    public EndpointInfo Payments { get; private set; }
+
 
     public AdminEndpoint()
     {
@@ -27,6 +30,20 @@ public sealed class AdminEndpoint : ApiEndpointBase
     "Admin Tickets",
     "Admin Tickets",
     _tag);
+
+        this.Orders = new EndpointInfo(
+            this.GetUrl("order/list"),
+            this.GetUrl("order/list"),
+            "Admin Orders",
+            "Admin Orders",
+            _tag);
+
+        this.Payments = new EndpointInfo(
+            this.GetUrl("payment/list"),
+            this.GetUrl("payment/list"),
+            "Admin Payments",
+            "Admin Payments",
+            _tag);
     }
 }
 

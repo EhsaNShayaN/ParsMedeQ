@@ -17,7 +17,7 @@ sealed class UserOrderListEndpoint : EndpointHandlerBase<
         IPresentationMapper<OrderListApiRequest, OrderListQuery> requestMapper,
         IPresentationMapper<BasePaginatedApiResponse<OrderListDbQueryResponse>, BasePaginatedApiResponse<OrderListApiResponse>> responseMapper)
         : base(
-            Endpoints.Order.Orders,
+            Endpoints.User.Orders,
             HttpMethod.Post,
             requestMapper,
             responseMapper,
