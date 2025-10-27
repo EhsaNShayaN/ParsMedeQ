@@ -39,7 +39,7 @@ internal sealed class OrderReadRepository : GenericPrimitiveReadRepositoryBase<R
         };
 
         var result = await this.DbContext.PaginateByPrimaryKey(
-            this.DbContext.Order.Include(x => x.Id)
+            this.DbContext.Order.Include(x => x.OrderItems)
             //.Include(x => x.OrderAnswers)
             .Include(x => x.OrderItems),
             lastId,

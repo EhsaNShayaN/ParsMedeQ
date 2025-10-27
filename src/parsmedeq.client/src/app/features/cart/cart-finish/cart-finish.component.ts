@@ -3,6 +3,7 @@ import {BaseComponent} from '../../../base-component';
 import {ActivatedRoute} from '@angular/router';
 import {first} from 'rxjs/operators';
 import {ConfirmPayment, ConfirmPaymentResponse} from '../../../core/models/ConfirmPaymentResponse';
+import {PaymentService} from '../../../core/services/rest/payment-service';
 
 @Component({
   selector: 'app-cart-finish',
@@ -17,7 +18,8 @@ export class CartFinishComponent extends BaseComponent implements OnInit, OnDest
   message: string = '';
   paymentResult: ConfirmPayment | null = null;
 
-  constructor(private activatedRoute: ActivatedRoute) {
+  constructor(private activatedRoute: ActivatedRoute,
+              private paymentService: PaymentService) {
     super();
   }
 
@@ -30,7 +32,7 @@ export class CartFinishComponent extends BaseComponent implements OnInit, OnDest
   }
 
   confirmPayment() {
-    this.restApiService.confirmPayment(this.paymentId, this.generateOT()).pipe(first()).subscribe((d: ConfirmPaymentResponse) => {
+    this.paymentService.confirmPayment(this.paymentId, this.generateOT()).pipe(first()).subscribe((d: ConfirmPaymentResponse) => {
       this.paymentResult = d.data;
       if (d.data.transactionId) {
         this.status = 'success';

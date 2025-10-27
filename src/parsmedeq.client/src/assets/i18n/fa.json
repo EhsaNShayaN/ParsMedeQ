@@ -103,5 +103,9 @@
   "TOTAL_COUNT": "تعداد کل",
   "TICKETS": "تیکت ها",
   "TICKET": "تیکت",
-  "TICKET_NUMBER": "شماره تیکت"
+  "TICKET_NUMBER": "شماره تیکت",
+  "ORDERS": "سفارشات",
+  "ORDER": "سفارش",
+  "PAYMENTS": "پرداخت ها",
+  "PAYMENT": "پرداخت"
 }

@@ -5,6 +5,10 @@ import {PanelTicketComponent} from './ticket/panel-ticket.component';
 import {PanelTicketListComponent} from './ticket/panel-ticket-list/panel-ticket-list.component';
 import {SharedModule} from '../shared-module';
 import {CommonModule} from '@angular/common';
+import {PanelOrderComponent} from './order/panel-order.component';
+import {PanelOrderListComponent} from './order/panel-order-list/panel-order-list.component';
+import {PanelPaymentComponent} from './payment/panel-payment.component';
+import {PanelPaymentListComponent} from './payment/panel-payment-list/panel-payment-list.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +17,12 @@ import {CommonModule} from '@angular/common';
 
     PanelTicketComponent,
     PanelTicketListComponent,
+
+    PanelOrderComponent,
+    PanelOrderListComponent,
+
+    PanelPaymentComponent,
+    PanelPaymentListComponent,
   ],
   imports: [
     CommonModule,
@@ -24,6 +34,12 @@ import {CommonModule} from '@angular/common';
 
     PanelTicketComponent,
     PanelTicketListComponent,
+
+    PanelOrderComponent,
+    PanelOrderListComponent,
+
+    PanelPaymentComponent,
+    PanelPaymentListComponent,
   ],
   providers: [],
 })

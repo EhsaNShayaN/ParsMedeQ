@@ -103,5 +103,9 @@
   "TOTAL_COUNT": "Total count",
   "TICKETS": "Tickets",
   "TICKET": "Ticket",
-  "TICKET_NUMBER": "Ticket number"
+  "TICKET_NUMBER": "Ticket number",
+  "ORDERS": "Orders",
+  "ORDER": "Order",
+  "PAYMENTS": "Payments",
+  "PAYMENT": "Payment"
 }

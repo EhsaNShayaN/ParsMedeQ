@@ -11,8 +11,6 @@ import {ProductCategoriesResponse} from './models/ProductCategoryResponse';
 import {AddProductRequest, Product, ProductRequest, ProductResponse, ProductsRequest} from './models/ProductResponse';
 import {MobileRequest, MobileResponse, SendOtpRequest, SendOtpResponse} from './models/Login';
 import {ProductMediaListResponse} from './models/ProductMediaResponse';
-import {AddOrderResponse, OrderResponse} from './models/AddOrderResponse';
-import {ConfirmPaymentResponse} from './models/ConfirmPaymentResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -219,38 +217,6 @@ export class RestApiService {
           this.authService.logout();
           return d.data;
         }));
-  }
-
-  addOrder(cartId: number): Observable<any> {
-    const model = {cartId};
-    return this.http.post<AddOrderResponse>(`${endpoint()}order/add`, model).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  addPayment(model: any): Observable<any> {
-    return this.http.post<BaseResult<AddResult>>(`${endpoint()}payment/add`, model).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  confirmPayment(paymentId: number, transactionId: string): Observable<any> {
-    const model = {paymentId, transactionId};
-    return this.http.post<ConfirmPaymentResponse>(`${endpoint()}payment/confirm`, model).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  failPayment(model: any): Observable<any> {
-    return this.http.post<BaseResult<AddResult>>(`${endpoint()}payment/fail`, model).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  getOrder(id: number): Observable<any> {
-    return this.http.get<OrderResponse>(`${endpoint()}order/details?id=${id}`).pipe(
-      catchError(this.handleError)
-    );
   }
 
   handleError<T>(error: HttpErrorResponse): Observable<any> {

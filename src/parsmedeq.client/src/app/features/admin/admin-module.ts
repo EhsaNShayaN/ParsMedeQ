@@ -35,6 +35,10 @@ import {AdminTicketListComponent} from './ticket/admin-ticket-list/admin-ticket-
 import {PanelsModule} from '../../shared/panels-component/panels-module';
 import {AdminCommentComponent} from './comment/admin-comment.component';
 import {AdminCommentListComponent} from './comment/admin-comment-list/admin-comment-list.component';
+import {AdminOrderComponent} from './order/admin-order.component';
+import {AdminOrderListComponent} from './order/admin-order-list/admin-order-list.component';
+import {AdminPaymentComponent} from './payment/admin-payment.component';
+import {AdminPaymentListComponent} from './payment/admin-payment-list/admin-payment-list.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +76,12 @@ import {AdminCommentListComponent} from './comment/admin-comment-list/admin-comm
 
     AdminTicketComponent,
     AdminTicketListComponent,
+
+    AdminOrderComponent,
+    AdminOrderListComponent,
+
+    AdminPaymentComponent,
+    AdminPaymentListComponent,
   ],
   imports: [
     CommonModule,

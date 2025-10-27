@@ -26,6 +26,10 @@ import {AdminTicketComponent} from './ticket/admin-ticket.component';
 import {AdminTicketListComponent} from './ticket/admin-ticket-list/admin-ticket-list.component';
 import {AdminCommentComponent} from './comment/admin-comment.component';
 import {AdminCommentListComponent} from './comment/admin-comment-list/admin-comment-list.component';
+import {AdminOrderComponent} from './order/admin-order.component';
+import {AdminOrderListComponent} from './order/admin-order-list/admin-order-list.component';
+import {AdminPaymentComponent} from './payment/admin-payment.component';
+import {AdminPaymentListComponent} from './payment/admin-payment-list/admin-payment-list.component';
 
 const routes: Routes = [
   {path: '', component: Admin},
@@ -68,6 +72,12 @@ const routes: Routes = [
 
   {path: 'ticket', component: AdminTicketComponent},
   {path: 'ticket/list', component: AdminTicketListComponent},
+
+  {path: 'order', component: AdminOrderComponent},
+  {path: 'order/list', component: AdminOrderListComponent},
+
+  {path: 'payment', component: AdminPaymentComponent},
+  {path: 'payment/list', component: AdminPaymentListComponent},
 ];
 
 @NgModule({

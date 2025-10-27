@@ -28,7 +28,7 @@ internal sealed class PaymentReadRepository : GenericPrimitiveReadRepositoryBase
         };
 
         var result = await this.DbContext.PaginateByPrimaryKey(
-            this.DbContext.Payment.Include(x => x.Id)
+            this.DbContext.Payment.Include(x => x.Order)
             //.Include(x => x.PaymentAnswers)
             .Include(x => x.Order),
             lastId,
