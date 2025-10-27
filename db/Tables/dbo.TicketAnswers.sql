@@ -10,3 +10,5 @@ CREATE TABLE [dbo].[TicketAnswers]
 GO
 ALTER TABLE [dbo].[TicketAnswers] ADD CONSTRAINT [PK_TicketAnswers_1] PRIMARY KEY CLUSTERED ([Id]) ON [PRIMARY]
 GO
+ALTER TABLE [dbo].[TicketAnswers] ADD CONSTRAINT [FK_TicketAnswers_Ticket] FOREIGN KEY ([TicketId]) REFERENCES [dbo].[Ticket] ([Id])
+GO
