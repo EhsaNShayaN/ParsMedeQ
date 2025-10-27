@@ -1,7 +1,6 @@
 CREATE TABLE [dbo].[Payment]
 (
-[Id] [int] NOT NULL IDENTITY(1, 1),
-[OrderId] [int] NOT NULL,
+[Id] [int] NOT NULL,
 [Amount] [decimal] (18, 0) NOT NULL,
 [PaymentMethod] [tinyint] NOT NULL,
 [TransactionId] [nvarchar] (100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
@@ -12,5 +11,5 @@ CREATE TABLE [dbo].[Payment]
 GO
 ALTER TABLE [dbo].[Payment] ADD CONSTRAINT [PK__Payment__3214EC0798BA99CF] PRIMARY KEY CLUSTERED ([Id]) ON [PRIMARY]
 GO
-ALTER TABLE [dbo].[Payment] ADD CONSTRAINT [FK__Payment__OrderId__3EA749C6] FOREIGN KEY ([OrderId]) REFERENCES [dbo].[Order] ([Id]) ON DELETE CASCADE
+ALTER TABLE [dbo].[Payment] ADD CONSTRAINT [FK_Payment_Order] FOREIGN KEY ([Id]) REFERENCES [dbo].[Order] ([Id])
 GO
