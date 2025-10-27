@@ -9,6 +9,7 @@ import {PanelOrderComponent} from './order/panel-order.component';
 import {PanelOrderListComponent} from './order/panel-order-list/panel-order-list.component';
 import {PanelPaymentComponent} from './payment/panel-payment.component';
 import {PanelPaymentListComponent} from './payment/panel-payment-list/panel-payment-list.component';
+import {PanelOrderDetailsComponent} from './order/panel-order-details/panel-order-details.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import {PanelPaymentListComponent} from './payment/panel-payment-list/panel-paym
     PanelTicketListComponent,
 
     PanelOrderComponent,
+    PanelOrderDetailsComponent,
     PanelOrderListComponent,
 
     PanelPaymentComponent,
@@ -36,6 +38,7 @@ import {PanelPaymentListComponent} from './payment/panel-payment-list/panel-paym
     PanelTicketListComponent,
 
     PanelOrderComponent,
+    PanelOrderDetailsComponent,
     PanelOrderListComponent,
 
     PanelPaymentComponent,

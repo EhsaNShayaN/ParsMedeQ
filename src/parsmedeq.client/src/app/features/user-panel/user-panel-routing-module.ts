@@ -9,6 +9,7 @@ import {UserOrderListComponent} from './order/user-order-list/user-order-list.co
 import {UserPaymentListComponent} from './payment/user-payment-list/user-payment-list.component';
 import {UserOrderComponent} from './order/user-order.component';
 import {UserPaymentComponent} from './payment/user-payment.component';
+import {UserOrderDetailsComponent} from '../admin/orders/user-order-details/user-order-details.component';
 
 const routes: Routes = [
   {path: '', component: UserPanel},
@@ -21,6 +22,7 @@ const routes: Routes = [
 
   {path: 'order', component: UserOrderComponent},
   {path: 'order/list', component: UserOrderListComponent},
+  {path: 'order/details/:id', component: UserOrderDetailsComponent},
 
   {path: 'payment', component: UserPaymentComponent},
   {path: 'payment/list', component: UserPaymentListComponent},

@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {BaseComponent} from '../../../../base-component';
 import {Order, OrderResponse} from '../../../../core/models/AddOrderResponse';
@@ -7,12 +7,13 @@ import * as moment from 'jalali-moment';
 import {OrderService} from '../../../../core/services/rest/order-service';
 
 @Component({
-  selector: 'app-order-finish',
-  templateUrl: './order.component.html',
-  styleUrls: ['./order.component.scss'],
+  selector: 'app-panel-order-details',
+  templateUrl: './panel-order-details.component.html',
+  styleUrls: ['./panel-order-details.component.scss'],
   standalone: false
 })
-export class OrderComponent extends BaseComponent implements OnInit, OnDestroy {
+export class PanelOrderDetailsComponent extends BaseComponent implements OnInit, OnDestroy {
+  @Input() url: string = '';
   sub: any;
   order: Order | undefined;
   protected readonly OrderStatus = OrderStatus;
