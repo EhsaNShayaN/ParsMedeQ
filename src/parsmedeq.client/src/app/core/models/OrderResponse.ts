@@ -9,13 +9,14 @@ export interface OrderResponse extends BaseResult<Paginated<Order>> {
 }
 
 export interface Order {
-  Id: number;
-  UserId: number;
-  OrderNumber: string;
-  TotalAmount: number;
-  DiscountAmount: number;
-  FinalAmount?: number | null;
-  Status: number;
-  UpdateDate?: Date | null;
-  CreationDate: Date;
+  id: number;
+  userId: number;
+  orderNumber: string;
+  totalAmount: number;
+  discountAmount: number;
+  finalAmount?: number | null;
+  status: number;
+  statusText: string;
+  updateDate?: Date | null;
+  creationDate: Date;
 }

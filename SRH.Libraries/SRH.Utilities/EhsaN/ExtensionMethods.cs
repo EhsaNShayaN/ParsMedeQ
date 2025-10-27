@@ -1,4 +1,6 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.ComponentModel;
+using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Web;
 
 namespace SRH.Utilities.EhsaN;
@@ -296,5 +298,11 @@ public static class ExtensionMethods
             return defaultFileName;
 
         return clean;
+    }
+    public static string GetDescription(this Enum value)
+    {
+        var field = value.GetType().GetField(value.ToString());
+        var attribute = field?.GetCustomAttribute<DescriptionAttribute>();
+        return attribute?.Description ?? value.ToString();
     }
 }

@@ -9,12 +9,12 @@ export interface PaymentResponse extends BaseResult<Payment> {
 }
 
 export interface Payment {
-  Id: number;
-  OrderId: number;
-  Amount: number;
-  PaymentMethod: number;
-  TransactionId?: string | null;
-  Status: number;
-  PaidDate?: Date | null;
-  CreationDate: Date;
+  id: number;
+  amount: number;
+  paymentMethod: number;
+  transactionId?: string | null;
+  status: number;
+  statusText: string;
+  paidDate?: Date | null;
+  creationDate: Date;
 }

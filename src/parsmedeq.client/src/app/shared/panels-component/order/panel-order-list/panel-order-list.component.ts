@@ -18,7 +18,7 @@ export class PanelOrderListComponent extends BaseComponent implements OnInit {
   @Input() url: string = '';
   dataSource!: MatTableDataSource<Order>;
   ///////////////////////
-  displayedColumns: string[] = [/*'row', */'title', 'description', 'creationDate', 'status', 'actions'];
+  displayedColumns: string[] = [/*'row', */'title', 'description', 'updateDate', 'statusText', 'actions'];
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator | null = null;
   @ViewChild(MatSort, {static: true}) sort: MatSort | null = null;
   pageIndex = 1;
@@ -27,7 +27,7 @@ export class PanelOrderListComponent extends BaseComponent implements OnInit {
   adminSort: Sort = {active: 'creationDate', direction: 'desc'};
 
   constructor(private orderService: OrderService,
-              private helpers: Helpers,
+              protected helpers: Helpers,
               private toastrService: ToastrService) {
     super();
   }
@@ -112,8 +112,11 @@ export class PanelOrderListComponent extends BaseComponent implements OnInit {
     if (column === 'expirationdate') {
       column = 'expiration_date';
     }
-    if (column === 'creationdate') {
-      column = 'published';
+    if (column === 'statustext') {
+      column = 'status';
+    }
+    if (column === 'updatedate') {
+      column = 'order_time';
     }
     return column.toUpperCase();
   }

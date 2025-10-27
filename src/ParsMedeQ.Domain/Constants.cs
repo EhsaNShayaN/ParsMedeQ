@@ -1,4 +1,6 @@
-﻿namespace ParsMedeQ.Domain;
+﻿using System.ComponentModel;
+
+namespace ParsMedeQ.Domain;
 public static class Constants
 {
     public const string LangCode_Farsi = "FA";
@@ -16,10 +18,15 @@ public enum Tables
 }
 public enum OrderStatus
 {
+    [Description("در حال پردازش")]
     Pending = 0,
+    [Description("پرداخت شده")]
     Paid = 1,
+    [Description("ارسال شده")]
     Shipped = 2,
+    [Description("تکمیل شده")]
     Completed = 3,
+    [Description("کنسل شده")]
     Cancelled = 4,
 }
 public enum PaymentMethods

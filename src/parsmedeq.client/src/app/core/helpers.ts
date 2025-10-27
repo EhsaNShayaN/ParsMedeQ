@@ -1,5 +1,6 @@
 import {MatPaginatorIntl} from '@angular/material/paginator';
 import {Injectable} from '@angular/core';
+import * as moment from 'jalali-moment';
 
 @Injectable({
   providedIn: 'root'
@@ -54,5 +55,14 @@ export class Helpers {
         return 'بسته شده';
     }
     return status + ': نامشخص';
+  }
+
+  convertToPersianDate(dateStr: string): string {
+    const persianDate = moment.from(dateStr, 'YYYY-MM-DD')
+      .locale('fa')          // switch to Persian locale
+      .format('jYYYY/jMM/jDD'); // use "j" for Jalali calendar
+    const date = new Date(dateStr);
+    const time = date.toLocaleTimeString('fa-IR', {hour: '2-digit', minute: '2-digit'});
+    return `${persianDate}-${time}`;
   }
 }

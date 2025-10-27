@@ -2,6 +2,8 @@
 using ParsMedeQ.Application.Helpers;
 using ParsMedeQ.Contracts;
 using ParsMedeQ.Contracts.OrderContracts.OrderListContract;
+using ParsMedeQ.Domain;
+using SRH.Utilities.EhsaN;
 
 namespace ParsMedeQ.Presentation.Features.AdminFeatures.OrderFeatures.AdminOrderList;
 
@@ -61,6 +63,7 @@ sealed class OrderListApiResponseMapper : IPresentationMapper<
                         data.DiscountAmount,
                         data.FinalAmount,
                         data.Status,
+                        ((OrderStatus)data.Status).GetDescription(),
                         data.UpdateDate,
                         data.CreationDate))
                     .ToArray(), src.TotalCount, src.PageIndex, src.PageSize)

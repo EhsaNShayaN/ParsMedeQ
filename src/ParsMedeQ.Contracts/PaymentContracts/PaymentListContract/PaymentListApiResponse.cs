@@ -5,5 +5,6 @@ public readonly record struct PaymentListApiResponse(
     byte PaymentMethod,
     string? TransactionId,
     byte Status,
+    string StatusText,
     DateTime? PaidDate,
     DateTime CreationDate);

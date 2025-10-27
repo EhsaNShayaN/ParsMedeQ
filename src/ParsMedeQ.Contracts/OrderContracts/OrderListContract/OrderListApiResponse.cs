@@ -7,5 +7,6 @@ public readonly record struct OrderListApiResponse(
     decimal DiscountAmount,
     decimal? FinalAmount,
     byte Status,
+    string StatusText,
     DateTime? UpdateDate,
     DateTime CreationDate);
