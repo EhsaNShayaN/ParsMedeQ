@@ -1,4 +1,5 @@
 ﻿using ParsMedeQ.Application.Services.UserContextAccessorServices;
+using ParsMedeQ.Domain.Aggregates.UserAggregate;
 using ParsMedeQ.Domain.Aggregates.UserAggregate.Validators;
 using ParsMedeQ.Domain.Helpers;
 
@@ -22,21 +23,24 @@ public sealed class SetPasswordCommandHandler : IPrimitiveResultCommandHandler<S
     public async Task<PrimitiveResult<SetPasswordCommandResponse>> Handle(SetPasswordCommand request, CancellationToken cancellationToken)
     {
         return await this._writeUnitOfWork.UserWriteRepository
-                    .FindById(_userContextAccessor.Current.UserId, cancellationToken)
-                    .MapIf(
-                        user => user.Mobile.IsDefault(),
-                        _ => ValueTask.FromResult(PrimitiveResult.Failure<SetPasswordCommandResponse>("", "موبایلی برای شما تعریف نشده است")),
-                        user => otpService.Validate(
-                            request.Otp,
-                            ApplicationCacheTokens.CreateOTPKey(user.Id.ToString(), ApplicationCacheTokens.SetPasswordOTP),
-                            OtpServiceValidationRemoveKeyStrategy.RemoveIfSuccess,
-                            cancellationToken)
-                        .Map(() => PasswordHelper.HashAndSaltPassword(request.Password))
-                        .Map(generatedPass => this._writeUnitOfWork.UserWriteRepository.FindById(user.Id, cancellationToken)
-                        .Bind(user => user.UpdatePassword(generatedPass.HashedPassword, generatedPass.Salt, this._userValidatorService)))
-                        .Bind(user => this._writeUnitOfWork.UserWriteRepository.UpdatePassword(user, cancellationToken))
-                        .Bind(user => this._writeUnitOfWork.SaveChangesAsync(cancellationToken).Map(_ => user))
-                        .Map(user => new SetPasswordCommandResponse(true)))
-                .ConfigureAwait(false);
+            .FindById(_userContextAccessor.GetCurrent().UserId, cancellationToken)
+            .MapIf(
+            user => !string.IsNullOrWhiteSpace(user.Password.Value),
+            _ => ValueTask.FromResult(PrimitiveResult.Failure<SetPasswordCommandResponse>("", "رمز عبور قبلا برای شما تعریف شده است")),
+            async user => await SetPassword(request, user, cancellationToken))
+            .ConfigureAwait(false);
+    }
+
+    ValueTask<PrimitiveResult<SetPasswordCommandResponse>> SetPassword(SetPasswordCommand request, User user, CancellationToken cancellationToken)
+    {
+        return PasswordHelper.HashAndSaltPassword(request.Password)
+            .Map(generatedPass => user.UpdatePassword(
+                generatedPass.HashedPassword,
+                generatedPass.Salt,
+                this._userValidatorService))
+            .Map(u => this._writeUnitOfWork.UserWriteRepository.UpdatePassword(user, cancellationToken))
+            .Map(u => this._writeUnitOfWork.SaveChangesAsync(cancellationToken))
+            .Map(count => new SetPasswordCommandResponse(count > 0))
+            ;
     }
 }

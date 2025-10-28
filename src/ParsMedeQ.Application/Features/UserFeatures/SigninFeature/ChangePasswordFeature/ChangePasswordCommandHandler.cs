@@ -22,22 +22,16 @@ public sealed class ChangePasswordCommandHandler : IPrimitiveResultCommandHandle
     public async Task<PrimitiveResult<ChangePasswordCommandResponse>> Handle(ChangePasswordCommand request, CancellationToken cancellationToken)
     {
         return await this._writeUnitOfWork.UserWriteRepository
-                    .FindById(_userContextAccessor.GetCurrent().UserId, cancellationToken)
-                    .Ensure(user =>
-                        PasswordHelper.VerifyPassword(request.OldPassword, user.Password.Value, user.Password.Salt).IsSuccess,
-                        PrimitiveError.Create("", "رمز عبور قبلی اشتباه است"))
-                    .Map(
-                        user => otpService.Validate(
-                            request.Otp,
-                            ApplicationCacheTokens.CreateOTPKey(user.Id.ToString(), ApplicationCacheTokens.SetPasswordOTP),
-                            OtpServiceValidationRemoveKeyStrategy.RemoveIfSuccess,
-                            cancellationToken)
-                        .Map(() => PasswordHelper.HashAndSaltPassword(request.Password))
-                        .Map(generatedPass => this._writeUnitOfWork.UserWriteRepository.FindById(user.Id, cancellationToken)
-                        .Bind(user => user.UpdatePassword(generatedPass.HashedPassword, generatedPass.Salt, this._userValidatorService)))
-                        .Bind(user => this._writeUnitOfWork.UserWriteRepository.UpdatePassword(user, cancellationToken))
-                        .Bind(user => this._writeUnitOfWork.SaveChangesAsync(cancellationToken).Map(_ => user))
-                        .Map(user => new ChangePasswordCommandResponse(true)))
+            .FindById(_userContextAccessor.GetCurrent().UserId, cancellationToken)
+            .Ensure(user => PasswordHelper.VerifyPassword(request.OldPassword, user.Password.Value, user.Password.Salt).IsSuccess,
+            PrimitiveError.Create("", "رمز عبور قبلی اشتباه است"))
+            .Map(user => PasswordHelper.HashAndSaltPassword(request.Password)
+                .Map(generatedPass => (User: user, Pass: generatedPass)))
+            .Map(data => this._writeUnitOfWork.UserWriteRepository.FindById(data.User.Id, cancellationToken)
+                .Bind(user => user.UpdatePassword(data.Pass.HashedPassword, data.Pass.Salt, this._userValidatorService)))
+                .Bind(user => this._writeUnitOfWork.UserWriteRepository.UpdatePassword(user, cancellationToken))
+                .Bind(user => this._writeUnitOfWork.SaveChangesAsync(cancellationToken).Map(_ => user))
+                .Map(user => new ChangePasswordCommandResponse(true))
                 .ConfigureAwait(false);
     }
 }
