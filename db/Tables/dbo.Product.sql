@@ -5,6 +5,8 @@ CREATE TABLE [dbo].[Product]
 [Price] [int] NULL,
 [Discount] [int] NULL,
 [Stock] [int] NOT NULL,
+[WarrantyExpirationTime] [int] NOT NULL,
+[PeriodicServiceInterval] [int] NOT NULL,
 [Deleted] [bit] NOT NULL,
 [Disabled] [bit] NOT NULL,
 [CreationDate] [datetime] NOT NULL
