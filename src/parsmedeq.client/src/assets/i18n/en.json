@@ -110,5 +110,13 @@
   "ORDERS": "Orders",
   "ORDER": "Order",
   "PAYMENTS": "Payments",
-  "PAYMENT": "Payment"
+  "PAYMENT": "Payment",
+  "CURRENT_PASSWORD": "Current password",
+  "CURRENT_PASSWORD_IS_WRONG": "Current password is wrong",
+  "NEW_PASSWORD": "New password",
+  "REPEAT": "Repeat",
+  "CHANGE_PASSWORD": "Change password",
+  "PASSWORDS_DO_NOT_MATCH": "The password and its repetition do not match.",
+  "YOUR_PASSWORD_CHANGED_SUCCESSFULLY": "Your password changed successfully",
+  "PASSWORD_MUST_BE_MORE_THAN_6_CHARACTERS": "Password must be more than 6 characters"
 }

@@ -1,4 +1,4 @@
 ﻿namespace ParsMedeQ.Contracts.UserContracts.SigninContracts.ChangePasswordContracts;
 public readonly record struct ChangePasswordApiRequest(
-    string Otp,
+    string OldPassword,
     string Password);

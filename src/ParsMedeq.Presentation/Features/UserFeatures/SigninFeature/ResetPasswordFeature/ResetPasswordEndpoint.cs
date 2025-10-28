@@ -1,4 +1,5 @@
 ﻿using ParsMedeQ.Application.Features.UserFeatures.SigninFeature.ResetPasswordFeature;
+using ParsMedeQ.Application.Features.UserFeatures.UserDetailsFeature;
 using ParsMedeQ.Contracts;
 using ParsMedeQ.Contracts.UserContracts.SigninContracts.ResetPasswordContracts;
 

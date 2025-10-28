@@ -27,6 +27,6 @@ internal sealed class ChangePasswordApiRequestMapper : IPresentationMapper<Chang
         ValueTask.FromResult(
             PrimitiveResult.Success(
                 new ChangePasswordCommand(
-                    src.Otp,
+                    src.OldPassword,
                     src.Password)));
 }

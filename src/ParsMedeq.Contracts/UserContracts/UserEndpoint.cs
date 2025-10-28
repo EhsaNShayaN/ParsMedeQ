@@ -35,6 +35,7 @@ public sealed class UserEndpoint : ApiEndpointBase
     public EndpointInfo SetPassword { get; init; }
     public EndpointInfo ChangePassword { get; init; }
     public EndpointInfo ResetPassword { get; init; }
+    public EndpointInfo Details { get; init; }
     public EndpointInfo Comments { get; init; }
     public EndpointInfo Tickets { get; init; }
     public EndpointInfo Orders { get; init; }
@@ -189,6 +190,13 @@ public sealed class UserEndpoint : ApiEndpointBase
             this.GetUrl("Signin/resetPassword"),
             "Reset Password",
             "Reset Password",
+            _tag);
+
+        this.Details = new EndpointInfo(
+            this.GetUrl("details"),
+            this.GetUrl("details"),
+            "User Details",
+            "User Details",
             _tag);
 
         this.Comments = new EndpointInfo(

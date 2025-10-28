@@ -9,7 +9,7 @@ import {ResourceCategoriesResponse} from './models/ResourceCategoryResponse';
 import {AuthService} from './services/auth.service';
 import {ProductCategoriesResponse} from './models/ProductCategoryResponse';
 import {AddProductRequest, Product, ProductRequest, ProductResponse, ProductsRequest} from './models/ProductResponse';
-import {MobileRequest, MobileResponse, SendOtpRequest, SendOtpResponse} from './models/Login';
+import {MobileRequest, MobileResponse, ProfileResponse, SendOtpRequest, SendOtpResponse} from './models/Login';
 import {ProductMediaListResponse} from './models/ProductMediaResponse';
 
 @Injectable({
@@ -28,6 +28,26 @@ export class RestApiService {
 
   sendMobile(model: MobileRequest): Observable<any> {
     return this.http.post<BaseResult<MobileResponse>>(`${endpoint()}user/signIn/mobile`, model).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getUserInfo(): Observable<any> {
+    return this.http.get<ProfileResponse>(`${endpoint()}user/details`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  setPassword(password: string): Observable<any> {
+    const model: any = {password};
+    return this.http.post<BaseResult<AddResult>>(`${endpoint()}user/setPassword`, model).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  changePassword(oldPassword: string, password: string): Observable<any> {
+    const model: any = {oldPassword, password};
+    return this.http.post<BaseResult<AddResult>>(`${endpoint()}user/changePassword`, model).pipe(
       catchError(this.handleError)
     );
   }

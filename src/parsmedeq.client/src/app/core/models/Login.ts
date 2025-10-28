@@ -1,3 +1,5 @@
+import { BaseResult } from "./BaseResult";
+
 export interface SendOtpRequest {
   mobile: string;
 }
@@ -17,8 +19,15 @@ export interface MobileResponse {
   mobile: string;
 }
 
+export interface ProfileResponse extends BaseResult<Profile> {
+}
+
 export interface Profile {
+  id: number;
   fullName: string;
-  firstName: string;
-  lastName: string;
+  email: string;
+  mobile: string;
+  passwordMustBeSet: boolean;
+  isEmailConfirmed: boolean;
+  isMobileConfirmed: boolean;
 }

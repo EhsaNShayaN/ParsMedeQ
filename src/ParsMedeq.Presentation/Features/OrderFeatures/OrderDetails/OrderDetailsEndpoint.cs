@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using ParsMedeQ.Application.Features.OrderFeatures.OrderDetailsFeature;
+using ParsMedeQ.Application.Features.UserFeatures.UserDetailsFeature;
 using ParsMedeQ.Contracts;
 using ParsMedeQ.Contracts.OrderContracts.OrderDetailsContract;
 using Order = ParsMedeQ.Domain.Aggregates.OrderAggregate.Order;
