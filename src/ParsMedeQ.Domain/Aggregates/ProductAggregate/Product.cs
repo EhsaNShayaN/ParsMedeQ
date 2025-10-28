@@ -16,6 +16,8 @@ public sealed class Product : EntityBase<int>
     public int? Price { get; private set; }
     public int? Discount { get; private set; }
     public int Stock { get; private set; }
+    public int WarrantyExpirationTime { get; private set; }//زمان انقضای گارانتی
+    public int PeriodicServiceInterval { get; private set; }//فاصله زمانی سرویس دوره‌ای
     public bool Deleted { get; private set; }
     public bool Disabled { get; private set; }
     public DateTime CreationDate { get; private set; }
@@ -45,12 +47,15 @@ public sealed class Product : EntityBase<int>
         string publisher,
         int price,
         int discount,
-        DateTime? expirationDate) => PrimitiveResult.Success(
+        int warrantyExpirationTime,
+        int periodicServiceInterval) => PrimitiveResult.Success(
             new Product
             {
                 ProductCategoryId = ProductCategoryId,
                 Price = price,
                 Discount = discount,
+                WarrantyExpirationTime = warrantyExpirationTime,
+                PeriodicServiceInterval = periodicServiceInterval,
                 CreationDate = DateTime.Now
             });
 

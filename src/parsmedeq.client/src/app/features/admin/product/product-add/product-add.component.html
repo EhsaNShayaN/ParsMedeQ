@@ -100,6 +100,22 @@
               </mat-error>
             </mat-form-field>
           </div>
+          <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
+            <mat-form-field appearance="outline" class="w-100 mt-2">
+              <mat-icon class="mr-1 text-muted" matPrefix>money</mat-icon>
+              <mat-label>{{ 'WARRANTY_EXPIRATION_TIME' | translate }}</mat-label>
+              <input class="text-left ltr" formControlName="warrantyExpirationTime" matInput onlyNumber
+                     [placeholder]="'WARRANTY_EXPIRATION_TIME' | translate">
+            </mat-form-field>
+          </div>
+          <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
+            <mat-form-field appearance="outline" class="w-100 mt-2">
+              <mat-icon class="mr-1 text-muted" matPrefix>person_outline</mat-icon>
+              <mat-label>{{ 'PERIODIC_SERVICE_INTERVAL' | translate }}</mat-label>
+              <input class="text-left ltr" formControlName="periodicServiceInterval" matInput onlyNumber
+                     [placeholder]="'PERIODIC_SERVICE_INTERVAL' | translate">
+            </mat-form-field>
+          </div>
           <div class="text-center mt-3" fxFlex="100">
             <button class="uppercase" color="primary" mat-raised-button type="submit">
               {{ (editItem ? 'EDIT' : 'ADD') | translate }}

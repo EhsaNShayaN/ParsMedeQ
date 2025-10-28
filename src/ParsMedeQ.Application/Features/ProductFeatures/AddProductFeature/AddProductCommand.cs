@@ -14,9 +14,10 @@ public sealed record class AddProductCommand
     int ProductCategoryId,
     string Abstract,
     string Anchors,
-    DateTime? ExpirationDate,
     string Keywords,
     string PublishDate,
+    int WarrantyExpirationTime,
+    int PeriodicServiceInterval,
     FileData? ImageInfo,
     FileData? FileInfo) : IPrimitiveResultCommand<AddProductCommandResponse>,
     IValidatableRequest<AddProductCommand>

@@ -118,5 +118,7 @@
   "CHANGE_PASSWORD": "تغییر رمز عبور",
   "PASSWORDS_DO_NOT_MATCH": "رمز عبور و تکرار آن یکسان نیستند",
   "YOUR_PASSWORD_CHANGED_SUCCESSFULLY": "رمز عبور شما با موفقیت تغییر کرد",
-  "PASSWORD_MUST_BE_MORE_THAN_6_CHARACTERS": "رمز عبور باید بیش از 6 کاراکتر باشد"
+  "PASSWORD_MUST_BE_MORE_THAN_6_CHARACTERS": "رمز عبور باید بیش از 6 کاراکتر باشد",
+  "WARRANTY_EXPIRATION_TIME": "زمان انقضای گارانتی(بر حسب سال)",
+  "PERIODIC_SERVICE_INTERVAL": "فاصله زمانی سرویس دوره ای(بر حسب ماه)"
 }

@@ -27,7 +27,8 @@ public sealed class AddProductCommandHandler : IPrimitiveResultCommandHandler<Ad
             request.Publisher,
             request.Price,
             request.Discount,
-            request.ExpirationDate)
+            request.WarrantyExpirationTime,
+            request.PeriodicServiceInterval)
             .Map(Product => UploadFile(this._fileService, request.ImageInfo?.Bytes, request.ImageInfo?.Extension, "Images", cancellationToken)
                 .Map(imagePath => (Product, imagePath)))
             .Map(data => UploadFile(this._fileService, request.FileInfo?.Bytes, request.FileInfo?.Extension, "Files", cancellationToken)

@@ -6,7 +6,6 @@ import {ProductCategoriesResponse, ProductCategory} from '../../../../core/model
 import {Product} from '../../../../core/models/ProductResponse';
 import {AddResult, BaseResult} from '../../../../core/models/BaseResult';
 import {BaseComponent} from '../../../../base-component';
-import {CustomConstants} from '../../../../core/constants/custom.constants';
 import {ToastrService} from 'ngx-toastr';
 
 @Component({
@@ -53,6 +52,8 @@ export class ProductAddComponent extends BaseComponent implements OnInit, OnDest
               fileId: null,
               price: this.editItem.price,
               discount: this.editItem.discount,
+              warrantyExpirationTime: this.editItem.warrantyExpirationTime > 0 ? this.editItem.warrantyExpirationTime : null,
+              periodicServiceInterval: this.editItem.periodicServiceInterval > 0 ? this.editItem.periodicServiceInterval : null,
             });
             this.oldImagePath = this.editItem.image;
             this.oldFileId = this.editItem.fileId ?? 0;

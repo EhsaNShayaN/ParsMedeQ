@@ -5,25 +5,28 @@ export interface ProductResponse {
   data: Paginated<Product>;
 }
 
-export class Product {
-  id!: number;
-  tableId!: number;
+export interface Product {
+  id: number;
+  tableId: number;
   productCategoryId?: number;
   productCategoryTitle?: string;
 
-  title!: string;
-  description!: string;
+  title: string;
+  description: string;
 
-  image!: string;
+  image: string;
   fileId?: number;
 
   price?: number;
   discount?: number;
-  stock!: number;
-  creationDate!: string;
-  registered!: boolean;
+  stock: number;
+  creationDate: string;
+  registered: boolean;
 
-  images: ProductImage[] = [];
+  warrantyExpirationTime: number;
+  periodicServiceInterval: number;
+
+  images: ProductImage[];
 }
 
 export interface ProductImage {

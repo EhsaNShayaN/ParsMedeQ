@@ -61,9 +61,10 @@ sealed class AddProductEndpoint : EndpointHandlerBase<
              request.ProductCategoryId,
              HttpUtility.HtmlDecode(request.Abstract),
              anchors,
-             string.IsNullOrEmpty(request.ExpirationDate) ? default : CreateExpirationDate(request.ExpirationDate, request.ExpirationTime),
              request.Keywords?.Replace("،", ","),
              request.PublishDate,
+             request.WarrantyExpirationTime,
+             request.PeriodicServiceInterval,
              imageInfo,
              fileInfo);
 
