@@ -22,6 +22,9 @@ sealed class CartEntityConfiguration : IEntityTypeConfiguration<Cart>
             .HasForeignKey(a => a.Id)
             .HasPrincipalKey(a => a.Id)
             .OnDelete(DeleteBehavior.Cascade);
+
+        builder
+            .HasIndex(x => x.UserId).IsUnique();
     }
 }
 

@@ -37,6 +37,6 @@ sealed class TicketItemEntityConfiguration : IEntityTypeConfiguration<TicketAnsw
             .WithMany(x => x.TicketAnswerss)
             .HasForeignKey(a => a.Id)
             .HasPrincipalKey(a => a.Id)
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.NoAction);
     }
 }
