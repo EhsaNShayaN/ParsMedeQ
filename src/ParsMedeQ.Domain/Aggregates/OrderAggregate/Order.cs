@@ -19,7 +19,7 @@ public sealed class Order : EntityBase<int>
     public decimal? FinalAmount { get; private set; }
     public byte Status { get; private set; }
     public DateTime? UpdateDate { get; private set; }
-    public DateTime CreationDate { get; private set; } = DateTime.UtcNow;
+    public DateTime CreationDate { get; private set; } = DateTime.Now;
     #endregion
 
     #region " Navigation Properties "
@@ -49,7 +49,7 @@ public sealed class Order : EntityBase<int>
                 DiscountAmount = discountAmount,
                 Status = status,
                 OrderNumber = orderNumber,
-                CreationDate = DateTime.UtcNow
+                CreationDate = DateTime.Now
             });
     }
 
@@ -59,7 +59,9 @@ public sealed class Order : EntityBase<int>
         string relatedName,
         int quantity,
         decimal unitPrice,
-        decimal subtotal)
+        decimal subtotal,
+        DateTime? guarantyExpirationDate,
+        int periodicServiceInterval)
     {
         return OrderItem.Create(
             tableId,
@@ -67,7 +69,9 @@ public sealed class Order : EntityBase<int>
             relatedName,
             quantity,
             unitPrice,
-            subtotal)
+            subtotal,
+            guarantyExpirationDate,
+            periodicServiceInterval)
             .OnSuccess(item => this._orderItems.Add(item.Value))
             .Match(
             success => PrimitiveResult.Success(),
@@ -78,7 +82,7 @@ public sealed class Order : EntityBase<int>
     public ValueTask<PrimitiveResult<Order>> Update(
         byte status)
     {
-        this.UpdateDate = DateTime.UtcNow;
+        this.UpdateDate = DateTime.Now;
         this.Status = status;
         return ValueTask.FromResult(PrimitiveResult.Success(this));
     }

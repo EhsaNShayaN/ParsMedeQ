@@ -40,7 +40,7 @@ public sealed class Payment : EntityBase<int>
                 Amount = amount,
                 PaymentMethod = paymentMethod,
                 Status = (byte)PaymentStatus.Pending.GetHashCode(),
-                CreationDate = DateTime.UtcNow
+                CreationDate = DateTime.Now
             });
     }
 
@@ -49,7 +49,7 @@ public sealed class Payment : EntityBase<int>
     {
         this.TransactionId = transactionId;
         this.Status = (byte)PaymentStatus.Success.GetHashCode();
-        this.PaidDate = DateTime.UtcNow;
+        this.PaidDate = DateTime.Now;
         this.UpdateOrder((byte)OrderStatus.Paid.GetHashCode());
         return ValueTask.FromResult(PrimitiveResult.Success(this));
     }

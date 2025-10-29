@@ -18,7 +18,8 @@
               <img [src]="selectedImage" alt="{{ product.title }}" loading="lazy">
             </div>
             <div class="thumbs">
-              <button *ngFor="let g of product.images" (click)="selectImage(g)" [class.active]="g.path === selectedImage">
+              <button *ngFor="let g of product.images" (click)="selectImage(g)"
+                      [class.active]="g.path === selectedImage">
                 <img [src]="g.path" alt="thumb" loading="lazy">
               </button>
             </div>
@@ -33,6 +34,16 @@
               <span class="original"
                     *ngIf="product.discount && product.discount>0">{{ formatPrice(product.price ?? 0) }}</span>
             </div>
+          </div>
+
+          <div *ngIf="product.guarantyExpirationTime > 0">
+            <b><u>{{ product.guarantyExpirationTime }}</u></b>
+            سال گارانتی
+          </div>
+          <div *ngIf="product.periodicServiceInterval > 0">
+            سرویس دوره ای هر
+            <b><u>{{ product.periodicServiceInterval }}</u></b>
+            ماه
           </div>
 
           <p class="short-desc" [innerHTML]="product.description | safeHtml"></p>

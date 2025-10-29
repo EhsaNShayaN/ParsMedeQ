@@ -35,7 +35,7 @@ public sealed class TokenGeneratorService : ITokenGeneratorService
             {
                 Issuer = this._authenticationOptions.IssuerName,
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.Add(this._authenticationOptions.TokenExpDuration),
+                Expires = DateTime.Now.Add(this._authenticationOptions.TokenExpDuration),
                 SigningCredentials = signingCredentials,
                 Audience = audience
             };

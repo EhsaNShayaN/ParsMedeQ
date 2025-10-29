@@ -4,7 +4,6 @@ using ParsMedeQ.Application.Features.ProductFeatures.UpdateProductFeature;
 using ParsMedeQ.Contracts;
 using ParsMedeQ.Contracts.ProductContracts.UpdateProductContract;
 using ParsMedeQ.Contracts.ResourceContracts;
-using SRH.Utilities.EhsaN;
 using System.Text.Json;
 using System.Web;
 
@@ -64,7 +63,8 @@ sealed class EditProductEndpoint : EndpointHandlerBase<
                  request.Publisher,
                  request.Price,
                  request.Discount,
-                 string.IsNullOrEmpty(request.ExpirationDate) ? default : CreateExpirationDate(request.ExpirationDate, request.ExpirationTime),
+                 request.GuarantyExpirationTime,
+                 request.PeriodicServiceInterval,
                  imageInfo,
                  fileInfo,
                  request.OldImagePath,
@@ -75,20 +75,4 @@ sealed class EditProductEndpoint : EndpointHandlerBase<
                     cancellationToken)
                 .ConfigureAwait(false);
         };
-
-    private static DateTime? CreateExpirationDate(string expirationDate, string expirationTime)
-    {
-        DateTime? date = null;
-        if (!string.IsNullOrEmpty(expirationDate))
-        {
-            date = expirationDate.ToGeorgianDate();
-            if (!string.IsNullOrEmpty(expirationTime))
-            {
-                var array = expirationTime.Split(":");
-                date = date.Value.AddHours(array[0].ToInt());
-                date = date.Value.AddMinutes(array[1].ToInt());
-            }
-        }
-        return date;
-    }
 }

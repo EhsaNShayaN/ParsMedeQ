@@ -23,7 +23,7 @@ export interface Product {
   creationDate: string;
   registered: boolean;
 
-  warrantyExpirationTime: number;
+  guarantyExpirationTime: number;
   periodicServiceInterval: number;
 
   images: ProductImage[];

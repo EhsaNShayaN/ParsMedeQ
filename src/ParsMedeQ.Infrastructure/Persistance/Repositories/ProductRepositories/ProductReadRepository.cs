@@ -57,6 +57,8 @@ internal sealed class ProductReadRepository : GenericPrimitiveReadRepositoryBase
                 Image = res.ProductTranslations.SingleOrDefault(s => s.LanguageCode == langCode).Image ?? string.Empty,
                 Price = res.Price,
                 Discount = res.Discount,
+                GuarantyExpirationTime = res.GuarantyExpirationTime,
+                PeriodicServiceInterval = res.PeriodicServiceInterval,
                 Deleted = res.Deleted,
                 Disabled = res.Disabled,
                 CreationDate = res.CreationDate,
@@ -100,7 +102,6 @@ internal sealed class ProductReadRepository : GenericPrimitiveReadRepositoryBase
 
     public ValueTask<PrimitiveResult<ProductDetailsDbQueryResponse>> ProductDetails(
         string langCode,
-        int UserId,
         int ProductId,
         CancellationToken cancellationToken)
     {
@@ -137,6 +138,8 @@ internal sealed class ProductReadRepository : GenericPrimitiveReadRepositoryBase
                 FileId = res.ProductTranslation?.FileId,
                 Price = res.Product.Price,
                 Discount = res.Product.Discount,
+                GuarantyExpirationTime = res.Product.GuarantyExpirationTime,
+                PeriodicServiceInterval = res.Product.PeriodicServiceInterval,
                 Deleted = res.Product.Deleted,
                 Disabled = res.Product.Disabled,
                 CreationDate = res.Product.CreationDate,

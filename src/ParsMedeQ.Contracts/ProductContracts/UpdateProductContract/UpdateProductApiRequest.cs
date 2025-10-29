@@ -18,10 +18,10 @@ public sealed class UpdateProductApiRequest
     public int ProductCategoryId { get; private set; }
     public string Abstract { get; private set; } = string.Empty;
     public string Anchors { get; private set; } = string.Empty;
-    public string ExpirationDate { get; private set; } = string.Empty;
-    public string ExpirationTime { get; private set; } = string.Empty;
     public string Keywords { get; private set; } = string.Empty;
     public string PublishDate { get; private set; } = string.Empty;
+    public int GuarantyExpirationTime { get; private set; }
+    public int PeriodicServiceInterval { get; private set; }
     public IFormFile? Image { get; private set; }
     public IFormFile? File { get; private set; }
     public string OldImagePath { get; private set; } = string.Empty;

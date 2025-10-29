@@ -55,5 +55,12 @@ sealed class UserEntityConfiguration : IEntityTypeConfiguration<User>
                 .HasForeignKey(a => a.UserId)
                 .HasPrincipalKey(a => a.Id)
                 .OnDelete(DeleteBehavior.Cascade);
+
+        builder
+                .HasMany(x => x.PeriodicServices)
+                .WithOne(x => x.User)
+                .HasForeignKey(a => a.UserId)
+                .HasPrincipalKey(a => a.Id)
+                .OnDelete(DeleteBehavior.Cascade);
     }
 }

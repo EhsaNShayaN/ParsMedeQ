@@ -21,4 +21,5 @@ internal static class TableNames
     internal static string Ticket = "Ticket";
     internal static string TicketAnswers = "TicketAnswers";
     internal static string Media = "Media";
+    internal static string PeriodicService = "PeriodicService";
 }

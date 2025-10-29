@@ -39,6 +39,7 @@ public sealed class WriteDbContext : DbContextBase<WriteDbContext>
     public DbSet<Payment> Payment { get; set; }
     public DbSet<Ticket> Ticket { get; set; }
     public DbSet<TicketAnswer> TicketAnswers { get; set; }
+    public DbSet<PeriodicService> PeriodicService { get; set; }
 
     public WriteDbContext(DbContextOptions<WriteDbContext> opts) : base(opts) { }
 

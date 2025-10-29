@@ -13,7 +13,7 @@ public class StopwatchTickProvider :
 
     public StopwatchTickProvider()
     {
-        _start = DateTime.UtcNow;
+        _start = DateTime.Now;
         _stopwatch = Stopwatch.StartNew();
     }
 

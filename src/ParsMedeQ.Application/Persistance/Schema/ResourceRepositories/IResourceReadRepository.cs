@@ -22,9 +22,7 @@ public interface IResourceReadRepository : IDomainRepository
 
     ValueTask<PrimitiveResult<ResourceDetailsDbQueryResponse>> ResourceDetails(
         string langCode,
-        int UserId,
-        int ResourceId,
-        int TableId,
+        int resourceId,
         CancellationToken cancellationToken);
 
     ValueTask<PrimitiveResult<ResourceCategoryListDbQueryResponse>> ResourceCategoryDetails(

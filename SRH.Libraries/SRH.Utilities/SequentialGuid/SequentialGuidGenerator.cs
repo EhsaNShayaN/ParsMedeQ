@@ -38,7 +38,7 @@ public class SequentialGuidGeneratorService : ISequentialGuidGenerator
             var randomBytes = new byte[8];
             Rng.GetBytes(randomBytes);
 
-            var ticks = DateTime.UtcNow.Ticks;
+            var ticks = DateTime.Now.Ticks;
             var timestamp = (ticks >> 12) - 0x789abcdef012L; //789abcdef012h = 10 Mar 1722
                                                              //the timestamp is decreased by the arbitrary value to give more room for future dates
             var timestampBytes = BitConverter.GetBytes(timestamp);

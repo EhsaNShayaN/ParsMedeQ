@@ -42,8 +42,8 @@ public sealed class UserAuthenticationTokenService : IUserAuthenticationTokenSer
         var token = new JwtSecurityToken(
             issuer: this._opts.CurrentValue.Issuer,
             claims: claims,
-            notBefore: DateTime.UtcNow,
-            expires: DateTime.UtcNow.Add(this._opts.CurrentValue.Expiry),
+            notBefore: DateTime.Now,
+            expires: DateTime.Now.Add(this._opts.CurrentValue.Expiry),
             signingCredentials: creds
         );
 

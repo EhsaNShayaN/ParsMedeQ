@@ -43,8 +43,9 @@ public sealed class UpdateProductCommandHandler : IPrimitiveResultCommandHandler
                 _ => langCode.Equals(Constants.LangCode_Farsi, StringComparison.OrdinalIgnoreCase),
                 data => data.Product.Update(
                     request.ProductCategoryId, request.Language, request.PublishDate, request.PublishInfo, request.Publisher,
-                    request.Price, request.Discount, request.ExpirationDate, langCode, request.Title, request.Description,
-                    request.Abstract, request.Anchors, request.Keywords, data.imagePath ?? request.OldImagePath, data.media?.Id ?? request.OldFileId),
+                    request.Price, request.Discount, langCode, request.Title, request.Description,
+                    request.Abstract, request.Anchors, request.Keywords, request.GuarantyExpirationTime, request.PeriodicServiceInterval,
+                    data.imagePath ?? request.OldImagePath, data.media?.Id ?? request.OldFileId),
                 data => data.Product.UpdateTranslation(langCode, request.Title, request.Description, request.Abstract, request.Anchors, request.Keywords,
                     data.imagePath ?? request.OldImagePath, data.media?.Id ?? request.OldFileId)
                     .Map(() => data.Product)

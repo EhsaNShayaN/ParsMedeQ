@@ -7,5 +7,5 @@ using System;
 public class DateTimeTickProvider :
     ITickProvider
 {
-    public long Ticks => DateTime.UtcNow.Ticks;
+    public long Ticks => DateTime.Now.Ticks;
 }

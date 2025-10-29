@@ -9,6 +9,8 @@ public readonly record struct ProductDetailsApiResponse(
     int? FileId,
     int? Price,
     int? Discount,
+    int GuarantyExpirationTime,
+    int PeriodicServiceInterval,
     bool Deleted,
     bool Disabled,
     string CreationDate,

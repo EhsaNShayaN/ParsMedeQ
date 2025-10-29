@@ -49,14 +49,16 @@ public sealed class Cart : EntityBase<int>
         int relatedId,
         string relatedName,
         decimal unitPrice,
-        int quantity)
+        int quantity,
+        string data)
         => this.Update(anonymousId, userId)
         .Map(_ => this.UpdateCartItem(
             tableId,
             relatedId,
             relatedName,
             unitPrice,
-            quantity)
+            quantity,
+            data)
         .Map(() => this));
     public ValueTask<PrimitiveResult> AddCartItem(
         CartItem item)
@@ -70,13 +72,15 @@ public sealed class Cart : EntityBase<int>
         int relatedtId,
         string relatedName,
         decimal unitPrice,
-        int quantity)
+        int quantity,
+        string data)
         => CartItem.Create(
             tableId,
             relatedtId,
             relatedName,
             unitPrice,
-            quantity)
+            quantity,
+            data)
         .OnSuccess(item => this._CartItems.Add(item.Value))
         .Match(
             success => PrimitiveResult.Success(),
@@ -87,7 +91,8 @@ public sealed class Cart : EntityBase<int>
         int relatedId,
         string relatedName,
         decimal unitPrice,
-        int quantity)
+        int quantity,
+        string data)
     {
         var current = _CartItems.FirstOrDefault(s => s.RelatedId.Equals(relatedId));
         if (current is null)
@@ -97,12 +102,14 @@ public sealed class Cart : EntityBase<int>
                 relatedId,
                 relatedName,
                 unitPrice,
-                quantity);
+                quantity,
+                data);
         }
         return current.Update(
             relatedName,
             unitPrice,
-            quantity)
+            quantity,
+            data)
             .Match(
             _ => PrimitiveResult.Success(),
             PrimitiveResult.Failure);

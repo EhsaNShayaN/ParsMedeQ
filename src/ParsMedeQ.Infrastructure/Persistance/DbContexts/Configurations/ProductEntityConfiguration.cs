@@ -22,6 +22,13 @@ sealed class ProductEntityConfiguration : IEntityTypeConfiguration<Product>
             .HasForeignKey(a => a.ProductId)
             .HasPrincipalKey(a => a.Id)
             .OnDelete(DeleteBehavior.Cascade);
+
+        builder
+            .HasMany(x => x.PeriodicServices)
+            .WithOne(x => x.Product)
+            .HasForeignKey(a => a.ProductId)
+            .HasPrincipalKey(a => a.Id)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }
 
@@ -32,7 +39,15 @@ sealed class ProductTranslationEntityConfiguration : IEntityTypeConfiguration<Pr
         builder.ToTable(TableNames.ProductTranslation);
 
         builder.HasKey(a => a.Id);
+    }
+}
 
+sealed class PeriodicServiceEntityConfiguration : IEntityTypeConfiguration<PeriodicService>
+{
+    public void Configure(EntityTypeBuilder<PeriodicService> builder)
+    {
+        builder.ToTable(TableNames.PeriodicService);
 
+        builder.HasKey(a => a.Id);
     }
 }

@@ -27,8 +27,8 @@ public sealed class AddToCartCommandHandler : IPrimitiveResultCommandHandler<Add
             request.TableId,
             request.RelatedId,
             request.Quantity,
-            this._userLangContextAccessor.GetCurrentLang()
-        );
+            this._userLangContextAccessor.GetCurrentLang(),
+            cancellationToken);
 
         return await this._writeUnitOfWork.SaveChangesAsync(cancellationToken)
             .Map(_ => new CartListQueryResponse(
@@ -38,7 +38,8 @@ public sealed class AddToCartCommandHandler : IPrimitiveResultCommandHandler<Add
                     item.RelatedId,
                     item.RelatedName,
                     item.UnitPrice,
-                    item.Quantity)).ToArray()))
+                    item.Quantity,
+                    item.Data)).ToArray()))
             .ConfigureAwait(false);
     }
 }

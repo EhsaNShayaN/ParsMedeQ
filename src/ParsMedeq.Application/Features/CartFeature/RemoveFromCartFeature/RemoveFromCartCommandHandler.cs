@@ -1,17 +1,21 @@
 ﻿using ParsMedeQ.Application.Features.CartFeature.GetCartFeature;
 using ParsMedeQ.Application.Services.UserContextAccessorServices;
+using ParsMedeQ.Application.Services.UserLangServices;
 
 namespace ParsMedeQ.Application.Features.CartFeature.RemoveFromCartFeature;
 public sealed class RemoveFromCartCommandHandler : IPrimitiveResultCommandHandler<RemoveFromCartCommand, CartListQueryResponse>
 {
     private readonly IWriteUnitOfWork _writeUnitOfWork;
     private readonly IUserContextAccessor _userContextAccessor;
+    private readonly IUserLangContextAccessor _userLangContextAccessor;
 
     public RemoveFromCartCommandHandler(
         IWriteUnitOfWork writeUnitOfWork,
-        IUserContextAccessor userContextAccessor)
+        IUserContextAccessor userContextAccessor,
+        IUserLangContextAccessor userLangContextAccessor)
     {
         this._writeUnitOfWork = writeUnitOfWork;
+        this._userLangContextAccessor = userLangContextAccessor;
         this._userContextAccessor = userContextAccessor;
     }
 
@@ -20,7 +24,9 @@ public sealed class RemoveFromCartCommandHandler : IPrimitiveResultCommandHandle
         var cart = await this._writeUnitOfWork.CartWriteRepository.RemoveFromCart(
             this._userContextAccessor.GetCurrent().UserId,
             request.AnonymousId,
-            request.RelatedId);
+            request.RelatedId,
+            _userLangContextAccessor.GetCurrentLang(),
+            cancellationToken);
 
         return await this._writeUnitOfWork.SaveChangesAsync(cancellationToken)
             .Map(_ => new CartListQueryResponse(
@@ -30,7 +36,8 @@ public sealed class RemoveFromCartCommandHandler : IPrimitiveResultCommandHandle
                     item.RelatedId,
                     item.RelatedName,
                     item.UnitPrice,
-                    item.Quantity)).ToArray()))
+                    item.Quantity,
+                    item.Data)).ToArray()))
             .ConfigureAwait(false);
     }
 }

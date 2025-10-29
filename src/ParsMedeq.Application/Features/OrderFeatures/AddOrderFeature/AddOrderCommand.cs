@@ -2,8 +2,7 @@
 
 namespace ParsMedeQ.Application.Features.OrderFeatures.AddOrderFeature;
 
-public sealed record class AddOrderCommand(
-    int CartId) : IPrimitiveResultCommand<AddOrderCommandResponse>,
+public sealed record class AddOrderCommand(int CartId) : IPrimitiveResultCommand<AddOrderCommandResponse>,
     IValidatableRequest<AddOrderCommand>
 {
     public ValueTask<PrimitiveResult<AddOrderCommand>> Validate() => PrimitiveResult.Success(this)

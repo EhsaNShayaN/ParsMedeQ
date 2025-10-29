@@ -26,7 +26,8 @@ sealed class GetCartQueryHandler : IPrimitiveResultQueryHandler<CartListQuery, C
         var cart = await this._writeUnitOfWork.CartWriteRepository.GetCarts(
             this._userContextAccessor.GetCurrent().GetUserId(),
             request.AnonymousId,
-            this._userLangContextAccessor.GetCurrentLang());
+            this._userLangContextAccessor.GetCurrentLang(),
+            cancellationToken);
         return await this._writeUnitOfWork.SaveChangesAsync(cancellationToken)
             .Map(_ => new CartListQueryResponse(
                 cart.Id,
@@ -35,7 +36,8 @@ sealed class GetCartQueryHandler : IPrimitiveResultQueryHandler<CartListQuery, C
                     item.RelatedId,
                     item.RelatedName,
                     item.UnitPrice,
-                    item.Quantity)).ToArray()))
+                    item.Quantity,
+                    item.Data)).ToArray()))
             .ConfigureAwait(false);
     }
 }

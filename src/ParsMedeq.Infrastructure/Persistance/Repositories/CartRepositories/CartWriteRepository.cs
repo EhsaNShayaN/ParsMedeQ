@@ -1,5 +1,7 @@
 ﻿using ParsMedeQ.Application.Persistance.Schema.CartRepositories;
 using ParsMedeQ.Application.Persistance.Schema.ProductRepositories;
+using ParsMedeQ.Application.Persistance.Schema.ResourceRepositories;
+using ParsMedeQ.Domain;
 using ParsMedeQ.Domain.Aggregates.CartAggregate;
 using ParsMedeQ.Domain.Aggregates.ProductAggregate;
 using ParsMedeQ.Infrastructure.Persistance.DbContexts;
@@ -9,46 +11,28 @@ namespace ParsMedeQ.Infrastructure.Persistance.Repositories.CartRepositories;
 internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<WriteDbContext>, ICartWriteRepository
 {
     private readonly IProductReadRepository _productReadRepository;
-    public CartWriteRepository(WriteDbContext dbContext, IProductReadRepository productReadRepository) : base(dbContext)
+    private readonly IResourceReadRepository _resourceReadRepository;
+    public CartWriteRepository(
+        WriteDbContext dbContext,
+        IProductReadRepository productReadRepository,
+        IResourceReadRepository resourceReadRepository) : base(dbContext)
     {
         this._productReadRepository = productReadRepository;
+        this._resourceReadRepository = resourceReadRepository;
     }
 
-    public async ValueTask<PrimitiveResult<Cart>> GetCart(int id, CancellationToken cancellationToken)
+    public async ValueTask<PrimitiveResult<Cart>> GetCart(string lang, int id, CancellationToken cancellationToken)
     {
         var cart = await this.DbContext.Cart
-            .Include(c => c.CartItems)
-            .Where(s => s.Id.Equals(id))
-            .FirstOrDefaultAsync(cancellationToken);
+        .Include(c => c.CartItems)
+        .Where(s => s.Id.Equals(id))
+        .FirstOrDefaultAsync(cancellationToken);
+        await UpdateCartItems(cart, cancellationToken, lang);
 
         return cart;
     }
 
-    /*private Cart UpdateCart(Cart cart, CancellationToken cancellationToken)
-    {
-        foreach (var item in cart!.CartItems)
-        {
-            switch ((Tables)item.TableId)
-            {
-                case Tables.Product:
-                    this._productReadRepository.FindById(item.RelatedId, cancellationToken)
-                        .MapIf(
-                        product => product is null || !product.Price.HasValue,
-                        product => PrimitiveResult.Failure<Cart>("", "Invalid product."),
-                        product => item.UnitPrice = product.Price)
-
-                    break;
-                case Tables.Clip:
-                    break;
-                default:
-                    break;
-            }
-            var product = await this.DbContext.Set<Product>().FindAsync(item.RelatedId);
-            if (product == null) throw new InvalidOperationException($"محصول {item.RelatedName} پیدا نشد");
-        }
-    }*/
-
-    public async ValueTask<Cart> GetCarts(int? userId, Guid? anonymousId, string Lang)
+    public async ValueTask<Cart> GetCarts(int? userId, Guid? anonymousId, string lang, CancellationToken cancellationToken)
     {
         var cart = await this.DbContext.Cart
             .Include(c => c.CartItems)
@@ -59,44 +43,97 @@ internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<
             cart = Cart.Create(userId, anonymousId).Value;
             this.DbContext.Cart.Add(cart);
         }
-
+        await UpdateCartItems(cart, cancellationToken, lang);
+        await this.DbContext.SaveChangesAsync(cancellationToken);
         return cart;
     }
-    public async ValueTask<Cart> AddToCart(int? userId, Guid? anonymousId, int tableId, int relatedId, int quantity, string Lang)
+
+    private async Task UpdateCartItems(Cart cart, CancellationToken cancellationToken, string lang)
+    {
+        foreach (var item in cart.CartItems)
+        {
+            switch ((Tables)item.TableId)
+            {
+                case Tables.Product:
+                    await this._productReadRepository.ProductDetails(lang, item.RelatedId, cancellationToken)
+                        .Map(product => cart.UpdateCartItem(
+                            item.TableId,
+                            item.RelatedId,
+                            product.Title,
+                            product.Price ?? 0,
+                            item.Quantity,
+                            JsonSerializer.Serialize(product)));
+                    break;
+                case Tables.Article:
+                case Tables.News:
+                case Tables.Clip:
+                    await this._resourceReadRepository.ResourceDetails(lang, item.RelatedId, cancellationToken)
+                        .Map(resource => cart.UpdateCartItem(
+                            item.TableId,
+                            item.RelatedId,
+                            resource.Title,
+                            resource.Price ?? 0,
+                            item.Quantity,
+                            JsonSerializer.Serialize(resource)));
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    public async ValueTask<Cart> AddToCart(int? userId, Guid? anonymousId, int tableId, int relatedId, int quantity, string lang, CancellationToken cancellationToken)
     {
         // گرفتن محصول از دیتابیس
-        var product = await this.DbContext
-            .Set<Product>()
-            .Include(a => a.ProductTranslations)
-            .Where(a => a.Id.Equals(relatedId))
-            .FirstOrDefaultAsync()
-            .ConfigureAwait(false);
+        string title = string.Empty;
+        decimal price = 0;
+        string data = string.Empty;
+        switch ((Tables)tableId)
+        {
+            case Tables.Product:
+                await this._productReadRepository.ProductDetails(lang, relatedId, cancellationToken)
+                    .OnSuccess(result =>
+                    {
+                        var item = result.Value;
+                        title = item.Title;
+                        price = item.Price ?? 0;
+                        data = JsonSerializer.Serialize(item);
+                    });
+                break;
+            case Tables.Article:
+            case Tables.News:
+            case Tables.Clip:
+                await this._resourceReadRepository.ResourceDetails(lang, relatedId, cancellationToken)
+                    .OnSuccess(result =>
+                    {
+                        var item = result.Value;
+                        title = item.Title;
+                        price = item.Price ?? 0;
+                        data = JsonSerializer.Serialize(item);
+                    });
+                break;
+            default:
+                break;
+        }
 
-        if (product == null)
-            throw new InvalidOperationException("محصول پیدا نشد");
-
-        //if (product.Stoc0k <= 0) throw new InvalidOperationException("محصول ناموجود است");
-
-        var cart = await GetCarts(userId, anonymousId, Lang);
+        var cart = await GetCarts(userId, anonymousId, lang, cancellationToken);
 
         var existingItem = cart.CartItems.FirstOrDefault(i => i.RelatedId == relatedId && i.TableId == tableId);
 
         if (existingItem != null)
         {
-            // چک موجودی
-            //if (existingItem.Quantity + quantity > product.Stoc0k) throw new InvalidOperationException($"حداکثر تعداد سفارش {product.Stoc0k} عدد است");
-
             existingItem.Quantity += quantity;
         }
         else
         {
-            //if (quantity > product.Stoc0k) throw new InvalidOperationException($"حداکثر تعداد سفارش {product.Stoc0k} عدد است");
-
             await cart.AddCartItem(
                 tableId,
                 relatedId,
-                product!.ProductTranslations.First(s => s.LanguageCode.Equals(Lang))!.Title,
-                product!.Price ?? 0, quantity);
+                title,
+                price,
+                quantity,
+                data);
         }
         return cart;
     }
@@ -110,18 +147,15 @@ internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<
             var product = await this.DbContext.Set<Product>().FindAsync(item.RelatedId);
             if (product == null)
                 throw new InvalidOperationException($"محصول {item.RelatedName} پیدا نشد");
-            //if (product.Stoc0k < item.Quantity) throw new InvalidOperationException($"موجودی محصول {item.RelatedName} کافی نیست");
-
-            //await product.UpdateStoc0k(item.Quantity);
         }
 
         // سبد بعد از خرید خالی میشه
         this.DbContext.CartItems.RemoveRange(cart.CartItems);
         return true;
     }
-    public async ValueTask<Cart> RemoveFromCart(int? userId, Guid? anonymousId, int relatedId)
+    public async ValueTask<Cart> RemoveFromCart(int? userId, Guid? anonymousId, int relatedId, string lang, CancellationToken cancellationToken)
     {
-        var cart = await GetCarts(userId, anonymousId, string.Empty);
+        var cart = await GetCarts(userId, anonymousId, lang, cancellationToken);
         var item = cart.CartItems.FirstOrDefault(i => i.RelatedId == relatedId);
         if (item != null)
         {

@@ -106,9 +106,7 @@ internal sealed class ResourceReadRepository : GenericPrimitiveReadRepositoryBas
 
     public ValueTask<PrimitiveResult<ResourceDetailsDbQueryResponse>> ResourceDetails(
         string langCode,
-        int UserId,
         int resourceId,
-        int TableId,
         CancellationToken cancellationToken)
     {
         var query =

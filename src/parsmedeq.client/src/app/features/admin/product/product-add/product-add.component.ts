@@ -52,7 +52,7 @@ export class ProductAddComponent extends BaseComponent implements OnInit, OnDest
               fileId: null,
               price: this.editItem.price,
               discount: this.editItem.discount,
-              warrantyExpirationTime: this.editItem.warrantyExpirationTime > 0 ? this.editItem.warrantyExpirationTime : null,
+              guarantyExpirationTime: this.editItem.guarantyExpirationTime > 0 ? this.editItem.guarantyExpirationTime : null,
               periodicServiceInterval: this.editItem.periodicServiceInterval > 0 ? this.editItem.periodicServiceInterval : null,
             });
             this.oldImagePath = this.editItem.image;

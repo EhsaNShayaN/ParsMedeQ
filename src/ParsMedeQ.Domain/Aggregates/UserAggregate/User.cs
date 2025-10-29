@@ -2,6 +2,7 @@
 using ParsMedeQ.Domain.Aggregates.CartAggregate;
 using ParsMedeQ.Domain.Aggregates.CommentAggregate;
 using ParsMedeQ.Domain.Aggregates.OrderAggregate;
+using ParsMedeQ.Domain.Aggregates.ProductAggregate.Entities;
 using ParsMedeQ.Domain.Aggregates.PurchaseAggregate;
 using ParsMedeQ.Domain.Aggregates.TicketAggregate;
 using ParsMedeQ.Domain.Aggregates.TicketAggregate.Entities;
@@ -23,6 +24,7 @@ public sealed class User : AggregateRoot<int>
     private List<Purchase> _purchases = [];
     private List<Ticket> _tickets = [];
     private List<TicketAnswer> _ticketAnswerss = [];
+    private List<PeriodicService> _periodicServices = [];
     #endregion
 
     #region " Properties "
@@ -66,6 +68,7 @@ public sealed class User : AggregateRoot<int>
     public IReadOnlyCollection<Purchase> Purchases => this._purchases.AsReadOnly();
     public IReadOnlyCollection<Ticket> Tickets => this._tickets.AsReadOnly();
     public IReadOnlyCollection<TicketAnswer> TicketAnswerss => this._ticketAnswerss.AsReadOnly();
+    public IReadOnlyCollection<PeriodicService> PeriodicServices => this._periodicServices.AsReadOnly();
     #endregion
 
     private User(int id) : base(id) { }

@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Http;
 using ParsMedeQ.Application.Features.ProductFeatures.ProductListFeature;
 using ParsMedeQ.Application.Helpers;
 using ParsMedeQ.Contracts;
-using ParsMedeQ.Contracts.CommentContracts.CommentListContract;
 using ParsMedeQ.Contracts.ProductContracts.ProductListContract;
 using SRH.Utilities.EhsaN;
 
@@ -81,6 +80,8 @@ sealed class ProductListApiResponseMapper : IPresentationMapper<
                         data.Image,
                         data.Price,
                         data.Discount,
+                        data.GuarantyExpirationTime,
+                        data.PeriodicServiceInterval,
                         data.CreationDate.ToPersianDate()))
                     .ToArray(), src.TotalCount, src.PageIndex, src.PageSize)
                     {

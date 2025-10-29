@@ -21,7 +21,6 @@ public interface IProductReadRepository : IDomainRepository
         CancellationToken cancellationToken);
     ValueTask<PrimitiveResult<ProductDetailsDbQueryResponse>> ProductDetails(
         string langCode,
-        int UserId,
         int ProductId,
         CancellationToken cancellationToken);
     ValueTask<PrimitiveResult<ProductCategoryListDbQueryResponse>> ProductCategoryDetails(

@@ -23,7 +23,7 @@ import {AddResult, BaseResult} from '../../../../core/models/BaseResult';
   standalone: false
 })
 export class ProductListComponent extends BaseComponent implements OnInit {
-  displayedColumns: string[] = [/*'row', */'title', 'productCategoryTitle', 'image', 'creationDate', 'actions'];
+  displayedColumns: string[] = [/*'row', */'title', 'productCategoryTitle', 'image', 'guarantyExpirationTime', 'periodicServiceInterval', 'actions'];
   columnsToDisplayWithExpand = [...this.displayedColumns, 'expand'];
   languages: string[] = [];
   colors: string[] = ['warn', 'primary', 'success', 'secondary', 'info', 'danger'];
@@ -109,6 +109,12 @@ export class ProductListComponent extends BaseComponent implements OnInit {
     }
     if (column === 'creationdate') {
       column = 'CREATION_DATE';
+    }
+    if (column === 'guarantyexpirationtime') {
+      column = 'GUARANTY_EXPIRATION_TIME';
+    }
+    if (column === 'periodicserviceinterval') {
+      column = 'periodic_service_interval';
     }
     return column.toUpperCase();
   }

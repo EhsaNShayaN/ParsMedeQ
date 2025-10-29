@@ -16,7 +16,7 @@ public sealed record class AddProductCommand
     string Anchors,
     string Keywords,
     string PublishDate,
-    int WarrantyExpirationTime,
+    int GuarantyExpirationTime,
     int PeriodicServiceInterval,
     FileData? ImageInfo,
     FileData? FileInfo) : IPrimitiveResultCommand<AddProductCommandResponse>,

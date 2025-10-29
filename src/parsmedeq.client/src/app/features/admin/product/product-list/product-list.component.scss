@@ -1,6 +1,8 @@
 @use '../../../../theme/styles/variables' as *;
 
-.mat-column-title {
+.mat-column-title,
+.mat-column-guarantyExpirationTime,
+.mat-column-periodicServiceInterval {
   white-space: normal !important;
 }
 

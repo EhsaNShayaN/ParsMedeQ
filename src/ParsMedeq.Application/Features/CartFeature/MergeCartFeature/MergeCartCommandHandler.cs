@@ -29,7 +29,8 @@ public sealed class MergeCartCommandHandler : IPrimitiveResultCommandHandler<Mer
                     item.RelatedId,
                     item.RelatedName,
                     item.UnitPrice,
-                    item.Quantity)).ToArray()))
+                    item.Quantity,
+                    item.Data)).ToArray()))
             .ConfigureAwait(false);
     }
 }

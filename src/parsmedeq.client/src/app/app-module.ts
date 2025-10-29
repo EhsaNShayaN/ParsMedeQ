@@ -1,6 +1,6 @@
 import {APP_INITIALIZER, NgModule, provideBrowserGlobalErrorListeners} from '@angular/core';
 import {BrowserModule, DomSanitizer} from '@angular/platform-browser';
-import {HTTP_INTERCEPTORS, HttpClient, provideHttpClient} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
 import {AuthInterceptor} from './core/services/auth.interceptor';
 import {MatIconRegistry} from '@angular/material/icon';
 import {AppRoutingModule} from './app-routing-module';
@@ -84,7 +84,7 @@ export function tokenGetter() {
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideHttpClient(),
+    provideHttpClient(withInterceptorsFromDi()),
     /*provideAppInitializer(() => {
       const urlInitService = inject(UrlInitService);
       return firstValueFrom(urlInitService.init());

@@ -6,7 +6,6 @@ using ParsMedeQ.Contracts;
 using ParsMedeQ.Contracts.ResourceContracts;
 using ParsMedeQ.Contracts.ResourceContracts.ResourceDetailsContract;
 using ParsMedeQ.Contracts.ResourceContracts.ResourceListContract;
-using ParsMedeQ.Contracts.ResourceContracts.UpdateResourceContract;
 using SRH.Utilities.EhsaN;
 
 namespace ParsMedeQ.Presentation.Features.ResourceFeatures.ResourceDetails;
@@ -36,7 +35,7 @@ sealed class ResourceDetailsEndpoint : EndpointHandlerBase<
             ISender sender,
             CancellationToken cancellationToken) => this.CallMediatRHandler(
             sender,
-            () => ValueTask.FromResult(PrimitiveResult.Success(new ResourceDetailsQuery(0, request.Id, request.TableId))),
+            () => ValueTask.FromResult(PrimitiveResult.Success(new ResourceDetailsQuery(request.Id))),
             cancellationToken);
 
 }
@@ -48,7 +47,7 @@ sealed class ResourceDetailsApiRequestMapper : IPresentationMapper<
         ResourceDetailsApiRequest src,
         CancellationToken cancellationToken)
     {
-        return ValueTask.FromResult(PrimitiveResult.Success(new ResourceDetailsQuery(0, src.Id, src.TableId)));
+        return ValueTask.FromResult(PrimitiveResult.Success(new ResourceDetailsQuery(src.Id)));
     }
 }
 sealed class ResourceDetailsApiResponseMapper : IPresentationMapper<

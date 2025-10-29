@@ -3,9 +3,7 @@ using SRH.MediatRMessaging.Queries;
 
 namespace ParsMedeQ.Application.Features.ProductFeatures.ProductDetailsFeature;
 
-public sealed record ProductDetailsQuery(
-    int UserId,
-    int ProductId) : IPrimitiveResultQuery<ProductDetailsDbQueryResponse>;
+public sealed record ProductDetailsQuery(int ProductId) : IPrimitiveResultQuery<ProductDetailsDbQueryResponse>;
 
 sealed class ProductDetailsQueryHandler : IPrimitiveResultQueryHandler<ProductDetailsQuery, ProductDetailsDbQueryResponse>
 {
@@ -22,7 +20,6 @@ sealed class ProductDetailsQueryHandler : IPrimitiveResultQueryHandler<ProductDe
     public async Task<PrimitiveResult<ProductDetailsDbQueryResponse>> Handle(ProductDetailsQuery request, CancellationToken cancellationToken) =>
         await this._readUnitOfWork.ProductReadRepository.ProductDetails(
             this._userLangContextAccessor.GetCurrentLang(),
-            request.UserId,
             request.ProductId,
             cancellationToken)
         .ConfigureAwait(false);

@@ -46,7 +46,7 @@ public sealed class Ticket : EntityBase<int>
                 Description = description,
                 Status = status,
                 MediaPath = mediaPath,
-                CreationDate = DateTime.UtcNow
+                CreationDate = DateTime.Now
             });
     }
     #endregion

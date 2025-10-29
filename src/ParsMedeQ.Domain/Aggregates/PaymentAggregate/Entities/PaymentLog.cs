@@ -7,7 +7,7 @@ public sealed class PaymentLog : EntityBase<int>
     public int PaymentId { get; private set; }
     public string LogType { get; private set; } = string.Empty;
     public string RawData { get; private set; } = string.Empty;
-    public DateTime CreationDate { get; private set; } = DateTime.UtcNow;
+    public DateTime CreationDate { get; private set; } = DateTime.Now;
     #endregion
 
     #region " Navigation Properties "

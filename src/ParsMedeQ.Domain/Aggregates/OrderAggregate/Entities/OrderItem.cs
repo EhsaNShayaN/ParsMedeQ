@@ -11,6 +11,8 @@ public sealed class OrderItem : EntityBase<int>
     public int Quantity { get; private set; }
     public decimal UnitPrice { get; private set; }
     public decimal? Subtotal { get; private set; }
+    public DateTime? GuarantyExpirationDate { get; private set; }
+    public int PeriodicServiceInterval { get; private set; }
     #endregion
 
     #region " Navigation Properties "
@@ -29,7 +31,9 @@ public sealed class OrderItem : EntityBase<int>
         string relatedName,
         int quantity,
         decimal unitPrice,
-        decimal subtotal)
+        decimal subtotal,
+        DateTime? guarantyExpirationDate,
+        int periodicServiceInterval)
     {
         return PrimitiveResult.Success(
             new OrderItem()
@@ -39,7 +43,9 @@ public sealed class OrderItem : EntityBase<int>
                 RelatedName = relatedName,
                 Quantity = quantity,
                 UnitPrice = unitPrice,
-                Subtotal = subtotal
+                Subtotal = subtotal,
+                GuarantyExpirationDate = guarantyExpirationDate,
+                PeriodicServiceInterval = periodicServiceInterval
             });
     }
     #endregion

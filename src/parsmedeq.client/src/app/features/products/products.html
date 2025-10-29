@@ -22,7 +22,7 @@
                       <img mat-card-image [src]="product.image" [alt]="product.title" loading="lazy"/>
                     </div>
                     <mat-card-content>
-                      <h3 class="title text-left" (click)="goToDetail(product)">{{ product.title }}</h3>
+                      <h3 class="title" (click)="goToDetail(product)">{{ product.title }}</h3>
                       <div class="meta">
                         <span class="price" *ngIf="product.discount && product.discount > 0">
                           <span
@@ -33,13 +33,20 @@
                           <span class="final">{{ formatPrice(product.price ?? 0) }}</span>
                         </span>
                       </div>
-
+                      <div *ngIf="product.guarantyExpirationTime > 0">
+                        <b><u>{{ product.guarantyExpirationTime }}</u></b>
+                        سال گارانتی
+                      </div>
+                      <div *ngIf="product.periodicServiceInterval > 0">
+                        سرویس دوره ای هر
+                        <b><u>{{ product.periodicServiceInterval }}</u></b>
+                        ماه
+                      </div>
                       <p class="desc">{{ product.description }}</p>
                     </mat-card-content>
 
                     <mat-card-actions class="card-actions">
                       <button mat-stroked-button color="primary" (click)="goToDetail(product)">جزئیات</button>
-                      <!--<button mat-raised-button color="primary" (click)="goToDetail(product)">افزودن به سبد</button>-->
                       <app-cart-item-control
                         [relatedId]="product!.id"
                         [tableId]="Tables.Product"

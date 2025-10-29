@@ -4,9 +4,7 @@ using SRH.MediatRMessaging.Queries;
 namespace ParsMedeQ.Application.Features.ResourceFeatures.ResourceDetailsFeature;
 
 public sealed record ResourceDetailsQuery(
-    int UserId,
-    int ResourceId,
-    int TableId) : IPrimitiveResultQuery<ResourceDetailsDbQueryResponse>;
+    int ResourceId) : IPrimitiveResultQuery<ResourceDetailsDbQueryResponse>;
 
 sealed class ResourceDetailsQueryHandler : IPrimitiveResultQueryHandler<ResourceDetailsQuery, ResourceDetailsDbQueryResponse>
 {
@@ -23,9 +21,7 @@ sealed class ResourceDetailsQueryHandler : IPrimitiveResultQueryHandler<Resource
     public async Task<PrimitiveResult<ResourceDetailsDbQueryResponse>> Handle(ResourceDetailsQuery request, CancellationToken cancellationToken) =>
         await this._readUnitOfWork.ResourceReadRepository.ResourceDetails(
             this._userLangContextAccessor.GetCurrentLang(),
-            request.UserId,
             request.ResourceId,
-            request.TableId,
             cancellationToken)
         .ConfigureAwait(false);
 }
