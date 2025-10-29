@@ -6,7 +6,8 @@ CREATE TABLE [dbo].[CartItems]
 [RelatedId] [int] NOT NULL,
 [RelatedName] [nvarchar] (500) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 [UnitPrice] [decimal] (18, 0) NOT NULL,
-[Quantity] [int] NOT NULL
+[Quantity] [int] NOT NULL,
+[Data] [nvarchar] (4000) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL
 ) ON [PRIMARY]
 GO
 ALTER TABLE [dbo].[CartItems] ADD CONSTRAINT [PK_CartItems] PRIMARY KEY CLUSTERED ([Id]) ON [PRIMARY]
