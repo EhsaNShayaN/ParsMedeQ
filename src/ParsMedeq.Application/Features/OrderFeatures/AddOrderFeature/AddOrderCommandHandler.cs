@@ -31,37 +31,31 @@ public sealed class AddOrderCommandHandler : IPrimitiveResultCommandHandler<AddO
             (byte)OrderStatus.Pending.GetHashCode(),
             $"ORD-{DateTime.Now:yyyyMMddHHmmss}-{cart.Id}")
             .Map(order =>
-                PrimitiveResult.BindAll(cart.CartItems, (ci) =>
+            {
+                foreach (var ci in cart.CartItems)
                 {
-                ValueTask<PrimitiveResult> result;
-                DateTime? guarantyExpirationDate = null;
-                int periodicServiceInterval = 0;
-                if (ci.TableId == Tables.Product.GetHashCode())
-                {
-                    _writeUnitOfWork.ProductWriteRepository.FindById(ci.RelatedId, cancellationToken)
-                    .Map(product =>
+                    DateTime? guarantyExpirationDate = null;
+                    int periodicServiceInterval = 0;
+                    if (ci.TableId == Tables.Product.GetHashCode())
                     {
+                        var product = _writeUnitOfWork.ProductWriteRepository.FindById(ci.RelatedId, cancellationToken).Result.Value;
                         guarantyExpirationDate = product.GuarantyExpirationTime > 0 ? DateTime.Now.AddMonths(product.GuarantyExpirationTime) : null;
                         periodicServiceInterval = product.PeriodicServiceInterval;
-                        if (periodicServiceInterval > 0)
-                        {
-                            product.AddPeriodicService(_userContextAccessor.GetCurrent().UserId);
-                        }
-                        result = order.AddItem(
-                        ci.TableId, ci.RelatedId, ci.RelatedName, ci.Quantity, ci.UnitPrice,
-                        ci.Quantity * ci.UnitPrice, guarantyExpirationDate, periodicServiceInterval);
-                    });
-                }
-                else
-                {
-                    result = order.AddItem(
+                    }
+                    order.AddItem(
                     ci.TableId, ci.RelatedId, ci.RelatedName, ci.Quantity, ci.UnitPrice,
-                    ci.Quantity * ci.UnitPrice, guarantyExpirationDate, periodicServiceInterval);
+                    ci.Quantity * ci.UnitPrice, guarantyExpirationDate, periodicServiceInterval)
+                    ;
 
+
+                    /*   if (periodicServiceInterval > 0)
+                   {
+                       product.AddPeriodicService(_userContextAccessor.GetCurrent().UserId);
+                   }*/
                 }
-                return result;
-                ,
-                BindAllIterationStrategy.BreakOnFirstError).Map(() => order)
+                return order;
+            }
+            )
             .Map(order => this._writeUnitOfWork.OrderWriteRepository.AddOrder(order)
             .Map(order => this._writeUnitOfWork.SaveChangesAsync(CancellationToken.None).Map(_ => order))
             .Map(order => cart.RemoveCartItems().Map(() => order))
@@ -69,7 +63,7 @@ public sealed class AddOrderCommandHandler : IPrimitiveResultCommandHandler<AddO
             .Map(order => Payment.Create(order.Id, order.FinalAmount!.Value, 0))
             .Map(payment => this._writeUnitOfWork.PaymentWriteRepository.AddPayment(payment)
             .Map(payment => this._writeUnitOfWork.SaveChangesAsync(CancellationToken.None).Map(_ => payment))
-            .Map(payment => new AddOrderCommandResponse(payment.Id))))));
+            .Map(payment => new AddOrderCommandResponse(payment.Id)))))
             .ConfigureAwait(false);
     }
 }
