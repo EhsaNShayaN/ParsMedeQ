@@ -6,7 +6,7 @@ CREATE TABLE [dbo].[Users]
 [IsEmailConfirmed] [bit] NOT NULL,
 [IsMobileConfirmed] [bit] NOT NULL,
 [FirstName] [nvarchar] (150) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-[LastName] [varchar] (150) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+[LastName] [nvarchar] (150) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 [Salt] [varchar] (2500) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 [Password] [varchar] (2500) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL
 ) ON [PRIMARY]
