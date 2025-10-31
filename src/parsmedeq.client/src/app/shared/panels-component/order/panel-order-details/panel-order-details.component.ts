@@ -1,10 +1,10 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {BaseComponent} from '../../../../base-component';
 import {Order, OrderResponse} from '../../../../core/models/OrderResponse';
 import {OrderStatus} from '../../../../core/constants/server.constants';
-import * as moment from 'jalali-moment';
 import {OrderService} from '../../../../core/services/rest/order-service';
+import {Helpers} from '../../../../core/helpers';
 
 @Component({
   selector: 'app-panel-order-details',
@@ -12,32 +12,21 @@ import {OrderService} from '../../../../core/services/rest/order-service';
   styleUrls: ['./panel-order-details.component.scss'],
   standalone: false
 })
-export class PanelOrderDetailsComponent extends BaseComponent implements OnInit, OnDestroy {
+export class PanelOrderDetailsComponent extends BaseComponent implements OnDestroy {
   @Input() url: string = '';
   sub: any;
   order: Order | undefined;
   protected readonly OrderStatus = OrderStatus;
 
   constructor(private activatedRoute: ActivatedRoute,
-              private orderService: OrderService) {
+              private orderService: OrderService,
+              protected helpers: Helpers) {
     super();
     this.sub = this.activatedRoute.params.subscribe(params => {
       this.orderService.getOrder(params['id']).subscribe((a: OrderResponse) => {
         this.order = a.data;
       });
     });
-  }
-
-  ngOnInit(): void {
-  }
-
-  convertToPersianDate(dateStr: string): string {
-    const persianDate = moment.from(dateStr, 'YYYY-MM-DD')
-      .locale('fa')          // switch to Persian locale
-      .format('jYYYY/jMM/jDD'); // use "j" for Jalali calendar
-    const date = new Date(dateStr);
-    const time = date.toLocaleTimeString('fa-IR', {hour: '2-digit', minute: '2-digit'});
-    return `${persianDate}-${time}`;
   }
 
   ngOnDestroy(): void {

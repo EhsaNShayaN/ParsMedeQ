@@ -21,7 +21,7 @@
         <p>
           <strong>تاریخ سفارش:</strong>
           <span>
-              {{ convertToPersianDate(order?.updateDate ?? '') }}
+              {{ helpers.convertToPersianDate(order?.updateDate ?? '') }}
             </span>
         </p>
         <p *ngIf="order.totalAmount">

@@ -39,30 +39,42 @@
       }
 
       <div class="cart-dropdown">
-        <button mat-icon-button>
+        <a mat-icon-button [routerLink]="['/cart/checkout' | langPack]">
           <mat-icon [matBadge]="totalItems" [matBadgeHidden]="totalItems === 0"
                     matBadgeSize="small" matBadgeColor="warn" aria-hidden="false">
             shopping_cart
           </mat-icon>
-        </button>
+        </a>
         <div class="cart-menu">
-          <ng-container *ngIf="cartItems.length > 0; else empty">
-            <div *ngFor="let item of cartItems" class="cart-item foreground-color reduced0 removed0">
-              <span>{{ item.relatedName }}</span>
-              <span>تعداد: {{ item.quantity }}</span>
-              <span>{{ item.unitPrice * item.quantity | number }} تومان</span>
-              <span class="icon-warning d-none">⚠️</span>
-              <mat-icon (click)="removeItem(item.id ?? 0)" class="red-color">cancel</mat-icon>
+          @if (cartItems.length > 0) {
+            <div fxLayout="row wrap" class="position-relative">
+              @for (item of cartItems; track item.relatedId; let i = $index) {
+                <div class="position-absolute" style="left: 0">
+                  <mat-icon (click)="removeItem(item.relatedId)" class="red-color cursor-pointer">cancel</mat-icon>
+                </div>
+                <div class="foreground-color">
+                  <div>
+                    <span>{{ item.relatedName }}</span>
+                    <br>
+                    <span>تعداد: {{ item.quantity }}</span>
+                    <br>
+                    <span class="mr-2">{{ item.unitPrice * item.quantity | number }} تومان</span>
+                    <span class="icon-warning d-none">⚠️</span>
+                  </div>
+                </div>
+                @if (i < cartItems.length - 1) {
+                  <mat-divider class="w-100"></mat-divider>
+                }
+              }
             </div>
             <div class="checkout">
               <a mat-button class="bg-red background-color" [routerLink]="['/cart/checkout' | langPack]">
                 ثبت سفارش
               </a>
             </div>
-          </ng-container>
-          <ng-template #empty>
+          } @else {
             <div class="empty-cart">سبد خرید شما خالی است</div>
-          </ng-template>
+          }
         </div>
       </div>
 

@@ -58,6 +58,9 @@ export class Helpers {
   }
 
   convertToPersianDate(dateStr: string): string {
+    if (!dateStr) {
+      return '';
+    }
     const persianDate = moment.from(dateStr, 'YYYY-MM-DD')
       .locale('fa')          // switch to Persian locale
       .format('jYYYY/jMM/jDD'); // use "j" for Jalali calendar

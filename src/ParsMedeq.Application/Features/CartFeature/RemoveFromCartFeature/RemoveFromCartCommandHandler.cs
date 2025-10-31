@@ -22,7 +22,7 @@ public sealed class RemoveFromCartCommandHandler : IPrimitiveResultCommandHandle
     public async Task<PrimitiveResult<CartListQueryResponse>> Handle(RemoveFromCartCommand request, CancellationToken cancellationToken)
     {
         var cart = await this._writeUnitOfWork.CartWriteRepository.RemoveFromCart(
-            this._userContextAccessor.GetCurrent().UserId,
+            this._userContextAccessor.GetCurrent().GetUserId(),
             request.AnonymousId,
             request.RelatedId,
             _userLangContextAccessor.GetCurrentLang(),
