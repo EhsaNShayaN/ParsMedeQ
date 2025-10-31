@@ -60,7 +60,7 @@ internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<
                             item.TableId,
                             item.RelatedId,
                             product.Title,
-                            product.Price ?? 0,
+                            product.Price,
                             item.Quantity));
                     break;
                 case Tables.Article:
@@ -71,7 +71,7 @@ internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<
                             item.TableId,
                             item.RelatedId,
                             resource.Title,
-                            resource.Price ?? 0,
+                            resource.Price,
                             item.Quantity));
                     break;
                 default:
@@ -94,7 +94,7 @@ internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<
                     {
                         var item = result.Value;
                         title = item.Title;
-                        price = item.Price ?? 0;
+                        price = item.Price;
                     });
                 break;
             case Tables.Article:
@@ -105,7 +105,7 @@ internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<
                     {
                         var item = result.Value;
                         title = item.Title;
-                        price = item.Price ?? 0;
+                        price = item.Price;
                     });
                 break;
             default:

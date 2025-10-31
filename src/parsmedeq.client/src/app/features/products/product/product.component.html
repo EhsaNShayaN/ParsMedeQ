@@ -28,14 +28,15 @@
         <div class="info ps-2" fxFlex="100"
              [fxFlex.gt-md]="(product.images?.length ?? 0) > 0 ? 40 : 100">
           <h1>{{ product.title }}</h1>
-          <div class="price-row">
-            <div class="price">
-              <span class="final">{{ formatPrice(finalPrice(product)) }}</span>
-              <span class="original"
-                    *ngIf="product.discount && product.discount>0">{{ formatPrice(product.price ?? 0) }}</span>
+          @if (product.price > 0) {
+            <div class="price-row">
+              <div class="price">
+                <span class="final">{{ product }}</span>
+                <span class="original" *ngIf="product.discount > 0">{{ product.price }}</span>
+                <span>{{ 'TOMAN' | translate }}</span>
+              </div>
             </div>
-          </div>
-
+          }
           <div *ngIf="product.guarantyExpirationTime > 0">
             <b><u>{{ product.guarantyExpirationTime }}</u></b>
             سال گارانتی
@@ -45,9 +46,6 @@
             <b><u>{{ product.periodicServiceInterval }}</u></b>
             ماه
           </div>
-
-          <p class="short-desc" [innerHTML]="product.description | safeHtml"></p>
-
           @if (product) {
             <app-cart-item-control
               [relatedId]="product!.id"
@@ -57,22 +55,12 @@
               [stock]="product!.stock ?? 99999999">
             </app-cart-item-control>
           }
-
           <mat-tab-group class="spec-tabs">
             <mat-tab label="توضیحات">
               <div class="tab-body">
                 <p [innerHTML]="product.description | safeHtml"></p>
               </div>
             </mat-tab>
-            @if ((product.images?.length ?? 0) > 0) {
-              <mat-tab label="گالری">
-                <div class="tab-body gallery-tab">
-                  <div class="gallery-grid">
-                    <img *ngFor="let g of product.images" [src]="g.path" loading="lazy" alt="">
-                  </div>
-                </div>
-              </mat-tab>
-            }
           </mat-tab-group>
         </div>
       </div>

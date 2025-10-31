@@ -9,8 +9,8 @@ public sealed class ProductDetailsDbQueryResponse
     public string ProductCategoryTitle { get; set; } = string.Empty;
     public string Image { get; set; } = string.Empty;
     public int? FileId { get; set; }
-    public int? Price { get; set; }
-    public int? Discount { get; set; }
+    public int Price { get; set; }
+    public int Discount { get; set; }
     public int GuarantyExpirationTime { get; set; }
     public int PeriodicServiceInterval { get; set; }
     public bool Deleted { get; set; }

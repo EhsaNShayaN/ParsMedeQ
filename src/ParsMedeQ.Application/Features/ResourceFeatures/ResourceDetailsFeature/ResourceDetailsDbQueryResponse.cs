@@ -17,8 +17,8 @@ public sealed class ResourceDetailsDbQueryResponse
     public string PublishDate { get; set; } = string.Empty;
     public string PublishInfo { get; set; } = string.Empty;
     public string Publisher { get; set; } = string.Empty;
-    public int? Price { get; set; }
-    public int? Discount { get; set; }
+    public int Price { get; set; }
+    public int Discount { get; set; }
     public int DownloadCount { get; set; }
     public int Stock { get; set; }
     public bool Deleted { get; set; }

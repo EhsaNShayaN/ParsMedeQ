@@ -5,8 +5,8 @@ public readonly record struct ProductListApiResponse(
     string ProductCategoryTitle,
     string Title,
     string Image,
-    int? Price,
-    int? Discount,
+    int Price,
+    int Discount,
     int GuarantyExpirationTime,
     int PeriodicServiceInterval,
     string CreationDate);

@@ -24,8 +24,8 @@ export class Resource {
   publishDate!: string;
   publishInfo!: string;
   publisher!: string;
-  price?: number;
-  discount?: number;
+  price!: number;
+  discount!: number;
   downloadCount!: number;
   stock!: number;
   expirationDate!: string;
@@ -61,8 +61,8 @@ export interface AddResourceRequest {
   imagePath?: string;
   mimeType: string;
   language: string;
-  price?: number;
-  discount?: number;
+  price: number;
+  discount: number;
   description: string;
   publishInfo: string;
   publisher: string;

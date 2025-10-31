@@ -71,10 +71,6 @@ export class ProductComponent extends BaseComponent implements OnInit, OnDestroy
     return p.price ?? 0;
   }
 
-  formatPrice(n: number) {
-    return n.toLocaleString('fa-IR') + ' تومان';
-  }
-
   ngOnDestroy() {
     this.sub.unsubscribe();
   }

@@ -17,8 +17,8 @@ export interface Product {
   image: string;
   fileId?: number;
 
-  price?: number;
-  discount?: number;
+  price: number;
+  discount: number;
   stock: number;
   creationDate: string;
   registered: boolean;
@@ -56,8 +56,8 @@ export interface AddProductRequest {
   imagePath?: string;
   mimeType: string;
   language: string;
-  price?: number;
-  discount?: number;
+  price: number;
+  discount: number;
   description: string;
   publishInfo: string;
   publisher: string;

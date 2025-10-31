@@ -14,8 +14,8 @@ public sealed class Product : EntityBase<int>
 
     #region " Properties "
     public int ProductCategoryId { get; private set; }
-    public int? Price { get; private set; }
-    public int? Discount { get; private set; }
+    public int Price { get; private set; }
+    public int Discount { get; private set; }
     public int Stock { get; private set; }
     public int GuarantyExpirationTime { get; private set; }//زمان انقضای گارانتی
     public int PeriodicServiceInterval { get; private set; }//فاصله زمانی سرویس دوره‌ای

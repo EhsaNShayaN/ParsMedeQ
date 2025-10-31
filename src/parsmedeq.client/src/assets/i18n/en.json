@@ -125,6 +125,7 @@
   "PERIODIC_SERVICE_INTERVAL": "Periodic Service Interval",
   "PERIODIC_SERVICE": "Periodic Service",
   "RIAL": "Rial",
+  "TOMAN": "Toman",
   "PAYMENT_STATUS": {
     "SUCCESS": "Success"
   }

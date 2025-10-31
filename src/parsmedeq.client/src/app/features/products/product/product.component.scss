@@ -118,19 +118,6 @@
   }
 }
 
-.gallery-tab .gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 0.6rem;
-
-  img {
-    width: 100%;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 8px;
-  }
-}
-
 /* toast */
 .toast {
   position: fixed;

@@ -22,8 +22,8 @@ public sealed class Resource : EntityBase<int>
     public string PublishDate { get; private set; } = string.Empty;
     public string PublishInfo { get; private set; } = string.Empty;
     public string Publisher { get; private set; } = string.Empty;
-    public int? Price { get; private set; }
-    public int? Discount { get; private set; }
+    public int Price { get; private set; }
+    public int Discount { get; private set; }
     public int DownloadCount { get; private set; }
     public int Stock { get; set; }
     public bool Deleted { get; private set; }

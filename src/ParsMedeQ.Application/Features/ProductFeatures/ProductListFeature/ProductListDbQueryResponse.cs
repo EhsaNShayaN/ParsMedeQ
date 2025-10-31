@@ -7,8 +7,8 @@ public sealed class ProductListDbQueryResponse
     public int ProductCategoryId { get; set; }
     public string ProductCategoryTitle { get; set; } = string.Empty;
     public string Image { get; set; } = string.Empty;
-    public int? Price { get; set; }
-    public int? Discount { get; set; }
+    public int Price { get; set; }
+    public int Discount { get; set; }
     public int GuarantyExpirationTime { get; set; }
     public int PeriodicServiceInterval { get; set; }
     public bool Deleted { get; set; }
