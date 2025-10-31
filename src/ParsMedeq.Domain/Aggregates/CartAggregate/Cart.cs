@@ -49,20 +49,17 @@ public sealed class Cart : EntityBase<int>
         int relatedId,
         string relatedName,
         decimal unitPrice,
-        int quantity,
-        string data)
+        int quantity)
         => this.Update(anonymousId, userId)
         .Map(_ => this.UpdateCartItem(
             tableId,
             relatedId,
             relatedName,
             unitPrice,
-            quantity,
-            data)
+            quantity)
         .Map(() => this));
-    public ValueTask<PrimitiveResult> AddCartItem(
-        CartItem item)
-        => CartItem.Create(item)
+    public ValueTask<PrimitiveResult> AddCartItem(CartItem item) =>
+        CartItem.Create(item)
         .OnSuccess(item => this._CartItems.Add(item.Value))
         .Match(
             success => PrimitiveResult.Success(),
@@ -72,15 +69,13 @@ public sealed class Cart : EntityBase<int>
         int relatedtId,
         string relatedName,
         decimal unitPrice,
-        int quantity,
-        string data)
+        int quantity)
         => CartItem.Create(
             tableId,
             relatedtId,
             relatedName,
             unitPrice,
-            quantity,
-            data)
+            quantity)
         .OnSuccess(item => this._CartItems.Add(item.Value))
         .Match(
             success => PrimitiveResult.Success(),
@@ -91,8 +86,7 @@ public sealed class Cart : EntityBase<int>
         int relatedId,
         string relatedName,
         decimal unitPrice,
-        int quantity,
-        string data)
+        int quantity)
     {
         var current = _CartItems.FirstOrDefault(s => s.RelatedId.Equals(relatedId));
         if (current is null)
@@ -102,14 +96,12 @@ public sealed class Cart : EntityBase<int>
                 relatedId,
                 relatedName,
                 unitPrice,
-                quantity,
-                data);
+                quantity);
         }
         return current.Update(
             relatedName,
             unitPrice,
-            quantity,
-            data)
+            quantity)
             .Match(
             _ => PrimitiveResult.Success(),
             PrimitiveResult.Failure);

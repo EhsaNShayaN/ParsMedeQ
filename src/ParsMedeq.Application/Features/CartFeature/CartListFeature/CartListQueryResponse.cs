@@ -7,5 +7,4 @@ public sealed record GetCartItemQueryResponse(
     int RelatedId,
     string RelatedName,
     decimal UnitPrice,
-    int Quantity,
-    string Data);
+    int Quantity);

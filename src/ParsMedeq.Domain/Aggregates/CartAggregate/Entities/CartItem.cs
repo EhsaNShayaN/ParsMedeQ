@@ -10,7 +10,6 @@ public sealed class CartItem : EntityBase<int>
     public string RelatedName { get; set; } = string.Empty;
     public decimal UnitPrice { get; set; }
     public int Quantity { get; set; }
-    public string Data { get; set; } = string.Empty;
     #endregion
 
     #region " Navigation Properties "
@@ -30,27 +29,23 @@ public sealed class CartItem : EntityBase<int>
         int relatedId,
         string relatedName,
         decimal unitPrice,
-        int quantity,
-        string data) => PrimitiveResult.Success(
+        int quantity) => PrimitiveResult.Success(
             new CartItem
             {
                 TableId = tableId,
                 RelatedId = relatedId,
                 RelatedName = relatedName,
                 UnitPrice = unitPrice,
-                Quantity = quantity,
-                Data = data
+                Quantity = quantity
             });
     internal PrimitiveResult<CartItem> Update(
         string productName,
         decimal unitPrice,
-        int quantity,
-        string data)
+        int quantity)
     {
         this.RelatedName = productName;
         this.UnitPrice = unitPrice;
         this.Quantity = quantity;
-        this.Data = data;
         return this;
     }
     #endregion

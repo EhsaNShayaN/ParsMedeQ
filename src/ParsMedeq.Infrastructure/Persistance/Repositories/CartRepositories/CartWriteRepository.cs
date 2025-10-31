@@ -61,8 +61,7 @@ internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<
                             item.RelatedId,
                             product.Title,
                             product.Price ?? 0,
-                            item.Quantity,
-                            JsonSerializer.Serialize(product)));
+                            item.Quantity));
                     break;
                 case Tables.Article:
                 case Tables.News:
@@ -73,8 +72,7 @@ internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<
                             item.RelatedId,
                             resource.Title,
                             resource.Price ?? 0,
-                            item.Quantity,
-                            JsonSerializer.Serialize(resource)));
+                            item.Quantity));
                     break;
                 default:
                     break;
@@ -88,7 +86,6 @@ internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<
         // گرفتن محصول از دیتابیس
         string title = string.Empty;
         decimal price = 0;
-        string data = string.Empty;
         switch ((Tables)tableId)
         {
             case Tables.Product:
@@ -98,7 +95,6 @@ internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<
                         var item = result.Value;
                         title = item.Title;
                         price = item.Price ?? 0;
-                        data = JsonSerializer.Serialize(item);
                     });
                 break;
             case Tables.Article:
@@ -110,7 +106,6 @@ internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<
                         var item = result.Value;
                         title = item.Title;
                         price = item.Price ?? 0;
-                        data = JsonSerializer.Serialize(item);
                     });
                 break;
             default:
@@ -132,8 +127,7 @@ internal sealed class CartWriteRepository : GenericPrimitiveWriteRepositoryBase<
                 relatedId,
                 title,
                 price,
-                quantity,
-                data);
+                quantity);
         }
         return cart;
     }

@@ -36,8 +36,7 @@ public sealed class RemoveFromCartCommandHandler : IPrimitiveResultCommandHandle
                     item.RelatedId,
                     item.RelatedName,
                     item.UnitPrice,
-                    item.Quantity,
-                    item.Data)).ToArray()))
+                    item.Quantity)).ToArray()))
             .ConfigureAwait(false);
     }
 }
