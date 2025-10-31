@@ -2,8 +2,8 @@ CREATE TABLE [dbo].[Product]
 (
 [Id] [int] NOT NULL IDENTITY(1, 1),
 [ProductCategoryId] [int] NOT NULL,
-[Price] [int] NULL,
-[Discount] [int] NULL,
+[Price] [int] NOT NULL,
+[Discount] [int] NOT NULL,
 [Stock] [int] NOT NULL,
 [GuarantyExpirationTime] [int] NOT NULL,
 [PeriodicServiceInterval] [int] NOT NULL,
