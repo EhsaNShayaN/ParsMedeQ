@@ -3,6 +3,7 @@ using ParsMedeQ.Domain.Aggregates.CartAggregate;
 using ParsMedeQ.Domain.Aggregates.CommentAggregate;
 using ParsMedeQ.Domain.Aggregates.OrderAggregate;
 using ParsMedeQ.Domain.Aggregates.ProductAggregate.Entities;
+using ParsMedeQ.Domain.Aggregates.ProvinceAggregate;
 using ParsMedeQ.Domain.Aggregates.PurchaseAggregate;
 using ParsMedeQ.Domain.Aggregates.TicketAggregate;
 using ParsMedeQ.Domain.Aggregates.TicketAggregate.Entities;

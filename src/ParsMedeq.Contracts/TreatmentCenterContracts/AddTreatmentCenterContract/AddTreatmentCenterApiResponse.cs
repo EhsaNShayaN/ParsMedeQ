@@ -1,0 +1,2 @@
+﻿namespace ParsMedeQ.Contracts.TreatmentCenterContracts.AddTreatmentCenterContract;
+public readonly record struct AddTreatmentCenterApiResponse(bool Changed);

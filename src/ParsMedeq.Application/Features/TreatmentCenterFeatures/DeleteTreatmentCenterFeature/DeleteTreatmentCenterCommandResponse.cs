@@ -1,0 +1,2 @@
+﻿namespace ParsMedeQ.Application.Features.TreatmentCenterFeatures.DeleteTreatmentCenterFeature;
+public sealed record DeleteTreatmentCenterCommandResponse(bool Changed);

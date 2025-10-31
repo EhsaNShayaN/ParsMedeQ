@@ -22,4 +22,7 @@ internal static class TableNames
     internal static string TicketAnswers = "TicketAnswers";
     internal static string Media = "Media";
     internal static string PeriodicService = "PeriodicService";
+    internal static string TreatmentCenter = "TreatmentCenter";
+    internal static string TreatmentCenterTranslation = "TreatmentCenterTranslation";
+    internal static string Province = "Province";
 }

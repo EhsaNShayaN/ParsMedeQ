@@ -1,0 +1,2 @@
+﻿namespace ParsMedeQ.Contracts.TreatmentCenterContracts.DeleteTreatmentCenterContract;
+public readonly record struct DeleteTreatmentCenterApiRequest(int Id);

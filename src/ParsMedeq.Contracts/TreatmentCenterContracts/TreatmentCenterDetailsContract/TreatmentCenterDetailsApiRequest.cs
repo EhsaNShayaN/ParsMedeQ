@@ -1,0 +1,3 @@
+﻿namespace ParsMedeQ.Contracts.TreatmentCenterContracts.TreatmentCenterDetailsContract;
+
+public readonly record struct TreatmentCenterDetailsApiRequest(int Id);

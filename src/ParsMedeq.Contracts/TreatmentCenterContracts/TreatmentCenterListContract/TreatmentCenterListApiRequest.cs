@@ -1,0 +1,3 @@
+﻿namespace ParsMedeQ.Contracts.TreatmentCenterContracts.TreatmentCenterListContract;
+
+public record TreatmentCenterListApiRequest();

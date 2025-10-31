@@ -8,12 +8,15 @@ using ParsMedeQ.Domain.Aggregates.PaymentAggregate;
 using ParsMedeQ.Domain.Aggregates.ProductAggregate;
 using ParsMedeQ.Domain.Aggregates.ProductAggregate.Entities;
 using ParsMedeQ.Domain.Aggregates.ProductCategoryAggregate;
+using ParsMedeQ.Domain.Aggregates.ProvinceAggregate;
 using ParsMedeQ.Domain.Aggregates.PurchaseAggregate;
 using ParsMedeQ.Domain.Aggregates.ResourceAggregate;
 using ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate;
 using ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate.Entities;
 using ParsMedeQ.Domain.Aggregates.TicketAggregate;
 using ParsMedeQ.Domain.Aggregates.TicketAggregate.Entities;
+using ParsMedeQ.Domain.Aggregates.TreatmentCenterAggregate;
+using ParsMedeQ.Domain.Aggregates.TreatmentCenterAggregate.Entities;
 using ParsMedeQ.Domain.Aggregates.UserAggregate;
 
 namespace ParsMedeQ.Infrastructure.Persistance.DbContexts;
@@ -40,6 +43,9 @@ public sealed class WriteDbContext : DbContextBase<WriteDbContext>
     public DbSet<Ticket> Ticket { get; set; }
     public DbSet<TicketAnswer> TicketAnswers { get; set; }
     public DbSet<PeriodicService> PeriodicService { get; set; }
+    public DbSet<TreatmentCenter> TreatmentCenter { get; set; }
+    public DbSet<TreatmentCenterTranslation> TreatmentCenterTranslation { get; set; }
+    public DbSet<Province> Province { get; set; }
 
     public WriteDbContext(DbContextOptions<WriteDbContext> opts) : base(opts) { }
 

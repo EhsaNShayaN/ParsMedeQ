@@ -55,7 +55,6 @@ public sealed class ProductCategory : EntityBase<int>
         return this.Update(parentId)
              .Map(_ => this.UpdateTranslation(langCode, title, description, image).Map(() => this));
     }
-    #endregion
 
     public ValueTask<PrimitiveResult> AddTranslation(
         string langCode,
@@ -88,4 +87,5 @@ public sealed class ProductCategory : EntityBase<int>
                 PrimitiveResult.Failure
             );
     }
+    #endregion
 }
