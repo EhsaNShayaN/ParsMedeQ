@@ -7,14 +7,17 @@ public readonly record struct OrderDetailsApiResponse(
     decimal DiscountAmount,
     decimal? FinalAmount,
     byte Status,
+    string StatusText,
+    string FullName,
     DateTime? UpdateDate,
     DateTime CreationDate,
     OrderItemApiResponse[] Items);
 public readonly record struct OrderItemApiResponse(
-    int OrderId,
     int TableId,
     int RelatedId,
     string RelatedName,
     int Quantity,
     decimal UnitPrice,
-    decimal? Subtotal);
+    decimal? Subtotal,
+    string GuarantyExpirationDate,
+    int PeriodicServiceInterval);

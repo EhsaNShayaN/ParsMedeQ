@@ -62,6 +62,7 @@ sealed class PaymentListApiResponseMapper : IPresentationMapper<
                         data.TransactionId,
                         data.Status,
                         ((PaymentStatus)data.Status).GetDescription(),
+                        data.FullName,
                         data.PaidDate,
                         data.CreationDate))
                     .ToArray(), src.TotalCount, src.PageIndex, src.PageSize)

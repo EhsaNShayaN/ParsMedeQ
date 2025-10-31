@@ -18,7 +18,7 @@ export class PanelPaymentListComponent extends BaseComponent implements OnInit {
   @Input() url: string = '';
   dataSource!: MatTableDataSource<Payment>;
   ///////////////////////
-  displayedColumns: string[] = [/*'row', */'title', 'description', 'paidDate', 'status', 'actions'];
+  displayedColumns: string[] = [/*'row', */'fullName', 'paidDate', 'statusText', 'actions'];
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator | null = null;
   @ViewChild(MatSort, {static: true}) sort: MatSort | null = null;
   pageIndex = 1;
@@ -103,8 +103,8 @@ export class PanelPaymentListComponent extends BaseComponent implements OnInit {
 
   getColName(column: string) {
     column = column.toLowerCase();
-    if (column === 'title') {
-      column = 'FULL_NAME';
+    if (column === 'fullname') {
+      column = 'full_name';
     }
     if (column === 'downloadcount') {
       column = 'download_count';
@@ -114,6 +114,9 @@ export class PanelPaymentListComponent extends BaseComponent implements OnInit {
     }
     if (column === 'paiddate') {
       column = 'payment_time';
+    }
+    if (column === 'statustext') {
+      column = 'status';
     }
     return column.toUpperCase();
   }

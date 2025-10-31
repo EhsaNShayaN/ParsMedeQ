@@ -16,11 +16,12 @@
 
       <div *ngIf="order.id" class="order-details">
         <p><strong>شماره سفارش:</strong> {{ order.id }}</p>
+        <p><strong>وضعیت سفارش:</strong> {{ order.statusText }}</p>
         <p><strong>کد رهگیری:</strong> {{ order.orderNumber }}</p>
         <p>
           <strong>تاریخ سفارش:</strong>
           <span>
-              {{ convertToPersianDate(order.updateDate ?? '') }}
+              {{ convertToPersianDate(order?.updateDate ?? '') }}
             </span>
         </p>
         <p *ngIf="order.totalAmount">
@@ -34,15 +35,41 @@
 
       <div class="items" *ngIf="order.items.length && order.status === OrderStatus.Paid">
         <h3>محصولات خریداری‌شده:</h3>
-        <mat-list>
-          <mat-list-item *ngFor="let item of order.items">
-            <img matListAvatar [src]="item.image" alt="{{ item.relatedName }}"/>
-            <div matLine>{{ item.relatedName }}</div>
-            <div matLine class="price">
-              {{ item.unitPrice | currencyFormatter }} × {{ item.quantity }}
+        <div fxLayout="row wrap">
+          @for (item of order?.items; track item.relatedId) {
+            <div fxFlex="100" fxFlex.gt-md="100" class="py-2">
+              <p>
+                {{ 'PRODUCT_NAME' | translate }}:
+                {{ item.relatedName }}
+              </p>
+              <p>
+                {{ 'PRICE' | translate }}:
+                {{ item.unitPrice | currencyFormatter }}
+                {{ 'RIAL' | translate }}
+              </p>
+              <p>
+                {{ 'GUARANTY_EXPIRATION_TIME' | translate }}:
+                @if (item.guarantyExpirationDate) {
+                  {{ item.guarantyExpirationDate }}
+                } @else {
+                  گارانتی ندارد
+                }
+              </p>
+              <p>
+                {{ 'PERIODIC_SERVICE' | translate }}:
+                @if (item.periodicServiceInterval > 0) {
+                  هر
+                  {{ item.periodicServiceInterval }}
+                  ماه
+                } @else {
+                  {{ 'PERIODIC_SERVICE' | translate }}
+                  ندارد
+                }
+              </p>
+              <mat-divider></mat-divider>
             </div>
-          </mat-list-item>
-        </mat-list>
+          }
+        </div>
       </div>
 
       <div class="actions">

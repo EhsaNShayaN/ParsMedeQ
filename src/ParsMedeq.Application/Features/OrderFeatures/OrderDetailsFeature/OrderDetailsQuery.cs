@@ -15,10 +15,9 @@ sealed class OrderDetailsQueryHandler : IPrimitiveResultQueryHandler<OrderDetail
     }
     public async Task<PrimitiveResult<Order>> Handle(OrderDetailsQuery request, CancellationToken cancellationToken)
     {
-        var x = await this._readUnitOfWork.OrderReadRepository.FindByIdWithItems(
+        return await this._readUnitOfWork.OrderReadRepository.FindByDetails(
             request.Id,
             cancellationToken)
         .ConfigureAwait(false);
-        return x;
     }
 }

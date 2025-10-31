@@ -1,9 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using ParsMedeQ.Application.Features.OrderFeatures.OrderDetailsFeature;
-using ParsMedeQ.Application.Features.UserFeatures.UserDetailsFeature;
 using ParsMedeQ.Contracts;
 using ParsMedeQ.Contracts.OrderContracts.OrderDetailsContract;
+using ParsMedeQ.Domain;
+using SRH.Utilities.EhsaN;
 using Order = ParsMedeQ.Domain.Aggregates.OrderAggregate.Order;
 
 namespace ParsMedeQ.Presentation.Features.OrderFeatures.OrderDetails;
@@ -66,15 +67,18 @@ sealed class OrderDetailsApiResponseMapper : IPresentationMapper<
                         src.DiscountAmount,
                         src.FinalAmount,
                         src.Status,
+                        ((OrderStatus)src.Status).GetDescription(),
+                        src.User.FullName.GetValue(),
                         src.UpdateDate,
                         src.CreationDate,
                         src.OrderItems.Select(s => new OrderItemApiResponse(
-                            s.OrderId,
                             s.TableId,
                             s.RelatedId,
                             s.RelatedName,
                             s.Quantity,
                             s.UnitPrice,
-                            s.Subtotal)).ToArray())));
+                            s.Subtotal,
+                            s.GuarantyExpirationDate.ToPersianDate(),
+                            s.PeriodicServiceInterval)).ToArray())));
     }
 }

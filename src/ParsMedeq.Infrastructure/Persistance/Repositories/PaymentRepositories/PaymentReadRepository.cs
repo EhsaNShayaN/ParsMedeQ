@@ -15,21 +15,20 @@ internal sealed class PaymentReadRepository : GenericPrimitiveReadRepositoryBase
         int lastId,
         CancellationToken cancellationToken)
     {
-        Expression<Func<Payment, PaymentListDbQueryResponse>> PaymentKeySelector = (res) => new PaymentListDbQueryResponse
-        {
-            Id = res.Id,
-            Amount = res.Amount,
-            PaymentMethod = res.PaymentMethod,
-            TransactionId = res.TransactionId,
-            Status = res.Status,
-            PaidDate = res.PaidDate,
-            CreationDate = res.CreationDate,
-        };
+        Expression<Func<Payment, PaymentListDbQueryResponse>> PaymentKeySelector = (res) => new PaymentListDbQueryResponse(
+            res.Id,
+            res.Amount,
+            res.PaymentMethod,
+            res.TransactionId,
+            res.Status,
+            res.Order.User.FullName.GetValue(),
+            res.PaidDate,
+            res.CreationDate);
 
         var result = await this.DbContext.PaginateByPrimaryKey(
-            this.DbContext.Payment.Include(x => x.Order)
-            //.Include(x => x.PaymentAnswers)
-            .Include(x => x.Order),
+            this.DbContext.Payment
+            .Include(x => x.Order)
+            .ThenInclude(s => s.User),
             lastId,
              x => userId <= 0 || x.Order.UserId == userId,
              paginated.PageSize,

@@ -3,7 +3,7 @@ import {BaseComponent} from '../../../base-component';
 import {Cart} from '../../../core/models/Cart';
 import {CartService} from '../../../core/services/cart.service';
 import {first} from 'rxjs/operators';
-import {AddOrderResponse} from '../../../core/models/AddOrderResponse';
+import {AddOrderResponse} from '../../../core/models/OrderResponse';
 import {OrderService} from '../../../core/services/rest/order-service';
 
 @Component({

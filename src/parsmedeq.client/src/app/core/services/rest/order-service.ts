@@ -4,15 +4,16 @@ import {Observable} from 'rxjs';
 import {AddResult, BaseResult} from '../../models/BaseResult';
 import {endpoint} from '../cookie-utils';
 import {catchError} from 'rxjs/operators';
-import {OrderResponse, OrdersRequest} from '../../models/OrderResponse';
-import {AddOrderResponse} from '../../models/AddOrderResponse';
+import {OrderResponse, OrdersRequest, OrdersResponse} from '../../models/OrderResponse';
+import {AddOrderResponse} from '../../models/OrderResponse';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService extends BaseRestService {
+
   getOrders(model: OrdersRequest, url: string): Observable<any> {
-    return this.http.post<OrderResponse>(`${endpoint()}${url}/order/list`, model).pipe(
+    return this.http.post<OrdersResponse>(`${endpoint()}${url}/order/list`, model).pipe(
       catchError(this.handleError)
     );
   }

@@ -5,20 +5,30 @@ import {BaseComponent} from '../../../../base-component';
 import {MatTableDataSource} from '@angular/material/table';
 import {ToastrService} from 'ngx-toastr';
 import {Helpers} from '../../../../core/helpers';
-import {Order, OrderResponse, OrdersRequest} from '../../../../core/models/OrderResponse';
+import {Order, OrderItem, OrderResponse, OrdersRequest} from '../../../../core/models/OrderResponse';
 import {OrderService} from '../../../../core/services/rest/order-service';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-panel-order-list',
   styleUrls: ['panel-order-list.component.scss'],
   templateUrl: 'panel-order-list.component.html',
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('750ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
   standalone: false
 })
 export class PanelOrderListComponent extends BaseComponent implements OnInit {
   @Input() url: string = '';
   dataSource!: MatTableDataSource<Order>;
+  expandedElement: Order | null = null;
   ///////////////////////
-  displayedColumns: string[] = [/*'row', */'title', 'description', 'updateDate', 'statusText', 'actions'];
+  displayedColumns: string[] = [/*'row', */'fullName', 'statusText', 'updateDate', 'actions'];
+  columnsToDisplayWithExpand = [...this.displayedColumns, 'expand'];
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator | null = null;
   @ViewChild(MatSort, {static: true}) sort: MatSort | null = null;
   pageIndex = 1;
@@ -103,7 +113,7 @@ export class PanelOrderListComponent extends BaseComponent implements OnInit {
 
   getColName(column: string) {
     column = column.toLowerCase();
-    if (column === 'title') {
+    if (column === 'fullname') {
       column = 'FULL_NAME';
     }
     if (column === 'downloadcount') {

@@ -15,6 +15,7 @@ export interface Payment {
   transactionId?: string | null;
   status: number;
   statusText: string;
+  fullName: string;
   paidDate?: Date | null;
   creationDate: Date;
 }

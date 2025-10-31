@@ -27,6 +27,7 @@
   "ARTICLE": "ARTICLE",
   "PRODUCTS": "Products",
   "PRODUCT": "Product",
+  "PRODUCT_NAME": "Product name",
   "ABOUT_US": "About Us",
   "CONTINUE": "Continue",
   "ENTER_WITH_OTP": "Sign in using a one-time password.",
@@ -102,7 +103,7 @@
   "PLAY_VIDEO": "Play video",
   "LIST": "List",
   "STATUS": "Status",
-  "FULL_NAME": "Fullname",
+  "FULL_NAME": "Full name",
   "TOTAL_COUNT": "Total count",
   "TICKETS": "Tickets",
   "TICKET": "Ticket",
@@ -119,6 +120,12 @@
   "PASSWORDS_DO_NOT_MATCH": "The password and its repetition do not match.",
   "YOUR_PASSWORD_CHANGED_SUCCESSFULLY": "Your password changed successfully",
   "PASSWORD_MUST_BE_MORE_THAN_6_CHARACTERS": "Password must be more than 6 characters",
-  "GUARANTY_EXPIRATION_TIME": "Guaranty Expiration Time(By Month)",
-  "PERIODIC_SERVICE_INTERVAL": "Periodic Service Interval(By Month)"
+  "BY_MONTH": "By month",
+  "GUARANTY_EXPIRATION_TIME": "Guaranty Expiration Time",
+  "PERIODIC_SERVICE_INTERVAL": "Periodic Service Interval",
+  "PERIODIC_SERVICE": "Periodic Service",
+  "RIAL": "Rial",
+  "PAYMENT_STATUS": {
+    "SUCCESS": "Success"
+  }
 }

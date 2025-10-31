@@ -1,7 +1,7 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {BaseComponent} from '../../../../base-component';
-import {Order, OrderResponse} from '../../../../core/models/AddOrderResponse';
+import {Order, OrderResponse} from '../../../../core/models/OrderResponse';
 import {OrderStatus} from '../../../../core/constants/server.constants';
 import * as moment from 'jalali-moment';
 import {OrderService} from '../../../../core/services/rest/order-service';

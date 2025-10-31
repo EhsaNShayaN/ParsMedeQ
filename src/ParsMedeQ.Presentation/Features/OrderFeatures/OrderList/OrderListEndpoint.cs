@@ -1,6 +1,7 @@
 ﻿using ParsMedeQ.Application.Features.OrderFeatures.OrderListFeature;
 using ParsMedeQ.Application.Helpers;
 using ParsMedeQ.Contracts;
+using ParsMedeQ.Contracts.OrderContracts.OrderDetailsContract;
 using ParsMedeQ.Contracts.OrderContracts.OrderListContract;
 using ParsMedeQ.Domain;
 using SRH.Utilities.EhsaN;
@@ -64,8 +65,18 @@ sealed class OrderListApiResponseMapper : IPresentationMapper<
                         data.FinalAmount,
                         data.Status,
                         ((OrderStatus)data.Status).GetDescription(),
+                        data.FullName,
                         data.UpdateDate,
-                        data.CreationDate))
+                        data.CreationDate,
+                        data.Items.Select(s => new OrderItemListApiResponse(
+                            s.TableId,
+                            s.RelatedId,
+                            s.RelatedName,
+                            s.Quantity,
+                            s.UnitPrice,
+                            s.Subtotal,
+                            s.GuarantyExpirationDate.ToPersianDate(),
+                            s.PeriodicServiceInterval)).ToArray()))
                     .ToArray(), src.TotalCount, src.PageIndex, src.PageSize)
                     {
                         LastId = src.LastId
