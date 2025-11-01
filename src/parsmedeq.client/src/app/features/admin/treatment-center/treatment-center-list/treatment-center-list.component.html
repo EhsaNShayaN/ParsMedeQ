@@ -1,0 +1,39 @@
+<table *ngIf="dataSource" [dataSource]="dataSource" class="w-100 mat-elevation-z8" mat-table multiTemplateDataRows>
+  <!--@for (column of columnsToDisplay; track column) {
+
+  }-->
+  <ng-container *ngFor="let column of columnsToDisplay" matColumnDef="{{column}}">
+    <th *matHeaderCellDef mat-header-cell>{{ getColName(column) }}</th>
+    <td *matCellDef="let element; let i = index;" mat-cell>
+      <ng-container [ngSwitch]="column">
+        <ng-container *ngSwitchCase="'image'">
+          <img class="img-square w-100 he-100" src="{{element.image}}"/>
+        </ng-container>
+        <ng-container *ngSwitchCase="'parentId'">
+          {{ element.parentTitle }}
+        </ng-container>
+        <ng-container *ngSwitchCase="'actions'">
+          <a [routerLink]="['/' + lang + '/admin/product/category/edit', element.id]" target="_blank" mat-icon-button
+             matTooltip="{{'EDIT' | translate}} {{('LANG.' + lang.toUpperCase()) | translate}}"
+             *ngFor="let lang of languages; let i = index">
+            <mat-icon [color]="colors[i]">edit</mat-icon>
+          </a>
+          <button mat-icon-button color="warn" (click)="remove(element)"
+                  [matTooltip]="'DELETE' | translate" class="remove">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+          {{ element[column] }}
+        </ng-container>
+      </ng-container>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="expand">
+    <th *matHeaderCellDef aria-label="row actions" mat-header-cell>&nbsp;</th>
+  </ng-container>
+  <tr *matHeaderRowDef="columnsToDisplay" mat-header-row></tr>
+  <tr *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row" mat-row>
+  </tr>
+</table>
+<mat-paginator [length]="totalCount" [pageSizeOptions]="[10, 50, 100]"></mat-paginator>

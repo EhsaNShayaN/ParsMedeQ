@@ -40,6 +40,9 @@ import {AdminOrderListComponent} from './order/admin-order-list/admin-order-list
 import {AdminPaymentComponent} from './payment/admin-payment.component';
 import {AdminPaymentListComponent} from './payment/admin-payment-list/admin-payment-list.component';
 import {AdminOrderDetailsComponent} from './orders/admin-order-details/admin-order-details.component';
+import {TreatmentCenterListComponent} from './treatment-center/treatment-center-list/treatment-center-list.component';
+import {TreatmentCenterAddComponent} from './treatment-center/treatment-center-add/treatment-center-add.component';
+import {TreatmentCenterComponent} from './treatment-center/treatment-center.component';
 
 @NgModule({
   declarations: [
@@ -84,6 +87,11 @@ import {AdminOrderDetailsComponent} from './orders/admin-order-details/admin-ord
 
     AdminPaymentComponent,
     AdminPaymentListComponent,
+
+    TreatmentCenterComponent,
+    TreatmentCenterListComponent,
+    TreatmentCenterAddComponent,
+    TreatmentCenterAddComponent,
   ],
   imports: [
     CommonModule,

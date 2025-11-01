@@ -1,0 +1,70 @@
+@if (myForm) {
+  <div class="p-3">
+    <div class="theme-container">
+      <div>
+        <div class="text-center">
+          <h1 class="uppercase">
+            @if (editItem) {
+              {{ 'EDIT' | translate }} {{ 'CATEGORY' | translate }}
+              "{{ editItem.title }}"
+            } @else {
+              {{ 'ADD' | translate }} {{ 'CATEGORY' | translate }}
+            }
+          </h1>
+        </div>
+        <form (ngSubmit)="onFormSubmit(myForm.value)" [formGroup]="myForm" fxLayout="row wrap">
+          <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>{{ 'TITLE' | translate }}</mat-label>
+              <input [placeholder]="'TITLE' | translate" autocomplete="off" formControlName="title" matInput required>
+              <mat-error *ngIf="myForm.controls['title'].errors?.['required']">
+                {{ 'TITLE' | translate }}
+                {{ 'IS_REQUIRED' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="px-2" fxFlex="100" fxFlex.gt-xs="50">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>{{ 'CATEGORY' | translate }}</mat-label>
+              <mat-select formControlName="parentId" [placeholder]="'CATEGORY' | translate">
+                <mat-option *ngFor="let item of productCategories" [value]="item.id">
+                  {{ item.title }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="px-2" fxFlex="100" fxFlex.gt-xs="75">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>{{ 'DESCRIPTION' | translate }}</mat-label>
+              <textarea formControlName="description" matInput [placeholder]="'DESCRIPTION' | translate"
+                        rows="5"></textarea>
+              <mat-error *ngIf="myForm.controls['description'].errors?.['required']">
+                {{ 'DESCRIPTION' | translate }}
+                {{ 'IS_REQUIRED' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="px-2" fxFlex="100" fxFlex.gt-xs="25">
+            <div class="border-radius border pad">
+              <mat-label class="ml-2 gray-color">{{ 'IMAGE' | translate }}</mat-label>
+              <input (change)="handleImageInput($event.target)" class="py-1" formControlName="imagePath"
+                     [placeholder]="'IMAGE' | translate" type="file"/>
+              <button *ngIf="oldImagePath" mat-button (click)="deleteImage()" class="mx-3 red-color delete-img"
+                      [matTooltip]="('DELETE' | translate) + ' ' + ('IMAGE' | translate)" matTooltipPosition="after"
+                      type="button">
+                {{ ('DELETE' | translate) + ' ' + ('IMAGE' | translate) }}
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+          </div>
+          <div class="text-center mt-2" fxFlex="100">
+            <button class="uppercase" color="primary" mat-raised-button type="submit">
+              {{ (editItem ? 'EDIT' : 'ADD') | translate }}
+              {{ 'CATEGORY' | translate }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+}
