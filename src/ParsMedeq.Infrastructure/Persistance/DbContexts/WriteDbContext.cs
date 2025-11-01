@@ -1,6 +1,7 @@
 ﻿using ParsMedeQ.Domain.Aggregates.CartAggregate;
 using ParsMedeQ.Domain.Aggregates.CartAggregate.Entities;
 using ParsMedeQ.Domain.Aggregates.CommentAggregate;
+using ParsMedeQ.Domain.Aggregates.LocationAggregate;
 using ParsMedeQ.Domain.Aggregates.MediaAggregate;
 using ParsMedeQ.Domain.Aggregates.OrderAggregate;
 using ParsMedeQ.Domain.Aggregates.OrderAggregate.Entities;
@@ -8,7 +9,6 @@ using ParsMedeQ.Domain.Aggregates.PaymentAggregate;
 using ParsMedeQ.Domain.Aggregates.ProductAggregate;
 using ParsMedeQ.Domain.Aggregates.ProductAggregate.Entities;
 using ParsMedeQ.Domain.Aggregates.ProductCategoryAggregate;
-using ParsMedeQ.Domain.Aggregates.ProvinceAggregate;
 using ParsMedeQ.Domain.Aggregates.PurchaseAggregate;
 using ParsMedeQ.Domain.Aggregates.ResourceAggregate;
 using ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate;
@@ -45,7 +45,7 @@ public sealed class WriteDbContext : DbContextBase<WriteDbContext>
     public DbSet<PeriodicService> PeriodicService { get; set; }
     public DbSet<TreatmentCenter> TreatmentCenter { get; set; }
     public DbSet<TreatmentCenterTranslation> TreatmentCenterTranslation { get; set; }
-    public DbSet<Province> Province { get; set; }
+    public DbSet<Location> Location { get; set; }
 
     public WriteDbContext(DbContextOptions<WriteDbContext> opts) : base(opts) { }
 

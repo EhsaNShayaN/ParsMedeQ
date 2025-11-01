@@ -4,7 +4,6 @@ using ParsMedeQ.Application.Persistance.Schema.ResourceRepositories;
 using ParsMedeQ.Domain;
 using ParsMedeQ.Domain.Aggregates.CartAggregate;
 using ParsMedeQ.Domain.Aggregates.ProductAggregate;
-using ParsMedeQ.Domain.Aggregates.ProvinceAggregate;
 using ParsMedeQ.Infrastructure.Persistance.DbContexts;
 using SRH.Persistance.Repositories.Write;
 

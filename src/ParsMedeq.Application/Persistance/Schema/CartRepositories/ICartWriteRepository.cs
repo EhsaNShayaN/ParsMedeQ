@@ -1,5 +1,4 @@
 ﻿using ParsMedeQ.Domain.Aggregates.CartAggregate;
-using ParsMedeQ.Domain.Aggregates.ProvinceAggregate;
 using ParsMedeQ.Domain.Persistance;
 
 namespace ParsMedeQ.Application.Persistance.Schema.CartRepositories;
