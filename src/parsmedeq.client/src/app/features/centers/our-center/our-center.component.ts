@@ -1,8 +1,9 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {SwiperConfigInterface} from 'ngx-swiper-wrapper';
 import {PureComponent} from '../../../pure-component';
-import {CenterModel, JsonService} from '../../../core/json.service';
 import {animate, query, stagger, style, transition, trigger} from '@angular/animations';
+import {TreatmentCenter, TreatmentCenterResponse} from '../../../core/models/TreatmentCenterResponse';
+import {LocationResponse} from '../../../core/models/LocationResponse';
 
 @Component({
   selector: 'app-our-center',
@@ -19,16 +20,26 @@ import {animate, query, stagger, style, transition, trigger} from '@angular/anim
   ])]
 })
 export class OurCenterComponent extends PureComponent implements OnInit, AfterViewInit {
-  public items: CenterModel[] = [];
+  public items: TreatmentCenter[] = [];
   public config: SwiperConfigInterface = {};
-
-  constructor(private jsonService: JsonService) {
-    super();
-  }
+  pageIndex = 1;
+  pageSize = 10;
 
   ngOnInit() {
-    this.jsonService.getCenters().subscribe((d: CenterModel[]) => {
-      this.items = d;
+    let model = {
+      pageIndex: this.pageIndex,
+      pageSize: this.pageSize,
+      sort: 0,
+    };
+    this.restApiService.getLocations().subscribe((loc: LocationResponse) => {
+      this.restApiService.getTreatmentCenters(model).subscribe((d: TreatmentCenterResponse) => {
+        d.data.items.forEach(item => {
+          const city = loc.data.find(s => s.id === item.locationId);
+          item.city = loc.data.find(s => s.id === item.locationId)?.title ?? '';
+          item.province = loc.data.find(s => s.id === city?.parentId)?.title ?? '';
+        })
+        this.items = d.data.items;
+      });
     });
   }
 

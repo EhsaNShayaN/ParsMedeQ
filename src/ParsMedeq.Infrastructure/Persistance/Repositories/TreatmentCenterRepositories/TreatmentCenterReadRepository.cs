@@ -11,6 +11,25 @@ namespace ParsMedeQ.Infrastructure.Persistance.Repositories.TreatmentCenterRepos
 internal sealed class TreatmentCenterReadRepository : GenericPrimitiveReadRepositoryBase<ReadDbContext>, ITreatmentCenterReadRepository
 {
     public TreatmentCenterReadRepository(ReadDbContext dbContext) : base(dbContext) { }
+
+    /*public async ValueTask<PrimitiveResult<TreatmentCenterDetailsDbQueryResponse>> FindById(int id, string langCode, CancellationToken cancellationToken)
+    {
+        var q =
+            from center in this.DbContext.TreatmentCenter.Include(s => s.TreatmentCenterTranslations)
+            join city in this.DbContext.Location.Include(s => s.LocationTranslation) on center.LocationId equals city.Id
+            join province in this.DbContext.Location.Include(s => s.LocationTranslation) on city.ParentId equals province.Id
+            select new TreatmentCenterDetailsDbQueryResponse(
+                center.Id,
+                center.LocationId,
+                city.LocationTranslation.SingleOrDefault(s => s.LanguageCode == langCode).Title ?? string.Empty,
+                province.LocationTranslation.SingleOrDefault(s => s.LanguageCode == langCode).Title ?? string.Empty,
+                center.TreatmentCenterTranslations.SingleOrDefault(s => s.LanguageCode == langCode).Title ?? string.Empty,
+                center.TreatmentCenterTranslations.SingleOrDefault(s => s.LanguageCode == langCode).Description ?? string.Empty,
+                center.TreatmentCenterTranslations.SingleOrDefault(s => s.LanguageCode == langCode).Image ?? string.Empty,
+                center.CreationDate);
+        return await q.Run(q => q.FirstOrDefaultAsync(cancellationToken), PrimitiveError.Create("", "آیتمی با شناسه مورد نظر پیدا نشد"));
+    }*/
+
     public async ValueTask<PrimitiveResult<TreatmentCenterDetailsDbQueryResponse>> FindById(int id, string langCode, CancellationToken cancellationToken)
     {
         return await this.DbContext.TreatmentCenter

@@ -3,13 +3,6 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {TranslateService} from '@ngx-translate/core';
 
-export interface CenterModel {
-  title: string;
-  image: string;
-  city: string;
-  description: string;
-}
-
 @Injectable({
   providedIn: 'root'
 })
@@ -23,10 +16,6 @@ export class JsonService {
 
   getHomeCarouselSlides() {
     return this.http.get<any[]>(this.url + 'slides.json');
-  }
-
-  getCenters() {
-    return this.http.get<CenterModel[]>(this.url + 'centers.json');
   }
 
   public getUsefulLinks() {
