@@ -2,10 +2,11 @@ import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {FormGroupDirective, UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
-import {ProductCategoriesResponse, ProductCategory} from '../../../../core/models/ProductCategoryResponse';
 import {BaseComponent} from '../../../../base-component';
 import {AddResult, BaseResult} from '../../../../core/models/BaseResult';
-import {CustomConstants} from '../../../../core/constants/custom.constants';
+import {Location, LocationResponse} from '../../../../core/models/LocationResponse';
+import {TreatmentCenter} from '../../../../core/models/TreatmentCenterResponse';
+import {MatSelectChange} from '@angular/material/select';
 
 @Component({
   selector: 'app-treatment-center-add',
@@ -17,12 +18,16 @@ export class TreatmentCenterAddComponent extends BaseComponent implements OnInit
   lang: string;
   public myForm!: UntypedFormGroup;
   @ViewChild(FormGroupDirective) formDir!: FormGroupDirective;
-  productCategories: ProductCategory[] = [];
-  editItem?: ProductCategory;
+  locations: Location[] = [];
+  provinces: Location[] = [];
+  cities: Location[] = [];
+  editItem?: TreatmentCenter;
   /////////////////////
   private sub: any;
   image?: File;
   oldImagePath: string = '';
+  pageIndex = 1;
+  pageSize = 5;
 
   constructor(private toastrService: ToastrService,
               protected activatedRoute: ActivatedRoute,
@@ -33,26 +38,36 @@ export class TreatmentCenterAddComponent extends BaseComponent implements OnInit
 
   ngOnInit() {
     this.sub = this.activatedRoute.params.subscribe(params => {
-      this.restApiService.getProductCategories().subscribe((acr: ProductCategoriesResponse) => {
-        this.productCategories = acr.data;
+      this.restApiService.getLocations().subscribe((acr: LocationResponse) => {
+        this.locations = acr.data;
+        this.provinces = this.locations.filter(s => !s.parentId);
         if (params['id']) {
-          this.editItem = this.productCategories.find(s => s.id === Number(params['id']));
-          if (this.editItem) {
-            this.productCategories = this.productCategories.filter(s => s.id !== this.editItem!.id);
-          }
-        }
-        this.myForm = this.formBuilder.group({
-          title: [this.editItem?.title, Validators.required],
-          description: this.editItem?.description,
-          parentId: this.editItem?.parentId,
-          imagePath: null
-        });
-        if (this.editItem) {
-          this.oldImagePath = this.editItem.image;
-          this.hideSingleLangControls();
+          this.restApiService.getTreatmentCenter(params['id']).subscribe((t: BaseResult<TreatmentCenter>) => {
+            this.editItem = t.data;
+            const provinceId = this.locations.find(p => p.id === this.editItem?.locationId)?.parentId;
+            this.cities = this.locations.filter(s => s.parentId === provinceId);
+            this.createForm(provinceId);
+          });
+        } else {
+          this.createForm(undefined);
         }
       });
     });
+  }
+
+  createForm(provinceId: number | undefined) {
+    console.log('provinceId', provinceId);
+    this.oldImagePath = this.editItem?.image ?? '';
+    this.myForm = this.formBuilder.group({
+      title: [this.editItem?.title, Validators.required],
+      description: this.editItem?.description,
+      provinceId: [provinceId, Validators.required],
+      cityId: [this.editItem?.locationId, Validators.required],
+      imagePath: [null, this.oldImagePath ? null : Validators.required]
+    });
+    if (this.editItem) {
+      this.hideSingleLangControls();
+    }
   }
 
   handleImageInput(target: any) {
@@ -76,6 +91,7 @@ export class TreatmentCenterAddComponent extends BaseComponent implements OnInit
 
   onFormSubmit(values: any): void {
     if (!this.myForm.valid) {
+      this.myForm.markAllAsTouched();
       console.log(this.findInvalidControls(this.myForm));
       return;
     }
@@ -86,7 +102,7 @@ export class TreatmentCenterAddComponent extends BaseComponent implements OnInit
       }
     }
     delete values.imagePath;
-    this.restApiService.addProductCategory(values, this.image).subscribe((d: BaseResult<AddResult>) => {
+    this.restApiService.addTreatmentCenter(values, this.image).subscribe((d: BaseResult<AddResult>) => {
       if (d.data.changed) {
         this.toastrService.success(this.getTranslateValue('THE_OPERATION_WAS_SUCCESSFUL'), '', {});
         if (!this.editItem) {
@@ -98,5 +114,9 @@ export class TreatmentCenterAddComponent extends BaseComponent implements OnInit
 
   ngOnDestroy() {
     this.sub.unsubscribe();
+  }
+
+  provinceChanged($event: MatSelectChange<any>) {
+    this.cities = this.locations.filter(s => s.parentId === $event.value);
   }
 }

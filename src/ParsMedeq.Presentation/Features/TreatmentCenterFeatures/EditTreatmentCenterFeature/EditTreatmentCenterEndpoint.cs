@@ -37,7 +37,7 @@ internal sealed class UpdateTreatmentCenterApiRequestMapper : IPresentationMappe
                     src.CityId,
                     src.Title,
                     src.Description,
-                    imageInfo.Value,
+                    imageInfo,
                     src.OldImagePath)));
     }
 }

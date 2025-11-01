@@ -11,6 +11,8 @@ import {ProductCategoriesResponse} from './models/ProductCategoryResponse';
 import {AddProductRequest, Product, ProductRequest, ProductResponse, ProductsRequest} from './models/ProductResponse';
 import {MobileRequest, MobileResponse, ProfileResponse, SendOtpRequest, SendOtpResponse} from './models/Login';
 import {ProductMediaListResponse} from './models/ProductMediaResponse';
+import {LocationResponse} from './models/LocationResponse';
+import {TreatmentCenter, TreatmentCenterResponse} from './models/TreatmentCenterResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -237,6 +239,39 @@ export class RestApiService {
           this.authService.logout();
           return d.data;
         }));
+  }
+
+  getLocations(): Observable<any> {
+    return this.http.get<LocationResponse>(`${endpoint()}location/list`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getTreatmentCenters(model: any): Observable<any> {
+    return this.http.post<TreatmentCenterResponse>(`${endpoint()}treatmentCenter/list`, model).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getTreatmentCenter(id: number): Observable<any> {
+    return this.http.get<BaseResult<TreatmentCenter>>(`${endpoint()}treatmentCenter/details?id=${id}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  addTreatmentCenter(model: any, image: any = null): Observable<any> {
+    const formData: FormData = this.toFormData(model);
+    formData.append('image', image);
+    return this.http.post<BaseResult<AddResult>>(`${endpoint()}treatmentCenter/${model.id ? 'edit' : 'add'}`, formData).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  deleteTreatmentCenter(id: number): Observable<any> {
+    const model = {id};
+    return this.http.post<BaseResult<AddResult>>(`${endpoint()}treatmentCenter/delete`, model).pipe(
+      catchError(this.handleError)
+    );
   }
 
   handleError<T>(error: HttpErrorResponse): Observable<any> {

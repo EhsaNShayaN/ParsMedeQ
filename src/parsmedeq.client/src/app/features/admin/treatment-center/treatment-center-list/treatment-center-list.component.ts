@@ -1,6 +1,5 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {BaseComponent} from '../../../../base-component';
-import {ProductCategoriesResponse, ProductCategory} from '../../../../core/models/ProductCategoryResponse';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {tap} from 'rxjs';
@@ -8,6 +7,7 @@ import {Helpers} from '../../../../core/helpers';
 import {AddResult, BaseResult} from '../../../../core/models/BaseResult';
 import {ToastrService} from 'ngx-toastr';
 import {MatTableDataSource} from '@angular/material/table';
+import {TreatmentCenter, TreatmentCenterResponse} from '../../../../core/models/TreatmentCenterResponse';
 
 @Component({
   selector: 'app-treatment-center-list',
@@ -16,13 +16,15 @@ import {MatTableDataSource} from '@angular/material/table';
   standalone: false
 })
 export class TreatmentCenterListComponent extends BaseComponent implements OnInit, AfterViewInit {
-  columnsToDisplay: string[] = [/*'row', */'title', 'parentId', 'image', 'creationDate', 'actions'];
+  columnsToDisplay: string[] = [/*'row', */'title', 'province', 'city', 'image', 'creationDate', 'actions'];
   languages: string[] = [];
   colors: string[] = ['warn', 'primary', 'success', 'secondary', 'info', 'danger'];
   ///////////
-  dataSource!: MatTableDataSource<ProductCategory>;
+  dataSource!: MatTableDataSource<TreatmentCenter>;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator | null = null;
   @ViewChild(MatSort, {static: true}) sort: MatSort | null = null;
+  pageIndex = 1;
+  pageSize = 5;
   totalCount = 0;
 
   constructor(private helpers: Helpers,
@@ -33,25 +35,26 @@ export class TreatmentCenterListComponent extends BaseComponent implements OnIni
 
   ngOnInit(): void {
     this.helpers.setPaginationLang();
-    this.getServerData();
+    this.getItems();
   }
 
-  getServerData() {
-    this.restApiService.getProductCategories().subscribe((res: ProductCategoriesResponse) => {
+  getItems() {
+    let model = {
+      pageIndex: this.pageIndex,
+      pageSize: this.pageSize,
+      sort: 0,
+    };
+    this.restApiService.getTreatmentCenters(model).subscribe((res: TreatmentCenterResponse) => {
       if (res?.data) {
         this.initDataSource(res);
-        /*this.dataSource.forEach(s => {
-          if (s.parentId) {
-            s.parentTitle = this.dataSource.find(d => d.id === s.parentId)?.title ?? '';
-          }
-        });*/
       }
     });
   }
 
-  initDataSource(res: ProductCategoriesResponse) {
-    this.totalCount = res.data.length;
-    this.dataSource = new MatTableDataSource<ProductCategory>(res.data);
+  initDataSource(res: TreatmentCenterResponse) {
+    this.totalCount = res.data.totalCount;
+    this.pageSize = res.data.pageSize;
+    this.dataSource = new MatTableDataSource<TreatmentCenter>(res.data.items);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
@@ -59,7 +62,7 @@ export class TreatmentCenterListComponent extends BaseComponent implements OnIni
   ngAfterViewInit() {
     this.paginator?.page
       .pipe(
-        tap(() => this.getServerData())
+        tap(() => this.getItems())
       )
       .subscribe();
   }
@@ -70,7 +73,7 @@ export class TreatmentCenterListComponent extends BaseComponent implements OnIni
       let dialogRef = this.dialogService.openConfirmDialog('', this.getTranslateValue('SURE_DELETE'));
       dialogRef.afterClosed().subscribe(dialogResult => {
         if (dialogResult) {
-          this.restApiService.deleteProductCategory(item.id).subscribe({
+          this.restApiService.deleteTreatmentCenter(item.id).subscribe({
             next: (response: BaseResult<AddResult>) => {
               if (response.data.changed) {
                 this.dataSource.data.splice(index, 1);

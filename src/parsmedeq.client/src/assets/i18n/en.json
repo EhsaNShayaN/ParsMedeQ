@@ -128,5 +128,8 @@
   "TOMAN": "Toman",
   "PAYMENT_STATUS": {
     "SUCCESS": "Success"
-  }
+  },
+  "COUNTRY": "Country",
+  "PROVINCE": "Province",
+  "CITY": "City"
 }

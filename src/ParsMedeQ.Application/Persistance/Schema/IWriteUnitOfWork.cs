@@ -1,5 +1,6 @@
 ﻿using ParsMedeQ.Application.Persistance.Schema.CartRepositories;
 using ParsMedeQ.Application.Persistance.Schema.CommentRepositories;
+using ParsMedeQ.Application.Persistance.Schema.LocationRepositories;
 using ParsMedeQ.Application.Persistance.Schema.MediaRepositories;
 using ParsMedeQ.Application.Persistance.Schema.OrderRepositories;
 using ParsMedeQ.Application.Persistance.Schema.PaymentRepositories;
@@ -22,4 +23,5 @@ public interface IWriteUnitOfWork : IBaseWriteUnitOfWork
     IPaymentWriteRepository PaymentWriteRepository { get; }
     ITicketWriteRepository TicketWriteRepository { get; }
     ITreatmentCenterWriteRepository TreatmentCenterWriteRepository { get; }
+    ILocationWriteRepository LocationWriteRepository { get; }
 }

@@ -1,6 +1,7 @@
 ﻿using ParsMedeQ.Application.Persistance.Schema;
 using ParsMedeQ.Application.Persistance.Schema.CartRepositories;
 using ParsMedeQ.Application.Persistance.Schema.CommentRepositories;
+using ParsMedeQ.Application.Persistance.Schema.LocationRepositories;
 using ParsMedeQ.Application.Persistance.Schema.MediaRepositories;
 using ParsMedeQ.Application.Persistance.Schema.OrderRepositories;
 using ParsMedeQ.Application.Persistance.Schema.PaymentRepositories;
@@ -25,6 +26,7 @@ public sealed class WriteUnitOfWork : WriteUnitofWorkBase<WriteDbContext>, IWrit
     public IPaymentWriteRepository PaymentWriteRepository => this.GetService<IPaymentWriteRepository>();
     public ITicketWriteRepository TicketWriteRepository => this.GetService<ITicketWriteRepository>();
     public ITreatmentCenterWriteRepository TreatmentCenterWriteRepository => this.GetService<ITreatmentCenterWriteRepository>();
+    public ILocationWriteRepository LocationWriteRepository => this.GetService<ILocationWriteRepository>();
 
     #region " Constructors "
     public WriteUnitOfWork(

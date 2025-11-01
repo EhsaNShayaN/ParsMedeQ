@@ -128,5 +128,8 @@
   "TOMAN": "تومان",
   "PAYMENT_STATUS": {
     "SUCCESS": "موفق"
-  }
+  },
+  "COUNTRY": "کشور",
+  "PROVINCE": "استان",
+  "CITY": "شهر"
 }

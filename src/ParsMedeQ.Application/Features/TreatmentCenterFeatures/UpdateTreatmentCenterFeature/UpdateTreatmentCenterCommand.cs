@@ -7,7 +7,7 @@ public sealed record class UpdateTreatmentCenterCommand(
     int LocationId,
     string Title,
     string Description,
-    FileData ImageInfo,
+    FileData? ImageInfo,
     string OldImagePath) : IPrimitiveResultCommand<UpdateTreatmentCenterCommandResponse>,
     IValidatableRequest<UpdateTreatmentCenterCommand>
 {

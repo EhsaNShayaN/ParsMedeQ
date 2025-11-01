@@ -2,6 +2,7 @@
 using ParsMedeQ.Contracts.CartContracts;
 using ParsMedeQ.Contracts.CommentContracts;
 using ParsMedeQ.Contracts.GeneralContracts;
+using ParsMedeQ.Contracts.LocationContracts;
 using ParsMedeQ.Contracts.OrderContracts;
 using ParsMedeQ.Contracts.PaymentContracts;
 using ParsMedeQ.Contracts.ProductContracts;
@@ -26,6 +27,7 @@ public static class Endpoints
     public readonly static OrderEndpoint Order = new();
     public readonly static PaymentEndpoint Payment = new();
     public readonly static TreatmentCenterEndpoint TreatmentCenter = new();
+    public readonly static LocationEndpoint Location = new();
 }
 public static class EndpointMetadata
 {
@@ -43,4 +45,5 @@ public static class EndpointMetadata
     public readonly static ApiEndpointItem Payment = new("payment", V1);
     public readonly static ApiEndpointItem Ticket = new("ticket", V1);
     public readonly static ApiEndpointItem TreatmentCenter = new("treatmentCenter", V1);
+    public readonly static ApiEndpointItem Location = new("location", V1);
 }

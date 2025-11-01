@@ -23,7 +23,7 @@ public sealed class UpdateTreatmentCenterCommandHandler : IPrimitiveResultComman
         var langCode = _userLangContextAccessor.GetCurrentLang();
         return
             await this._writeUnitOfWork.TreatmentCenterWriteRepository.FindById(request.Id, cancellationToken)
-            .Map(center => UploadFile(this._fileService, request.ImageInfo.Bytes, request.ImageInfo.Extension, "Images", cancellationToken)
+            .Map(center => UploadFile(this._fileService, request.ImageInfo?.Bytes, request.ImageInfo?.Extension, "Images", cancellationToken)
                 .Map(imagePath => (center, imagePath)))
             .MapIf(
                 _ => langCode.Equals(Constants.LangCode_Farsi, StringComparison.OrdinalIgnoreCase),

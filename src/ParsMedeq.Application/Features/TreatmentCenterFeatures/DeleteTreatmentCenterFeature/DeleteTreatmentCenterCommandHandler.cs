@@ -11,7 +11,7 @@ public sealed class DeleteTreatmentCenterCommandHandler : IPrimitiveResultComman
 
     public async Task<PrimitiveResult<DeleteTreatmentCenterCommandResponse>> Handle(DeleteTreatmentCenterCommand request, CancellationToken cancellationToken) =>
         await _writeUnitOfWork.TreatmentCenterWriteRepository.FindById(request.Id, cancellationToken)
-        .Map(category => _writeUnitOfWork.TreatmentCenterWriteRepository.DeleteTreatmentCenter(category)
+        .Map(center => _writeUnitOfWork.TreatmentCenterWriteRepository.DeleteTreatmentCenter(center)
         .Map(category => this._writeUnitOfWork.SaveChangesAsync(CancellationToken.None))
         .Map(count => new DeleteTreatmentCenterCommandResponse(count > 0)))
         .ConfigureAwait(false);
