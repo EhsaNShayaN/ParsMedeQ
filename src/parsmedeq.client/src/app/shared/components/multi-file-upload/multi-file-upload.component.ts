@@ -32,10 +32,10 @@ export class MultiFileUploadComponent implements ControlValueAccessor, OnInit {
   //@Input() accept: string = 'image/png, image/jpeg, image/jpg';
   @Input() label: string = '';
   @Input() accept: string = '*/*';
-  @Input() maxFiles: number = -1;
-  @Input() maxSizeMb: number = -1;
-  @Input() minWidth: number = -1;
-  @Input() minHeight: number = -1;
+  @Input() maxFiles: number = 1;
+  @Input() maxSizeMb: number = 1;
+  @Input() maxWidth: number = 1080;
+  @Input() maxHeight: number = 1080;
   @Input() aspectRatio: number = -1;
 
   items: UnifiedItem[] = [];
@@ -179,9 +179,9 @@ export class MultiFileUploadComponent implements ControlValueAccessor, OnInit {
         const {width, height} = img;
         URL.revokeObjectURL(url);
 
-        if ((this.minWidth !== -1 && width < this.minWidth) || (this.minHeight !== -1 && height < this.minHeight)) {
+        if ((this.maxWidth !== -1 && width > this.maxWidth) || (this.maxHeight !== -1 && height > this.maxHeight)) {
           this.errors.push(
-            `${file.name}: must be at least ${this.minWidth}x${this.minHeight}px`
+            `${file.name}: must be a maximum of ${this.maxWidth}x${this.maxHeight}px`
           );
           return resolve(false);
         }
