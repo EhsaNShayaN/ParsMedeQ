@@ -28,8 +28,7 @@ public sealed class UpdateTreatmentCenterCommandHandler : IPrimitiveResultComman
             .MapIf(
                 _ => langCode.Equals(Constants.LangCode_Farsi, StringComparison.OrdinalIgnoreCase),
                 data => data.center.Update(
-                    request.ProvinceId,
-                    request.CityId,
+                    request.LocationId,
                     langCode,
                     request.Title,
                     request.Description,

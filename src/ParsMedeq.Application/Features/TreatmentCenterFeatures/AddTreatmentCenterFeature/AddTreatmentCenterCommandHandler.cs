@@ -16,9 +16,7 @@ public sealed class AddTreatmentCenterCommandHandler : IPrimitiveResultCommandHa
 
     public async Task<PrimitiveResult<AddTreatmentCenterCommandResponse>> Handle(AddTreatmentCenterCommand request, CancellationToken cancellationToken)
     {
-        return await TreatmentCenter.Create(
-            request.ProvinceId,
-            request.CityId)
+        return await TreatmentCenter.Create(request.LocationId)
             .Map(resource => UploadFile(this._fileService, request.ImageInfo.Bytes, request.ImageInfo.Extension, "Images", cancellationToken)
                 .Map(imagePath => (resource, imagePath)))
             .Map(data => data.resource.AddTranslation(Constants.LangCode_Farsi.ToLower(), request.Title, request.Description, data.imagePath)

@@ -10,8 +10,7 @@ public sealed class TreatmentCenter : EntityBase<int>
     #endregion
 
     #region " Properties "
-    public int ProvinceId { get; private set; }
-    public int CityId { get; private set; }
+    public int LocationId { get; private set; }
     public DateTime CreationDate { get; private set; }
     #endregion
 
@@ -27,33 +26,28 @@ public sealed class TreatmentCenter : EntityBase<int>
 
     #region " Factory "
     public static PrimitiveResult<TreatmentCenter> Create(
-        int provinceId,
-        int cityId) => PrimitiveResult.Success(
+        int locationId) => PrimitiveResult.Success(
             new TreatmentCenter
             {
-                ProvinceId = provinceId,
-                CityId = cityId,
+                LocationId = locationId,
                 CreationDate = DateTime.Now,
             });
 
     public ValueTask<PrimitiveResult<TreatmentCenter>> Update(
-        int provinceId,
-        int cityId)
+        int locationId)
     {
-        this.ProvinceId = provinceId;
-        this.CityId = cityId;
+        this.LocationId = locationId;
         return ValueTask.FromResult(PrimitiveResult.Success(this));
     }
 
     public ValueTask<PrimitiveResult<TreatmentCenter>> Update(
-        int provinceId,
-        int cityId,
+        int locationId,
         string langCode,
         string title,
         string description,
         string image)
     {
-        return this.Update(provinceId, cityId)
+        return this.Update(locationId)
              .Map(_ => this.UpdateTranslation(langCode, title, description, image).Map(() => this));
     }
 

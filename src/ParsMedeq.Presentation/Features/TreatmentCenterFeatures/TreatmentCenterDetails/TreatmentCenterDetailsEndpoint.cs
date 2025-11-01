@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using ParsMedeQ.Application.Features.TreatmentCenterFeatures.TreatmentCenterDetailsFeature;
-using ParsMedeQ.Application.Features.TreatmentCenterFeatures.TreatmentCenterListFeature;
 using ParsMedeQ.Contracts;
 using ParsMedeQ.Contracts.TreatmentCenterContracts.TreatmentCenterDetailsContract;
 using SRH.Utilities.EhsaN;
@@ -11,14 +10,14 @@ namespace ParsMedeQ.Presentation.Features.TreatmentCenterFeatures.TreatmentCente
 sealed class TreatmentCenterDetailsEndpoint : EndpointHandlerBase<
     TreatmentCenterDetailsApiRequest,
     TreatmentCenterDetailsQuery,
-    TreatmentCenterListDbQueryResponse,
+    TreatmentCenterDetailsDbQueryResponse,
     TreatmentCenterDetailsApiResponse>
 {
     protected override bool NeedTaxPayerFile => true;
 
     public TreatmentCenterDetailsEndpoint(
         IPresentationMapper<TreatmentCenterDetailsApiRequest, TreatmentCenterDetailsQuery> requestMapper,
-        IPresentationMapper<TreatmentCenterListDbQueryResponse, TreatmentCenterDetailsApiResponse> responseMapper)
+        IPresentationMapper<TreatmentCenterDetailsDbQueryResponse, TreatmentCenterDetailsApiResponse> responseMapper)
         : base(
             Endpoints.TreatmentCenter.TreatmentCenter,
             HttpMethod.Get,
@@ -48,19 +47,18 @@ sealed class TreatmentCenterDetailsApiRequestMapper : IPresentationMapper<
     }
 }
 sealed class TreatmentCenterDetailsApiResponseMapper : IPresentationMapper<
-    TreatmentCenterListDbQueryResponse,
+    TreatmentCenterDetailsDbQueryResponse,
     TreatmentCenterDetailsApiResponse>
 {
     public ValueTask<PrimitiveResult<TreatmentCenterDetailsApiResponse>> Map(
-        TreatmentCenterListDbQueryResponse src,
+        TreatmentCenterDetailsDbQueryResponse src,
         CancellationToken cancellationToken)
     {
         return ValueTask.FromResult(
             PrimitiveResult.Success(
                     new TreatmentCenterDetailsApiResponse(
                         src.Id,
-                        src.ProvinceId,
-                        src.CityId,
+                        src.LocationId,
                         src.Title,
                         src.Description,
                         src.Image,

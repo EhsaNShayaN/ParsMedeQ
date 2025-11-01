@@ -34,7 +34,6 @@ internal sealed class UpdateTreatmentCenterApiRequestMapper : IPresentationMappe
             PrimitiveResult.Success(
                 new UpdateTreatmentCenterCommand(
                     src.Id,
-                    src.ProvinceId,
                     src.CityId,
                     src.Title,
                     src.Description,

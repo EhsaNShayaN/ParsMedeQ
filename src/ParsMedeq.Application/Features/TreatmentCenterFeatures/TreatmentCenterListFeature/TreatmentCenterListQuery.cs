@@ -21,7 +21,7 @@ sealed class TreatmentCenterListQueryHandler : IPrimitiveResultQueryHandler<Trea
     {
         return await this._readUnitOfWork.TreatmentCenterReadRepository.FilterTreatmentCenters(
             request,
-            _userLangContextAccessor.GetCurrentLang(),
+            this._userLangContextAccessor.GetCurrentLang(),
             request.LastId,
             cancellationToken)
         .ConfigureAwait(false);

@@ -4,8 +4,7 @@ namespace ParsMedeQ.Application.Features.TreatmentCenterFeatures.UpdateTreatment
 
 public sealed record class UpdateTreatmentCenterCommand(
     int Id,
-    int ProvinceId,
-    int CityId,
+    int LocationId,
     string Title,
     string Description,
     FileData ImageInfo,

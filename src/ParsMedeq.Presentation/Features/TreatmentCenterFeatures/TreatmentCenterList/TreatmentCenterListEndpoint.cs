@@ -1,6 +1,5 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Http;
-using ParsMedeQ.Application.Features.TreatmentCenterFeatures.TreatmentCenterListFeature;
+﻿using ParsMedeQ.Application.Features.TreatmentCenterFeatures.TreatmentCenterListFeature;
+using ParsMedeQ.Application.Helpers;
 using ParsMedeQ.Contracts;
 using ParsMedeQ.Contracts.TreatmentCenterContracts.TreatmentCenterListContract;
 using SRH.Utilities.EhsaN;
@@ -10,33 +9,21 @@ namespace ParsMedeQ.Presentation.Features.TreatmentCenterFeatures.TreatmentCente
 sealed class TreatmentCenterListEndpoint : EndpointHandlerBase<
     TreatmentCenterListApiRequest,
     TreatmentCenterListQuery,
-    TreatmentCenterListDbQueryResponse[],
-    TreatmentCenterListApiResponse[]>
+    BasePaginatedApiResponse<TreatmentCenterListDbQueryResponse>,
+    BasePaginatedApiResponse<TreatmentCenterListApiResponse>>
 {
     protected override bool NeedTaxPayerFile => true;
 
     public TreatmentCenterListEndpoint(
         IPresentationMapper<TreatmentCenterListApiRequest, TreatmentCenterListQuery> requestMapper,
-        IPresentationMapper<TreatmentCenterListDbQueryResponse[], TreatmentCenterListApiResponse[]> responseMapper)
+        IPresentationMapper<BasePaginatedApiResponse<TreatmentCenterListDbQueryResponse>, BasePaginatedApiResponse<TreatmentCenterListApiResponse>> responseMapper)
         : base(
             Endpoints.TreatmentCenter.TreatmentCenters,
-            HttpMethod.Get,
+            HttpMethod.Post,
             requestMapper,
             responseMapper,
             DefaultResponseFactory.Instance.CreateOk)
     { }
-
-    protected override Delegate EndpointDelegate =>
-    (
-            [AsParameters] TreatmentCenterListApiRequest request,
-            ISender sender,
-            CancellationToken cancellationToken) => this.CallMediatRHandler(
-            sender,
-            () => ValueTask.FromResult(
-                PrimitiveResult.Success(
-                    new TreatmentCenterListQuery())),
-            cancellationToken);
-
 }
 sealed class TreatmentCenterListApiRequestMapper : IPresentationMapper<
     TreatmentCenterListApiRequest,
@@ -48,28 +35,35 @@ sealed class TreatmentCenterListApiRequestMapper : IPresentationMapper<
     {
         return ValueTask.FromResult(
             PrimitiveResult.Success(
-                new TreatmentCenterListQuery()));
+                new TreatmentCenterListQuery()
+                {
+                    PageIndex = src.PageIndex,
+                    PageSize = src.PageSize,
+                    LastId = src.LastId,
+                }));
     }
 }
 sealed class TreatmentCenterListApiResponseMapper : IPresentationMapper<
-    TreatmentCenterListDbQueryResponse[],
-    TreatmentCenterListApiResponse[]>
+    BasePaginatedApiResponse<TreatmentCenterListDbQueryResponse>,
+    BasePaginatedApiResponse<TreatmentCenterListApiResponse>>
 {
-    public ValueTask<PrimitiveResult<TreatmentCenterListApiResponse[]>> Map(
-        TreatmentCenterListDbQueryResponse[] src,
+    public ValueTask<PrimitiveResult<BasePaginatedApiResponse<TreatmentCenterListApiResponse>>> Map(
+        BasePaginatedApiResponse<TreatmentCenterListDbQueryResponse> src,
         CancellationToken cancellationToken)
     {
         return ValueTask.FromResult(
             PrimitiveResult.Success(
-                    src.Select(data =>
+                    new BasePaginatedApiResponse<TreatmentCenterListApiResponse>(src.Items.Select(data =>
                     new TreatmentCenterListApiResponse(
                         data.Id,
-                        data.ProvinceId,
-                        data.CityId,
+                        data.LocationId,
                         data.Title,
                         data.Description,
                         data.Image,
                         data.CreationDate.ToPersianDate()))
-                    .ToArray()));
+                    .ToArray(), src.TotalCount, src.PageIndex, src.PageSize)
+                    {
+                        LastId = src.LastId
+                    }));
     }
 }
