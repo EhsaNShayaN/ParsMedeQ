@@ -17,6 +17,15 @@ internal sealed class ProductWriteRepository : GenericPrimitiveWriteRepositoryBa
             .Include(s => s.ProductTranslations)
             .Where(s => s.Id.Equals(id))
             .Run(q => q.FirstOrDefaultAsync(cancellationToken), PrimitiveError.Create("", "محصولی با شناسه مورد نظر پیدا نشد"));
+
+    public ValueTask<PrimitiveResult<Product[]>> FindByIds(int[] ids, CancellationToken cancellationToken = default) =>
+        this.DbContext
+            .Product
+            .Include(s => s.ProductTranslations)
+            .Where(s => ids.Contains(s.Id))
+            .Run(q => q.ToArrayAsync(cancellationToken),
+                PrimitiveResult.Success(Array.Empty<Product>()));
+
     public ValueTask<PrimitiveResult<Product>> FindByIdWithMediaList(int id, CancellationToken cancellationToken = default) =>
         this.DbContext
             .Product
