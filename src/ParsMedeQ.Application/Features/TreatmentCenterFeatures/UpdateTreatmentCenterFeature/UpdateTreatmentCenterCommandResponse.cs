@@ -1,0 +1,2 @@
+﻿namespace ParsMedeQ.Application.Features.TreatmentCenterFeatures.UpdateTreatmentCenterFeature;
+public sealed record UpdateTreatmentCenterCommandResponse(bool Changed);

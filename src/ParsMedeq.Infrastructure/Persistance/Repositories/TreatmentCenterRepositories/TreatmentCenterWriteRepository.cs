@@ -11,4 +11,6 @@ internal sealed class TreatmentCenterWriteRepository : GenericPrimitiveWriteRepo
         this.FindByIdAsync<TreatmentCenter, int>(id, cancellationToken);
     public ValueTask<PrimitiveResult<TreatmentCenter>> AddTreatmentCenter(TreatmentCenter TreatmentCenter) => this.Add(TreatmentCenter);
     public ValueTask<PrimitiveResult<TreatmentCenter>> DeleteTreatmentCenter(TreatmentCenter TreatmentCenter) => this.Remove(TreatmentCenter);
+    public ValueTask<PrimitiveResult<TreatmentCenter>> UpdateTreatmentCenter(TreatmentCenter TreatmentCenter, CancellationToken cancellationToken) =>
+            this.Update(TreatmentCenter);
 }

@@ -7,4 +7,5 @@ public interface ITreatmentCenterWriteRepository : IDomainRepository
     ValueTask<PrimitiveResult<TreatmentCenter>> FindById(int id, CancellationToken cancellationToken);
     ValueTask<PrimitiveResult<TreatmentCenter>> AddTreatmentCenter(TreatmentCenter TreatmentCenter);
     ValueTask<PrimitiveResult<TreatmentCenter>> DeleteTreatmentCenter(TreatmentCenter TreatmentCenter);
+    ValueTask<PrimitiveResult<TreatmentCenter>> UpdateTreatmentCenter(TreatmentCenter TreatmentCenter, CancellationToken cancellationToken);
 }

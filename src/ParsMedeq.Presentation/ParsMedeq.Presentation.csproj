@@ -8,8 +8,14 @@
 
   <ItemGroup>
     <Compile Remove="Features\CartFeatures\AddToCartFeature\**" />
+    <Compile Remove="Features\TreatmentCenterFeatures\TreatmentCenterDetails\**" />
+    <Compile Remove="Features\TreatmentCenterFeatures\TreatmentCenterList\**" />
     <EmbeddedResource Remove="Features\CartFeatures\AddToCartFeature\**" />
+    <EmbeddedResource Remove="Features\TreatmentCenterFeatures\TreatmentCenterDetails\**" />
+    <EmbeddedResource Remove="Features\TreatmentCenterFeatures\TreatmentCenterList\**" />
     <None Remove="Features\CartFeatures\AddToCartFeature\**" />
+    <None Remove="Features\TreatmentCenterFeatures\TreatmentCenterDetails\**" />
+    <None Remove="Features\TreatmentCenterFeatures\TreatmentCenterList\**" />
   </ItemGroup>
 
   <ItemGroup>

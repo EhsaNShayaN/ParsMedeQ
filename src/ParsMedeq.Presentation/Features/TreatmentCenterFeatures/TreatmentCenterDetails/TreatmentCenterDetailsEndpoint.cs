@@ -35,7 +35,6 @@ sealed class TreatmentCenterDetailsEndpoint : EndpointHandlerBase<
             sender,
             () => ValueTask.FromResult(PrimitiveResult.Success(new TreatmentCenterDetailsQuery(request.Id))),
             cancellationToken);
-
 }
 sealed class TreatmentCenterDetailsApiRequestMapper : IPresentationMapper<
     TreatmentCenterDetailsApiRequest,

@@ -14,8 +14,7 @@ sealed class EditTreatmentCenterEndpoint : EndpointHandlerBase<
     protected override bool NeedTaxPayerFile => false;
 
     public EditTreatmentCenterEndpoint(
-        IPresentationMapper<UpdateTreatmentCenterApiRequest, UpdateTreatmentCenterCommand> apiRequestMapper
-        ) : base(
+        IPresentationMapper<UpdateTreatmentCenterApiRequest, UpdateTreatmentCenterCommand> apiRequestMapper) : base(
             Endpoints.TreatmentCenter.EditTreatmentCenter,
             HttpMethod.Post,
             apiRequestMapper,
@@ -35,10 +34,11 @@ internal sealed class UpdateTreatmentCenterApiRequestMapper : IPresentationMappe
             PrimitiveResult.Success(
                 new UpdateTreatmentCenterCommand(
                     src.Id,
+                    src.ProvinceId,
+                    src.CityId,
                     src.Title,
                     src.Description,
-                    src.ParentId,
-                    imageInfo,
+                    imageInfo.Value,
                     src.OldImagePath)));
     }
 }
