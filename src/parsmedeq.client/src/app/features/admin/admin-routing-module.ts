@@ -34,6 +34,9 @@ import {AdminOrderDetailsComponent} from './orders/admin-order-details/admin-ord
 import {TreatmentCenterListComponent} from './treatment-center/treatment-center-list/treatment-center-list.component';
 import {TreatmentCenterAddComponent} from './treatment-center/treatment-center-add/treatment-center-add.component';
 import {TreatmentCenterComponent} from './treatment-center/treatment-center.component';
+import {ServiceComponent} from './service/service.component';
+import {ServiceListComponent} from './service/service-list/service-list.component';
+import {ServiceAddComponent} from './service/service-add/service-add.component';
 
 const routes: Routes = [
   {path: '', component: Admin},
@@ -88,6 +91,11 @@ const routes: Routes = [
   {path: 'treatment-center/list', component: TreatmentCenterListComponent},
   {path: 'treatment-center/add', component: TreatmentCenterAddComponent},
   {path: 'treatment-center/edit/:id', component: TreatmentCenterAddComponent},
+
+  {path: 'service', component: ServiceComponent},
+  {path: 'service/list', component: ServiceListComponent},
+  {path: 'service/add', component: ServiceAddComponent},
+  {path: 'service/edit/:id', component: ServiceAddComponent},
 ];
 
 @NgModule({

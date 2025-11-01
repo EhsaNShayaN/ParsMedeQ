@@ -43,6 +43,9 @@ import {AdminOrderDetailsComponent} from './orders/admin-order-details/admin-ord
 import {TreatmentCenterListComponent} from './treatment-center/treatment-center-list/treatment-center-list.component';
 import {TreatmentCenterAddComponent} from './treatment-center/treatment-center-add/treatment-center-add.component';
 import {TreatmentCenterComponent} from './treatment-center/treatment-center.component';
+import {ServiceComponent} from './service/service.component';
+import {ServiceListComponent} from './service/service-list/service-list.component';
+import {ServiceAddComponent} from './service/service-add/service-add.component';
 
 @NgModule({
   declarations: [
@@ -92,6 +95,11 @@ import {TreatmentCenterComponent} from './treatment-center/treatment-center.comp
     TreatmentCenterListComponent,
     TreatmentCenterAddComponent,
     TreatmentCenterAddComponent,
+
+    ServiceComponent,
+    ServiceListComponent,
+    ServiceAddComponent,
+    ServiceAddComponent,
   ],
   imports: [
     CommonModule,
