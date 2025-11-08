@@ -12,10 +12,4 @@
     <ProjectReference Include="..\..\SRH.Libraries\SRH.MediatRMessaging\SRH.MediatRMessaging.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Application\Features\" />
-    <Folder Include="Application\" />
-    <Folder Include="Models\Application\Features\" />
-  </ItemGroup>
-
 </Project>

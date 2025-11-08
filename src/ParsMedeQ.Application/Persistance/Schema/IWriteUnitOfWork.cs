@@ -6,6 +6,7 @@ using ParsMedeQ.Application.Persistance.Schema.OrderRepositories;
 using ParsMedeQ.Application.Persistance.Schema.PaymentRepositories;
 using ParsMedeQ.Application.Persistance.Schema.ProductRepositories;
 using ParsMedeQ.Application.Persistance.Schema.ResourceRepositories;
+using ParsMedeQ.Application.Persistance.Schema.ServiceRepositories;
 using ParsMedeQ.Application.Persistance.Schema.TicketRepositories;
 using ParsMedeQ.Application.Persistance.Schema.TreatmentCenterRepositories;
 using ParsMedeQ.Application.Persistance.Schema.UserRepositories;
@@ -24,4 +25,5 @@ public interface IWriteUnitOfWork : IBaseWriteUnitOfWork
     ITicketWriteRepository TicketWriteRepository { get; }
     ITreatmentCenterWriteRepository TreatmentCenterWriteRepository { get; }
     ILocationWriteRepository LocationWriteRepository { get; }
+    IServiceWriteRepository ServiceWriteRepository { get; }
 }

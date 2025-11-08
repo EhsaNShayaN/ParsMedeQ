@@ -27,7 +27,7 @@ static void GenerateCRUD()
 {
     var dir = AppContext.BaseDirectory;
     var projectDir = Path.GetFullPath(Path.Combine(dir, @"..\..\.."));
-    var path = Path.Combine(projectDir, "Models", "x.cs");
+    var path = Path.Combine(projectDir, "Models", "Service.cs");
     var modelContent = File.ReadAllText(path);
     var classNameMatch = Regex.Match(modelContent, @"class\s+(\w+)");
     if (!classNameMatch.Success)
@@ -37,28 +37,37 @@ static void GenerateCRUD()
     }
 
     var className = classNameMatch.Groups[1].Value;
-    var props = Regex.Matches(modelContent, @"public\s+([\w<>?]+)\s+(\w+)\s*{\s*get;\s*set;\s*}");
+    var props = Regex.Matches(modelContent, @"public\s+([\w<>?]+)\s+(\w+)\s*{\s*get;\s*private set;\s*}");
 
     // prepare output directory
-    var outputDir = Path.Combine(Path.GetDirectoryName(path)!, "Application", "Features", $"{className}Feature");
+    var outputDir = Path.Combine(projectDir, "Application", "Features", $"{className}Features", $"Create{className}Feature");
     Directory.CreateDirectory(outputDir);
 
     // filenames
     var commandFile = Path.Combine(outputDir, $"Create{className}Command.cs");
     var handlerFile = Path.Combine(outputDir, $"Create{className}CommandHandler.cs");
-    var responseFile = Path.Combine(outputDir, $"Create{className}Response.cs");
+    var responseFile = Path.Combine(outputDir, $"Create{className}CommandResponse.cs");
 
+    GenerateCommand(className, commandFile, props);
+    GenerateHandler(className, handlerFile, props);
+    GenerateResponse(className, responseFile, props);
+
+    Console.WriteLine($"✅ Generated files in: {outputDir}");
+}
+
+static void GenerateCommand(string className, string commandFile, MatchCollection props)
+{
     // Generate Command
     var commandProps = string.Join(", ", props.Select(p => $"{p.Groups[1].Value} {p.Groups[2].Value}"));
-    var commandCode = $@"using SRH.MediatRMessaging;
+    var commandCode =
+$@"namespace ParsMedeQ.Application.Features.{className}Features.Create{className}Feature;
 
-namespace ParsMedeQ.Application.Features.{className}Features.Create{className}Feature;
-
-public sealed record class Create{className}Command({commandProps}) : IPrimitiveResultCommand<Create{className}Response>, IValidatableRequest<Create{className}>
+public sealed record class Create{className}Command({commandProps}) :
+    IPrimitiveResultCommand<Create{className}CommandResponse>, IValidatableRequest<Create{className}Command>
 {{
     public ValueTask<PrimitiveResult<Create{className}Command>> Validate() => PrimitiveResult.Success(this)
             .Ensure([
-                value => PrimitiveResult.Success(this.Title)
+                value => PrimitiveResult.Success(this.{props[0].Groups[2].Value})
                 .Match(
                     _ => PrimitiveResult.Success() ,
                     _ => PrimitiveResult.Failure(""Validation.Error"", ""موبایل ارسالی نامعتبر است""))
@@ -66,46 +75,70 @@ public sealed record class Create{className}Command({commandProps}) : IPrimitive
 }}
 ";
     File.WriteAllText(commandFile, commandCode);
+}
 
-    // Generate Response
-    var responseCode = $@"public class Create{className}Response
-{{
-    public int Id {{ get; set; }}
-    public string Message {{ get; set; }} = string.Empty;
-}}
-";
-    File.WriteAllText(responseFile, responseCode);
-
+static void GenerateHandler(string className, string handlerFile, MatchCollection props)
+{
     // Generate Handler
-    var handlerCode = $@"using MediatR;
+    var handlerProps = string.Join(", ", props.Select(p => $"request.{p.Groups[2].Value}"));
+    var handlerCode = $@"using ParsMedeQ.Domain.Aggregates.{className}Aggregate;
 
-public class Create{className}CommandHandler : IRequestHandler<Create{className}Command, Create{className}Response>
+namespace ParsMedeQ.Application.Features.{className}Features.Create{className}Feature;
+
+public sealed class Create{className}CommandHandler : IPrimitiveResultCommandHandler<Create{className}Command, Create{className}CommandResponse>
 {{
-    private readonly I{className}Repository _repository;
+    private readonly IWriteUnitOfWork _writeUnitOfWork;
+    private readonly IFileService _fileService;
 
-    public Create{className}CommandHandler(I{className}Repository repository)
+    public Create{className}CommandHandler(
+        IWriteUnitOfWork writeUnitOfWork,
+        IFileService fileService)
     {{
-        _repository = repository;
+        this._writeUnitOfWork = writeUnitOfWork;
+        this._fileService = fileService;
     }}
 
-    public async Task<Create{className}Response> Handle(Create{className}Command request, CancellationToken cancellationToken)
+    public async Task<PrimitiveResult<Create{className}CommandResponse>> Handle(Create{className}Command request, CancellationToken cancellationToken)
     {{
-        var entity = new {className}
-        {{
-{string.Join(Environment.NewLine, props.Select(p => $"            {p.Groups[2].Value} = request.{p.Groups[2].Value},"))}
-        }};
+        return await {className}.Create({handlerProps})
+            .Map(item => UploadFile(this._fileService, request.ImageInfo.Bytes, request.ImageInfo.Extension, ""Images"", cancellationToken)
+                .Map(imagePath => (item, imagePath)))
+            .Map(data => data.item.AddTranslation(Constants.LangCode_Farsi.ToLower(), {handlerProps}, data.imagePath)
+                .Map(() => data.item))
+            .Map({className} => this._writeUnitOfWork.{className}WriteRepository.Create{className}({className})
+            .Map({className} => this._writeUnitOfWork.SaveChangesAsync(CancellationToken.None).Map(_ => {className}))
+            .Map({className} => new Create{className}CommandResponse({className} is not null)))
+            .ConfigureAwait(false);
+    }}
 
-        await _repository.AddAsync(entity, cancellationToken);
+    static async ValueTask<PrimitiveResult<string>> UploadFile(
+        IFileService fileService,
+        byte[] bytes,
+        string fileExtension,
+        string fodlerName,
+        CancellationToken cancellationToken)
+    {{
+        if ((bytes?.Length ?? 0) == 0) return string.Empty;
+        var result = await fileService.UploadFile(bytes, fileExtension, fodlerName, cancellationToken).ConfigureAwait(false);
+        if (string.IsNullOrWhiteSpace(result)) return PrimitiveResult.Failure<string>("""", ""Can not upload file"");
 
-        return new Create{className}Response
-        {{
-            Id = entity.Id,
-            Message = ""{className} created successfully""
-        }};
+        return result;
     }}
 }}
 ";
     File.WriteAllText(handlerFile, handlerCode);
+}
 
-    Console.WriteLine($"✅ Generated files in: {outputDir}");
+static void GenerateResponse(string className, string responseFile, MatchCollection props)
+{
+    // Generate Response
+    var responseProps = string.Join(", ", props.Select(p => $"{p.Groups[1].Value} {p.Groups[2].Value}"));
+    var responseCode =
+$@"namespace ParsMedeQ.Application.Features.{className}Features.Create{className}Feature;
+
+public sealed record Create{className}CommandResponse(
+    {responseProps}
+);
+";
+    File.WriteAllText(responseFile, responseCode);
 }
