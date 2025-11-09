@@ -23,6 +23,7 @@ static DirectoryInfo? FindFolder(DirectoryInfo? current, int level, string folde
     var found = subDirs!.FirstOrDefault(x => x.Name.Equals(folder, StringComparison.InvariantCultureIgnoreCase));
     return found ?? FindFolder(current.Parent, level, folder);
 }
+
 static void GenerateCRUD()
 {
     var dir = AppContext.BaseDirectory;
@@ -47,6 +48,9 @@ static void GenerateCRUD()
     var commandFile = Path.Combine(outputDir, $"Create{className}Command.cs");
     var handlerFile = Path.Combine(outputDir, $"Create{className}CommandHandler.cs");
     var responseFile = Path.Combine(outputDir, $"Create{className}CommandResponse.cs");
+
+    var commandTemplatePath = Path.Combine(projectDir, "Application/Features/TemplateFeatures/CreateTemplateFeature", "CreateTemplateCommand.txt");
+
 
     GenerateCommand(className, commandFile, props);
     GenerateHandler(className, handlerFile, props);

@@ -1,0 +1,14 @@
+namespace ParsMedeQ.Application.Features.{{className}}Features.Create{{className}}Feature;
+
+public sealed record class Create{{className}}Command(
+    {{props}}) :
+    IPrimitiveResultCommand<Create{{className}}CommandResponse>, IValidatableRequest<Create{{className}}Command>
+{
+    public ValueTask<PrimitiveResult<Create{{className}}Command>> Validate() => PrimitiveResult.Success(this)
+            .Ensure([
+                value => PrimitiveResult.Success(this.{{firstProp}})
+                .Match(
+                    _ => PrimitiveResult.Success(),
+                    _ => PrimitiveResult.Failure("Validation.Error", "{{firstProp}} ارسالی نامعتبر است"))
+                ]);
+}
