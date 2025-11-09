@@ -3,6 +3,7 @@ CREATE TABLE [dbo].[PeriodicService]
 [Id] [int] NOT NULL IDENTITY(1, 1),
 [UserId] [int] NOT NULL,
 [ProductId] [int] NOT NULL,
+[ServiceDate] [datetime] NOT NULL,
 [Done] [bit] NOT NULL,
 [CreationDate] [datetime] NOT NULL
 ) ON [PRIMARY]
