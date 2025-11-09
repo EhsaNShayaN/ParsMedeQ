@@ -123,6 +123,7 @@
   "BY_MONTH": "By month",
   "GUARANTY_EXPIRATION_TIME": "Guaranty Expiration Time",
   "PERIODIC_SERVICE_INTERVAL": "Periodic Service Interval",
+  "PERIODIC_SERVICES": "Periodic Services",
   "PERIODIC_SERVICE": "Periodic Service",
   "RIAL": "Rial",
   "TOMAN": "Toman",
@@ -133,5 +134,6 @@
   "PROVINCE": "Province",
   "CITY": "City",
   "SERVICE": "Service",
-  "SERVICES": "Services"
+  "SERVICES": "Services",
+  "SEARCH": "Search"
 }

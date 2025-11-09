@@ -46,6 +46,8 @@ import {TreatmentCenterComponent} from './treatment-center/treatment-center.comp
 import {ServiceComponent} from './service/service.component';
 import {ServiceListComponent} from './service/service-list/service-list.component';
 import {ServiceAddComponent} from './service/service-add/service-add.component';
+import {AdminPeriodicServiceComponent} from './periodic-service/admin-periodic-service.component';
+import {AdminPeriodicServiceListComponent} from './periodic-service/admin-periodic-service-list/admin-periodic-service-list.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +84,6 @@ import {ServiceAddComponent} from './service/service-add/service-add.component';
     AdminCommentListComponent,
 
     AdminTicketComponent,
-    AdminTicketListComponent,
 
     AdminOrderComponent,
     AdminOrderDetailsComponent,
@@ -100,6 +101,10 @@ import {ServiceAddComponent} from './service/service-add/service-add.component';
     ServiceListComponent,
     ServiceAddComponent,
     ServiceAddComponent,
+    AdminTicketListComponent,
+
+    AdminPeriodicServiceComponent,
+    AdminPeriodicServiceListComponent,
   ],
   imports: [
     CommonModule,

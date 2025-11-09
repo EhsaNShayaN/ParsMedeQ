@@ -1,4 +1,5 @@
-﻿using ParsMedeQ.Application.Features.ProductFeatures.ProductCategoryListFeature;
+﻿using ParsMedeQ.Application.Features.ProductFeatures.PeriodicServiceListFeature;
+using ParsMedeQ.Application.Features.ProductFeatures.ProductCategoryListFeature;
 using ParsMedeQ.Application.Features.ProductFeatures.ProductDetailsFeature;
 using ParsMedeQ.Application.Features.ProductFeatures.ProductListFeature;
 using ParsMedeQ.Application.Features.ProductFeatures.ProductMediaListFeature;
@@ -193,6 +194,57 @@ internal sealed class ProductReadRepository : GenericPrimitiveReadRepositoryBase
                     Path = m.Path
                 };
         return q.Run(q => q.ToArrayAsync(cancellationToken), PrimitiveError.Create("", "آیتمی با شناسه مورد نظر پیدا نشد"));
+    }
+    public ValueTask<PrimitiveResult<BasePaginatedApiResponse<PeriodicServiceListDbQueryResponse>>> FilterPeriodicServices(
+        BasePaginatedQuery paginated,
+        int lastId,
+        CancellationToken cancellationToken)
+    {
+        static BasePaginatedApiResponse<PeriodicServiceListDbQueryResponse> MapResult(
+            PaginateListResult<PeriodicServiceListDbQueryResponse> paginatedData,
+            BasePaginatedQuery pageinated)
+        {
+            var data = paginatedData.Data.ToArray();
+            return new BasePaginatedApiResponse<PeriodicServiceListDbQueryResponse>(
+                data,
+                paginatedData.Total,
+                pageinated.PageIndex,
+                pageinated.PageSize)
+            {
+                LastId = data.Length > 0 ? data.Last().Id : 0
+            };
+        }
+
+        var query =
+            from res in this.DbContext.PeriodicService
+            .Include(r => r.Product)
+            .Include(r => r.User)
+            select new PeriodicServiceListDbQueryResponse
+            {
+                Id = res.Id,
+                UserId = res.UserId,
+                User = res.User,
+                ProductId = res.ProductId,
+                Product = res.Product,
+                ServiceDate = res.ServiceDate,
+                Done = res.Done,
+                CreationDate = res.CreationDate,
+            };
+
+        if (lastId.Equals(0))
+            return query.Paginate(
+                PaginateQuery.Create(paginated.PageIndex, paginated.PageSize),
+                s => s.Id,
+                PaginateOrder.DESC,
+                cancellationToken)
+                .Map(data => MapResult(data, paginated));
+
+        return query.PaginateOverPK(
+            paginated.PageSize,
+            lastId,
+            PaginateOrder.DESC,
+            cancellationToken)
+            .Map(data => MapResult(data, paginated));
     }
 }
 

@@ -1,4 +1,5 @@
-﻿using ParsMedeQ.Application.Features.ProductFeatures.ProductCategoryListFeature;
+﻿using ParsMedeQ.Application.Features.ProductFeatures.PeriodicServiceListFeature;
+using ParsMedeQ.Application.Features.ProductFeatures.ProductCategoryListFeature;
 using ParsMedeQ.Application.Features.ProductFeatures.ProductDetailsFeature;
 using ParsMedeQ.Application.Features.ProductFeatures.ProductListFeature;
 using ParsMedeQ.Application.Features.ProductFeatures.ProductMediaListFeature;
@@ -29,5 +30,9 @@ public interface IProductReadRepository : IDomainRepository
         CancellationToken cancellationToken);
     ValueTask<PrimitiveResult<ProductMediaListDbQueryResponse[]>> GetProductMediaList(
         int productId,
+        CancellationToken cancellationToken);
+    ValueTask<PrimitiveResult<BasePaginatedApiResponse<PeriodicServiceListDbQueryResponse>>> FilterPeriodicServices(
+        BasePaginatedQuery paginated,
+        int lastId,
         CancellationToken cancellationToken);
 }

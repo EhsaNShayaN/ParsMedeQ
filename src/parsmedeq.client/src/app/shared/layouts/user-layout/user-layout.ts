@@ -18,6 +18,7 @@ export class UserLayout extends PureComponent implements OnInit, AfterViewInit {
     {name: 'پرداخت ها', href: 'payment', icon: 'money'},
     {name: 'سفارشات', href: 'order', icon: 'reorder'},
     {name: 'تیکت ها', href: 'ticket', icon: 'reorder'},
+    {name: 'سرویس های دوره ای', href: 'periodic-service', icon: 'reorder'},
   ];
   profile?: Profile;
   urlArray = [];

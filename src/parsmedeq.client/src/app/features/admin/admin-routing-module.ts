@@ -37,6 +37,8 @@ import {TreatmentCenterComponent} from './treatment-center/treatment-center.comp
 import {ServiceComponent} from './service/service.component';
 import {ServiceListComponent} from './service/service-list/service-list.component';
 import {ServiceAddComponent} from './service/service-add/service-add.component';
+import {AdminPeriodicServiceComponent} from './periodic-service/admin-periodic-service.component';
+import {AdminPeriodicServiceListComponent} from './periodic-service/admin-periodic-service-list/admin-periodic-service-list.component';
 
 const routes: Routes = [
   {path: '', component: Admin},
@@ -96,6 +98,9 @@ const routes: Routes = [
   {path: 'service/list', component: ServiceListComponent},
   {path: 'service/add', component: ServiceAddComponent},
   {path: 'service/edit/:id', component: ServiceAddComponent},
+
+  {path: 'periodic-service', component: AdminPeriodicServiceComponent},
+  {path: 'periodic-service/list', component: AdminPeriodicServiceListComponent},
 ];
 
 @NgModule({

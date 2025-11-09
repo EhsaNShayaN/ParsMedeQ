@@ -123,6 +123,7 @@
   "BY_MONTH": "بر حسب ماه",
   "GUARANTY_EXPIRATION_TIME": "زمان انقضای گارانتی",
   "PERIODIC_SERVICE_INTERVAL": "فاصله زمانی سرویس دوره ای",
+  "PERIODIC_SERVICES": "سرویس های دوره ای",
   "PERIODIC_SERVICE": "سرویس دوره ای",
   "RIAL": "ریال",
   "TOMAN": "تومان",
@@ -133,5 +134,6 @@
   "PROVINCE": "استان",
   "CITY": "شهر",
   "SERVICE": "خدمت",
-  "SERVICES": "خدمات"
+  "SERVICES": "خدمات",
+  "SEARCH": "جستجو"
 }

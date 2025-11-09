@@ -1,0 +1,3 @@
+﻿namespace ParsMedeQ.Contracts.ProductContracts.PeriodicServiceListContract;
+
+public record PeriodicServiceListApiRequest() : BasePaginatedApiRequest;

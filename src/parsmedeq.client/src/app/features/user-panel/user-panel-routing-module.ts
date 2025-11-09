@@ -10,6 +10,8 @@ import {UserPaymentListComponent} from './payment/user-payment-list/user-payment
 import {UserOrderComponent} from './order/user-order.component';
 import {UserPaymentComponent} from './payment/user-payment.component';
 import {UserOrderDetailsComponent} from './order/user-order-details/user-order-details.component';
+import {UserPeriodicServiceComponent} from './periodic-service/user-periodic-service.component';
+import {UserPeriodicServiceListComponent} from './periodic-service/user-periodic-service-list/user-periodic-service-list.component';
 
 const routes: Routes = [
   {path: '', component: UserPanel},
@@ -26,6 +28,9 @@ const routes: Routes = [
 
   {path: 'payment', component: UserPaymentComponent},
   {path: 'payment/list', component: UserPaymentListComponent},
+
+  {path: 'periodic-service', component: UserPeriodicServiceComponent},
+  {path: 'periodic-service/list', component: UserPeriodicServiceListComponent},
 ];
 
 @NgModule({

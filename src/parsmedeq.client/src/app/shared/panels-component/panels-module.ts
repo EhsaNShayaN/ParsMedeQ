@@ -10,6 +10,8 @@ import {PanelOrderListComponent} from './order/panel-order-list/panel-order-list
 import {PanelPaymentComponent} from './payment/panel-payment.component';
 import {PanelPaymentListComponent} from './payment/panel-payment-list/panel-payment-list.component';
 import {PanelOrderDetailsComponent} from './order/panel-order-details/panel-order-details.component';
+import {PanelPeriodicServiceComponent} from './periodic-service/panel-periodic-service.component';
+import {PanelPeriodicServiceListComponent} from './periodic-service/panel-periodic-service-list/panel-periodic-service-list.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,9 @@ import {PanelOrderDetailsComponent} from './order/panel-order-details/panel-orde
 
     PanelPaymentComponent,
     PanelPaymentListComponent,
+
+    PanelPeriodicServiceComponent,
+    PanelPeriodicServiceListComponent,
   ],
   imports: [
     CommonModule,
@@ -43,6 +48,9 @@ import {PanelOrderDetailsComponent} from './order/panel-order-details/panel-orde
 
     PanelPaymentComponent,
     PanelPaymentListComponent,
+
+    PanelPeriodicServiceComponent,
+    PanelPeriodicServiceListComponent,
   ],
   providers: [],
 })

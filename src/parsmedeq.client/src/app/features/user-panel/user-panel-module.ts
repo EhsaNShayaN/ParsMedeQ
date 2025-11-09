@@ -18,6 +18,8 @@ import {UserOrderListComponent} from './order/user-order-list/user-order-list.co
 import {UserPaymentComponent} from './payment/user-payment.component';
 import {UserPaymentListComponent} from './payment/user-payment-list/user-payment-list.component';
 import {UserOrderDetailsComponent} from './order/user-order-details/user-order-details.component';
+import {UserPeriodicServiceComponent} from './periodic-service/user-periodic-service.component';
+import {UserPeriodicServiceListComponent} from './periodic-service/user-periodic-service-list/user-periodic-service-list.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,9 @@ import {UserOrderDetailsComponent} from './order/user-order-details/user-order-d
 
     UserPaymentComponent,
     UserPaymentListComponent,
+
+    UserPeriodicServiceComponent,
+    UserPeriodicServiceListComponent,
   ],
   imports: [
     CommonModule,
