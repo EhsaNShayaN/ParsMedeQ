@@ -8,6 +8,7 @@ using ParsMedeQ.Application.Persistance.Schema.PaymentRepositories;
 using ParsMedeQ.Application.Persistance.Schema.ProductRepositories;
 using ParsMedeQ.Application.Persistance.Schema.PurchaseRepositories;
 using ParsMedeQ.Application.Persistance.Schema.ResourceRepositories;
+using ParsMedeQ.Application.Persistance.Schema.ServiceRepositories;
 using ParsMedeQ.Application.Persistance.Schema.TicketRepositories;
 using ParsMedeQ.Application.Persistance.Schema.TreatmentCenterRepositories;
 using ParsMedeQ.Application.Persistance.Schema.UserRepositories;
@@ -40,6 +41,8 @@ public sealed class ReadUnitOfWork : UnitofWorkBase<ReadDbContext>, IReadUnitOfW
     public ITreatmentCenterReadRepository TreatmentCenterReadRepository => this.GetService<ITreatmentCenterReadRepository>();
 
     public ILocationReadRepository LocationReadRepository => this.GetService<ILocationReadRepository>();
+
+    public IServiceReadRepository ServiceReadRepository => this.GetService<IServiceReadRepository>();
 
     public ReadUnitOfWork(ReadDbContext dbContext, IServiceProvider serviceProvider) : base(dbContext, serviceProvider) { }
 }
