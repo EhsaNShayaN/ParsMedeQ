@@ -14,6 +14,8 @@ sealed class AdminOrderListEndpoint : EndpointHandlerBase<
     BasePaginatedApiResponse<OrderListApiResponse>>
 {
     protected override bool NeedTaxPayerFile => true;
+    protected override bool NeedAdminPrivilage => true;
+    protected override bool NeedAuthentication => true;
 
     public AdminOrderListEndpoint(
         IPresentationMapper<OrderListApiRequest, OrderListQuery> requestMapper,

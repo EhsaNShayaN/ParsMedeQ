@@ -14,6 +14,7 @@ sealed class UserOrderListEndpoint : EndpointHandlerBase<
     BasePaginatedApiResponse<OrderListApiResponse>>
 {
     protected override bool NeedTaxPayerFile => true;
+    protected override bool NeedAuthentication => true;
 
     public UserOrderListEndpoint(
         IPresentationMapper<OrderListApiRequest, OrderListQuery> requestMapper,

@@ -1,48 +1,31 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Http;
-using ParsMedeQ.Application.Features.ProductFeatures.PeriodicServiceListFeature;
+﻿using ParsMedeQ.Application.Features.ProductFeatures.PeriodicServiceListFeature;
 using ParsMedeQ.Application.Helpers;
 using ParsMedeQ.Contracts;
 using ParsMedeQ.Contracts.ProductContracts.PeriodicServiceListContract;
 using ParsMedeQ.Domain;
 using SRH.Utilities.EhsaN;
 
-namespace ParsMedeQ.Presentation.Features.ProductFeatures.PeriodicServiceList;
+namespace ParsMedeQ.Presentation.Features.UserFeatures.PeriodicServiceFeatures.UserPeriodicServiceList;
 
-sealed class PeriodicServiceListEndpoint : EndpointHandlerBase<
+sealed class UserPeriodicServiceListEndpoint : EndpointHandlerBase<
     PeriodicServiceListApiRequest,
     PeriodicServiceListQuery,
     BasePaginatedApiResponse<PeriodicServiceListDbQueryResponse>,
     BasePaginatedApiResponse<PeriodicServiceListApiResponse>>
 {
     protected override bool NeedTaxPayerFile => true;
+    protected override bool NeedAuthentication => true;
 
-    public PeriodicServiceListEndpoint(
+    public UserPeriodicServiceListEndpoint(
         IPresentationMapper<PeriodicServiceListApiRequest, PeriodicServiceListQuery> requestMapper,
         IPresentationMapper<BasePaginatedApiResponse<PeriodicServiceListDbQueryResponse>, BasePaginatedApiResponse<PeriodicServiceListApiResponse>> responseMapper)
         : base(
-            Endpoints.Product.PeriodicServices,
-            HttpMethod.Get,
+            Endpoints.User.PeriodicServices,
+            HttpMethod.Post,
             requestMapper,
             responseMapper,
             DefaultResponseFactory.Instance.CreateOk)
     { }
-
-    protected override Delegate EndpointDelegate =>
-    (
-            [AsParameters] PeriodicServiceListApiRequest request,
-            ISender sender,
-            CancellationToken cancellationToken) => this.CallMediatRHandler(
-            sender,
-            () => ValueTask.FromResult(
-                PrimitiveResult.Success(
-                    new PeriodicServiceListQuery()
-                    {
-                        PageIndex = request.PageIndex,
-                        PageSize = request.PageSize,
-                    })),
-            cancellationToken);
-
 }
 sealed class PeriodicServiceListApiRequestMapper : IPresentationMapper<
     PeriodicServiceListApiRequest,
@@ -54,7 +37,7 @@ sealed class PeriodicServiceListApiRequestMapper : IPresentationMapper<
     {
         return ValueTask.FromResult(
             PrimitiveResult.Success(
-                new PeriodicServiceListQuery()
+                new PeriodicServiceListQuery(false)
                 {
                     PageIndex = src.PageIndex,
                     PageSize = src.PageSize,

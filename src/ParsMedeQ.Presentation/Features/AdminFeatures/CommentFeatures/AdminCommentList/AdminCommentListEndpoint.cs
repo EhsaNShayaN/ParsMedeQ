@@ -12,7 +12,7 @@ sealed class AdminCommentListEndpoint : EndpointHandlerBase<
     BasePaginatedApiResponse<CommentListDbQueryResponse>,
     BasePaginatedApiResponse<CommentListApiResponse>>
 {
-    protected override bool NeedTaxPayerFile => false;
+    protected override bool NeedTaxPayerFile => true;
     protected override bool NeedAdminPrivilage => true;
     protected override bool NeedAuthentication => true;
 

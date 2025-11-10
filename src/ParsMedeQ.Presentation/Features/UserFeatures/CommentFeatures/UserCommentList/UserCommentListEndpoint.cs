@@ -12,8 +12,7 @@ sealed class UserCommentListEndpoint : EndpointHandlerBase<
     BasePaginatedApiResponse<CommentListDbQueryResponse>,
     BasePaginatedApiResponse<CommentListApiResponse>>
 {
-    protected override bool NeedTaxPayerFile => false;
-    protected override bool NeedAdminPrivilage => false;
+    protected override bool NeedTaxPayerFile => true;
     protected override bool NeedAuthentication => true;
 
     public UserCommentListEndpoint(

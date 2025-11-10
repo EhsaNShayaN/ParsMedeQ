@@ -6,7 +6,9 @@ using ParsMedeQ.Application.Features.ProductFeatures.ProductMediaListFeature;
 using ParsMedeQ.Application.Helpers;
 using ParsMedeQ.Application.Persistance.Schema.ProductRepositories;
 using ParsMedeQ.Domain.Aggregates.ProductAggregate;
+using ParsMedeQ.Domain.Aggregates.ProductAggregate.Entities;
 using ParsMedeQ.Infrastructure.Persistance.DbContexts;
+using ParsMedeQ.Infrastructure.Persistance.DbContexts.Extensions;
 using SRH.Persistance.Extensions;
 using SRH.Persistance.Models;
 
@@ -195,56 +197,40 @@ internal sealed class ProductReadRepository : GenericPrimitiveReadRepositoryBase
                 };
         return q.Run(q => q.ToArrayAsync(cancellationToken), PrimitiveError.Create("", "آیتمی با شناسه مورد نظر پیدا نشد"));
     }
-    public ValueTask<PrimitiveResult<BasePaginatedApiResponse<PeriodicServiceListDbQueryResponse>>> FilterPeriodicServices(
+    public async ValueTask<PrimitiveResult<BasePaginatedApiResponse<PeriodicServiceListDbQueryResponse>>> FilterPeriodicServices(
         BasePaginatedQuery paginated,
+        int userId,
         int lastId,
         CancellationToken cancellationToken)
     {
-        static BasePaginatedApiResponse<PeriodicServiceListDbQueryResponse> MapResult(
-            PaginateListResult<PeriodicServiceListDbQueryResponse> paginatedData,
-            BasePaginatedQuery pageinated)
+        Expression<Func<PeriodicService, PeriodicServiceListDbQueryResponse>> PeriodicServiceKeySelector = (res) => new PeriodicServiceListDbQueryResponse
         {
-            var data = paginatedData.Data.ToArray();
-            return new BasePaginatedApiResponse<PeriodicServiceListDbQueryResponse>(
-                data,
-                paginatedData.Total,
-                pageinated.PageIndex,
-                pageinated.PageSize)
-            {
-                LastId = data.Length > 0 ? data.Last().Id : 0
-            };
-        }
+            Id = res.Id,
+            UserId = res.UserId,
+            User = res.User,
+            ProductId = res.ProductId,
+            Product = res.Product,
+            ServiceDate = res.ServiceDate,
+            Done = res.Done,
+            CreationDate = res.CreationDate,
+        };
 
-        var query =
-            from res in this.DbContext.PeriodicService
-            .Include(r => r.Product)
-            .Include(r => r.User)
-            select new PeriodicServiceListDbQueryResponse
-            {
-                Id = res.Id,
-                UserId = res.UserId,
-                User = res.User,
-                ProductId = res.ProductId,
-                Product = res.Product,
-                ServiceDate = res.ServiceDate,
-                Done = res.Done,
-                CreationDate = res.CreationDate,
-            };
-
-        if (lastId.Equals(0))
-            return query.Paginate(
-                PaginateQuery.Create(paginated.PageIndex, paginated.PageSize),
-                s => s.Id,
-                PaginateOrder.DESC,
-                cancellationToken)
-                .Map(data => MapResult(data, paginated));
-
-        return query.PaginateOverPK(
-            paginated.PageSize,
+        return await this.DbContext.PaginateByPrimaryKey(
+            this.DbContext.PeriodicService
+            .Include(x => x.User)
+            .Include(x => x.Product)
+            .ThenInclude(x => x.ProductTranslations),
             lastId,
-            PaginateOrder.DESC,
-            cancellationToken)
-            .Map(data => MapResult(data, paginated));
+             x => userId <= 0 || x.UserId == userId,
+             paginated.PageSize,
+             PeriodicServiceKeySelector,
+             cancellationToken)
+            .Map(data => new BasePaginatedApiResponse<PeriodicServiceListDbQueryResponse>(
+                data.Data,
+               Convert.ToInt32(data.TotalCount),
+            paginated.PageIndex,
+            paginated.PageSize))
+            .ConfigureAwait(false);
     }
 }
 

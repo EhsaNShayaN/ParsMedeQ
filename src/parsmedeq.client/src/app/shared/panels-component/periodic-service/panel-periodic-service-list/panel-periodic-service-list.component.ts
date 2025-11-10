@@ -4,7 +4,6 @@ import {MatSort, Sort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {BaseComponent} from '../../../../base-component';
 import {MatSelectChange} from '@angular/material/select';
-import {BaseResult} from '../../../../core/models/BaseResult';
 import {ToastrService} from 'ngx-toastr';
 import {Helpers} from '../../../../core/helpers';
 import {AuthService} from '../../../../core/services/auth.service';
@@ -19,7 +18,7 @@ import {PagingRequest} from '../../../../core/models/Pagination';
 })
 export class PanelPeriodicServiceListComponent extends BaseComponent implements OnInit {
   @Input() url: string = '';
-  displayedColumns: string[] = [/*'row', */'code', 'title', 'profile', 'statusText', 'creationDate', 'actions'];
+  displayedColumns: string[] = [/*'row', */'code', 'title', 'profile', 'serviceDate', 'status', 'actions'];
   dataSource?: MatTableDataSource<PeriodicService>;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator | null = null;
   @ViewChild(MatSort, {static: true}) sort: MatSort | null = null;
@@ -29,7 +28,6 @@ export class PanelPeriodicServiceListComponent extends BaseComponent implements 
   fromDate?: string;
   toDate?: string;
   query: string | null = null;
-  statuses: any[] = [];
 
   constructor(protected auth: AuthService,
               private toaster: ToastrService,
@@ -51,15 +49,15 @@ export class PanelPeriodicServiceListComponent extends BaseComponent implements 
       toDate: this.toDate,
       //query: this.query,
     };
-    this.restApiService.getPeriodicServices(model).subscribe((res: PeriodicServiceResponse) => {
+    this.restApiService.getPeriodicServices(model, this.url).subscribe((res: PeriodicServiceResponse) => {
       this.initDataSource(res);
     });
   }
 
-  public initDataSource(res: any) {
-    this.totalCount = res.totalCount;
-    this.pageSize = res.pageSize;
-    this.dataSource = new MatTableDataSource<PeriodicService>(res.data);
+  public initDataSource(res: PeriodicServiceResponse) {
+    this.totalCount = res.data.totalCount;
+    this.pageSize = res.data.pageSize;
+    this.dataSource = new MatTableDataSource<PeriodicService>(res.data.items);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
@@ -97,8 +95,8 @@ export class PanelPeriodicServiceListComponent extends BaseComponent implements 
     if (column === 'creationdate') {
       column = 'PUBLISHED';
     }
-    if (column === 'statustext') {
-      column = 'STATUS';
+    if (column === 'servicedate') {
+      column = 'SERVICE_DATE';
     }
     return column.toUpperCase();
   }
@@ -132,5 +130,13 @@ export class PanelPeriodicServiceListComponent extends BaseComponent implements 
     /*this.ticketService.updateTicketStatus(element.id, $event.value).subscribe((t: BaseResult<boolean>) => {
       this.toaster.success(this.getTranslateValue('THE_OPERATION_WAS_SUCCESSFUL'), '', {});
     });*/
+  }
+
+  done(item: PeriodicService) {
+    item.done = true;
+  }
+
+  createService(item: PeriodicService) {
+
   }
 }

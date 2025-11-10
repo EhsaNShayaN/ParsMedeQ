@@ -35,25 +35,21 @@
       </ng-container>
       <td mat-cell *matCellDef="let element; let i = index;">
         <ng-container [ngSwitch]="column">
-          <ng-container *ngSwitchCase="'statusText'">
-            <mat-select [(ngModel)]="element.status" (selectionChange)="changeStatus($event, element)" *ngIf="auth.isAdmin()"
-                        class="w-100">
-              <mat-option [value]="0">0. نامشخص</mat-option>
-              <mat-option *ngFor="let item of statuses" [value]="item.id">
-                {{ item.id }}. {{ item.title }}
-              </mat-option>
-            </mat-select>
-            <ng-container *ngIf="!auth.isAdmin()">{{ element.statusText }}</ng-container>
-          </ng-container>
           <ng-container *ngSwitchCase="'profile'">
-            {{ element.profile?.firstName }}
-            {{ element.profile?.lastName }}({{ element.profile?.mobile }})
+            {{ element.fullName }}
+          </ng-container>
+          <ng-container *ngSwitchCase="'status'">
+            {{ element.done ? 'انجام شده' : 'هنوز انجام نشده' }}
           </ng-container>
           <ng-container *ngSwitchCase="'actions'">
-            <a [routerLink]="['/ticket', element.id]" mat-icon-button color="warn" target="_blank"
-               matTooltip="{{'VIEW' | translate}}">
-              <mat-icon>search</mat-icon>
-            </a>
+            @if (this.auth.isAdmin() && !element.done) {
+              <button (click)="done(element)" mat-icon-button color="warn" matTooltip="تغییر وضعیت">
+                <mat-icon>done</mat-icon>
+              </button>
+              <button (click)="createService(element)" mat-icon-button color="warn" matTooltip="ایجاد سرویس بعدی">
+                <mat-icon>add_circle</mat-icon>
+              </button>
+            }
           </ng-container>
           <ng-container *ngSwitchDefault>
             {{ element[column] }}

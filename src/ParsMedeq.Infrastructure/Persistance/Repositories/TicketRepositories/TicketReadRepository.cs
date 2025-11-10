@@ -1,5 +1,4 @@
 ﻿using ParsMedeQ.Application.Features.TicketFeatures.TicketListFeature;
-using ParsMedeQ.Application.Features.TreatmentCenterFeatures.TreatmentCenterListFeature;
 using ParsMedeQ.Application.Helpers;
 using ParsMedeQ.Application.Persistance.Schema.TicketRepositories;
 using ParsMedeQ.Domain.Aggregates.TicketAggregate;
@@ -43,7 +42,7 @@ internal sealed class TicketReadRepository : GenericPrimitiveReadRepositoryBase<
             }).ToArray(),
         };
 
-        var result = await this.DbContext.PaginateByPrimaryKey(
+        return await this.DbContext.PaginateByPrimaryKey(
             this.DbContext.Ticket
             .Include(x => x.TicketAnswers)
             .Include(x => x.User),
@@ -58,6 +57,5 @@ internal sealed class TicketReadRepository : GenericPrimitiveReadRepositoryBase<
             paginated.PageIndex,
             paginated.PageSize))
             .ConfigureAwait(false);
-        return result;
     }
 }

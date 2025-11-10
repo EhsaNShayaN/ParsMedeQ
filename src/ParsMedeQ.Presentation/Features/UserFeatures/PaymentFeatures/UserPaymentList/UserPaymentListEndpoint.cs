@@ -14,6 +14,7 @@ sealed class UserPaymentListEndpoint : EndpointHandlerBase<
     BasePaginatedApiResponse<PaymentListApiResponse>>
 {
     protected override bool NeedTaxPayerFile => true;
+    protected override bool NeedAuthentication => true;
 
     public UserPaymentListEndpoint(
         IPresentationMapper<PaymentListApiRequest, PaymentListQuery> requestMapper,

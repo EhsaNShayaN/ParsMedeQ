@@ -13,6 +13,7 @@ public sealed class AdminEndpoint : ApiEndpointBase
 
     public EndpointInfo Orders { get; private set; }
     public EndpointInfo Payments { get; private set; }
+    public EndpointInfo PeriodicServices { get; private set; }
 
 
     public AdminEndpoint()
@@ -30,7 +31,6 @@ public sealed class AdminEndpoint : ApiEndpointBase
     "Admin Tickets",
     "Admin Tickets",
     _tag);
-
         this.Orders = new EndpointInfo(
             this.GetUrl("order/list"),
             this.GetUrl("order/list"),
@@ -43,6 +43,13 @@ public sealed class AdminEndpoint : ApiEndpointBase
             this.GetUrl("payment/list"),
             "Admin Payments",
             "Admin Payments",
+            _tag);
+
+        this.PeriodicServices = new EndpointInfo(
+            this.GetUrl("periodicService/list"),
+            this.GetUrl("periodicService/list"),
+            "Admin PeriodicServices",
+            "Admin PeriodicServices",
             _tag);
     }
 }

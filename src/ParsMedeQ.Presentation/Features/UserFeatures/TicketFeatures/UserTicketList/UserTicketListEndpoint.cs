@@ -1,5 +1,4 @@
 ﻿using ParsMedeQ.Application.Features.TicketFeatures.TicketListFeature;
-using ParsMedeQ.Application.Features.TreatmentCenterFeatures.TreatmentCenterListFeature;
 using ParsMedeQ.Application.Helpers;
 using ParsMedeQ.Contracts;
 using ParsMedeQ.Contracts.TicketContracts.TicketListContract;
@@ -13,6 +12,7 @@ sealed class UserTicketListEndpoint : EndpointHandlerBase<
     BasePaginatedApiResponse<TicketListApiResponse>>
 {
     protected override bool NeedTaxPayerFile => true;
+    protected override bool NeedAuthentication => true;
 
     public UserTicketListEndpoint(
         IPresentationMapper<TicketListApiRequest, TicketListQuery> requestMapper,

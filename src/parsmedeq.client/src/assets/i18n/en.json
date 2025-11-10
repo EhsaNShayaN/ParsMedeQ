@@ -135,5 +135,6 @@
   "CITY": "City",
   "SERVICE": "Service",
   "SERVICES": "Services",
-  "SEARCH": "Search"
+  "SEARCH": "Search",
+  "SERVICE_DATE": "Service date"
 }

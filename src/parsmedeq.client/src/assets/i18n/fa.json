@@ -135,5 +135,6 @@
   "CITY": "شهر",
   "SERVICE": "خدمت",
   "SERVICES": "خدمات",
-  "SEARCH": "جستجو"
+  "SEARCH": "جستجو",
+  "SERVICE_DATE": "تاریخ سرویس"
 }

@@ -40,6 +40,7 @@ public sealed class UserEndpoint : ApiEndpointBase
     public EndpointInfo Tickets { get; init; }
     public EndpointInfo Orders { get; init; }
     public EndpointInfo Payments { get; init; }
+    public EndpointInfo PeriodicServices { get; init; }
 
 
 
@@ -225,6 +226,13 @@ public sealed class UserEndpoint : ApiEndpointBase
             this.GetUrl("payment/list"),
             "User Payments",
             "User Payments",
+            _tag);
+
+        this.PeriodicServices = new EndpointInfo(
+            this.GetUrl("periodicService/list"),
+            this.GetUrl("periodicService/list"),
+            "User PeriodicServices",
+            "User PeriodicServices",
             _tag);
     }
 }

@@ -33,6 +33,7 @@ public interface IProductReadRepository : IDomainRepository
         CancellationToken cancellationToken);
     ValueTask<PrimitiveResult<BasePaginatedApiResponse<PeriodicServiceListDbQueryResponse>>> FilterPeriodicServices(
         BasePaginatedQuery paginated,
+        int userId,
         int lastId,
         CancellationToken cancellationToken);
 }
