@@ -33,11 +33,11 @@ internal sealed class ProductWriteRepository : GenericPrimitiveWriteRepositoryBa
             .Where(s => s.Id.Equals(id))
             .Run(q => q.FirstOrDefaultAsync(cancellationToken), PrimitiveError.Create("", "محصولی با شناسه مورد نظر پیدا نشد"));
 
-    public ValueTask<PrimitiveResult<Product>> FindByPeriodicService(int id, CancellationToken cancellationToken = default) =>
+    public ValueTask<PrimitiveResult<Product>> FindByPeriodicService(int id, int periodicServiceId, CancellationToken cancellationToken = default) =>
         this.DbContext
             .Product
             .Include(s => s.PeriodicServices)
-            .Where(s => s.Id.Equals(id))
+            .Where(s => s.Id.Equals(id) && s.PeriodicServices.Any(p => p.Id.Equals(periodicServiceId)))
             .Run(q => q.FirstOrDefaultAsync(cancellationToken), PrimitiveError.Create("", "محصولی با شناسه مورد نظر پیدا نشد"));
     public ValueTask<PrimitiveResult<Product>> AddProduct(Product Product, CancellationToken cancellationToken) =>
         this.Add(Product);

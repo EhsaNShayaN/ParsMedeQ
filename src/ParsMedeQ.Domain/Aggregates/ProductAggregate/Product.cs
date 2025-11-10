@@ -173,9 +173,9 @@ public sealed class Product : EntityBase<int>
         return PrimitiveResult.Success();
     }
 
-    public PrimitiveResult AddPeriodicService(int userId)
+    public PrimitiveResult AddPeriodicService(int userId, DateTime fromDate)
     {
-        PeriodicService.Create(userId, this.Id, DateTime.Now.AddMonths(this.PeriodicServiceInterval))
+        PeriodicService.Create(userId, this.Id, fromDate.AddMonths(this.PeriodicServiceInterval))
             .OnSuccess(periodicService => this._periodicServices.Add(periodicService.Value));
 
         return PrimitiveResult.Success();
