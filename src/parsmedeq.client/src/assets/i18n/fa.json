@@ -136,5 +136,7 @@
   "SERVICE": "خدمت",
   "SERVICES": "خدمات",
   "SEARCH": "جستجو",
-  "SERVICE_DATE": "تاریخ سرویس"
+  "SERVICE_DATE": "تاریخ سرویس",
+  "DONE": "انجام شده",
+  "NOT_DONE": "انجام نشده"
 }

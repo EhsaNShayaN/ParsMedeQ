@@ -190,6 +190,20 @@ export class RestApiService {
     );
   }
 
+  addPeriodicService(id: number, productId: number): Observable<any> {
+    const model = {id, productId};
+    return this.http.post<BaseResult<AddResult>>(`${endpoint()}admin/periodicService/add`, model).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  donePeriodicService(id: number, productId: number): Observable<any> {
+    const model = {id, productId};
+    return this.http.post<BaseResult<AddResult>>(`${endpoint()}admin/periodicService/done`, model).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   download(id: number, tableId: number, model: any = null): Observable<any> {
     const headers = new HttpHeaders({
       'ngsw-bypass': 'true'

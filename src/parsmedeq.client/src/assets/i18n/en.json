@@ -136,5 +136,7 @@
   "SERVICE": "Service",
   "SERVICES": "Services",
   "SEARCH": "Search",
-  "SERVICE_DATE": "Service date"
+  "SERVICE_DATE": "Service date",
+  "DONE": "Done",
+  "NOT_DONE": "Not done"
 }

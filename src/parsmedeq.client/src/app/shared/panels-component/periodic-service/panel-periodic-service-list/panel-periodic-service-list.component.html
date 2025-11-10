@@ -39,16 +39,19 @@
             {{ element.fullName }}
           </ng-container>
           <ng-container *ngSwitchCase="'status'">
-            {{ element.done ? 'انجام شده' : 'هنوز انجام نشده' }}
+            {{ (element.done ? 'DONE' : 'NOT_DONE') | translate }}
           </ng-container>
           <ng-container *ngSwitchCase="'actions'">
-            @if (this.auth.isAdmin() && !element.done) {
-              <button (click)="done(element)" mat-icon-button color="warn" matTooltip="تغییر وضعیت">
-                <mat-icon>done</mat-icon>
-              </button>
-              <button (click)="createService(element)" mat-icon-button color="warn" matTooltip="ایجاد سرویس بعدی">
-                <mat-icon>add_circle</mat-icon>
-              </button>
+            @if (this.auth.isAdmin()) {
+              @if (!element.done) {
+                <button (click)="done(element)" mat-icon-button color="warn" matTooltip="تغییر وضعیت">
+                  <mat-icon>done</mat-icon>
+                </button>
+              } @else {
+                <button (click)="add(element)" mat-icon-button color="warn" matTooltip="ایجاد سرویس بعدی">
+                  <mat-icon>add_circle</mat-icon>
+                </button>
+              }
             }
           </ng-container>
           <ng-container *ngSwitchDefault>

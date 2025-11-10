@@ -1,0 +1,2 @@
+﻿namespace ParsMedeQ.Contracts.ProductContracts.DonePeriodicServiceContract;
+public readonly record struct DonePeriodicServiceApiResponse(bool Changed);

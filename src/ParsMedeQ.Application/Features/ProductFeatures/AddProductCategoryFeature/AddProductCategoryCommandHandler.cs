@@ -1,5 +1,4 @@
-﻿using ParsMedeQ.Domain;
-using ParsMedeQ.Domain.Aggregates.ProductCategoryAggregate;
+﻿using ParsMedeQ.Domain.Aggregates.ProductCategoryAggregate;
 
 namespace ParsMedeQ.Application.Features.ProductFeatures.AddProductCategoryFeature;
 public sealed class AddProductCategoryCommandHandler : IPrimitiveResultCommandHandler<AddProductCategoryCommand, AddProductCategoryCommandResponse>

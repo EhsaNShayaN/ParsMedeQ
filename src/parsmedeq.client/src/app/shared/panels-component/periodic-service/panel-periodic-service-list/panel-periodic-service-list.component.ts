@@ -3,12 +3,12 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort, Sort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {BaseComponent} from '../../../../base-component';
-import {MatSelectChange} from '@angular/material/select';
 import {ToastrService} from 'ngx-toastr';
 import {Helpers} from '../../../../core/helpers';
 import {AuthService} from '../../../../core/services/auth.service';
 import {PeriodicService, PeriodicServiceResponse} from '../../../../core/models/ProductResponse';
 import {PagingRequest} from '../../../../core/models/Pagination';
+import {AddResult, BaseResult} from '../../../../core/models/BaseResult';
 
 @Component({
   selector: 'app-panel-periodic-service-list',
@@ -126,17 +126,17 @@ export class PanelPeriodicServiceListComponent extends BaseComponent implements 
     this.pageSize = 20;
   }
 
-  changeStatus($event: MatSelectChange, element: PeriodicService) {
-    /*this.ticketService.updateTicketStatus(element.id, $event.value).subscribe((t: BaseResult<boolean>) => {
-      this.toaster.success(this.getTranslateValue('THE_OPERATION_WAS_SUCCESSFUL'), '', {});
-    });*/
-  }
-
   done(item: PeriodicService) {
-    item.done = true;
+    this.restApiService.donePeriodicService(item.id, item.productId).subscribe((t: BaseResult<AddResult>) => {
+      this.toaster.success(this.getTranslateValue('THE_OPERATION_WAS_SUCCESSFUL'), '', {});
+      item.done = t.data.changed;
+    });
   }
 
-  createService(item: PeriodicService) {
-
+  add(item: PeriodicService) {
+    this.restApiService.addPeriodicService(item.id, item.productId).subscribe((t: BaseResult<AddResult>) => {
+      this.toaster.success(this.getTranslateValue('THE_OPERATION_WAS_SUCCESSFUL'), '', {});
+      this.getItems();
+    });
   }
 }
