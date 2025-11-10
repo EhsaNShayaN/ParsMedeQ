@@ -3,13 +3,13 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort, Sort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {BaseComponent} from '../../../../base-component';
-import {Ticket, TicketResponse} from '../../../../core/models/TicketResponse';
 import {MatSelectChange} from '@angular/material/select';
 import {BaseResult} from '../../../../core/models/BaseResult';
 import {ToastrService} from 'ngx-toastr';
 import {Helpers} from '../../../../core/helpers';
-import {TicketService} from '../../../../core/services/rest/ticket-service';
 import {AuthService} from '../../../../core/services/auth.service';
+import {PeriodicService, PeriodicServiceResponse} from '../../../../core/models/ProductResponse';
+import {PagingRequest} from '../../../../core/models/Pagination';
 
 @Component({
   selector: 'app-panel-periodic-service-list',
@@ -20,19 +20,18 @@ import {AuthService} from '../../../../core/services/auth.service';
 export class PanelPeriodicServiceListComponent extends BaseComponent implements OnInit {
   @Input() url: string = '';
   displayedColumns: string[] = [/*'row', */'code', 'title', 'profile', 'statusText', 'creationDate', 'actions'];
-  dataSource?: MatTableDataSource<Ticket>;
+  dataSource?: MatTableDataSource<PeriodicService>;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator | null = null;
   @ViewChild(MatSort, {static: true}) sort: MatSort | null = null;
   pageIndex = 1;
   pageSize = 20;
   totalCount = 0;
-  fromDate: string | null = null;
-  toDate: string | null = null;
+  fromDate?: string;
+  toDate?: string;
   query: string | null = null;
   statuses: any[] = [];
 
-  constructor(private ticketService: TicketService,
-              protected auth: AuthService,
+  constructor(protected auth: AuthService,
               private toaster: ToastrService,
               private helpers: Helpers) {
     super();
@@ -40,23 +39,19 @@ export class PanelPeriodicServiceListComponent extends BaseComponent implements 
 
   ngOnInit() {
     this.helpers.setPaginationLang();
-    this.statuses = this.helpers.getTicketStatuses();
     this.getItems();
   }
 
   getItems() {
-    const model = {
+    const model: PagingRequest = {
       pageIndex: this.pageIndex,
       pageSize: this.pageSize,
       sort: 0,
       fromDate: this.fromDate,
       toDate: this.toDate,
-      query: this.query,
+      //query: this.query,
     };
-    this.ticketService.getTickets(model, this.url).subscribe((res: TicketResponse) => {
-      /*if (res.data.length) {
-        res.data.forEach(s => s.statusText = this.helpers.getTicketStatus(s.status));
-      }*/
+    this.restApiService.getPeriodicServices(model).subscribe((res: PeriodicServiceResponse) => {
       this.initDataSource(res);
     });
   }
@@ -64,7 +59,7 @@ export class PanelPeriodicServiceListComponent extends BaseComponent implements 
   public initDataSource(res: any) {
     this.totalCount = res.totalCount;
     this.pageSize = res.pageSize;
-    this.dataSource = new MatTableDataSource<Ticket>(res.data);
+    this.dataSource = new MatTableDataSource<PeriodicService>(res.data);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
@@ -133,9 +128,9 @@ export class PanelPeriodicServiceListComponent extends BaseComponent implements 
     this.pageSize = 20;
   }
 
-  changeStatus($event: MatSelectChange, element: Ticket) {
-    this.ticketService.updateTicketStatus(element.id, $event.value).subscribe((t: BaseResult<boolean>) => {
+  changeStatus($event: MatSelectChange, element: PeriodicService) {
+    /*this.ticketService.updateTicketStatus(element.id, $event.value).subscribe((t: BaseResult<boolean>) => {
       this.toaster.success(this.getTranslateValue('THE_OPERATION_WAS_SUCCESSFUL'), '', {});
-    });
+    });*/
   }
 }

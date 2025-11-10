@@ -1,4 +1,4 @@
-import {AlborzPagingRequest, Paginated} from './Pagination';
+import {PagingRequest, Paginated} from './Pagination';
 import {ResourceCategory} from './ResourceCategoryResponse';
 
 export interface ResourceResponse {
@@ -48,7 +48,7 @@ export class ResourceRequest {
   tableId?: number;
 }
 
-export class ResourcesRequest extends AlborzPagingRequest {
+export class ResourcesRequest extends PagingRequest {
   //id?: number;
   tableId?: number;
   resourceCategoryId?: number;

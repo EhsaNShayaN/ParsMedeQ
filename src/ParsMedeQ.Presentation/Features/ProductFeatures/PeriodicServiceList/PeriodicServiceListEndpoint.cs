@@ -21,7 +21,7 @@ sealed class PeriodicServiceListEndpoint : EndpointHandlerBase<
         IPresentationMapper<PeriodicServiceListApiRequest, PeriodicServiceListQuery> requestMapper,
         IPresentationMapper<BasePaginatedApiResponse<PeriodicServiceListDbQueryResponse>, BasePaginatedApiResponse<PeriodicServiceListApiResponse>> responseMapper)
         : base(
-            Endpoints.Product.Products,
+            Endpoints.Product.PeriodicServices,
             HttpMethod.Get,
             requestMapper,
             responseMapper,

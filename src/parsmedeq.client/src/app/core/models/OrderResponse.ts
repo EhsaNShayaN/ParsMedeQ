@@ -1,7 +1,7 @@
 import {BaseResult} from './BaseResult';
-import {AlborzPagingRequest, Paginated} from './Pagination';
+import {PagingRequest, Paginated} from './Pagination';
 
-export class OrdersRequest extends AlborzPagingRequest {
+export class OrdersRequest extends PagingRequest {
 }
 
 export interface OrdersResponse extends BaseResult<Paginated<Order>> {

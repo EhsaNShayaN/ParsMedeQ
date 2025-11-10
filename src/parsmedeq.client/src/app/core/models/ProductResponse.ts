@@ -1,5 +1,6 @@
-import {AlborzPagingRequest, Paginated} from './Pagination';
+import {Paginated, PagingRequest} from './Pagination';
 import {FileUploadValue} from '../../shared/components/multi-file-upload/multi-file-upload.component';
+import {BaseResult} from './BaseResult';
 
 export interface ProductResponse {
   data: Paginated<Product>;
@@ -45,7 +46,7 @@ export class ProductRequest {
   id?: number;
 }
 
-export class ProductsRequest extends AlborzPagingRequest {
+export class ProductsRequest extends PagingRequest {
   productCategoryId?: number;
 }
 
@@ -73,8 +74,21 @@ export interface AddProductRequest {
   gallery: FileUploadValue;
 }
 
-
 export interface IdTitleRequest {
   id: number;
   title: string;
+}
+
+export interface PeriodicServiceResponse extends BaseResult<Paginated<PeriodicService>> {
+}
+
+export interface PeriodicService {
+  id: number;
+  userId: number;
+  fullName: string;
+  productId: number;
+  productTitle: string;
+  serviceDate: string;
+  done: boolean;
+  creationDate: string;
 }

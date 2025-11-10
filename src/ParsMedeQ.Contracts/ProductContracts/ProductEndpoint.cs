@@ -21,6 +21,7 @@ public sealed class ProductEndpoint : ApiEndpointBase
     public EndpointInfo ProductMediaList { get; private set; }
     public EndpointInfo AddProductMedia { get; private set; }
     public EndpointInfo DeleteProductMedia { get; private set; }
+    public EndpointInfo PeriodicServices { get; private set; }
 
     public ProductEndpoint()
     {
@@ -113,6 +114,13 @@ public sealed class ProductEndpoint : ApiEndpointBase
            this.GetUrl("media/delete"),
            "DeleteProductMedia",
            "DeleteProductMedia",
+           _tag);
+
+        PeriodicServices = new EndpointInfo(
+           this.GetUrl("periodicService/list"),
+           this.GetUrl("periodicService/list"),
+           "List of PeriodicServices",
+           "List of PeriodicServices",
            _tag);
     }
 }

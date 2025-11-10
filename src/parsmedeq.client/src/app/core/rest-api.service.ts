@@ -8,11 +8,12 @@ import {AddResult, BaseResult} from './models/BaseResult';
 import {ResourceCategoriesResponse} from './models/ResourceCategoryResponse';
 import {AuthService} from './services/auth.service';
 import {ProductCategoriesResponse} from './models/ProductCategoryResponse';
-import {AddProductRequest, Product, ProductRequest, ProductResponse, ProductsRequest} from './models/ProductResponse';
+import {AddProductRequest, PeriodicServiceResponse, Product, ProductRequest, ProductResponse, ProductsRequest} from './models/ProductResponse';
 import {MobileRequest, MobileResponse, ProfileResponse, SendOtpRequest, SendOtpResponse} from './models/Login';
 import {ProductMediaListResponse} from './models/ProductMediaResponse';
 import {LocationResponse} from './models/LocationResponse';
 import {TreatmentCenter, TreatmentCenterResponse} from './models/TreatmentCenterResponse';
+import {PagingRequest} from './models/Pagination';
 
 @Injectable({
   providedIn: 'root'
@@ -179,6 +180,13 @@ export class RestApiService {
     formData.append('file', file);
     //formData.append('model', JSON.stringify(model));
     return this.http.post<BaseResult<boolean>>(`${endpoint()}product/${model.id ? 'edit' : 'add'}`, formData).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getPeriodicServices(model: PagingRequest): Observable<any> {
+    const query = this.modelToQuery(model);
+    return this.http.get<PeriodicServiceResponse>(`${endpoint()}product/periodicService/list?${query}`).pipe(
       catchError(this.handleError)
     );
   }

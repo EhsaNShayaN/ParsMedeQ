@@ -11,10 +11,6 @@ export class PagingRequest {
   url?: string;
 }
 
-export class AlborzPagingRequest extends PagingRequest {
-  expired?: boolean;
-}
-
 export class SortRequest {
   active!: string;
   direction!: string;
