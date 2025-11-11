@@ -5,6 +5,7 @@ CREATE TABLE [dbo].[PeriodicService]
 [ProductId] [int] NOT NULL,
 [ServiceDate] [datetime] NOT NULL,
 [Done] [bit] NOT NULL,
+[HasNext] [bit] NOT NULL,
 [CreationDate] [datetime] NOT NULL
 ) ON [PRIMARY]
 GO
