@@ -18,7 +18,7 @@ import {AddResult, BaseResult} from '../../../../core/models/BaseResult';
 })
 export class PanelPeriodicServiceListComponent extends BaseComponent implements OnInit {
   @Input() url: string = '';
-  displayedColumns: string[] = [/*'row', */'code', 'title', 'profile', 'serviceDate', 'status', 'actions'];
+  displayedColumns: string[] = [/*'row', */'fullName', 'serviceDate', 'status', 'actions'];
   dataSource?: MatTableDataSource<PeriodicService>;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator | null = null;
   @ViewChild(MatSort, {static: true}) sort: MatSort | null = null;
@@ -80,17 +80,8 @@ export class PanelPeriodicServiceListComponent extends BaseComponent implements 
 
   getColName(column: string) {
     column = column.toLowerCase();
-    if (column === 'code') {
-      column = 'TICKET_NUMBER';
-    }
-    if (column === 'userscount') {
-      column = 'USERS_COUNT';
-    }
-    if (column === 'downloadcount') {
-      column = 'DOWNLOAD_COUNT';
-    }
-    if (column === 'expirationdate') {
-      column = 'EXPIRATION_DATE';
+    if (column === 'fullname') {
+      column = 'FULL_NAME';
     }
     if (column === 'creationdate') {
       column = 'PUBLISHED';
@@ -128,8 +119,9 @@ export class PanelPeriodicServiceListComponent extends BaseComponent implements 
 
   done(item: PeriodicService) {
     this.restApiService.donePeriodicService(item.id, item.productId).subscribe((t: BaseResult<AddResult>) => {
-      this.toaster.success(this.getTranslateValue('THE_OPERATION_WAS_SUCCESSFUL'), '', {});
       item.done = t.data.changed;
+      this.toaster.success(this.getTranslateValue('THE_OPERATION_WAS_SUCCESSFUL'), '', {});
+      this.getItems();
     });
   }
 

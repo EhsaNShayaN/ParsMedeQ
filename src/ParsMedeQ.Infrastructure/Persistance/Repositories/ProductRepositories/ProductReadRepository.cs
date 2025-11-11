@@ -212,6 +212,7 @@ internal sealed class ProductReadRepository : GenericPrimitiveReadRepositoryBase
             Product = res.Product,
             ServiceDate = res.ServiceDate,
             Done = res.Done,
+            HasNext = res.HasNext,
             CreationDate = res.CreationDate,
         };
 

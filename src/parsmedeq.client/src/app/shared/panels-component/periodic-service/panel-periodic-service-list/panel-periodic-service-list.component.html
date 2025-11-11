@@ -1,4 +1,4 @@
-<div fxLayout="row wrap" fxLayoutAlign="start center" class="p-2">
+<!--<div fxLayout="row wrap" fxLayoutAlign="start center" class="p-2">
   <div fxFlex="100" fxFlex.gt-sm="50" fxFlex.sm="50" class="box p-2">
     <mat-form-field appearance="outline" class="w-100">
       <input matInput (change)="applyFilter($event.target)" [placeholder]="'SEARCH' | translate"
@@ -11,7 +11,7 @@
   <div fxFlex="100" fxFlex.gt-sm="25" fxFlex.sm="25" class="box p-2">
     <app-date-picker [title]="'تا تاریخ'" (dateSelect)="toDateChanged($event)"></app-date-picker>
   </div>
-</div>
+</div>-->
 <div class="table-wrapper tickets">
   <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="w-100 mat-elevation-z8" *ngIf="dataSource"
          matSort (matSortChange)="sortChanged($event)" matSortActive="creationDate" matSortDirection="desc">
@@ -44,10 +44,15 @@
           <ng-container *ngSwitchCase="'actions'">
             @if (this.auth.isAdmin()) {
               @if (!element.done) {
-                <button (click)="done(element)" mat-icon-button color="warn" matTooltip="تغییر وضعیت">
+                <button (click)="done(element)" mat-icon-button color="warn"
+                        fxLayout="row wrap" fxLayoutAlign="center center">
                   <mat-icon>done</mat-icon>
+                  <span class="font-xsm">
+                    تغییر وضعیت
+                    <br>
+                    به انجام شده</span>
                 </button>
-              } @else {
+              } @else if (!element.hasNext) {
                 <button (click)="add(element)" mat-icon-button color="warn" matTooltip="ایجاد سرویس بعدی">
                   <mat-icon>add_circle</mat-icon>
                 </button>

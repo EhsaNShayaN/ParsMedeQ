@@ -181,15 +181,18 @@ public sealed class Product : EntityBase<int>
         return PrimitiveResult.Success();
     }
 
-    public PrimitiveResult DonePeriodicService()
+    public PrimitiveResult DonePeriodicService(int id)
     {
-        var last = _periodicServices.OrderByDescending(s => s.CreationDate).First();
-        last.DoneService()
-              .Map(s => PeriodicService.Create(
-                  last.UserId,
-                  last.ProductId,
-                  DateTime.Now.AddMonths(this.PeriodicServiceInterval))
-              .OnSuccess(periodicService => this._periodicServices.Add(periodicService.Value)));
+        var service = _periodicServices.Single(s => s.Id.Equals(id));
+        service.DoneService()
+            .OnSuccess(periodicService => this._periodicServices.Add(periodicService.Value));
+        return PrimitiveResult.Success();
+    }
+
+    public PrimitiveResult NextPeriodicService(int id)
+    {
+        var service = _periodicServices.Single(s => s.Id.Equals(id));
+        service.NextService();
         return PrimitiveResult.Success();
     }
     #endregion

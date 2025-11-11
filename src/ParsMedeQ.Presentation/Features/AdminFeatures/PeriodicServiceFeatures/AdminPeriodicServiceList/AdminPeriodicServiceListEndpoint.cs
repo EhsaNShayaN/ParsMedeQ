@@ -65,6 +65,7 @@ sealed class PeriodicServiceListApiResponseMapper : IPresentationMapper<
                         data.Product.ProductTranslations.FirstOrDefault(s => s.LanguageCode == Constants.LangCode_Farsi.ToLower()).Title,
                         data.ServiceDate.ToPersianDate(),
                         data.Done,
+                        data.HasNext,
                         data.CreationDate.ToPersianDate()))
                     .ToArray(), src.TotalCount, src.PageIndex, src.PageSize)
                     {

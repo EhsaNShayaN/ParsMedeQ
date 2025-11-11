@@ -1,6 +1,5 @@
 ﻿using ParsMedeQ.Application.Services.UserContextAccessorServices;
 using ParsMedeQ.Application.Services.UserLangServices;
-using ParsMedeQ.Domain;
 using ParsMedeQ.Domain.Aggregates.CartAggregate;
 using ParsMedeQ.Domain.Aggregates.PaymentAggregate;
 using ParsMedeQ.Domain.Aggregates.ProductAggregate;
@@ -76,7 +75,7 @@ public sealed class AddOrderCommandHandler : IPrimitiveResultCommandHandler<AddO
         if (context.Products.Length <= 0) return context;
 
         foreach (var product in context.Products)
-            product.AddPeriodicService(_userContextAccessor.GetCurrent().UserId);
+            product.AddPeriodicService(_userContextAccessor.GetCurrent().UserId, DateTime.Now);
 
         return context;
     }

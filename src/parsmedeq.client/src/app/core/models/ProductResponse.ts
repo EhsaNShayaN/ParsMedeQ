@@ -90,5 +90,6 @@ export interface PeriodicService {
   productTitle: string;
   serviceDate: string;
   done: boolean;
+  hasNext: boolean;
   creationDate: string;
 }

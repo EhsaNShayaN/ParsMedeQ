@@ -12,5 +12,6 @@ public sealed class PeriodicServiceListDbQueryResponse
     public Product Product { get; set; } = null!;
     public DateTime ServiceDate { get; set; }
     public bool Done { get; set; }
+    public bool HasNext { get; set; }
     public DateTime CreationDate { get; set; }
 }

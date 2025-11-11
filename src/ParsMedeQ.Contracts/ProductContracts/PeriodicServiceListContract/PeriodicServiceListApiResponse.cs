@@ -7,4 +7,5 @@ public readonly record struct PeriodicServiceListApiResponse(
     string ProductTitle,
     string ServiceDate,
     bool Done,
+    bool HasNext,
     string CreationDate);
