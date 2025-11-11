@@ -20,11 +20,15 @@ public sealed class CreateServiceCommandHandler : IPrimitiveResultCommandHandler
         return await Service.Create(request.TypeId)
             .Map(item => UploadFile(this._fileService, request.ImageInfo?.Bytes, request.ImageInfo?.Extension, "Images", cancellationToken)
                 .Map(imagePath => (item, imagePath)))
-            .Map(data => data.item.AddTranslation(Constants.LangCode_Farsi.ToLower(), request.Title, request.Description, data.imagePath)
+            .Map(data => data.item.AddTranslation(
+                Constants.LangCode_Farsi.ToLower(),
+               request.Title,
+               request.Description,
+                data.imagePath)
                 .Map(() => data.item))
-            .Map(Service => this._writeUnitOfWork.ServiceWriteRepository.AddService(Service)
-            .Map(Service => this._writeUnitOfWork.SaveChangesAsync(CancellationToken.None).Map(_ => Service))
-            .Map(Service => new CreateServiceCommandResponse(Service is not null)))
+            .Map(service => this._writeUnitOfWork.ServiceWriteRepository.AddService(service)
+            .Map(service => this._writeUnitOfWork.SaveChangesAsync(CancellationToken.None).Map(_ => service))
+            .Map(service => new CreateServiceCommandResponse(service is not null)))
             .ConfigureAwait(false);
     }
 
@@ -36,7 +40,8 @@ public sealed class CreateServiceCommandHandler : IPrimitiveResultCommandHandler
         CancellationToken cancellationToken)
     {
         if ((bytes?.Length ?? 0) == 0) return string.Empty;
-        var result = await fileService.UploadFile(bytes, fileExtension, fodlerName, cancellationToken).ConfigureAwait(false);
+        var result = await fileService.UploadFile(bytes, fileExtension, fodlerName, cancellationToken)
+            .ConfigureAwait(false);
         if (string.IsNullOrWhiteSpace(result)) return PrimitiveResult.Failure<string>("", "Can not upload file");
 
         return result;
