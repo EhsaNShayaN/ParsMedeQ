@@ -1,8 +1,10 @@
 namespace ParsMedeQ.Application.Features.{{className}}Features.Create{{className}}Feature;
 
-public sealed record class Create{{className}}Command({{ for prop in props }}
+public sealed record class Create{{className}}Command(
+    {{ for prop in props }}
         {{ prop.DataType }} {{ prop.Name }},
-    {{ end }}): IPrimitiveResultCommand<Create{{className}}CommandResponse>, IValidatableRequest<Create{{className}}Command>
+    {{ end }}) :
+    IPrimitiveResultCommand<Create{{className}}CommandResponse>, IValidatableRequest<Create{{className}}Command>
 {
     public ValueTask<PrimitiveResult<Create{{className}}Command>> Validate() => PrimitiveResult.Success(this)
             .Ensure([

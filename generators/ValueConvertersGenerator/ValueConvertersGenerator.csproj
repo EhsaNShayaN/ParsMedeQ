@@ -17,4 +17,8 @@
     <ProjectReference Include="..\..\SRH.Libraries\SRH.MediatRMessaging\SRH.MediatRMessaging.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Scriban" Version="6.5.0" />
+  </ItemGroup>
+
 </Project>
