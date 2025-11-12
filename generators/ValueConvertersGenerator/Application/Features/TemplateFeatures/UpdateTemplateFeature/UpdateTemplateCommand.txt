@@ -1,0 +1,14 @@
+﻿namespace ParsMedeQ.Application.Features.{{ClassName}}Features.Update{{ClassName}}Feature;
+
+public sealed record class Update{{ClassName}}Command(int Id, {{ for prop in Props }}{{ prop.DataType }} {{ prop.Name }}, {{ end }}string OldImagePath)
+    : IPrimitiveResultCommand<Update{{ClassName}}CommandResponse>,
+    IValidatableRequest<Update{{ClassName}}Command>
+{
+    public ValueTask<PrimitiveResult<Update{{ClassName}}Command>> Validate() => PrimitiveResult.Success(this)
+            .Ensure([
+                value => PrimitiveResult.Success(this.{{FirstPropName}})
+                .Match(
+                    _ => PrimitiveResult.Success() ,
+                    _ => PrimitiveResult.Failure("Validation.Error", "{{FirstPropName}} ارسالی نامعتبر است"))
+                ]);
+}

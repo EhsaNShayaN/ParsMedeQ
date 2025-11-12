@@ -1,0 +1,2 @@
+namespace ParsMedeQ.Application.Features.ServiceFeatures.UpdateServiceFeature;
+public sealed record UpdateServiceCommandResponse(bool Changed);

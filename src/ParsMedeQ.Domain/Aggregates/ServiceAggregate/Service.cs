@@ -45,5 +45,32 @@ public sealed class Service : EntityBase<int>
                 PrimitiveResult.Failure
             );
     }
+
+    public ValueTask<PrimitiveResult<Service>> Update(
+        string langCode,
+        string title,
+        string description,
+        string image)
+    {
+        return this.UpdateTranslation(langCode, title, description, image).Map(() => this);
+    }
+
+    public ValueTask<PrimitiveResult> UpdateTranslation(
+        string langCode,
+        string title,
+        string description,
+        string image)
+    {
+        var currentTranslation = _serviceTranslations.FirstOrDefault(s => s.LanguageCode.Equals(langCode, StringComparison.OrdinalIgnoreCase));
+        if (currentTranslation is null)
+        {
+            return this.AddTranslation(langCode, title, description, image);
+        }
+        return currentTranslation.Update(title, description, image)
+            .Match(
+                _ => PrimitiveResult.Success(),
+                PrimitiveResult.Failure
+            );
+    }
     #endregion
 }

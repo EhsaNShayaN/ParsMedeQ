@@ -1,6 +1,4 @@
-﻿using SRH.MediatRMessaging;
-
-namespace ParsMedeQ.Application.Features.ProductFeatures.UpdateProductCategoryFeature;
+﻿namespace ParsMedeQ.Application.Features.ProductFeatures.UpdateProductCategoryFeature;
 
 public sealed record class UpdateProductCategoryCommand(
     int Id,

@@ -1,0 +1,2 @@
+﻿namespace ParsMedeQ.Application.Features.{{ClassName}}Features.Update{{ClassName}}Feature;
+public sealed record Update{{ClassName}}CommandResponse(bool Changed);

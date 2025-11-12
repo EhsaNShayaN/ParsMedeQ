@@ -5,20 +5,20 @@ namespace ParsMedeQ.Application.Features.{{ClassName}}Features.Create{{ClassName
 public sealed class Create{{ClassName}}CommandHandler : IPrimitiveResultCommandHandler<Create{{ClassName}}Command, Create{{ClassName}}CommandResponse>
 {
     private readonly IWriteUnitOfWork _writeUnitOfWork;
-    private readonly IFile{{ClassName}} _file{{ClassName}};
+    private readonly IFileService _fileService;
 
     public Create{{ClassName}}CommandHandler(
         IWriteUnitOfWork writeUnitOfWork,
-        IFile{{ClassName}} file{{ClassName}})
+        IFileService fileService)
     {
         this._writeUnitOfWork = writeUnitOfWork;
-        this._file{{ClassName}} = file{{ClassName}};
+        this._fileService = fileService;
     }
 
     public async Task<PrimitiveResult<Create{{ClassName}}CommandResponse>> Handle(Create{{ClassName}}Command request, CancellationToken cancellationToken)
     {
         return await {{ClassName}}.Create(request.TypeId)
-            .Map(item => UploadFile(this._file{{ClassName}}, request.ImageInfo?.Bytes, request.ImageInfo?.Extension, "Images", cancellationToken)
+            .Map(item => UploadFile(this._fileService, request.ImageInfo?.Bytes, request.ImageInfo?.Extension, "Images", cancellationToken)
                 .Map(imagePath => (item, imagePath)))
             .Map(data => data.item.AddTranslation(
                 Constants.LangCode_Farsi.ToLower(),
@@ -32,14 +32,14 @@ public sealed class Create{{ClassName}}CommandHandler : IPrimitiveResultCommandH
     }
 
     static async ValueTask<PrimitiveResult<string>> UploadFile(
-        IFile{{ClassName}} file{{ClassName}},
+        IFileService fileService,
         byte[] bytes,
         string fileExtension,
         string fodlerName,
         CancellationToken cancellationToken)
     {
         if ((bytes?.Length ?? 0) == 0) return string.Empty;
-        var result = await file{{ClassName}}.UploadFile(bytes, fileExtension, fodlerName, cancellationToken)
+        var result = await fileService.UploadFile(bytes, fileExtension, fodlerName, cancellationToken)
             .ConfigureAwait(false);
         if (string.IsNullOrWhiteSpace(result)) return PrimitiveResult.Failure<string>("", "Can not upload file");
 

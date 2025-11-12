@@ -37,5 +37,15 @@ public sealed class ServiceTranslation : EntityBase<int>
                 Image = image
             });
     }
+    internal PrimitiveResult<ServiceTranslation> Update(
+        string title,
+        string description,
+        string image)
+    {
+        this.Title = title;
+        this.Description = description;
+        this.Image = image;
+        return this;
+    }
     #endregion
 }

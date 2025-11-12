@@ -1,7 +1,4 @@
-﻿using ParsMedeQ.Application.Services.UserLangServices;
-using ParsMedeQ.Domain;
-
-namespace ParsMedeQ.Application.Features.ProductFeatures.UpdateProductCategoryFeature;
+﻿namespace ParsMedeQ.Application.Features.ProductFeatures.UpdateProductCategoryFeature;
 public sealed class UpdateProductCategoryCommandHandler : IPrimitiveResultCommandHandler<UpdateProductCategoryCommand, UpdateProductCategoryCommandResponse>
 {
     private readonly IUserLangContextAccessor _userLangContextAccessor;

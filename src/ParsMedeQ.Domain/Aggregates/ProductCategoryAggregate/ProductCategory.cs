@@ -45,17 +45,6 @@ public sealed class ProductCategory : EntityBase<int>
         return ValueTask.FromResult(PrimitiveResult.Success(this));
     }
 
-    public ValueTask<PrimitiveResult<ProductCategory>> Update(
-        int? parentId,
-        string langCode,
-        string title,
-        string description,
-        string image)
-    {
-        return this.Update(parentId)
-             .Map(_ => this.UpdateTranslation(langCode, title, description, image).Map(() => this));
-    }
-
     public ValueTask<PrimitiveResult> AddTranslation(
         string langCode,
         string title,
@@ -68,6 +57,17 @@ public sealed class ProductCategory : EntityBase<int>
                 success => PrimitiveResult.Success(),
                 PrimitiveResult.Failure
             );
+    }
+
+    public ValueTask<PrimitiveResult<ProductCategory>> Update(
+        int? parentId,
+        string langCode,
+        string title,
+        string description,
+        string image)
+    {
+        return this.Update(parentId)
+             .Map(_ => this.UpdateTranslation(langCode, title, description, image).Map(() => this));
     }
 
     public ValueTask<PrimitiveResult> UpdateTranslation(

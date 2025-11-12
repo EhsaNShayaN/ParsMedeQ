@@ -53,9 +53,6 @@ internal static class CRUDGenerator
                 prop.DataType = "FileData?";
             }
         }
-        // prepare output directory
-        var outputDir = Path.Combine(ProjectDir, "Application", "Features", $"{className}Features", $"Create{className}Feature");
-        Directory.CreateDirectory(outputDir);
 
         // filenames
 
@@ -67,19 +64,27 @@ internal static class CRUDGenerator
             Props = properties
         };
 
-        var templateCommandPath = Path.Combine(ProjectDir, "Application", "Features", "TemplateFeatures", "CreateTemplateFeature", "CreateTemplateCommand.txt");
-        var commandFile = Path.Combine(outputDir, $"Create{className}Command.cs");
-        GenerateCommand(templateCommandPath, commandFile, model);
+        List<string> lst = new List<string> { "Create", "Update" };
+        foreach (var item in lst)
+        {
+            // prepare output directory
+            var outputDir = Path.Combine(ProjectDir, "Application", "Features", $"{className}Features", $"{item}{className}Feature");
+            Directory.CreateDirectory(outputDir);
 
-        var templateHandlerPath = Path.Combine(ProjectDir, "Application", "Features", "TemplateFeatures", "CreateTemplateFeature", "CreateTemplateCommandHandler.txt");
-        var handlerFile = Path.Combine(outputDir, $"Create{className}CommandHandler.cs");
-        GenerateCommand(templateHandlerPath, handlerFile, model);
+            var templateCommandPath = Path.Combine(ProjectDir, "Application", "Features", "TemplateFeatures", $"{item}TemplateFeature", $"{item}TemplateCommand.txt");
+            var commandFile = Path.Combine(outputDir, $"{item}{className}Command.cs");
+            GenerateCommand(templateCommandPath, commandFile, model);
 
-        var templateResponsePath = Path.Combine(ProjectDir, "Application", "Features", "TemplateFeatures", "CreateTemplateFeature", "CreateTemplateCommandResponse.txt");
-        var responseFile = Path.Combine(outputDir, $"Create{className}CommandResponse.cs");
-        GenerateCommand(templateResponsePath, responseFile, model);
+            var templateHandlerPath = Path.Combine(ProjectDir, "Application", "Features", "TemplateFeatures", $"{item}TemplateFeature", $"{item}TemplateCommandHandler.txt");
+            var handlerFile = Path.Combine(outputDir, $"{item}{className}CommandHandler.cs");
+            GenerateCommand(templateHandlerPath, handlerFile, model);
 
-        Console.WriteLine($"✅ Generated files in: {outputDir}");
+            var templateResponsePath = Path.Combine(ProjectDir, "Application", "Features", "TemplateFeatures", $"{item}TemplateFeature", $"{item}TemplateCommandResponse.txt");
+            var responseFile = Path.Combine(outputDir, $"{item}{className}CommandResponse.cs");
+            GenerateCommand(templateResponsePath, responseFile, model);
+        }
+
+        Console.WriteLine("✅ Generated files");
     }
 
     static void GenerateCommand(string templatePath, string outputPath, TemplateModel model)
