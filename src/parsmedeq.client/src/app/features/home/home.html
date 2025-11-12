@@ -2,9 +2,10 @@
 <section class="hero scroll-section">
   <div class="overlay"></div>
   <div class="hero-content">
-    <h1>تکنولوژی هوشمند پارس مدیکیو</h1>
+    <h1>با ما «درمان ممکن است؛ اگر باورش کنید.»</h1>
+    <!--<h1>تکنولوژی هوشمند پارس مدیکیو</h1>
     <p>تحول در دقت، کارایی و عدالت در خدمات پزشکی</p>
-    <button mat-raised-button color="primary" (click)="testr()">کشف فناوری</button>
+    <button mat-raised-button color="primary" (click)="testr()">کشف فناوری</button>-->
   </div>
 </section>
 
@@ -32,18 +33,18 @@
     <div class="steps">
       <div class="step">
         <mat-icon>science</mat-icon>
-        <h3>تحلیل داده</h3>
-        <p>داده‌های حیاتی به‌صورت بلادرنگ بررسی و تفسیر می‌شوند.</p>
+        <h3></h3>
+        <p>پالس‌های الکتریکی کنترل‌شده، منافذ موقتی در سلول‌های توموری ایجاد می‌کنند.</p>
       </div>
       <div class="step">
         <mat-icon>hub</mat-icon>
-        <h3>یکپارچگی سیستم</h3>
-        <p>ارتباطی امن بین دستگاه‌ها، نرم‌افزارها و کاربران برقرار می‌شود.</p>
+        <h3></h3>
+        <p>داروی شیمی‌درمانی از این منافذ وارد سلول سرطانی می‌شود.</p>
       </div>
       <div class="step">
         <mat-icon>favorite</mat-icon>
-        <h3>دقت در نتیجه</h3>
-        <p>هر تصمیم درمانی بر پایه‌ی داده‌های واقعی است.</p>
+        <h3></h3>
+        <p>سلول توموری به‌طور هدفمند از بین می‌رود — دقیق، ایمن و با حداقل آسیب به بافت سالم.</p>
       </div>
     </div>
   </div>
@@ -53,33 +54,72 @@
 <section class="scroll-section benefits">
   <div class="container">
     <h2>مزایای برجسته</h2>
-    <div class="cards">
-      <mat-card>
-        <mat-icon color="primary">speed</mat-icon>
-        <h3>سرعت پردازش بالا</h3>
-        <p>نتایج در کمتر از چند ثانیه نمایش داده می‌شوند.</p>
-      </mat-card>
-      <mat-card>
-        <mat-icon color="primary">security</mat-icon>
-        <h3>امنیت داده‌ها</h3>
-        <p>رمزگذاری کامل اطلاعات بیماران و تجهیزات.</p>
-      </mat-card>
-      <mat-card>
-        <mat-icon color="primary">psychology</mat-icon>
-        <h3>یادگیری خودکار</h3>
-        <p>سیستم به‌مرور هوشمندتر و دقیق‌تر می‌شود.</p>
-      </mat-card>
+    <div fxLayout="row wrap" fxLayoutAlign="center center" class="cards">
+      <div fxFlex="100" fxFlex.gt-md="33.3" class="p-3">
+        <mat-card>
+          <mat-icon color="primary">speed</mat-icon>
+          <p class="font-large fw-600 two-lines">
+            افزایش نفوذ دارو تا ۱۰۰۰ برابر
+          </p>
+          <p></p>
+        </mat-card>
+      </div>
+      <div fxFlex="100" fxFlex.gt-md="33.3" class="p-3">
+        <mat-card>
+          <mat-icon color="primary">security</mat-icon>
+          <p class="font-large fw-600 two-lines">
+            پاسخ سریع در ۱–۳ هفته
+          </p>
+          <p></p>
+        </mat-card>
+      </div>
+      <div fxFlex="100" fxFlex.gt-md="33.3" class="p-3">
+        <mat-card>
+          <mat-icon color="primary">psychology</mat-icon>
+          <p class="font-large fw-600 two-lines">
+            بدون نیاز به جراحی وسیع
+          </p>
+          <p></p>
+        </mat-card>
+      </div>
+      <div fxFlex="100" fxFlex.gt-md="33.3" class="p-3">
+        <mat-card>
+          <mat-icon color="primary">speed</mat-icon>
+          <p class="font-large fw-600 two-lines">
+            حفظ عملکرد طبیعی عضو درگیر و زیبایی ظاهری
+          </p>
+          <p></p>
+        </mat-card>
+      </div>
+      <div fxFlex="100" fxFlex.gt-md="33.3" class="p-3">
+        <mat-card>
+          <mat-icon color="primary">security</mat-icon>
+          <p class="font-large fw-600 two-lines">
+            قابل تکرار و قابل ترکیب با درمان‌های دیگر
+          </p>
+          <p></p>
+        </mat-card>
+      </div>
+      <div fxFlex="100" fxFlex.gt-md="33.3" class="p-3">
+        <mat-card>
+          <mat-icon color="primary">psychology</mat-icon>
+          <p class="font-large fw-600 two-lines">
+            هزینه‌ی کمتر و عوارض حداقلی
+          </p>
+          <p></p>
+        </mat-card>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- Applications -->
-<section class="scroll-section applications">
+<section class="scroll-section applications d-none">
   <div class="container">
     <h2>کاربردهای فناوری</h2>
     <div class="image-grid">
       <img src="assets/images/about.png" alt="Application 1">
-      <img src="assets/images/hero.png" alt="Application 2">
+      <img src="assets/images/hero2.jpg" alt="Application 2">
       <img src="assets/images/about.png" alt="Application 3">
     </div>
   </div>
@@ -91,11 +131,18 @@
     <div class="about-text">
       <h2>دربارهٔ ما</h2>
       <p>
-        شرکت پیشرو فناوران درمان پارس، با افتخار یکی از مجموعه‌های تخصصی و معتبر در زمینه ارائه خدمات درمانی و تجهیزات
-        پزشکی در ایران است. ما با سال‌ها تجربه، تخصص و تعهد، تلاش می‌کنیم بهترین خدمات درمانی، مشاوره تخصصی، و تجهیز
-        مراکز درمانی را با بالاترین استانداردها به شما ارائه دهیم.
+        شرکت پیشرو فناوران درمان پارس با رویکردی دانش‌بنیان و مبتنی بر تحقیق و توسعه، در حوزه‌ی فناوری‌های نوین درمان
+        سرطان فعالیت می‌کند. این شرکت به‌عنوان تنها توسعه‌دهنده و تولیدکننده‌ی فناوری الکتروکموتراپی (ECT) در ایران
+        وآسیا، گام بزرگی در مسیر تولید و ارتقای این روش درمانی برداشته است. تیم‌های تخصصی پیشرو فناوران درمان پارس در
+        حوزه‌های مهندسی ،پزشکی و علوم پایه با هم‌افزایی دانش و تجربه، طراحی و تولید تجهیزات درمانی دقیق، ایمن و منطبق با
+        استانداردهای جهانی را دنبال می‌کنند. ماموریت ما، به‌کارگیری علم و فناوری با نگاهی انسان‌محور برای دستیابی به
+        درمانی مؤثر و در دسترس است.
+        <br>
+        زیرا ما باور داریم:
+        <br>
+        درمان ممکن است، اگر باورش کنید
       </p>
-      <a class="btn btn-primary" routerLink="/about">بیشتر بدانید</a>
+      <a class="btn btn-primary not-link" routerLink="/about">بیشتر بدانید</a>
     </div>
     <div class="about-image" aria-hidden="true">
       <img src="assets/images/cancer-treatment.jpg" alt="" loading="lazy">
