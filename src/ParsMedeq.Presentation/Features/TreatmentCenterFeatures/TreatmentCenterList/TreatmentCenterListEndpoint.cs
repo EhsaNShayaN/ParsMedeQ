@@ -35,7 +35,10 @@ sealed class TreatmentCenterListApiRequestMapper : IPresentationMapper<
     {
         return ValueTask.FromResult(
             PrimitiveResult.Success(
-                new TreatmentCenterListQuery()
+                new TreatmentCenterListQuery(
+                    src.Query,
+                    src.ProvinceId,
+                    src.CityId)
                 {
                     PageIndex = src.PageIndex,
                     PageSize = src.PageSize,
@@ -56,7 +59,8 @@ sealed class TreatmentCenterListApiResponseMapper : IPresentationMapper<
                     new BasePaginatedApiResponse<TreatmentCenterListApiResponse>(src.Items.Select(data =>
                     new TreatmentCenterListApiResponse(
                         data.Id,
-                        data.LocationId,
+                        data.ProvinceId,
+                        data.CityId,
                         data.Title,
                         data.Description,
                         data.Image,

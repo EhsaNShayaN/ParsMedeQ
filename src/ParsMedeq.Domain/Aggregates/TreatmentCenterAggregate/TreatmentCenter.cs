@@ -1,5 +1,4 @@
 ﻿using ParsMedeQ.Domain.Abstractions;
-using ParsMedeQ.Domain.Aggregates.LocationAggregate;
 using ParsMedeQ.Domain.Aggregates.TreatmentCenterAggregate.Entities;
 
 namespace ParsMedeQ.Domain.Aggregates.TreatmentCenterAggregate;
@@ -10,12 +9,14 @@ public sealed class TreatmentCenter : EntityBase<int>
     #endregion
 
     #region " Properties "
-    public int LocationId { get; private set; }
+    public int ProvinceId { get; private set; }
+    public int CityId { get; private set; }
     public DateTime CreationDate { get; private set; }
     #endregion
 
     #region " Navigation Properties "
-    public Location Location { get; private set; } = null!;
+    /*public Location Province { get; private set; } = null!;
+    public Location City { get; private set; } = null!;*/
     public IReadOnlyCollection<TreatmentCenterTranslation> TreatmentCenterTranslations => this._treatmentCenterTranslations.AsReadOnly();
     #endregion
 
@@ -26,28 +27,33 @@ public sealed class TreatmentCenter : EntityBase<int>
 
     #region " Factory "
     public static PrimitiveResult<TreatmentCenter> Create(
-        int locationId) => PrimitiveResult.Success(
+        int provinceId,
+        int cityId) => PrimitiveResult.Success(
             new TreatmentCenter
             {
-                LocationId = locationId,
+                ProvinceId = provinceId,
+                CityId = cityId,
                 CreationDate = DateTime.Now,
             });
 
     public ValueTask<PrimitiveResult<TreatmentCenter>> Update(
-        int locationId)
+        int provinceId,
+        int cityId)
     {
-        this.LocationId = locationId;
+        this.CityId = provinceId;
+        this.CityId = cityId;
         return ValueTask.FromResult(PrimitiveResult.Success(this));
     }
 
     public ValueTask<PrimitiveResult<TreatmentCenter>> Update(
-        int locationId,
+        int provinceId,
+        int cityId,
         string langCode,
         string title,
         string description,
         string image)
     {
-        return this.Update(locationId)
+        return this.Update(provinceId, cityId)
              .Map(_ => this.UpdateTranslation(langCode, title, description, image).Map(() => this));
     }
 

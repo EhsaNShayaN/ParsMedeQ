@@ -1,7 +1,8 @@
 ﻿namespace ParsMedeQ.Application.Features.TreatmentCenterFeatures.AddTreatmentCenterFeature;
 
 public sealed record class AddTreatmentCenterCommand(
-    int LocationId,
+    int ProvinceId,
+    int CityId,
     string Title,
     string Description,
     FileData ImageInfo) : IPrimitiveResultCommand<AddTreatmentCenterCommandResponse>, IValidatableRequest<AddTreatmentCenterCommand>

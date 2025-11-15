@@ -138,5 +138,6 @@
   "SEARCH": "Search",
   "SERVICE_DATE": "Service date",
   "DONE": "Done",
-  "NOT_DONE": "Not done"
+  "NOT_DONE": "Not done",
+  "RESET_FILTERS": "Reset filters"
 }

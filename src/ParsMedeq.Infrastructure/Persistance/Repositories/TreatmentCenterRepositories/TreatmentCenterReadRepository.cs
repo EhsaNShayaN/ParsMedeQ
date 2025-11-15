@@ -37,7 +37,7 @@ internal sealed class TreatmentCenterReadRepository : GenericPrimitiveReadReposi
             .Where(s => s.Id.Equals(id))
             .Select(s => new TreatmentCenterDetailsDbQueryResponse(
                 s.Id,
-                s.LocationId,
+                s.CityId,
                 s.TreatmentCenterTranslations.SingleOrDefault(s => s.LanguageCode == langCode).Title ?? string.Empty,
                 s.TreatmentCenterTranslations.SingleOrDefault(s => s.LanguageCode == langCode).Description ?? string.Empty,
                 s.TreatmentCenterTranslations.SingleOrDefault(s => s.LanguageCode == langCode).Image ?? string.Empty,
@@ -48,12 +48,16 @@ internal sealed class TreatmentCenterReadRepository : GenericPrimitiveReadReposi
     public async ValueTask<PrimitiveResult<BasePaginatedApiResponse<TreatmentCenterListDbQueryResponse>>> FilterTreatmentCenters(
         BasePaginatedQuery paginated,
         string langCode,
+        string query,
+        int provinceId,
+        int cityId,
         int lastId,
         CancellationToken cancellationToken)
     {
         Expression<Func<TreatmentCenter, TreatmentCenterListDbQueryResponse>> TreatmentCenterKeySelector = (res) => new TreatmentCenterListDbQueryResponse(
             res.Id,
-            res.LocationId,
+            res.ProvinceId,
+            res.CityId,
             res.TreatmentCenterTranslations.SingleOrDefault(s => s.LanguageCode == langCode).Title ?? string.Empty,
             res.TreatmentCenterTranslations.SingleOrDefault(s => s.LanguageCode == langCode).Description ?? string.Empty,
             res.TreatmentCenterTranslations.SingleOrDefault(s => s.LanguageCode == langCode).Image ?? string.Empty,
@@ -63,7 +67,10 @@ internal sealed class TreatmentCenterReadRepository : GenericPrimitiveReadReposi
             this.DbContext.TreatmentCenter
             .Include(x => x.TreatmentCenterTranslations),
             lastId,
-             x => true,
+             x =>
+                //(string.IsNullOrWhiteSpace(query) || x.ProvinceId.Equals(provinceId)) &&
+                (provinceId.Equals(0) || x.ProvinceId.Equals(provinceId)) &&
+                (cityId.Equals(0) || x.CityId.Equals(cityId)),
              paginated.PageSize,
              TreatmentCenterKeySelector,
              cancellationToken)

@@ -1,10 +1,9 @@
-﻿using SRH.MediatRMessaging;
-
-namespace ParsMedeQ.Application.Features.TreatmentCenterFeatures.UpdateTreatmentCenterFeature;
+﻿namespace ParsMedeQ.Application.Features.TreatmentCenterFeatures.UpdateTreatmentCenterFeature;
 
 public sealed record class UpdateTreatmentCenterCommand(
     int Id,
-    int LocationId,
+    int ProvinceId,
+    int CityId,
     string Title,
     string Description,
     FileData? ImageInfo,

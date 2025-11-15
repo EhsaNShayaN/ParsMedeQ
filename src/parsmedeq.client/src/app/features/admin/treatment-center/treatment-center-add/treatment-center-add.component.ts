@@ -44,25 +44,23 @@ export class TreatmentCenterAddComponent extends BaseComponent implements OnInit
         if (params['id']) {
           this.restApiService.getTreatmentCenter(params['id']).subscribe((t: BaseResult<TreatmentCenter>) => {
             this.editItem = t.data;
-            const provinceId = this.locations.find(p => p.id === this.editItem?.locationId)?.parentId;
-            this.cities = this.locations.filter(s => s.parentId === provinceId);
-            this.createForm(provinceId);
+            this.cities = this.locations.filter(s => s.parentId === this.editItem?.provinceId);
+            this.createForm();
           });
         } else {
-          this.createForm(undefined);
+          this.createForm();
         }
       });
     });
   }
 
-  createForm(provinceId: number | undefined) {
-    console.log('provinceId', provinceId);
+  createForm() {
     this.oldImagePath = this.editItem?.image ?? '';
     this.myForm = this.formBuilder.group({
       title: [this.editItem?.title, Validators.required],
       description: this.editItem?.description,
-      provinceId: [provinceId, Validators.required],
-      cityId: [this.editItem?.locationId, Validators.required],
+      provinceId: [this.editItem?.provinceId, Validators.required],
+      cityId: [this.editItem?.cityId, Validators.required],
       imagePath: [null, this.oldImagePath ? null : Validators.required]
     });
     if (this.editItem) {

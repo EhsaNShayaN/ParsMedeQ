@@ -1,4 +1,4 @@
-<app-header-image [backgroundImage]="'assets/images/others/projects_header.jpg'"
+<app-header-image [backgroundImage]="''"
                   [bgImageAnimate]="false"
                   [contentOffsetToTop]="true"
                   [hideMask]="true"
@@ -8,6 +8,34 @@
 <div class="theme-container">
   <div class="px-3">
     <mat-card appearance="outlined" class="main-content-header">
+      <div fxLayout="row wrap" class="mt-5">
+        <div class="px-2" fxFlex="100" fxFlex.gt-xs="40">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>{{ 'PROVINCE' | translate }}</mat-label>
+            <mat-select [placeholder]="'PROVINCE' | translate" (selectionChange)="provinceChanged($event)"
+                        [(ngModel)]="provinceId">
+              <mat-option *ngFor="let item of provinces" [value]="item.id">
+                {{ item.title }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="px-2" fxFlex="100" fxFlex.gt-xs="40">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>{{ 'CITY' | translate }}</mat-label>
+            <mat-select [placeholder]="'CITY' | translate" (selectionChange)="cityChanged($event)" [(ngModel)]="cityId">
+              <mat-option *ngFor="let item of cities" [value]="item.id">
+                {{ item.title }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="px-2 text-left" fxFlex="100" fxFlex.gt-xs="20">
+          <button mat-raised-button color="accent" (click)="reset()" class="mt-3">
+            {{ 'RESET_FILTERS' | translate }}
+          </button>
+        </div>
+      </div>
       <div class="section mt-3">
         <h1 class="section-title">{{ 'TREATMENT_CENTERS' | translate }}</h1>
         <div fxLayout="row wrap" class="services-wrapper">

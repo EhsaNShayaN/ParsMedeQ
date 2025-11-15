@@ -1,7 +1,8 @@
 ﻿namespace ParsMedeQ.Contracts.TreatmentCenterContracts.TreatmentCenterListContract;
 public readonly record struct TreatmentCenterListApiResponse(
     int Id,
-    int LocationId,
+    int ProvinceId,
+    int CityId,
     string Title,
     string Description,
     string Image,

@@ -10,6 +10,9 @@ public interface ITreatmentCenterReadRepository : IDomainRepository
     public ValueTask<PrimitiveResult<BasePaginatedApiResponse<TreatmentCenterListDbQueryResponse>>> FilterTreatmentCenters(
         BasePaginatedQuery paginated,
         string langCode,
+        string query,
+        int provinceId,
+        int cityId,
         int lastId,
         CancellationToken cancellationToken);
 }

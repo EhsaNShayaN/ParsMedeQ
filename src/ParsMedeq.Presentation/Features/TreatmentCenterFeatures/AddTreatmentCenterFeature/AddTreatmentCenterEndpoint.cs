@@ -34,6 +34,7 @@ internal sealed class AddTreatmentCenterApiRequestMapper : IPresentationMapper<A
         return await ValueTask.FromResult(
             PrimitiveResult.Success(
                 new AddTreatmentCenterCommand(
+                    src.ProvinceId,
                     src.CityId,
                     src.Title,
                     src.Description,

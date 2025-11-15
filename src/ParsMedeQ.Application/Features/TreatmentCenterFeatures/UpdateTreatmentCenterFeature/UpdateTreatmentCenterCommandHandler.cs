@@ -1,7 +1,4 @@
-﻿using ParsMedeQ.Application.Services.UserLangServices;
-using ParsMedeQ.Domain;
-
-namespace ParsMedeQ.Application.Features.TreatmentCenterFeatures.UpdateTreatmentCenterFeature;
+﻿namespace ParsMedeQ.Application.Features.TreatmentCenterFeatures.UpdateTreatmentCenterFeature;
 public sealed class UpdateTreatmentCenterCommandHandler : IPrimitiveResultCommandHandler<UpdateTreatmentCenterCommand, UpdateTreatmentCenterCommandResponse>
 {
     private readonly IUserLangContextAccessor _userLangContextAccessor;
@@ -28,7 +25,8 @@ public sealed class UpdateTreatmentCenterCommandHandler : IPrimitiveResultComman
             .MapIf(
                 _ => langCode.Equals(Constants.LangCode_Farsi, StringComparison.OrdinalIgnoreCase),
                 data => data.center.Update(
-                    request.LocationId,
+                    request.ProvinceId,
+                    request.CityId,
                     langCode,
                     request.Title,
                     request.Description,

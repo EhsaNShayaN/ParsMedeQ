@@ -15,6 +15,20 @@ sealed class TreatmentCenterEntityConfiguration : IEntityTypeConfiguration<Treat
             .HasForeignKey(a => a.TreatmentCenterId)
             .HasPrincipalKey(a => a.Id)
             .OnDelete(DeleteBehavior.Cascade);
+
+        /*builder
+            .HasOne(x => x.Province)
+            .WithMany(x => x.TreatmentCenter)
+            .HasForeignKey(a => a.ProvinceId)
+            .HasPrincipalKey(a => a.Id)
+            .OnDelete(DeleteBehavior.NoAction);*/
+
+        /*builder
+            .HasOne(x => x.City)
+            .WithMany(x => x.TreatmentCenter)
+            .HasForeignKey(a => a.CityId)
+            .HasPrincipalKey(a => a.Id)
+            .OnDelete(DeleteBehavior.NoAction);*/
     }
 }
 

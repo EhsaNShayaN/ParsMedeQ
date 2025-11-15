@@ -1,5 +1,4 @@
-﻿using ParsMedeQ.Domain;
-using ParsMedeQ.Domain.Aggregates.TreatmentCenterAggregate;
+﻿using ParsMedeQ.Domain.Aggregates.TreatmentCenterAggregate;
 
 namespace ParsMedeQ.Application.Features.TreatmentCenterFeatures.AddTreatmentCenterFeature;
 public sealed class AddTreatmentCenterCommandHandler : IPrimitiveResultCommandHandler<AddTreatmentCenterCommand, AddTreatmentCenterCommandResponse>
@@ -16,7 +15,7 @@ public sealed class AddTreatmentCenterCommandHandler : IPrimitiveResultCommandHa
 
     public async Task<PrimitiveResult<AddTreatmentCenterCommandResponse>> Handle(AddTreatmentCenterCommand request, CancellationToken cancellationToken)
     {
-        return await TreatmentCenter.Create(request.LocationId)
+        return await TreatmentCenter.Create(request.ProvinceId, request.CityId)
             .Map(resource => UploadFile(this._fileService, request.ImageInfo.Bytes, request.ImageInfo.Extension, "Images", cancellationToken)
                 .Map(imagePath => (resource, imagePath)))
             .Map(data => data.resource.AddTranslation(Constants.LangCode_Farsi.ToLower(), request.Title, request.Description, data.imagePath)

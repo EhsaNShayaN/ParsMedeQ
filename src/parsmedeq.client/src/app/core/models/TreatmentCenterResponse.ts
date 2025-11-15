@@ -6,8 +6,9 @@ export interface TreatmentCenterResponse extends BaseResult<Paginated<TreatmentC
 
 export interface TreatmentCenter {
   id: number;
-  locationId: number;
+  provinceId: number;
   province: string;
+  cityId: number;
   city: string;
   title: string;
   description: string;
