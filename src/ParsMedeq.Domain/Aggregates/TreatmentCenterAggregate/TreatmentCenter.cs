@@ -1,4 +1,5 @@
 ﻿using ParsMedeQ.Domain.Abstractions;
+using ParsMedeQ.Domain.Aggregates.LocationAggregate;
 using ParsMedeQ.Domain.Aggregates.TreatmentCenterAggregate.Entities;
 
 namespace ParsMedeQ.Domain.Aggregates.TreatmentCenterAggregate;
@@ -15,8 +16,8 @@ public sealed class TreatmentCenter : EntityBase<int>
     #endregion
 
     #region " Navigation Properties "
-    /*public Location Province { get; private set; } = null!;
-    public Location City { get; private set; } = null!;*/
+    public Location Province { get; private set; } = null!;
+    public Location City { get; private set; } = null!;
     public IReadOnlyCollection<TreatmentCenterTranslation> TreatmentCenterTranslations => this._treatmentCenterTranslations.AsReadOnly();
     #endregion
 

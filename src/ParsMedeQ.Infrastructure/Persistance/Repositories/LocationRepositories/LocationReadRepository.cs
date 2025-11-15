@@ -13,12 +13,12 @@ internal sealed class LocationReadRepository : GenericPrimitiveReadRepositoryBas
         CancellationToken cancellationToken)
     {
         return await this.DbContext.Location
-            .Include(x => x.LocationTranslation)
+            .Include(x => x.LocationTranslations)
             .Select(s => new
             LocationListDbQueryResponse(
                 s.Id,
                 s.ParentId,
-                s.LocationTranslation.SingleOrDefault(s => s.LanguageCode == langCode).Title ?? string.Empty)
+                s.LocationTranslations.SingleOrDefault(s => s.LanguageCode == langCode).Title ?? string.Empty)
             )
             .Run(q => q.ToArrayAsync(cancellationToken), PrimitiveResult.Success(Array.Empty<LocationListDbQueryResponse>()));
     }

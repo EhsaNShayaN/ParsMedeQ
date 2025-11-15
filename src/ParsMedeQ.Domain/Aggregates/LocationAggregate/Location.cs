@@ -8,8 +8,8 @@ public sealed class Location : EntityBase<int>
 {
     #region " Fields "
     private List<Location> _children = [];
-    private List<LocationTranslation> _locationTranslation = [];
-    private List<TreatmentCenter> _treatmentCenter = [];
+    private List<LocationTranslation> _locationTranslations = [];
+    private List<TreatmentCenter> _treatmentCenters = [];
     #endregion
 
     #region " Properties "
@@ -19,8 +19,8 @@ public sealed class Location : EntityBase<int>
     #region " Navigation Properties "
     public Location? Parent { get; private set; }
     public IReadOnlyCollection<Location> Children => this._children.AsReadOnly();
-    public IReadOnlyCollection<LocationTranslation> LocationTranslation => this._locationTranslation.AsReadOnly();
-    public IReadOnlyCollection<TreatmentCenter> TreatmentCenter => this._treatmentCenter.AsReadOnly();
+    public IReadOnlyCollection<LocationTranslation> LocationTranslations => this._locationTranslations.AsReadOnly();
+    public IReadOnlyCollection<TreatmentCenter> TreatmentCenters => this._treatmentCenters.AsReadOnly();
     #endregion
 
     #region " Constructors "

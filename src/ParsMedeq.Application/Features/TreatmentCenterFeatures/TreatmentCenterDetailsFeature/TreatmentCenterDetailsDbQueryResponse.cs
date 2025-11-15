@@ -2,7 +2,8 @@
 
 public readonly record struct TreatmentCenterDetailsDbQueryResponse(
     int Id,
-    int LocationId,
+    int ProvinceId,
+    int CityId,
     string Title,
     string Description,
     string Image,

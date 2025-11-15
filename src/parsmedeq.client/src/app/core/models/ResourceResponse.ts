@@ -32,7 +32,7 @@ export class Resource {
   expirationTime!: string;
   expired!: boolean;
   creationDate!: string;
-  registered!: boolean;
+  purchased!: boolean;
 
   resourceCategories: ResourceCategory[] = [];
 }

@@ -16,19 +16,19 @@ sealed class TreatmentCenterEntityConfiguration : IEntityTypeConfiguration<Treat
             .HasPrincipalKey(a => a.Id)
             .OnDelete(DeleteBehavior.Cascade);
 
-        /*builder
+        builder
             .HasOne(x => x.Province)
-            .WithMany(x => x.TreatmentCenter)
+            .WithMany()
             .HasForeignKey(a => a.ProvinceId)
             .HasPrincipalKey(a => a.Id)
-            .OnDelete(DeleteBehavior.NoAction);*/
+            .OnDelete(DeleteBehavior.NoAction);
 
-        /*builder
+        builder
             .HasOne(x => x.City)
-            .WithMany(x => x.TreatmentCenter)
+            .WithMany(x => x.TreatmentCenters)
             .HasForeignKey(a => a.CityId)
             .HasPrincipalKey(a => a.Id)
-            .OnDelete(DeleteBehavior.NoAction);*/
+            .OnDelete(DeleteBehavior.NoAction);
     }
 }
 

@@ -9,7 +9,6 @@ import {Tables} from '../../core/constants/server.constants';
 @Directive()
 export class BasePageResource extends BaseComponent implements AfterViewInit, OnDestroy {
   public readonly Tables = Tables;
-  isLoading: boolean = true;
   public appSettings: AppSettings;
   public settings: Settings;
   private activatedRoute: ActivatedRoute;

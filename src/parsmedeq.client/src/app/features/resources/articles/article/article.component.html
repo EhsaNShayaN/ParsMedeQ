@@ -7,33 +7,53 @@
   </nav>
 
   @if (item) {
-
-    <img class="cover" [src]="item?.image" [alt]="item.title"/>
-
-    <div class="content">
-      <h1 class="ltr text-left">{{ item.title }}</h1>
-      <p class="meta">
-        تاریخ:
-        {{ item.creationDate }}
-      </p>
-      @if (item.keywords) {
-        <p class="meta ">
-          کلمات کلیدی:
-          <span class="bg-primary p-2 background-color">{{ item.keywords }}</span>
-        </p>
-      }
-
-      <div class="body" [innerHTML]="item.abstract | safeHtml"></div>
-
-      <!--<div class="related" *ngIf="item.related?.length">
-        <h3>مقالات مرتبط</h3>
-        <div class="related-grid">
-          <div class="related-card" *ngFor="let related of item.related">
-            <img [src]="related.thumbnail" [alt]="related.title"/>
-            <h4>{{ related.title }}</h4>
-          </div>
+    <div fxLayout="row wrap">
+      @if (item.image) {
+        <div fxFlex="100" fxFlex.gt-md="33.3" class="p-3">
+          <img class="cover w-100 h-100" [src]="item.image" [alt]="item.title"/>
         </div>
-      </div>-->
+      }
+      <div fxFlex="100" [fxFlex.gt-md]="item.image ? 66.6 : 100" class="p-3">
+        <div class="content">
+          <h1>{{ item.title }}</h1>
+          <p class="meta">
+            {{ 'CREATION_DATE' | translate }}:
+            {{ item.creationDate }}
+          </p>
+          @if ((item.fileId ?? 0) > 0) {
+            <div class="w-25 mb-5">
+              @if (item.purchased) {
+                <app-download-management [id]="item.fileId ?? 0" [price]="item.price" [tableId]="Tables.Article">
+                </app-download-management>
+              } @else {
+                <app-cart-item-control
+                  [relatedId]="item!.id"
+                  [tableId]="Tables.Article"
+                  [relatedName]="item!.title"
+                  [unitPrice]="item!.price ?? 0"
+                  [stock]="item!.stock ?? 99999999">
+                </app-cart-item-control>
+              }
+            </div>
+          }
+          @if (item.keywords) {
+            <p class="meta ">
+              کلمات کلیدی:
+              <span class="bg-primary p-2 background-color">{{ item.keywords }}</span>
+            </p>
+          }
+          <div class="body" [innerHTML]="item.abstract | safeHtml"></div>
+          <!--<div class="related" *ngIf="item.related?.length">
+            <h3>مقالات مرتبط</h3>
+            <div class="related-grid">
+              <div class="related-card" *ngFor="let related of item.related">
+                <img [src]="related.thumbnail" [alt]="related.title"/>
+                <h4>{{ related.title }}</h4>
+              </div>
+            </div>
+          </div>-->
+        </div>
+      </div>
     </div>
     <div class="mb-3">
       <app-comments [relatedId]="item.id" [tableId]="Tables.Article"></app-comments>

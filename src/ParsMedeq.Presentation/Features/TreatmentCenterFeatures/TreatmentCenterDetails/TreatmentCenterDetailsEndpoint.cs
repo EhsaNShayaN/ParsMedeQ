@@ -58,7 +58,8 @@ sealed class TreatmentCenterDetailsApiResponseMapper : IPresentationMapper<
             PrimitiveResult.Success(
                     new TreatmentCenterDetailsApiResponse(
                         src.Id,
-                        src.LocationId,
+                        src.ProvinceId,
+                        src.CityId,
                         src.Title,
                         src.Description,
                         src.Image,

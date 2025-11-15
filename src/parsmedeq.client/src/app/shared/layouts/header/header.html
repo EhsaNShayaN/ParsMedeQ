@@ -3,12 +3,6 @@
     <mat-icon>menu</mat-icon>
   </button>
 
-  <div class="logo px-2">
-    <img src="/assets/logo.png" alt="ParsMedeQ" height="40"/>
-  </div>
-
-  <span class="spacer"></span>
-
   <nav class="main-menu desktop-only">
     <a mat-button [routerLink]="'/' | langPack">{{ 'HOME' | translate }}</a>
     <a mat-button [routerLink]="'/centers' | langPack">{{ 'TREATMENT_CENTERS' | translate }}</a>
@@ -28,6 +22,14 @@
       <a mat-button [routerLink]="'/auth/login' | langPack">{{ 'LOGIN' | translate }}</a>
     }-->
   </nav>
+
+  <span class="spacer"></span>
+
+  <div class="logo px-2">
+    <a [routerLink]="'/' | langPack">
+      <img src="/assets/logo.png" alt="ParsMedeQ" height="40"/>
+    </a>
+  </div>
 </mat-toolbar>
 
 <mat-sidenav-container class="sidenav-container">

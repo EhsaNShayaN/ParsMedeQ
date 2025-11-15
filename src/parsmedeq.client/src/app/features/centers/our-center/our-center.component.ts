@@ -33,11 +33,6 @@ export class OurCenterComponent extends PureComponent implements OnInit, AfterVi
     };
     this.restApiService.getLocations().subscribe((loc: LocationResponse) => {
       this.restApiService.getTreatmentCenters(model).subscribe((d: TreatmentCenterResponse) => {
-        /*d.data.items.forEach(item => {
-          const city = loc.data.find(s => s.id === item.locationId);
-          item.city = loc.data.find(s => s.id === item.locationId)?.title ?? '';
-          item.province = loc.data.find(s => s.id === city?.parentId)?.title ?? '';
-        })*/
         this.items = d.data.items;
       });
     });

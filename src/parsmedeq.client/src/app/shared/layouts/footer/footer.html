@@ -1,43 +1,35 @@
 <footer class="footer">
-  <div class="footer-content">
-    <div class="company-info">
-      <h3>ParsMedeQ</h3>
-      <p>تولیدکننده تجهیزات پزشکی با کیفیت بالا</p>
-      <p>
-        آدرس:
-        <span [innerHTML]="settings.address"></span>
-      </p>
-      <p>
-        تلفن:
-        <a href="tel:{{settings.tel}}" class="not-link">{{ settings.tel.replace('021', '') }}</a>
-      </p>
-      <p>
-        کدپستی:
-        {{ settings.postalCode }}
-      </p>
-    </div>
-
-    <div class="footer-links">
-      <h4>دسترسی سریع</h4>
-      <a routerLink="/about">درباره ما</a>
-      <a routerLink="/products">محصولات</a>
-      <a routerLink="/articles">مقالات</a>
-      <a routerLink="/contact">تماس با ما</a>
-    </div>
-
-    <!--<div class="footer-social">
-      <h4>ما را دنبال کنید</h4>
-      <div class="social-icons">
-        <a href="https://instagram.com/parsmedeq" target="_blank">
-          <mat-icon svgIcon="instagram"></mat-icon>
-        </a>
-        <a href="https://linkedin.com/company/parsmedeq" target="_blank">
-          <mat-icon svgIcon="linkedin"></mat-icon>
-        </a>
+  <div fxLayout="row wrap" fxLayoutAlign="space-between start">
+    <div fxFlex="0" fxFlex.gt-xs="1">&nbsp;</div>
+    <div fxFlex="100" fxFlex.gt-xs="33.3">
+      <div class="company-info">
+        <h3>ParsMedeQ</h3>
+        <p>تولیدکننده تجهیزات پزشکی با کیفیت بالا</p>
+        <p>
+          آدرس:
+          <span [innerHTML]="settings.address"></span>
+        </p>
+        <p>
+          تلفن:
+          <a href="tel:{{settings.tel}}" class="not-link">{{ settings.tel.replace('021', '') }}</a>
+        </p>
+        <p>
+          کدپستی:
+          {{ settings.postalCode }}
+        </p>
       </div>
-    </div>-->
+    </div>
+    <div fxFlex="100" fxFlex.gt-xs="33.3" class="text-left">
+      <div class="footer-links">
+        <h4>دسترسی سریع</h4>
+        <a routerLink="/about">درباره ما</a>
+        <a routerLink="/products">محصولات</a>
+        <a routerLink="/articles">مقالات</a>
+        <a routerLink="/contact">تماس با ما</a>
+      </div>
+    </div>
+    <div fxFlex="0" fxFlex.gt-xs="1">&nbsp;</div>
   </div>
-
   <div class="footer-bottom">
     © {{ currentYear }} ParsMedeQ - تمامی حقوق محفوظ است
   </div>
