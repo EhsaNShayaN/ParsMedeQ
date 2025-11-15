@@ -20,6 +20,7 @@ export class ProductComponent extends BaseComponent implements OnInit, OnDestroy
   parents: ProductCategory[] = [];
   fixTabs = false;
   selectedImage?: string;
+  oldPrice: number = 0;
 
   constructor(private activatedRoute: ActivatedRoute) {
     super();
@@ -31,8 +32,11 @@ export class ProductComponent extends BaseComponent implements OnInit, OnDestroy
       this.sub = this.activatedRoute.params.subscribe(params => {
         this.restApiService.getProduct({id: params['id']}).subscribe((p: BaseResult<Product>) => {
           this.product = p.data;
+          this.oldPrice = this.product.discount > 0 ? this.calcOldPrice(this.product.price, this.product.discount) : this.product.price;
+          if (p.data.image) {
+            p.data.images.splice(0, 0, {id: 0, ordinal: 0, path: p.data.image});
+          }
           this.selectedImage = p?.data?.images[0]?.path;
-          console.log(this.selectedImage);
           this.getParents(this.product?.productCategoryId);
           this.setTitle(this.product.title);
           this.setMetaDescription(this.product.description);
@@ -73,6 +77,10 @@ export class ProductComponent extends BaseComponent implements OnInit, OnDestroy
 
   ngOnDestroy() {
     this.sub.unsubscribe();
+  }
+
+  private calcOldPrice(price: number, discount: number) {
+    return price / (1 - discount / 100);
   }
 }
 

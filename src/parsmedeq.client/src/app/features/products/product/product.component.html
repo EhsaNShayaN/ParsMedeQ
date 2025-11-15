@@ -1,5 +1,5 @@
 @if (product) {
-  <app-header-image
+  <!--<app-header-image
     [backgroundImage]="product.image"
     [bgImageAnimate]="false"
     [contentOffsetToTop]="true"
@@ -7,13 +7,13 @@
     [contentMinHeight]="400"
     [title]="''"
     [desc]="''">
-  </app-header-image>
+  </app-header-image>-->
   <div class="theme-container">
     <div class="py-3">
       <nav class="breadcrumb">فروشگاه › {{ product.productCategoryTitle }} › {{ product.title }}</nav>
       <div fxLayout="row wrap">
         @if ((product.images?.length ?? 0) > 0) {
-          <div class="gallery pe-2" fxFlex="100" fxFlex.gt-md="60">
+          <div class="gallery pe-2" fxFlex="100" fxFlex.gt-md="50">
             <div class="main-image">
               <img [src]="selectedImage" alt="{{ product.title }}" loading="lazy">
             </div>
@@ -31,8 +31,10 @@
           @if (product.price > 0) {
             <div class="price-row">
               <div class="price">
-                <span class="final">{{ product }}</span>
-                <span class="original" *ngIf="product.discount > 0">{{ product.price }}</span>
+                <span class="final">{{ product.price | currencyFormatter }}</span>
+                <span class="original" *ngIf="product.price !== oldPrice">
+                  {{ oldPrice | currencyFormatter }}
+                </span>
                 <span>{{ 'TOMAN' | translate }}</span>
               </div>
             </div>
@@ -41,27 +43,25 @@
             <b><u>{{ product.guarantyExpirationTime }}</u></b>
             سال گارانتی
           </div>
-          <div *ngIf="product.periodicServiceInterval > 0">
+          <div *ngIf="product.periodicServiceInterval > 0" class="mt-2">
             سرویس دوره ای هر
             <b><u>{{ product.periodicServiceInterval }}</u></b>
             ماه
           </div>
           @if (product) {
-            <app-cart-item-control
-              [relatedId]="product!.id"
-              [tableId]="Tables.Product"
-              [relatedName]="product!.title"
-              [unitPrice]="product!.price ?? 0"
-              [stock]="product!.stock ?? 99999999">
-            </app-cart-item-control>
+            <div class="mt-3">
+              <app-cart-item-control
+                [relatedId]="product!.id"
+                [tableId]="Tables.Product"
+                [relatedName]="product!.title"
+                [unitPrice]="product!.price ?? 0"
+                [stock]="product!.stock ?? 99999999">
+              </app-cart-item-control>
+            </div>
           }
-          <mat-tab-group class="spec-tabs">
-            <mat-tab label="توضیحات">
-              <div class="tab-body">
-                <p [innerHTML]="product.description | safeHtml"></p>
-              </div>
-            </mat-tab>
-          </mat-tab-group>
+          <div class="tab-body">
+            <p [innerHTML]="product.description | safeHtml"></p>
+          </div>
         </div>
       </div>
     </div>
