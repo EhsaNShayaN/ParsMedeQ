@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, ElementRef} from '@angular/core';
 import {BasePageResource} from '../../base-page-resource';
 import {Tables} from '../../../../core/constants/server.constants';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-news-details',
@@ -9,7 +10,8 @@ import {Tables} from '../../../../core/constants/server.constants';
   standalone: false,
 })
 export class NewsDetailsComponent extends BasePageResource implements AfterViewInit {
-  constructor(private el: ElementRef) {
+  constructor(private el: ElementRef,
+              private toastrService: ToastrService) {
     super(Tables.News);
   }
 
@@ -21,7 +23,35 @@ export class NewsDetailsComponent extends BasePageResource implements AfterViewI
     }, 80);
   }
 
-  share(target: string) {
+  share() {
+    const url = window.location.href;
 
+    if (navigator.share) {
+      navigator.share({
+        title: document.title,
+        text: 'Check this page:',
+        url: url
+      })
+        .catch(err => console.error('Share failed:', err));
+    } else {
+      // fallback
+      navigator.clipboard.writeText(url);
+      alert('Share not supported. URL copied to clipboard.');
+    }
   }
+
+
+  copy() {
+    const url = window.location.href;
+
+    navigator.clipboard.writeText(url)
+      .then(() => {
+        console.log('URL copied!');
+        this.toastrService.success(this.getTranslateValue('PAGE_URL_COPIED_TO_CLIPBOARD'), '', {});
+      })
+      .catch(err => {
+        console.error('Failed to copy: ', err);
+      });
+  }
+
 }

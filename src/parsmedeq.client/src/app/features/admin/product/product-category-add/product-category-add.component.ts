@@ -5,7 +5,6 @@ import {FormGroupDirective, UntypedFormBuilder, UntypedFormGroup, Validators} fr
 import {ProductCategoriesResponse, ProductCategory} from '../../../../core/models/ProductCategoryResponse';
 import {BaseComponent} from '../../../../base-component';
 import {AddResult, BaseResult} from '../../../../core/models/BaseResult';
-import {CustomConstants} from '../../../../core/constants/custom.constants';
 
 @Component({
   selector: 'app-product-category-add',

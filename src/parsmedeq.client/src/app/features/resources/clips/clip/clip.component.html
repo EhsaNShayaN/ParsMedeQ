@@ -19,6 +19,23 @@
       </div>
     </header>
 
+    @if ((item.fileId ?? 0) > 0) {
+      <div class="w-25 mb-5">
+        @if (item.purchased || item.price === 0) {
+          <app-download-management [id]="item.fileId ?? 0" [price]="item.price" [tableId]="Tables.Article">
+          </app-download-management>
+        } @else {
+          <app-cart-item-control
+            [relatedId]="item!.id"
+            [tableId]="Tables.Article"
+            [relatedName]="item!.title"
+            [unitPrice]="item!.price ?? 0"
+            [stock]="item!.stock ?? 99999999">
+          </app-cart-item-control>
+        }
+      </div>
+    }
+
     <main class="content fade-in">
       <section class="desc">
         <h3>توضیحات</h3>

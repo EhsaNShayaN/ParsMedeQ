@@ -22,7 +22,7 @@
           </p>
           @if ((item.fileId ?? 0) > 0) {
             <div class="w-25 mb-5">
-              @if (item.purchased) {
+              @if (item.purchased || item.price === 0) {
                 <app-download-management [id]="item.fileId ?? 0" [price]="item.price" [tableId]="Tables.Article">
                 </app-download-management>
               } @else {

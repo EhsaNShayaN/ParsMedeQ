@@ -139,5 +139,8 @@
   "SERVICE_DATE": "تاریخ سرویس",
   "DONE": "انجام شده",
   "NOT_DONE": "انجام نشده",
-  "RESET_FILTERS": "حذف فیلترها"
+  "RESET_FILTERS": "حذف فیلترها",
+  "SHARE": "اشتراک گذاری",
+  "COPY": "کپی",
+  "PAGE_URL_COPIED_TO_CLIPBOARD": "آدرس صفحه در کلیپبورد کپی شد"
 }

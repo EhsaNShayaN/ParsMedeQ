@@ -13,19 +13,36 @@
       </div>
     </header>
 
+    @if ((item.fileId ?? 0) > 0) {
+      <div class="w-25 mb-5">
+        @if (item.purchased || item.price === 0) {
+          <app-download-management [id]="item.fileId ?? 0" [price]="item.price" [tableId]="Tables.Article">
+          </app-download-management>
+        } @else {
+          <app-cart-item-control
+            [relatedId]="item!.id"
+            [tableId]="Tables.Article"
+            [relatedName]="item!.title"
+            [unitPrice]="item!.price ?? 0"
+            [stock]="item!.stock ?? 99999999">
+          </app-cart-item-control>
+        }
+      </div>
+    }
+
     <article class="content fade-section">
       <h1 class="title">{{ item.title }}</h1>
       <div class="mt-2 text" [innerHTML]="item.description | safeHtml"></div>
 
-      <div class="share d-none">
+      <div class="share">
         <span>اشتراک‌گذاری:</span>
-        <button mat-icon-button aria-label="share telegram" (click)="share('Telegram')">
+        <!--<button mat-icon-button aria-label="share telegram" (click)="share('Telegram')" title="Telegram">
           <mat-icon>send</mat-icon>
-        </button>
-        <button mat-icon-button aria-label="share linkedin" (click)="share('LinkedIn')">
+        </button>-->
+        <button mat-icon-button aria-label="share copy" (click)="copy()" [title]="'COPY' | translate">
           <mat-icon>linkedin</mat-icon>
         </button>
-        <button mat-icon-button aria-label="share twitter" (click)="share('Twitter')">
+        <button mat-icon-button aria-label="share twitter" (click)="share()" [title]="'SHARE' | translate">
           <mat-icon>share</mat-icon>
         </button>
       </div>
