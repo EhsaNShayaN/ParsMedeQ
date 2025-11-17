@@ -1,7 +1,9 @@
 ﻿using ParsMedeQ.Domain.Abstractions;
+using ParsMedeQ.Domain.Aggregates.MediaAggregate;
 using ParsMedeQ.Domain.Aggregates.OrderAggregate.Entities;
 using ParsMedeQ.Domain.Aggregates.PaymentAggregate;
 using ParsMedeQ.Domain.Aggregates.UserAggregate;
+using System.Threading;
 
 namespace ParsMedeQ.Domain.Aggregates.OrderAggregate;
 public sealed class Order : EntityBase<int>
@@ -85,6 +87,14 @@ public sealed class Order : EntityBase<int>
         this.UpdateDate = DateTime.Now;
         this.Status = status;
         return ValueTask.FromResult(PrimitiveResult.Success(this));
+    }
+
+    public PrimitiveResult AddPeriodicService(DateTime fromDate)
+    {
+        PrimitiveResult.BindAll(this.OrderItems, (orderItem) =>
+            orderItem.AddPeriodicService(fromDate),
+            BindAllIterationStrategy.BreakOnFirstError);
+        return PrimitiveResult.Success();
     }
     #endregion
 }

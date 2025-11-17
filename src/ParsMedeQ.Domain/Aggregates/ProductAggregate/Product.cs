@@ -1,4 +1,5 @@
 ﻿using ParsMedeQ.Domain.Abstractions;
+using ParsMedeQ.Domain.Aggregates.OrderAggregate;
 using ParsMedeQ.Domain.Aggregates.ProductAggregate.Entities;
 using ParsMedeQ.Domain.Aggregates.ProductCategoryAggregate;
 using System.ComponentModel.DataAnnotations.Schema;

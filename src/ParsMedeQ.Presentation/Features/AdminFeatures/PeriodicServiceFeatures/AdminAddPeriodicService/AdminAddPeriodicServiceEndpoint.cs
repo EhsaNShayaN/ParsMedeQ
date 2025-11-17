@@ -1,4 +1,4 @@
-﻿using ParsMedeQ.Application.Features.ProductFeatures.AddPeriodicServiceFeature;
+﻿using ParsMedeQ.Application.Features.OrderFeatures.AddPeriodicServiceFeature;
 using ParsMedeQ.Contracts;
 using ParsMedeQ.Contracts.ProductContracts.AddPeriodicServiceContract;
 

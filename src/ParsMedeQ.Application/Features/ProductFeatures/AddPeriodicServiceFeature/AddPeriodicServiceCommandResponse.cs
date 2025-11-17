@@ -1,2 +1,0 @@
-﻿namespace ParsMedeQ.Application.Features.ProductFeatures.AddPeriodicServiceFeature;
-public sealed record AddPeriodicServiceCommandResponse(bool Changed);

@@ -1,4 +1,4 @@
-﻿namespace ParsMedeQ.Application.Features.ProductFeatures.AddPeriodicServiceFeature;
+﻿namespace ParsMedeQ.Application.Features.OrderFeatures.AddPeriodicServiceFeature;
 
 public sealed record class AddPeriodicServiceCommand(
     int Id,

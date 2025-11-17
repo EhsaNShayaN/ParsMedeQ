@@ -3,6 +3,10 @@
 namespace ParsMedeQ.Domain.Aggregates.OrderAggregate.Entities;
 public sealed class OrderItem : EntityBase<int>
 {
+    #region " Fields "
+    private List<PeriodicService> _periodicServices = [];
+    #endregion
+
     #region " Properties "
     public int OrderId { get; private set; }
     public int TableId { get; private set; }
@@ -17,6 +21,7 @@ public sealed class OrderItem : EntityBase<int>
 
     #region " Navigation Properties "
     public Order Order { get; private set; } = null!;
+    public IReadOnlyCollection<PeriodicService> PeriodicServices => this._periodicServices.AsReadOnly();
     #endregion
 
     #region " Constructors "
@@ -47,6 +52,13 @@ public sealed class OrderItem : EntityBase<int>
                 GuarantyExpirationDate = guarantyExpirationDate,
                 PeriodicServiceInterval = periodicServiceInterval
             });
+    }
+
+    public PrimitiveResult AddPeriodicService(DateTime fromDate)
+    {
+        PeriodicService.Create(fromDate.AddMonths(this.PeriodicServiceInterval))
+            .OnSuccess(periodicService => this._periodicServices.Add(periodicService.Value));
+        return PrimitiveResult.Success();
     }
     #endregion
 }

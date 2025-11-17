@@ -1,22 +1,19 @@
 ﻿using ParsMedeQ.Domain.Abstractions;
-using ParsMedeQ.Domain.Aggregates.UserAggregate;
+using ParsMedeQ.Domain.Aggregates.OrderAggregate.Entities;
 
-namespace ParsMedeQ.Domain.Aggregates.ProductAggregate.Entities;
+namespace ParsMedeQ.Domain.Aggregates.OrderAggregate;
 
 public sealed class PeriodicService : EntityBase<int>
 {
     #region " Properties "
-    public int UserId { get; private set; }
-    public int ProductId { get; private set; }
+    public int OrderItemId { get; private set; }
     public DateTime ServiceDate { get; private set; }
     public bool Done { get; private set; }
     public bool HasNext { get; private set; }
-    public DateTime CreationDate { get; private set; }
     #endregion
 
     #region " Navigation Properties "
-    public Product Product { get; private set; } = null!;
-    public User User { get; private set; } = null!;
+    public OrderItem OrderItem { get; private set; } = null!;
     #endregion
 
     #region " Constructors "
@@ -26,17 +23,12 @@ public sealed class PeriodicService : EntityBase<int>
 
     #region " Factory "
     internal static PrimitiveResult<PeriodicService> Create(
-        int userId,
-        int productId,
         DateTime serviceDate)
     {
         return PrimitiveResult.Success(
             new PeriodicService()
             {
-                UserId = userId,
-                ProductId = productId,
                 ServiceDate = serviceDate,
-                CreationDate = DateTime.Now,
             });
     }
     internal PrimitiveResult<PeriodicService> DoneService()

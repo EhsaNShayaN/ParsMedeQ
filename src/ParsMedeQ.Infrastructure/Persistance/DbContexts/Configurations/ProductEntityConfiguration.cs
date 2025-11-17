@@ -1,4 +1,5 @@
-﻿using ParsMedeQ.Domain.Aggregates.ProductAggregate;
+﻿using ParsMedeQ.Domain.Aggregates.OrderAggregate;
+using ParsMedeQ.Domain.Aggregates.ProductAggregate;
 using ParsMedeQ.Domain.Aggregates.ProductAggregate.Entities;
 
 namespace ParsMedeQ.Infrastructure.Persistance.DbContexts.Configurations;
