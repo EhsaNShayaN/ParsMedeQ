@@ -18,11 +18,11 @@ internal static class EndpointHandlerBase
     }
 
 }
-internal abstract class TspMinimalApiHandlerBase<TRequest, TResponse> : MinimalApiHandlerBase<TRequest, TResponse> where TRequest : notnull
+internal abstract class MinimalApiHandlerBase<TRequest, TResponse> : SRH.PresentationApi.MinimalApiHandlerBase<TRequest, TResponse> where TRequest : notnull
 {
     protected virtual string ContentType { get; } = "application/json";
 
-    protected TspMinimalApiHandlerBase(EndpointInfo endpointInfo, bool isStream, HttpMethod method) : base(endpointInfo, isStream, method)
+    protected MinimalApiHandlerBase(EndpointInfo endpointInfo, bool isStream, HttpMethod method) : base(endpointInfo, isStream, method)
     {
     }
 
@@ -39,7 +39,7 @@ internal abstract class TspMinimalApiHandlerBase<TRequest, TResponse> : MinimalA
                 .WithSwaggerDocs<TRequest, TResponse>(this.ContentType);
     }
 }
-internal abstract class EndpointHandlerBase<THandlerRequest, THandlerResponse, TEndpointResponse> : TspMinimalApiHandlerBase<THandlerRequest, TEndpointResponse>
+internal abstract class EndpointHandlerBase<THandlerRequest, THandlerResponse, TEndpointResponse> : MinimalApiHandlerBase<THandlerRequest, TEndpointResponse>
     where THandlerRequest : IRequest<PrimitiveResult<THandlerResponse>>
 {
     protected virtual bool NeedAuthentication { get; } = false;
@@ -112,7 +112,7 @@ internal abstract class EndpointHandlerBase<THandlerRequest, THandlerResponse, T
     {
         var result = this.MapRoute(routeBuilder, this.EndpointDelegate);
 
-        if (this.NeedAuthentication)
+        if (this.NeedAuthentication || NeedAdminPrivilage)
         {
             result.AddEndpointFilter<AuthenticationEndpointFilter>();
             if (this.NeedAdminPrivilage)

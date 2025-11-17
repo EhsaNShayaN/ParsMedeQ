@@ -21,18 +21,19 @@ public sealed class AdminEndpoint : ApiEndpointBase
     public AdminEndpoint()
     {
         this.Comments = new EndpointInfo(
-    this.GetUrl("comment/list"),
-    this.GetUrl("comment/list"),
-    "Admin Comments",
-    "Admin Comments",
-    _tag);
+            this.GetUrl("comment/list"),
+            this.GetUrl("comment/list"),
+            "Admin Comments",
+            "Admin Comments",
+            _tag);
 
         this.Tickets = new EndpointInfo(
-    this.GetUrl("ticket/list"),
-    this.GetUrl("ticket/list"),
-    "Admin Tickets",
-    "Admin Tickets",
-    _tag);
+            this.GetUrl("ticket/list"),
+            this.GetUrl("ticket/list"),
+            "Admin Tickets",
+            "Admin Tickets",
+            _tag);
+
         this.Orders = new EndpointInfo(
             this.GetUrl("order/list"),
             this.GetUrl("order/list"),
@@ -69,4 +70,3 @@ public sealed class AdminEndpoint : ApiEndpointBase
             _tag);
     }
 }
-

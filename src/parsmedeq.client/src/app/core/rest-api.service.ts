@@ -185,7 +185,7 @@ export class RestApiService {
   }
 
   getPeriodicServices(model: PagingRequest, url: string): Observable<any> {
-    return this.http.post<PeriodicServiceResponse>(`${endpoint()}${url}/periodicService/list`, model).pipe(
+    return this.http.post<PeriodicServiceResponse>(`${endpoint()}${url}/periodicService/list1`, model).pipe(
       catchError(this.handleError)
     );
   }

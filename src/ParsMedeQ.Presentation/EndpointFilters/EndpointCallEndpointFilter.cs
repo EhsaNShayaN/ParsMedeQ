@@ -7,16 +7,16 @@ namespace ParsMedeQ.Presentation.EndpointFilters;
 
 public sealed class EndpointCallEndpointFilter : IEndpointFilter
 {
-    private readonly IUserContextAccessor _tspUserContextAccessor;
+    private readonly IUserContextAccessor _userContextAccessor;
     private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly ILogger<EndpointCallEndpointFilter> _logger;
 
     public EndpointCallEndpointFilter(
-        IUserContextAccessor tspUserContextAccessor,
+        IUserContextAccessor userContextAccessor,
         IHttpContextAccessor httpContextAccessor,
         ILogger<EndpointCallEndpointFilter> logger)
     {
-        this._tspUserContextAccessor = tspUserContextAccessor;
+        this._userContextAccessor = userContextAccessor;
         this._httpContextAccessor = httpContextAccessor;
         this._logger = logger;
     }
@@ -31,7 +31,7 @@ public sealed class EndpointCallEndpointFilter : IEndpointFilter
 
         stopwatch.Stop();
 
-        var currentRequestor = this._tspUserContextAccessor.GetCurrent();
+        var currentRequestor = this._userContextAccessor.GetCurrent();
 
         this._logger.LogInformation(message,
             currentRequestor.UserId,

@@ -6,15 +6,15 @@ namespace ParsMedeQ.Presentation.EndpointFilters;
 
 public sealed class AuthenticationEndpointFilter : IEndpointFilter
 {
-    private readonly IUserContextAccessor _tspUserContextAccessor;
+    private readonly IUserContextAccessor _userContextAccessor;
 
-    public AuthenticationEndpointFilter(IUserContextAccessor tspUserContextAccessor)
+    public AuthenticationEndpointFilter(IUserContextAccessor userContextAccessor)
     {
-        this._tspUserContextAccessor = tspUserContextAccessor;
+        this._userContextAccessor = userContextAccessor;
     }
     public async ValueTask<object?> InvokeAsync(EndpointFilterInvocationContext context, EndpointFilterDelegate next)
     {
-        if (this._tspUserContextAccessor.IsGuest())
+        if (this._userContextAccessor.IsGuest())
         {
             return TypedResults.Json(DefaultApiResponse.Failure("", new DefaultApiError("", "کاربر غیر مجاز")), statusCode: HttpStatusCode.Forbidden.GetHashCode());
         }

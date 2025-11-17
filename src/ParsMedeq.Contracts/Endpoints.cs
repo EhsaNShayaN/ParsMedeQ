@@ -16,7 +16,7 @@ namespace ParsMedeQ.Contracts;
 
 public static class Endpoints
 {
-    public readonly static AdminEndpoint Admin = new AdminEndpoint();
+    public readonly static AdminEndpoint Admin = new();
     public readonly static UserEndpoint User = new();
     public readonly static ResourceEndpoint Resource = new();
     public readonly static ProductEndpoint Product = new();

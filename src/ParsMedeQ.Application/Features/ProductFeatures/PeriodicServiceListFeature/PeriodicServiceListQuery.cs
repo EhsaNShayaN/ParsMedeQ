@@ -21,7 +21,7 @@ sealed class PeriodicServiceListQueryHandler : IPrimitiveResultQueryHandler<Peri
     }
     public async Task<PrimitiveResult<BasePaginatedApiResponse<PeriodicServiceListDbQueryResponse>>> Handle(PeriodicServiceListQuery request, CancellationToken cancellationToken)
     {
-        var userId = !request.IsAdmin.HasValue || request.IsAdmin.Value ? 0 : this._userContextAccessor.Current.UserId;
+        var userId = !request.IsAdmin.HasValue || request.IsAdmin.Value ? 0 : this._userContextAccessor.GetCurrent().UserId;
         return await this._readUnitOfWork.ProductReadRepository.FilterPeriodicServices(
             request,
             userId,
