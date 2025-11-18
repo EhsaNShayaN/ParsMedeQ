@@ -29,4 +29,8 @@
 		<ProjectReference Include="..\ParsMedeQ.Domain\ParsMedeQ.Domain.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Features\AdminFeatures\PeriodicServiceFeatures\" />
+	</ItemGroup>
+
 </Project>

@@ -1,0 +1,2 @@
+﻿namespace ParsMedeQ.Application.Features.OrderFeatures.DonePeriodicServiceFeature;
+public sealed record DonePeriodicServiceCommandResponse(bool Changed);

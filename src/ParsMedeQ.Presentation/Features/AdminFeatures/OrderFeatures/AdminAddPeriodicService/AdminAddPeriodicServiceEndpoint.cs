@@ -1,8 +1,10 @@
 ﻿using ParsMedeQ.Application.Features.OrderFeatures.AddPeriodicServiceFeature;
 using ParsMedeQ.Contracts;
-using ParsMedeQ.Contracts.ProductContracts.AddPeriodicServiceContract;
+using ParsMedeQ.Contracts.OrderContracts.AddPeriodicServiceContract;
+using ParsMedeQ.Domain.Helpers;
+using SRH.Utilities.EhsaN;
 
-namespace ParsMedeQ.Presentation.Features.AdminFeatures.PeriodicServiceFeatures.AdminAddPeriodicService;
+namespace ParsMedeQ.Presentation.Features.AdminFeatures.OrderFeatures.AdminAddPeriodicService;
 
 sealed class AdminAddPeriodicServiceEndpoint : EndpointHandlerBase<
     AddPeriodicServiceApiRequest,
@@ -33,10 +35,15 @@ sealed class AddPeriodicServiceApiRequestMapper : IPresentationMapper<
         AddPeriodicServiceApiRequest src,
         CancellationToken cancellationToken)
     {
-        return ValueTask.FromResult(
-            PrimitiveResult.Success(
-                new AddPeriodicServiceCommand(src.Id, src.ProductId)
-                ));
+        var array = HashIdsHelper.HexSerializer.Deserialize(src.Id, v =>
+        {
+            return v.Split('|').Select(s => s.ToInt()).ToArray();
+        });
+        return ValueTask
+            .FromResult(PrimitiveResult.Success(new AddPeriodicServiceCommand(
+                array[0],
+                array[1],
+                array[2])));
     }
 }
 sealed class AddPeriodicServiceApiResponseMapper : IPresentationMapper<

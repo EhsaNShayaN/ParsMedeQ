@@ -54,10 +54,25 @@ public sealed class OrderItem : EntityBase<int>
             });
     }
 
-    public PrimitiveResult AddPeriodicService(DateTime fromDate)
+    public ValueTask<PrimitiveResult<PeriodicService>> AddPeriodicService(DateTime fromDate)
     {
-        PeriodicService.Create(fromDate.AddMonths(this.PeriodicServiceInterval))
+        return PeriodicService.Create(fromDate.AddMonths(this.PeriodicServiceInterval))
             .OnSuccess(periodicService => this._periodicServices.Add(periodicService.Value));
+    }
+
+    public PrimitiveResult DonePeriodicService(int id)
+    {
+        _periodicServices
+            .FirstOrDefault(s => s.Id.Equals(id))
+            .DoneService();
+        return PrimitiveResult.Success();
+    }
+
+    public PrimitiveResult NextPeriodicService(int id)
+    {
+        _periodicServices
+            .FirstOrDefault(s => s.Id.Equals(id))
+            .NextService();
         return PrimitiveResult.Success();
     }
     #endregion

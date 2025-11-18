@@ -48,7 +48,6 @@ export class DownloadManagementComponent extends PureComponent implements OnInit
   }
 
   download() {
-    console.log('download123');
     this.onOpenFile();
   }
 
@@ -66,7 +65,6 @@ export class DownloadManagementComponent extends PureComponent implements OnInit
 
     this.isDownloading = true;
     this.restApiService.download(this.id, this.tableId, this.model).subscribe((event: HttpEvent<any>) => {
-      console.log('download', event);
       if (event.type === HttpEventType.ResponseHeader) {
         const contentDisposition = event.headers.get('Content-Disposition');
         if (contentDisposition) {

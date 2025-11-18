@@ -17,7 +17,6 @@ internal sealed class ProductWriteRepository : GenericPrimitiveWriteRepositoryBa
             .Include(s => s.ProductTranslations)
             .Where(s => s.Id.Equals(id))
             .Run(q => q.FirstOrDefaultAsync(cancellationToken), PrimitiveError.Create("", "محصولی با شناسه مورد نظر پیدا نشد"));
-
     public ValueTask<PrimitiveResult<Product[]>> FindByIds(int[] ids, CancellationToken cancellationToken = default) =>
         this.DbContext
             .Product
@@ -25,19 +24,11 @@ internal sealed class ProductWriteRepository : GenericPrimitiveWriteRepositoryBa
             .Where(s => ids.Contains(s.Id))
             .Run(q => q.ToArrayAsync(cancellationToken),
                 PrimitiveResult.Success(Array.Empty<Product>()));
-
     public ValueTask<PrimitiveResult<Product>> FindByIdWithMediaList(int id, CancellationToken cancellationToken = default) =>
         this.DbContext
             .Product
             .Include(s => s.ProductMediaList)
             .Where(s => s.Id.Equals(id))
-            .Run(q => q.FirstOrDefaultAsync(cancellationToken), PrimitiveError.Create("", "محصولی با شناسه مورد نظر پیدا نشد"));
-
-    public ValueTask<PrimitiveResult<Product>> FindByPeriodicService(int id, int periodicServiceId, CancellationToken cancellationToken = default) =>
-        this.DbContext
-            .Product
-            .Include(s => s.PeriodicServices)
-            .Where(s => s.Id.Equals(id) && s.PeriodicServices.Any(p => p.Id.Equals(periodicServiceId)))
             .Run(q => q.FirstOrDefaultAsync(cancellationToken), PrimitiveError.Create("", "محصولی با شناسه مورد نظر پیدا نشد"));
     public ValueTask<PrimitiveResult<Product>> AddProduct(Product Product, CancellationToken cancellationToken) =>
         this.Add(Product);

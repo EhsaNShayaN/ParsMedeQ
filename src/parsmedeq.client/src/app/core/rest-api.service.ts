@@ -185,20 +185,20 @@ export class RestApiService {
   }
 
   getPeriodicServices(model: PagingRequest, url: string): Observable<any> {
-    return this.http.post<PeriodicServiceResponse>(`${endpoint()}${url}/periodicService/list1`, model).pipe(
+    return this.http.post<PeriodicServiceResponse>(`${endpoint()}${url}/periodicService/list`, model).pipe(
       catchError(this.handleError)
     );
   }
 
-  addPeriodicService(id: number, productId: number): Observable<any> {
-    const model = {id, productId};
+  addPeriodicService(id: string): Observable<any> {
+    const model = {id};
     return this.http.post<BaseResult<AddResult>>(`${endpoint()}admin/periodicService/add`, model).pipe(
       catchError(this.handleError)
     );
   }
 
-  donePeriodicService(id: number, productId: number): Observable<any> {
-    const model = {id, productId};
+  donePeriodicService(id: string): Observable<any> {
+    const model = {id};
     return this.http.post<BaseResult<AddResult>>(`${endpoint()}admin/periodicService/done`, model).pipe(
       catchError(this.handleError)
     );

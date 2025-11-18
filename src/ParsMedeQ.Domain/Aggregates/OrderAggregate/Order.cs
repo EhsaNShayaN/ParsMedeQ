@@ -1,9 +1,7 @@
 ﻿using ParsMedeQ.Domain.Abstractions;
-using ParsMedeQ.Domain.Aggregates.MediaAggregate;
 using ParsMedeQ.Domain.Aggregates.OrderAggregate.Entities;
 using ParsMedeQ.Domain.Aggregates.PaymentAggregate;
 using ParsMedeQ.Domain.Aggregates.UserAggregate;
-using System.Threading;
 
 namespace ParsMedeQ.Domain.Aggregates.OrderAggregate;
 public sealed class Order : EntityBase<int>
@@ -95,6 +93,20 @@ public sealed class Order : EntityBase<int>
             orderItem.AddPeriodicService(fromDate),
             BindAllIterationStrategy.BreakOnFirstError);
         return PrimitiveResult.Success();
+    }
+
+    public PrimitiveResult DonePeriodicService(int orderItemId, int id)
+    {
+        return _orderItems
+            .FirstOrDefault(s => s.Id == orderItemId)
+            .DonePeriodicService(id);
+    }
+
+    public PrimitiveResult NextPeriodicService(int orderItemId, int id)
+    {
+        return _orderItems
+            .FirstOrDefault(s => s.Id == orderItemId)
+            .NextPeriodicService(id);
     }
     #endregion
 }

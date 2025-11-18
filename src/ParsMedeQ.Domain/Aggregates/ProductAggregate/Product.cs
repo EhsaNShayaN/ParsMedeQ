@@ -1,5 +1,4 @@
 ﻿using ParsMedeQ.Domain.Abstractions;
-using ParsMedeQ.Domain.Aggregates.OrderAggregate;
 using ParsMedeQ.Domain.Aggregates.ProductAggregate.Entities;
 using ParsMedeQ.Domain.Aggregates.ProductCategoryAggregate;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -10,7 +9,6 @@ public sealed class Product : EntityBase<int>
     #region " Fields "
     private List<ProductTranslation> _productTranslations = [];
     private List<ProductMedia> _productMediaList = [];
-    private List<PeriodicService> _periodicServices = [];
     #endregion
 
     #region " Properties "
@@ -33,7 +31,6 @@ public sealed class Product : EntityBase<int>
     public ProductCategory[]? ProductCategories { get; set; }
     public IReadOnlyCollection<ProductTranslation> ProductTranslations => this._productTranslations.AsReadOnly();
     public IReadOnlyCollection<ProductMedia> ProductMediaList => this._productMediaList.AsReadOnly();
-    public IReadOnlyCollection<PeriodicService> PeriodicServices => this._periodicServices.AsReadOnly();
     #endregion
 
     #region " Constructors "
@@ -171,29 +168,6 @@ public sealed class Product : EntityBase<int>
         {
             _productMediaList.Remove(x);
         }
-        return PrimitiveResult.Success();
-    }
-
-    public PrimitiveResult AddPeriodicService(int userId, DateTime fromDate)
-    {
-        PeriodicService.Create(userId, this.Id, fromDate.AddMonths(this.PeriodicServiceInterval))
-            .OnSuccess(periodicService => this._periodicServices.Add(periodicService.Value));
-
-        return PrimitiveResult.Success();
-    }
-
-    public PrimitiveResult DonePeriodicService(int id)
-    {
-        var service = _periodicServices.Single(s => s.Id.Equals(id));
-        service.DoneService()
-            .OnSuccess(periodicService => this._periodicServices.Add(periodicService.Value));
-        return PrimitiveResult.Success();
-    }
-
-    public PrimitiveResult NextPeriodicService(int id)
-    {
-        var service = _periodicServices.Single(s => s.Id.Equals(id));
-        service.NextService();
         return PrimitiveResult.Success();
     }
     #endregion

@@ -1,5 +1,4 @@
-﻿using ParsMedeQ.Domain.Aggregates.OrderAggregate;
-using ParsMedeQ.Domain.Aggregates.ProductAggregate;
+﻿using ParsMedeQ.Domain.Aggregates.ProductAggregate;
 using ParsMedeQ.Domain.Aggregates.ProductAggregate.Entities;
 
 namespace ParsMedeQ.Infrastructure.Persistance.DbContexts.Configurations;
@@ -23,13 +22,6 @@ sealed class ProductEntityConfiguration : IEntityTypeConfiguration<Product>
             .HasForeignKey(a => a.ProductId)
             .HasPrincipalKey(a => a.Id)
             .OnDelete(DeleteBehavior.Cascade);
-
-        builder
-            .HasMany(x => x.PeriodicServices)
-            .WithOne(x => x.Product)
-            .HasForeignKey(a => a.ProductId)
-            .HasPrincipalKey(a => a.Id)
-            .OnDelete(DeleteBehavior.Cascade);
     }
 }
 
@@ -38,16 +30,6 @@ sealed class ProductTranslationEntityConfiguration : IEntityTypeConfiguration<Pr
     public void Configure(EntityTypeBuilder<ProductTranslation> builder)
     {
         builder.ToTable(TableNames.ProductTranslation);
-
-        builder.HasKey(a => a.Id);
-    }
-}
-
-sealed class PeriodicServiceEntityConfiguration : IEntityTypeConfiguration<PeriodicService>
-{
-    public void Configure(EntityTypeBuilder<PeriodicService> builder)
-    {
-        builder.ToTable(TableNames.PeriodicService);
 
         builder.HasKey(a => a.Id);
     }

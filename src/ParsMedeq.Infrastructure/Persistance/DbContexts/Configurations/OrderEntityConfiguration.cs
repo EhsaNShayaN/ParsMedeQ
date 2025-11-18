@@ -49,6 +49,13 @@ sealed class OrderItemEntityConfiguration : IEntityTypeConfiguration<OrderItem>
             .Property(o => o.Subtotal)
             .ValueGeneratedOnAddOrUpdate()
             .HasComputedColumnSql("[Quantity] * [UnitPrice]");
+
+        builder
+            .HasMany(x => x.PeriodicServices)
+            .WithOne(x => x.OrderItem)
+            .HasForeignKey(a => a.OrderItemId)
+            .HasPrincipalKey(a => a.Id)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }
 sealed class PaymentEntityConfiguration : IEntityTypeConfiguration<Payment>
@@ -72,6 +79,16 @@ sealed class PaymentLogEntityConfiguration : IEntityTypeConfiguration<PaymentLog
     public void Configure(EntityTypeBuilder<PaymentLog> builder)
     {
         builder.ToTable(TableNames.PaymentLog);
+        builder.HasKey(a => a.Id);
+    }
+}
+
+sealed class PeriodicServiceEntityConfiguration : IEntityTypeConfiguration<PeriodicService>
+{
+    public void Configure(EntityTypeBuilder<PeriodicService> builder)
+    {
+        builder.ToTable(TableNames.PeriodicService);
+
         builder.HasKey(a => a.Id);
     }
 }

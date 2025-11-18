@@ -1,4 +1,4 @@
-﻿using ParsMedeQ.Application.Features.ProductFeatures.PeriodicServiceListFeature;
+﻿using ParsMedeQ.Application.Features.OrderFeatures.PeriodicServiceListFeature;
 using ParsMedeQ.Application.Features.ProductFeatures.ProductCategoryListFeature;
 using ParsMedeQ.Application.Features.ProductFeatures.ProductDetailsFeature;
 using ParsMedeQ.Application.Features.ProductFeatures.ProductListFeature;
@@ -206,23 +206,23 @@ internal sealed class ProductReadRepository : GenericPrimitiveReadRepositoryBase
         Expression<Func<PeriodicService, PeriodicServiceListDbQueryResponse>> PeriodicServiceKeySelector = (res) => new PeriodicServiceListDbQueryResponse
         {
             Id = res.Id,
-            UserId = res.UserId,
-            User = res.User,
-            ProductId = res.ProductId,
-            Product = res.Product,
+            OrderItemId = res.OrderItem.Id,
+            OrderId = res.OrderItem.Order.Id,
+            User = res.OrderItem.Order.User,
+            RelatedId = res.OrderItem.RelatedId,
             ServiceDate = res.ServiceDate,
             Done = res.Done,
             HasNext = res.HasNext,
-            CreationDate = res.CreationDate,
+            GuarantyExpirationDate = res.OrderItem.GuarantyExpirationDate,
         };
 
         return await this.DbContext.PaginateByPrimaryKey(
             this.DbContext.PeriodicService
-            .Include(x => x.User)
-            .Include(x => x.Product)
-            .ThenInclude(x => x.ProductTranslations),
+            .Include(x => x.OrderItem)
+            .ThenInclude(x => x.Order)
+            .ThenInclude(x => x.User),
             lastId,
-             x => userId <= 0 || x.UserId == userId,
+             x => userId <= 0 || x.OrderItem.Order.UserId.Equals(userId),
              paginated.PageSize,
              PeriodicServiceKeySelector,
              cancellationToken)

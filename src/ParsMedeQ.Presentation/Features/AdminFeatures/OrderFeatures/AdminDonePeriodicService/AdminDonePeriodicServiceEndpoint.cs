@@ -1,8 +1,10 @@
-﻿using ParsMedeQ.Application.Features.ProductFeatures.DonePeriodicServiceFeature;
+﻿using ParsMedeQ.Application.Features.OrderFeatures.DonePeriodicServiceFeature;
 using ParsMedeQ.Contracts;
-using ParsMedeQ.Contracts.ProductContracts.DonePeriodicServiceContract;
+using ParsMedeQ.Contracts.OrderContracts.DonePeriodicServiceContract;
+using ParsMedeQ.Domain.Helpers;
+using SRH.Utilities.EhsaN;
 
-namespace ParsMedeQ.Presentation.Features.AdminFeatures.PeriodicServiceFeatures.AdminDonePeriodicService;
+namespace ParsMedeQ.Presentation.Features.AdminFeatures.OrderFeatures.AdminDonePeriodicService;
 
 sealed class AdminDonePeriodicServiceEndpoint : EndpointHandlerBase<
     DonePeriodicServiceApiRequest,
@@ -33,11 +35,16 @@ sealed class DonePeriodicServiceApiRequestMapper : IPresentationMapper<
         DonePeriodicServiceApiRequest src,
         CancellationToken cancellationToken)
     {
+        var array = HashIdsHelper.HexSerializer.Deserialize(src.Id, v =>
+        {
+            return v.Split('|').Select(s => s.ToInt()).ToArray();
+        });
         return ValueTask.FromResult(
             PrimitiveResult.Success(
                 new DonePeriodicServiceCommand(
-                    src.Id,
-                    src.ProductId)
+                array[0],
+                array[1],
+                array[2])
                 ));
     }
 }

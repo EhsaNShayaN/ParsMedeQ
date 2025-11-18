@@ -1,11 +1,11 @@
-﻿using ParsMedeQ.Application.Features.ProductFeatures.PeriodicServiceListFeature;
+﻿using ParsMedeQ.Application.Features.OrderFeatures.PeriodicServiceListFeature;
 using ParsMedeQ.Application.Helpers;
 using ParsMedeQ.Contracts;
-using ParsMedeQ.Contracts.ProductContracts.PeriodicServiceListContract;
-using ParsMedeQ.Domain;
+using ParsMedeQ.Contracts.OrderContracts.PeriodicServiceListContract;
+using ParsMedeQ.Domain.Helpers;
 using SRH.Utilities.EhsaN;
 
-namespace ParsMedeQ.Presentation.Features.UserFeatures.PeriodicServiceFeatures.UserPeriodicServiceList;
+namespace ParsMedeQ.Presentation.Features.UserFeatures.OrderFeatures.UserPeriodicServiceList;
 
 sealed class UserPeriodicServiceListEndpoint : EndpointHandlerBase<
     PeriodicServiceListApiRequest,
@@ -57,15 +57,13 @@ sealed class PeriodicServiceListApiResponseMapper : IPresentationMapper<
             PrimitiveResult.Success(
                     new BasePaginatedApiResponse<PeriodicServiceListApiResponse>(src.Items.Select(data =>
                     new PeriodicServiceListApiResponse(
-                        data.Id,
-                        data.UserId,
+                        HashIdsHelper.HexSerializer.Serialize($"{data.OrderId}|{data.OrderItemId}|{data.Id}"),
                         data.User.FullName.GetValue(),
-                        data.ProductId,
-                        data.Product.ProductTranslations.FirstOrDefault(s => s.LanguageCode == Constants.LangCode_Farsi.ToLower()).Title,
+                        data.RelatedId,
                         data.ServiceDate.ToPersianDate(),
                         data.Done,
                         data.HasNext,
-                        data.CreationDate.ToPersianDate()))
+                        data.GuarantyExpirationDate.ToPersianDate()))
                     .ToArray(), src.TotalCount, src.PageIndex, src.PageSize)
                     {
                         LastId = src.LastId

@@ -1,0 +1,3 @@
+﻿namespace ParsMedeQ.Contracts.OrderContracts.DonePeriodicServiceContract;
+
+public record DonePeriodicServiceApiRequest(string Id);

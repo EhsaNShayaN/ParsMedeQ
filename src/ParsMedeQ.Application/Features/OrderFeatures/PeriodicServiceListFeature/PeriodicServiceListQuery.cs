@@ -2,7 +2,7 @@
 using ParsMedeQ.Application.Services.UserContextAccessorServices;
 using SRH.MediatRMessaging.Queries;
 
-namespace ParsMedeQ.Application.Features.ProductFeatures.PeriodicServiceListFeature;
+namespace ParsMedeQ.Application.Features.OrderFeatures.PeriodicServiceListFeature;
 public sealed record PeriodicServiceListQuery(bool? IsAdmin) :
     BasePaginatedQuery,
     IPrimitiveResultQuery<BasePaginatedApiResponse<PeriodicServiceListDbQueryResponse>>;

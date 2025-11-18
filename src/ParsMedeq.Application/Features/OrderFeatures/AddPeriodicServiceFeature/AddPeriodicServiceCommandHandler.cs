@@ -10,11 +10,11 @@ public sealed class AddPeriodicServiceCommandHandler : IPrimitiveResultCommandHa
 
     public async Task<PrimitiveResult<AddPeriodicServiceCommandResponse>> Handle(AddPeriodicServiceCommand request, CancellationToken cancellationToken)
     {
-        return await this._writeUnitOfWork.ProductWriteRepository.FindByPeriodicService(request.ProductId, request.Id, cancellationToken)
-              .Map(product => product.NextPeriodicService(request.Id).Map(() => product))
-              .Map(product => product.AddPeriodicService(
-                  product.PeriodicServices.First().UserId,
-                  product.PeriodicServices.First().ServiceDate))
+        return await this._writeUnitOfWork.OrderWriteRepository.FindByDependencies(request.OrderId, cancellationToken)
+              .Map(order => order.NextPeriodicService(request.OrderItemId, request.PeriodicServiceId).Map(() => order))
+              .Map(order => order.AddPeriodicService(order.OrderItems
+                .FirstOrDefault(s => s.Id == request.OrderItemId).PeriodicServices
+                    .FirstOrDefault(s => s.Id == request.PeriodicServiceId).ServiceDate))
               .Map(_ => this._writeUnitOfWork.SaveChangesAsync(CancellationToken.None)
                   .Map(count => new AddPeriodicServiceCommandResponse(count > 0)))
               .ConfigureAwait(false);

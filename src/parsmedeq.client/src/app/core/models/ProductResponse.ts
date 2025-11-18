@@ -83,13 +83,11 @@ export interface PeriodicServiceResponse extends BaseResult<Paginated<PeriodicSe
 }
 
 export interface PeriodicService {
-  id: number;
-  userId: number;
+  id: string;
   fullName: string;
-  productId: number;
-  productTitle: string;
+  relatedId: number;
   serviceDate: string;
   done: boolean;
   hasNext: boolean;
-  creationDate: string;
+  guarantyExpirationDate: string;
 }

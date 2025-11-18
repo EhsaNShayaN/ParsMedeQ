@@ -1,2 +1,0 @@
-﻿namespace ParsMedeQ.Contracts.ProductContracts.AddPeriodicServiceContract;
-public readonly record struct AddPeriodicServiceApiResponse(bool Changed);

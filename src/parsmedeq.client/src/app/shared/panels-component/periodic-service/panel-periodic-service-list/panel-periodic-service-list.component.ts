@@ -118,7 +118,7 @@ export class PanelPeriodicServiceListComponent extends BaseComponent implements 
   }
 
   done(item: PeriodicService) {
-    this.restApiService.donePeriodicService(item.id, item.productId).subscribe((t: BaseResult<AddResult>) => {
+    this.restApiService.donePeriodicService(item.id).subscribe((t: BaseResult<AddResult>) => {
       item.done = t.data.changed;
       this.toaster.success(this.getTranslateValue('THE_OPERATION_WAS_SUCCESSFUL'), '', {});
       this.getItems();
@@ -126,7 +126,7 @@ export class PanelPeriodicServiceListComponent extends BaseComponent implements 
   }
 
   add(item: PeriodicService) {
-    this.restApiService.addPeriodicService(item.id, item.productId).subscribe((t: BaseResult<AddResult>) => {
+    this.restApiService.addPeriodicService(item.id).subscribe((t: BaseResult<AddResult>) => {
       this.toaster.success(this.getTranslateValue('THE_OPERATION_WAS_SUCCESSFUL'), '', {});
       this.getItems();
     });
