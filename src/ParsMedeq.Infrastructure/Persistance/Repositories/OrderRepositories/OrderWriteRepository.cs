@@ -24,4 +24,5 @@ internal sealed class OrderWriteRepository : GenericPrimitiveWriteRepositoryBase
         this.DbContext.PeriodicService
         .Where(s => s.Id.Equals(id))
         .Run(q => q.FirstOrDefaultAsync(cancellationToken), PrimitiveError.Create("", "سفارشی با شناسه مورد نظر پیدا نشد"));
+    public ValueTask<PrimitiveResult> AddPeriodicServices(IEnumerable<PeriodicService> periodicServices) => this.AddRange(periodicServices);
 }

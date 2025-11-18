@@ -9,7 +9,7 @@ public sealed class FailPaymentCommandHandler : IPrimitiveResultCommandHandler<F
     }
 
     public async Task<PrimitiveResult<FailPaymentCommandResponse>> Handle(FailPaymentCommand request, CancellationToken cancellationToken) =>
-    await _writeUnitOfWork.PaymentWriteRepository.FindByIdWithOrder(request.PaymentId, cancellationToken)
+    await _writeUnitOfWork.PaymentWriteRepository.FindPaymentWithDependencies(request.PaymentId, cancellationToken)
             .MapIf(
                 payment => payment.Status > 0,
                 payment => PrimitiveResult.Success(payment),

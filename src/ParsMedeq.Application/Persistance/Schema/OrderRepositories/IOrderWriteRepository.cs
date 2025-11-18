@@ -10,4 +10,5 @@ public interface IOrderWriteRepository : IDomainRepository
     ValueTask<PrimitiveResult<Order>> FindByDependencies(int id, CancellationToken cancellationToken);
     ValueTask<PrimitiveResult<Order>> PayOrder(Order order);
     ValueTask<PrimitiveResult<PeriodicService>> FindPeriodicServiceById(int id, CancellationToken cancellationToken);
+    ValueTask<PrimitiveResult> AddPeriodicServices(IEnumerable<PeriodicService> periodicServices);
 }
