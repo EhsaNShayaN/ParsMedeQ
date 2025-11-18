@@ -8,7 +8,7 @@ using SRH.Utilities.EhsaN;
 namespace ParsMedeQ.Presentation.Features.AdminFeatures.PaymentFeatures.AdminPaymentList;
 
 sealed class AdminPaymentListEndpoint : EndpointHandlerBase<
-    PaymentListApiRequest,
+    AdminPaymentListApiRequest,
     PaymentListQuery,
     BasePaginatedApiResponse<PaymentListDbQueryResponse>,
     BasePaginatedApiResponse<PaymentListApiResponse>>
@@ -18,7 +18,7 @@ sealed class AdminPaymentListEndpoint : EndpointHandlerBase<
     protected override bool NeedAuthentication => true;
 
     public AdminPaymentListEndpoint(
-        IPresentationMapper<PaymentListApiRequest, PaymentListQuery> requestMapper,
+        IPresentationMapper<AdminPaymentListApiRequest, PaymentListQuery> requestMapper,
         IPresentationMapper<BasePaginatedApiResponse<PaymentListDbQueryResponse>, BasePaginatedApiResponse<PaymentListApiResponse>> responseMapper)
         : base(
             Endpoints.Admin.Payments,
@@ -28,12 +28,12 @@ sealed class AdminPaymentListEndpoint : EndpointHandlerBase<
             DefaultResponseFactory.Instance.CreateOk)
     { }
 }
-sealed class PaymentListApiRequestMapper : IPresentationMapper<
-    PaymentListApiRequest,
+sealed class AdminPaymentListApiRequestMapper : IPresentationMapper<
+    AdminPaymentListApiRequest,
     PaymentListQuery>
 {
     public ValueTask<PrimitiveResult<PaymentListQuery>> Map(
-        PaymentListApiRequest src,
+        AdminPaymentListApiRequest src,
         CancellationToken cancellationToken)
     {
         return ValueTask.FromResult(

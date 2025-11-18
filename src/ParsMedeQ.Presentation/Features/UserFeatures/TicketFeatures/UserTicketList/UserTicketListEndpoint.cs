@@ -6,7 +6,7 @@ using ParsMedeQ.Contracts.TicketContracts.TicketListContract;
 namespace ParsMedeQ.Presentation.Features.UserFeatures.TicketFeatures.UserTicketList;
 
 sealed class UserTicketListEndpoint : EndpointHandlerBase<
-    TicketListApiRequest,
+    UserTicketListApiRequest,
     TicketListQuery,
     BasePaginatedApiResponse<TicketListDbQueryResponse>,
     BasePaginatedApiResponse<TicketListApiResponse>>
@@ -15,7 +15,7 @@ sealed class UserTicketListEndpoint : EndpointHandlerBase<
     protected override bool NeedAuthentication => true;
 
     public UserTicketListEndpoint(
-        IPresentationMapper<TicketListApiRequest, TicketListQuery> requestMapper,
+        IPresentationMapper<UserTicketListApiRequest, TicketListQuery> requestMapper,
         IPresentationMapper<BasePaginatedApiResponse<TicketListDbQueryResponse>, BasePaginatedApiResponse<TicketListApiResponse>> responseMapper)
         : base(
             Endpoints.User.Tickets,
@@ -25,12 +25,12 @@ sealed class UserTicketListEndpoint : EndpointHandlerBase<
             DefaultResponseFactory.Instance.CreateOk)
     { }
 }
-sealed class TicketListApiRequestMapper : IPresentationMapper<
-    TicketListApiRequest,
+sealed class UserTicketListApiRequestMapper : IPresentationMapper<
+    UserTicketListApiRequest,
     TicketListQuery>
 {
     public ValueTask<PrimitiveResult<TicketListQuery>> Map(
-        TicketListApiRequest src,
+        UserTicketListApiRequest src,
         CancellationToken cancellationToken)
     {
         return ValueTask.FromResult(

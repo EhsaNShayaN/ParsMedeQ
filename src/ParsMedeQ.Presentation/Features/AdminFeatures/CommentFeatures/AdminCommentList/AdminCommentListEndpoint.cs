@@ -7,7 +7,7 @@ using SRH.Utilities.EhsaN;
 namespace ParsMedeQ.Presentation.Features.AdminFeatures.CommentFeatures.AdminCommentList;
 
 sealed class AdminCommentListEndpoint : EndpointHandlerBase<
-    CommentListApiRequest,
+    AdminCommentListApiRequest,
     CommentListQuery,
     BasePaginatedApiResponse<CommentListDbQueryResponse>,
     BasePaginatedApiResponse<CommentListApiResponse>>
@@ -17,7 +17,7 @@ sealed class AdminCommentListEndpoint : EndpointHandlerBase<
     protected override bool NeedAuthentication => true;
 
     public AdminCommentListEndpoint(
-        IPresentationMapper<CommentListApiRequest, CommentListQuery> requestMapper,
+        IPresentationMapper<AdminCommentListApiRequest, CommentListQuery> requestMapper,
         IPresentationMapper<BasePaginatedApiResponse<CommentListDbQueryResponse>, BasePaginatedApiResponse<CommentListApiResponse>> responseMapper)
         : base(
             Endpoints.Admin.Comments,
@@ -27,12 +27,12 @@ sealed class AdminCommentListEndpoint : EndpointHandlerBase<
             DefaultResponseFactory.Instance.CreateOk)
     { }
 }
-sealed class CommentListApiRequestMapper : IPresentationMapper<
-    CommentListApiRequest,
+sealed class AdminCommentListApiRequestMapper : IPresentationMapper<
+    AdminCommentListApiRequest,
     CommentListQuery>
 {
     public ValueTask<PrimitiveResult<CommentListQuery>> Map(
-        CommentListApiRequest src,
+        AdminCommentListApiRequest src,
         CancellationToken cancellationToken)
     {
         return ValueTask.FromResult(

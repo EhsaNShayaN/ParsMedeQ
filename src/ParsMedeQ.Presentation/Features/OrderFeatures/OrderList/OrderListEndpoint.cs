@@ -1,7 +1,6 @@
 ﻿using ParsMedeQ.Application.Features.OrderFeatures.OrderListFeature;
 using ParsMedeQ.Application.Helpers;
 using ParsMedeQ.Contracts;
-using ParsMedeQ.Contracts.OrderContracts.OrderDetailsContract;
 using ParsMedeQ.Contracts.OrderContracts.OrderListContract;
 using ParsMedeQ.Domain;
 using SRH.Utilities.EhsaN;

@@ -8,7 +8,7 @@ using SRH.Utilities.EhsaN;
 namespace ParsMedeQ.Presentation.Features.UserFeatures.OrderFeatures.UserOrderList;
 
 sealed class UserOrderListEndpoint : EndpointHandlerBase<
-    OrderListApiRequest,
+    UserOrderListApiRequest,
     OrderListQuery,
     BasePaginatedApiResponse<OrderListDbQueryResponse>,
     BasePaginatedApiResponse<OrderListApiResponse>>
@@ -17,7 +17,7 @@ sealed class UserOrderListEndpoint : EndpointHandlerBase<
     protected override bool NeedAuthentication => true;
 
     public UserOrderListEndpoint(
-        IPresentationMapper<OrderListApiRequest, OrderListQuery> requestMapper,
+        IPresentationMapper<UserOrderListApiRequest, OrderListQuery> requestMapper,
         IPresentationMapper<BasePaginatedApiResponse<OrderListDbQueryResponse>, BasePaginatedApiResponse<OrderListApiResponse>> responseMapper)
         : base(
             Endpoints.User.Orders,
@@ -27,12 +27,12 @@ sealed class UserOrderListEndpoint : EndpointHandlerBase<
             DefaultResponseFactory.Instance.CreateOk)
     { }
 }
-sealed class OrderListApiRequestMapper : IPresentationMapper<
-    OrderListApiRequest,
+sealed class UserOrderListApiRequestMapper : IPresentationMapper<
+    UserOrderListApiRequest,
     OrderListQuery>
 {
     public ValueTask<PrimitiveResult<OrderListQuery>> Map(
-        OrderListApiRequest src,
+        UserOrderListApiRequest src,
         CancellationToken cancellationToken)
     {
         return ValueTask.FromResult(
