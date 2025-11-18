@@ -71,9 +71,11 @@ public sealed class AddOrderCommandHandler : IPrimitiveResultCommandHandler<AddO
     }
     PrimitiveResult<AddOrderContext> AddPeriodicService(AddOrderContext context)
     {
-        if (context.Order is null) return context;
+        if ((context.Order?.OrderItems?.Count ?? 0) == 0) return context;
 
-        context.Order.AddPeriodicService(DateTime.Now);
+        PrimitiveResult.BindAll(context.Order.OrderItems.Where(s => s.PeriodicServiceInterval > 0), (orderItem) =>
+            orderItem.AddPeriodicService(DateTime.Now),
+            BindAllIterationStrategy.BreakOnFirstError);
 
         return context;
     }

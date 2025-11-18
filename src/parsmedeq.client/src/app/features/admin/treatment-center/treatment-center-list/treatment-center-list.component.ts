@@ -8,6 +8,7 @@ import {AddResult, BaseResult} from '../../../../core/models/BaseResult';
 import {ToastrService} from 'ngx-toastr';
 import {MatTableDataSource} from '@angular/material/table';
 import {TreatmentCenter, TreatmentCenterResponse} from '../../../../core/models/TreatmentCenterResponse';
+import {Location, LocationResponse} from '../../../../core/models/LocationResponse';
 
 @Component({
   selector: 'app-treatment-center-list',
@@ -19,6 +20,7 @@ export class TreatmentCenterListComponent extends BaseComponent implements OnIni
   columnsToDisplay: string[] = [/*'row', */'title', 'province', 'city', 'image', 'creationDate', 'actions'];
   languages: string[] = [];
   colors: string[] = ['warn', 'primary', 'success', 'secondary', 'info', 'danger'];
+  locations: Location[] = [];
   ///////////
   dataSource!: MatTableDataSource<TreatmentCenter>;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator | null = null;
@@ -35,7 +37,10 @@ export class TreatmentCenterListComponent extends BaseComponent implements OnIni
 
   ngOnInit(): void {
     this.helpers.setPaginationLang();
-    this.getItems();
+    this.restApiService.getLocations().subscribe((acr: LocationResponse) => {
+      this.locations = acr.data;
+      this.getItems();
+    });
   }
 
   getItems() {
@@ -46,6 +51,10 @@ export class TreatmentCenterListComponent extends BaseComponent implements OnIni
     };
     this.restApiService.getTreatmentCenters(model).subscribe((res: TreatmentCenterResponse) => {
       if (res?.data) {
+        res.data.items.forEach(item => {
+          item.province = this.locations.find(s => s.id === item.provinceId)?.title ?? '';
+          item.city = this.locations.find(s => s.id === item.cityId)?.title ?? '';
+        })
         this.initDataSource(res);
       }
     });

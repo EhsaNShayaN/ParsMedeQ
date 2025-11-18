@@ -3,7 +3,7 @@
     <mat-card class="result-card">
       <div class="icon">
         @if (status === 'success') {
-          <mat-icon svgIcon="check_circle" aria-hidden="false" aria-label="موفق"></mat-icon>
+          <mat-icon aria-label="موفق">check_circle</mat-icon>
         } @else if (status === 'error') {
           <mat-icon svgIcon="error" aria-hidden="false" aria-label="خطا"></mat-icon>
         } @else if (status === 'pending') {

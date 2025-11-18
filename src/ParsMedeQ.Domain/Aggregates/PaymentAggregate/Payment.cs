@@ -50,7 +50,7 @@ public sealed class Payment : EntityBase<int>
         this.TransactionId = transactionId;
         this.Status = (byte)PaymentStatus.Success.GetHashCode();
         this.PaidDate = DateTime.Now;
-        this.UpdateOrder((byte)OrderStatus.Paid.GetHashCode());
+        this.PayOrder((byte)OrderStatus.Paid.GetHashCode());
         return ValueTask.FromResult(PrimitiveResult.Success(this));
     }
 
@@ -63,6 +63,11 @@ public sealed class Payment : EntityBase<int>
     public ValueTask<PrimitiveResult> UpdateOrder(byte status)
     {
         var x = this.Order.Update(status);
+        return ValueTask.FromResult(PrimitiveResult.Success());
+    }
+    public ValueTask<PrimitiveResult> PayOrder(byte status)
+    {
+        var x = this.Order.Pay(status);
         return ValueTask.FromResult(PrimitiveResult.Success());
     }
     #endregion

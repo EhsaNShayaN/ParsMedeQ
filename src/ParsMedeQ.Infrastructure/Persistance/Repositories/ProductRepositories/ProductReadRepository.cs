@@ -5,7 +5,7 @@ using ParsMedeQ.Application.Features.ProductFeatures.ProductListFeature;
 using ParsMedeQ.Application.Features.ProductFeatures.ProductMediaListFeature;
 using ParsMedeQ.Application.Helpers;
 using ParsMedeQ.Application.Persistance.Schema.ProductRepositories;
-using ParsMedeQ.Domain.Aggregates.OrderAggregate;
+using ParsMedeQ.Domain.Aggregates.OrderAggregate.Entities;
 using ParsMedeQ.Domain.Aggregates.ProductAggregate;
 using ParsMedeQ.Infrastructure.Persistance.DbContexts;
 using ParsMedeQ.Infrastructure.Persistance.DbContexts.Extensions;

@@ -1,7 +1,7 @@
 ﻿using ParsMedeQ.Application.Features.OrderFeatures.AddOrderFeature;
+using ParsMedeQ.Application.Services.UserContextAccessorServices;
 using ParsMedeQ.Contracts;
 using ParsMedeQ.Contracts.OrderContracts.AddOrderContract;
-using ParsMedeQ.Contracts.OrderContracts.OrderDetailsContract;
 
 namespace ParsMedeQ.Presentation.Features.OrderFeatures.AddOrderFeature;
 sealed class AddOrderEndpoint : EndpointHandlerBase<
@@ -11,7 +11,6 @@ sealed class AddOrderEndpoint : EndpointHandlerBase<
     AddOrderApiResponse>
 {
     protected override bool NeedAuthentication => true;
-    protected override bool NeedAdminPrivilage => true;
     protected override bool NeedTaxPayerFile => false;
 
     public AddOrderEndpoint(
@@ -25,8 +24,14 @@ sealed class AddOrderEndpoint : EndpointHandlerBase<
 }
 internal sealed class AddOrderApiRequestMapper : IPresentationMapper<AddOrderApiRequest, AddOrderCommand>
 {
+    private readonly IUserContextAccessor _userContextAccessor;
+
+    public AddOrderApiRequestMapper(IUserContextAccessor userContextAccessor) => this._userContextAccessor = userContextAccessor;
+
     public async ValueTask<PrimitiveResult<AddOrderCommand>> Map(AddOrderApiRequest src, CancellationToken cancellationToken)
     {
+        var validUserIds = new int[] { 1, 2, 8 };
+        if (!validUserIds.Contains(this._userContextAccessor.GetCurrent().GetUserId() ?? 0)) throw new Exception("Invalid User");
         return await ValueTask.FromResult(
             PrimitiveResult.Success(
                 new AddOrderCommand(

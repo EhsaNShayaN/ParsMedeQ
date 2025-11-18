@@ -1,7 +1,6 @@
 ﻿using ParsMedeQ.Domain.Abstractions;
-using ParsMedeQ.Domain.Aggregates.OrderAggregate.Entities;
 
-namespace ParsMedeQ.Domain.Aggregates.OrderAggregate;
+namespace ParsMedeQ.Domain.Aggregates.OrderAggregate.Entities;
 
 public sealed class PeriodicService : EntityBase<int>
 {

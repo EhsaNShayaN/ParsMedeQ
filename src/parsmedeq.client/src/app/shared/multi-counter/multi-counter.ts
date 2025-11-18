@@ -1,4 +1,4 @@
-import {Component, ElementRef, HostListener, ViewChild} from '@angular/core';
+import {Component, ElementRef, HostListener, Input, OnInit, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'app-multi-counter',
@@ -6,16 +6,24 @@ import {Component, ElementRef, HostListener, ViewChild} from '@angular/core';
   styleUrls: ['./multi-counter.scss'],
   standalone: false
 })
-export class MultiCounterComponent {
+export class MultiCounterComponent implements OnInit {
+  @Input() centersCount!: number;
+  @Input() years!: number;
+  @Input() rewardsCount!: number;
   @ViewChild('counterSection') counterSection!: ElementRef;
   started = false;
   duration = 3000; // زمان انیمیشن به میلی‌ثانیه
 
-  counters = [
-    {label: 'سانترهای درمانی', target: 4, current: 0},
-    {label: 'سال تجربه', target: 4, current: 0},
-    {label: 'جوایز', target: 21, current: 0},
-  ];
+  counters: any[] = [];
+
+  ngOnInit(): void {
+
+    this.counters = [
+      {label: 'سانترهای درمانی', target: this.centersCount, current: 0},
+      {label: 'سال تجربه', target: this.years, current: 0},
+      {label: 'جوایز', target: this.rewardsCount, current: 0},
+    ];
+  }
 
   @HostListener('window:scroll', [])
   onScroll() {

@@ -87,14 +87,6 @@ public sealed class Order : EntityBase<int>
         return ValueTask.FromResult(PrimitiveResult.Success(this));
     }
 
-    public PrimitiveResult AddPeriodicService(DateTime fromDate)
-    {
-        PrimitiveResult.BindAll(this.OrderItems, (orderItem) =>
-            orderItem.AddPeriodicService(fromDate),
-            BindAllIterationStrategy.BreakOnFirstError);
-        return PrimitiveResult.Success();
-    }
-
     public PrimitiveResult DonePeriodicService(int orderItemId, int id)
     {
         return _orderItems
@@ -107,6 +99,13 @@ public sealed class Order : EntityBase<int>
         return _orderItems
             .FirstOrDefault(s => s.Id == orderItemId)
             .NextPeriodicService(id);
+    }
+
+    public ValueTask<PrimitiveResult<Order>> Pay(byte status)
+    {
+        this.UpdateDate = DateTime.Now;
+        this.Status = status;
+        return ValueTask.FromResult(PrimitiveResult.Success(this));
     }
     #endregion
 }

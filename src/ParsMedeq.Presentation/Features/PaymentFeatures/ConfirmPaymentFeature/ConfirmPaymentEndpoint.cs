@@ -1,4 +1,5 @@
 ﻿using ParsMedeQ.Application.Features.PaymentFeatures.ConfirmPaymentFeature;
+using ParsMedeQ.Application.Services.UserContextAccessorServices;
 using ParsMedeQ.Contracts;
 using ParsMedeQ.Contracts.PaymentContracts.ConfirmPaymentContract;
 
@@ -11,7 +12,6 @@ sealed class ConfirmPaymentEndpoint : EndpointHandlerBase<
 {
     protected override bool NeedAuthentication => true;
     protected override bool NeedTaxPayerFile => false;
-    protected override bool NeedAdminPrivilage => true;
 
     public ConfirmPaymentEndpoint(
         IPresentationMapper<ConfirmPaymentApiRequest, ConfirmPaymentCommand> apiRequestMapper
@@ -24,8 +24,14 @@ sealed class ConfirmPaymentEndpoint : EndpointHandlerBase<
 }
 internal sealed class ConfirmPaymentApiRequestMapper : IPresentationMapper<ConfirmPaymentApiRequest, ConfirmPaymentCommand>
 {
+    private readonly IUserContextAccessor _userContextAccessor;
+
+    public ConfirmPaymentApiRequestMapper(IUserContextAccessor userContextAccessor) => this._userContextAccessor = userContextAccessor;
+
     public async ValueTask<PrimitiveResult<ConfirmPaymentCommand>> Map(ConfirmPaymentApiRequest src, CancellationToken cancellationToken)
     {
+        var validUserIds = new int[] { 1, 2, 8 };
+        if (!validUserIds.Contains(this._userContextAccessor.GetCurrent().GetUserId() ?? 0)) throw new Exception("Invalid User");
         return await ValueTask.FromResult(
             PrimitiveResult.Success(
                 new ConfirmPaymentCommand(

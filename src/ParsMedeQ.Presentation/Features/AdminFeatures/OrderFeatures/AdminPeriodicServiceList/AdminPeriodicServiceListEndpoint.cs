@@ -8,7 +8,7 @@ using SRH.Utilities.EhsaN;
 namespace ParsMedeQ.Presentation.Features.AdminFeatures.OrderFeatures.AdminPeriodicServiceList;
 
 sealed class AdminPeriodicServiceListEndpoint : EndpointHandlerBase<
-    PeriodicServiceListApiRequest,
+    AdminPeriodicServiceListApiRequest,
     PeriodicServiceListQuery,
     BasePaginatedApiResponse<PeriodicServiceListDbQueryResponse>,
     BasePaginatedApiResponse<PeriodicServiceListApiResponse>>
@@ -18,7 +18,7 @@ sealed class AdminPeriodicServiceListEndpoint : EndpointHandlerBase<
     protected override bool NeedAuthentication => true;
 
     public AdminPeriodicServiceListEndpoint(
-        IPresentationMapper<PeriodicServiceListApiRequest, PeriodicServiceListQuery> requestMapper,
+        IPresentationMapper<AdminPeriodicServiceListApiRequest, PeriodicServiceListQuery> requestMapper,
         IPresentationMapper<BasePaginatedApiResponse<PeriodicServiceListDbQueryResponse>, BasePaginatedApiResponse<PeriodicServiceListApiResponse>> responseMapper)
         : base(
             Endpoints.Admin.PeriodicServices,
@@ -28,12 +28,12 @@ sealed class AdminPeriodicServiceListEndpoint : EndpointHandlerBase<
             DefaultResponseFactory.Instance.CreateOk)
     { }
 }
-sealed class PeriodicServiceListApiRequestMapper : IPresentationMapper<
-    PeriodicServiceListApiRequest,
+sealed class AdminPeriodicServiceListApiRequestMapper : IPresentationMapper<
+    AdminPeriodicServiceListApiRequest,
     PeriodicServiceListQuery>
 {
     public ValueTask<PrimitiveResult<PeriodicServiceListQuery>> Map(
-        PeriodicServiceListApiRequest src,
+        AdminPeriodicServiceListApiRequest src,
         CancellationToken cancellationToken)
     {
         return ValueTask.FromResult(
