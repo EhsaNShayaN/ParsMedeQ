@@ -67,13 +67,5 @@ public sealed class OrderItem : EntityBase<int>
             .DoneService();
         return PrimitiveResult.Success();
     }
-
-    public PrimitiveResult NextPeriodicService(int id)
-    {
-        _periodicServices
-            .FirstOrDefault(s => s.Id.Equals(id))
-            .NextService();
-        return PrimitiveResult.Success();
-    }
     #endregion
 }

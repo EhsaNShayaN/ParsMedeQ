@@ -42,7 +42,7 @@
             {{ (element.done ? 'DONE' : 'NOT_DONE') | translate }}
           </ng-container>
           <ng-container *ngSwitchCase="'actions'">
-            @if (this.auth.isAdmin()) {
+            @if (url === 'admin' && this.auth.isAdmin()) {
               @if (!element.done) {
                 <button (click)="done(element)" mat-icon-button color="warn"
                         fxLayout="row wrap" fxLayoutAlign="center center">

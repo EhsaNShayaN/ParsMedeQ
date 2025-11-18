@@ -8,7 +8,6 @@ public sealed class PeriodicService : EntityBase<int>
     public int OrderItemId { get; private set; }
     public DateTime ServiceDate { get; private set; }
     public bool Done { get; private set; }
-    public bool HasNext { get; private set; }
     #endregion
 
     #region " Navigation Properties "
@@ -33,11 +32,6 @@ public sealed class PeriodicService : EntityBase<int>
     internal PrimitiveResult<PeriodicService> DoneService()
     {
         this.Done = true;
-        return this;
-    }
-    internal PrimitiveResult<PeriodicService> NextService()
-    {
-        this.HasNext = true;
         return this;
     }
     #endregion

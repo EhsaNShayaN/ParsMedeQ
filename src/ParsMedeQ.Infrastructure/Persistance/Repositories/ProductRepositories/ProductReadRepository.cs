@@ -212,7 +212,13 @@ internal sealed class ProductReadRepository : GenericPrimitiveReadRepositoryBase
             RelatedId = res.OrderItem.RelatedId,
             ServiceDate = res.ServiceDate,
             Done = res.Done,
-            HasNext = res.HasNext,
+            //HasNext = res.HasNext,
+            //HasNext = EF.Functions.Lead(res.ServiceDate).Over(partitionBy: res.OrderItem.Order.UserId, orderBy: res.ServiceDate) != null,
+            HasNext = DbContext.PeriodicService.Include(s => s.OrderItem).ThenInclude(s => s.Order)
+                .Where(o2 => o2.OrderItem.Order.UserId == res.OrderItem.Order.UserId && o2.ServiceDate > res.ServiceDate)
+                .OrderBy(o2 => o2.ServiceDate)
+                .Select(o2 => o2.ServiceDate)
+                .Any(),
             GuarantyExpirationDate = res.OrderItem.GuarantyExpirationDate,
         };
 

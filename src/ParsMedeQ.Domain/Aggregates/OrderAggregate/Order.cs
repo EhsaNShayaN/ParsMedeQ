@@ -94,13 +94,6 @@ public sealed class Order : EntityBase<int>
             .DonePeriodicService(id);
     }
 
-    public PrimitiveResult NextPeriodicService(int orderItemId, int id)
-    {
-        return _orderItems
-            .FirstOrDefault(s => s.Id == orderItemId)
-            .NextPeriodicService(id);
-    }
-
     public ValueTask<PrimitiveResult<Order>> Pay(byte status)
     {
         this.UpdateDate = DateTime.Now;
