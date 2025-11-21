@@ -7,6 +7,7 @@ using ParsMedeQ.Application.Persistance.Schema.PaymentRepositories;
 using ParsMedeQ.Application.Persistance.Schema.ProductRepositories;
 using ParsMedeQ.Application.Persistance.Schema.PurchaseRepositories;
 using ParsMedeQ.Application.Persistance.Schema.ResourceRepositories;
+using ParsMedeQ.Application.Persistance.Schema.SectionRepositories;
 using ParsMedeQ.Application.Persistance.Schema.ServiceRepositories;
 using ParsMedeQ.Application.Persistance.Schema.TicketRepositories;
 using ParsMedeQ.Application.Persistance.Schema.TreatmentCenterRepositories;
@@ -29,4 +30,5 @@ public interface IReadUnitOfWork : IUnitOfWork
     ITreatmentCenterReadRepository TreatmentCenterReadRepository { get; }
     ILocationReadRepository LocationReadRepository { get; }
     IServiceReadRepository ServiceReadRepository { get; }
+    ISectionReadRepository SectionReadRepository { get; }
 }

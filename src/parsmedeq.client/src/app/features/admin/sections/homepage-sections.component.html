@@ -1,0 +1,96 @@
+<div class="container">
+
+  <h2 class="page-title">مدیریت بخش‌های صفحه اصلی</h2>
+
+  <div cdkDropList (cdkDropListDropped)="drop($event)" class="drag-container">
+
+    <table mat-table [dataSource]="sections" class="mat-elevation-z2 full-width">
+
+      <ng-container matColumnDef="order">
+        <th mat-header-cell *matHeaderCellDef>ترتیب</th>
+        <td mat-cell *matCellDef="let s; let i = index">
+          <div cdkDrag class="drag-handle">
+            <mat-icon>drag_indicator</mat-icon>
+            {{ i + 1 }}
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef>عنوان</th>
+        <td mat-cell *matCellDef="let s">
+          <div>{{ s.title }}</div>
+          @if (s.type === 'mainImage') {
+            <div><strong>عکس اصلی</strong></div>
+            @if (s.title) {
+              <div>{{ s.title }}</div>
+            }
+          }
+          @if (s.type === 'centers') {
+            <div><strong>سانترهای درمانی</strong></div>
+          }
+          @if (s.type === 'services') {
+            <div><strong>خدمات ما</strong></div>
+            @if (s.title) {
+              <div>{{ s.title }}</div>
+            }
+          }
+          @if (s.type === 'advantages') {
+            <div><strong>مزایای برجسته</strong></div>
+            @if (s.title) {
+              <div>{{ s.title }}</div>
+            }
+          }
+          @if (s.type === 'about') {
+            <div><strong>درباره ما</strong></div>
+            @if (s.description) {
+              <div class="muted">{{ s.description | slice:0:120 }}...</div>
+            }
+          }
+          @if (s.type === 'contact') {
+            <div><strong>تماس با ما</strong></div>
+            @if (s.description) {
+              <div class="muted">{{ s.description | slice:0:120 }}...</div>
+            }
+          }
+          @if (s.type === 'bottomImage') {
+            <div><strong>عکس پایین</strong></div>
+            @if (s.title) {
+              <div>{{ s.title }}</div>
+            }
+          }
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>وضعیت</th>
+        <td mat-cell *matCellDef="let s">
+          @if (!s.hidden) {
+            <span class="status visible">نمایش</span>
+          }
+          @if (s.hidden) {
+            <span class="status hidden">پنهان</span>
+          }
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>عملیات</th>
+        <td mat-cell *matCellDef="let s">
+          <button mat-button color="primary" (click)="edit(s)">
+            <mat-icon>edit</mat-icon>
+            ویرایش
+          </button>
+          <button mat-button color="warn" (click)="toggle(s)">
+            <mat-icon>{{ s.hidden ? 'visibility' : 'visibility_off' }}</mat-icon>
+            {{ s.hidden ? 'نمایش' : 'عدم نمایش' }}
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns" cdkDrag class="draggable-row"></tr>
+
+    </table>
+  </div>
+</div>

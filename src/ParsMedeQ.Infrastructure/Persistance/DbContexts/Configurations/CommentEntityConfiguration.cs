@@ -1,4 +1,6 @@
 ﻿using ParsMedeQ.Domain.Aggregates.CommentAggregate;
+using ParsMedeQ.Domain.Aggregates.SectionAggregate;
+using ParsMedeQ.Domain.Aggregates.SectionAggregate.Entities;
 
 namespace ParsMedeQ.Infrastructure.Persistance.DbContexts.Configurations;
 

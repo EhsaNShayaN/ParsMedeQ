@@ -1,0 +1,41 @@
+<h2 mat-dialog-title>ویرایش مزایای برجسته</h2>
+<div mat-dialog-content>
+  <form [formGroup]="form">
+
+    <mat-form-field appearance="outline" class="full">
+      <mat-label>عنوان</mat-label>
+      <input matInput formControlName="title">
+    </mat-form-field>
+
+    <h3>لیست مزایا</h3>
+
+    @for (ctrl of items.controls; track ctrl; let i = $index) {
+      <div style="display:flex; gap:8px; align-items:center; margin-bottom:8px">
+        <mat-form-field appearance="outline" style="flex:1">
+          <mat-label>متن مزیت</mat-label>
+          <input matInput [formControl]="$any(ctrl.get('text'))">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" style="width:160px">
+          <mat-label>آیکون (نام mat icon)</mat-label>
+          <input matInput [formControl]="$any(ctrl.get('icon'))">
+        </mat-form-field>
+
+        <button mat-icon-button color="warn" (click)="removeItem(i)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    }
+
+    <button mat-stroked-button color="primary" (click)="addItem()">
+      <mat-icon>add</mat-icon>
+      افزودن مزیت
+    </button>
+
+  </form>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>انصراف</button>
+  <button mat-raised-button color="primary" (click)="save()">ذخیره</button>
+</div>

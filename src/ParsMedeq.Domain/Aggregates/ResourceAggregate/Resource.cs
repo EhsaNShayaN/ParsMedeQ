@@ -75,7 +75,7 @@ public sealed class Resource : EntityBase<int>
                 CreationDate = DateTime.Now
             });
 
-    public ValueTask<PrimitiveResult<Resource>> Update(
+    private ValueTask<PrimitiveResult<Resource>> Update(
         int resourceCategoryId,
         string language,
         string publishDate,

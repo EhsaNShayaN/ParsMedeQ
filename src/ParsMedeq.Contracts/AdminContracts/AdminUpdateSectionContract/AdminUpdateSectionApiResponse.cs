@@ -1,0 +1,2 @@
+﻿namespace ParsMedeQ.Contracts.AdminContracts.AdminUpdateSectionContract;
+public readonly record struct AdminUpdateSectionApiResponse(bool Changed);

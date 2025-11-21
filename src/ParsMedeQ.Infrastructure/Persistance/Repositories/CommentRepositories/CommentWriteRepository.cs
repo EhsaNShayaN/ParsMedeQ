@@ -1,5 +1,7 @@
 ﻿using ParsMedeQ.Application.Persistance.Schema.CommentRepositories;
 using ParsMedeQ.Domain.Aggregates.CommentAggregate;
+using ParsMedeQ.Domain.Aggregates.SectionAggregate;
+using ParsMedeQ.Domain.Aggregates.SectionAggregate.Entities;
 using ParsMedeQ.Infrastructure.Persistance.DbContexts;
 using SRH.Persistance.Repositories.Write;
 

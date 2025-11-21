@@ -1,0 +1,48 @@
+.container {
+  padding: 20px;
+  direction: rtl;
+  text-align: right;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.page-title {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.drag-handle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: grab;
+  color: #555;
+}
+
+.status.visible {
+  color: #2e7d32;
+}
+
+.status.hidden {
+  color: #c62828;
+}
+
+.muted {
+  color: #666;
+  font-size: 13px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.draggable-row {
+  cursor: grab;
+}
+
+.preview-img {
+  max-width: 100%;
+  max-height: 220px;
+  display: block;
+  margin-top: 8px;
+}

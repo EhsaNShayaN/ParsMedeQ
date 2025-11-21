@@ -25,4 +25,6 @@ internal static class TableNames
     internal static string TreatmentCenter = "TreatmentCenter";
     internal static string TreatmentCenterTranslation = "TreatmentCenterTranslation";
     internal static string Location = "Location";
+    internal static string Section = "Section";
+    internal static string SectionTranslation = "SectionTranslation";
 }

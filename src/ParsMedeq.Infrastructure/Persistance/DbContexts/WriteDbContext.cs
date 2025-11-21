@@ -13,6 +13,8 @@ using ParsMedeQ.Domain.Aggregates.PurchaseAggregate;
 using ParsMedeQ.Domain.Aggregates.ResourceAggregate;
 using ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate;
 using ParsMedeQ.Domain.Aggregates.ResourceCategoryAggregate.Entities;
+using ParsMedeQ.Domain.Aggregates.SectionAggregate;
+using ParsMedeQ.Domain.Aggregates.SectionAggregate.Entities;
 using ParsMedeQ.Domain.Aggregates.TicketAggregate;
 using ParsMedeQ.Domain.Aggregates.TicketAggregate.Entities;
 using ParsMedeQ.Domain.Aggregates.TreatmentCenterAggregate;
@@ -46,6 +48,7 @@ public sealed class WriteDbContext : DbContextBase<WriteDbContext>
     public DbSet<TreatmentCenter> TreatmentCenter { get; set; }
     public DbSet<TreatmentCenterTranslation> TreatmentCenterTranslation { get; set; }
     public DbSet<Location> Location { get; set; }
+    public DbSet<Section> Section{ get; set; }
 
     public WriteDbContext(DbContextOptions<WriteDbContext> opts) : base(opts) { }
 

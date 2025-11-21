@@ -1,0 +1,2 @@
+﻿namespace ParsMedeQ.Application.Features.SectionFeatures.UpdateSectionFeature;
+public sealed record UpdateSectionCommandResponse(bool Changed);

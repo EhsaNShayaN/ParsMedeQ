@@ -48,6 +48,12 @@ import {ServiceListComponent} from './service/service-list/service-list.componen
 import {ServiceAddComponent} from './service/service-add/service-add.component';
 import {AdminPeriodicServiceComponent} from './periodic-service/admin-periodic-service.component';
 import {AdminPeriodicServiceListComponent} from './periodic-service/admin-periodic-service-list/admin-periodic-service-list.component';
+import {HomepageSectionsComponent} from './sections/homepage-sections.component';
+import {EditMainImageDialog} from './sections/dialogs/edit-main-image.dialog';
+import {EditServicesDialog} from './sections/dialogs/edit-services.dialog';
+import {EditAdvantagesDialog} from './sections/dialogs/edit-advantages.dialog';
+import {EditTextDialog} from './sections/dialogs/edit-text.dialog';
+import {EditBottomImageDialog} from './sections/dialogs/edit-bottom-image.dialog';
 
 @NgModule({
   declarations: [
@@ -105,6 +111,13 @@ import {AdminPeriodicServiceListComponent} from './periodic-service/admin-period
 
     AdminPeriodicServiceComponent,
     AdminPeriodicServiceListComponent,
+
+    HomepageSectionsComponent,
+    EditMainImageDialog,
+    EditServicesDialog,
+    EditAdvantagesDialog,
+    EditTextDialog,
+    EditBottomImageDialog,
   ],
   imports: [
     CommonModule,

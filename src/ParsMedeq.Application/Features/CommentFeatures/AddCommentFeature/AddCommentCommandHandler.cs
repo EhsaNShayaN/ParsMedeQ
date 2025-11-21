@@ -1,5 +1,7 @@
 ﻿using ParsMedeQ.Application.Services.UserContextAccessorServices;
 using ParsMedeQ.Domain.Aggregates.CommentAggregate;
+using ParsMedeQ.Domain.Aggregates.SectionAggregate;
+using ParsMedeQ.Domain.Aggregates.SectionAggregate.Entities;
 
 namespace ParsMedeQ.Application.Features.CommentFeatures.AddCommentFeature;
 public sealed class AddCommentCommandHandler : IPrimitiveResultCommandHandler<AddCommentCommand, AddCommentCommandResponse>
