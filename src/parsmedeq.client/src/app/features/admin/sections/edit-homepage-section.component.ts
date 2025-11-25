@@ -7,7 +7,7 @@ import {SectionType} from './homepage-sections.component';
 import {EditMainImageDialog} from './dialogs/edit-main-image.dialog';
 import {EditServicesDialog} from './dialogs/edit-services.dialog';
 import {EditAdvantagesDialog} from './dialogs/edit-advantages.dialog';
-import {EditTextDialog} from './dialogs/edit-text.dialog';
+import {EditAboutDialog} from './dialogs/edit-about.dialog';
 import {EditBottomImageDialog} from './dialogs/edit-bottom-image.dialog';
 import {ToastrService} from 'ngx-toastr';
 
@@ -45,7 +45,7 @@ export class EditHomepageSectionComponent extends BaseComponent implements OnDes
               this.router.navigate([`/${this.translateService.getDefaultLang()}/admin/treatment-center/list`]); // صفحه مدیریت سانترها
               break;
             case SectionType.services:
-              this.dialog.open(EditServicesDialog, config).afterClosed().subscribe(res => {
+              this.dialog.open(EditServicesDialog, config)  .afterClosed().subscribe(res => {
                 this.load(res);
               });
               break;
@@ -56,7 +56,7 @@ export class EditHomepageSectionComponent extends BaseComponent implements OnDes
               break;
             case SectionType.about:
             case SectionType.contact:
-              this.dialog.open(EditTextDialog, config).afterClosed().subscribe(res => {
+              this.dialog.open(EditAboutDialog, config).afterClosed().subscribe(res => {
                 this.load(res);
               });
               break;

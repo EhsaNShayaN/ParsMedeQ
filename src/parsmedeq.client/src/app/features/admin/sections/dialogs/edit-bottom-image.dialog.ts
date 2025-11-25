@@ -9,6 +9,7 @@ import {ToastrService} from 'ngx-toastr';
 @Component({
   selector: 'edit-bottom-image-dialog',
   templateUrl: './edit-bottom-image.dialog.html',
+  styleUrl: '../homepage-sections.component.scss',
   standalone: false
 })
 export class EditBottomImageDialog extends PureComponent {

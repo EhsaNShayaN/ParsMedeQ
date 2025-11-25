@@ -1,11 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
 import {SectionService} from './section.service';
-import {EditMainImageDialog} from './dialogs/edit-main-image.dialog';
-import {EditServicesDialog} from './dialogs/edit-services.dialog';
-import {EditAdvantagesDialog} from './dialogs/edit-advantages.dialog';
-import {EditTextDialog} from './dialogs/edit-text.dialog';
-import {EditBottomImageDialog} from './dialogs/edit-bottom-image.dialog';
 import {BaseComponent} from '../../../base-component';
 
 export enum SectionType {
@@ -25,8 +19,7 @@ export interface Section {
   description?: string;
   hidden: boolean;
   order: number;
-  // for complex sections:
-  items?: any[]; // services or advantages items
+  items?: any[];
   image?: string;
 }
 
@@ -42,9 +35,7 @@ export class HomepageSectionsComponent extends BaseComponent implements OnInit {
   displayedColumns = ['order', 'title', 'status', 'actions'];
   sections: Section[] = [];
 
-  constructor(
-    private dialog: MatDialog,
-    private service: SectionService) {
+  constructor(private service: SectionService) {
     super();
     this.languages = this.translateService.getLangs();
   }
@@ -55,7 +46,7 @@ export class HomepageSectionsComponent extends BaseComponent implements OnInit {
 
   load() {
     this.service.getAll().subscribe(res => {
-      this.sections = res.data.sort((a, b) => a.order - b.order);
+      this.sections = res.data.filter(s => s.id !== SectionType.contact).sort((a, b) => a.order - b.order);
     });
   }
 
