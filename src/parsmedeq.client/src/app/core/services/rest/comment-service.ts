@@ -11,7 +11,7 @@ import {CommentResponse, CommentsRequest} from '../../models/CommentResponse';
 })
 export class CommentService extends BaseRestService {
 
-  getComments(model: CommentsRequest, url:string): Observable<any> {
+  getComments(model: CommentsRequest, url: string): Observable<any> {
     return this.http.post<CommentResponse>(`${endpoint()}${url}/comment/list`, model).pipe(
       catchError(this.handleError)
     );
