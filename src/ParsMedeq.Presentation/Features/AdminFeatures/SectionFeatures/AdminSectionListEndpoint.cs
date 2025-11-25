@@ -62,6 +62,6 @@ sealed class AdminSectionListApiResponseMapper : IPresentationMapper<
                             s.Title,
                             s.Description,
                             s.Image,
-                            s.Visible)).ToArray()));
+                            s.Hidden)).ToArray()));
     }
 }

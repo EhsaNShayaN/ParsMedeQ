@@ -40,6 +40,7 @@ import {ServiceAddComponent} from './service/service-add/service-add.component';
 import {AdminPeriodicServiceComponent} from './periodic-service/admin-periodic-service.component';
 import {AdminPeriodicServiceListComponent} from './periodic-service/admin-periodic-service-list/admin-periodic-service-list.component';
 import {HomepageSectionsComponent} from './sections/homepage-sections.component';
+import {EditHomepageSectionComponent} from './sections/edit-homepage-section.component';
 
 const routes: Routes = [
   {path: '', component: Admin},
@@ -103,7 +104,8 @@ const routes: Routes = [
   {path: 'periodic-service', component: AdminPeriodicServiceComponent},
   {path: 'periodic-service/list', component: AdminPeriodicServiceListComponent},
 
-  {path: 'sections', component: HomepageSectionsComponent},
+  {path: 'section/list', component: HomepageSectionsComponent},
+  {path: 'section/edit/:id', component: EditHomepageSectionComponent},
 ];
 
 @NgModule({

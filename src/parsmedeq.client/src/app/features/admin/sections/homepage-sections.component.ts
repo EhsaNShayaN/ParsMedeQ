@@ -1,22 +1,22 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
-import {Router} from '@angular/router';
 import {SectionService} from './section.service';
 import {EditMainImageDialog} from './dialogs/edit-main-image.dialog';
 import {EditServicesDialog} from './dialogs/edit-services.dialog';
 import {EditAdvantagesDialog} from './dialogs/edit-advantages.dialog';
 import {EditTextDialog} from './dialogs/edit-text.dialog';
 import {EditBottomImageDialog} from './dialogs/edit-bottom-image.dialog';
+import {BaseComponent} from '../../../base-component';
 
-export type SectionType =
-  | 'mainImage'
-  | 'centers'
-  | 'services'
-  | 'advantages'
-  | 'about'
-  | 'contact'
-  | 'bottomImage';
+enum SectionType {
+  mainImage = 1,
+  centers = 2,
+  services = 3,
+  advantages = 4,
+  about = 5,
+  contact = 6,
+  bottomImage = 7
+}
 
 export interface Section {
   id: number;
@@ -36,15 +36,17 @@ export interface Section {
   styleUrls: ['./homepage-sections.component.scss'],
   standalone: false
 })
-export class HomepageSectionsComponent implements OnInit {
+export class HomepageSectionsComponent extends BaseComponent implements OnInit {
+  languages: string[] = [];
+  colors: string[] = ['warn', 'primary', 'success', 'secondary', 'info', 'danger'];
   displayedColumns = ['order', 'title', 'status', 'actions'];
   sections: Section[] = [];
 
   constructor(
     private dialog: MatDialog,
-    private service: SectionService,
-    private router: Router
-  ) {
+    private service: SectionService) {
+    super();
+    this.languages = this.translateService.getLangs();
   }
 
   ngOnInit() {
@@ -57,37 +59,37 @@ export class HomepageSectionsComponent implements OnInit {
     });
   }
 
-  edit(section: Section) {
-    switch (section.type) {
-      case 'mainImage':
+  edit(section: Section, lang: string) {
+    switch (section.id) {
+      case SectionType.mainImage:
         this.dialog.open(EditMainImageDialog, {width: '600px', data: section})
           .afterClosed().subscribe(res => {
           if (res) this.service.update(section.id, res).subscribe(() => this.load());
         });
         break;
-      case 'centers':
+      case SectionType.centers:
         this.router.navigate(['/admin/centers']); // صفحه مدیریت سانترها
         break;
-      case 'services':
+      case SectionType.services:
         this.dialog.open(EditServicesDialog, {width: '800px', data: section})
           .afterClosed().subscribe(res => {
           if (res) this.service.update(section.id, res).subscribe(() => this.load());
         });
         break;
-      case 'advantages':
+      case SectionType.advantages:
         this.dialog.open(EditAdvantagesDialog, {width: '800px', data: section})
           .afterClosed().subscribe(res => {
           if (res) this.service.update(section.id, res).subscribe(() => this.load());
         });
         break;
-      case 'about':
-      case 'contact':
+      case SectionType.about:
+      case SectionType.contact:
         this.dialog.open(EditTextDialog, {width: '600px', data: section})
           .afterClosed().subscribe(res => {
           if (res) this.service.update(section.id, res).subscribe(() => this.load());
         });
         break;
-      case 'bottomImage':
+      case SectionType.bottomImage:
         this.dialog.open(EditBottomImageDialog, {width: '600px', data: section})
           .afterClosed().subscribe(res => {
           if (res) this.service.update(section.id, res).subscribe(() => this.load());
@@ -97,12 +99,6 @@ export class HomepageSectionsComponent implements OnInit {
   }
 
   toggle(section: Section) {
-    this.service.update(section.id, {hidden: !section.hidden}).subscribe(() => this.load());
-  }
-
-  drop(event: CdkDragDrop<Section[]>) {
-    moveItemInArray(this.sections, event.previousIndex, event.currentIndex);
-    const ordered = this.sections.map((s, index) => ({id: s.id, order: index + 1}));
-    this.service.updateOrder(ordered).subscribe(() => this.load());
+    this.service.toggle(section.id, section.hidden).subscribe(() => this.load());
   }
 }

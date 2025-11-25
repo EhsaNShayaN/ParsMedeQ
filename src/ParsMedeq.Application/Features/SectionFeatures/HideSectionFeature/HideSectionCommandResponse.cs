@@ -1,0 +1,2 @@
+﻿namespace ParsMedeQ.Application.Features.SectionFeatures.HideSectionFeature;
+public sealed record HideSectionCommandResponse(bool Changed);

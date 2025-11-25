@@ -20,6 +20,13 @@ export class SectionService {
     return this.http.post(`${this.api}/edit/${id}`, data);
   }
 
+  toggle(id: number, hide: boolean) {
+    if (hide) {
+      return this.http.post(`${this.api}/show`, {id});
+    }
+    return this.http.post(`${this.api}/hide`, {id});
+  }
+
   updateOrder(list: { id: number, order: number }[]) {
     return this.http.post(`${this.api}/order`, list);
   }

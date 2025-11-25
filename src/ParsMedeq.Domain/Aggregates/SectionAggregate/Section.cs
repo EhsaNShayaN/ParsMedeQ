@@ -9,7 +9,7 @@ public sealed class Section : EntityBase<int>
     #endregion
 
     #region " Properties "
-    public bool Visible { get; private set; }
+    public bool Hidden { get; private set; }
     #endregion
 
     #region " Navigation Properties "
@@ -27,7 +27,7 @@ public sealed class Section : EntityBase<int>
         return PrimitiveResult.Success(
             new Section()
             {
-                Visible = true,
+                Hidden = true,
             });
     }
     private ValueTask<PrimitiveResult<Section>> Update()
@@ -76,6 +76,18 @@ public sealed class Section : EntityBase<int>
                 _ => PrimitiveResult.Success(),
                 PrimitiveResult.Failure
             );
+    }
+
+    public PrimitiveResult<Section> Show()
+    {
+        this.Hidden = false;
+        return this;
+    }
+
+    public PrimitiveResult<Section> Hide()
+    {
+        this.Hidden = true;
+        return this;
     }
     #endregion
 }

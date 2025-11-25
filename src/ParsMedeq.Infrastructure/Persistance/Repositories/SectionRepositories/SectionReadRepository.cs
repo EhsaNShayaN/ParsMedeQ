@@ -19,7 +19,7 @@ internal sealed class SectionReadRepository : GenericPrimitiveReadRepositoryBase
                     Title = res.SectionTranslations.SingleOrDefault(s => s.LanguageCode == langCode).Title ?? string.Empty,
                     Description = res.SectionTranslations.SingleOrDefault(s => s.LanguageCode == langCode).Description ?? string.Empty,
                     Image = res.SectionTranslations.SingleOrDefault(s => s.LanguageCode == langCode).Image ?? string.Empty,
-                    Visible = res.Visible,
+                    Hidden = res.Hidden,
                 };
         return q.Run(q => q.ToArrayAsync(cancellationToken), PrimitiveError.Create("", "آیتمی پیدا نشد"));
     }

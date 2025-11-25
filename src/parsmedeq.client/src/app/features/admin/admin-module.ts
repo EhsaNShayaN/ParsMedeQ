@@ -54,6 +54,8 @@ import {EditServicesDialog} from './sections/dialogs/edit-services.dialog';
 import {EditAdvantagesDialog} from './sections/dialogs/edit-advantages.dialog';
 import {EditTextDialog} from './sections/dialogs/edit-text.dialog';
 import {EditBottomImageDialog} from './sections/dialogs/edit-bottom-image.dialog';
+import {MatDialogClose} from '@angular/material/dialog';
+import {EditHomepageSectionComponent} from './sections/edit-homepage-section.component';
 
 @NgModule({
   declarations: [
@@ -113,6 +115,7 @@ import {EditBottomImageDialog} from './sections/dialogs/edit-bottom-image.dialog
     AdminPeriodicServiceListComponent,
 
     HomepageSectionsComponent,
+    EditHomepageSectionComponent,
     EditMainImageDialog,
     EditServicesDialog,
     EditAdvantagesDialog,
@@ -131,6 +134,7 @@ import {EditBottomImageDialog} from './sections/dialogs/edit-bottom-image.dialog
     NgxMatTimepickerDirective,
     NgxMatTimepickerComponent,
     MatSlideToggle,
+    MatDialogClose,
   ]
 })
 export class AdminModule {

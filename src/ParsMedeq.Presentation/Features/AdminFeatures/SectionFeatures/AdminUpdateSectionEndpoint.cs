@@ -16,7 +16,7 @@ sealed class AdminUpdateSectionEndpoint : EndpointHandlerBase<
     public AdminUpdateSectionEndpoint(
         IPresentationMapper<AdminUpdateSectionApiRequest, UpdateSectionCommand> apiRequestMapper
         ) : base(
-            Endpoints.Admin.AddSection,
+            Endpoints.Admin.UpdateSection,
             HttpMethod.Post,
             apiRequestMapper,
             DefaultResponseFactory.Instance.CreateOk)

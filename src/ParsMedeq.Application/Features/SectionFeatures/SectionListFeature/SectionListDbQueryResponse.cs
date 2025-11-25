@@ -6,5 +6,5 @@ public sealed class SectionListDbQueryResponse
     public string Title { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     public string Image { get; set; } = string.Empty;
-    public bool Visible { get; set; }
+    public bool Hidden { get; set; }
 }

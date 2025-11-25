@@ -4,4 +4,4 @@ public readonly record struct AdminSectionListApiResponse(
     string Title,
     string Description,
     string Image,
-    bool Visible);
+    bool Hidden);
