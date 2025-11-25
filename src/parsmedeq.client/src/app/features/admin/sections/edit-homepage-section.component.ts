@@ -1,7 +1,7 @@
 import {Component, OnDestroy} from '@angular/core';
 import {BaseComponent} from '../../../base-component';
 import {ActivatedRoute} from '@angular/router';
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {SectionService} from './section.service';
 import {SectionType} from './homepage-sections.component';
 import {EditMainImageDialog} from './dialogs/edit-main-image.dialog';
@@ -29,41 +29,39 @@ export class EditHomepageSectionComponent extends BaseComponent implements OnDes
         const id = params['id'];
         this.service.getAll().subscribe(res => {
           const section = res.data.find(s => s.id == id);
+          const config: MatDialogConfig = {
+            width: window.outerWidth + 'px',
+            height: window.outerHeight + 'px',
+            data: section
+          };
           if (!section) return;
           switch (section.id) {
             case SectionType.mainImage:
-              this.dialog.open(EditMainImageDialog, {width: '600px', data: section})
-                .afterClosed().subscribe(res => {
-                console.log('close');
-                console.log('res', res);
+              this.dialog.open(EditMainImageDialog, config).afterClosed().subscribe(res => {
                 this.load(res);
               });
               break;
             case SectionType.centers:
-              this.router.navigate(['/admin/centers']); // صفحه مدیریت سانترها
+              this.router.navigate([`/${this.translateService.getDefaultLang()}/admin/treatment-center/list`]); // صفحه مدیریت سانترها
               break;
             case SectionType.services:
-              this.dialog.open(EditServicesDialog, {width: '800px', data: section})
-                .afterClosed().subscribe(res => {
+              this.dialog.open(EditServicesDialog, config).afterClosed().subscribe(res => {
                 this.load(res);
               });
               break;
             case SectionType.advantages:
-              this.dialog.open(EditAdvantagesDialog, {width: '800px', data: section})
-                .afterClosed().subscribe(res => {
+              this.dialog.open(EditAdvantagesDialog, config).afterClosed().subscribe(res => {
                 this.load(res);
               });
               break;
             case SectionType.about:
             case SectionType.contact:
-              this.dialog.open(EditTextDialog, {width: '600px', data: section})
-                .afterClosed().subscribe(res => {
+              this.dialog.open(EditTextDialog, config).afterClosed().subscribe(res => {
                 this.load(res);
               });
               break;
             case SectionType.bottomImage:
-              this.dialog.open(EditBottomImageDialog, {width: '600px', data: section})
-                .afterClosed().subscribe(res => {
+              this.dialog.open(EditBottomImageDialog, config).afterClosed().subscribe(res => {
                 this.load(res);
               });
               break;
