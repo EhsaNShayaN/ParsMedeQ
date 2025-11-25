@@ -48,7 +48,8 @@ public sealed class WriteDbContext : DbContextBase<WriteDbContext>
     public DbSet<TreatmentCenter> TreatmentCenter { get; set; }
     public DbSet<TreatmentCenterTranslation> TreatmentCenterTranslation { get; set; }
     public DbSet<Location> Location { get; set; }
-    public DbSet<Section> Section{ get; set; }
+    public DbSet<Section> Section { get; set; }
+    public DbSet<SectionTranslation> SectionTranslation { get; set; }
 
     public WriteDbContext(DbContextOptions<WriteDbContext> opts) : base(opts) { }
 

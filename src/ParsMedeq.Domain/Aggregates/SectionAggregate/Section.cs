@@ -77,17 +77,31 @@ public sealed class Section : EntityBase<int>
                 PrimitiveResult.Failure
             );
     }
-
     public PrimitiveResult<Section> Show()
     {
         this.Hidden = false;
         return this;
     }
-
     public PrimitiveResult<Section> Hide()
     {
         this.Hidden = true;
         return this;
+    }
+    public PrimitiveResult<Section> RemoveTranslations(string langCode)
+    {
+        this._sectionTranslations.RemoveAll(s => s.LanguageCode == langCode);
+        return PrimitiveResult.Success(this);
+    }
+    public ValueTask<PrimitiveResult> AddTranslations(
+        string languageCode,
+        (string title, string description)[] translations)
+    {
+        return PrimitiveResult.BindAll(translations,
+            s => this.Update(languageCode, s.title, s.description, string.Empty),
+            BindAllIterationStrategy.BreakOnFirstError).Match(
+                _ => PrimitiveResult.Success(),
+                PrimitiveResult.Failure
+            );
     }
     #endregion
 }

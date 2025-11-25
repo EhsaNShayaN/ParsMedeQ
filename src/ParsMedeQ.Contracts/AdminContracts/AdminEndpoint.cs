@@ -20,6 +20,7 @@ public sealed class AdminEndpoint : ApiEndpointBase
     public EndpointInfo SectionItems { get; private set; }
     public EndpointInfo AddSection { get; private set; }
     public EndpointInfo UpdateSection { get; private set; }
+    public EndpointInfo UpdateSectionByList { get; private set; }
     public EndpointInfo ShowSection { get; private set; }
     public EndpointInfo HideSection { get; private set; }
 
@@ -100,6 +101,13 @@ public sealed class AdminEndpoint : ApiEndpointBase
             this.GetUrl("section/update"),
             "Update Section",
             "Update Section",
+            _tag);
+
+        this.UpdateSectionByList = new EndpointInfo(
+            this.GetUrl("section/updateByList"),
+            this.GetUrl("section/updateByList"),
+            "Update Section ByList",
+            "Update Section ByList",
             _tag);
 
         this.ShowSection = new EndpointInfo(

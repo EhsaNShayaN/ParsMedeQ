@@ -85,7 +85,8 @@
     "SAVE": "Save",
     "CANCEL": "Cancel",
     "ADD": "Add",
-    "EDIT": "Edit"
+    "EDIT": "Edit",
+    "DELETE": "Delete"
   },
   "ITEM_DELETED_SUCCESSFULLY": "Item deleted successfully",
   "VIEW": "VIEW",
@@ -153,11 +154,12 @@
   "DELETE_FILE": "Delete file",
   "SECTIONS": {
     "MAIN_IMAGE": "Main image",
-    "CENTERS":"Centers",
+    "CENTERS": "Centers",
     "SERVICES": "Services",
-    "ADVANTAGES":"Advantages",
+    "ADVANTAGES": "Advantages",
     "ABOUT": "About",
-    "CONTACT":"Contact",
+    "CONTACT": "Contact",
     "BOTTOM_IMAGE": "Bottom image"
-  }
+  },
+  "PRESS_THE_SAVE_BUTTON_TO_FINALIZE_THE_OPERATION": "Press the Save button to finalize the operation."
 }

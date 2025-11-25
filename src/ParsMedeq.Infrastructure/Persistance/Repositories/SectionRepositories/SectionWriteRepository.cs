@@ -11,7 +11,6 @@ internal sealed class SectionWriteRepository : GenericPrimitiveWriteRepositoryBa
 
     public ValueTask<PrimitiveResult<Section>> FindById(int id, CancellationToken cancellationToken) =>
         this.FindByIdAsync<Section, int>(id, cancellationToken);
-
     public ValueTask<PrimitiveResult<Section>> FindByTranslation(int id, CancellationToken cancellationToken)
     {
         var q = this.DbContext.Section.Include(s => s.SectionTranslations).Where(s => s.Id.Equals(id));

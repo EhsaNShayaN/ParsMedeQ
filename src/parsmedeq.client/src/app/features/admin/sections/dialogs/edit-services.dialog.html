@@ -2,38 +2,41 @@
   {{ 'EDIT' | translate }}
   {{ sectionTitle | translate }}
 </h2>
+<p class="ps-6 red-color">{{ 'PRESS_THE_SAVE_BUTTON_TO_FINALIZE_THE_OPERATION' | translate }}</p>
 <mat-divider></mat-divider>
 <div mat-dialog-content>
   <form [formGroup]="form">
     @for (ctrl of itemControls; track ctrl; let i = $index) {
       <div fxLayout="row wrap" fxLayoutAlign="space-between start">
         <div fxFlex="100" fxFlex.gt-xs="40">
-          <mat-form-field appearance="outline" class="w-100">
+          <mat-form-field appearance="outline" class="w-100 pe-1">
             <mat-label>{{ i + 1 }}</mat-label>
-            <input matInput [formControl]="ctrl['title']">
+            <input matInput [formControl]="$any(ctrl.get('title'))">
           </mat-form-field>
+          <button mat-stroked-button color="warn" (click)="removeItem(i)">
+            <mat-icon>remove</mat-icon>
+            {{ 'BTN.DELETE' | translate }}
+            {{ 'SERVICE' | translate }}
+          </button>
         </div>
         <div fxFlex="100" fxFlex.gt-xs="60">
-          <mat-form-field appearance="outline" class="w-100">
+          <mat-form-field appearance="outline" class="w-100 ps-1">
             <mat-label>{{ i + 1 }}</mat-label>
-            <textarea matInput [formControl]="ctrl['description']"></textarea>
+            <textarea matInput [formControl]="$any(ctrl.get('description'))" rows="5"></textarea>
           </mat-form-field>
-          <button mat-icon-button color="warn" (click)="removeItem(i)">
-            <mat-icon>delete</mat-icon>
-          </button>
+        </div>
+        <div fxFlex="100" class="mb-5">
+          <mat-divider></mat-divider>
         </div>
       </div>
     }
-
     <button mat-stroked-button color="primary" (click)="addItem()">
       <mat-icon>add</mat-icon>
       {{ 'BTN.ADD' | translate }}
       {{ 'SERVICE' | translate }}
     </button>
-
   </form>
 </div>
-
 <div mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>{{ 'BTN.CANCEL'  | translate }}</button>
   <button mat-raised-button color="primary" (click)="save()">{{ 'BTN.SAVE'  | translate }}</button>

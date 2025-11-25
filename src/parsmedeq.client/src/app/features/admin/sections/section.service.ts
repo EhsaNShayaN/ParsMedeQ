@@ -46,6 +46,10 @@ export class SectionService {
     return this.http.post<{ url: string }>(`${this.api}/update`, fd);
   }
 
+  updateList(model: any) {
+    return this.http.post(`${this.api}/updateList`, model);
+  }
+
   deleteImage(id: number) {
     return this.http.post(`${this.api}/deleteImage`, {id});
   }
