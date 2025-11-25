@@ -47,7 +47,7 @@ export class CentersComponent extends BaseComponent implements OnInit {
       res.data.items.forEach(item => {
         item.city = this.locations.find(s => s.id === item.cityId)?.title ?? '';
         item.province = this.locations.find(s => s.id === item.provinceId)?.title ?? '';
-      })
+      });
       this.array = res.data.items;
     });
   }
