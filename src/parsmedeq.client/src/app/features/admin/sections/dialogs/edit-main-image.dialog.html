@@ -1,16 +1,23 @@
-<h2 mat-dialog-title>ویرایش عکس اصلی</h2>
+<h2 mat-dialog-title>{{ 'EDIT_MAIN_IMAGE' | translate }}</h2>
+<mat-divider></mat-divider>
 <div mat-dialog-content>
   <form [formGroup]="form">
-    <mat-form-field appearance="outline" class="full">
-      <mat-label>عنوان</mat-label>
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>{{ 'TITLE' | translate }}</mat-label>
       <input matInput formControlName="title">
     </mat-form-field>
 
-    <label>آپلود عکس</label>
+    <label>{{ 'UPLOAD_IMAGE' | translate }}</label>
     <input type="file" (change)="onFileSelected($event)" accept="image/*">
 
     @if (preview) {
-      <img [src]="preview" class="preview-img">
+      <div class="position-relative">
+        <img [src]="preview" class="preview-img">
+        <!--<mat-icon [matTooltip]="'DELETE_IMAGE' | translate" class="cursor-pointer position-absolute"
+                  (click)="deleteImage()">
+          delete
+        </mat-icon>-->
+      </div>
     }
   </form>
 </div>

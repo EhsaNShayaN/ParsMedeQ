@@ -142,5 +142,11 @@
   "RESET_FILTERS": "Reset filters",
   "SHARE": "Share",
   "COPY": "Copy",
-  "PAGE_URL_COPIED_TO_CLIPBOARD": "Page url copied to clipboard"
+  "PAGE_URL_COPIED_TO_CLIPBOARD": "Page url copied to clipboard",
+  "EDIT_MAIN_IMAGE": "Edit main image",
+  "EDIT_BOTTOM_IMAGE": "Edit bottom image",
+  "UPLOAD_IMAGE": "Upload image",
+  "UPLOAD_FILE": "Upload file",
+  "DELETE_IMAGE": "Delete image",
+  "DELETE_FILE": "Delete file"
 }

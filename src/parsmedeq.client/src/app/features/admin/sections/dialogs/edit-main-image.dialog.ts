@@ -3,13 +3,16 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {FormBuilder, Validators} from '@angular/forms';
 import {Section} from '../homepage-sections.component';
 import {SectionService} from '../section.service';
+import {ToastrService} from 'ngx-toastr';
+import {PureComponent} from '../../../../pure-component';
 
 @Component({
   selector: 'edit-main-image-dialog',
   templateUrl: './edit-main-image.dialog.html',
+  styleUrl: '../homepage-sections.component.scss',
   standalone: false
 })
-export class EditMainImageDialog {
+export class EditMainImageDialog extends PureComponent {
   preview: string | null = null;
   selectedFile?: File;
 
@@ -21,10 +24,11 @@ export class EditMainImageDialog {
     @Inject(MAT_DIALOG_DATA) public data: Section,
     private dialogRef: MatDialogRef<EditMainImageDialog>,
     private fb: FormBuilder,
-    private service: SectionService
-  ) {
+    private service: SectionService,
+    private toastrService: ToastrService) {
+    super();
     this.form.patchValue({title: data.title || ''});
-    this.preview = data.imageUrl || null;
+    this.preview = data.image || null;
   }
 
   onFileSelected(e: Event) {
@@ -40,14 +44,16 @@ export class EditMainImageDialog {
 
   save() {
     const title = this.form.value.title;
-    if (this.selectedFile) {
-      // upload file first (multipart)
-      this.service.uploadImage(this.selectedFile).subscribe(res => {
-        const payload: any = {title, imageUrl: res.url};
-        this.dialogRef.close(payload);
-      });
-    } else {
-      this.dialogRef.close({title});
-    }
+    this.service.update(this.data.id, title ?? '', this.data.image, this.selectedFile).subscribe(res => {
+      const payload: any = {title, image: res.url};
+      this.dialogRef.close(payload);
+    });
+  }
+
+  deleteImage() {
+    this.preview = null;
+    this.service.deleteImage(this.data.id).subscribe(res => {
+      this.toastrService.success(this.getTranslateValue('THE_OPERATION_WAS_SUCCESSFUL'), '', {});
+    });
   }
 }

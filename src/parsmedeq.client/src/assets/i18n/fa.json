@@ -142,5 +142,11 @@
   "RESET_FILTERS": "حذف فیلترها",
   "SHARE": "اشتراک گذاری",
   "COPY": "کپی",
-  "PAGE_URL_COPIED_TO_CLIPBOARD": "آدرس صفحه در کلیپبورد کپی شد"
+  "PAGE_URL_COPIED_TO_CLIPBOARD": "آدرس صفحه در کلیپبورد کپی شد",
+  "EDIT_MAIN_IMAGE": "ویرایش عکس اصلی",
+  "EDIT_BOTTOM_IMAGE": "ویرایش عکس پایین صفحه",
+  "UPLOAD_IMAGE": "بارگزاری تصویر",
+  "UPLOAD_FILE": "بارگزاری فایل",
+  "DELETE_IMAGE": "حذف تصویر",
+  "DELETE_FILE": "حذف فایل"
 }

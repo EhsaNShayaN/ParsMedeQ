@@ -16,8 +16,8 @@ export class SectionService {
     return this.http.get<BaseResult<Section[]>>(`${this.api}/list`);
   }
 
-  update(id: number, data: any) {
-    return this.http.post(`${this.api}/edit/${id}`, data);
+  update0(id: number, data: any) {
+    return this.http.post(`${this.api}/update`, data);
   }
 
   toggle(id: number, hide: boolean) {
@@ -31,9 +31,18 @@ export class SectionService {
     return this.http.post(`${this.api}/order`, list);
   }
 
-  uploadImage(file: File) {
+  update(id: number, title: string, oldImagePath?: string, file?: File) {
     const fd = new FormData();
-    fd.append('file', file);
-    return this.http.post<{ url: string }>(`${this.api}/upload`, fd);
+    fd.append('id', id.toString());
+    fd.append('title', title);
+    fd.append('oldImagePath', oldImagePath ?? '');
+    if (file) {
+      fd.append('file', file);
+    }
+    return this.http.post<{ url: string }>(`${this.api}/update`, fd);
+  }
+
+  deleteImage(id: number) {
+    return this.http.post(`${this.api}/deleteImage`, {id});
   }
 }
