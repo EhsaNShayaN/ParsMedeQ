@@ -3,13 +3,13 @@ import {BaseComponent} from '../../../base-component';
 import {ActivatedRoute} from '@angular/router';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {SectionService} from './section.service';
-import {SectionType} from './homepage-sections.component';
 import {EditMainImageDialog} from './dialogs/edit-main-image.dialog';
 import {EditServicesDialog} from './dialogs/edit-services.dialog';
 import {EditAdvantagesDialog} from './dialogs/edit-advantages.dialog';
 import {EditAboutDialog} from './dialogs/edit-about.dialog';
 import {EditBottomImageDialog} from './dialogs/edit-bottom-image.dialog';
 import {ToastrService} from 'ngx-toastr';
+import {MainSections, SectionType} from '../../../core/constants/server.constants';
 
 @Component({
   selector: 'app-edit-homepage-section',
@@ -26,16 +26,19 @@ export class EditHomepageSectionComponent extends BaseComponent implements OnDes
     super();
     this.sub = this.activatedRoute.params.subscribe(params => {
       if (params['id']) {
-        const id = params['id'];
-        this.service.getAll().subscribe(res => {
-          const section = res.data.find(s => s.id == id);
+        const id = Number(params['id']);
+        this.service.getAllItems().subscribe(res => {
+          let section = res.data.find(s => s.sectionId === id);
+          if (!section) {
+            const mainSection = MainSections.find(s => s.id === id);
+            section = {description: '', hidden: false, image: '', items: [], order: 0, title: '', type: mainSection.type, id: id, sectionId: id};
+          }
           const config: MatDialogConfig = {
             width: window.outerWidth + 'px',
             height: window.outerHeight + 'px',
             data: section
           };
-          if (!section) return;
-          switch (section.id) {
+          switch (id) {
             case SectionType.mainImage:
               this.dialog.open(EditMainImageDialog, config).afterClosed().subscribe(res => {
                 this.load(res);
@@ -45,7 +48,7 @@ export class EditHomepageSectionComponent extends BaseComponent implements OnDes
               this.router.navigate([`/${this.translateService.getDefaultLang()}/admin/treatment-center/list`]); // صفحه مدیریت سانترها
               break;
             case SectionType.services:
-              this.dialog.open(EditServicesDialog, config)  .afterClosed().subscribe(res => {
+              this.dialog.open(EditServicesDialog, config).afterClosed().subscribe(res => {
                 this.load(res);
               });
               break;
@@ -55,10 +58,11 @@ export class EditHomepageSectionComponent extends BaseComponent implements OnDes
               });
               break;
             case SectionType.about:
-            case SectionType.contact:
               this.dialog.open(EditAboutDialog, config).afterClosed().subscribe(res => {
                 this.load(res);
               });
+              break;
+            case SectionType.contact:
               break;
             case SectionType.bottomImage:
               this.dialog.open(EditBottomImageDialog, config).afterClosed().subscribe(res => {

@@ -2,7 +2,7 @@ import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {FormBuilder, Validators} from '@angular/forms';
 import {Section} from '../homepage-sections.component';
-import {PureComponent} from '../../../../pure-component';
+import {BaseSectionDialog} from './base-section.dialog';
 
 @Component({
   selector: 'edit-text-dialog',
@@ -10,7 +10,7 @@ import {PureComponent} from '../../../../pure-component';
   styleUrl: '../homepage-sections.component.scss',
   standalone: false
 })
-export class EditAboutDialog extends PureComponent {
+export class EditAboutDialog extends BaseSectionDialog {
   form = this.fb.group({text: ['', Validators.required]});
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: Section,

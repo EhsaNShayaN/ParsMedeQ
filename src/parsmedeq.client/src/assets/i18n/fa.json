@@ -81,7 +81,9 @@
   "SURE_DELETE": "آیا با حذف آیتم مورد نظر موافقید؟",
   "BTN": {
     "YES": "بله",
-    "NO": "خیر"
+    "NO": "خیر",
+    "SAVE": "ذخیره",
+    "CANCEL": "انصراف"
   },
   "ITEM_DELETED_SUCCESSFULLY": "آیتم مورد نظر با موفقیت حذف گردید.",
   "VIEW": "مشاهده",
@@ -143,10 +145,17 @@
   "SHARE": "اشتراک گذاری",
   "COPY": "کپی",
   "PAGE_URL_COPIED_TO_CLIPBOARD": "آدرس صفحه در کلیپبورد کپی شد",
-  "EDIT_MAIN_IMAGE": "ویرایش عکس اصلی",
-  "EDIT_BOTTOM_IMAGE": "ویرایش عکس پایین صفحه",
   "UPLOAD_IMAGE": "بارگزاری تصویر",
   "UPLOAD_FILE": "بارگزاری فایل",
   "DELETE_IMAGE": "حذف تصویر",
-  "DELETE_FILE": "حذف فایل"
+  "DELETE_FILE": "حذف فایل",
+  "SECTIONS": {
+    "MAIN_IMAGE": "عکس اصلی",
+    "CENTERS": "سانترهای درمانی",
+    "SERVICES": "خدمات",
+    "ADVANTAGES": "مزایای برجسته",
+    "ABOUT": "درباره ما",
+    "CONTACT": "تماس با ما",
+    "BOTTOM_IMAGE": "عکس پایین"
+  }
 }

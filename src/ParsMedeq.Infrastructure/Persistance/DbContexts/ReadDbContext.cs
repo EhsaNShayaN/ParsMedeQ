@@ -51,6 +51,7 @@ public sealed class ReadDbContext : DbContextBase<ReadDbContext>
     public DbSet<TreatmentCenterTranslation> TreatmentCenterTranslation { get; set; }
     public DbSet<Location> Location { get; set; }
     public DbSet<Section> Section { get; set; }
+    public DbSet<SectionTranslation> SectionTranslation { get; set; }
 
     public ReadDbContext(DbContextOptions<ReadDbContext> opts) : base(opts) { }
 

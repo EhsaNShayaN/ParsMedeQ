@@ -1,4 +1,8 @@
-<h2 mat-dialog-title>ویرایش مزایای برجسته</h2>
+<h2 mat-dialog-title>
+  {{ 'EDIT' | translate }}
+  {{ sectionTitle | translate }}
+</h2>
+<mat-divider></mat-divider>
 <div mat-dialog-content>
   <form [formGroup]="form">
 
@@ -36,6 +40,6 @@
 </div>
 
 <div mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>انصراف</button>
-  <button mat-raised-button color="primary" (click)="save()">ذخیره</button>
+  <button mat-button mat-dialog-close>{{ 'BTN.CANCEL'  | translate }}</button>
+  <button mat-raised-button color="primary" (click)="save()">{{ 'BTN.SAVE'  | translate }}</button>
 </div>

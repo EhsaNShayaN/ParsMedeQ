@@ -2,24 +2,24 @@
 using Microsoft.AspNetCore.Http;
 using ParsMedeQ.Application.Features.SectionFeatures.SectionListFeature;
 using ParsMedeQ.Contracts;
-using ParsMedeQ.Contracts.AdminContracts.AdminSectionListContract;
+using ParsMedeQ.Contracts.AdminContracts.AdminSectionItemsContract;
 
 namespace ParsMedeQ.Presentation.Features.AdminFeatures.SectionFeatures;
 
-sealed class AdminSectionListEndpoint : EndpointHandlerBase<
-    AdminSectionListApiRequest,
-    SectionListQuery,
+sealed class AdminSectionItemsEndpoint : EndpointHandlerBase<
+    AdminSectionItemsApiRequest,
+    SectionItemsQuery,
     SectionListDbQueryResponse[],
-    AdminSectionListApiResponse[]>
+    AdminSectionItemsApiResponse[]>
 {
     protected override bool NeedTaxPayerFile => true;
     protected override bool NeedAdminPrivilage => true;
 
-    public AdminSectionListEndpoint(
-        IPresentationMapper<AdminSectionListApiRequest, SectionListQuery> requestMapper,
-        IPresentationMapper<SectionListDbQueryResponse[], AdminSectionListApiResponse[]> responseMapper)
+    public AdminSectionItemsEndpoint(
+        IPresentationMapper<AdminSectionItemsApiRequest, SectionItemsQuery> requestMapper,
+        IPresentationMapper<SectionListDbQueryResponse[], AdminSectionItemsApiResponse[]> responseMapper)
         : base(
-            Endpoints.Admin.Sections,
+            Endpoints.Admin.SectionItems,
             HttpMethod.Get,
             requestMapper,
             responseMapper,
@@ -28,36 +28,36 @@ sealed class AdminSectionListEndpoint : EndpointHandlerBase<
 
     protected override Delegate EndpointDelegate =>
     (
-            [AsParameters] AdminSectionListApiRequest request,
+            [AsParameters] AdminSectionItemsApiRequest request,
             ISender sender,
             CancellationToken cancellationToken) => this.CallMediatRHandler(
             sender,
-            () => ValueTask.FromResult(PrimitiveResult.Success(new SectionListQuery())),
+            () => ValueTask.FromResult(PrimitiveResult.Success(new SectionItemsQuery())),
             cancellationToken);
 
 }
-sealed class AdminSectionListApiRequestMapper : IPresentationMapper<
-    AdminSectionListApiRequest,
-    SectionListQuery>
+sealed class AdminSectionItemsApiRequestMapper : IPresentationMapper<
+    AdminSectionItemsApiRequest,
+    SectionItemsQuery>
 {
-    public ValueTask<PrimitiveResult<SectionListQuery>> Map(
-        AdminSectionListApiRequest src,
+    public ValueTask<PrimitiveResult<SectionItemsQuery>> Map(
+        AdminSectionItemsApiRequest src,
         CancellationToken cancellationToken)
     {
-        return ValueTask.FromResult(PrimitiveResult.Success(new SectionListQuery()));
+        return ValueTask.FromResult(PrimitiveResult.Success(new SectionItemsQuery()));
     }
 }
-sealed class AdminSectionListApiResponseMapper : IPresentationMapper<
+sealed class AdminSectionItemsApiResponseMapper : IPresentationMapper<
     SectionListDbQueryResponse[],
-    AdminSectionListApiResponse[]>
+    AdminSectionItemsApiResponse[]>
 {
-    public ValueTask<PrimitiveResult<AdminSectionListApiResponse[]>> Map(
+    public ValueTask<PrimitiveResult<AdminSectionItemsApiResponse[]>> Map(
         SectionListDbQueryResponse[] src,
         CancellationToken cancellationToken)
     {
         return ValueTask.FromResult(
             PrimitiveResult.Success(
-                        src.Select(s => new AdminSectionListApiResponse(
+                        src.Select(s => new AdminSectionItemsApiResponse(
                             s.Id,
                             s.SectionId,
                             s.Title,

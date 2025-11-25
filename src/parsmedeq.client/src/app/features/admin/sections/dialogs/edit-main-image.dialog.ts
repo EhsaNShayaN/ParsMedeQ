@@ -4,7 +4,7 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {Section} from '../homepage-sections.component';
 import {SectionService} from '../section.service';
 import {ToastrService} from 'ngx-toastr';
-import {PureComponent} from '../../../../pure-component';
+import {BaseSectionDialog} from './base-section.dialog';
 
 @Component({
   selector: 'edit-main-image-dialog',
@@ -12,7 +12,7 @@ import {PureComponent} from '../../../../pure-component';
   styleUrl: '../homepage-sections.component.scss',
   standalone: false
 })
-export class EditMainImageDialog extends PureComponent {
+export class EditMainImageDialog extends BaseSectionDialog {
   preview: string | null = null;
   selectedFile?: File;
 
@@ -20,15 +20,17 @@ export class EditMainImageDialog extends PureComponent {
     title: ['', Validators.required]
   });
 
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: Section,
-    private dialogRef: MatDialogRef<EditMainImageDialog>,
-    private fb: FormBuilder,
-    private service: SectionService,
-    private toastrService: ToastrService) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: Section,
+              private dialogRef: MatDialogRef<EditMainImageDialog>,
+              private fb: FormBuilder,
+              private service: SectionService,
+              private toastrService: ToastrService) {
     super();
-    this.form.patchValue({title: data.title || ''});
-    this.preview = data.image || null;
+    if(data) {
+      this.form.patchValue({title: data.title || ''});
+      this.preview = data.image || null;
+      this.sectionTitle = this.mainSections.find(s => s.id === data.sectionId).title;
+    }
   }
 
   onFileSelected(e: Event) {
@@ -44,7 +46,7 @@ export class EditMainImageDialog extends PureComponent {
 
   save() {
     const title = this.form.value.title;
-    this.service.update(this.data.id, title ?? '', this.data.image, this.selectedFile).subscribe(res => {
+    this.service.update(this.data.sectionId, title ?? '', this.data.image, this.selectedFile).subscribe(res => {
       const payload: any = {title, image: res.url};
       this.dialogRef.close(payload);
     });
@@ -52,7 +54,7 @@ export class EditMainImageDialog extends PureComponent {
 
   deleteImage() {
     this.preview = null;
-    this.service.deleteImage(this.data.id).subscribe(res => {
+    this.service.deleteImage(this.data.sectionId).subscribe(res => {
       this.toastrService.success(this.getTranslateValue('THE_OPERATION_WAS_SUCCESSFUL'), '', {});
     });
   }

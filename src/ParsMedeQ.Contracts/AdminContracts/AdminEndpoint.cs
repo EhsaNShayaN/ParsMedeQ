@@ -17,6 +17,7 @@ public sealed class AdminEndpoint : ApiEndpointBase
     public EndpointInfo AddPeriodicService { get; private set; }
     public EndpointInfo DonePeriodicService { get; private set; }
     public EndpointInfo Sections { get; private set; }
+    public EndpointInfo SectionItems { get; private set; }
     public EndpointInfo AddSection { get; private set; }
     public EndpointInfo UpdateSection { get; private set; }
     public EndpointInfo ShowSection { get; private set; }
@@ -78,6 +79,13 @@ public sealed class AdminEndpoint : ApiEndpointBase
             this.GetUrl("section/list"),
             "List of Sections",
             "List of Sections",
+            _tag);
+
+        this.SectionItems = new EndpointInfo(
+            this.GetUrl("section/items"),
+            this.GetUrl("section/items"),
+            "List of Section Items",
+            "List of Section Items",
             _tag);
 
         this.AddSection = new EndpointInfo(

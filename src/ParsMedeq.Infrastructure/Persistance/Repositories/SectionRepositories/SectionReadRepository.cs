@@ -16,10 +16,28 @@ internal sealed class SectionReadRepository : GenericPrimitiveReadRepositoryBase
                 select new SectionListDbQueryResponse
                 {
                     Id = res.Id,
+                    SectionId = res.Id,
                     Title = res.SectionTranslations.SingleOrDefault(s => s.LanguageCode == langCode).Title ?? string.Empty,
                     Description = res.SectionTranslations.SingleOrDefault(s => s.LanguageCode == langCode).Description ?? string.Empty,
                     Image = res.SectionTranslations.SingleOrDefault(s => s.LanguageCode == langCode).Image ?? string.Empty,
                     Hidden = res.Hidden,
+                };
+        return q.Run(q => q.ToArrayAsync(cancellationToken), PrimitiveError.Create("", "آیتمی پیدا نشد"));
+    }
+
+    public ValueTask<PrimitiveResult<SectionListDbQueryResponse[]>> GetAllTranslations(string langCode, CancellationToken cancellationToken)
+    {
+        var q = from res in this.DbContext.SectionTranslation
+                .Include(s => s.Section)
+                .Where(s => s.LanguageCode == langCode)
+                select new SectionListDbQueryResponse
+                {
+                    Id = res.Id,
+                    SectionId = res.SectionId,
+                    Title = res.Title,
+                    Description = res.Description,
+                    Image = res.Image,
+                    Hidden = res.Section.Hidden,
                 };
         return q.Run(q => q.ToArrayAsync(cancellationToken), PrimitiveError.Create("", "آیتمی پیدا نشد"));
     }

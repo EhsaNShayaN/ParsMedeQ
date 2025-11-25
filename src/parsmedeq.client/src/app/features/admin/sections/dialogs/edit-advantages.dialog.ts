@@ -2,7 +2,7 @@ import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {FormBuilder, FormArray, FormControl, Validators} from '@angular/forms';
 import {Section} from '../homepage-sections.component';
-import {PureComponent} from '../../../../pure-component';
+import {BaseSectionDialog} from './base-section.dialog';
 
 @Component({
   selector: 'edit-advantages-dialog',
@@ -10,7 +10,7 @@ import {PureComponent} from '../../../../pure-component';
   styleUrl: '../homepage-sections.component.scss',
   standalone: false
 })
-export class EditAdvantagesDialog extends PureComponent {
+export class EditAdvantagesDialog extends BaseSectionDialog {
   form = this.fb.group({
     title: ['', Validators.required],
     items: this.fb.array([])

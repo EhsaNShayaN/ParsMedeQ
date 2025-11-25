@@ -6,5 +6,6 @@ namespace ParsMedeQ.Application.Persistance.Schema.SectionRepositories;
 public interface ISectionReadRepository : IDomainRepository
 {
     ValueTask<PrimitiveResult<SectionListDbQueryResponse[]>> GetAll(string langCode, CancellationToken cancellationToken);
+    ValueTask<PrimitiveResult<SectionListDbQueryResponse[]>> GetAllTranslations(string langCode, CancellationToken cancellationToken);
     ValueTask<PrimitiveResult<Section>> FindById(int id, CancellationToken cancellationToken);
 }

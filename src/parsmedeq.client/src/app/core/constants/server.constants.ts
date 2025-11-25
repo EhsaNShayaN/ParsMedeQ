@@ -34,3 +34,23 @@ export enum PaymentLogTypes {
   Response = 1,
   Callback = 2,
 }
+
+export enum SectionType {
+  mainImage = 1,
+  centers = 2,
+  services = 3,
+  advantages = 4,
+  about = 5,
+  contact = 6,
+  bottomImage = 7
+}
+
+export const MainSections: any[] = [
+  {id: 1, sectionId: 1, type: SectionType.mainImage, title: 'SECTIONS.MAIN_IMAGE'},
+  {id: 2, sectionId: 2, type: SectionType.centers, title: 'SECTIONS.CENTERS'},
+  {id: 3, sectionId: 3, type: SectionType.services, title: 'SECTIONS.SERVICES'},
+  {id: 4, sectionId: 4, type: SectionType.advantages, title: 'SECTIONS.ADVANTAGES'},
+  {id: 5, sectionId: 5, type: SectionType.about, title: 'SECTIONS.ABOUT'},
+  {id: 6, sectionId: 6, type: SectionType.contact, title: 'SECTIONS.CONTACT'},
+  {id: 7, sectionId: 7, type: SectionType.bottomImage, title: 'SECTIONS.BOTTOM_IMAGE'},
+];

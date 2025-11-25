@@ -81,7 +81,9 @@
   "SURE_DELETE": "Are you sure you want to delete?",
   "BTN": {
     "YES": "Yes",
-    "NO": "No"
+    "NO": "No",
+    "SAVE": "Save",
+    "CANCEL": "Cancel"
   },
   "ITEM_DELETED_SUCCESSFULLY": "Item deleted successfully",
   "VIEW": "VIEW",
@@ -143,10 +145,17 @@
   "SHARE": "Share",
   "COPY": "Copy",
   "PAGE_URL_COPIED_TO_CLIPBOARD": "Page url copied to clipboard",
-  "EDIT_MAIN_IMAGE": "Edit main image",
-  "EDIT_BOTTOM_IMAGE": "Edit bottom image",
   "UPLOAD_IMAGE": "Upload image",
   "UPLOAD_FILE": "Upload file",
   "DELETE_IMAGE": "Delete image",
-  "DELETE_FILE": "Delete file"
+  "DELETE_FILE": "Delete file",
+  "SECTIONS": {
+    "MAIN_IMAGE": "Main image",
+    "CENTERS":"Centers",
+    "SERVICES": "Services",
+    "ADVANTAGES":"Advantages",
+    "ABOUT": "About",
+    "CONTACT":"Contact",
+    "BOTTOM_IMAGE": "Bottom image"
+  }
 }

@@ -3,8 +3,8 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {FormBuilder, Validators} from '@angular/forms';
 import {SectionService} from '../section.service';
 import {Section} from '../homepage-sections.component';
-import {PureComponent} from '../../../../pure-component';
 import {ToastrService} from 'ngx-toastr';
+import {BaseSectionDialog} from './base-section.dialog';
 
 @Component({
   selector: 'edit-bottom-image-dialog',
@@ -12,7 +12,7 @@ import {ToastrService} from 'ngx-toastr';
   styleUrl: '../homepage-sections.component.scss',
   standalone: false
 })
-export class EditBottomImageDialog extends PureComponent {
+export class EditBottomImageDialog extends BaseSectionDialog {
   preview: string | null = null;
   selectedFile?: File;
 
@@ -24,8 +24,11 @@ export class EditBottomImageDialog extends PureComponent {
               private service: SectionService,
               private toastrService: ToastrService) {
     super();
-    this.form.patchValue({title: data.title || ''});
-    this.preview = data.image || null;
+    if (data) {
+      this.form.patchValue({title: data.title || ''});
+      this.preview = data.image || null;
+      this.sectionTitle = this.mainSections.find(s => s.id === data.sectionId).title;
+    }
   }
 
   onFileSelected(e: Event) {
@@ -39,14 +42,14 @@ export class EditBottomImageDialog extends PureComponent {
 
   save() {
     const title = this.form.value.title;
-    this.service.update(this.data.id, title ?? '', this.data.image, this.selectedFile).subscribe(res => {
+    this.service.update(this.data.sectionId, title ?? '', this.data.image, this.selectedFile).subscribe(res => {
       this.dialogRef.close({title, image: res.url});
     });
   }
 
   deleteImage() {
     this.preview = null;
-    this.service.deleteImage(this.data.id).subscribe(res => {
+    this.service.deleteImage(this.data.sectionId).subscribe(res => {
       this.toastrService.success(this.getTranslateValue('THE_OPERATION_WAS_SUCCESSFUL'), '', {});
     });
   }

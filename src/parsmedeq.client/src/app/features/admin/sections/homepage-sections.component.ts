@@ -1,19 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {SectionService} from './section.service';
 import {BaseComponent} from '../../../base-component';
-
-export enum SectionType {
-  mainImage = 1,
-  centers = 2,
-  services = 3,
-  advantages = 4,
-  about = 5,
-  contact = 6,
-  bottomImage = 7
-}
+import {MainSections, SectionType} from '../../../core/constants/server.constants';
 
 export interface Section {
   id: number;
+  sectionId: number;
   type: SectionType;
   title?: string;
   description?: string;
@@ -30,10 +22,11 @@ export interface Section {
   standalone: false
 })
 export class HomepageSectionsComponent extends BaseComponent implements OnInit {
+  protected readonly SectionType = SectionType;
   languages: string[] = [];
   colors: string[] = ['warn', 'primary', 'success', 'secondary', 'info', 'danger'];
   displayedColumns = ['order', 'title', 'status', 'actions'];
-  sections: Section[] = [];
+  mainSections= MainSections;
 
   constructor(private service: SectionService) {
     super();
@@ -46,11 +39,14 @@ export class HomepageSectionsComponent extends BaseComponent implements OnInit {
 
   load() {
     this.service.getAll().subscribe(res => {
-      this.sections = res.data.filter(s => s.id !== SectionType.contact).sort((a, b) => a.order - b.order);
+      const sections = res.data.sort((a, b) => a.order - b.order);
+      this.mainSections.forEach(s => {
+        s.hidden = sections.find(s => s.id === s.id)?.hidden;
+      });
     });
   }
 
   toggle(section: Section) {
-    this.service.toggle(section.id, section.hidden).subscribe(() => this.load());
+    this.service.toggle(section.sectionId, section.hidden).subscribe(() => this.load());
   }
 }

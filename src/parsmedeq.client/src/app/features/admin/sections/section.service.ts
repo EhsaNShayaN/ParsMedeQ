@@ -16,6 +16,10 @@ export class SectionService {
     return this.http.get<BaseResult<Section[]>>(`${this.api}/list`);
   }
 
+  getAllItems(): Observable<BaseResult<Section[]>> {
+    return this.http.get<BaseResult<Section[]>>(`${this.api}/items`);
+  }
+
   update0(id: number, data: any) {
     return this.http.post(`${this.api}/update`, data);
   }
@@ -31,13 +35,13 @@ export class SectionService {
     return this.http.post(`${this.api}/order`, list);
   }
 
-  update(id: number, title: string, oldImagePath?: string, file?: File) {
+  update(id: number, title: string, oldImagePath?: string, image?: File) {
     const fd = new FormData();
     fd.append('id', id.toString());
     fd.append('title', title);
     fd.append('oldImagePath', oldImagePath ?? '');
-    if (file) {
-      fd.append('file', file);
+    if (image) {
+      fd.append('image', image);
     }
     return this.http.post<{ url: string }>(`${this.api}/update`, fd);
   }
