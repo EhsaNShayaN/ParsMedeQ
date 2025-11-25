@@ -83,7 +83,9 @@
     "YES": "Yes",
     "NO": "No",
     "SAVE": "Save",
-    "CANCEL": "Cancel"
+    "CANCEL": "Cancel",
+    "ADD": "Add",
+    "EDIT": "Edit"
   },
   "ITEM_DELETED_SUCCESSFULLY": "Item deleted successfully",
   "VIEW": "VIEW",

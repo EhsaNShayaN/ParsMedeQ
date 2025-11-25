@@ -17,14 +17,15 @@ export class EditServicesDialog extends BaseSectionDialog {
     items: this.fb.array<string>([])
   });
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: Section,
+  constructor(@Inject(MAT_DIALOG_DATA) public data: Section[],
               private dialogRef: MatDialogRef<EditServicesDialog>,
               private fb: FormBuilder) {
     super();
-    this.form.patchValue({title: data.title || '', description: data.description || ''});
+    this.form.patchValue({title: data[0].title || '', description: data[0].description || ''});
 
     const arr = this.form.get('items') as FormArray;
-    (data.items || []).forEach(it => arr.push(this.fb.control(it, Validators.required)));
+    (data || []).forEach(it => arr.push(this.fb.control(it, Validators.required)));
+    this.sectionTitle = this.mainSections.find(s => s.id === data[0].sectionId).title;
   }
 
   get items() {

@@ -28,15 +28,22 @@ export class EditHomepageSectionComponent extends BaseComponent implements OnDes
       if (params['id']) {
         const id = Number(params['id']);
         this.service.getAllItems().subscribe(res => {
+          let sections = res.data.filter(s => s.sectionId === id);
           let section = res.data.find(s => s.sectionId === id);
           if (!section) {
             const mainSection = MainSections.find(s => s.id === id);
             section = {description: '', hidden: false, image: '', items: [], order: 0, title: '', type: mainSection.type, id: id, sectionId: id};
+            sections = [{description: '', hidden: false, image: '', items: [], order: 0, title: '', type: mainSection.type, id: id, sectionId: id}];
           }
           const config: MatDialogConfig = {
             width: window.outerWidth + 'px',
             height: window.outerHeight + 'px',
             data: section
+          };
+          const listConfig: MatDialogConfig = {
+            width: window.outerWidth + 'px',
+            height: window.outerHeight + 'px',
+            data: sections
           };
           switch (id) {
             case SectionType.mainImage:
@@ -48,7 +55,7 @@ export class EditHomepageSectionComponent extends BaseComponent implements OnDes
               this.router.navigate([`/${this.translateService.getDefaultLang()}/admin/treatment-center/list`]); // صفحه مدیریت سانترها
               break;
             case SectionType.services:
-              this.dialog.open(EditServicesDialog, config).afterClosed().subscribe(res => {
+              this.dialog.open(EditServicesDialog, listConfig).afterClosed().subscribe(res => {
                 this.load(res);
               });
               break;

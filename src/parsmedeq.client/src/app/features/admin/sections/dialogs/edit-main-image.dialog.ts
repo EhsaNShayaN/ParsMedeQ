@@ -26,11 +26,9 @@ export class EditMainImageDialog extends BaseSectionDialog {
               private service: SectionService,
               private toastrService: ToastrService) {
     super();
-    if(data) {
-      this.form.patchValue({title: data.title || ''});
-      this.preview = data.image || null;
-      this.sectionTitle = this.mainSections.find(s => s.id === data.sectionId).title;
-    }
+    this.form.patchValue({title: data.title || ''});
+    this.preview = data.image || null;
+    this.sectionTitle = this.mainSections.find(s => s.id === data.sectionId).title;
   }
 
   onFileSelected(e: Event) {
