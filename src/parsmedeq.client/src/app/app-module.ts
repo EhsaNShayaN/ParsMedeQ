@@ -99,14 +99,6 @@ export function tokenGetter() {
   bootstrap: [App]
 })
 export class AppModule {
-  constructor(private iconRegistry: MatIconRegistry, private sanitizer: DomSanitizer) {
-    this.iconRegistry.addSvgIcon(
-      'instagram',
-      this.sanitizer.bypassSecurityTrustResourceUrl('assets/icons/instagram.svg')
-    );
-    this.iconRegistry.addSvgIcon(
-      'linkedin',
-      this.sanitizer.bypassSecurityTrustResourceUrl('assets/icons/linkedin.svg')
-    );
+  constructor() {
   }
 }

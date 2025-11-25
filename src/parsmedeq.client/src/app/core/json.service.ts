@@ -14,10 +14,6 @@ export class JsonService {
     this.url += this.translateService.getDefaultLang() + '/';
   }
 
-  getHomeCarouselSlides() {
-    return this.http.get<any[]>(this.url + 'slides.json');
-  }
-
   public getUsefulLinks() {
     return this.http.get<any[]>(this.url + 'useful-links.json');
   }
