@@ -19,18 +19,18 @@ import {StorageService} from '../../../core/services/storage.service';
 export class Login extends BaseComponent implements OnInit, OnDestroy {
   @Input() isDialog: boolean = false;
   hasMobile = false;
-  hasCode = 0;
-  mobile = '';
+  flag = false;
   submitClick = false;
   submitted = false;
   returnUrl = '';
   error: string = '';
   ///////////////
   public loginForm: UntypedFormGroup;
-  public hide = true;
+  public hide = false;
   private sub: any;
   ///////////////
   @Output() clicked = new EventEmitter<any>();
+  timerTarget: number = 0;
 
   constructor(public fb: UntypedFormBuilder,
               private activatedRoute: ActivatedRoute,
@@ -72,12 +72,17 @@ export class Login extends BaseComponent implements OnInit, OnDestroy {
       this.onVerify();
       return;
     }
-    this.mobile = this.mobileFormatter.transform(this.loginFormData['username']?.value);
+    this.sendOtp();
+  }
+
+  sendOtp() {
     this.restApiService.sendOtp({mobile: this.loginFormData['username']?.value})
       .pipe(first())
       .subscribe((d: BaseResult<SendOtpResponse>) => {
+          this.startTimer();
           this.submitClick = false;
           this.hasMobile = true;
+          this.flag = d.data.flag;
           this.loginFormData['password']?.setValue(d.data.otp);
         },
         (error: string) => {
@@ -116,6 +121,26 @@ export class Login extends BaseComponent implements OnInit, OnDestroy {
         this.error = error;
         this.submitClick = false;
       });
+  }
+
+  startTimer() {
+    this.timerTarget = Date.now() + 2 * 60_000;
+  }
+
+  check(number: number) {
+
+  }
+
+  back() {
+    this.error = '';
+    this.hasMobile = false;
+    this.flag = false;
+    this.submitClick = false;
+    this.loginFormData['password']?.setErrors(null);
+  }
+
+  onFinish() {
+    this.timerTarget = 0;
   }
 
   ngOnDestroy() {

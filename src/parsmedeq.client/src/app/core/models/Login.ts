@@ -1,4 +1,4 @@
-import { BaseResult } from "./BaseResult";
+import {BaseResult} from "./BaseResult";
 
 export interface SendOtpRequest {
   mobile: string;
@@ -6,6 +6,7 @@ export interface SendOtpRequest {
 
 export interface SendOtpResponse {
   otp?: string;
+  flag: boolean;
 }
 
 export interface MobileRequest {

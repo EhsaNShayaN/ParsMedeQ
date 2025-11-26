@@ -1,0 +1,34 @@
+<div class="countdown">
+  <div class="time-row">
+    <div class="time-card">
+      <div class="value">{{ timeLeft.days }}</div>
+      <div class="label">days</div>
+    </div>
+
+    <div class="time-card">
+      <div class="value">{{ timeLeft.hours | number:'2.0' }}</div>
+      <div class="label">hours</div>
+    </div>
+
+    <div class="time-card">
+      <div class="value">{{ timeLeft.minutes | number:'2.0' }}</div>
+      <div class="label">minutes</div>
+    </div>
+
+    <div class="time-card">
+      <div class="value">{{ timeLeft.seconds | number:'2.0' }}</div>
+      <div class="label">seconds</div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button (click)="start()">Start</button>
+    <button (click)="pause()">Pause</button>
+    <button (click)="resume()">Resume</button>
+    <button (click)="reset()">Reset</button>
+  </div>
+
+  @if (timeLeft.totalMs === 0) {
+    <div class="finished">Finished!</div>
+  }
+</div>

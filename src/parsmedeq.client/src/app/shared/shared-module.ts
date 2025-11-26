@@ -57,6 +57,8 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatOption, MatSelect} from '@angular/material/select';
 import {MatCell, MatCellDef, MatColumnDef, MatHeaderCell, MatHeaderCellDef, MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef, MatTable} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
+import {CountdownComponent} from './countdown/countdown.component';
+import {OtpCountdownComponent} from './otp-countdown/otp-countdown.component';
 
 @NgModule({
   declarations: [
@@ -87,6 +89,8 @@ import {MatSort} from '@angular/material/sort';
     OurCenterComponent,
     MultiCounterComponent,
     ClipDialogComponent,
+    CountdownComponent,
+    OtpCountdownComponent,
   ],
   imports: [
     CommonModule,
@@ -262,6 +266,8 @@ import {MatSort} from '@angular/material/sort';
     OurCenterComponent,
     MultiCounterComponent,
     ClipDialogComponent,
+    CountdownComponent,
+    OtpCountdownComponent,
   ],
   providers: [
     CurrencyFormatterPipe,
