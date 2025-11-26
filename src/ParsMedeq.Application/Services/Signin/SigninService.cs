@@ -3,6 +3,7 @@ using ParsMedeQ.Application.Errors;
 using ParsMedeQ.Domain.Aggregates.UserAggregate;
 using ParsMedeQ.Domain.Aggregates.UserAggregate.Validators;
 using ParsMedeQ.Domain.DomainServices.SigninService;
+using ParsMedeQ.Domain.Helpers;
 using ParsMedeQ.Domain.Types.FullName;
 using ParsMedeQ.Domain.Types.Password;
 
@@ -26,7 +27,9 @@ internal sealed class SigninService : ISigninService
         this._writeUnitOfWork = writeUnitOfWork;
     }
 
-    public async ValueTask<PrimitiveResult<SigninResult>> SigninOrSignupIfMobileNotExists(MobileType mobile, CancellationToken cancellationToken)
+    public async ValueTask<PrimitiveResult<SigninResult>> SigninOrSignupIfMobileNotExists(
+        MobileType mobile,
+        CancellationToken cancellationToken)
     {
         var sessionName = $"SigninOrSignupIfMobileNotExists:{mobile.Value}";
 
@@ -55,7 +58,9 @@ internal sealed class SigninService : ISigninService
                 newUser.Mobile))
             .ConfigureAwait(false);
     }
-    public async ValueTask<PrimitiveResult<SigninResult>> SigninWithExistingMobile(MobileType mobile, CancellationToken cancellationToken)
+    public async ValueTask<PrimitiveResult<SigninResult>> SigninWithExistingMobile(
+        MobileType mobile,
+        CancellationToken cancellationToken)
     {
         var sessionName = $"SigninMobileExists:{mobile.Value}";
 
@@ -74,7 +79,10 @@ internal sealed class SigninService : ISigninService
 
         return await ValueTask.FromResult(PrimitiveResult.Failure<SigninResult>("", "کاربر مورد نظر یافت نشد"));
     }
-    public async ValueTask<PrimitiveResult<SigninResult>> SignupIfMobileNotExists(MobileType mobile, FullNameType fullname, CancellationToken cancellationToken)
+    public async ValueTask<PrimitiveResult<SigninResult>> SignupIfMobileNotExists(
+        MobileType mobile,
+        FullNameType fullname,
+        CancellationToken cancellationToken)
     {
         var sessionName = $"SignupIfMobileNotExists:{mobile.Value}";
 
@@ -101,5 +109,23 @@ internal sealed class SigninService : ISigninService
                 newUser.FullName,
                 newUser.Mobile))
             .ConfigureAwait(false);
+    }
+    public async ValueTask<PrimitiveResult<SigninResult>> SigninWithMobileAndPassword(
+        MobileType mobile,
+        PasswordType password,
+        CancellationToken cancellationToken)
+    {
+        var user = await this._readUnitOfWork
+            .UserReadRepository
+            .FindByMobile(mobile, cancellationToken)
+            .Map(user => PasswordHelper.VerifyPassword(password.Value, user.Password.Value, user.Password.Salt).Map(() => user))
+            .ConfigureAwait(false);
+
+        if (user.IsSuccess) return new SigninResult(
+            user.Value.Id,
+            user.Value.FullName,
+            user.Value.Mobile);
+
+        return await ValueTask.FromResult(PrimitiveResult.Failure<SigninResult>("", "کاربر مورد نظر یافت نشد"));
     }
 }

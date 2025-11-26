@@ -8,16 +8,13 @@ public sealed class SigninWithMobileSendOtpCommandHandler : IPrimitiveResultComm
 {
     private readonly IOtpServiceFactory _otpServiceFactory;
     private readonly IFeatureManager _featureManager;
-    private readonly IReadUnitOfWork _readUnitOfWork;
 
     public SigninWithMobileSendOtpCommandHandler(
         IOtpServiceFactory otpServiceFactory,
-        IFeatureManager featureManager,
-        IReadUnitOfWork readUnitOfWork)
+        IFeatureManager featureManager)
     {
         this._otpServiceFactory = otpServiceFactory;
         this._featureManager = featureManager;
-        this._readUnitOfWork = readUnitOfWork;
     }
     public async Task<PrimitiveResult<SigninWithMobileSendOtpCommandResponse>> Handle(
         SigninWithMobileSendOtpCommand request,

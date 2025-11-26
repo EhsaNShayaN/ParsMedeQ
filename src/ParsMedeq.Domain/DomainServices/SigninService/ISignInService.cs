@@ -1,5 +1,6 @@
 ﻿using ParsMedeQ.Domain.Types.FullName;
 using ParsMedeQ.Domain.Types.Mobile;
+using ParsMedeQ.Domain.Types.Password;
 
 namespace ParsMedeQ.Domain.DomainServices.SigninService;
 public interface ISigninService
@@ -13,6 +14,10 @@ public interface ISigninService
     ValueTask<PrimitiveResult<SigninResult>> SignupIfMobileNotExists(
         MobileType mobile,
         FullNameType fullname,
+        CancellationToken cancellationToken);
+    ValueTask<PrimitiveResult<SigninResult>> SigninWithMobileAndPassword(
+        MobileType mobile,
+        PasswordType password,
         CancellationToken cancellationToken);
 }
 public readonly record struct SigninResult(

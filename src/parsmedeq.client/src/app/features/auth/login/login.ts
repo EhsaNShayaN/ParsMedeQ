@@ -6,7 +6,7 @@ import {MobileFormatterPipe} from '../../../core/pipes/mobile-formatter.pipe';
 import {AuthService} from '../../../core/services/auth.service';
 import {first} from 'rxjs/operators';
 import {BaseResult} from '../../../core/models/BaseResult';
-import {MobileResponse, SendOtpResponse} from '../../../core/models/Login';
+import {CheckSigninResponse, MobileResponse, SendOtpResponse} from '../../../core/models/Login';
 import {CartService} from '../../../core/services/cart.service';
 import {StorageService} from '../../../core/services/storage.service';
 
@@ -72,6 +72,15 @@ export class Login extends BaseComponent implements OnInit, OnDestroy {
       this.onVerify();
       return;
     }
+    this.restApiService.checkSignin({mobile: this.loginFormData['username']?.value}).subscribe((p: CheckSigninResponse) => {
+      this.flag = p.result === 'password';
+      if (p.result === 'otp') {
+        this.sendOtp();
+      } else {
+        
+      }
+    });
+
     this.sendOtp();
   }
 

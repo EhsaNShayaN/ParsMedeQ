@@ -9,7 +9,7 @@ import {ResourceCategoriesResponse} from './models/ResourceCategoryResponse';
 import {AuthService} from './services/auth.service';
 import {ProductCategoriesResponse} from './models/ProductCategoryResponse';
 import {AddProductRequest, PeriodicServiceResponse, Product, ProductRequest, ProductResponse, ProductsRequest} from './models/ProductResponse';
-import {MobileRequest, MobileResponse, ProfileResponse, SendOtpRequest, SendOtpResponse} from './models/Login';
+import {CheckSigninRequest, CheckSigninResponse, MobileRequest, MobileResponse, ProfileResponse, SendOtpRequest, SendOtpResponse} from './models/Login';
 import {ProductMediaListResponse} from './models/ProductMediaResponse';
 import {LocationResponse} from './models/LocationResponse';
 import {TreatmentCenter, TreatmentCenterResponse} from './models/TreatmentCenterResponse';
@@ -25,6 +25,12 @@ export class RestApiService {
 
   sendOtp(model: SendOtpRequest): Observable<any> {
     return this.http.post<BaseResult<SendOtpResponse>>(`${endpoint()}user/signIn/mobile/sendotp`, model).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  checkSignin(model: CheckSigninRequest): Observable<any> {
+    return this.http.post<BaseResult<CheckSigninResponse>>(`${endpoint()}user/signIn/mobile/checkSignin`, model).pipe(
       catchError(this.handleError)
     );
   }

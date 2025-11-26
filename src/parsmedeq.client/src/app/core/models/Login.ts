@@ -9,6 +9,14 @@ export interface SendOtpResponse {
   flag: boolean;
 }
 
+export interface CheckSigninRequest {
+  mobile: string;
+}
+
+export interface CheckSigninResponse {
+  result: string;
+}
+
 export interface MobileRequest {
   mobile: string;
   otp: string;

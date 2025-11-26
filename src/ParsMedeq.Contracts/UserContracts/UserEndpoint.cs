@@ -12,6 +12,7 @@ public sealed class UserEndpoint : ApiEndpointBase
 
 
     public EndpointInfo SigninWithMobile_SendOtp { get; private set; }
+    public EndpointInfo SigninWithMobile_CheckSigin { get; private set; }
     public EndpointInfo SendOtpToExistingMobile { get; private set; }
     public EndpointInfo SendPasswordOtpBySMS { get; private set; }
     public EndpointInfo SendPasswordOtpByEmail { get; private set; }
@@ -51,6 +52,13 @@ public sealed class UserEndpoint : ApiEndpointBase
             this.GetUrl($"{UserSigninWithMobile.Endpoint}/sendotp"),
             "Send OTP to mobile",
             "ارسال رمز یکبار مصرف به موبایل",
+            _tag);
+
+        SigninWithMobile_CheckSigin = new EndpointInfo(
+            this.GetUrl($"{UserSigninWithMobile.Endpoint}/checkSigin"),
+            this.GetUrl($"{UserSigninWithMobile.Endpoint}/checkSigin"),
+            "Check Sigin with mobile",
+            "چک ورود با موبایل",
             _tag);
 
         SendOtpToExistingMobile = new EndpointInfo(
