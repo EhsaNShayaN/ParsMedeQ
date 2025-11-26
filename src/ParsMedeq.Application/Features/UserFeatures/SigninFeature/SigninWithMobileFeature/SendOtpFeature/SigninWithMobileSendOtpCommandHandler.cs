@@ -29,11 +29,8 @@ public sealed class SigninWithMobileSendOtpCommandHandler : IPrimitiveResultComm
                 mobile,
                 ApplicationCacheTokens.CreateOTPKey(mobile.Value.ToString(), ApplicationCacheTokens.LoginOTP),
                 cancellationToken)
-            .Map(otp => IsDummy().Map(d => d ? otp : string.Empty).Map(otp => (otp, mobile)))
-            .Map(data => this._readUnitOfWork.UserReadRepository.FindByMobile(data.mobile, cancellationToken)
-            .Map(user => (flag: user is null, data.otp)))
-            .Map(data => new SigninWithMobileSendOtpCommandResponse(data.otp, data.flag)))
-            .ConfigureAwait(false);
+            .Map(otp => IsDummy().Map(d => d ? otp : string.Empty)
+            .Map(otp => new SigninWithMobileSendOtpCommandResponse(otp))));
     }
     async ValueTask<PrimitiveResult<bool>> IsDummy()
     {
