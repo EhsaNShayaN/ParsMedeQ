@@ -30,7 +30,7 @@ export class UserPanel extends BaseComponent {
     });
   }
 
-  public onPasswordFormSubmit(values: any): void {
+  onPasswordFormSubmit(values: any): void {
     if (!this.form.valid) {
       this.form.markAllAsTouched();
       console.log(this.findInvalidControls(this.form));
@@ -43,14 +43,19 @@ export class UserPanel extends BaseComponent {
       obs = this.restApiService.changePassword(values.currentPassword, values.newPassword);
     }
     obs.pipe(first()).subscribe((d: BaseResult<AddResult>) => {
-      if (d.data.changed) {
+      console.log(d);
+      if (d.data?.changed) {
         this.profile!.passwordMustBeSet = false;
         this.toastrService.success(this.getTranslateValue('YOUR_PASSWORD_CHANGED_SUCCESSFULLY'), '', {});
         this.form.reset();
         this.form.markAsPristine();
         this.form.markAsUntouched();
       } else {
-        this.toastrService.error(this.getTranslateValue('CURRENT_PASSWORD_IS_WRONG'), '', {});
+        if (d.errors?.length > 0) {
+          this.toastrService.error(d.errors[0].errorMessage, '', {});
+        } else {
+          this.toastrService.error(this.getTranslateValue('UNKNOWN_ERROR'), '', {});
+        }
       }
     });
   }

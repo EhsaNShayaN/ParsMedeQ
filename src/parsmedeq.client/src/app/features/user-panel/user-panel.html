@@ -1,4 +1,4 @@
-@if (form && false) {
+@if (form) {
   <form [formGroup]="form" (ngSubmit)="onPasswordFormSubmit(form.value)">
     <div fxLayout="row wrap" class="p-5">
       @if (!profile?.passwordMustBeSet) {

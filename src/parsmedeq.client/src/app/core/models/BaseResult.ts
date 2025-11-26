@@ -1,12 +1,17 @@
 export class BaseResult<T> {
   code: ResultStatusCode = ResultStatusCode.OK;
-  errors: string[] = [];
+  errors: error[] = [];
   data: T;
 
   constructor(code: ResultStatusCode, data: T) {
     this.code = code;
     this.data = data;
   }
+}
+
+export interface error {
+  errorMessage: string;
+  errorCode: string;
 }
 
 export enum ResultStatusCode {
