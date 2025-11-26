@@ -44,7 +44,7 @@ export class EditMainImageDialog extends BaseSectionDialog {
 
   save() {
     const title = this.form.value.title;
-    this.service.update(this.data.sectionId, title ?? '', this.data.image, this.selectedFile).subscribe(res => {
+    this.service.update(this.data.sectionId, title ?? '', '', this.data.image, this.selectedFile).subscribe(res => {
       const payload: any = {title, image: res.url};
       this.dialogRef.close(payload);
     });

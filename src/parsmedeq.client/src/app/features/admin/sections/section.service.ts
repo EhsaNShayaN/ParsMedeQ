@@ -35,10 +35,11 @@ export class SectionService {
     return this.http.post(`${this.api}/order`, list);
   }
 
-  update(id: number, title: string, oldImagePath?: string, image?: File) {
+  update(id: number, title: string, description: string, oldImagePath?: string, image?: File) {
     const fd = new FormData();
     fd.append('id', id.toString());
     fd.append('title', title);
+    fd.append('description', description);
     fd.append('oldImagePath', oldImagePath ?? '');
     if (image) {
       fd.append('image', image);
