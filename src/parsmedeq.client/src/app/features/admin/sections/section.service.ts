@@ -46,11 +46,22 @@ export class SectionService {
     return this.http.post<{ url: string }>(`${this.api}/update`, fd);
   }
 
-  updateList(model: any) {
-    return this.http.post(`${this.api}/updateList`, model);
+  updateByList(model: UpdateListRequest) {
+    return this.http.post(`${this.api}/updateByList`, model);
   }
 
   deleteImage(id: number) {
     return this.http.post(`${this.api}/deleteImage`, {id});
   }
+}
+
+export interface UpdateListRequest {
+  id: number;
+  items: UpdateListItem[];
+}
+
+export interface UpdateListItem {
+  title: string;
+  description: string;
+  image: string;
 }

@@ -19,13 +19,13 @@ public sealed class UpdateSectionByListCommandHandler : IPrimitiveResultCommandH
     {
         return await _writeUnitOfWork.SectionWriteRepository.FindByTranslation(request.Id, cancellationToken)
             .Map(section => section.RemoveTranslations(_userLangContextAccessor.GetCurrentLang()))
-            .Map(section => section.AddTranslations(_userLangContextAccessor.GetCurrentLang(), request.Items.Select(s => ToTuple(s)).ToArray())
-                .Map(() => section))
+            .Map(section => section.AddTranslations(_userLangContextAccessor.GetCurrentLang(),
+            request.Items.Select(s => ToTuple(s)).ToArray()))
             .Map(section => this._writeUnitOfWork.SectionWriteRepository.EditSection(section)
             .Map(section => this._writeUnitOfWork.SaveChangesAsync(CancellationToken.None).Map(_ => section))
             .Map(section => new UpdateSectionByListCommandResponse(section is not null)))
             .ConfigureAwait(false);
     }
-    public static (string title, string description) ToTuple(UpdateSectionByListItemCommand cmd)
-    => (cmd.Title, cmd.Description);
+    public static (string title, string description, string image) ToTuple(UpdateSectionByListItemCommand cmd)
+    => (cmd.Title, cmd.Description, cmd.Image);
 }

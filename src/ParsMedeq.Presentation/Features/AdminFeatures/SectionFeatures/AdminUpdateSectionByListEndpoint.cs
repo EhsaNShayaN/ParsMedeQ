@@ -21,7 +21,9 @@ sealed class AdminUpdateSectionByListEndpoint : EndpointHandlerBase<
             DefaultResponseFactory.Instance.CreateOk)
     { }
 }
-internal sealed class AdminUpdateSectionByListApiRequestMapper : IPresentationMapper<AdminUpdateSectionByListApiRequest, UpdateSectionByListCommand>
+internal sealed class AdminUpdateSectionByListApiRequestMapper : IPresentationMapper<
+    AdminUpdateSectionByListApiRequest,
+    UpdateSectionByListCommand>
 {
     public async ValueTask<PrimitiveResult<UpdateSectionByListCommand>> Map(
         AdminUpdateSectionByListApiRequest src,
@@ -31,6 +33,6 @@ internal sealed class AdminUpdateSectionByListApiRequestMapper : IPresentationMa
             PrimitiveResult.Success(
                 new UpdateSectionByListCommand(
                     src.Id,
-                    src.Items.Select(s => new UpdateSectionByListItemCommand(s.Title, s.Description)).ToArray())));
+                    src.Items.Select(s => new UpdateSectionByListItemCommand(s.Title, s.Description, s.Image)).ToArray())));
     }
 }

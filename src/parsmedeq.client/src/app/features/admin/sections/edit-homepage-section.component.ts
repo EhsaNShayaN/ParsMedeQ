@@ -32,8 +32,8 @@ export class EditHomepageSectionComponent extends BaseComponent implements OnDes
           let section = res.data.find(s => s.sectionId === id);
           if (!section) {
             const mainSection = MainSections.find(s => s.id === id);
-            section = {description: '', hidden: false, image: '', items: [], order: 0, title: '', type: mainSection.type, id: id, sectionId: id};
-            sections = [{description: '', hidden: false, image: '', items: [], order: 0, title: '', type: mainSection.type, id: id, sectionId: id}];
+            section = {description: '', hidden: false, image: '', items: [], title: '', type: mainSection.type, id: id, sectionId: id};
+            sections = [{description: '', hidden: false, image: '', items: [], title: '', type: mainSection.type, id: id, sectionId: id}];
           }
           const config: MatDialogConfig = {
             width: window.outerWidth + 'px',

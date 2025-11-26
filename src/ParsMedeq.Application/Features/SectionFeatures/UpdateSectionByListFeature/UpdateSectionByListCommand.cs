@@ -15,4 +15,5 @@ public sealed record class UpdateSectionByListCommand(
 }
 public sealed record class UpdateSectionByListItemCommand(
     string Title,
-    string Description);
+    string Description,
+    string Image);

@@ -10,7 +10,6 @@ export interface Section {
   title?: string;
   description?: string;
   hidden: boolean;
-  order: number;
   items?: any[];
   image?: string;
 }
@@ -26,7 +25,7 @@ export class HomepageSectionsComponent extends BaseComponent implements OnInit {
   languages: string[] = [];
   colors: string[] = ['warn', 'primary', 'success', 'secondary', 'info', 'danger'];
   displayedColumns = ['order', 'title', 'status', 'actions'];
-  mainSections= MainSections;
+  mainSections = MainSections;
 
   constructor(private service: SectionService) {
     super();
@@ -39,9 +38,10 @@ export class HomepageSectionsComponent extends BaseComponent implements OnInit {
 
   load() {
     this.service.getAll().subscribe(res => {
-      const sections = res.data.sort((a, b) => a.order - b.order);
-      this.mainSections.forEach(s => {
-        s.hidden = sections.find(s => s.id === s.id)?.hidden;
+      const sections = res.data;
+      this.mainSections.forEach(m => {
+        const section = sections.find(s => s.sectionId === m.sectionId);
+        m.hidden = section?.hidden ?? false;
       });
     });
   }

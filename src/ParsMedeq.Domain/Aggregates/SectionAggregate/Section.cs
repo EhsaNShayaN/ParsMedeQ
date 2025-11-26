@@ -92,16 +92,14 @@ public sealed class Section : EntityBase<int>
         this._sectionTranslations.RemoveAll(s => s.LanguageCode == langCode);
         return PrimitiveResult.Success(this);
     }
-    public ValueTask<PrimitiveResult> AddTranslations(
+    public PrimitiveResult<Section> AddTranslations(
         string languageCode,
-        (string title, string description)[] translations)
+        (string title, string description, string image)[] translations)
     {
-        return PrimitiveResult.BindAll(translations,
-            s => this.Update(languageCode, s.title, s.description, string.Empty),
-            BindAllIterationStrategy.BreakOnFirstError).Match(
-                _ => PrimitiveResult.Success(),
-                PrimitiveResult.Failure
-            );
+        PrimitiveResult.BindAll(translations,
+            s => this.AddTranslation(languageCode, s.title, s.description, s.image),
+            BindAllIterationStrategy.BreakOnFirstError);
+        return PrimitiveResult.Success(this);
     }
     #endregion
 }

@@ -1,9 +1,9 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {FormBuilder, FormArray, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Section} from '../homepage-sections.component';
 import {BaseSectionDialog} from './base-section.dialog';
-import {SectionService} from '../section.service';
+import {SectionService, UpdateListItem, UpdateListRequest} from '../section.service';
 
 @Component({
   selector: 'edit-services-dialog',
@@ -46,8 +46,15 @@ export class EditServicesDialog extends BaseSectionDialog {
   save() {
     console.log(this.form.value.items);
     this.dialogRef.close(this.form.value);
-    const model = {id: this.data[0].sectionId, items: this.form.value.items};
-    this.service.updateList(model).subscribe(res => {
+
+    const items: UpdateListItem[] = this.form.value.items!.map(x => ({
+      title: x.title ?? '',
+      description: x.description ?? '',
+      image: x.image ?? ''
+    }));
+
+    const model: UpdateListRequest = {id: this.data[0].sectionId, items};
+    this.service.updateByList(model).subscribe(res => {
       this.dialogRef.close(model);
     });
   }
