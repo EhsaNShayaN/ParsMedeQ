@@ -60,7 +60,7 @@ export class EditHomepageSectionComponent extends BaseComponent implements OnDes
               });
               break;
             case SectionType.advantages:
-              this.dialog.open(EditAdvantagesDialog, config).afterClosed().subscribe(res => {
+              this.dialog.open(EditAdvantagesDialog, listConfig).afterClosed().subscribe(res => {
                 this.load(res);
               });
               break;

@@ -1,8 +1,9 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {FormBuilder, FormArray, FormControl, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Section} from '../homepage-sections.component';
 import {BaseSectionDialog} from './base-section.dialog';
+import {SectionService, UpdateListItem, UpdateListRequest} from '../section.service';
 
 @Component({
   selector: 'edit-advantages-dialog',
@@ -12,25 +13,30 @@ import {BaseSectionDialog} from './base-section.dialog';
 })
 export class EditAdvantagesDialog extends BaseSectionDialog {
   form = this.fb.group({
-    title: ['', Validators.required],
-    items: this.fb.array([])
+    items: this.fb.array<FormGroup>([])
   });
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: Section,
+  constructor(@Inject(MAT_DIALOG_DATA) public data: Section[],
               private dialogRef: MatDialogRef<EditAdvantagesDialog>,
-              private fb: FormBuilder) {
+              private fb: FormBuilder,
+              private service: SectionService) {
     super();
-    this.form.patchValue({title: data.title || ''});
-    const arr = this.form.get('items') as FormArray;
-    (data.items || []).forEach((it: any) => arr.push(this.fb.group({text: [it.text || '', Validators.required], icon: [it.icon || '']})));
+
+    const arr = this.form.get('items') as FormArray<FormGroup>;
+    (data || []).forEach(it => arr.push(this.createItemGroup(it)));
+    this.sectionTitle = this.mainSections.find(s => s.id === data[0].sectionId)?.title || '';
   }
 
   get items() {
     return this.form.get('items') as FormArray;
   }
 
+  get itemControls(): FormGroup[] {
+    return this.items.controls as FormGroup[];
+  }
+
   addItem() {
-    this.items.push(this.fb.group({text: ['', Validators.required], icon: ['check_circle']}));
+    this.items.push(this.createItemGroup());
   }
 
   removeItem(i: number) {
@@ -38,6 +44,26 @@ export class EditAdvantagesDialog extends BaseSectionDialog {
   }
 
   save() {
+    console.log(this.form.value.items);
     this.dialogRef.close(this.form.value);
+
+    const items: UpdateListItem[] = this.form.value.items!.map(x => ({
+      title: x.title ?? '',
+      description: x.description ?? '',
+      image: x.image ?? ''
+    }));
+
+    const model: UpdateListRequest = {id: this.data[0].sectionId, items};
+    this.service.updateByList(model).subscribe(res => {
+      this.dialogRef.close(model);
+    });
+  }
+
+  private createItemGroup(item?: Section) {
+    return this.fb.group({
+      title: [item?.title || '', Validators.required],
+      description: [item?.description || ''],
+      image: [item?.image || ''],
+    });
   }
 }

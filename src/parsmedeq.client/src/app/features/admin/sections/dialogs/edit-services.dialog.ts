@@ -62,7 +62,8 @@ export class EditServicesDialog extends BaseSectionDialog {
   private createItemGroup(item?: Section) {
     return this.fb.group({
       title: [item?.title || '', Validators.required],
-      description: [item?.description || '']
+      description: [item?.description || ''],
+      image: [item?.image || ''],
     });
   }
 }

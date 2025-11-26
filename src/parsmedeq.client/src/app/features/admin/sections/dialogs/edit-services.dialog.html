@@ -4,6 +4,14 @@
 </h2>
 <p class="ps-6 red-color">{{ 'PRESS_THE_SAVE_BUTTON_TO_FINALIZE_THE_OPERATION' | translate }}</p>
 <mat-divider></mat-divider>
+<div class="m-2">
+  <button mat-stroked-button color="primary" (click)="addItem()">
+    <mat-icon>add</mat-icon>
+    {{ 'BTN.ADD' | translate }}
+    {{ 'SECTIONS.SERVICES' | translate }}
+  </button>
+</div>
+<mat-divider></mat-divider>
 <div mat-dialog-content>
   <form [formGroup]="form">
     @for (ctrl of itemControls; track ctrl; let i = $index) {
@@ -30,11 +38,6 @@
         </div>
       </div>
     }
-    <button mat-stroked-button color="primary" (click)="addItem()">
-      <mat-icon>add</mat-icon>
-      {{ 'BTN.ADD' | translate }}
-      {{ 'SERVICE' | translate }}
-    </button>
   </form>
 </div>
 <div mat-dialog-actions align="end">
