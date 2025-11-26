@@ -2,24 +2,21 @@
 using Microsoft.AspNetCore.Http;
 using ParsMedeQ.Application.Features.SectionFeatures.SectionListFeature;
 using ParsMedeQ.Contracts;
-using ParsMedeQ.Contracts.AdminContracts.AdminSectionListContract;
+using ParsMedeQ.Contracts.SectionContracts.AdminSectionListContract;
 
-namespace ParsMedeQ.Presentation.Features.AdminFeatures.SectionFeatures;
+namespace ParsMedeQ.Presentation.Features.SectionFeatures;
 
-sealed class AdminSectionListEndpoint : EndpointHandlerBase<
+sealed class SectionListEndpoint : EndpointHandlerBase<
     AdminSectionListApiRequest,
     SectionListQuery,
     SectionListDbQueryResponse[],
     AdminSectionListApiResponse[]>
 {
-    protected override bool NeedTaxPayerFile => true;
-    protected override bool NeedAdminPrivilage => true;
-
-    public AdminSectionListEndpoint(
+    public SectionListEndpoint(
         IPresentationMapper<AdminSectionListApiRequest, SectionListQuery> requestMapper,
         IPresentationMapper<SectionListDbQueryResponse[], AdminSectionListApiResponse[]> responseMapper)
         : base(
-            Endpoints.Admin.Sections,
+            Endpoints.Section.List,
             HttpMethod.Get,
             requestMapper,
             responseMapper,

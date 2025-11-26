@@ -51,7 +51,6 @@ import {OurCenterComponent} from '../features/centers/our-center/our-center.comp
 import {CustomDialogComponent} from './dialogs/custom-dialog/custom-dialog.component';
 import {MatBadge} from '@angular/material/badge';
 import {MultiCounterComponent} from './multi-counter/multi-counter';
-import {OurServiceComponent} from '../features/home/our-service/our-service.component';
 import {MatTab, MatTabGroup} from '@angular/material/tabs';
 import {ClipDialogComponent} from './dialogs/clip-dialog/clip-dialog.component';
 import {MatPaginator} from '@angular/material/paginator';
@@ -87,7 +86,6 @@ import {MatSort} from '@angular/material/sort';
     OurProductComponent,
     OurCenterComponent,
     MultiCounterComponent,
-    OurServiceComponent,
     ClipDialogComponent,
   ],
   imports: [
@@ -263,7 +261,6 @@ import {MatSort} from '@angular/material/sort';
     OurProductComponent,
     OurCenterComponent,
     MultiCounterComponent,
-    OurServiceComponent,
     ClipDialogComponent,
   ],
   providers: [

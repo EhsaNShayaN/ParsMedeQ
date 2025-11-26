@@ -1,21 +1,39 @@
 <!-- Hero with Parallax -->
-<section class="hero scroll-section">
-  <div class="overlay"></div>
-  <div class="hero-content">
-    <h1>با ما «درمان ممکن است؛ اگر باورش کنید.»</h1>
-    <!--<h1>تکنولوژی هوشمند پارس مدیکیو</h1>
-    <p>تحول در دقت، کارایی و عدالت در خدمات پزشکی</p>
-    <button mat-raised-button color="primary" (click)="testr()">کشف فناوری</button>-->
-  </div>
-</section>
-
-<!-- Centers -->
-<app-our-center></app-our-center>
-
-<!-- Services -->
-<app-our-service></app-our-service>
-
-<!-- About -->
+@if (!mainImageIsHide) {
+  <section class="hero scroll-section"
+           [style.background-image]="'url(' + mainImageSections[0]?.image + ')'">
+    <div class="overlay"></div>
+    <div class="hero-content">
+      <h1>
+        {{ mainImageSections[0].title }}
+      </h1>
+      <!--<h1>تکنولوژی هوشمند پارس مدیکیو</h1>
+      <p>تحول در دقت، کارایی و عدالت در خدمات پزشکی</p>
+      <button mat-raised-button color="primary" (click)="testr()">کشف فناوری</button>-->
+    </div>
+  </section>
+}
+@if (!centersIsHide) {
+  <app-our-center></app-our-center>
+}
+@if (!servicesIsHide) {
+  <section class="services">
+    <div class="theme-container">
+      <h2>{{ 'SECTIONS.SERVICES' | translate }}</h2>
+      <div class="cards">
+        @for (item of servicesSections; track item.id) {
+          <div class="w-100 card">
+            <div class="icon"></div>
+            <h3>{{ item.title }}</h3>
+            <p class="text-justify">
+              {{ item.description }}
+            </p>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+}
 <section class="scroll-section about d-none">
   <div class="container">
     <h2>نگاهی به آینده پزشکی</h2>
@@ -25,7 +43,6 @@
     </p>
   </div>
 </section>
-
 <!-- How It Works -->
 <section class="scroll-section how d-none">
   <div class="container">
@@ -49,70 +66,26 @@
     </div>
   </div>
 </section>
-
-<!-- Benefits -->
-<section class="scroll-section benefits">
-  <div class="container">
-    <h2>مزایای برجسته</h2>
-    <div fxLayout="row wrap" fxLayoutAlign="center center" class="cards">
-      <div fxFlex="100" fxFlex.gt-md="33.3" class="p-3">
-        <mat-card>
-          <mat-icon color="primary">speed</mat-icon>
-          <p class="font-large fw-600 two-lines">
-            افزایش نفوذ دارو تا ۱۰۰۰ برابر
-          </p>
-          <p></p>
-        </mat-card>
-      </div>
-      <div fxFlex="100" fxFlex.gt-md="33.3" class="p-3">
-        <mat-card>
-          <mat-icon color="primary">security</mat-icon>
-          <p class="font-large fw-600 two-lines">
-            پاسخ سریع در ۱–۳ هفته
-          </p>
-          <p></p>
-        </mat-card>
-      </div>
-      <div fxFlex="100" fxFlex.gt-md="33.3" class="p-3">
-        <mat-card>
-          <mat-icon color="primary">psychology</mat-icon>
-          <p class="font-large fw-600 two-lines">
-            بدون نیاز به جراحی وسیع
-          </p>
-          <p></p>
-        </mat-card>
-      </div>
-      <div fxFlex="100" fxFlex.gt-md="33.3" class="p-3">
-        <mat-card>
-          <mat-icon color="primary">speed</mat-icon>
-          <p class="font-large fw-600 two-lines">
-            حفظ عملکرد طبیعی عضو درگیر و زیبایی ظاهری
-          </p>
-          <p></p>
-        </mat-card>
-      </div>
-      <div fxFlex="100" fxFlex.gt-md="33.3" class="p-3">
-        <mat-card>
-          <mat-icon color="primary">security</mat-icon>
-          <p class="font-large fw-600 two-lines">
-            قابل تکرار و قابل ترکیب با درمان‌های دیگر
-          </p>
-          <p></p>
-        </mat-card>
-      </div>
-      <div fxFlex="100" fxFlex.gt-md="33.3" class="p-3">
-        <mat-card>
-          <mat-icon color="primary">psychology</mat-icon>
-          <p class="font-large fw-600 two-lines">
-            هزینه‌ی کمتر و عوارض حداقلی
-          </p>
-          <p></p>
-        </mat-card>
+@if (!advantagesIsHide) {
+  <section class="scroll-section benefits">
+    <div class="container">
+      <h2>{{ 'SECTIONS.ADVANTAGES' | translate }}</h2>
+      <div fxLayout="row wrap" fxLayoutAlign="center center" class="cards">
+        @for (item of advantagesSections; track item.id) {
+          <div fxFlex="100" fxFlex.gt-md="33.3" class="p-3">
+            <mat-card>
+              <mat-icon color="primary">{{ item.image }}</mat-icon>
+              <p class="font-large fw-600 two-lines">
+                {{ item.title }}
+              </p>
+              <p></p>
+            </mat-card>
+          </div>
+        }
       </div>
     </div>
-  </div>
-</section>
-
+  </section>
+}
 <!-- Applications -->
 <section class="scroll-section applications d-none">
   <div class="container">
@@ -125,56 +98,50 @@
   </div>
 </section>
 
-<!-- ABOUT -->
-<section id="about" class="about-section alt-bg" [@fadeInSimple]>
-  <div class="theme-container about-inner">
-    <div class="about-text">
-      <h2>دربارهٔ ما</h2>
-      <p>
-        شرکت پیشرو فناوران درمان پارس با رویکردی دانش‌بنیان و مبتنی بر تحقیق و توسعه، در حوزه‌ی فناوری‌های نوین درمان
-        سرطان فعالیت می‌کند. این شرکت به‌عنوان تنها توسعه‌دهنده و تولیدکننده‌ی فناوری الکتروکموتراپی (ECT) در ایران
-        وآسیا، گام بزرگی در مسیر تولید و ارتقای این روش درمانی برداشته است. تیم‌های تخصصی پیشرو فناوران درمان پارس در
-        حوزه‌های مهندسی ،پزشکی و علوم پایه با هم‌افزایی دانش و تجربه، طراحی و تولید تجهیزات درمانی دقیق، ایمن و منطبق با
-        استانداردهای جهانی را دنبال می‌کنند. ماموریت ما، به‌کارگیری علم و فناوری با نگاهی انسان‌محور برای دستیابی به
-        درمانی مؤثر و در دسترس است.
-        <br>
-        زیرا ما باور داریم:
-        <br>
-        درمان ممکن است، اگر باورش کنید
-      </p>
-      <a class="btn btn-primary not-link" routerLink="/about">بیشتر بدانید</a>
+@if (!aboutIsHide) {
+  <section id="about" class="about-section alt-bg" [@fadeInSimple]>
+    <div class="theme-container about-inner">
+      <div class="about-text">
+        <h2>{{ 'SECTIONS.ABOUT' | translate }}</h2>
+        <p>
+          {{ aboutSections[0].description }}
+        </p>
+        <a class="btn btn-primary not-link" routerLink="/about">بیشتر بدانید</a>
+      </div>
+      <div class="about-image" aria-hidden="true">
+        <img [src]="aboutSections[0].image" alt="" loading="lazy">
+      </div>
     </div>
-    <div class="about-image" aria-hidden="true">
-      <img src="assets/images/cancer-treatment2.jpg" alt="" loading="lazy">
+  </section>
+}
+@if (!contactIsHide) {
+  <section id="contact" class="contact-section" [@fadeInSimple]>
+    <div class="theme-container contact-inner">
+      <div class="contact-card">
+        <h2>{{ 'SECTIONS.CONTACT' | translate }}</h2>
+        <p>هر سوالی داشتی، اینجا سریع با ما در ارتباط باش.</p>
+        <form class="contact-form">
+          <input name="name" ngModel placeholder="نام و نام خانوادگی" required>
+          <input name="email" ngModel type="email" placeholder="ایمیل" required>
+          <textarea name="message" ngModel placeholder="پیام" rows="4" required></textarea>
+          <button mat-raised-button color="primary" type="submit">ارسال پیام</button>
+        </form>
+      </div>
     </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact" class="contact-section" [@fadeInSimple]>
-  <div class="theme-container contact-inner">
-    <div class="contact-card">
-      <h2>تماس با ما</h2>
-      <p>هر سوالی داشتی، اینجا سریع با ما در ارتباط باش.</p>
-      <form class="contact-form">
-        <input name="name" ngModel placeholder="نام و نام خانوادگی" required>
-        <input name="email" ngModel type="email" placeholder="ایمیل" required>
-        <textarea name="message" ngModel placeholder="پیام" rows="4" required></textarea>
-        <button mat-raised-button color="primary" type="submit">ارسال پیام</button>
-      </form>
+  </section>
+}
+@if (!bottomImageIsHide) {
+  <section class="cta scroll-section"
+           [style.background-image]="'url(' + bottomImageSections[0]?.image + ')'">
+    <div class="overlay"></div>
+    <div class="content">
+      <h2 class="background-color">
+        {{ bottomImageSections[0].title }}
+      </h2>
+      <!--<button mat-raised-button color="primary">درخواست دمو</button>-->
     </div>
-  </div>
-</section>
-
-<!-- CTA with Parallax -->
-<section class="cta scroll-section">
-  <div class="overlay"></div>
-  <div class="content">
-    <h2 class="background-color">پیوستن به آینده‌ی پزشکی امروز آغاز می‌شود</h2>
-    <!--<button mat-raised-button color="primary">درخواست دمو</button>-->
-  </div>
-</section>
-
+  </section>
+}
 <footer class="site-footer" role="contentinfo">
   <div class="theme-container footer-inner">
     <p>© 2025 ParsMEDEQ — تمامی حقوق محفوظ است</p>

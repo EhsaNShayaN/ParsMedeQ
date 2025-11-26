@@ -1,4 +1,4 @@
-﻿namespace ParsMedeQ.Contracts.AdminContracts.AdminSectionListContract;
+﻿namespace ParsMedeQ.Contracts.SectionContracts.AdminSectionListContract;
 public readonly record struct AdminSectionListApiResponse(
     int Id,
     int SectionId,

@@ -7,7 +7,8 @@ import {BaseResult} from '../../../core/models/BaseResult';
 
 @Injectable({providedIn: 'root'})
 export class SectionService {
-  private api = `${endpoint()}admin/section`;
+  private adminApi = `${endpoint()}admin/section`;
+  private api = `${endpoint()}section`;
 
   constructor(private http: HttpClient) {
   }
@@ -21,18 +22,18 @@ export class SectionService {
   }
 
   update0(id: number, data: any) {
-    return this.http.post(`${this.api}/update`, data);
+    return this.http.post(`${this.adminApi}/update`, data);
   }
 
   toggle(id: number, hide: boolean) {
     if (hide) {
-      return this.http.post(`${this.api}/show`, {id});
+      return this.http.post(`${this.adminApi}/show`, {id});
     }
-    return this.http.post(`${this.api}/hide`, {id});
+    return this.http.post(`${this.adminApi}/hide`, {id});
   }
 
   updateOrder(list: { id: number, order: number }[]) {
-    return this.http.post(`${this.api}/order`, list);
+    return this.http.post(`${this.adminApi}/order`, list);
   }
 
   update(id: number, title: string, description: string, oldImagePath?: string, image?: File) {
@@ -44,15 +45,15 @@ export class SectionService {
     if (image) {
       fd.append('image', image);
     }
-    return this.http.post<{ url: string }>(`${this.api}/update`, fd);
+    return this.http.post<{ url: string }>(`${this.adminApi}/update`, fd);
   }
 
   updateByList(model: UpdateListRequest) {
-    return this.http.post(`${this.api}/updateByList`, model);
+    return this.http.post(`${this.adminApi}/updateByList`, model);
   }
 
   deleteImage(id: number) {
-    return this.http.post(`${this.api}/deleteImage`, {id});
+    return this.http.post(`${this.adminApi}/deleteImage`, {id});
   }
 }
 

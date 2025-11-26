@@ -2,24 +2,21 @@
 using Microsoft.AspNetCore.Http;
 using ParsMedeQ.Application.Features.SectionFeatures.SectionListFeature;
 using ParsMedeQ.Contracts;
-using ParsMedeQ.Contracts.AdminContracts.AdminSectionItemsContract;
+using ParsMedeQ.Contracts.SectionContracts.SectionItemsContract;
 
-namespace ParsMedeQ.Presentation.Features.AdminFeatures.SectionFeatures;
+namespace ParsMedeQ.Presentation.Features.SectionFeatures;
 
-sealed class AdminSectionItemsEndpoint : EndpointHandlerBase<
-    AdminSectionItemsApiRequest,
+sealed class SectionItemsEndpoint : EndpointHandlerBase<
+    SectionItemsApiRequest,
     SectionItemsQuery,
     SectionListDbQueryResponse[],
-    AdminSectionItemsApiResponse[]>
+    SectionItemsApiResponse[]>
 {
-    protected override bool NeedTaxPayerFile => true;
-    protected override bool NeedAdminPrivilage => true;
-
-    public AdminSectionItemsEndpoint(
-        IPresentationMapper<AdminSectionItemsApiRequest, SectionItemsQuery> requestMapper,
-        IPresentationMapper<SectionListDbQueryResponse[], AdminSectionItemsApiResponse[]> responseMapper)
+    public SectionItemsEndpoint(
+        IPresentationMapper<SectionItemsApiRequest, SectionItemsQuery> requestMapper,
+        IPresentationMapper<SectionListDbQueryResponse[], SectionItemsApiResponse[]> responseMapper)
         : base(
-            Endpoints.Admin.SectionItems,
+            Endpoints.Section.Items,
             HttpMethod.Get,
             requestMapper,
             responseMapper,
@@ -28,7 +25,7 @@ sealed class AdminSectionItemsEndpoint : EndpointHandlerBase<
 
     protected override Delegate EndpointDelegate =>
     (
-            [AsParameters] AdminSectionItemsApiRequest request,
+            [AsParameters] SectionItemsApiRequest request,
             ISender sender,
             CancellationToken cancellationToken) => this.CallMediatRHandler(
             sender,
@@ -37,11 +34,11 @@ sealed class AdminSectionItemsEndpoint : EndpointHandlerBase<
 
 }
 sealed class AdminSectionItemsApiRequestMapper : IPresentationMapper<
-    AdminSectionItemsApiRequest,
+    SectionItemsApiRequest,
     SectionItemsQuery>
 {
     public ValueTask<PrimitiveResult<SectionItemsQuery>> Map(
-        AdminSectionItemsApiRequest src,
+        SectionItemsApiRequest src,
         CancellationToken cancellationToken)
     {
         return ValueTask.FromResult(PrimitiveResult.Success(new SectionItemsQuery()));
@@ -49,15 +46,15 @@ sealed class AdminSectionItemsApiRequestMapper : IPresentationMapper<
 }
 sealed class AdminSectionItemsApiResponseMapper : IPresentationMapper<
     SectionListDbQueryResponse[],
-    AdminSectionItemsApiResponse[]>
+    SectionItemsApiResponse[]>
 {
-    public ValueTask<PrimitiveResult<AdminSectionItemsApiResponse[]>> Map(
+    public ValueTask<PrimitiveResult<SectionItemsApiResponse[]>> Map(
         SectionListDbQueryResponse[] src,
         CancellationToken cancellationToken)
     {
         return ValueTask.FromResult(
             PrimitiveResult.Success(
-                        src.Select(s => new AdminSectionItemsApiResponse(
+                        src.Select(s => new SectionItemsApiResponse(
                             s.Id,
                             s.SectionId,
                             s.Title,

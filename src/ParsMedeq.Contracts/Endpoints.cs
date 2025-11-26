@@ -7,6 +7,7 @@ using ParsMedeQ.Contracts.OrderContracts;
 using ParsMedeQ.Contracts.PaymentContracts;
 using ParsMedeQ.Contracts.ProductContracts;
 using ParsMedeQ.Contracts.ResourceContracts;
+using ParsMedeQ.Contracts.SectionContracts;
 using ParsMedeQ.Contracts.TicketContracts;
 using ParsMedeQ.Contracts.TreatmentCenterContracts;
 using ParsMedeQ.Contracts.UserContracts;
@@ -21,6 +22,7 @@ public static class Endpoints
     public readonly static ResourceEndpoint Resource = new();
     public readonly static ProductEndpoint Product = new();
     public readonly static GeneralEndpoint General = new();
+    public readonly static SectionEndpoint Section = new();
     public readonly static CartEndpoint Cart = new();
     public readonly static CommentEndpoint Comment = new();
     public readonly static TicketEndpoint Ticket = new();
@@ -39,6 +41,7 @@ public static class EndpointMetadata
     public readonly static ApiEndpointItem Resource = new("resource", V1);
     public readonly static ApiEndpointItem Product = new("product", V1);
     public readonly static ApiEndpointItem General = new("general", V1);
+    public readonly static ApiEndpointItem Section = new("section", V1);
     public readonly static ApiEndpointItem Cart = new("cart", V1);
     public readonly static ApiEndpointItem Comment = new("comment", V1);
     public readonly static ApiEndpointItem Order = new("order", V1);
