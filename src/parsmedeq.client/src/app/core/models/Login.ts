@@ -6,20 +6,24 @@ export interface SendOtpRequest {
 
 export interface SendOtpResponse {
   otp?: string;
-  flag: boolean;
 }
 
 export interface CheckSigninRequest {
   mobile: string;
 }
 
-export interface CheckSigninResponse {
+export interface CheckSigninResponse  {
   result: string;
 }
 
 export interface MobileRequest {
   mobile: string;
   otp: string;
+}
+
+export interface PasswordRequest {
+  mobile: string;
+  password: string;
 }
 
 export interface MobileResponse {

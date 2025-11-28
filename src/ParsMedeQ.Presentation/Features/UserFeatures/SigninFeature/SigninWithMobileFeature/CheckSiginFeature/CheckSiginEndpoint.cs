@@ -13,7 +13,7 @@ internal sealed class CheckSiginEndpoint : EndpointHandlerBase<
     protected override bool NeedTaxPayerFile => false;
 
     public CheckSiginEndpoint() : base(
-       Endpoints.User.SigninWithMobile_CheckSigin,
+       Endpoints.User.SigninWithMobile_CheckSignin,
        HttpMethod.Post)
     {
     }

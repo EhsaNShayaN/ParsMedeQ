@@ -9,7 +9,7 @@ import {ResourceCategoriesResponse} from './models/ResourceCategoryResponse';
 import {AuthService} from './services/auth.service';
 import {ProductCategoriesResponse} from './models/ProductCategoryResponse';
 import {AddProductRequest, PeriodicServiceResponse, Product, ProductRequest, ProductResponse, ProductsRequest} from './models/ProductResponse';
-import {CheckSigninRequest, CheckSigninResponse, MobileRequest, MobileResponse, ProfileResponse, SendOtpRequest, SendOtpResponse} from './models/Login';
+import {CheckSigninRequest, CheckSigninResponse, MobileRequest, MobileResponse, PasswordRequest, ProfileResponse, SendOtpRequest, SendOtpResponse} from './models/Login';
 import {ProductMediaListResponse} from './models/ProductMediaResponse';
 import {LocationResponse} from './models/LocationResponse';
 import {TreatmentCenter, TreatmentCenterResponse} from './models/TreatmentCenterResponse';
@@ -24,7 +24,7 @@ export class RestApiService {
   }
 
   sendOtp(model: SendOtpRequest): Observable<any> {
-    return this.http.post<BaseResult<SendOtpResponse>>(`${endpoint()}user/signIn/mobile/sendotp`, model).pipe(
+    return this.http.post<BaseResult<SendOtpResponse>>(`${endpoint()}user/signIn/mobile/sendOtp`, model).pipe(
       catchError(this.handleError)
     );
   }
@@ -37,6 +37,12 @@ export class RestApiService {
 
   sendMobile(model: MobileRequest): Observable<any> {
     return this.http.post<BaseResult<MobileResponse>>(`${endpoint()}user/signIn/mobile`, model).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  sendPassword(model: PasswordRequest): Observable<any> {
+    return this.http.post<BaseResult<MobileResponse>>(`${endpoint()}user/signIn/password`, model).pipe(
       catchError(this.handleError)
     );
   }

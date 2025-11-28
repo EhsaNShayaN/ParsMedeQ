@@ -1,5 +1,4 @@
 ﻿using ParsMedeQ.Application.Services.UserContextAccessorServices;
-using SRH.MediatRMessaging;
 
 namespace ParsMedeQ.Application.Features.UserFeatures.SigninFeature.SigninWithMobileFeature.SigninWithExistingMobileFeature;
 public sealed record SigninWithExistingMobileCommand(string Mobile, string Otp) :

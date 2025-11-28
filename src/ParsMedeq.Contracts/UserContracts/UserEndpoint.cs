@@ -12,7 +12,7 @@ public sealed class UserEndpoint : ApiEndpointBase
 
 
     public EndpointInfo SigninWithMobile_SendOtp { get; private set; }
-    public EndpointInfo SigninWithMobile_CheckSigin { get; private set; }
+    public EndpointInfo SigninWithMobile_CheckSignin { get; private set; }
     public EndpointInfo SendOtpToExistingMobile { get; private set; }
     public EndpointInfo SendPasswordOtpBySMS { get; private set; }
     public EndpointInfo SendPasswordOtpByEmail { get; private set; }
@@ -20,6 +20,7 @@ public sealed class UserEndpoint : ApiEndpointBase
     public EndpointInfo User_SendPasswordOtpByEmail { get; private set; }
     public EndpointInfo SigninWithMobile { get; private set; }
     public EndpointInfo SigninWithExistingMobile { get; private set; }
+    public EndpointInfo SigninWithPassword { get; private set; }
 
     //public EndpointInfo SignupPersonalInquery { get; private set; }
     //public EndpointInfo SignupLegalInquery { get; private set; }
@@ -54,10 +55,10 @@ public sealed class UserEndpoint : ApiEndpointBase
             "ارسال رمز یکبار مصرف به موبایل",
             _tag);
 
-        SigninWithMobile_CheckSigin = new EndpointInfo(
-            this.GetUrl($"{UserSigninWithMobile.Endpoint}/checkSigin"),
-            this.GetUrl($"{UserSigninWithMobile.Endpoint}/checkSigin"),
-            "Check Sigin with mobile",
+        SigninWithMobile_CheckSignin = new EndpointInfo(
+            this.GetUrl($"{UserSigninWithMobile.Endpoint}/checkSignin"),
+            this.GetUrl($"{UserSigninWithMobile.Endpoint}/checkSignin"),
+            "Check Signin with mobile",
             "چک ورود با موبایل",
             _tag);
 
@@ -107,6 +108,13 @@ public sealed class UserEndpoint : ApiEndpointBase
             this.GetUrl("signin/existingMobile"),
             this.GetUrl("signin/existingMobile"),
             "Sign in with existsing mobile",
+            "ورود توسط موبایل موجود در سیستم و رمز یکبار مصرف",
+            _tag);
+
+        SigninWithPassword = new EndpointInfo(
+            this.GetUrl("signin/password"),
+            this.GetUrl("signin/password"),
+            "Sign in with password",
             "ورود توسط موبایل موجود در سیستم و رمز یکبار مصرف",
             _tag);
 

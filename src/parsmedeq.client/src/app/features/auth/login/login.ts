@@ -9,6 +9,7 @@ import {BaseResult} from '../../../core/models/BaseResult';
 import {CheckSigninResponse, MobileResponse, SendOtpResponse} from '../../../core/models/Login';
 import {CartService} from '../../../core/services/cart.service';
 import {StorageService} from '../../../core/services/storage.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -72,16 +73,15 @@ export class Login extends BaseComponent implements OnInit, OnDestroy {
       this.onVerify();
       return;
     }
-    this.restApiService.checkSignin({mobile: this.loginFormData['username']?.value}).subscribe((p: CheckSigninResponse) => {
-      this.flag = p.result === 'password';
-      if (p.result === 'otp') {
+    this.restApiService.checkSignin({mobile: this.loginFormData['username']?.value}).subscribe((p: BaseResult<CheckSigninResponse>) => {
+      this.flag = p.data.result === 'password';
+      if (p.data.result === 'otp') {
         this.sendOtp();
       } else {
-        
+        this.submitClick = false;
+        this.hasMobile = true;
       }
     });
-
-    this.sendOtp();
   }
 
   sendOtp() {
@@ -91,7 +91,6 @@ export class Login extends BaseComponent implements OnInit, OnDestroy {
           this.startTimer();
           this.submitClick = false;
           this.hasMobile = true;
-          this.flag = d.data.flag;
           this.loginFormData['password']?.setValue(d.data.otp);
         },
         (error: string) => {
@@ -107,8 +106,14 @@ export class Login extends BaseComponent implements OnInit, OnDestroy {
       return;
     }
     this.loginFormData['password']?.clearValidators();
-    this.restApiService.sendMobile({mobile: this.loginFormData['username']?.value, otp: this.loginFormData['password']?.value})
-      .pipe(first()).subscribe((d: BaseResult<MobileResponse>) => {
+    let obs: Observable<any>;
+    if (this.flag) {
+      obs = this.restApiService.sendPassword({mobile: this.loginFormData['username']?.value, password: this.loginFormData['password']?.value});
+    } else {
+      obs = this.restApiService.sendMobile({mobile: this.loginFormData['username']?.value, otp: this.loginFormData['password']?.value});
+    }
+    //this.restApiService.sendMobile({mobile: this.loginFormData['username']?.value, otp: this.loginFormData['password']?.value})
+    obs.pipe(first()).subscribe((d: BaseResult<MobileResponse>) => {
         if (!d) {
           this.error = this.getTranslateValue('UNKNOWN_ERROR');
           this.submitClick = false;

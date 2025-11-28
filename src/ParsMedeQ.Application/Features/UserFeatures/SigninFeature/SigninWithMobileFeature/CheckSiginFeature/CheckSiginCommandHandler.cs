@@ -16,7 +16,8 @@ public sealed class CheckSiginCommandHandler : IPrimitiveResultCommandHandler<
     {
         return await MobileType.Create(request.Mobile)
             .Map(mobile => this._readUnitOfWork.UserReadRepository.FindByMobile(mobile, cancellationToken))
-            .Map(user => string.IsNullOrWhiteSpace(user.Password.Value) ? "otp" : "password")
-            .Map(otp => new CheckSiginCommandResponse(otp));
+            .Match(
+                user => new CheckSiginCommandResponse(string.IsNullOrWhiteSpace(user.Password.Value) ? "otp" : "password"),
+                user => new CheckSiginCommandResponse("otp"));
     }
 }
