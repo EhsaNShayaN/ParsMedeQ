@@ -10,6 +10,7 @@ import {EditAboutDialog} from './dialogs/edit-about.dialog';
 import {EditBottomImageDialog} from './dialogs/edit-bottom-image.dialog';
 import {ToastrService} from 'ngx-toastr';
 import {MainSections, SectionType} from '../../../core/constants/server.constants';
+import {ForStudyDialog} from './dialogs/for-study.dialog';
 
 @Component({
   selector: 'app-edit-homepage-section',
@@ -73,6 +74,11 @@ export class EditHomepageSectionComponent extends BaseComponent implements OnDes
               break;
             case SectionType.bottomImage:
               this.dialog.open(EditBottomImageDialog, config).afterClosed().subscribe(res => {
+                this.load(res);
+              });
+              break;
+            case SectionType.ForStudy:
+              this.dialog.open(ForStudyDialog, config).afterClosed().subscribe(res => {
                 this.load(res);
               });
               break;

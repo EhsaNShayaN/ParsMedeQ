@@ -23,6 +23,7 @@ const pagesChildren: Routes = [
       {path: 'auth', loadChildren: () => import('./features/auth/login/login.module').then(m => m.LoginModule)},
       {path: 'contact', loadChildren: () => import('./features/contact/contact-module').then(m => m.ContactModule)},
       {path: 'faq', loadChildren: () => import('./features/faq/faq-module').then(m => m.FaqModule)},
+      {path: 'for-study', loadChildren: () => import('./features/for-study/for-study-module').then(m => m.ForStudyModule)},
     ]
   },
   // پنل کاربر

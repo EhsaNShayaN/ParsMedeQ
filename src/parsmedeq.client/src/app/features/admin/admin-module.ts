@@ -56,6 +56,7 @@ import {EditAboutDialog} from './sections/dialogs/edit-about.dialog';
 import {EditBottomImageDialog} from './sections/dialogs/edit-bottom-image.dialog';
 import {MatDialogClose} from '@angular/material/dialog';
 import {EditHomepageSectionComponent} from './sections/edit-homepage-section.component';
+import {ForStudyDialog} from './sections/dialogs/for-study.dialog';
 
 @NgModule({
   declarations: [
@@ -121,6 +122,7 @@ import {EditHomepageSectionComponent} from './sections/edit-homepage-section.com
     EditAdvantagesDialog,
     EditAboutDialog,
     EditBottomImageDialog,
+    ForStudyDialog,
   ],
   imports: [
     CommonModule,

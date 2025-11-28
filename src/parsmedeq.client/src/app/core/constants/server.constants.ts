@@ -42,7 +42,8 @@ export enum SectionType {
   advantages = 4,
   about = 5,
   contact = 6,
-  bottomImage = 7
+  bottomImage = 7,
+  ForStudy = 8,
 }
 
 export const MainSections: any[] = [
@@ -53,4 +54,5 @@ export const MainSections: any[] = [
   {id: 5, sectionId: 5, type: SectionType.about, title: 'SECTIONS.ABOUT'},
   {id: 6, sectionId: 6, type: SectionType.contact, title: 'SECTIONS.CONTACT'},
   {id: 7, sectionId: 7, type: SectionType.bottomImage, title: 'SECTIONS.BOTTOM_IMAGE'},
+  {id: 8, sectionId: 8, type: SectionType.ForStudy, title: 'SECTIONS.FOR_STUDY'},
 ];
