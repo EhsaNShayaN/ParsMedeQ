@@ -20,7 +20,7 @@ public abstract class DbContextBase<T> : DbContext
         { typeof(EmailType), DbValueTypeCreator.Varchar(255) },
         { typeof(MobileType), DbValueTypeCreator.Varchar(11) },
         { typeof(FirstNameType), DbValueTypeCreator.NVarchar(150) },
-        { typeof(LastNameType), DbValueTypeCreator.Varchar(150) },
+        { typeof(LastNameType), DbValueTypeCreator.NVarchar(150) },
     };
 
     public DbContextBase(DbContextOptions<T> opts) : base(opts) { }

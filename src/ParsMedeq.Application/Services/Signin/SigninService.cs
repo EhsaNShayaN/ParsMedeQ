@@ -112,13 +112,13 @@ internal sealed class SigninService : ISigninService
     }
     public async ValueTask<PrimitiveResult<SigninResult>> SigninWithMobileAndPassword(
         MobileType mobile,
-        PasswordType password,
+        string password,
         CancellationToken cancellationToken)
     {
         var user = await this._readUnitOfWork
             .UserReadRepository
             .FindByMobile(mobile, cancellationToken)
-            .Map(user => PasswordHelper.VerifyPassword(password.Value, user.Password.Value, user.Password.Salt).Map(() => user))
+            .Map(user => PasswordHelper.VerifyPassword(password, user.Password.Value, user.Password.Salt).Map(() => user))
             .ConfigureAwait(false);
 
         if (user.IsSuccess) return new SigninResult(

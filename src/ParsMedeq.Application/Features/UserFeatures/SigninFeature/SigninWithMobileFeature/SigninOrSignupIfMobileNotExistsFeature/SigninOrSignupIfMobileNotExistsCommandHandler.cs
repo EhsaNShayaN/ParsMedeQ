@@ -82,7 +82,7 @@ sealed class LoginContext
     public CancellationToken CancellationToken { get; }
     public MobileType Mobile { get; private set; }
     public SigninResult SigninResult { get; private set; }
-    public string Token { get; private set; } = null;
+    public string Token { get; private set; } = string.Empty;
 
     public LoginContext(SigninOrSignupIfMobileNotExistsCommand request, CancellationToken cancellationToken)
     {
