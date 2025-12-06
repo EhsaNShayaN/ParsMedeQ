@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AppSettings} from '../../app.settings';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-contact',
@@ -11,7 +10,7 @@ import {Router} from '@angular/router';
 })
 export class Contact {
   form: FormGroup;
-  address: string;
+  address: string = '456';
 
   constructor(private fb: FormBuilder,
               protected appSettings: AppSettings) {
@@ -20,7 +19,7 @@ export class Contact {
       email: ['', [Validators.required, Validators.email]],
       message: ['', Validators.required]
     });
-    this.address = appSettings.settings.address.replace('<br>', '');
+    //this.address = appSettings.settings.address.replace('<br>', '');
   }
 
   onSubmit(): void {

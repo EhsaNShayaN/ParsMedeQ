@@ -106,7 +106,7 @@
         <p>
           {{ aboutSections[0]?.description }}
         </p>
-        <a class="btn btn-primary not-link" routerLink="/about">بیشتر بدانید</a>
+        <!--<a class="btn btn-primary not-link" routerLink="/about">بیشتر بدانید</a>-->
       </div>
       <div class="about-image" aria-hidden="true">
         <img [src]="aboutSections[0]?.image" alt="" loading="lazy">
@@ -119,12 +119,14 @@
     <div class="theme-container contact-inner">
       <div class="contact-card">
         <h2>{{ 'SECTIONS.CONTACT' | translate }}</h2>
-        <p>هر سوالی داشتی، اینجا سریع با ما در ارتباط باش.</p>
+        <!--<p>هر سوالی داشتی، اینجا سریع با ما در ارتباط باش.</p>-->
         <form class="contact-form">
-          <input name="name" ngModel placeholder="نام و نام خانوادگی" required>
-          <input name="email" ngModel type="email" placeholder="ایمیل" required>
-          <textarea name="message" ngModel placeholder="پیام" rows="4" required></textarea>
-          <button mat-raised-button color="primary" type="submit">ارسال پیام</button>
+          <input name="name" ngModel [placeholder]="'FULL_NAME' | translate" required>
+          <input name="email" ngModel type="email" [placeholder]="'EMAIL' | translate" required>
+          <textarea name="message" ngModel [placeholder]="'DESCRIPTION' | translate" rows="4" required></textarea>
+          <button mat-raised-button color="primary" type="submit">
+            {{ 'SEND' | translate }}
+          </button>
         </form>
       </div>
     </div>

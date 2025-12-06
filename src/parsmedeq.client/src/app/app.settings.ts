@@ -22,7 +22,6 @@ export class Settings {
               public tel2: string,
               public postalCode: string,
               public mobile: string,
-              public address: string,
               public selectLang: boolean
   ) {
   }
@@ -52,7 +51,6 @@ export class AppSettings {
     '02192003696',
     '1439813211',
     '0912-xxxxxxx',
-    'امیرآباد – خیابان کارگر شمالی – خیابان فرشی مقدم (16) –<br>مرکز رشد پارک علم و فناوری – ساختمان دیتا سنتر- شرکت پیشرو فناوران درمان پارس',
     true
   );
 }

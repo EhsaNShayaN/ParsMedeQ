@@ -4,33 +4,35 @@
     <div fxFlex="100" fxFlex.gt-xs="33.3">
       <div class="company-info">
         <h3>ParsMedeQ</h3>
-        <p>تولیدکننده تجهیزات پزشکی با کیفیت بالا</p>
+        <p>{{ 'FOOTER_SLOGAN'| translate }}</p>
         <p>
-          آدرس:
-          <span [innerHTML]="settings.address"></span>
+          {{ 'ADDRESS_TEXT' | translate }}:
+          <span>
+            {{ 'ADDRESS' | translate }}
+          </span>
         </p>
         <p>
-          تلفن:
+          {{ 'TEL'| translate }}:
           <a href="tel:{{settings.tel}}" class="not-link">{{ settings.tel.replace('021', '') }}</a>
         </p>
         <p>
-          کدپستی:
+          {{ 'POSTAL_CODE' | translate }}:
           {{ settings.postalCode }}
         </p>
       </div>
     </div>
     <div fxFlex="100" fxFlex.gt-xs="33.3" class="text-left">
       <div class="footer-links">
-        <h4>دسترسی سریع</h4>
-        <a routerLink="/about">درباره ما</a>
-        <a routerLink="/products">محصولات</a>
-        <a routerLink="/articles">مقالات</a>
-        <a routerLink="/contact">تماس با ما</a>
+        <h4>{{ 'QUICK_ACCESS' | translate }}</h4>
+        <a routerLink="/about">{{ 'ABOUT_US' | translate }}</a>
+        <a routerLink="/products">{{ 'PRODUCTS' | translate }}</a>
+        <a routerLink="/articles">{{ 'ARTICLES' | translate }}</a>
+        <a routerLink="/contact">{{ 'CONTACT_US' | translate }}</a>
       </div>
     </div>
     <div fxFlex="0" fxFlex.gt-xs="1">&nbsp;</div>
   </div>
   <div class="footer-bottom">
-    © {{ currentYear }} ParsMedeQ - تمامی حقوق محفوظ است
+    © {{ currentYear }} ParsMedeQ - {{ 'COPYRIGHT' | translate }}
   </div>
 </footer>
