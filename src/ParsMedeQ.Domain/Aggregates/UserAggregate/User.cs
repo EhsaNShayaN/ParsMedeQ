@@ -40,6 +40,11 @@ public sealed class User : AggregateRoot<int>
     public EmailType Email { get; private set; } = EmailType.Empty;
 
     /// <summary>
+    /// کد ملی
+    /// </summary>
+    public string NationalCode { get; private set; } = string.Empty;
+
+    /// <summary>
     /// موبایل
     /// </summary>
     public MobileType Mobile { get; private set; } = MobileType.Empty;
@@ -123,20 +128,16 @@ public sealed class User : AggregateRoot<int>
         FirstNameType firstName,
         LastNameType lastName,
         EmailType email,
+        string nationalCode,
         IUserValidatorService userValidatorService,
         CancellationToken cancellationToken)
     {
-        /*
-            1 : Fullname misazim, agar dorost sakhte shod boro marhale bad
-            2 : Validate mikonim ke Email tekrari nabashe, agar tekrari nabood boro marhale bad
-            3 : Event e UserProfileUpdatedEvent ro add mikonim
-            3 : akhar sar, kole object ke update shode to barmigardoonim
-         */
         return FullNameType.Create(firstName.Value, lastName.Value)
             .OnSuccess(fullname =>
             {
                 this.FullName = fullname.Value;
                 this.Email = email;
+                this.NationalCode = nationalCode;
             })
             .Map(_ => userValidatorService.IsEmailUnique(this.Id, this.Email, cancellationToken))
             .Map(_ => this);

@@ -57,9 +57,12 @@ sealed class UserDetailsApiResponseMapper : IPresentationMapper<
             PrimitiveResult.Success(
                     new UserDetailsApiResponse(
                         src.Id,
+                        src.FullName.FirstName.Value,
+                        src.FullName.LastName.Value,
                         src.FullName.GetValue(),
                         src.Email.GetValue(),
                         src.Mobile.Value,
+                        src.NationalCode,
                         string.IsNullOrWhiteSpace(src.Password.Value),
                         src.IsEmailConfirmed,
                         src.IsMobileConfirmed)));

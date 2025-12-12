@@ -1,0 +1,2 @@
+﻿namespace ParsMedeQ.Application.Features.UserFeatures.UserUpdateProfile;
+public readonly record struct UserUpdateProfileCommandResponse(bool Changed);

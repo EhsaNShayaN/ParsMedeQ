@@ -30,6 +30,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AuthGuard} from './core/guards/auth.guard';
 import {getCookie} from './core/services/cookie-utils';
 import {CustomConstants} from './core/constants/custom.constants';
+import {NotAcceptableComponent} from './features/not-acceptable/not-acceptable';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -51,6 +52,7 @@ export function tokenGetter() {
     SocialIcons,
     UserMenu,
     ////////////////////////////
+    NotAcceptableComponent,
     Lang,
     Header,
     Footer,

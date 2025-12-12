@@ -11,10 +11,11 @@ using System.Net.Mail;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development";
 var processEnv = CommandArgReader.Read(
     builder.Configuration,
     "env",
-    Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development");
+    env);
 Console.WriteLine($"Process Env = {processEnv}");
 
 
@@ -88,6 +89,10 @@ ServiceInstallerHelper.InstallServicesRecursively(builder.Services,
 var app = builder.Build();
 app.UseMiddleware<UserContextAccessorMiddleware>();
 app.UseMiddleware<UserLangContextAccessorMiddleware>();
+if (env != "Development")
+{
+    app.UseIpRestriction("185.126.4.61");
+}
 app.UseHsts();
 app.UseDefaultFiles();
 app.MapStaticAssets();

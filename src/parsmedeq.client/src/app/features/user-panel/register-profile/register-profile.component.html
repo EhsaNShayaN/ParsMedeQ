@@ -1,0 +1,65 @@
+@if (myForm) {
+  <div class="register p-3">
+    <div class="theme-container">
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <mat-card appearance="outlined" [style.max-width.px]="500" [style.border]="'none'">
+          <mat-error *ngIf="error" class="bg-warn p-3 my-3 background-color bordered">
+            {{ error }}
+          </mat-error>
+          <form [formGroup]="myForm" (ngSubmit)="onRegisterFormSubmit(myForm.value)">
+            <mat-form-field appearance="outline" class="w-100 mt-1">
+              <mat-icon matPrefix class="mr-1 text-muted">email</mat-icon>
+              <mat-label>{{ 'EMAIL' | translate }}</mat-label>
+              <input matInput placeholder="{{'EMAIL' | translate}}" formControlName="email" required class="text-left ltr">
+              <mat-error *ngIf="myForm.controls['email'].errors?.['required']">
+                {{ 'ENTER_VALID_EMAIL' | translate }}
+              </mat-error>
+              <mat-error *ngIf="myForm.controls['email'].hasError('invalidEmail')">
+                {{ 'ENTER_VALID_EMAIL' | translate }}
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100 mt-2">
+              <mat-icon matPrefix class="mr-1 text-muted">person</mat-icon>
+              <mat-label>{{ 'FIRST_NAME' | translate }}</mat-label>
+              <input matInput placeholder="{{'FIRST_NAME' | translate}}" formControlName="firstName" required>
+              <mat-error *ngIf="myForm.controls['firstName'].errors?.['required']">
+                {{ 'FIRST_NAME' | translate }}
+                {{ 'IS_REQUIRED' | translate }}
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100 mt-2">
+              <mat-icon matPrefix class="mr-1 text-muted">person</mat-icon>
+              <mat-label>{{ 'LAST_NAME' | translate }}</mat-label>
+              <input matInput placeholder="{{'LAST_NAME' | translate}}" formControlName="lastName" required>
+              <mat-error *ngIf="myForm.controls['lastName'].errors?.['required']">
+                {{ 'LAST_NAME' | translate }}
+                {{ 'IS_REQUIRED' | translate }}
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100 mt-1">
+              <mat-icon matPrefix class="mr-1 text-muted">code</mat-icon>
+              <mat-label>{{'NATIONAL_CODE' | translate}}</mat-label>
+              <input matInput placeholder="{{'NATIONAL_CODE' | translate}}" formControlName="nationalCode" required appInputRestriction="int"
+                     class="text-left ltr">
+              <mat-error *ngIf="myForm.controls['nationalCode'].errors?.['required']">
+                {{ 'ENTER_NATIONAL_CODE' | translate }}
+              </mat-error>
+              <mat-error *ngIf="myForm.controls['nationalCode'].hasError('minlength')">
+                {{ 'NATIONAL_CODE_LENGTH_ERROR' | translate }}
+              </mat-error>
+              <mat-error *ngIf="myForm.controls['nationalCode'].hasError('maxlength')">
+                {{ 'NATIONAL_CODE_LENGTH_ERROR' | translate }}
+              </mat-error>
+            </mat-form-field>
+            <div class="text-center mt-2">
+              <button mat-raised-button color="primary" type="submit" class="uppercase">
+                {{ 'EDIT' | translate }}
+                {{ 'PROFILE' | translate }}
+              </button>
+            </div>
+          </form>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+}

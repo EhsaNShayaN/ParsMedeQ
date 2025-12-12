@@ -52,6 +52,7 @@
   "ABSTRACT": "چکیده",
   "ACCOUNT": "حساب کاربری",
   "PROFILE": "پروفایل",
+  "EDIT_PROFILE": "ویرایش پروفایل",
   "CREATION_DATE": "تاریخ ایجاد",
   "UPDATE_DATE": "تاریخ عملیات",
   "ORDER_TIME": "زمان سفارش",
@@ -174,5 +175,13 @@
   "TEL": "تلفن",
   "POSTAL_CODE": "کدپستی",
   "EMAIL": "ایمیل",
-  "SEND": "ارسال"
+  "SEND": "ارسال",
+  "ENTER_VALID_EMAIL": "ایمیل معتبر وارد نمایید.",
+  "NATIONAL_CODE": "کد ملی",
+  "ENTER_NATIONAL_CODE": "کد ملی را وارد نمایید",
+  "NATIONAL_CODE_LENGTH_ERROR": "کد ملی باید 10 کاراکتر باشد.",
+  "FIRST_NAME": "نام",
+  "LAST_NAME": "نام خانوادگی",
+  "ENTER_FIRST_NAME": "نام را وارد نمایید",
+  "ENTER_LAST_NAME": "نام خانوادگی را وارد نمایید"
 }

@@ -20,6 +20,7 @@ import {UserPaymentListComponent} from './payment/user-payment-list/user-payment
 import {UserOrderDetailsComponent} from './order/user-order-details/user-order-details.component';
 import {UserPeriodicServiceComponent} from './periodic-service/user-periodic-service.component';
 import {UserPeriodicServiceListComponent} from './periodic-service/user-periodic-service-list/user-periodic-service-list.component';
+import {RegisterProfileComponent} from './register-profile/register-profile.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,8 @@ import {UserPeriodicServiceListComponent} from './periodic-service/user-periodic
 
     UserPeriodicServiceComponent,
     UserPeriodicServiceListComponent,
+
+    RegisterProfileComponent,
   ],
   imports: [
     CommonModule,

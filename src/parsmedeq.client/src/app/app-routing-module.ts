@@ -4,6 +4,7 @@ import {UserLayout} from './shared/layouts/user-layout/user-layout';
 import {AdminLayout} from './shared/layouts/admin-layout/admin-layout';
 import {Pages} from './features/pages';
 import {AuthGuard} from './core/guards/auth.guard';
+import {NotAcceptableComponent} from './features/not-acceptable/not-acceptable';
 
 const pagesChildren: Routes = [
 // صفحات عمومی
@@ -65,7 +66,8 @@ const routes: Routes = [
     path: 'en',
     component: Pages, children: pagesChildren
   },
-  {path: '**', redirectTo: ''}
+  {path: '406', component: NotAcceptableComponent},
+  {path: '**', redirectTo: ''},
 ];
 
 @NgModule({

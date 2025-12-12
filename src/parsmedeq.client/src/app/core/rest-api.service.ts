@@ -307,6 +307,12 @@ export class RestApiService {
     );
   }
 
+  updateProfile(model: any): Observable<any> {
+    return this.http.post<BaseResult<AddResult>>(`${endpoint()}user/updateProfile`, model).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   handleError<T>(error: HttpErrorResponse): Observable<any> {
     if (error.error instanceof ErrorEvent) {
       console.error('An error occurred:', error.error.message);

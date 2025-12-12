@@ -52,6 +52,7 @@
   "ABSTRACT": "Abstract",
   "ACCOUNT": "Account",
   "PROFILE": "Profile",
+  "EDIT_PROFILE": "Edit Profile",
   "CREATION_DATE": "Creation date",
   "UPDATE_DATE": "Update date",
   "ORDER_TIME": "Order time",
@@ -174,5 +175,13 @@
   "TEL": "Tel",
   "POSTAL_CODE": "Postal code",
   "EMAIL": "E-Mail",
-  "SEND": "Send"
+  "SEND": "Send",
+  "ENTER_VALID_EMAIL": "Enter valid email",
+  "NATIONAL_CODE": "National Code",
+  "ENTER_NATIONAL_CODE": "Enter National Code",
+  "NATIONAL_CODE_LENGTH_ERROR": "National Code Must be 10 characters",
+  "FIRST_NAME": "First Name",
+  "LAST_NAME": "Last Name",
+  "ENTER_FIRST_NAME": "Enter First Name",
+  "ENTER_LAST_NAME": "Enter Last Name"
 }

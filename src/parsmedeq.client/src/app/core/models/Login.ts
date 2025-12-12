@@ -38,8 +38,11 @@ export interface ProfileResponse extends BaseResult<Profile> {
 export interface Profile {
   id: number;
   fullName: string;
+  firstName: string;
+  lastName: string;
   email: string;
   mobile: string;
+  nationalCode: string;
   passwordMustBeSet: boolean;
   isEmailConfirmed: boolean;
   isMobileConfirmed: boolean;

@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {BaseComponent} from '../../base-component';
-import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
+import {FormGroupDirective, UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {Profile, ProfileResponse} from '../../core/models/Login';
 import {matchingPasswords} from '../../core/utils/app-validators';
 import {first, Observable} from 'rxjs';
@@ -14,6 +14,7 @@ import {ToastrService} from 'ngx-toastr';
   styleUrl: './user-panel.scss'
 })
 export class UserPanel extends BaseComponent {
+  @ViewChild(FormGroupDirective) formDir!: FormGroupDirective;
   public form!: UntypedFormGroup;
   profile?: Profile;
 
@@ -47,9 +48,7 @@ export class UserPanel extends BaseComponent {
       if (d.data?.changed) {
         this.profile!.passwordMustBeSet = false;
         this.toastrService.success(this.getTranslateValue('YOUR_PASSWORD_CHANGED_SUCCESSFULLY'), '', {});
-        this.form.reset();
-        this.form.markAsPristine();
-        this.form.markAsUntouched();
+        this.formDir.resetForm();
       } else {
         if (d.errors?.length > 0) {
           this.toastrService.error(d.errors[0].errorMessage, '', {});
